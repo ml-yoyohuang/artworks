@@ -134,4 +134,4 @@ repo 根目錄沒有 CLAUDE.md、CONTRIBUTING.md 或 AGENTS.md；沒有相應額
 
 三頁皆通過 Playwright / Chromium 實測，1440×900 與 390×844（DPR 2）各運行至少 3.3 秒、截圖與像素取樣，零 console / pageerror，手機控制與說明面板無溢出。桌／手機量化色樣：銀鹽 48 / 44、藍曬 27 / 33、織紋 78 / 85。WebGL1（關閉浮點擴充）、減少動態、觸控、控制操作、隱藏暫停及編譯失敗說明通過。逐一檢視桌機手機截圖；第一輪藍曬缺損仍過於規律，進一步改變缺損分布、葉長及傾角後重新實測。三張目錄縮圖更新為實測截圖，皆小於 150KB；暫存檔留在 repo 外。植物為虛構生成標本，並非特定植物的科學圖譜；手機仍為瀏覽器模擬，未使用實體裝置。
 
-深空入口未作任何更動。根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；已遵守檔案範圍，只提交本次 shader-demos 修訂，保留其他工作流程的檔案。此次交付分支與作品 commit hash 於推送後補記。
+深空入口未作任何更動。根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；已遵守檔案範圍，只提交本次 shader-demos 修訂，保留其他工作流程的檔案。此次已成功推送至 `origin/main`，作品 commit hash：`82e5012f136f955db83bec651a6e3ae6d4daab51`。交付紀錄以後續文件提交補記。
