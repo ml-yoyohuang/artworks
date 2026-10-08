@@ -44,7 +44,7 @@ instance=new p5(p=>{
  }
  const line=(x1,y1,x2,y2,c=meta.fg,weight=.7)=>{ink.stroke(c);ink.strokeWeight(weight);ink.line(x1,y1,x2,y2);};
  const dot=(x,y,size,c=meta.fg)=>{ink.noStroke();ink.fill(c);ink.circle(x,y,size);};
- 
+
  function createArt(){
   const a=box,rooms=[];let index=0;
   function split(x,y,w,h,d){if(d===0||Math.min(w,h)<35){rooms.push({x,y,w,h,r:R(1),orient:R(1)});return;}const vertical=w/h>1.2||(w/h>.7&&R(1)<.5),t=R(.32,.68);if(vertical){split(x,y,w*t,h,d-1);split(x+w*t,y,w*(1-t),h,d-1);}else{split(x,y,w,h*t,d-1);split(x,y+h*t,w,h*(1-t),d-1);}}

@@ -44,7 +44,7 @@ instance=new p5(p=>{
  }
  const line=(x1,y1,x2,y2,c=meta.fg,weight=.7)=>{ink.stroke(c);ink.strokeWeight(weight);ink.line(x1,y1,x2,y2);};
  const dot=(x,y,size,c=meta.fg)=>{ink.noStroke();ink.fill(c);ink.circle(x,y,size);};
- 
+
  function createArt(){
   const a=box,cx=a.x+a.w*.5,cy=a.y+a.h*.5,rx=a.w*.47,ry=a.h*.48,maxR=a.mobile?28:42,target=a.mobile?240:650,balls=[],grid=new Grid(maxR*2+5),fixed=p.createGraphics(w,h);fixed.pixelDensity(1);let iteration=0;
   function allowed(x,y,r){return((x-cx)/(rx-r))**2+((y-cy)/(ry-r))**2<1&&((x-(cx+rx*.19))/(rx*.19+r))**2+((y-(cy-ry*.04))/(ry*.23+r))**2>1;}

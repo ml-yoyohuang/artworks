@@ -44,7 +44,7 @@ instance=new p5(p=>{
  }
  const line=(x1,y1,x2,y2,c=meta.fg,weight=.7)=>{ink.stroke(c);ink.strokeWeight(weight);ink.line(x1,y1,x2,y2);};
  const dot=(x,y,size,c=meta.fg)=>{ink.noStroke();ink.fill(c);ink.circle(x,y,size);};
- 
+
  function createArt(){
   const a=box,cx=a.x+a.w*.5,cy=a.y+a.h*.5,r=Math.min(a.w*.44,a.h*.46),count=a.mobile?700:1900,sampleCount=a.mobile?9000:18000,sites=[],samples=[];let round=0,cursor=0,grid=null,reveal=0;
   function density(x,y){const u=(x-cx)/r,v=(y-cy)/r,rr=Math.hypot(u,v);if(rr>1)return .012*Math.exp(-(rr-1)*12);const light=clamp(.48+.3*u+.22*v,.12,.95),ridges=.5+.5*Math.sin(rr*42+Math.atan2(v,u)*2.5);return .08+.68*light*light+.22*ridges*Math.pow(rr,.5);}

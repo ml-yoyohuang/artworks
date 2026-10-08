@@ -44,7 +44,7 @@ instance=new p5(p=>{
  }
  const line=(x1,y1,x2,y2,c=meta.fg,weight=.7)=>{ink.stroke(c);ink.strokeWeight(weight);ink.line(x1,y1,x2,y2);};
  const dot=(x,y,size,c=meta.fg)=>{ink.noStroke();ink.fill(c);ink.circle(x,y,size);};
- 
+
  function createArt(){
   const a=box,g=p.createGraphics(Math.ceil(a.w),Math.ceil(a.h));g.pixelDensity(1);g.background(0);g.fill(255);g.noStroke();g.textFont('Georgia');g.textStyle(p.BOLD);g.textAlign(p.CENTER,p.CENTER);
   const fontSize=a.mobile?a.w*.43:a.w*.28;g.textSize(fontSize);if(a.mobile){g.text('FO',a.w*.5,a.h*.29);g.text('RM',a.w*.5,a.h*.7);}else g.text('FORM',a.w*.5,a.h*.47);g.loadPixels();const points=[],stride=a.mobile?3:4;

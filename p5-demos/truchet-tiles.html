@@ -44,7 +44,7 @@ instance=new p5(p=>{
  }
  const line=(x1,y1,x2,y2,c=meta.fg,weight=.7)=>{ink.stroke(c);ink.strokeWeight(weight);ink.line(x1,y1,x2,y2);};
  const dot=(x,y,size,c=meta.fg)=>{ink.noStroke();ink.fill(c);ink.circle(x,y,size);};
- 
+
  function createArt(){
   const a=box,cols=a.mobile?8:18,s=Math.min(a.w/cols,a.h/(a.mobile?12:9)),rows=Math.floor(a.h/s),nx=Math.floor(a.w/s),ox=a.x+(a.w-nx*s)/2,oy=a.y+(a.h-rows*s)/2,total=nx*rows;let index=0;
   return{step(progress){const target=Math.floor(progress*total);for(;index<target;index++){const x=index%nx,y=Math.floor(index/nx),px=ox+x*s,py=oy+y*s,turn=R(1)<(.5+.24*Math.sin(x*.45+y*.6)),c=(x+y)%7<2?meta.accent:meta.fg;ink.noFill();ink.stroke(c);ink.strokeWeight(s*.19);if(turn){ink.arc(px,py,s,s,0,p.HALF_PI);ink.arc(px+s,py+s,s,s,p.PI,p.PI+p.HALF_PI);}else{ink.arc(px+s,py,s,s,p.HALF_PI,p.PI);ink.arc(px,py+s,s,s,p.PI+p.HALF_PI,p.TWO_PI);}ink.stroke(meta.bg);ink.strokeWeight(.9);if(turn){ink.arc(px,py,s,s,0,p.HALF_PI);ink.arc(px+s,py+s,s,s,p.PI,p.PI+p.HALF_PI);}else{ink.arc(px+s,py,s,s,p.HALF_PI,p.PI);ink.arc(px,py+s,s,s,p.PI+p.HALF_PI,p.TWO_PI);}}return index>=total;}};

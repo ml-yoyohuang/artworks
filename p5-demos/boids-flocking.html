@@ -44,7 +44,7 @@ instance=new p5(p=>{
  }
  const line=(x1,y1,x2,y2,c=meta.fg,weight=.7)=>{ink.stroke(c);ink.strokeWeight(weight);ink.line(x1,y1,x2,y2);};
  const dot=(x,y,size,c=meta.fg)=>{ink.noStroke();ink.fill(c);ink.circle(x,y,size);};
- 
+
  function createArt(){
   const a=box,cx=a.x+a.w*.5,cy=a.y+a.h*.5,count=Math.floor(clamp(a.w*a.h/2400,90,240)),flock=[];let mx=-1000,my=-1000,tick=0;
   for(let i=0;i<count;i++){const t=R(p.TWO_PI),r=R(.35,1),x=cx+Math.cos(t)*a.w*.39*r,y=cy+Math.sin(t)*a.h*.38*r;flock.push({x,y,vx:-Math.sin(t)*2,vy:Math.cos(t)*1.7,trail:[]});}
