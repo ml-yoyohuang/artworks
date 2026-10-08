@@ -226,4 +226,4 @@ Chromium / Playwright 在 1440×900（DPR 1）及 390×844（DPR 2）各運行�
 
 Chromium / Playwright 實測通過：1440×900（DPR 1）及 390×844（DPR 2）各至少 3.3 秒，零 console / pageerror，桌／手機色樣 47 / 58。兩種尺寸另在轉場兩端分別觀看完整場景至少 3.1 秒；逐張檢視截圖，確認明暗、朱紅焦點及文字可讀性。WebGL1 禁用浮點擴充、減少動態、觸控、滑桿、說明面板、隱藏暫停與 shader 失敗提示通過。17 頁結構與目錄相對連結、縮圖大小靜態檢查通過。縮圖更新且小於 150KB；完整截圖與驗證資料在 repo 外，手機為瀏覽器模擬。
 
-根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；已遵守檔案範圍，只修改本頁及其目錄資訊、縮圖、報告。此次交付分支與作品 commit hash 於推送後補記。
+根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；已遵守檔案範圍，只修改本頁及其目錄資訊、縮圖、報告。已成功推送至 `origin/main`，作品 commit hash：`922c1b21814d48812468b432fd0b82e30a20c399`。交付紀錄由後續文件提交補記。
