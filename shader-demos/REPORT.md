@@ -243,3 +243,13 @@ Chromium / Playwright 實測通過：1440×900（DPR 1）及 390×844（DPR 2）
 依使用者試玩後的選擇，將邊緣滑桿範圍從 0–2.5 收至 0–1.5，預設 0.50、步長 0.01；同步更新參數說明。GLSL 與 JavaScript 雜湊在修改前後相同，原有效果映射及預設畫面保持不變。HTML 參數、17 頁結構、目錄連結與縮圖大小靜態檢查通過；此前瀏覽器實測與逐像素比較見上一節。本次僅調整滑桿上限與文字，未重跑相同渲染測試。
 
 根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；只修改作品頁與報告，遵守檔案範圍。已成功推送至 `origin/main`，作品 commit hash：`b91fb445c5ce5d54583673e11d3e644bd6fb8128`。交付紀錄由後續文件提交補記。
+
+## 2026-10-09 列表頁分享預覽圖
+
+依使用者要求製作列表頁 OG image，採 1200×630 JPEG（108,178 bytes），以紙色留白、展覽標題與四件已定稿作品的現有縮圖組成：兩個日落之間、深空入口、偏移的花園、一處皺摺。圖檔為 `assets/og-image.jpg`；以原生 HTML 排版後由 Chromium 截圖並壓縮，未新增外部素材。完整尺寸製作快照與驗證程式在 repo 外。
+
+列表頁新增 canonical、Open Graph 及 Twitter large-image 分享標籤，含圖片尺寸、JPEG 格式與替代文字。已確認 GitHub Pages 使用 main 根目錄，分享頁網址為 `https://ml-yoyohuang.github.io/artworks/shader-demos/shader-demo-list.html`，圖片使用同網域的絕對網址，便於分享服務擷取。原有作品、CSS、頁面內容及 JavaScript 保持不變。
+
+Chromium / Playwright 在 1440×900 與 390×844 分別以 file:// 與本機靜態 HTTP 實測，各至少 3.1 秒；16 張作品縮圖正常載入、無水平溢出、零 console / pageerror，OG 與 Twitter 標籤正確。HTTP 圖片回應 200、image/jpeg；圖檔尺寸與視覺檢視通過。17 頁結構、連結、離線素材與縮圖大小靜態檢查通過，canonical 是分享頁識別網址，並非頁面載入依賴。手機為瀏覽器模擬。分享平台可能快取舊預覽，實際裁切由平台決定。
+
+根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；已遵守檔案範圍，未修改或提交既有未追蹤的 `.gitignore`。推送分支與作品 commit hash 於推送後補記。
