@@ -102,4 +102,8 @@ repo 根目錄沒有 CLAUDE.md、CONTRIBUTING.md 或 AGENTS.md；沒有相應額
 
 作品提交訊息：`feat: add 16 shader demo pages and shader-demo-list index`。
 
-推送分支與作品 commit hash：於實際提交與推送成功後補記。
+已成功推送至 `origin/main`，未使用備案分支。
+
+作品與完整驗證報告 commit hash：`ef84a85a6e82409aadbb0924a5cc88cf6a20df67`。
+
+[GitHub 作品提交](https://github.com/ml-yoyohuang/artworks/commit/ef84a85a6e82409aadbb0924a5cc88cf6a20df67)。本段推送紀錄以後續 `docs: record shader demos delivery` 提交補記，保留既有歷史。包含補記的最終分支 tip 可由 `git rev-parse origin/main` 或 [main 提交紀錄](https://github.com/ml-yoyohuang/artworks/commits/main/) 查得。
