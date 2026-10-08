@@ -162,4 +162,4 @@ Playwright / Chromium 實測通過：1440×900（DPR 1）和 390×844（DPR 2、
 
 Playwright / Chromium 實測通過：1440×900（DPR 1）和 390×844（DPR 2、觸控）各至少 3.3 秒，桌／手機取樣色數：日落 54 / 59、荷葉 63 / 63，零 console / pageerror。桌機、手機截圖逐張檢視通過；WebGL1 禁用浮點擴充、低動態畫面穩定、觸控、滑桿、說明面板、隱藏暫停、shader 編譯失敗提示通過。縮圖重新由驗證截圖產生，皆小於 150KB，目錄及 HTML 靜態檢查通過；完整截圖與測試資料均在 repo 外。手機為瀏覽器模擬，未用實體裝置。
 
-根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；遵守任務範圍，只修改兩頁、其縮圖及報告。交付分支及作品 commit hash 於推送後補記。
+根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；遵守任務範圍，只修改兩頁、其縮圖及報告。已成功推送至 `origin/main`，作品 commit hash：`4b3d572e0ed59e526cdf9a9784d99462b6f8fbda`。交付紀錄由後續文件提交補記。
