@@ -152,4 +152,4 @@ Playwright / Chromium 實測通過：1440×900（DPR 1）和 390×844（DPR 2、
 
 兩頁均通過 Playwright / Chromium 瀏覽器實測：1440×900（DPR 1）及 390×844（DPR 2、觸控）各運行至少 3.3 秒、截圖、像素取樣及逐張視覺檢視。兩個日落桌／手機色樣為 48 / 53，荷葉為 66 / 61；零 console / pageerror，控制與說明面板無溢出。WebGL1（禁用浮點擴充）、減少動態、觸控、滑桿、隱藏暫停與 shader 失敗說明皆通過。更新兩張實測縮圖，均小於 150KB；全目錄相對連結與 17 頁結構靜態檢查通過。完整截圖及驗證腳本在 repo 外。手機仍為瀏覽器模擬，未實測實體裝置。
 
-根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；已遵守檔案範圍，其他作品未修改。此次分支與作品 commit hash 於推送後補記。
+根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；已遵守檔案範圍，其他作品未修改。此次已成功推送至 `origin/main`，作品 commit hash：`ff3e4ad34618b955da4fc5e837053fa0a38c178d`。交付紀錄由後續文件提交補記。
