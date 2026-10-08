@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>柔軟的擁擠 — 規則的餘溫</title><style>:root{--bg:#f1ddd1;--fg:#8d3d46;--accent:#ce735b}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}body{overflow:hidden}a{color:inherit;text-decoration:none}button,summary,a{ -webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:5px}#stage{position:fixed;inset:0;touch-action:pan-y}canvas{display:block}header{position:fixed;z-index:2;top:32px;left:40px;right:40px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none}header a,header button{pointer-events:auto}.back{font-size:12px;letter-spacing:.12em;border-bottom:1px solid color-mix(in srgb,var(--fg) 30%,transparent);padding-bottom:7px}.edition{text-align:right;font-size:10px;letter-spacing:.17em;line-height:1.9}.edition b{font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:.06em}footer{position:fixed;z-index:3;left:40px;right:40px;bottom:26px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end;pointer-events:none}.caption,.actions{pointer-events:auto}.caption:has(details[open]){background:var(--bg);box-shadow:0 0 0 12px var(--bg)}.eyebrow{font-size:9px;letter-spacing:.22em;opacity:.64}h1{font-family:"Noto Serif TC","Songti TC",Georgia,serif;font-size:24px;font-weight:400;letter-spacing:.15em;line-height:1.3;margin:8px 0}.rule{font-size:12px;line-height:1.8;letter-spacing:.06em;margin:0;opacity:.82}.actions{display:flex;gap:8px}button{font:inherit;font-size:11px;letter-spacing:.1em;padding:10px 16px;color:var(--fg);background:color-mix(in srgb,var(--bg) 80%,transparent);border:1px solid color-mix(in srgb,var(--fg) 28%,transparent);border-radius:2px;cursor:pointer;backdrop-filter:blur(8px)}button:hover{border-color:var(--fg)}details{max-width:620px;font-size:11px;line-height:1.9;margin-top:8px}summary{cursor:pointer;display:inline-block;letter-spacing:.12em;opacity:.65;list-style:none}summary::-webkit-details-marker{display:none}summary:before{content:'＋ ';}details[open] summary:before{content:'− ';}details[open]{padding:16px;background:var(--bg);border:1px solid color-mix(in srgb,var(--fg) 18%,transparent);max-height:45vh;overflow:auto;box-shadow:0 5px 40px #00000012}details p{margin:9px 0 0}#status{font-size:9px;letter-spacing:.07em;opacity:.55;margin-top:10px}#failure{position:fixed;z-index:5;top:40%;left:10%;right:10%;padding:28px;background:var(--bg);border:1px solid var(--fg);line-height:1.8}#failure[hidden]{display:none}.no-script{position:fixed;z-index:10;top:40%;left:10%;right:10%;background:var(--bg);padding:30px}@media(max-width:600px){header{top:22px;left:22px;right:22px}.edition{font-size:8px}footer{left:22px;right:22px;bottom:20px;grid-template-columns:1fr;gap:12px}h1{font-size:21px;margin:6px 0}.rule{font-size:11px}.actions{position:absolute;right:0;bottom:0}button{padding:9px 10px;font-size:10px}.caption{padding-bottom:36px}#status{position:absolute;bottom:7px;left:0;max-width:45%;font-size:8px}details{margin-top:5px}details[open]{max-height:38vh}.back{font-size:11px}}
+</style></head>
+<body><main id="stage" aria-label="柔軟的擁擠，程序生成的藝術作品"></main>
+<header><a class="back" href="p5-demo-list.html">← 規則的餘溫</a><div class="edition">STUDY 04 / 10<br>CIRCLE PACKING<br>SEED <b id="seed">—</b></div></header>
+<footer><div class="caption"><div class="eyebrow">細胞 / 泡沫 / 共生</div><h1>柔軟的擁擠</h1><p class="rule">每個圓只長到鄰居的邊界，擁擠因此有了溫柔的秩序。</p><details><summary>關於這個規則</summary><p>在策展的橢圓聚落中放入小圓，逐步增大半徑，遇到鄰居便停止。均勻網格只查詢附近圓，避免所有圓兩兩比對。稀密分布與偏移的中央空隙先被設計，再讓種子安排各個細胞的位置。</p><p>核心參數：圓 230–650；間隙 2 px；最大半徑 28–42 px；生長 14 秒。</p><p>適合用於：健康品牌、內容卡片、社群視覺。</p></details><div id="status" role="status">準備作品</div></div><div class="actions"><button id="regenerate" type="button">重新生成</button><button id="download" type="button">下載 PNG</button></div></footer>
+<div id="failure" hidden>作品無法載入。請確認 p5-demos/lib/p5.min.js 與此頁面保存在同一份完整資料夾內，再重新開啟。</div><noscript><p class="no-script">這件作品需要 JavaScript。請在瀏覽器啟用 JavaScript，再重新開啟。</p></noscript>
+<script src="lib/p5.min.js" onerror="document.getElementById('failure').hidden=false"></script><script>
+(() => {
+'use strict';
+const meta = {"id": "circle-packing", "bg": "#f1ddd1", "fg": "#8d3d46", "accent": "#ce735b"};
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+let seed = readSeed(), instance;
+function readSeed(){ const v=new URLSearchParams(location.search).get('seed'); return v!==null&&/^\d+$/.test(v)?Number(BigInt(v)%4294967296n):crypto.getRandomValues(new Uint32Array(1))[0]; }
+const stage=document.querySelector('#stage'), status=document.querySelector('#status');
+function fail(){ document.querySelector('#failure').hidden=false; status.textContent='作品暫時無法載入'; }
+if(typeof window.p5!=='function'){fail();return;}
+class Grid {
+ constructor(size){this.size=size;this.cells=new Map();}
+ key(x,y){return Math.floor(x/this.size)+','+Math.floor(y/this.size);}
+ add(o){const k=this.key(o.x,o.y);if(!this.cells.has(k))this.cells.set(k,[]);this.cells.get(k).push(o);}
+ near(x,y,r){const out=[],s=this.size;for(let a=Math.floor((x-r)/s);a<=Math.floor((x+r)/s);a++)for(let b=Math.floor((y-r)/s);b<=Math.floor((y+r)/s);b++){const c=this.cells.get(a+','+b);if(c)out.push(...c);}return out;}
+ nearest(x,y,max=Infinity){let best=null,d=Infinity;for(let ring=1;ring<=12;ring++){for(const o of this.near(x,y,ring*this.size)){const dd=(o.x-x)**2+(o.y-y)**2;if(dd<d){d=dd;best=o;}}if(d<(ring*this.size-this.size)**2||ring*this.size>=max)break;}return best;}
+}
+instance=new p5(p=>{
+ let w,h,box,paper,ink,engine,elapsed=0,last=0,finished=false,frames=[],fps=60;
+ const duration=14000, continuous=meta.id==='boids-flocking';
+ const R=(a,b)=>p.random(a,b), N=(a,b)=>p.noise(a,b), clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ function reset(){
+  if(engine?.dispose)engine.dispose();
+  w=Math.max(280,stage.clientWidth);h=Math.max(460,window.innerHeight);
+  p.resizeCanvas(w,h,true);p.randomSeed(seed);p.noiseSeed(seed);
+  if(paper)paper.remove();if(ink)ink.remove();
+  paper=p.createGraphics(w,h);ink=p.createGraphics(w,h);paper.pixelDensity(1);ink.pixelDensity(1);
+  paper.background(meta.bg);paper.stroke(meta.fg);paper.strokeWeight(.45);
+  const fibers=Math.floor(w*h/110);for(let i=0;i<fibers;i++){const x=R(w),y=R(h);paper.stroke(p.color(meta.fg+'12'));paper.line(x,y,x+R(1,4),y+R(-.5,.5));}
+  const mobile=w<600, top=mobile?122:112, bottom=mobile?204:180;
+  box={x:w*(mobile?.055:.10),y:top,w:w*(mobile?.89:.8),h:Math.max(220,h-top-bottom),mobile};
+  ink.noFill();ink.stroke(meta.fg);engine=createArt();elapsed=0;last=performance.now();finished=false;frames=[];
+  document.querySelector('#seed').textContent=String(seed);document.querySelector('#regenerate').disabled=false;
+  stage.dataset.complete='false';stage.dataset.seed=seed;status.textContent=reduce.matches?'正在凝成靜止的作品':'作品正在生長';
+  if(!document.hidden)p.loop();
+ }
+ const line=(x1,y1,x2,y2,c=meta.fg,weight=.7)=>{ink.stroke(c);ink.strokeWeight(weight);ink.line(x1,y1,x2,y2);};
+ const dot=(x,y,size,c=meta.fg)=>{ink.noStroke();ink.fill(c);ink.circle(x,y,size);};
+ 
+ function createArt(){
+  const a=box,cx=a.x+a.w*.5,cy=a.y+a.h*.5,rx=a.w*.47,ry=a.h*.48,maxR=a.mobile?28:42,target=a.mobile?240:650,balls=[],grid=new Grid(maxR*2+5),fixed=p.createGraphics(w,h);fixed.pixelDensity(1);let iteration=0;
+  function allowed(x,y,r){return((x-cx)/(rx-r))**2+((y-cy)/(ry-r))**2<1&&((x-(cx+rx*.19))/(rx*.19+r))**2+((y-(cy-ry*.04))/(ry*.23+r))**2>1;}
+  function drawBall(g,q){g.fill(q.tint>.72?meta.accent+'15':meta.fg+'08');g.stroke(q.tint>.72?meta.accent+'b0':meta.fg+'b0');g.strokeWeight(q.r>15?1.2:.7);g.circle(q.x,q.y,q.r*2);g.noFill();if(q.r>8){g.stroke(meta.fg+'40');g.strokeWeight(.45);g.circle(q.x-.7,q.y-.7,q.r*2-3);}if(q.r>19){g.noStroke();g.fill(meta.accent);g.circle(q.x-q.r*.18,q.y+q.r*.25,2);}}
+  return{dispose(){fixed.remove();},step(progress){const desired=Math.floor(progress*420),end=Math.min(desired,iteration+8);for(;iteration<end;iteration++){
+  for(let j=0;j<12&&balls.length<target;j++){const x=R(cx-rx,cx+rx),y=R(cy-ry,cy+ry);if(!allowed(x,y,2))continue;if(grid.near(x,y,maxR+4).some(q=>Math.hypot(q.x-x,q.y-y)<q.r+4))continue;const q={x,y,r:1,grow:true,tint:R(1)};balls.push(q);grid.add(q);}
+  for(const q of balls){if(!q.grow)continue;const r=q.r+.48;if(r>=maxR||!allowed(q.x,q.y,r)||grid.near(q.x,q.y,maxR+r+3).some(n=>n!==q&&Math.hypot(n.x-q.x,n.y-q.y)<n.r+r+2)){q.grow=false;drawBall(fixed,q);}else q.r=r;}
+  }
+  ink.clear();ink.image(fixed,0,0);for(const q of balls)if(q.grow)drawBall(ink,q);
+  return iteration>=420;}};
+ }
+
+ p.setup=()=>{p.pixelDensity(Math.min(2,window.devicePixelRatio||1));p.createCanvas(1,1).parent(stage);p.frameRate(60);reset();};
+ p.draw=()=>{
+  if(document.hidden)return;
+  const now=performance.now(),dt=Math.min(40,now-last);last=now;elapsed+=dt;
+  frames.push(now);if(frames.length>180)frames.shift();if(frames.length>60)fps=(frames.length-1)*1000/(now-frames[0]);
+  const progress=reduce.matches?1:clamp(elapsed/duration,0,1);
+  const done=engine.step(progress,dt);
+  p.image(paper,0,0);if(!reduce.matches||done)p.image(ink,0,0);
+  stage.dataset.progress=progress.toFixed(3);stage.dataset.fps=fps.toFixed(1);
+  if(done&&(!continuous||reduce.matches)&&progress>=1){finished=true;stage.dataset.complete='true';status.textContent='已完成 · 靜止的作品';p.noLoop();}
+  else if(continuous&&!reduce.matches){stage.dataset.complete='true';status.textContent='移動游標或輕觸，改變潮汐';}
+ };
+ p.windowResized=reset;
+ const point=(event)=>{const t=event.touches?.[0]||event;engine?.pointer?.(t.clientX,t.clientY);};
+ stage.addEventListener('pointermove',point);stage.addEventListener('pointerleave',()=>engine?.pointer?.(-1000,-1000));
+ stage.addEventListener('touchmove',e=>{if(continuous)e.preventDefault();point(e);},{passive:false});
+ stage.addEventListener('touchstart',point,{passive:true});stage.addEventListener('touchend',()=>engine?.pointer?.(-1000,-1000));
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)p.noLoop();else if(!finished){last=performance.now();p.loop();}});
+ reduce.addEventListener('change',reset);
+ document.querySelector('#regenerate').addEventListener('click',()=>{seed=crypto.getRandomValues(new Uint32Array(1))[0];const u=new URL(location.href);u.searchParams.set('seed',seed);try{history.replaceState(null,'',u);}catch(_){}reset();});
+ document.querySelector('#download').addEventListener('click',()=>p.saveCanvas(meta.id+'-'+seed,'png'));
+},stage);
+})();
+</script></body></html>

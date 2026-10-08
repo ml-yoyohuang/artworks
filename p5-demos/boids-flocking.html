@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>共同的偏航 — 規則的餘溫</title><style>:root{--bg:#102526;--fg:#d5e2d4;--accent:#bd9b68}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}body{overflow:hidden}a{color:inherit;text-decoration:none}button,summary,a{ -webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:5px}#stage{position:fixed;inset:0;touch-action:pan-y}canvas{display:block}header{position:fixed;z-index:2;top:32px;left:40px;right:40px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none}header a,header button{pointer-events:auto}.back{font-size:12px;letter-spacing:.12em;border-bottom:1px solid color-mix(in srgb,var(--fg) 30%,transparent);padding-bottom:7px}.edition{text-align:right;font-size:10px;letter-spacing:.17em;line-height:1.9}.edition b{font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:.06em}footer{position:fixed;z-index:3;left:40px;right:40px;bottom:26px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end;pointer-events:none}.caption,.actions{pointer-events:auto}.caption:has(details[open]){background:var(--bg);box-shadow:0 0 0 12px var(--bg)}.eyebrow{font-size:9px;letter-spacing:.22em;opacity:.64}h1{font-family:"Noto Serif TC","Songti TC",Georgia,serif;font-size:24px;font-weight:400;letter-spacing:.15em;line-height:1.3;margin:8px 0}.rule{font-size:12px;line-height:1.8;letter-spacing:.06em;margin:0;opacity:.82}.actions{display:flex;gap:8px}button{font:inherit;font-size:11px;letter-spacing:.1em;padding:10px 16px;color:var(--fg);background:color-mix(in srgb,var(--bg) 80%,transparent);border:1px solid color-mix(in srgb,var(--fg) 28%,transparent);border-radius:2px;cursor:pointer;backdrop-filter:blur(8px)}button:hover{border-color:var(--fg)}details{max-width:620px;font-size:11px;line-height:1.9;margin-top:8px}summary{cursor:pointer;display:inline-block;letter-spacing:.12em;opacity:.65;list-style:none}summary::-webkit-details-marker{display:none}summary:before{content:'＋ ';}details[open] summary:before{content:'− ';}details[open]{padding:16px;background:var(--bg);border:1px solid color-mix(in srgb,var(--fg) 18%,transparent);max-height:45vh;overflow:auto;box-shadow:0 5px 40px #00000012}details p{margin:9px 0 0}#status{font-size:9px;letter-spacing:.07em;opacity:.55;margin-top:10px}#failure{position:fixed;z-index:5;top:40%;left:10%;right:10%;padding:28px;background:var(--bg);border:1px solid var(--fg);line-height:1.8}#failure[hidden]{display:none}.no-script{position:fixed;z-index:10;top:40%;left:10%;right:10%;background:var(--bg);padding:30px}@media(max-width:600px){header{top:22px;left:22px;right:22px}.edition{font-size:8px}footer{left:22px;right:22px;bottom:20px;grid-template-columns:1fr;gap:12px}h1{font-size:21px;margin:6px 0}.rule{font-size:11px}.actions{position:absolute;right:0;bottom:0}button{padding:9px 10px;font-size:10px}.caption{padding-bottom:36px}#status{position:absolute;bottom:7px;left:0;max-width:45%;font-size:8px}details{margin-top:5px}details[open]{max-height:38vh}.back{font-size:11px}}
+</style></head>
+<body><main id="stage" aria-label="共同的偏航，程序生成的藝術作品"></main>
+<header><a class="back" href="p5-demo-list.html">← 規則的餘溫</a><div class="edition">STUDY 09 / 10<br>BOIDS<br>SEED <b id="seed">—</b></div></header>
+<footer><div class="caption"><div class="eyebrow">鳥群 / 銀魚 / 集體</div><h1>共同的偏航</h1><p class="rule">每一道微光跟隨鄰近的微光，游標則成為短暫的潮汐。</p><details><summary>關於這個規則</summary><p>個體同時遵循分離、對齊與凝聚三個局部規則，形成群體的轉彎。均勻網格縮小鄰居搜尋範圍，緩慢的環形潮流維持構圖。游標或觸控會推開附近個體；減少動態時呈現固定的集體軌跡。</p><p>核心參數：個體 90–240；鄰域 55 px；速率 1.6–2.8 px；游標排斥 110 px。</p><p>適合用於：互動首頁、音樂視覺、活動開場。</p></details><div id="status" role="status">準備作品</div></div><div class="actions"><button id="regenerate" type="button">重新生成</button><button id="download" type="button">下載 PNG</button></div></footer>
+<div id="failure" hidden>作品無法載入。請確認 p5-demos/lib/p5.min.js 與此頁面保存在同一份完整資料夾內，再重新開啟。</div><noscript><p class="no-script">這件作品需要 JavaScript。請在瀏覽器啟用 JavaScript，再重新開啟。</p></noscript>
+<script src="lib/p5.min.js" onerror="document.getElementById('failure').hidden=false"></script><script>
+(() => {
+'use strict';
+const meta = {"id": "boids-flocking", "bg": "#102526", "fg": "#d5e2d4", "accent": "#bd9b68"};
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+let seed = readSeed(), instance;
+function readSeed(){ const v=new URLSearchParams(location.search).get('seed'); return v!==null&&/^\d+$/.test(v)?Number(BigInt(v)%4294967296n):crypto.getRandomValues(new Uint32Array(1))[0]; }
+const stage=document.querySelector('#stage'), status=document.querySelector('#status');
+function fail(){ document.querySelector('#failure').hidden=false; status.textContent='作品暫時無法載入'; }
+if(typeof window.p5!=='function'){fail();return;}
+class Grid {
+ constructor(size){this.size=size;this.cells=new Map();}
+ key(x,y){return Math.floor(x/this.size)+','+Math.floor(y/this.size);}
+ add(o){const k=this.key(o.x,o.y);if(!this.cells.has(k))this.cells.set(k,[]);this.cells.get(k).push(o);}
+ near(x,y,r){const out=[],s=this.size;for(let a=Math.floor((x-r)/s);a<=Math.floor((x+r)/s);a++)for(let b=Math.floor((y-r)/s);b<=Math.floor((y+r)/s);b++){const c=this.cells.get(a+','+b);if(c)out.push(...c);}return out;}
+ nearest(x,y,max=Infinity){let best=null,d=Infinity;for(let ring=1;ring<=12;ring++){for(const o of this.near(x,y,ring*this.size)){const dd=(o.x-x)**2+(o.y-y)**2;if(dd<d){d=dd;best=o;}}if(d<(ring*this.size-this.size)**2||ring*this.size>=max)break;}return best;}
+}
+instance=new p5(p=>{
+ let w,h,box,paper,ink,engine,elapsed=0,last=0,finished=false,frames=[],fps=60;
+ const duration=14000, continuous=meta.id==='boids-flocking';
+ const R=(a,b)=>p.random(a,b), N=(a,b)=>p.noise(a,b), clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ function reset(){
+  if(engine?.dispose)engine.dispose();
+  w=Math.max(280,stage.clientWidth);h=Math.max(460,window.innerHeight);
+  p.resizeCanvas(w,h,true);p.randomSeed(seed);p.noiseSeed(seed);
+  if(paper)paper.remove();if(ink)ink.remove();
+  paper=p.createGraphics(w,h);ink=p.createGraphics(w,h);paper.pixelDensity(1);ink.pixelDensity(1);
+  paper.background(meta.bg);paper.stroke(meta.fg);paper.strokeWeight(.45);
+  const fibers=Math.floor(w*h/110);for(let i=0;i<fibers;i++){const x=R(w),y=R(h);paper.stroke(p.color(meta.fg+'12'));paper.line(x,y,x+R(1,4),y+R(-.5,.5));}
+  const mobile=w<600, top=mobile?122:112, bottom=mobile?204:180;
+  box={x:w*(mobile?.055:.10),y:top,w:w*(mobile?.89:.8),h:Math.max(220,h-top-bottom),mobile};
+  ink.noFill();ink.stroke(meta.fg);engine=createArt();elapsed=0;last=performance.now();finished=false;frames=[];
+  document.querySelector('#seed').textContent=String(seed);document.querySelector('#regenerate').disabled=false;
+  stage.dataset.complete='false';stage.dataset.seed=seed;status.textContent=reduce.matches?'正在凝成靜止的作品':'作品正在生長';
+  if(!document.hidden)p.loop();
+ }
+ const line=(x1,y1,x2,y2,c=meta.fg,weight=.7)=>{ink.stroke(c);ink.strokeWeight(weight);ink.line(x1,y1,x2,y2);};
+ const dot=(x,y,size,c=meta.fg)=>{ink.noStroke();ink.fill(c);ink.circle(x,y,size);};
+ 
+ function createArt(){
+  const a=box,cx=a.x+a.w*.5,cy=a.y+a.h*.5,count=Math.floor(clamp(a.w*a.h/2400,90,240)),flock=[];let mx=-1000,my=-1000,tick=0;
+  for(let i=0;i<count;i++){const t=R(p.TWO_PI),r=R(.35,1),x=cx+Math.cos(t)*a.w*.39*r,y=cy+Math.sin(t)*a.h*.38*r;flock.push({x,y,vx:-Math.sin(t)*2,vy:Math.cos(t)*1.7,trail:[]});}
+  function simulate(dt){const grid=new Grid(55);flock.forEach(q=>grid.add(q));const results=[];
+  for(const q of flock){let sx=0,sy=0,ax=0,ay=0,gx=0,gy=0,n=0;for(const b of grid.near(q.x,q.y,55)){if(b===q)continue;const dx=q.x-b.x,dy=q.y-b.y,d=Math.hypot(dx,dy);if(d<55){ax+=b.vx;ay+=b.vy;gx+=b.x;gy+=b.y;n++;if(d<23&&d>0){sx+=dx/d*(1-d/23);sy+=dy/d*(1-d/23);}}}
+  const u=(q.x-cx)/(a.w*.43),v=(q.y-cy)/(a.h*.43),radius=Math.hypot(u,v);let vx=q.vx+sx*.17,vy=q.vy+sy*.17;
+  if(n){vx+=(ax/n-q.vx)*.025+(gx/n-q.x)*.0008;vy+=(ay/n-q.vy)*.025+(gy/n-q.y)*.0008;}
+  vx+=(-v*.9-u*(radius-.75)*2)*.035;vy+=(u*.9-v*(radius-.75)*2)*.035;
+  const dx=q.x-mx,dy=q.y-my,dist=Math.hypot(dx,dy);if(dist<110&&dist>0){vx+=dx/dist*(1-dist/110)*.3;vy+=dy/dist*(1-dist/110)*.3;}
+  const speed=Math.hypot(vx,vy),lim=clamp(speed,1.6,2.8);vx=vx/speed*lim;vy=vy/speed*lim;results.push({x:clamp(q.x+vx*dt/16.67,a.x,a.x+a.w),y:clamp(q.y+vy*dt/16.67,a.y,a.y+a.h),vx,vy});}
+  for(let i=0;i<flock.length;i++){const q=flock[i];Object.assign(q,results[i]);q.trail.push([q.x,q.y]);if(q.trail.length>24)q.trail.shift();}}
+  return{pointer(x,y){mx=x;my=y;},step(progress,dt){if(reduce.matches){for(let i=0;i<3&&tick<160;i++,tick++)simulate(16.67);}else simulate(dt);
+  ink.clear();ink.noFill();for(let i=0;i<flock.length;i++){const q=flock[i],c=i%7===0?meta.accent:meta.fg;ink.stroke(c+'48');ink.strokeWeight(.7);ink.beginShape();q.trail.forEach(t=>ink.vertex(...t));ink.endShape();const theta=Math.atan2(q.vy,q.vx);ink.push();ink.translate(q.x,q.y);ink.rotate(theta);ink.noStroke();ink.fill(c);ink.triangle(5,0,-3,-1.6,-1,1.6);ink.pop();}return tick>=160;}};
+ }
+
+ p.setup=()=>{p.pixelDensity(Math.min(2,window.devicePixelRatio||1));p.createCanvas(1,1).parent(stage);p.frameRate(60);reset();};
+ p.draw=()=>{
+  if(document.hidden)return;
+  const now=performance.now(),dt=Math.min(40,now-last);last=now;elapsed+=dt;
+  frames.push(now);if(frames.length>180)frames.shift();if(frames.length>60)fps=(frames.length-1)*1000/(now-frames[0]);
+  const progress=reduce.matches?1:clamp(elapsed/duration,0,1);
+  const done=engine.step(progress,dt);
+  p.image(paper,0,0);if(!reduce.matches||done)p.image(ink,0,0);
+  stage.dataset.progress=progress.toFixed(3);stage.dataset.fps=fps.toFixed(1);
+  if(done&&(!continuous||reduce.matches)&&progress>=1){finished=true;stage.dataset.complete='true';status.textContent='已完成 · 靜止的作品';p.noLoop();}
+  else if(continuous&&!reduce.matches){stage.dataset.complete='true';status.textContent='移動游標或輕觸，改變潮汐';}
+ };
+ p.windowResized=reset;
+ const point=(event)=>{const t=event.touches?.[0]||event;engine?.pointer?.(t.clientX,t.clientY);};
+ stage.addEventListener('pointermove',point);stage.addEventListener('pointerleave',()=>engine?.pointer?.(-1000,-1000));
+ stage.addEventListener('touchmove',e=>{if(continuous)e.preventDefault();point(e);},{passive:false});
+ stage.addEventListener('touchstart',point,{passive:true});stage.addEventListener('touchend',()=>engine?.pointer?.(-1000,-1000));
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)p.noLoop();else if(!finished){last=performance.now();p.loop();}});
+ reduce.addEventListener('change',reset);
+ document.querySelector('#regenerate').addEventListener('click',()=>{seed=crypto.getRandomValues(new Uint32Array(1))[0];const u=new URL(location.href);u.searchParams.set('seed',seed);try{history.replaceState(null,'',u);}catch(_){}reset();});
+ document.querySelector('#download').addEventListener('click',()=>p.saveCanvas(meta.id+'-'+seed,'png'));
+},stage);
+})();
+</script></body></html>

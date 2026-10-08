@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>慢慢展開的內側 — 規則的餘溫</title><style>:root{--bg:#e8e6d6;--fg:#355347;--accent:#b58050}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}body{overflow:hidden}a{color:inherit;text-decoration:none}button,summary,a{ -webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:5px}#stage{position:fixed;inset:0;touch-action:pan-y}canvas{display:block}header{position:fixed;z-index:2;top:32px;left:40px;right:40px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none}header a,header button{pointer-events:auto}.back{font-size:12px;letter-spacing:.12em;border-bottom:1px solid color-mix(in srgb,var(--fg) 30%,transparent);padding-bottom:7px}.edition{text-align:right;font-size:10px;letter-spacing:.17em;line-height:1.9}.edition b{font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:.06em}footer{position:fixed;z-index:3;left:40px;right:40px;bottom:26px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end;pointer-events:none}.caption,.actions{pointer-events:auto}.caption:has(details[open]){background:var(--bg);box-shadow:0 0 0 12px var(--bg)}.eyebrow{font-size:9px;letter-spacing:.22em;opacity:.64}h1{font-family:"Noto Serif TC","Songti TC",Georgia,serif;font-size:24px;font-weight:400;letter-spacing:.15em;line-height:1.3;margin:8px 0}.rule{font-size:12px;line-height:1.8;letter-spacing:.06em;margin:0;opacity:.82}.actions{display:flex;gap:8px}button{font:inherit;font-size:11px;letter-spacing:.1em;padding:10px 16px;color:var(--fg);background:color-mix(in srgb,var(--bg) 80%,transparent);border:1px solid color-mix(in srgb,var(--fg) 28%,transparent);border-radius:2px;cursor:pointer;backdrop-filter:blur(8px)}button:hover{border-color:var(--fg)}details{max-width:620px;font-size:11px;line-height:1.9;margin-top:8px}summary{cursor:pointer;display:inline-block;letter-spacing:.12em;opacity:.65;list-style:none}summary::-webkit-details-marker{display:none}summary:before{content:'＋ ';}details[open] summary:before{content:'− ';}details[open]{padding:16px;background:var(--bg);border:1px solid color-mix(in srgb,var(--fg) 18%,transparent);max-height:45vh;overflow:auto;box-shadow:0 5px 40px #00000012}details p{margin:9px 0 0}#status{font-size:9px;letter-spacing:.07em;opacity:.55;margin-top:10px}#failure{position:fixed;z-index:5;top:40%;left:10%;right:10%;padding:28px;background:var(--bg);border:1px solid var(--fg);line-height:1.8}#failure[hidden]{display:none}.no-script{position:fixed;z-index:10;top:40%;left:10%;right:10%;background:var(--bg);padding:30px}@media(max-width:600px){header{top:22px;left:22px;right:22px}.edition{font-size:8px}footer{left:22px;right:22px;bottom:20px;grid-template-columns:1fr;gap:12px}h1{font-size:21px;margin:6px 0}.rule{font-size:11px}.actions{position:absolute;right:0;bottom:0}button{padding:9px 10px;font-size:10px}.caption{padding-bottom:36px}#status{position:absolute;bottom:7px;left:0;max-width:45%;font-size:8px}details{margin-top:5px}details[open]{max-height:38vh}.back{font-size:11px}}
+</style></head>
+<body><main id="stage" aria-label="慢慢展開的內側，程序生成的藝術作品"></main>
+<header><a class="back" href="p5-demo-list.html">← 規則的餘溫</a><div class="edition">STUDY 06 / 10<br>DIFFERENTIAL GROWTH<br>SEED <b id="seed">—</b></div></header>
+<footer><div class="caption"><div class="eyebrow">珊瑚 / 腦紋 / 呼吸</div><h1>慢慢展開的內側</h1><p class="rule">線讓鄰近的點彼此退讓，又始終不肯鬆開相連的手。</p><details><summary>關於這個規則</summary><p>封閉曲線上的節點受到短距離排斥、相鄰彈性與彎曲平滑三種力量。過長的邊插入新節點，讓輪廓慢慢長出摺痕。空間網格加速鄰域排斥，每影格僅推進一小批迭代。</p><p>核心參數：節點上限 450–950；排斥半徑 11–16 px；迭代 460 次；生長 14 秒。</p><p>適合用於：展覽開場、生活風格、沉浸背景。</p></details><div id="status" role="status">準備作品</div></div><div class="actions"><button id="regenerate" type="button">重新生成</button><button id="download" type="button">下載 PNG</button></div></footer>
+<div id="failure" hidden>作品無法載入。請確認 p5-demos/lib/p5.min.js 與此頁面保存在同一份完整資料夾內，再重新開啟。</div><noscript><p class="no-script">這件作品需要 JavaScript。請在瀏覽器啟用 JavaScript，再重新開啟。</p></noscript>
+<script src="lib/p5.min.js" onerror="document.getElementById('failure').hidden=false"></script><script>
+(() => {
+'use strict';
+const meta = {"id": "differential-growth", "bg": "#e8e6d6", "fg": "#355347", "accent": "#b58050"};
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+let seed = readSeed(), instance;
+function readSeed(){ const v=new URLSearchParams(location.search).get('seed'); return v!==null&&/^\d+$/.test(v)?Number(BigInt(v)%4294967296n):crypto.getRandomValues(new Uint32Array(1))[0]; }
+const stage=document.querySelector('#stage'), status=document.querySelector('#status');
+function fail(){ document.querySelector('#failure').hidden=false; status.textContent='作品暫時無法載入'; }
+if(typeof window.p5!=='function'){fail();return;}
+class Grid {
+ constructor(size){this.size=size;this.cells=new Map();}
+ key(x,y){return Math.floor(x/this.size)+','+Math.floor(y/this.size);}
+ add(o){const k=this.key(o.x,o.y);if(!this.cells.has(k))this.cells.set(k,[]);this.cells.get(k).push(o);}
+ near(x,y,r){const out=[],s=this.size;for(let a=Math.floor((x-r)/s);a<=Math.floor((x+r)/s);a++)for(let b=Math.floor((y-r)/s);b<=Math.floor((y+r)/s);b++){const c=this.cells.get(a+','+b);if(c)out.push(...c);}return out;}
+ nearest(x,y,max=Infinity){let best=null,d=Infinity;for(let ring=1;ring<=12;ring++){for(const o of this.near(x,y,ring*this.size)){const dd=(o.x-x)**2+(o.y-y)**2;if(dd<d){d=dd;best=o;}}if(d<(ring*this.size-this.size)**2||ring*this.size>=max)break;}return best;}
+}
+instance=new p5(p=>{
+ let w,h,box,paper,ink,engine,elapsed=0,last=0,finished=false,frames=[],fps=60;
+ const duration=14000, continuous=meta.id==='boids-flocking';
+ const R=(a,b)=>p.random(a,b), N=(a,b)=>p.noise(a,b), clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ function reset(){
+  if(engine?.dispose)engine.dispose();
+  w=Math.max(280,stage.clientWidth);h=Math.max(460,window.innerHeight);
+  p.resizeCanvas(w,h,true);p.randomSeed(seed);p.noiseSeed(seed);
+  if(paper)paper.remove();if(ink)ink.remove();
+  paper=p.createGraphics(w,h);ink=p.createGraphics(w,h);paper.pixelDensity(1);ink.pixelDensity(1);
+  paper.background(meta.bg);paper.stroke(meta.fg);paper.strokeWeight(.45);
+  const fibers=Math.floor(w*h/110);for(let i=0;i<fibers;i++){const x=R(w),y=R(h);paper.stroke(p.color(meta.fg+'12'));paper.line(x,y,x+R(1,4),y+R(-.5,.5));}
+  const mobile=w<600, top=mobile?122:112, bottom=mobile?204:180;
+  box={x:w*(mobile?.055:.10),y:top,w:w*(mobile?.89:.8),h:Math.max(220,h-top-bottom),mobile};
+  ink.noFill();ink.stroke(meta.fg);engine=createArt();elapsed=0;last=performance.now();finished=false;frames=[];
+  document.querySelector('#seed').textContent=String(seed);document.querySelector('#regenerate').disabled=false;
+  stage.dataset.complete='false';stage.dataset.seed=seed;status.textContent=reduce.matches?'正在凝成靜止的作品':'作品正在生長';
+  if(!document.hidden)p.loop();
+ }
+ const line=(x1,y1,x2,y2,c=meta.fg,weight=.7)=>{ink.stroke(c);ink.strokeWeight(weight);ink.line(x1,y1,x2,y2);};
+ const dot=(x,y,size,c=meta.fg)=>{ink.noStroke();ink.fill(c);ink.circle(x,y,size);};
+ 
+ function createArt(){
+  const a=box,cx=a.x+a.w*.5,cy=a.y+a.h*.5,scale=Math.min(a.w,a.h),rad=scale*.23,repel=a.mobile?11:16,cap=a.mobile?450:950;let iteration=0;
+  let pts=Array.from({length:90},(_,i)=>{const t=i/90*p.TWO_PI,r=rad*(1+.11*Math.sin(t*7+R(-.2,.2)));return{x:cx+Math.cos(t)*r,y:cy+Math.sin(t)*r*.83};});
+  return{step(progress){const target=Math.floor(progress*460),end=Math.min(target,iteration+7),deadline=performance.now()+6;for(;iteration<end&&performance.now()<deadline;iteration++){
+  const grid=new Grid(repel);pts.forEach(q=>grid.add(q));const next=[];let extra=cap-pts.length;
+  for(let i=0;i<pts.length;i++){const q=pts[i],prev=pts[(i+pts.length-1)%pts.length],after=pts[(i+1)%pts.length];let dx=(prev.x+after.x-2*q.x)*.09,dy=(prev.y+after.y-2*q.y)*.09;
+  for(const n of grid.near(q.x,q.y,repel)){if(n===q)continue;const vx=q.x-n.x,vy=q.y-n.y,d=Math.hypot(vx,vy);if(d>0&&d<repel){dx+=vx/d*(1-d/repel)*.92;dy+=vy/d*(1-d/repel)*.92;}}
+  const bound=Math.hypot((q.x-cx)/(scale*.43),(q.y-cy)/(scale*.39));if(bound>1){dx-=(q.x-cx)/rad*(bound-1)*.4;dy-=(q.y-cy)/rad*(bound-1)*.4;}dx+=(N(q.x*.02,q.y*.02)-.5)*.09;dy+=(N(q.y*.02,q.x*.02)-.5)*.09;
+  const x=clamp(q.x+dx,a.x+8,a.x+a.w-8),y=clamp(q.y+dy,a.y+8,a.y+a.h-8);next.push({x,y});if(extra>0&&Math.hypot(q.x-after.x,q.y-after.y)>repel*.28){next.push({x:(q.x+after.x)/2,y:(q.y+after.y)/2});extra--;}}
+  pts=next.slice(0,cap);
+  }
+  ink.clear();ink.noFill();for(let layer=2;layer>=0;layer--){ink.stroke(layer===0?meta.fg:meta.accent+'35');ink.strokeWeight(layer===0?1.15:.55);ink.beginShape();for(const q of [pts[pts.length-1],...pts,pts[0],pts[1]])ink.curveVertex(q.x+(q.x-cx)*layer*.012,q.y+(q.y-cy)*layer*.012);ink.endShape();}return iteration>=460;}};
+ }
+
+ p.setup=()=>{p.pixelDensity(Math.min(2,window.devicePixelRatio||1));p.createCanvas(1,1).parent(stage);p.frameRate(60);reset();};
+ p.draw=()=>{
+  if(document.hidden)return;
+  const now=performance.now(),dt=Math.min(40,now-last);last=now;elapsed+=dt;
+  frames.push(now);if(frames.length>180)frames.shift();if(frames.length>60)fps=(frames.length-1)*1000/(now-frames[0]);
+  const progress=reduce.matches?1:clamp(elapsed/duration,0,1);
+  const done=engine.step(progress,dt);
+  p.image(paper,0,0);if(!reduce.matches||done)p.image(ink,0,0);
+  stage.dataset.progress=progress.toFixed(3);stage.dataset.fps=fps.toFixed(1);
+  if(done&&(!continuous||reduce.matches)&&progress>=1){finished=true;stage.dataset.complete='true';status.textContent='已完成 · 靜止的作品';p.noLoop();}
+  else if(continuous&&!reduce.matches){stage.dataset.complete='true';status.textContent='移動游標或輕觸，改變潮汐';}
+ };
+ p.windowResized=reset;
+ const point=(event)=>{const t=event.touches?.[0]||event;engine?.pointer?.(t.clientX,t.clientY);};
+ stage.addEventListener('pointermove',point);stage.addEventListener('pointerleave',()=>engine?.pointer?.(-1000,-1000));
+ stage.addEventListener('touchmove',e=>{if(continuous)e.preventDefault();point(e);},{passive:false});
+ stage.addEventListener('touchstart',point,{passive:true});stage.addEventListener('touchend',()=>engine?.pointer?.(-1000,-1000));
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)p.noLoop();else if(!finished){last=performance.now();p.loop();}});
+ reduce.addEventListener('change',reset);
+ document.querySelector('#regenerate').addEventListener('click',()=>{seed=crypto.getRandomValues(new Uint32Array(1))[0];const u=new URL(location.href);u.searchParams.set('seed',seed);try{history.replaceState(null,'',u);}catch(_){}reset();});
+ document.querySelector('#download').addEventListener('click',()=>p.saveCanvas(meta.id+'-'+seed,'png'));
+},stage);
+})();
+</script></body></html>
