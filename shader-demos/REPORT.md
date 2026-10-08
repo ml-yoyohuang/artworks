@@ -194,4 +194,4 @@ Chromium / Playwright 瀏覽器實測通過：1440×900（DPR 1）及 390×844�
 
 使用者選定「一處皺摺」，取代「經緯之間」。更新作品頁標題、主標、無障礙名稱與目錄名稱／預覽替代文字；保留 `textile-moire.html` 路徑以維持既有連結。GLSL 與 JavaScript 內容雜湊在命名前後完全一致，已選定的雙層紗畫面不變。歷史製作紀錄保留當時名稱，現行作品清單使用新名稱。桌機 1440×900、手機 390×844 各瀏覽器實測至少 3.3 秒，零 console / pageerror、控制版面正常；更新實測縮圖小於 150KB，17 頁結構及目錄連結靜態檢查通過。
 
-根目錄未找到 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；遵守任務檔案範圍。此次交付分支及作品 commit hash 於推送後補記。
+根目錄未找到 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；遵守任務檔案範圍。已成功推送至 `origin/main`，作品 commit hash：`352787424121f6b8a38216a53946599a9f78e7c3`。交付紀錄由後續文件提交補記。
