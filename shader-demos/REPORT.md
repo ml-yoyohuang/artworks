@@ -242,4 +242,4 @@ Chromium / Playwright 實測通過：1440×900（DPR 1）及 390×844（DPR 2）
 
 依使用者試玩後的選擇，將邊緣滑桿範圍從 0–2.5 收至 0–1.5，預設 0.50、步長 0.01；同步更新參數說明。GLSL 與 JavaScript 雜湊在修改前後相同，原有效果映射及預設畫面保持不變。HTML 參數、17 頁結構、目錄連結與縮圖大小靜態檢查通過；此前瀏覽器實測與逐像素比較見上一節。本次僅調整滑桿上限與文字，未重跑相同渲染測試。
 
-根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；只修改作品頁與報告，遵守檔案範圍。此次交付分支與作品 commit hash 於推送後補記。
+根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；只修改作品頁與報告，遵守檔案範圍。已成功推送至 `origin/main`，作品 commit hash：`b91fb445c5ce5d54583673e11d3e644bd6fb8128`。交付紀錄由後續文件提交補記。
