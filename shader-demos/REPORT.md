@@ -124,4 +124,4 @@ repo 根目錄沒有 CLAUDE.md、CONTRIBUTING.md 或 AGENTS.md；沒有相應額
 
 三頁皆重新瀏覽器實測至少 3.3 秒、截圖、像素取樣與視覺檢視，無 console / pageerror；手機 DPR 2，實際 canvas 515×1114。控制項、說明面板、shader 失敗說明皆通過。目錄 16 個連結與 16 張縮圖存在且可載入；本機 HTTP 實測 17 頁零 console 錯誤。縮圖更新且皆小於 150KB。完整截圖、比較快照與測試資料僅保留在 repo 外暫存目錄。深空是藝術性的光線彎曲近似，並非精確相對論模擬。
 
-此次修訂交付分支：`main`；作品 commit hash 於推送後補記。根目錄未找到 CLAUDE.md；已遵守檔案範圍，不納入其他工作流程檔案。
+此次修訂已成功推送至 `origin/main`；作品 commit hash：`c4885e14108814daa3934567c321ae422bba06ff`。推送紀錄由後續文件提交補記。根目錄未找到 CLAUDE.md；已遵守檔案範圍，不納入其他工作流程檔案。
