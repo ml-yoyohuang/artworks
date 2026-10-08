@@ -252,4 +252,4 @@ Chromium / Playwright 實測通過：1440×900（DPR 1）及 390×844（DPR 2）
 
 Chromium / Playwright 在 1440×900 與 390×844 分別以 file:// 與本機靜態 HTTP 實測，各至少 3.1 秒；16 張作品縮圖正常載入、無水平溢出、零 console / pageerror，OG 與 Twitter 標籤正確。HTTP 圖片回應 200、image/jpeg；圖檔尺寸與視覺檢視通過。17 頁結構、連結、離線素材與縮圖大小靜態檢查通過，canonical 是分享頁識別網址，並非頁面載入依賴。手機為瀏覽器模擬。分享平台可能快取舊預覽，實際裁切由平台決定。
 
-根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；已遵守檔案範圍，未修改或提交既有未追蹤的 `.gitignore`。推送分支與作品 commit hash 於推送後補記。
+根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；已遵守檔案範圍，未修改或提交既有未追蹤的 `.gitignore`。已成功推送至 `origin/main`，作品 commit hash：`38e38afc6af3b6e279f3e2b91edcb544b53a3ab2`。交付紀錄由後續文件提交補記。
