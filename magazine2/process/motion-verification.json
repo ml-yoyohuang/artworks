@@ -1,0 +1,36 @@
+[
+  {
+    "desktop": {
+      "exposed": true,
+      "filter": "saturate(1.14) contrast(1.035) brightness(0.995)",
+      "x": 1.8,
+      "y": -1.2
+    },
+    "headingStable": true,
+    "exitRestoresOriginal": true
+  },
+  {
+    "mobile": {
+      "startFilter": "saturate(0.88) contrast(0.975)",
+      "oneTimeOnly": true,
+      "insetFixed": true,
+      "tapNavigation": "file:///Users/yoyohuang/dev/artworks/p5-demos2/space-colonization.html?seed=2024"
+    }
+  },
+  {
+    "reducedMotion": true
+  },
+  {
+    "dynamicReducedMotion": true
+  },
+  {
+    "responsiveWidths": [
+      320,
+      390,
+      768,
+      1024,
+      1440
+    ],
+    "errors": []
+  }
+]

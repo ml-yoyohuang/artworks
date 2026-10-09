@@ -10,3 +10,10 @@
 @media(min-width:1101px){.hero-art{padding-bottom:172px}.hero-inset{top:310px}.hero-caption{bottom:57px}}
 /* On a phone each work gets a whole page width, so the original notes stay readable. */
 @media(max-width:480px){.works{grid-template-columns:1fr;gap:44px}.work-top{font-size:9px}.work-top>span:last-child{font-size:9px;max-width:none}.work-title{display:flex;margin-top:17px}.work h3{font-size:24px;letter-spacing:.04em}.swatches{margin-top:0;gap:4px}.swatches i{width:7px;height:7px}.work-en{font-size:9px;min-height:0;line-height:1.9;overflow-wrap:normal;margin-top:7px}.work-desc{font-size:12px;line-height:2.05;letter-spacing:.03em;margin-top:12px}.work-tags{font-size:10px;line-height:1.9;margin-top:14px}.work-use{font-size:11px;line-height:1.9;margin-top:12px;padding-top:10px}.work-use>span{font-size:9px}}
+
+/* A slow exposure inside the plate; the page and its type remain still. */
+.hero-main img{transition:filter 1.6s cubic-bezier(.22,.61,.36,1)}
+.hero-art.is-exposed .hero-main img{filter:saturate(1.14) contrast(1.035) brightness(.995)}
+.hero-inset,.hero-inset:hover{transform:translate(var(--plate-x,0px),var(--plate-y,0px)) rotate(-3deg);transition:transform .65s cubic-bezier(.22,.61,.36,1)}
+.hero-art.is-motion-paused .hero-main img,.hero-art.is-motion-paused .hero-inset{transition:none}
+@media(prefers-reduced-motion:reduce){.hero-art.is-exposed .hero-main img{filter:none}.hero-inset,.hero-inset:hover{transform:rotate(-3deg)}}

@@ -28,3 +28,113 @@
   });
   tools.hidden = false;
 })();
+
+// Two small gestures for the opening spread. No scroll interception or render loop.
+(() => {
+  'use strict';
+  const art = document.querySelector('.hero-art');
+  const plate = art.querySelector('.hero-main');
+  const image = plate.querySelector('img');
+  const inset = art.querySelector('.hero-inset');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const mouseAvailable = matchMedia('(any-hover: hover) and (any-pointer: fine)');
+  let visible = false;
+  let inside = false;
+  let hoverTimer = 0;
+  let frame = 0;
+  let touchPlayed = false;
+  let touchAnimation = null;
+  let imageReady = image.complete && image.naturalWidth > 0;
+  let pendingPoint = null;
+  const enabled = () => !reduced.matches && visible && !document.hidden;
+
+  function rest() {
+    clearTimeout(hoverTimer);
+    hoverTimer = 0;
+    cancelAnimationFrame(frame);
+    frame = 0;
+    pendingPoint = null;
+    art.classList.remove('is-exposed');
+    inset.style.removeProperty('--plate-x');
+    inset.style.removeProperty('--plate-y');
+  }
+  function stop() {
+    art.classList.add('is-motion-paused');
+    inside = false;
+    rest();
+    if (touchAnimation) touchAnimation.cancel();
+    touchAnimation = null;
+  }
+  function touchExposure() {
+    if (!enabled() || touchPlayed || !imageReady || typeof image.animate !== 'function') return;
+    touchPlayed = true;
+    art.classList.remove('is-motion-paused');
+    touchAnimation = image.animate([
+      {filter:'saturate(.88) contrast(.975)'},
+      {filter:'saturate(1) contrast(1)'}
+    ], {duration:1800, easing:'cubic-bezier(.22,.61,.36,1)'});
+    touchAnimation.onfinish = () => { touchAnimation = null; };
+  }
+  function ready() {
+    imageReady = image.naturalWidth > 0;
+    if (!mouseAvailable.matches) touchExposure();
+  }
+  if (!imageReady) image.addEventListener('load', ready, {once:true});
+
+  art.addEventListener('pointerenter', event => {
+    if (event.pointerType !== 'mouse' || !mouseAvailable.matches || !enabled()) return;
+    inside = true;
+    art.classList.remove('is-motion-paused');
+    hoverTimer = setTimeout(() => {
+      hoverTimer = 0;
+      if (inside && enabled() && imageReady) art.classList.add('is-exposed');
+    }, 180);
+  });
+  art.addEventListener('pointermove', event => {
+    if (event.pointerType !== 'mouse' || !mouseAvailable.matches || !inside || !enabled()) return;
+    pendingPoint = {x:event.clientX, y:event.clientY};
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      if (!pendingPoint || !enabled() || !inside) return;
+      const rect = art.getBoundingClientRect();
+      const x = Math.max(-1,Math.min(1,(pendingPoint.x-rect.left)/rect.width*2-1));
+      const y = Math.max(-1,Math.min(1,(pendingPoint.y-rect.top)/rect.height*2-1));
+      inset.style.setProperty('--plate-x',`${(x*3).toFixed(2)}px`);
+      inset.style.setProperty('--plate-y',`${(y*3).toFixed(2)}px`);
+    });
+  });
+  art.addEventListener('pointerleave', () => { inside = false; rest(); });
+  // Touch on a hybrid laptop also uses the quiet, one-time exposure.
+  art.addEventListener('pointerdown', event => {
+    if (event.pointerType !== 'mouse') { rest(); touchExposure(); }
+  }, {passive:true});
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      visible = entries[0].isIntersecting && entries[0].intersectionRatio >= .4;
+      if (!visible) { stop(); return; }
+      art.classList.remove('is-motion-paused');
+      if (!mouseAvailable.matches) touchExposure();
+    }, {threshold:[0,.4]});
+    observer.observe(plate);
+  }
+  reduced.addEventListener('change', () => {
+    stop();
+    if (!reduced.matches && visible && !document.hidden) {
+      art.classList.remove('is-motion-paused');
+      if (!mouseAvailable.matches) touchExposure();
+    }
+  });
+  mouseAvailable.addEventListener('change', () => {
+    stop();
+    if (!mouseAvailable.matches) touchExposure();
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+    else if (visible && !reduced.matches) {
+      art.classList.remove('is-motion-paused');
+      if (!mouseAvailable.matches) touchExposure();
+    }
+  });
+})();
