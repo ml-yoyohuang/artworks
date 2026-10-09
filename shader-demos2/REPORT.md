@@ -1,0 +1,108 @@
+# 慢物質 Slow Matter：製作與驗證報告
+
+完成日期：2026-10-09（Asia/Taipei）。入口：[shader-demo-list.html](shader-demo-list.html)。
+
+十六件以原生 WebGL 寫成的 shader 作品，加上一個目錄頁。每頁是單一 HTML 檔，CSS、JavaScript、GLSL 全部內嵌；不使用任何函式庫、CDN、外部字型或外部圖片。所有影像都由程式即時生成：shader 的 SDF 與雜訊，或 JS 以 Canvas2D 畫出的植物、文字與靜物。
+
+## 作品與創作自述
+
+### 效果系列
+
+| 編號 | 檔案 | 作品 | 創作自述 |
+| --- | --- | --- | --- |
+| A·01 | [grain-gradient-mesh.html](grain-gradient-mesh.html) | 校樣之晨 | 這個畫面像一張剛從印刷機取下的校樣，顏色還在紙纖維裡慢慢沉澱。 |
+| A·02 | [noise-dissolve.html](noise-dissolve.html) | 兩卷底片 | 這個畫面像兩卷底片在放映機裡交換了記憶。 |
+| A·03 | [liquid-distortion.html](liquid-distortion.html) | 午後泳池 | 這個畫面像午後無人的泳池，等著被指尖喚醒。 |
+| A·04 | [dithering-halftone.html](dithering-halftone.html) | 側臉與紅日 | 這個畫面像一張連夜印好、還帶著油墨味的傳單。 |
+| A·05 | [domain-warp-fbm.html](domain-warp-fbm.html) | 石中之水 | 這個畫面像剖開一塊石頭，看見它曾經是水。 |
+| A·06 | [feedback-trails.html](feedback-trails.html) | 殘光 | 這個畫面像黃昏裡被記住的一道光，走過之後還捨不得散去。 |
+| A·07 | [reaction-diffusion.html](reaction-diffusion.html) | 斑紋 | 這個畫面像一張還在生長的獸皮，斑點自己決定要長成什麼樣子。 |
+| A·08 | [pixel-sorting.html](pixel-sorting.html) | 斷訊 | 這個畫面像一則正在融化的訊號，字還在，意思卻一行行往下流。 |
+| A·09 | [raymarching-sdf.html](raymarching-sdf.html) | 石膏習作 | 這個畫面像美術館角落的一件石膏習作，光在它的孔洞裡慢慢午睡。 |
+
+### 媒材系列
+
+| 編號 | 檔案 | 作品 | 創作自述 |
+| --- | --- | --- | --- |
+| B·10 | [darkroom-solarize.html](darkroom-solarize.html) | 顯影 | 這個畫面像一張還在顯影液中、慢慢浮現的相片。 |
+| B·11 | [risograph-print.html](risograph-print.html) | 套色 | 這個畫面像兩道油墨各走各的，在紙上偶然重疊。 |
+| B·12 | [cyanotype.html](cyanotype.html) | 日光標本 | 這個畫面像植物在陽光下躺了一個午後，留下的白色影子。 |
+| B·13 | [glass-refraction.html](glass-refraction.html) | 隔著玻璃 | 這個畫面像隔著一扇老玻璃窗，看見午後模糊的庭院。 |
+| B·14 | [organic-growth.html](organic-growth.html) | 石上地衣 | 這個畫面像一塊石頭，用幾十年慢慢記下自己被誰住過。 |
+| B·15 | [long-exposure.html](long-exposure.html) | 北天曝光 | 這個畫面像一台整夜沒關的相機，把星星走過的路都留了下來。 |
+| B·16 | [textile-moire.html](textile-moire.html) | 紗上波紋 | 這個畫面像兩層布輕輕交疊，紋理之間浮出一片不存在的水光。 |
+
+## 驗證結果
+
+**測試方式：** 全部 17 頁都經過瀏覽器實測，沒有任何頁面只做靜態檢查。
+
+- **工具：** Playwright 1.56.1 + Chromium（headless），使用 `--use-angle=swiftshader` 軟體繪圖，以 `file://` 直接開啟。
+- **測試腳本與完整截圖：** 都放在 repo 以外的暫存目錄，沒有進入 repo。
+
+| 檢查項目 | 方法 | 結果 |
+| --- | --- | --- |
+| 一般模式 | 1440×900（DPR 1）與 390×844（DPR 2、觸控）各跑一次，每頁至少 3.2 秒。桌機另外模擬一次拖曳。 | 34/34 通過 |
+| console | 監聽 console error、warning 與 pageerror。唯一排除的是 SwiftShader 截圖時的「GPU stall due to ReadPixels」驅動訊息，它由測試工具引起，不是頁面程式。 | 0 錯誤 |
+| 畫面非單色 | 截圖縮成 96×96 取樣，量化色數須大於 6，亮度標準差須大於 3。 | 全數通過 |
+| WebGL1 + 無浮點 | 加上 `?gl1&nofloat`，強制使用 WebGL1，並關閉所有浮點擴充。 | 34/34 通過，降級路徑可運作 |
+| 減少動態 | 設定 `prefers-reduced-motion: reduce`。 | 34/34 通過，皆為完整的靜止畫面 |
+| 無 WebGL | 讓 getContext 一律回傳 null。 | 16 個作品頁皆顯示繁中說明與返回連結；目錄頁改用靜態漸層並顯示提示 |
+| shader 編譯失敗 | 強制注入 `#error`。 | 16 個作品頁皆顯示「著色器無法在此裝置上編譯」與技術細節；目錄頁顯示提示，console 無錯誤 |
+| 分頁隱藏暫停 | 模擬 `document.hidden` 並觸發 visibilitychange，計算 rAF 回呼次數。 | 17/17 頁：隱藏後回呼增量為 0，恢復後繼續 |
+| 水平溢出 | 比較 scrollWidth 與 innerWidth。 | 全部無溢出 |
+| 外部資源 | 搜尋所有 `src` 與 `href` 中的外部網址。 | 0 個 |
+| 控制項數量 | 每頁計數。 | 每頁 3 個 |
+| 目錄連結 | 目錄有 16 個作品連結與 16 張縮圖。 | 全部指向存在的檔案，所有圖片都成功載入 |
+| 縮圖大小 | `thumbs/*.jpg`，720×450。 | 29KB–139KB，皆小於 150KB |
+
+**策展檢視：** 我以策展人的角度，逐頁檢視桌機與手機截圖，以及 16 頁並排的手機總覽。
+
+- 根據檢視結果做了修改：
+  - 泳池頁的文字被高光的水紋吃掉，加了柔光文字陰影。
+  - 布料頁在手機上的說明文字被織紋干擾，改放在亞麻色標籤上。
+  - 目錄效果系列改為 3×3 排列，避免第 9 件單獨落在一行。
+- 16 頁的色帶、構圖與氣質互不重複。
+
+## 重要決定與理由
+
+1. **另立新系列，不更新舊系列。** repo 中已有第一輯 `shader-demos/`（「光與物質」）。第二輯取名「慢物質 Slow Matter」，16 頁的標題、配色與畫面全部重新設計，不重複第一輯。
+2. **共用執行框架，逐頁內嵌。** 各頁內嵌同一份小型 WebGL 執行框架（約 18KB），統一處理：
+   - 裝置像素比上限 2
+   - 分頁隱藏時暫停
+   - 減少動態設定
+   - 觸控
+   - 失敗時的說明文字
+   - 浮點偵測
+   - 自動降低解析度：手機起始 0.75 倍，持續低於約 45fps 時逐步再降，最低 0.45 倍
+
+   每頁仍是可以單獨開啟的單一檔案。產生這些頁面的腳本沒有提交，只提交成品。
+3. **GLSL 一律以 ES 1.00 撰寫。** 優先建立 WebGL2 環境，取得浮點緩衝等能力；著色器則使用兩種環境都能編譯的 ES 1.00，因此降級到 WebGL1 時不需要第二套程式。
+4. **浮點緩衝的偵測順序。** WebGL2 偵測 `EXT_color_buffer_float` 與 `EXT_color_buffer_half_float`，WebGL1 偵測 `OES_texture_half_float`、`OES_texture_float` 與對應的 color buffer 擴充，並以 framebuffer 完整性實測。都不可用時改用 RGBA8，各頁的替代方案如下：
+   - 反應擴散：U、V 各打包為 16 位元
+   - 域扭曲：場值打包為 16 位元
+   - 回饋殘影：以抖動減法衰減，避免殘影卡住不消
+   - 長曝光：改用 max-blend（lighten）堆疊，存平方根值
+   - 地衣生長：狀態原本就是 8 位元打包，不需要浮點
+5. **像素排序。** 在 GPU 上以奇偶轉置排序實作，每幀 10 個 pass（觸控裝置 6 個），奇偶交替，NEAREST 取樣，逐像素精確。只在亮度落入閾值帶的連續區段內排序（Asendorf 式區間）。
+6. **地衣生長與反應擴散的區隔。** 地衣頁使用隨機細胞自動機（Eden/DLA 類生長），記錄出生時間並畫成年輪，手法和畫面都與第 7 頁的 Gray-Scott 明顯不同。
+7. **布料頁多加一層薄紗。** 只有一層薄紗時，干涉紋在布紋上幾乎看不見，所以改為兩層茜紅薄紗。條紋依像素足跡做解析式盒狀濾波，確保畫面上的 moiré 是設計出來的干涉，而不是 GPU 鋸齒。
+8. **縮圖。** 以 1440×900 截圖並隱藏介面文字，再用 macOS `sips` 轉成 JPEG（品質 74，寬 720）。
+9. **製作分工。** 製作時以 4 個平行子代理撰寫各頁，最後由我統一驗證與修改。
+
+## 已知限制
+
+- 實測使用 SwiftShader 軟體繪圖，只能驗證正確性與構圖，不能代表實際 GPU 的幀率。60fps 依靠步數上限與自動降解析度來確保，沒有在實體筆電或手機上量測。
+- 不支援浮點緩衝的裝置（部分舊款 iOS / Android）會使用 RGBA8 替代方案：
+  - 回饋殘影的尾巴較短、較暗。
+  - 長曝光的光軌是取最大值堆疊，不是累加，重疊處不會更亮。
+  - 反應擴散與域扭曲以 16 位元打包，視覺上與浮點版幾乎相同，但計算量略高。
+- 玻璃頁的 RGB 色散邊緣會略微超出嚴格色帶。這是色散效果本身的必然結果。
+- 地衣頁在手機上的細胞約 5 個裝置像素，菌落邊緣有輕微階梯感。
+- 側臉頁的「網格」滑桿數值以小數顯示（例如 4.00），沒有單位，因為共用框架的數值格式只支援小數或百分比。
+- 減少動態模式下，模擬類作品會預先計算到成熟狀態再靜止，互動時只補算少量步數。
+
+## Git
+
+- **CLAUDE.md：** repo 中不存在 CLAUDE.md，也沒有 CONTRIBUTING.md 或其他貢獻規範。
+- **提交範圍：** 只提交 `shader-demos2/`。工作目錄中原本就有未追蹤的 `p5-demos2/`，與本任務無關，未動也未提交。
+- **推送：** 目標為 `main`（`git push origin main`）。本報告與作品在同一個 commit 中，commit 無法在自己的內容裡記錄自己的 hash，請以 `git log -1 -- shader-demos2/REPORT.md` 查詢。

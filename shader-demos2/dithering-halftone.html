@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>側臉與紅日 — 慢物質 Slow Matter</title>
+<meta name="description" content="這個畫面像一張連夜印好、還帶著油墨味的傳單。">
+<meta name="theme-color" content="#E8E3D3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Crect%20width%3D%2732%27%20height%3D%2732%27%20fill%3D%27%23E8E3D3%27/%3E%3Ccircle%20cx%3D%2713%27%20cy%3D%2717%27%20r%3D%278%27%20fill%3D%27%23151515%27/%3E%3Ccircle%20cx%3D%2720%27%20cy%3D%2714%27%20r%3D%275%27%20fill%3D%27%23D9372B%27%20opacity%3D%27.85%27/%3E%3C/svg%3E">
+<style>
+:root{--bg:#E8E3D3;--ui:#151515;--line:rgba(21,21,21,.5);--panel:rgba(232,227,211,.94);--fb1:#E8E3D3;--fb2:#D9372B;--thumb-bg:#151515;--thumb-b:0;--thumb-r:0;--thumb-w:9px;--thumb-h:18px;--track-h:3px;--track-on:#151515;--track:rgba(21,21,21,.22);--btn-r:0}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg)}
+body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ui);-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;font-weight:400}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:var(--cursor,crosshair);background:var(--bg)}
+a{color:inherit}
+.scrim{position:fixed;left:0;right:0;bottom:0;height:42vh;pointer-events:none;background:linear-gradient(to top,var(--scrim,transparent),transparent)}
+.chrome{position:fixed;inset:0;pointer-events:none;padding:clamp(18px,3.2vw,40px);display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr auto;gap:12px}
+.chrome>*{pointer-events:auto}
+.back{grid-column:1;grid-row:1;justify-self:start;align-self:start;font-size:11px;letter-spacing:.16em;text-decoration:none;padding:6px 0;border-bottom:1px solid var(--line);opacity:.86;transition:opacity .3s}
+.back:hover,.back:focus-visible{opacity:1}
+.folio{grid-column:2;grid-row:1;justify-self:end;text-align:right;font-size:10px;letter-spacing:.2em;line-height:1.8;opacity:.72;font-variant-numeric:tabular-nums;pointer-events:none}
+.folio b{font-weight:500;display:block;font-size:11px;letter-spacing:.24em;opacity:1}
+.notes{grid-column:2;grid-row:2;justify-self:end;align-self:start;max-width:min(340px,calc(100vw - 36px));font-size:12px;line-height:1.85;margin-top:2px}
+.notes summary{list-style:none;cursor:pointer;text-align:right;font-size:10px;letter-spacing:.22em;opacity:.8;padding:6px 0;user-select:none}
+.notes summary::-webkit-details-marker{display:none}
+.notes summary::after{content:" ＋";font-size:9px}
+.notes[open] summary::after{content:" －"}
+.notes .panel{margin-top:10px;padding:20px 22px;background:var(--panel);color:var(--panel-ui,var(--ui));border:1px solid var(--line);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);max-height:58vh;overflow:auto}
+.notes h3{font-size:9.5px;font-weight:500;letter-spacing:.26em;margin:0 0 4px;opacity:.6}
+.notes p{margin:0 0 14px;letter-spacing:.03em}
+.notes p:last-of-type{margin-bottom:0}
+.notes .state{display:block;margin-top:16px;font-size:9px;letter-spacing:.14em;opacity:.45;font-variant-numeric:tabular-nums}
+.caption{grid-column:1;grid-row:3;align-self:end;max-width:30em;pointer-events:none}
+.caption .en{font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;margin:0 0 12px;opacity:.62}
+.caption h1{font-size:clamp(22px,2.5vw,34px);font-weight:300;letter-spacing:.14em;margin:0 0 12px;line-height:1.3}
+.caption .statement{font-size:13px;line-height:1.95;letter-spacing:.06em;margin:0;opacity:.88}
+.caption .hint{font-size:10px;letter-spacing:.16em;margin:12px 0 0;opacity:.5}
+.controls{grid-column:2;grid-row:3;align-self:end;justify-self:end;display:flex;gap:22px;align-items:flex-end;flex-wrap:wrap;justify-content:flex-end}
+.ctl{display:flex;flex-direction:column;gap:9px;min-width:118px}
+.ctl label{display:flex;justify-content:space-between;gap:12px;font-size:10.5px;letter-spacing:.14em;opacity:.86}
+.ctl output{font-variant-numeric:tabular-nums;opacity:.55;font-size:10px;letter-spacing:.06em}
+input[type=range]{-webkit-appearance:none;appearance:none;width:var(--range-w,128px);height:18px;margin:0;background:transparent;cursor:pointer;--fill:50%}
+input[type=range]:focus{outline:none}
+input[type=range]::-webkit-slider-runnable-track{height:var(--track-h,1px);background:linear-gradient(to right,var(--track-on,currentColor) var(--fill),var(--track,var(--line)) var(--fill))}
+input[type=range]::-moz-range-track{height:var(--track-h,1px);background:var(--track,var(--line))}
+input[type=range]::-moz-range-progress{height:var(--track-h,1px);background:var(--track-on,currentColor)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:var(--thumb-w,11px);height:var(--thumb-h,11px);border-radius:var(--thumb-r,50%);background:var(--thumb-bg,var(--bg));border:var(--thumb-b,1px solid currentColor);margin-top:calc((var(--track-h,1px) - var(--thumb-h,11px)) / 2);transition:transform .2s}
+input[type=range]::-moz-range-thumb{width:var(--thumb-w,11px);height:var(--thumb-h,11px);border-radius:var(--thumb-r,50%);background:var(--thumb-bg,var(--bg));border:var(--thumb-b,1px solid currentColor);box-sizing:border-box}
+input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
+input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentColor;outline-offset:3px}
+.btn{font:inherit;color:inherit;background:var(--btn-bg,transparent);border:1px solid var(--line);border-radius:var(--btn-r,0);padding:9px 15px;font-size:10.5px;letter-spacing:.16em;cursor:pointer;white-space:nowrap;transition:background .3s,color .3s,border-color .3s;touch-action:manipulation}
+.btn:hover{border-color:currentColor}
+.btn[aria-pressed=true]{background:var(--ui);color:var(--bg);border-color:var(--ui)}
+.btn:focus-visible,.back:focus-visible,.notes summary:focus-visible{outline:1px solid currentColor;outline-offset:4px}
+#fallback{position:fixed;inset:0;display:grid;place-items:center;padding:32px;background:radial-gradient(120% 90% at 30% 20%,var(--fb1,var(--bg)),var(--fb2,var(--bg)));z-index:5}
+#fallback[hidden]{display:none}
+#fallback .box{max-width:30em;line-height:1.95;font-size:13px;letter-spacing:.05em}
+#fallback h2{font-weight:300;font-size:20px;letter-spacing:.14em;margin:0 0 14px}
+#fallback pre{white-space:pre-wrap;font-size:10px;opacity:.6;max-height:30vh;overflow:auto}
+#fallback a{display:inline-block;margin-top:14px;font-size:11px;letter-spacing:.16em}
+.is-failed .chrome .controls,.is-failed .chrome .notes,.is-failed #c{display:none}
+.is-failed .chrome{z-index:6}
+@media (max-width:700px){
+  .chrome{grid-template-columns:1fr auto;grid-template-rows:auto 1fr auto auto;padding:18px;gap:14px}
+  .caption{grid-column:1/3;grid-row:3;max-width:none}
+  .caption h1{font-size:22px;margin-bottom:8px}
+  .caption .en{margin-bottom:8px;font-size:9px}
+  .caption .statement{font-size:12px;line-height:1.8;max-width:24em}
+  .caption .hint{margin-top:6px}
+  .controls{grid-column:1/3;grid-row:4;justify-self:stretch;justify-content:space-between;gap:12px 16px}
+  .ctl{min-width:0;flex:1 1 30%}
+  input[type=range]{width:100%;height:28px}
+  .btn{padding:10px 13px}
+  .notes{grid-column:1/3;justify-self:end}
+  .scrim{height:55vh}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.caption .en{font-family:ui-monospace,Menlo,monospace;letter-spacing:.18em;opacity:.8}.caption h1{font-weight:900;letter-spacing:.06em;font-size:clamp(28px,3.4vw,46px)}.caption .statement{font-weight:500}.ctl label{text-transform:uppercase;font-weight:700;letter-spacing:.2em}.ctl output{font-family:ui-monospace,Menlo,monospace;opacity:.9;font-weight:700;text-transform:uppercase}.btn{border:2px solid #151515;font-weight:700;letter-spacing:.12em;background:#E8E3D3}.btn[aria-pressed=true]{background:#D9372B;border-color:#D9372B;color:#E8E3D3}.folio b{font-family:ui-monospace,Menlo,monospace;font-weight:700}.notes .panel{border:2px solid #151515;backdrop-filter:none}.back{border-bottom:2px solid #151515;font-weight:700}
+</style>
+</head>
+<body>
+<canvas id="c" role="img" aria-label="側臉與紅日：這個畫面像一張連夜印好、還帶著油墨味的傳單。"></canvas>
+<div class="scrim" aria-hidden="true"></div>
+<div class="chrome">
+  <a class="back" href="shader-demo-list.html">← 慢物質 · 目錄</a>
+  <div class="folio" aria-hidden="true"><b>A · 04</b>效果系列</div>
+  <details class="notes">
+    <summary>筆記</summary>
+    <div class="panel">
+      <h3>技術原理</h3><p>側臉的輪廓先在 JavaScript 裡以曲線取樣成多邊形，逐格算出有號距離場，再把距離轉成圓鼓的高度場並加上耳、顴、眉的起伏；著色器用高度場的梯度當法線，讓一盞緩慢繞行的光打出明暗與投在牆上的影子。得到的灰階不直接輸出，而是交給兩種印刷手法之一：8×8 Bayer 有序抖動（每格只有墨或紙）或 45° 旋轉網格的調幅網點；紅日是另一塊獨立的版，用不同角度與錯位疊印，最後加上紙纖維與油墨暈開。</p>
+      <h3>核心參數</h3><p><b>手法</b>：在 Bayer 抖動與網點之間切換。<b>網格</b>：網點或抖動格的大小，以 CSS 像素計，在高解析度螢幕上仍清楚可見。<b>對比</b>：送進網版前的灰階曲線，越高越像影印過頭的傳單。</p>
+      <h3>適合的位置</h3><p>適合活動或展覽海報頁、獨立刊物與 zine 的封面、需要立場與態度的品牌宣言頁首；只有三色，標題可直接用黑或紅壓在留白處。</p>
+      <span class="state" id="state"></span>
+    </div>
+  </details>
+  <section class="caption">
+    <p class="en">Profile &amp; Red Sun · Ordered Dither / Halftone</p>
+    <h1>側臉與紅日</h1>
+    <p class="statement">這個畫面像一張連夜印好、還帶著油墨味的傳單。</p>
+    <p class="hint">切換手法，看同一張臉被兩種網印出</p>
+  </section>
+  <div class="controls"><button class="btn" type="button" data-param="mode" data-toggle="Bayer 抖動|網點" aria-pressed="false" aria-label="Bayer 抖動"><span>Bayer 抖動</span></button><div class="ctl"><label for="p-cell">網格<output></output></label><input id="p-cell" type="range" data-param="cell" min="2" max="10" step="0.5" value="4" aria-label="網格"></div><div class="ctl"><label for="p-contrast">對比<output></output></label><input id="p-contrast" type="range" data-param="contrast" min="0" max="1" step="0.01" value="0.5" data-fmt="pct" aria-label="對比"></div></div>
+</div>
+<div id="fallback" hidden role="alert"><div class="box"><h2></h2><p></p><details hidden><summary>技術細節</summary><pre></pre></details><a href="shader-demo-list.html">← 回到目錄</a></div></div>
+<noscript><div style="position:fixed;inset:0;display:grid;place-items:center;padding:32px;background:#E8E3D3;color:#151515;font-size:14px;line-height:2">這件作品以 JavaScript 與 WebGL 即時繪製，請啟用 JavaScript 後再觀看。</div></noscript>
+<script>
+/* Studio runtime — 每頁內嵌的共用 WebGL 小框架（無外部依賴）
+   WebGL2 優先，WebGL1 降級；GLSL 一律以 ES 1.00 撰寫，兩種環境都能編譯。 */
+(function () {
+  'use strict';
+  var Q = new URLSearchParams(location.search);
+  var reducedMQ = matchMedia('(prefers-reduced-motion: reduce)');
+  var coarse = matchMedia('(pointer: coarse)').matches;
+
+  var LIB = [
+    '#ifdef GL_FRAGMENT_PRECISION_HIGH',
+    'precision highp float;',
+    '#else',
+    'precision mediump float;',
+    '#endif',
+    'varying vec2 vUv;',
+    'uniform vec2 uRes;',
+    'const float PI=3.14159265359;',
+    'float hash12(vec2 p){vec3 p3=fract(vec3(p.xyx)*.1031);p3+=dot(p3,p3.yzx+33.33);return fract((p3.x+p3.y)*p3.z);}',
+    'vec2 hash22(vec2 p){vec3 p3=fract(vec3(p.xyx)*vec3(.1031,.1030,.0973));p3+=dot(p3,p3.yzx+33.33);return fract((p3.xx+p3.yz)*p3.zy);}',
+    'float vnoise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*f*(f*(f*6.-15.)+10.);',
+    ' return mix(mix(hash12(i),hash12(i+vec2(1,0)),u.x),mix(hash12(i+vec2(0,1)),hash12(i+vec2(1,1)),u.x),u.y);}',
+    'float gnoise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);',
+    ' vec2 a=hash22(i)*2.-1.,b=hash22(i+vec2(1,0))*2.-1.,c=hash22(i+vec2(0,1))*2.-1.,d=hash22(i+vec2(1,1))*2.-1.;',
+    ' return mix(mix(dot(a,f),dot(b,f-vec2(1,0)),u.x),mix(dot(c,f-vec2(0,1)),dot(d,f-vec2(1,1)),u.x),u.y);}',
+    'const mat2 ROT=mat2(.8,.6,-.6,.8);',
+    'float fbm(vec2 p){float s=0.,a=.5;for(int i=0;i<5;i++){s+=a*vnoise(p);p=ROT*p*2.02+vec2(1.7,9.2);a*=.5;}return s;}',
+    'float grain(vec2 fc,float seed){return hash12(fc+fract(seed)*vec2(113.1,71.7))-.5;}',
+    'mat2 rot(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}',
+    'float luma(vec3 c){return dot(c,vec3(.299,.587,.114));}',
+    ''
+  ].join('\n');
+
+  var VERT = 'attribute vec2 aPos;varying vec2 vUv;void main(){vUv=aPos*.5+.5;gl_Position=vec4(aPos,0.,1.);}';
+
+  function Studio(opts) {
+    opts = opts || {};
+    var S = this;
+    S.opts = opts;
+    S.canvas = document.getElementById('c');
+    S.reduced = reducedMQ.matches || Q.has('still');
+    S.coarse = coarse;
+    S.params = {};
+    S.handlers = {};
+    S.pointer = { x: .5, y: .5, px: .5, py: .5, vx: 0, vy: 0, down: false, moved: false, last: -1e9 };
+    S.time = 0; S.frame = 0;
+    S.scale = 1; S.ok = false;
+    S.LIB = LIB;
+    S._bindControls();
+    if (!S._initGL()) return;
+    S.ok = true;
+  }
+
+  var P = Studio.prototype;
+
+  /* ---------- 失敗時的說明 ---------- */
+  P.fail = function (title, detail, log) {
+    var box = document.getElementById('fallback');
+    if (!box) return;
+    box.hidden = false;
+    box.querySelector('h2').textContent = title;
+    box.querySelector('p').textContent = detail;
+    var pre = box.querySelector('pre');
+    if (log) { pre.textContent = log; pre.parentNode.hidden = false; }
+    document.body.classList.add('is-failed');
+    this.ok = false;
+    if (this._raf) cancelAnimationFrame(this._raf);
+    this._dead = true;
+  };
+
+  P._initGL = function () {
+    var c = this.canvas, attrs = { alpha: false, antialias: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, powerPreference: 'high-performance' };
+    var gl = null;
+    try {
+      if (!Q.has('gl1')) gl = c.getContext('webgl2', attrs);
+      this.isGL2 = !!gl;
+      if (!gl) gl = c.getContext('webgl', attrs) || c.getContext('experimental-webgl', attrs);
+    } catch (e) { gl = null; }
+    if (!gl) {
+      this.fail('這件作品需要 WebGL', '目前的瀏覽器或裝置無法建立 WebGL 繪圖環境（可能關閉了硬體加速，或裝置過舊）。請在設定中開啟硬體加速，或改用新版 Chrome、Safari、Firefox、Edge 開啟。');
+      return false;
+    }
+    this.gl = gl;
+    var self = this;
+    c.addEventListener('webglcontextlost', function (e) {
+      e.preventDefault();
+      self.fail('繪圖環境暫時中斷', '瀏覽器回收了這頁的 GPU 資源（常見於同時開啟許多分頁時）。重新整理頁面即可恢復。');
+    });
+    var buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    this._buf = buf;
+    this._detectFloat();
+    return true;
+  };
+
+  /* ---------- 浮點緩衝偵測：WebGL2 → EXT_color_buffer_float；WebGL1 → half float / float；否則 RGBA8 ---------- */
+  P._detectFloat = function () {
+    var gl = this.gl, f = { renderable: false, type: gl.UNSIGNED_BYTE, internal: gl.RGBA, linear: true, name: 'RGBA8' };
+    var cands = [];
+    if (!Q.has('nofloat')) {
+      if (this.isGL2) {
+        if (gl.getExtension('EXT_color_buffer_float') || gl.getExtension('EXT_color_buffer_half_float')) {
+          cands.push({ type: gl.HALF_FLOAT, internal: gl.RGBA16F, linear: true, name: 'RGBA16F' });
+          cands.push({ type: gl.FLOAT, internal: gl.RGBA32F, linear: !!gl.getExtension('OES_texture_float_linear'), name: 'RGBA32F' });
+        }
+      } else {
+        var hf = gl.getExtension('OES_texture_half_float');
+        if (hf) { gl.getExtension('EXT_color_buffer_half_float'); cands.push({ type: hf.HALF_FLOAT_OES, internal: gl.RGBA, linear: !!gl.getExtension('OES_texture_half_float_linear'), name: 'half float' }); }
+        if (gl.getExtension('OES_texture_float')) { gl.getExtension('WEBGL_color_buffer_float'); cands.push({ type: gl.FLOAT, internal: gl.RGBA, linear: !!gl.getExtension('OES_texture_float_linear'), name: 'float' }); }
+      }
+    }
+    for (var i = 0; i < cands.length; i++) {
+      if (this._testFormat(cands[i])) { f = cands[i]; f.renderable = true; break; }
+    }
+    this.float = f;
+  };
+
+  P._testFormat = function (fmt) {
+    var gl = this.gl, ok = false;
+    var t = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, t);
+    gl.texImage2D(gl.TEXTURE_2D, 0, fmt.internal, 4, 4, 0, gl.RGBA, fmt.type, null);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    var fb = gl.createFramebuffer();
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0);
+    ok = gl.checkFramebufferStatus(gl.FRAMEBUFFER) === gl.FRAMEBUFFER_COMPLETE;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    gl.deleteFramebuffer(fb); gl.deleteTexture(t);
+    while (gl.getError() !== gl.NO_ERROR) { ok = false; }
+    return ok;
+  };
+
+  /* ---------- 著色器 ---------- */
+  P.program = function (frag, defines) {
+    if (this._dead) return null;
+    var gl = this.gl;
+    var head = (defines || '') + (this.float && this.float.renderable ? '#define HAS_FLOAT 1\n' : '') + (this.isGL2 ? '#define IS_GL2 1\n' : '');
+    var src = head + LIB + frag;
+    function sh(type, s) {
+      var o = gl.createShader(type);
+      gl.shaderSource(o, s); gl.compileShader(o);
+      if (!gl.getShaderParameter(o, gl.COMPILE_STATUS) && !gl.isContextLost()) { var log = gl.getShaderInfoLog(o); gl.deleteShader(o); throw { shaderLog: log }; }
+      return o;
+    }
+    try {
+      var vs = sh(gl.VERTEX_SHADER, VERT), fs = sh(gl.FRAGMENT_SHADER, src);
+      var p = gl.createProgram();
+      gl.attachShader(p, vs); gl.attachShader(p, fs);
+      gl.bindAttribLocation(p, 0, 'aPos');
+      gl.linkProgram(p);
+      if (!gl.getProgramParameter(p, gl.LINK_STATUS) && !gl.isContextLost()) throw { shaderLog: gl.getProgramInfoLog(p) };
+    } catch (e) {
+      this.fail('著色器無法在此裝置上編譯', '這台裝置的顯示晶片不接受這件作品的 GLSL 程式。可改用桌上型瀏覽器，或更新瀏覽器與顯示驅動後再試。', (e && e.shaderLog) || String(e));
+      return null;
+    }
+    var prog = { p: p, u: {}, units: {} };
+    var n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS), unit = 0;
+    for (var i = 0; i < n; i++) {
+      var info = gl.getActiveUniform(p, i), name = info.name.replace(/\[0\]$/, '');
+      prog.u[name] = { loc: gl.getUniformLocation(p, info.name), type: info.type, size: info.size };
+      if (info.type === gl.SAMPLER_2D) prog.units[name] = unit++;
+    }
+    return prog;
+  };
+
+  /* 設定 uniform：數字、陣列（2/3/4 維或 vec2 陣列）、紙材 target 或 texture */
+  P._set = function (prog, name, v) {
+    var gl = this.gl, u = prog.u[name];
+    if (!u) return;
+    var T = u.type;
+    if (T === gl.SAMPLER_2D) {
+      var unit = prog.units[name];
+      gl.activeTexture(gl.TEXTURE0 + unit);
+      gl.bindTexture(gl.TEXTURE_2D, v && v.tex ? v.tex : v);
+      gl.uniform1i(u.loc, unit);
+    } else if (T === gl.FLOAT) { if (u.size > 1) gl.uniform1fv(u.loc, v); else gl.uniform1f(u.loc, v); }
+    else if (T === gl.FLOAT_VEC2) gl.uniform2fv(u.loc, v);
+    else if (T === gl.FLOAT_VEC3) gl.uniform3fv(u.loc, v);
+    else if (T === gl.FLOAT_VEC4) gl.uniform4fv(u.loc, v);
+    else if (T === gl.INT || T === gl.BOOL) gl.uniform1i(u.loc, v);
+  };
+
+  /* 畫一個全螢幕四邊形：target 為 null 時畫到螢幕 */
+  P.draw = function (prog, target, uniforms) {
+    if (!prog || this._dead) return;
+    var gl = this.gl;
+    var w = target ? target.w : this.canvas.width, h = target ? target.h : this.canvas.height;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, target ? target.fbo : null);
+    gl.viewport(0, 0, w, h);
+    gl.useProgram(prog.p);
+    gl.bindBuffer(gl.ARRAY_BUFFER, this._buf);
+    gl.enableVertexAttribArray(0);
+    gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+    this._set(prog, 'uRes', [w, h]);
+    if (uniforms) for (var k in uniforms) this._set(prog, k, uniforms[k]);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  };
+
+  /* ---------- 紋理與緩衝 ---------- */
+  P._tex = function (linear, wrap) {
+    var gl = this.gl, t = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, t);
+    var f = linear ? gl.LINEAR : gl.NEAREST, w = wrap ? gl.REPEAT : gl.CLAMP_TO_EDGE;
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, f);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, f);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, w);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, w);
+    return t;
+  };
+
+  /* opts: float(是否需要浮點) linear wrap */
+  P.target = function (w, h, opts) {
+    opts = opts || {};
+    var gl = this.gl, fmt = { type: gl.UNSIGNED_BYTE, internal: gl.RGBA, linear: true, renderable: false };
+    if (opts.float && this.float.renderable) fmt = this.float;
+    // WebGL1 的 REPEAT 需要 2 的次方尺寸
+    var wrap = !!opts.wrap && (this.isGL2 || ((w & (w - 1)) === 0 && (h & (h - 1)) === 0));
+    var t = this._tex(!!opts.linear && fmt.linear, wrap);
+    gl.texImage2D(gl.TEXTURE_2D, 0, fmt.internal, w, h, 0, gl.RGBA, fmt.type, null);
+    var fb = gl.createFramebuffer();
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0);
+    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    return { tex: t, fbo: fb, w: w, h: h, isFloat: !!(opts.float && this.float.renderable) };
+  };
+
+  P.freeTarget = function (t) { if (!t || !this.gl) return; this.gl.deleteTexture(t.tex); this.gl.deleteFramebuffer(t.fbo); };
+
+  P.pingpong = function (w, h, opts) {
+    var a = this.target(w, h, opts), b = this.target(w, h, opts), S = this;
+    return {
+      read: a, write: b, w: w, h: h, isFloat: a.isFloat,
+      swap: function () { var t = this.read; this.read = this.write; this.write = t; },
+      clear: function (r, g, bb, al) { var gl = S.gl; [this.read, this.write].forEach(function (t) { gl.bindFramebuffer(gl.FRAMEBUFFER, t.fbo); gl.clearColor(r || 0, g || 0, bb || 0, al || 0); gl.clear(gl.COLOR_BUFFER_BIT); }); gl.bindFramebuffer(gl.FRAMEBUFFER, null); },
+      free: function () { S.freeTarget(this.read); S.freeTarget(this.write); }
+    };
+  };
+
+  /* 由 2D canvas（程序化繪製的素材）建立紋理 */
+  P.texture = function (source, opts) {
+    opts = opts || {};
+    var gl = this.gl;
+    var pot = ((source.width & (source.width - 1)) === 0) && ((source.height & (source.height - 1)) === 0);
+    var t = opts.tex || this._tex(opts.linear !== false, !!opts.wrap && (this.isGL2 || pot));
+    gl.bindTexture(gl.TEXTURE_2D, t);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, source);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+    return t;
+  };
+
+  /* ---------- 尺寸與自適應解析度 ---------- */
+  P.resize = function () {
+    var c = this.canvas;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var s = dpr * this.scale * (this.opts.resolution || 1);
+    var w = Math.max(2, Math.round(c.clientWidth * s)), h = Math.max(2, Math.round(c.clientHeight * s));
+    if (c.width !== w || c.height !== h) {
+      c.width = w; c.height = h;
+      if (this.handlers.resize) this.handlers.resize(w, h);
+      return true;
+    }
+    return false;
+  };
+
+  /* ---------- 控制項 ---------- */
+  P._bindControls = function () {
+    var S = this;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-param]'), function (el) {
+      var k = el.getAttribute('data-param');
+      if (el.type === 'range') {
+        var out = el.parentNode.querySelector('output');
+        var upd = function () {
+          S.params[k] = parseFloat(el.value);
+          el.style.setProperty('--fill', ((el.value - el.min) / (el.max - el.min) * 100) + '%');
+          if (out) out.textContent = el.getAttribute('data-fmt') === 'pct' ? Math.round((el.value - el.min) / (el.max - el.min) * 100) : parseFloat(el.value).toFixed(2);
+        };
+        upd();
+        el.addEventListener('input', function () { upd(); S.emit('param', k); S.invalidate(); });
+      } else if (el.getAttribute('data-toggle') !== null) {
+        var labels = el.getAttribute('data-toggle').split('|');
+        S.params[k] = el.getAttribute('aria-pressed') === 'true' ? 1 : 0;
+        el.addEventListener('click', function () {
+          S.params[k] = 1 - S.params[k];
+          el.setAttribute('aria-pressed', S.params[k] ? 'true' : 'false');
+          el.querySelector('span').textContent = labels[S.params[k]];
+          S.emit('param', k); S.invalidate();
+        });
+      } else {
+        el.addEventListener('click', function () { S.emit(k); S.invalidate(); });
+      }
+    });
+  };
+
+  P.on = function (ev, fn) { this.handlers[ev] = fn; return this; };
+  P.emit = function (ev, a) { if (this.handlers[ev]) this.handlers[ev](a); };
+
+  /* ---------- 游標與觸控 ---------- */
+  P._bindPointer = function () {
+    var S = this, c = this.canvas, p = this.pointer;
+    function at(e) {
+      var r = c.getBoundingClientRect();
+      p.px = p.x; p.py = p.y;
+      p.x = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+      p.y = Math.min(1, Math.max(0, 1 - (e.clientY - r.top) / r.height));
+      p.moved = true; p.last = S.time;
+    }
+    c.addEventListener('pointerdown', function (e) {
+      at(e); p.px = p.x; p.py = p.y; p.down = true;
+      try { c.setPointerCapture(e.pointerId); } catch (_) {}
+      S.emit('down'); S.invalidate();
+    });
+    c.addEventListener('pointermove', function (e) {
+      if (e.pointerType === 'touch' && !p.down) return;
+      at(e); S.emit('move'); S.invalidate();
+    });
+    function up() { if (!p.down) return; p.down = false; S.emit('up'); S.invalidate(); }
+    c.addEventListener('pointerup', up);
+    c.addEventListener('pointercancel', up);
+    c.addEventListener('pointerleave', function (e) { if (e.pointerType !== 'touch') up(); });
+  };
+
+  /* ---------- 主迴圈：分頁隱藏即暫停、尊重低動態偏好、自動降解析度 ---------- */
+  P.invalidate = function () {
+    this._dirty = true;
+    if (this.reduced && !this._raf && !document.hidden && this._render) this._kick();
+  };
+
+  P._kick = function () {
+    var S = this;
+    if (S._raf || S._dead) return;
+    S._raf = requestAnimationFrame(function (ts) { S._tick(ts); });
+  };
+
+  P._tick = function (ts) {
+    var S = this;
+    S._raf = 0;
+    if (S._dead || document.hidden) return;
+    var dt = S._last ? Math.min(0.05, (ts - S._last) / 1000) : 1 / 60;
+    S._last = ts;
+    if (S.reduced) dt = 0;
+    S.time += dt;
+    var p = S.pointer;
+    var k = dt > 0 ? 1 - Math.exp(-dt * 10) : 1;
+    var nvx = (p.x - (p.sx === undefined ? p.x : p.sx)), nvy = (p.y - (p.sy === undefined ? p.y : p.sy));
+    p.sx = p.sx === undefined ? p.x : p.sx + (p.x - p.sx) * k;
+    p.sy = p.sy === undefined ? p.y : p.sy + (p.y - p.sy) * k;
+    p.vx = nvx; p.vy = nvy;
+    try {
+      S._render(S.time, dt, S.frame);
+    } catch (e) {
+      S.fail('作品執行時發生問題', '繪圖過程中斷，可能是裝置資源不足。重新整理頁面通常可以恢復。', String(e && e.message || e));
+      return;
+    }
+    S.frame++;
+    S._dirty = false;
+    // 自適應：持續低於約 45fps 就逐步降低解析度（手機尤其有效）
+    if (!S.reduced && dt > 0) {
+      S._acc = (S._acc || 0) + dt; S._n = (S._n || 0) + 1;
+      if (S._acc > 1.2) {
+        var avg = S._acc / S._n;
+        if (avg > 1 / 45 && S.scale > S._minScale) { S.scale = Math.max(S._minScale, S.scale * .82); S.resize(); }
+        S._acc = 0; S._n = 0;
+      }
+    }
+    if (!S.reduced || S._dirty) S._kick();
+  };
+
+  P.start = function (render) {
+    if (!this.ok || this._dead) return;
+    var S = this;
+    S._render = render;
+    var small = Math.min(screen.width, screen.height) < 600 || coarse;
+    S.scale = small ? (S.opts.mobileScale || .75) : 1;
+    S._minScale = S.opts.minScale || .45;
+    S._bindPointer();
+    S.resize();
+    window.addEventListener('resize', function () { if (S.resize()) S.invalidate(); });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { if (S._raf) cancelAnimationFrame(S._raf); S._raf = 0; }
+      else { S._last = 0; S._dirty = true; S._kick(); }
+    });
+    var onMQ = function () { S.reduced = reducedMQ.matches || Q.has('still'); document.body.classList.toggle('is-still', S.reduced); S.emit('reduced', S.reduced); S._dirty = true; S._kick(); };
+    if (reducedMQ.addEventListener) reducedMQ.addEventListener('change', onMQ); else if (reducedMQ.addListener) reducedMQ.addListener(onMQ);
+    document.body.classList.toggle('is-still', S.reduced);
+    var note = document.getElementById('state');
+    if (note) note.textContent = (S.isGL2 ? 'WebGL2' : 'WebGL1') + (S.opts.needsFloat ? ' · ' + (S.float.renderable ? S.float.name : 'RGBA8 相容模式') : '') + (S.reduced ? ' · 靜止觀看' : '');
+    S._dirty = true;
+    S._kick();
+  };
+
+  /* 讓 2D canvas 的素材可以在 JS 裡程序化產生 */
+  Studio.canvas2d = function (w, h) { var c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+  Studio.rng = function (seed) { var s = seed >>> 0 || 1; return function () { s ^= s << 13; s >>>= 0; s ^= s >> 17; s ^= s << 5; s >>>= 0; return s / 4294967296; }; };
+
+  window.Studio = Studio;
+})();
+
+</script>
+<script>
+(function () {
+  var S = new Studio({ resolution: 1, mobileScale: 1, minScale: .7 });
+  if (!S.ok) return;
+
+  /* ---------- 側臉輪廓（頭部座標：耳朵附近為原點，下巴到頭頂約 1.1） ---------- */
+  var P = [
+    [1.45, -2.2], [1.30, -1.05], [0.95, -0.76], [0.50, -0.62], [0.37, -0.40], [0.40, -0.18],
+    [0.48, 0.06], [0.44, 0.33], [0.28, 0.55], [0.04, 0.65], [-0.19, 0.61], [-0.36, 0.48],
+    [-0.45, 0.31], [-0.475, 0.18], [-0.445, 0.115], [-0.50, 0.03], [-0.585, -0.085],
+    [-0.555, -0.13], [-0.49, -0.145], [-0.505, -0.195], [-0.465, -0.232], [-0.495, -0.27],
+    [-0.448, -0.31], [-0.468, -0.38], [-0.41, -0.445], [-0.25, -0.475], [-0.10, -0.50],
+    [-0.12, -0.62], [-0.11, -0.80], [-0.17, -0.95], [-0.30, -1.10], [-0.42, -1.40], [-0.5, -2.2]
+  ];
+  function catmull(pts, per) {
+    var out = [], n = pts.length;
+    for (var i = 0; i < n - 1; i++) {
+      var p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(n - 1, i + 2)];
+      for (var k = 0; k < per; k++) {
+        var t = k / per, t2 = t * t, t3 = t2 * t;
+        out.push([0, 1].map(function (c) {
+          return .5 * ((2 * p1[c]) + (-p0[c] + p2[c]) * t + (2 * p0[c] - 5 * p1[c] + 4 * p2[c] - p3[c]) * t2 + (-p0[c] + 3 * p1[c] - 3 * p2[c] + p3[c]) * t3);
+        }));
+      }
+    }
+    out.push(pts[n - 1]);
+    out.push([1.45, -2.2]);
+    return out;
+  }
+  var poly = catmull(P, 5);
+  // 高度場貼圖覆蓋的頭部座標範圍
+  var X0 = -1.05, X1 = 1.55, Y0 = -2.0, Y1 = 0.85;
+  var TW = 360, TH = Math.round(TW * (Y1 - Y0) / (X1 - X0));
+  function bakeField() {
+    var c = Studio.canvas2d(TW, TH), x = c.getContext('2d'), img = x.createImageData(TW, TH), d = img.data;
+    var n = poly.length, R = 0.2;
+    var bumps = [ // x, y, sx, sy, amp
+      [0.02, 0.22, .42, .40, .55],   // 顱頂
+      [0.16, 0.0, .075, .12, .2],   // 耳
+      [-0.30, -0.06, .14, .1, .1], // 顴骨
+      [-0.40, 0.17, .07, .035, .18], // 眉骨
+      [-0.30, -0.36, .12, .07, .15]  // 下顎
+    ];
+    for (var j = 0; j < TH; j++) {
+      var py = Y1 - (j + .5) / TH * (Y1 - Y0);
+      for (var i = 0; i < TW; i++) {
+        var px = X0 + (i + .5) / TW * (X1 - X0);
+        var md = 1e9, inside = false;
+        for (var k = 0, l = n - 1; k < n; l = k++) {
+          var ax = poly[l][0], ay = poly[l][1], bx = poly[k][0], by = poly[k][1];
+          var ex = bx - ax, ey = by - ay, wx = px - ax, wy = py - ay;
+          var h = Math.max(0, Math.min(1, (wx * ex + wy * ey) / (ex * ex + ey * ey)));
+          var qx = wx - ex * h, qy = wy - ey * h, dd = qx * qx + qy * qy;
+          if (dd < md) md = dd;
+          if ((ay > py) !== (by > py) && px < ax + (py - ay) * ex / ey) inside = !inside;
+        }
+        var dist = Math.sqrt(md) * (inside ? -1 : 1);
+        var tIn = Math.max(0, -dist), u = Math.min(1, tIn / R);
+        var hh = inside ? Math.sqrt(1 - (1 - u) * (1 - u)) * .6 : 0;
+        if (inside) for (var b = 0; b < bumps.length; b++) {
+          var B = bumps[b], gx = (px - B[0]) / B[2], gy = (py - B[1]) / B[3];
+          hh += B[4] * Math.exp(-(gx * gx + gy * gy)) * u;
+        }
+        var o = (j * TW + i) * 4;
+        d[o] = Math.max(0, Math.min(255, hh * 180));
+        d[o + 1] = Math.max(0, Math.min(255, 128 + dist * 600));
+        d[o + 2] = 0; d[o + 3] = 255;
+      }
+    }
+    x.putImageData(img, 0, 0);
+    return c;
+  }
+  var fieldTex = S.texture(bakeField(), { linear: true });
+
+  var prog = S.program([
+    'uniform sampler2D uField;uniform float uTime,uMode,uCell,uCon,uPx,uS;uniform vec2 uO,uSun;uniform float uSunR;uniform vec3 uL;',
+    'uniform vec4 uBox;uniform float uFade;',
+    'const vec3 PAPER=vec3(.910,.890,.827);const vec3 INK=vec3(.082,.082,.082);const vec3 RED=vec3(.851,.216,.169);',
+    'float bayer2(vec2 a){a=floor(a);return fract(a.x*.5+a.y*a.y*.75);}',
+    'float bayer8(vec2 a){return bayer2(.25*a)*.0625+bayer2(.5*a)*.25+bayer2(a);}',
+    // 螢幕座標 → 頭部座標 → 貼圖座標
+    'vec2 fuv(vec2 p){vec2 h=(p-uO)/uS;return vec2((h.x-uBox.x)/(uBox.z-uBox.x),(h.y-uBox.y)/(uBox.w-uBox.y));}',
+    'vec4 field(vec2 p){return texture2D(uField,fuv(p));}',
+    // 墨的濃度：x=碳黑 y=紅
+    'vec2 tone(vec2 p){',
+    ' vec4 F=field(p);',
+    ' float d=(F.g-.5)/600.*255.*uS;',
+    ' float inside=smoothstep(.0015,-.0015,d);',
+    ' float e=1.5/360.*uS*2.6;',
+    ' float hx=field(p+vec2(e,0.)).r-field(p-vec2(e,0.)).r;',
+    ' float hy=field(p+vec2(0.,e)).r-field(p-vec2(0.,e)).r;',
+    ' vec3 n=normalize(vec3(-hx,-hy,.055));',
+    ' float dif=max(dot(n,uL),0.);',
+    ' float fig=mix(.82,.05,pow(dif,.85));',
+    ' vec2 hp=(p-uO)/uS;',
+    ' float hair=step(-.34,hp.y)*smoothstep(1.,1.04,length((hp-vec2(-.55,-.08))/vec2(.79,.56)));',
+    ' float ang=atan(hp.y-.05,hp.x-.05);',
+    ' float strand=vnoise(vec2(ang*26.,length(hp-vec2(.05))*3.));',
+    ' float hairT=mix(.97,.5,pow(dif,1.3))-.25*smoothstep(.55,.9,strand)*dif;',
+    ' fig=mix(fig,hairT,hair);',
+    ' vec2 ey=(hp-vec2(-.375,.105))/vec2(.045,.016);',
+    ' fig=max(fig,(1.-hair)*smoothstep(1.,.5,length(ey))*.95);',
+    ' vec2 lp=(hp-vec2(-.49,-.232))/vec2(.03,.008);',
+    ' fig=max(fig,smoothstep(1.,.4,length(lp))*.9);',
+    ' fig*=smoothstep(-.5,uFade,p.y);',
+    // 背景：牆上的投影 + 底部漸層
+    ' vec2 sp=p-uL.xy/max(uL.z,.25)*.06;',
+    ' float sh=smoothstep(.003,-.003,(field(sp).g-.5)/600.*255.*uS)*(1.-inside);',
+    ' float bg=sh*.3*smoothstep(-.5,uFade,p.y);',
+    ' float c=mix(bg,fig,inside);',
+    ' float k=mix(.8,2.4,uCon);',
+    ' c=clamp((c-.5)*k+.5,0.,1.);',
+    // 紅日：獨立的版，被人物遮住
+    ' float sd=length(p-uSun)-uSunR;',
+    ' float r=smoothstep(.002,-.002,sd)*(1.-inside);',
+    ' r*=mix(.95,.55,smoothstep(uSun.y+uSunR,uSun.y-uSunR,p.y));',
+    ' r=clamp((r-.5)*mix(.9,1.6,uCon)+.5,0.,1.)*step(.001,r);',
+    ' return vec2(c,r);',
+    '}',
+    'void main(){',
+    ' vec2 fc=gl_FragCoord.xy;',
+    ' float cs=uCell*uPx;',
+    ' vec2 C=uRes*.5;',
+    ' float ink=0.,red=0.;',
+    ' float spread=(vnoise(fc*.45/uPx)-.5)*.10+(hash12(fc)-.5)*.03;',
+    ' if(uMode<.5){',
+    // Bayer 8×8 有序抖動：每格取樣中心
+    '  vec2 b=floor(fc/cs);',
+    '  vec2 t=tone(((b+.5)*cs-C)/uRes.y);',
+    '  ink=step(bayer8(b)+.5/64.,t.x+spread*.3*step(.02,t.x));',
+    '  vec2 rb=floor((fc+vec2(1.,-1.)*uPx)/cs);',
+    '  vec2 tr=tone(((rb+.5)*cs-C)/uRes.y);',
+    '  red=step(bayer8(rb+vec2(3.,5.))+.5/64.,tr.y+spread*.3*step(.02,tr.y));',
+    // 墨暈：格子邊緣微微吃進
+    '  vec2 f=fract(fc/cs)-.5;float edge=max(abs(f.x),abs(f.y));',
+    '  ink*=1.-step(.5-.06,edge)*step(.5,vnoise(fc*.8))*.0;',
+    ' }else{',
+    // 調幅網點：碳黑 45°、紅 15°
+    '  vec2 p=(fc-C)/uRes.y;',
+    '  vec2 t=tone(p);',
+    '  vec2 u=rot(PI*.25)*fc/cs;',
+    '  float s=(cos(6.2831*u.x)+cos(6.2831*u.y))*.25+.5;',
+    '  float aa=.9/cs*3.1416*.5;',
+    '  ink=smoothstep(1.-t.x-aa,1.-t.x+aa,s+spread)*step(.01,t.x);',
+    '  vec2 ru=rot(PI*.0833)*(fc+vec2(1.,-1.)*uPx)/cs;',
+    '  float rs=(cos(6.2831*ru.x)+cos(6.2831*ru.y))*.25+.5;',
+    '  vec2 tr=tone((fc+vec2(1.,-1.)*uPx-C)/uRes.y);',
+    '  red=smoothstep(1.-tr.y-aa,1.-tr.y+aa,rs+spread)*step(.01,tr.y);',
+    ' }',
+    // 紙：纖維與斑點
+    ' float fib=vnoise(vec2(fc.x*.02,fc.y*.35)/uPx);',
+    ' vec3 paper=mix(PAPER,INK,.035*smoothstep(.55,1.,fib)+(hash12(fc*.7)-.5)*.03);',
+    ' paper=mix(paper,mix(PAPER,INK,.25),step(.9993,hash12(floor(fc/(2.*uPx))))*.6);',
+    ' vec3 redInk=mix(RED,PAPER,.06*vnoise(fc*.3/uPx));',
+    ' vec3 col=mix(paper,redInk,red);',
+    ' vec3 carbon=mix(INK,red>.5?RED:PAPER,.05*vnoise(fc*.25/uPx+4.));',
+    ' col=mix(col,carbon,ink);',
+    ' gl_FragColor=vec4(col,1.);',
+    '}'
+  ].join('\n'));
+  if (!prog) return;
+
+  var t = 0;
+  S.start(function (time, dt) {
+    var W = S.canvas.width, H = S.canvas.height, a = W / H;
+    t += dt;
+    var ang = S.reduced ? 2.35 : 2.35 + t * .22;
+    var L = [Math.cos(ang) * .75, Math.sin(ang) * .45 + .3, .6];
+    var ll = Math.hypot(L[0], L[1], L[2]); L = L.map(function (v) { return v / ll; });
+    var sc, ox, oy, sun, sr;
+    if (a > 1.05) { sc = .43; ox = Math.min(.2, a * .5 - .62); oy = .02; sun = [ox - .06, oy + .14]; sr = .3; }
+    else { sc = Math.min(.36, a * .56); ox = a * .14; oy = .14; sun = [ox - .04, oy + .1]; sr = Math.min(.24, a * .46); }
+    var px = W / Math.max(1, S.canvas.clientWidth);
+    S.draw(prog, null, {
+      uField: fieldTex, uTime: t, uMode: S.params.mode, uCell: S.params.cell, uCon: S.params.contrast, uPx: px,
+      uS: sc, uO: [ox, oy], uSun: sun, uSunR: sr, uL: L, uBox: [X0, Y0, X1, Y1], uFade: a > 1.05 ? -.3 : -.1
+    });
+  });
+})();
+</script>
+</body>
+</html>

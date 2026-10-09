@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>慢物質 Slow Matter — 十六件 GLSL 研究</title>
+<meta name="description" content="十六件以原生 WebGL 寫成的 shader 作品：九種效果、七種媒材。">
+<meta name="theme-color" content="#161513">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Crect%20width%3D%2732%27%20height%3D%2732%27%20fill%3D%27%23161513%27/%3E%3Ccircle%20cx%3D%2716%27%20cy%3D%2716%27%20r%3D%279%27%20fill%3D%27%23c9bfae%27%20opacity%3D%27.85%27/%3E%3C/svg%3E">
+<style>
+:root{--bg:#161513;--ink:#E7E0D3;--dim:rgba(231,224,211,.56);--line:rgba(231,224,211,.16)}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+#bg{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;background:radial-gradient(90% 70% at 20% 10%,#2a2620,transparent 60%),radial-gradient(80% 70% at 85% 90%,#1f2420,transparent 60%),var(--bg)}
+main{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:clamp(22px,4vw,64px)}
+header.top{display:flex;justify-content:space-between;align-items:baseline;font-size:10.5px;letter-spacing:.24em;color:var(--dim);margin-bottom:clamp(64px,14vh,160px)}
+.hero h1{font-weight:200;font-size:clamp(44px,8.4vw,128px);letter-spacing:.12em;line-height:1.02;margin:0}
+.hero h1 small{display:block;font-size:clamp(11px,1vw,13px);letter-spacing:.5em;font-weight:400;color:var(--dim);margin-top:22px;text-transform:uppercase}
+.hero p{max-width:34em;font-size:14px;line-height:2.1;letter-spacing:.06em;color:var(--dim);margin:40px 0 0}
+section{margin-top:clamp(80px,14vh,150px)}
+.sh{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:18px;margin-bottom:38px;gap:20px}
+.sh h2{font-weight:300;font-size:20px;letter-spacing:.2em;margin:0}
+.sh span{font-size:10.5px;letter-spacing:.22em;color:var(--dim)}
+ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:56px 34px}
+.card{display:block;color:inherit;text-decoration:none}
+figure{margin:0 0 18px;aspect-ratio:16/10;overflow:hidden;background:#000;position:relative}
+figure img,figure .ph{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.2,.7,.1,1),filter 1s}
+figure::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px var(--line);pointer-events:none}
+.card:hover img,.card:focus-visible img{transform:scale(1.035)}
+.card:focus-visible{outline:1px solid var(--ink);outline-offset:8px}
+.meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.num{font-size:10.5px;letter-spacing:.2em;color:var(--dim);font-variant-numeric:tabular-nums}
+.sw{display:flex;gap:3px}.sw i{width:9px;height:9px;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+.card h3{font-weight:400;font-size:19px;letter-spacing:.16em;margin:0 0 4px}
+.card .en{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
+.card .st{font-size:13px;line-height:1.9;letter-spacing:.04em;margin:0 0 14px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:11.5px;line-height:1.75;color:var(--dim)}
+dt{letter-spacing:.18em;opacity:.7}dd{margin:0;letter-spacing:.04em}
+footer{margin-top:clamp(90px,16vh,170px);border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:11px;line-height:1.9;letter-spacing:.08em;color:var(--dim)}
+footer p{margin:0;max-width:44em}
+#bgnote{position:fixed;right:16px;bottom:12px;z-index:2;font-size:10px;letter-spacing:.1em;color:var(--dim)}
+@media (min-width:1100px){ul.fx{grid-template-columns:repeat(3,1fr);gap:64px 40px}ul.mt{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:640px){ul{grid-template-columns:1fr;gap:48px}.hero p{font-size:13px}header.top{margin-bottom:72px}}
+@media (prefers-reduced-motion:reduce){figure img{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<main>
+<header class="top"><span>SHADER STUDIES · VOL. 2</span><span>16 WORKS</span></header>
+<div class="hero">
+<h1>慢物質<small>Slow Matter</small></h1>
+<p>十六件以原生 WebGL 寫成的小型研究。前九件是演算法的效果，後七件模擬紙、銀鹽、油墨、玻璃、菌與布這些實體材料。每一件都很慢，值得多看一會兒。</p>
+</div>
+<section aria-labelledby="sa"><div class="sh"><h2 id="sa">效果系列</h2><span>EFFECTS · 01—09</span></div>
+<ul class="fx">
+<li><a class="card" href="grain-gradient-mesh.html">
+  <figure><img src="thumbs/grain-gradient-mesh.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#ECE5D8,#9FAE95 55%,#E2AE8E)"></figure>
+  <div class="meta"><span class="num">01</span><span class="sw" aria-hidden="true"><i style="background:#ECE5D8"></i><i style="background:#9FAE95"></i><i style="background:#E2AE8E"></i><i style="background:#2A2926"></i></span></div>
+  <h3>校樣之晨</h3>
+  <p class="en">Morning Proof · Grain Gradient Mesh</p>
+  <p class="st">這個畫面像一張剛從印刷機取下的校樣，顏色還在紙纖維裡慢慢沉澱。</p>
+  <dl><dt>氣質</dt><dd>安靜 · 紙感 · 高級</dd><dt>適用</dt><dd>品牌首頁主視覺、作品集封面、長文頁首</dd></dl>
+</a></li><li><a class="card" href="noise-dissolve.html">
+  <figure><img src="thumbs/noise-dissolve.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#0E1424,#EFE6CF 55%,#D9572B)"></figure>
+  <div class="meta"><span class="num">02</span><span class="sw" aria-hidden="true"><i style="background:#0E1424"></i><i style="background:#EFE6CF"></i><i style="background:#D9572B"></i><i style="background:#7A2E1D"></i></span></div>
+  <h3>兩卷底片</h3>
+  <p class="en">Two Reels · Noise Mask Dissolve</p>
+  <p class="st">這個畫面像兩卷底片在放映機裡交換了記憶。</p>
+  <dl><dt>氣質</dt><dd>電影感 · 餘燼 · 夜</dd><dt>適用</dt><dd>作品集章節轉場、影像品牌首頁、活動倒數頁</dd></dl>
+</a></li><li><a class="card" href="liquid-distortion.html">
+  <figure><img src="thumbs/liquid-distortion.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#7CC6C0,#0E4A53 55%,#F3F0E4)"></figure>
+  <div class="meta"><span class="num">03</span><span class="sw" aria-hidden="true"><i style="background:#7CC6C0"></i><i style="background:#0E4A53"></i><i style="background:#F3F0E4"></i><i style="background:#E8735A"></i></span></div>
+  <h3>午後泳池</h3>
+  <p class="en">Afternoon Pool · Liquid Ripple Distortion</p>
+  <p class="st">這個畫面像午後無人的泳池，等著被指尖喚醒。</p>
+  <dl><dt>氣質</dt><dd>清涼 · 安靜 · 陽光</dd><dt>適用</dt><dd>夏季活動頁、旅宿與生活品牌首頁、互動式頁首</dd></dl>
+</a></li><li><a class="card" href="dithering-halftone.html">
+  <figure><img src="thumbs/dithering-halftone.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#E8E3D3,#151515 55%,#D9372B)"></figure>
+  <div class="meta"><span class="num">04</span><span class="sw" aria-hidden="true"><i style="background:#E8E3D3"></i><i style="background:#151515"></i><i style="background:#D9372B"></i></span></div>
+  <h3>側臉與紅日</h3>
+  <p class="en">Profile &amp; Red Sun · Ordered Dither / Halftone</p>
+  <p class="st">這個畫面像一張連夜印好、還帶著油墨味的傳單。</p>
+  <dl><dt>氣質</dt><dd>態度 · 印刷 · 宣言</dd><dt>適用</dt><dd>活動海報頁、獨立刊物封面、宣言式品牌頁首</dd></dl>
+</a></li><li><a class="card" href="domain-warp-fbm.html">
+  <figure><img src="thumbs/domain-warp-fbm.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#08241D,#2C6A4E 55%,#A6CFA4)"></figure>
+  <div class="meta"><span class="num">05</span><span class="sw" aria-hidden="true"><i style="background:#08241D"></i><i style="background:#2C6A4E"></i><i style="background:#A6CFA4"></i><i style="background:#C8A44B"></i></span></div>
+  <h3>石中之水</h3>
+  <p class="en">Water in Stone · Nested Domain Warp</p>
+  <p class="st">這個畫面像剖開一塊石頭，看見它曾經是水。</p>
+  <dl><dt>氣質</dt><dd>沉靜 · 礦物 · 時間</dd><dt>適用</dt><dd>珠寶與精品品牌主視覺、建材或室內設計作品頁、長文章節底圖</dd></dl>
+</a></li><li><a class="card" href="feedback-trails.html">
+  <figure><img src="thumbs/feedback-trails.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#170F2B,#B39BE0 55%,#F5C6A5)"></figure>
+  <div class="meta"><span class="num">06</span><span class="sw" aria-hidden="true"><i style="background:#170F2B"></i><i style="background:#B39BE0"></i><i style="background:#F5C6A5"></i></span></div>
+  <h3>殘光</h3>
+  <p class="en">Afterglow · Feedback Trails</p>
+  <p class="st">這個畫面像黃昏裡被記住的一道光，走過之後還捨不得散去。</p>
+  <dl><dt>氣質</dt><dd>夢境 · 時間 · 溫柔</dd><dt>適用</dt><dd>個人網站首頁、音樂或詩作專題、夜間模式主視覺</dd></dl>
+</a></li><li><a class="card" href="reaction-diffusion.html">
+  <figure><img src="thumbs/reaction-diffusion.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#D6A23F,#1E1C18 55%,#F2E2B6)"></figure>
+  <div class="meta"><span class="num">07</span><span class="sw" aria-hidden="true"><i style="background:#D6A23F"></i><i style="background:#1E1C18"></i><i style="background:#F2E2B6"></i></span></div>
+  <h3>斑紋</h3>
+  <p class="en">Pelt · Gray-Scott Reaction–Diffusion</p>
+  <p class="st">這個畫面像一張還在生長的獸皮，斑點自己決定要長成什麼樣子。</p>
+  <dl><dt>氣質</dt><dd>野性 · 生長 · 溫熱</dd><dt>適用</dt><dd>自然或生物主題專題、品牌包裝紋樣、展覽主視覺</dd></dl>
+</a></li><li><a class="card" href="pixel-sorting.html">
+  <figure><img src="thumbs/pixel-sorting.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#0B0B0E,#C6F032 55%,#CDD0D6)"></figure>
+  <div class="meta"><span class="num">08</span><span class="sw" aria-hidden="true"><i style="background:#0B0B0E"></i><i style="background:#C6F032"></i><i style="background:#CDD0D6"></i><i style="background:#FF5A1F"></i></span></div>
+  <h3>斷訊</h3>
+  <p class="en">Signal Loss · GPU Pixel Sorting</p>
+  <p class="st">這個畫面像一則正在融化的訊號，字還在，意思卻一行行往下流。</p>
+  <dl><dt>氣質</dt><dd>數位 · 冷冽 · 崩解</dd><dt>適用</dt><dd>科技品牌發表頁、音樂專輯或活動主視覺、404 與維護頁</dd></dl>
+</a></li><li><a class="card" href="raymarching-sdf.html">
+  <figure><img src="thumbs/raymarching-sdf.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#E7E2DA,#4A3F36 55%,#F2D4A9)"></figure>
+  <div class="meta"><span class="num">09</span><span class="sw" aria-hidden="true"><i style="background:#E7E2DA"></i><i style="background:#4A3F36"></i><i style="background:#F2D4A9"></i></span></div>
+  <h3>石膏習作</h3>
+  <p class="en">Plaster Study · Raymarched SDF</p>
+  <p class="st">這個畫面像美術館角落的一件石膏習作，光在它的孔洞裡慢慢午睡。</p>
+  <dl><dt>氣質</dt><dd>靜物 · 溫潤 · 留白</dd><dt>適用</dt><dd>建築或設計事務所首頁、藝廊展覽頁、產品形象頁</dd></dl>
+</a></li>
+</ul></section>
+<section aria-labelledby="sb"><div class="sh"><h2 id="sb">媒材系列</h2><span>MATERIALS · 10—16</span></div>
+<ul class="mt">
+<li><a class="card" href="darkroom-solarize.html">
+  <figure><img src="thumbs/darkroom-solarize.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#3B0A06,#E8DFCC 55%,#110F0E)"></figure>
+  <div class="meta"><span class="num">10</span><span class="sw" aria-hidden="true"><i style="background:#3B0A06"></i><i style="background:#E8DFCC"></i><i style="background:#110F0E"></i></span></div>
+  <h3>顯影</h3>
+  <p class="en">Latent Hour · Darkroom Solarization</p>
+  <p class="st">這個畫面像一張還在顯影液中、慢慢浮現的相片。</p>
+  <dl><dt>氣質</dt><dd>暗房 · 等待 · 記憶</dd><dt>適用</dt><dd>攝影作品集首頁、展覽開場、回憶與紀實專題頁首</dd></dl>
+</a></li><li><a class="card" href="risograph-print.html">
+  <figure><img src="thumbs/risograph-print.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#F2EDE2,#FF4FA3 55%,#1F5FBF)"></figure>
+  <div class="meta"><span class="num">11</span><span class="sw" aria-hidden="true"><i style="background:#F2EDE2"></i><i style="background:#FF4FA3"></i><i style="background:#1F5FBF"></i></span></div>
+  <h3>套色</h3>
+  <p class="en">Two-Drum Still Life · Risograph Print</p>
+  <p class="st">這個畫面像兩道油墨各走各的，在紙上偶然重疊。</p>
+  <dl><dt>氣質</dt><dd>俏皮 · 手作 · 溫度</dd><dt>適用</dt><dd>獨立刊物與小誌網站、活動海報頁、文創品牌商品頁</dd></dl>
+</a></li><li><a class="card" href="cyanotype.html">
+  <figure><img src="thumbs/cyanotype.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#10295A,#081633 55%,#EFEBE0)"></figure>
+  <div class="meta"><span class="num">12</span><span class="sw" aria-hidden="true"><i style="background:#10295A"></i><i style="background:#081633"></i><i style="background:#EFEBE0"></i></span></div>
+  <h3>日光標本</h3>
+  <p class="en">Sun Herbarium · Cyanotype</p>
+  <p class="st">這個畫面像植物在陽光下躺了一個午後，留下的白色影子。</p>
+  <dl><dt>氣質</dt><dd>靜謐 · 植物 · 時間</dd><dt>適用</dt><dd>植物或自然品牌首頁、手作工作室介紹、慢生活專欄頁首</dd></dl>
+</a></li><li><a class="card" href="glass-refraction.html">
+  <figure><img src="thumbs/glass-refraction.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#23493D,#E6ECE8 55%,#D98C7A)"></figure>
+  <div class="meta"><span class="num">13</span><span class="sw" aria-hidden="true"><i style="background:#23493D"></i><i style="background:#E6ECE8"></i><i style="background:#D98C7A"></i><i style="background:#101815"></i></span></div>
+  <h3>隔著玻璃</h3>
+  <p class="en">Behind Reeded Glass · Refraction</p>
+  <p class="st">這個畫面像隔著一扇老玻璃窗，看見午後模糊的庭院。</p>
+  <dl><dt>氣質</dt><dd>朦朧 · 距離 · 清涼</dd><dt>適用</dt><dd>室內設計與建築事務所首頁、選物店形象頁、會員登入背景</dd></dl>
+</a></li><li><a class="card" href="organic-growth.html">
+  <figure><img src="thumbs/organic-growth.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#A6A49B,#C7D266 55%,#DD7333)"></figure>
+  <div class="meta"><span class="num">14</span><span class="sw" aria-hidden="true"><i style="background:#A6A49B"></i><i style="background:#C7D266"></i><i style="background:#DD7333"></i><i style="background:#2B2C27"></i></span></div>
+  <h3>石上地衣</h3>
+  <p class="en">Lichen on Stone · Stochastic Cellular Growth</p>
+  <p class="st">這個畫面像一塊石頭，用幾十年慢慢記下自己被誰住過。</p>
+  <dl><dt>氣質</dt><dd>緩慢 · 共生 · 年輪</dd><dt>適用</dt><dd>自然與永續品牌、研究單位網站、長篇專題的章節底圖</dd></dl>
+</a></li><li><a class="card" href="long-exposure.html">
+  <figure><img src="thumbs/long-exposure.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#0A1324,#EDEFF5 55%,#2B5866)"></figure>
+  <div class="meta"><span class="num">15</span><span class="sw" aria-hidden="true"><i style="background:#0A1324"></i><i style="background:#EDEFF5"></i><i style="background:#2B5866"></i><i style="background:#F1A33D"></i></span></div>
+  <h3>北天曝光</h3>
+  <p class="en">North Sky · Long-Exposure Accumulation</p>
+  <p class="st">這個畫面像一台整夜沒關的相機，把星星走過的路都留了下來。</p>
+  <dl><dt>氣質</dt><dd>守候 · 時間 · 夜</dd><dt>適用</dt><dd>天文與戶外品牌、攝影作品集首頁、夜間活動頁</dd></dl>
+</a></li><li><a class="card" href="textile-moire.html">
+  <figure><img src="thumbs/textile-moire.jpg" alt="" loading="lazy" width="720" height="450" style="background:linear-gradient(135deg,#22305A,#D9CEB8 55%,#A3412D)"></figure>
+  <div class="meta"><span class="num">16</span><span class="sw" aria-hidden="true"><i style="background:#22305A"></i><i style="background:#D9CEB8"></i><i style="background:#A3412D"></i></span></div>
+  <h3>紗上波紋</h3>
+  <p class="en">Veiled Weave · Textile Moiré</p>
+  <p class="st">這個畫面像兩層布輕輕交疊，紋理之間浮出一片不存在的水光。</p>
+  <dl><dt>氣質</dt><dd>織物 · 細密 · 呼吸</dd><dt>適用</dt><dd>服飾與織品品牌、設計工作室首頁、展覽主視覺</dd></dl>
+</a></li>
+</ul></section>
+<footer><p>每頁皆為單一 HTML 檔，不依賴任何函式庫、字型或外部圖片；所有影像都由程式即時生成。支援觸控、尊重「減少動態」設定，分頁不可見時自動暫停。</p><p>慢物質 · 第二輯</p></footer>
+</main>
+<span id="bgnote" hidden></span>
+<script>
+(function(){'use strict';
+var c=document.getElementById('bg'),note=document.getElementById('bgnote');
+function off(msg){note.hidden=false;note.textContent=msg;}
+var gl=null;try{gl=c.getContext('webgl2',{antialias:false,alpha:false,depth:false})||c.getContext('webgl',{antialias:false,alpha:false,depth:false});}catch(e){}
+if(!gl){off('此瀏覽器無法使用 WebGL，背景改為靜態漸層；作品頁需要 WebGL 才能觀看。');return;}
+var vs='attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+var fs=['precision mediump float;uniform vec2 r;uniform float t;',
+'float h(vec2 p){vec3 q=fract(vec3(p.xyx)*.1031);q+=dot(q,q.yzx+33.33);return fract((q.x+q.y)*q.z);}',
+'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}',
+'void main(){vec2 u=gl_FragCoord.xy/r;vec2 p=(u-.5)*vec2(r.x/r.y,1.);',
+'float a=n(p*1.3+vec2(t*.013,-t*.009))*.6+n(p*2.7-vec2(t*.01,0.))*.4;',
+'float b=n(p*1.1+vec2(-t*.008,t*.011)+4.);',
+'vec3 base=vec3(.086,.082,.075);',
+'vec3 col=base+vec3(.07,.055,.035)*smoothstep(.35,.95,a)*(1.-u.y*.6)+vec3(.02,.04,.03)*smoothstep(.4,1.,b)*u.y;',
+'col*=1.-.35*dot(u-.5,u-.5);',
+'col+=(h(gl_FragCoord.xy+fract(t*.1)*91.)-.5)*.035;',
+'gl_FragColor=vec4(col,1.);}'].join('\n');
+function sh(t,s){var o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return gl.getShaderParameter(o,gl.COMPILE_STATUS)?o:null;}
+var v=sh(gl.VERTEX_SHADER,vs),f=sh(gl.FRAGMENT_SHADER,fs);
+if(!v||!f){off('背景 shader 無法在此裝置編譯，已改為靜態漸層。');return;}
+var p=gl.createProgram();gl.attachShader(p,v);gl.attachShader(p,f);gl.bindAttribLocation(p,0,'a');gl.linkProgram(p);
+if(!gl.getProgramParameter(p,gl.LINK_STATUS)){off('背景 shader 無法連結，已改為靜態漸層。');return;}
+gl.useProgram(p);var b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+gl.enableVertexAttribArray(0);gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);
+var ur=gl.getUniformLocation(p,'r'),ut=gl.getUniformLocation(p,'t');
+var mq=matchMedia('(prefers-reduced-motion: reduce)'),T=40,last=0,raf=0;
+function size(){var d=Math.min(devicePixelRatio||1,2)*.5;var w=Math.round(innerWidth*d),hh=Math.round(innerHeight*d);if(c.width!==w||c.height!==hh){c.width=w;c.height=hh;}gl.viewport(0,0,c.width,c.height);}
+function draw(){gl.uniform2f(ur,c.width,c.height);gl.uniform1f(ut,T);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);}
+function tick(ts){raf=0;if(document.hidden)return;if(last&&!mq.matches)T+=Math.min(.05,(ts-last)/1000);last=ts;draw();if(!mq.matches)raf=requestAnimationFrame(tick);}
+function go(){if(!raf&&!document.hidden){last=0;raf=requestAnimationFrame(tick);}}
+size();go();
+addEventListener('resize',function(){size();go();});
+document.addEventListener('visibilitychange',function(){if(document.hidden){cancelAnimationFrame(raf);raf=0;}else go();});
+c.addEventListener('webglcontextlost',function(e){e.preventDefault();off('背景繪圖環境中斷，已改為靜態漸層。');});
+if(mq.addEventListener)mq.addEventListener('change',go);
+})();
+</script>
+</body>
+</html>
