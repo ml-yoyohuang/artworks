@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>對頁 — 光與規則的二十六件作品</title>
-<meta name="description" content="對頁 第一期：把「光與物質」十六件 shader 與「規則的餘溫」十件生成式研究放進同一本雜誌。十組作品隔著裝訂線對望，六件作品獨佔單頁。">
+<title>對頁 — 光與規則的三十五件作品</title>
+<meta name="description" content="對頁 第一期：把「光與物質」十七件 shader 與「規則的餘溫」十八件生成式研究放進同一本雜誌。十六組作品隔著裝訂線對望，三件作品獨佔單頁。">
 <link rel="canonical" href="https://ml-yoyohuang.github.io/artworks/magazine/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="對頁">
-<meta property="og:title" content="對頁 — 光與規則的二十六件作品">
+<meta property="og:title" content="對頁 — 光與規則的三十五件作品">
 <meta property="og:description" content="十組作品隔著裝訂線對望，中縫寫著它們共同的那個字。">
 <meta property="og:url" content="https://ml-yoyohuang.github.io/artworks/magazine/">
 <meta property="og:image" content="https://ml-yoyohuang.github.io/artworks/magazine/assets/og-image.jpg">
@@ -18,7 +18,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="對頁 第一期：紙色封面以中縫分成兩頁，左下是以長曝光光軌填色的「光」，右上是以 Truchet 織紋填色的「則」。">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="對頁 — 光與規則的二十六件作品">
+<meta name="twitter:title" content="對頁 — 光與規則的三十五件作品">
 <meta name="twitter:description" content="十組作品隔著裝訂線對望，中縫寫著它們共同的那個字。">
 <meta name="twitter:image" content="https://ml-yoyohuang.github.io/artworks/magazine/assets/og-image.jpg">
 <meta name="twitter:image:alt" content="對頁 第一期：紙色封面以中縫分成兩頁，左下是以長曝光光軌填色的「光」，右上是以 Truchet 織紋填色的「則」。">
@@ -166,6 +166,27 @@ body.night .night::before,html:not(.js) .night::before{opacity:1}
 /* 消散 */
 .fade .void{--c:6/8;min-height:38vh}
 
+/* part II opener */
+.part h2{font-family:var(--serif);font-size:clamp(48px,6vw,92px);letter-spacing:.24em;line-height:1.2;text-align:right}
+.part .kick{font-size:10px;letter-spacing:.24em;margin-bottom:26px;text-align:right;opacity:.7}
+.part .body{font-family:var(--serif);font-size:15px;line-height:2.25;letter-spacing:.06em;max-width:27em}
+.part .body p+p{margin-top:1.3em}
+.part .sig{font-family:var(--sans);margin-top:30px;font-size:10px;letter-spacing:.2em;opacity:.6}
+.toc .part-row a{border-top:1px solid rgba(35,39,42,.3);margin-top:22px}
+.toc .part-row .a,.toc .part-row .b{font-size:11px;letter-spacing:.3em;opacity:.6}
+.toc .part-row .w{color:var(--ink);letter-spacing:.3em}
+.im picture{display:block;width:100%;height:100%}
+/* 殘像 — a pale double of the right-hand work, where it used to be */
+.residue .ghost{aspect-ratio:1.43;background:center/cover no-repeat;opacity:.14;translate:-3.2vw -6vh;filter:saturate(.4);pointer-events:none}
+/* 折 — both pages open from the binding like a book being opened */
+.fold .im{transition:transform 1.8s cubic-bezier(.2,.7,.2,1)}
+.fold .im[data-side=l]{transform-origin:right center}
+.fold .im[data-side=r]{transform-origin:left center}
+.js .fold .im[data-side=l]:not(.in){transform:perspective(1600px) rotateY(32deg)}
+.js .fold .im[data-side=r]:not(.in){transform:perspective(1600px) rotateY(-32deg)}
+/* 空洞 — one circle joins the two holes across the gutter */
+.void2 .ring{justify-self:center;width:min(100%,64vh);aspect-ratio:1;border:1px solid var(--line);border-radius:50%;pointer-events:none}
+
 /* ── solo pages ── */
 .solo-sec{padding-top:24vh;row-gap:16vh}
 .solo-sec .title h2{font-family:var(--serif);font-size:clamp(64px,8vw,124px);letter-spacing:.2em;line-height:1}
@@ -212,6 +233,7 @@ body.night .night::before,html:not(.js) .night::before{opacity:1}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js .im[data-side] img{clip-path:none!important;transition:none}
+  .js .fold .im{transform:none!important;transition:none}
   .im img{transition:none}
   .js .im[data-par] img,.js [data-par-self]{translate:none}
 }
@@ -262,6 +284,13 @@ body.night .night::before,html:not(.js) .night::before{opacity:1}
   .spread .im[data-side=l]{order:1}.spread .cap.ca{order:2}.spread .im[data-side=r]{order:3}.spread .cap.cb{order:4}
   .spread .note,.spread .note.r{order:9;margin:0 0 10px;max-width:none}
   .spread .void{display:none}
+  .spread .ghost,.spread .ring{display:none}
+  .spread .im.geo{aspect-ratio:600/660}
+  .solo-sec .im:has(picture){aspect-ratio:600/660}
+  .part h2,.part .kick{text-align:left}
+  .part h2{font-size:52px}
+  .part .body{margin-top:36px;font-size:14px}
+  .misreg .im[data-side=r]{margin-left:0!important}
   .spread .cap.mr{align-self:flex-end;width:84%}
   /* squeeze survives on a phone: two squares that still touch */
   .crowd{display:grid;grid-template-columns:1fr 1fr;column-gap:0}
@@ -313,11 +342,11 @@ body.night .night::before,html:not(.js) .night::before{opacity:1}
   </div>
   <p class="big k" aria-label="光"><span>光</span></p>
   <p class="big z" aria-label="則"><span>則</span></p>
-  <p class="lab k2"><b>光與物質</b>十六件 shader 研究</p>
-  <p class="lab z2"><b>規則的餘溫</b>十件生成式研究</p>
+  <p class="lab k2"><b>光與物質</b>十七件 shader 研究</p>
+  <p class="lab z2"><b>規則的餘溫</b>十八件生成式研究</p>
   <div class="lede">
     <p>一本目錄收著光，一本目錄收著規則。<br>我們把它們放進同一本書，讓每件作品都有一頁可以回答它的對頁。</p>
-    <a href="#contents">十組對頁 · 六張單頁 · 二十六件作品 ↓</a>
+    <a href="#contents">十六組對頁 · 三張單頁 · 三十五件作品 ↓</a>
   </div>
 </section>
 
@@ -328,14 +357,14 @@ body.night .night::before,html:not(.js) .night::before{opacity:1}
     <h2>兩本目錄，<br>在同一道中縫<br>相遇。</h2>
   </div>
   <div class="fig" style="--c:3/6;--r:2;--as:end;text-align:right">
-    <b>16 ⁄ 10</b>
-    sixteen studies in light &amp; matter,<br>ten atlases of generative gesture
+    <b>17 ⁄ 18</b>
+    seventeen studies in light &amp; matter,<br>eighteen atlases of generative gesture
   </div>
   <div class="body" style="--c:8/13;--r:1/3">
-    <p>一邊是<em>光</em>。十六件 shader 在顯示晶片上逐像素計算，模仿暗房、油墨、玻璃與長曝光——它們關心的是：物質如何被照亮。</p>
-    <p>另一邊是<em>規則</em>。十件 p5.js 研究從一條簡單的規則出發，讓線、點與圓自己長成世界——它們關心的是：時間如何留下形狀。</p>
+    <p>一邊是<em>光</em>。十七件 shader 在顯示晶片上逐像素計算，模仿暗房、油墨、玻璃與長曝光——它們關心的是：物質如何被照亮。</p>
+    <p>另一邊是<em>規則</em>。十八件 p5.js 研究從一條簡單的規則出發，讓線、點與圓自己長成世界——它們關心的是：時間如何留下形狀。</p>
     <p>把兩本目錄攤開並排，我們發現它們常常說著同一件事。葉脈、顆粒、增殖、軌跡；一邊用光寫，一邊用規則寫。</p>
-    <p>於是有了這本雜誌。十組作品隔著裝訂線對望，中縫上寫著它們共同的那個字。剩下六件找不到對頁的作品，我們讓它們獨自佔據整個跨頁。</p>
+    <p>於是有了這本雜誌。十六組作品隔著裝訂線對望，中縫上寫著它們共同的那個字；後六組來自付印前才送到的新作，收在第二部「幾何之間」。剩下三件找不到對頁的作品，我們讓它們獨自佔據整個跨頁。</p>
     <p class="sig">對頁編輯部 · 二〇二六年十月</p>
   </div>
 </section>
@@ -355,7 +384,14 @@ body.night .night::before,html:not(.js) .night::before{opacity:1}
       <li><a href="#p08"><span class="a">失序的肖像<small>光 08</small></span><span class="w"><i>08</i>分割</span><span class="b"><small>則 03</small>房間與停頓</span></a></li>
       <li><a href="#p09"><span class="a">遲到的光<small>光 06</small></span><span class="w"><i>09</i>群</span><span class="b"><small>則 09</small>共同的偏航</span></a></li>
       <li><a href="#p10"><span class="a">兩個日落之間<small>光 02</small></span><span class="w"><i>10</i>消散</span><span class="b"><small>則 10</small>字的餘溫</span></a></li>
-      <li class="solo-row"><a href="#solo"><span class="a">紙上的氣候 · 偏移的花園 · 銀鹽的第二次黎明</span><span class="w">單頁</span><span class="b">透明的重量 · 石頭裡的潮汐 · 一個不存在的物件</span></a></li>
+      <li class="part-row"><a href="#part2"><span class="a">第二部</span><span class="w">幾何之間</span><span class="b">PART II</span></a></li>
+      <li><a href="#p11"><span class="a">偏移的花園<small>光 11</small></span><span class="w"><i>11</i>套印</span><span class="b"><small>則 12</small>尚未對準的印刷</span></a></li>
+      <li><a href="#p12"><span class="a">石頭裡的潮汐<small>光 05</small></span><span class="w"><i>12</i>沉積</span><span class="b"><small>則 15</small>色彩沉積</span></a></li>
+      <li><a href="#p13"><span class="a">銀鹽的第二次黎明<small>光 10</small></span><span class="w"><i>13</i>殘像</span><span class="b"><small>則 18</small>幾何的餘溫</span></a></li>
+      <li><a href="#p14"><span class="a">光的薄界<small>光 17</small></span><span class="w"><i>14</i>折</span><span class="b"><small>則 13</small>平面有背面</span></a></li>
+      <li><a href="#p15"><span class="a">透明的重量<small>光 13</small></span><span class="w"><i>15</i>尺度</span><span class="b"><small>則 17</small>同一張圖的不同尺度</span></a></li>
+      <li><a href="#p16"><span class="a">一個不存在的物件<small>光 09</small></span><span class="w"><i>16</i>空洞</span><span class="b"><small>則 14</small>空白正在移動</span></a></li>
+      <li class="solo-row"><a href="#solo"><span class="a">紙上的氣候</span><span class="w">單頁</span><span class="b">領土協商 · 遲到半拍的群舞</span></a></li>
     </ol>
   </div>
 </section>
@@ -581,13 +617,160 @@ body.night .night::before,html:not(.js) .night::before{opacity:1}
   </div>
 </section>
 
+<!-- ═════ PART II ═════ -->
+<section class="sheet part" id="part2" data-label="第二部" data-page="14">
+  <div style="--c:1/6;--r:1">
+    <p class="kick">PART II ／ 第二部</p>
+    <h2>幾何之間</h2>
+  </div>
+  <div class="body" style="--c:8/13;--r:1;--as:end">
+    <p>付印前，兩本目錄又各自送來新作。「規則的餘溫」多了八件幾何色塊研究，「光與物質」多了一層會折光的薄膜。</p>
+    <p>原本找不到對頁的六件作品，有五件在這批新作之中找到了回答：套印、沉積、殘像、尺度、空洞。薄膜則和一張會翻面的平面，對折在同一道中縫上。</p>
+    <p class="sig">十八件規則 ／ 十七件光 · 第二部共六組對頁</p>
+  </div>
+</section>
+
+<!-- ═════ 11 套印 ═════ -->
+<section class="sheet spread misreg" id="p11" data-label="11　套印" data-page="15">
+  <div class="hinge" style="--c:6/8;--r:1;--as:center"><i>11</i><b>套印</b><s>REGISTER</s></div>
+  <a class="im" data-side="l" href="../shader-demos/risograph-print.html?from=magazine:p11" tabindex="-1" aria-hidden="true" style="--c:2/6;--r:1;--ar:1.43;--op:45% 50%"><img src="../shader-demos/thumbs/risograph-print.webp" alt="" width="600" height="375" loading="lazy"></a>
+  <a class="im geo" data-side="r" href="../p5-demos/registration-pending.html?from=magazine:p11" tabindex="-1" aria-hidden="true" style="--c:8/12;--r:1;--ar:1.43;--mt:22px;margin-left:14px"><picture><source media="(max-width:760px)" srcset="../p5-demos/thumbs/geometric/registration-pending-mobile.webp"><img src="../p5-demos/thumbs/geometric/registration-pending.webp" alt="" width="1000" height="700" loading="lazy"></picture></a>
+  <div class="cap ca" style="--c:2/6;--r:2;--mt:30px">
+    <p class="no"><em>光</em>11<span>媒材系列</span></p>
+    <h3><a href="../shader-demos/risograph-print.html?from=magazine:p11">偏移的花園</a></h3>
+    <p class="en">A GARDEN OUT OF REGISTER</p>
+    <p class="st">兩種油墨沒有對齊，卻讓花園多出一個季節。</p>
+    <p class="tg">套色・油墨・植物<span>適合：文化活動、海報、文創品牌</span></p>
+  </div>
+  <div class="cap cb" style="--c:8/12;--r:2;--mt:30px">
+    <p class="no"><em>則</em>12<span>幾何之間</span></p>
+    <h3><a href="../p5-demos/registration-pending.html?from=magazine:p11">尚未對準的印刷</a></h3>
+    <p class="en">REGISTRATION, PENDING</p>
+    <p class="st">幾層各自存在的顏色，在對準的一刻取得重量。</p>
+    <p class="tg">色版・相遇・停頓<span>適合：品牌視覺、專案轉場、展覽開場</span></p>
+  </div>
+  <p class="note" style="--c:8/11;--r:3;--mt:8vh">兩種油墨沒有對齊，花園多出一個季節；幾層顏色等著對準，在相遇的一刻取得重量。這一組對頁，也刻意差了幾公釐。</p>
+</section>
+
+<!-- ═════ 12 沉積 ═════ -->
+<section class="sheet spread strata" id="p12" data-label="12　沉積" data-page="16">
+  <p class="note" style="--c:2/5;--r:1;margin-bottom:8vh">石頭把海壓進紋理，色層把時間壓成厚薄。兩件作品都是時間的剖面——一件仍在流動，一件已經斷層。</p>
+  <div class="hinge" style="--c:6/8;--r:2;--as:start;--mt:4vh"><i>12</i><b>沉積</b><s>SEDIMENT</s></div>
+  <a class="im bleed-l" data-side="l" href="../shader-demos/domain-warp-fbm.html?from=magazine:p12" tabindex="-1" aria-hidden="true" style="--c:1/7;--r:2;--ar:2.4"><img src="../shader-demos/thumbs/domain-warp-fbm.webp" alt="" width="600" height="375" loading="lazy"></a>
+  <a class="im bleed-r geo" data-side="r" href="../p5-demos/chromatic-sediments.html?from=magazine:p12" tabindex="-1" aria-hidden="true" style="--c:7/13;--r:2;--ar:2.4;--mt:9vw;--op:50% 55%"><picture><source media="(max-width:760px)" srcset="../p5-demos/thumbs/geometric/chromatic-sediments-mobile.webp"><img src="../p5-demos/thumbs/geometric/chromatic-sediments.webp" alt="" width="1000" height="700" loading="lazy"></picture></a>
+  <div class="cap ca" style="--c:2/6;--r:3;--mt:30px">
+    <p class="no"><em>光</em>05<span>效果系列</span></p>
+    <h3><a href="../shader-demos/domain-warp-fbm.html?from=magazine:p12">石頭裡的潮汐</a></h3>
+    <p class="en">THE INTERIOR OF STONE</p>
+    <p class="st">一塊石頭保留著海，卻從來不說它流動過。</p>
+    <p class="tg">大理石・地質・流動<span>適合：建築作品集、材質展示、沉浸背景</span></p>
+  </div>
+  <div class="cap cb" style="--c:9/13;--r:3;--mt:30px">
+    <p class="no"><em>則</em>15<span>幾何之間</span></p>
+    <h3><a href="../p5-demos/chromatic-sediments.html?from=magazine:p12">色彩沉積</a></h3>
+    <p class="en">CHROMATIC SEDIMENTS</p>
+    <p class="st">時間被壓成厚薄不等的層，倒退便能回到先前的平面。</p>
+    <p class="tg">厚度・斷層・回訪<span>適合：長文專題、閱讀節奏、章節視覺</span></p>
+  </div>
+</section>
+
+<!-- ═════ 13 殘像 ═════ -->
+<section class="sheet spread residue" id="p13" data-label="13　殘像" data-page="17">
+  <div class="hinge" style="--c:6/8;--r:1;--as:start;--mt:8vh"><i>13</i><b>殘像</b><s>AFTERIMAGE</s></div>
+  <a class="im" data-side="l" href="../shader-demos/darkroom-solarize.html?from=magazine:p13" tabindex="-1" aria-hidden="true" style="--c:2/6;--r:1/3;--ar:4/5;--op:50% 30%"><img src="../shader-demos/thumbs/darkroom-solarize.webp" alt="" width="600" height="375" loading="lazy"></a>
+  <div class="cap ca" style="--c:2/6;--r:3;--mt:30px">
+    <p class="no"><em>光</em>10<span>媒材系列</span></p>
+    <h3><a href="../shader-demos/darkroom-solarize.html?from=magazine:p13">銀鹽的第二次黎明</a></h3>
+    <p class="en">THE SECOND EXPOSURE</p>
+    <p class="st">一張相片在黑暗裡浮現，又被光重新拿走。</p>
+    <p class="tg">暗房・銀鹽・反轉<span>適合：攝影作品集、敘事轉場、開場顯影</span></p>
+  </div>
+  <div class="ghost" aria-hidden="true" style="--c:8/12;--r:2;--as:end;background-image:url(../p5-demos/thumbs/geometric/residual-geometry.webp)"></div>
+  <a class="im geo" data-side="r" href="../p5-demos/residual-geometry.html?from=magazine:p13" tabindex="-1" aria-hidden="true" style="--c:8/12;--r:2;--as:end;--ar:1.43"><picture><source media="(max-width:760px)" srcset="../p5-demos/thumbs/geometric/residual-geometry-mobile.webp"><img src="../p5-demos/thumbs/geometric/residual-geometry.webp" alt="" width="1000" height="700" loading="lazy"></picture></a>
+  <div class="cap cb" style="--c:8/12;--r:3;--mt:30px">
+    <p class="no"><em>則</em>18<span>幾何之間</span></p>
+    <h3><a href="../p5-demos/residual-geometry.html?from=magazine:p13">幾何的餘溫</a></h3>
+    <p class="en">RESIDUAL GEOMETRY</p>
+    <p class="st">形狀離開之後，原來的位置仍繼續參與畫面。</p>
+    <p class="tg">現在・歷史・重量<span>適合：閱讀停頓、互動敘事、時間轉場</span></p>
+  </div>
+  <p class="note" style="--c:8/11;--r:1;--as:start">相片被光拿走之後，形狀離開之後，原來的位置都還在參與畫面。右頁那道淡淡的重影，就是它留下的。</p>
+</section>
+
+<!-- ═════ 14 折 ═════ -->
+<section class="sheet spread fold" id="p14" data-label="14　折" data-page="18">
+  <div class="hinge" style="--c:6/8;--r:2;--as:center"><i>14</i><b>折</b><s>FOLD</s></div>
+  <p class="note" style="--c:8/11;--r:1;margin-bottom:8vh">一處偏心的折痕，一張沿邊翻起的平面——兩件作品都相信，顏色藏在表面的背面。它們從中縫翻開，像一本書剛被打開。</p>
+  <a class="im press-l" data-side="l" href="../shader-demos/thin-film.html?from=magazine:p14" tabindex="-1" aria-hidden="true" style="--c:2/7;--r:2;--ar:1.43;--op:55% 50%"><img src="../shader-demos/thumbs/thin-film.webp" alt="" width="600" height="375" loading="lazy"></a>
+  <a class="im press-r geo" data-side="r" href="../p5-demos/reverse-of-a-plane.html?from=magazine:p14" tabindex="-1" aria-hidden="true" style="--c:7/12;--r:2;--ar:1.43"><picture><source media="(max-width:760px)" srcset="../p5-demos/thumbs/geometric/reverse-of-a-plane-mobile.webp"><img src="../p5-demos/thumbs/geometric/reverse-of-a-plane.webp" alt="" width="1000" height="700" loading="lazy"></picture></a>
+  <div class="cap ca" style="--c:2/6;--r:3;--mt:30px">
+    <p class="no"><em>光</em>17<span>媒材系列</span></p>
+    <h3><a href="../shader-demos/thin-film.html?from=magazine:p14">光的薄界</a></h3>
+    <p class="en">THIN BOUNDARIES / A SURFACE OF LIGHT</p>
+    <p class="st">一處偏心的折痕，藏著觀看位置尚未抵達的顏色。</p>
+    <p class="tg">珠光・薄膜・張力<span>適合：作品封面、材質研究、沉浸式展覽入口</span></p>
+  </div>
+  <div class="cap cb" style="--c:8/12;--r:3;--mt:30px">
+    <p class="no"><em>則</em>13<span>幾何之間</span></p>
+    <h3><a href="../p5-demos/reverse-of-a-plane.html?from=magazine:p14">平面有背面</a></h3>
+    <p class="en">THE REVERSE OF A PLANE</p>
+    <p class="st">沿一條邊翻起的平面，把另一種顏色帶進觀看。</p>
+    <p class="tg">表面・鉸鏈・揭露<span>適合：互動作品集、產品揭露、章節開場</span></p>
+  </div>
+</section>
+
+<!-- ═════ 15 尺度 ═════ -->
+<section class="sheet spread scale" id="p15" data-label="15　尺度" data-page="19">
+  <div class="hinge" style="--c:6/8;--r:1;--as:start"><i>15</i><b>尺度</b><s>SCALE</s></div>
+  <a class="im bleed-l" data-side="l" href="../shader-demos/glass-refraction.html?from=magazine:p15" tabindex="-1" aria-hidden="true" style="--c:1/7;--r:1/3;--ar:1;--op:62% 40%"><img src="../shader-demos/thumbs/glass-refraction.webp" alt="" width="600" height="375" loading="lazy"></a>
+  <div class="cap ca" style="--c:2/6;--r:3;--mt:30px">
+    <p class="no"><em>光</em>13<span>媒材系列</span></p>
+    <h3><a href="../shader-demos/glass-refraction.html?from=magazine:p15">透明的重量</a></h3>
+    <p class="en">THE WEIGHT OF TRANSPARENCY</p>
+    <p class="st">玻璃沒有顏色，只借來世界的一點偏差。</p>
+    <p class="tg">玻璃・色散・冷光<span>適合：產品展示、精品品牌、互動背景</span></p>
+  </div>
+  <p class="note" style="--c:8/11;--r:1;--as:start">玻璃借來世界的一點偏差，色塊裡藏著另一張圖。靠近之後，局部就成了新的整體——所以左頁放大，右頁退遠。</p>
+  <a class="im geo" data-side="r" href="../p5-demos/within-the-same-frame.html?from=magazine:p15" tabindex="-1" aria-hidden="true" style="--c:9/12;--r:2;--ar:1.43;--mt:6vh"><picture><source media="(max-width:760px)" srcset="../p5-demos/thumbs/geometric/within-the-same-frame-mobile.webp"><img src="../p5-demos/thumbs/geometric/within-the-same-frame.webp" alt="" width="1000" height="700" loading="lazy"></picture></a>
+  <div class="cap cb" style="--c:9/13;--r:3;--mt:30px">
+    <p class="no"><em>則</em>17<span>幾何之間</span></p>
+    <h3><a href="../p5-demos/within-the-same-frame.html?from=magazine:p15">同一張圖的不同尺度</a></h3>
+    <p class="en">WITHIN THE SAME FRAME</p>
+    <p class="st">進入一塊顏色，讓原本的局部成為新的整體。</p>
+    <p class="tg">局部・尺度・世界<span>適合：內容探索、作品導覽、細節展示</span></p>
+  </div>
+</section>
+
+<!-- ═════ 16 空洞 ═════ -->
+<section class="sheet spread void2" id="p16" data-label="16　空洞" data-page="20">
+  <div class="ring" aria-hidden="true" style="--c:3/11;--r:1;--as:center"></div>
+  <div class="hinge" style="--c:6/8;--r:1;--as:center"><i>16</i><b>空洞</b><s>VOID</s></div>
+  <a class="im" data-side="l" href="../shader-demos/raymarching-sdf.html?from=magazine:p16" tabindex="-1" aria-hidden="true" style="--c:2/5;--r:1;--ar:1;--as:center;--op:50% 60%"><img src="../shader-demos/thumbs/raymarching-sdf.webp" alt="" width="600" height="375" loading="lazy"></a>
+  <a class="im geo" data-side="r" href="../p5-demos/moving-absence.html?from=magazine:p16" tabindex="-1" aria-hidden="true" style="--c:9/12;--r:1;--ar:1;--as:center;--op:54% 45%"><picture><source media="(max-width:760px)" srcset="../p5-demos/thumbs/geometric/moving-absence-mobile.webp"><img src="../p5-demos/thumbs/geometric/moving-absence.webp" alt="" width="1000" height="700" loading="lazy"></picture></a>
+  <div class="cap ca" style="--c:2/5;--r:2;--mt:30px">
+    <p class="no"><em>光</em>09<span>效果系列</span></p>
+    <h3><a href="../shader-demos/raymarching-sdf.html?from=magazine:p16">一個不存在的物件</a></h3>
+    <p class="en">AN OBJECT WITHOUT A PAST</p>
+    <p class="st">光在這裡停止解釋自己，只留下通往未知的邊緣。</p>
+    <p class="tg">黑洞・光環・深空<span>適合：科幻主視覺、沉浸式封面、展覽網站</span></p>
+  </div>
+  <div class="cap cb" style="--c:9/12;--r:2;--mt:30px">
+    <p class="no"><em>則</em>14<span>幾何之間</span></p>
+    <h3><a href="../p5-demos/moving-absence.html?from=magazine:p16">空白正在移動</a></h3>
+    <p class="en">MOVING ABSENCE</p>
+    <p class="st">空白帶走表面，讓下方的關係取得輪廓。</p>
+    <p class="tg">缺席・斷面・重心<span>適合：導覽轉場、活動首頁、負空間構圖</span></p>
+  </div>
+  <p class="note" style="--c:8/11;--r:3;--mt:8vh">光在邊緣停止解釋自己；空白帶走表面，只留下輪廓。兩個洞隔著中縫，被同一個圓連在一起。</p>
+</section>
+
 <!-- ═════ SOLO ═════ -->
-<section class="sheet solo-sec" id="solo" data-label="單頁" data-page="14" data-tone="solo">
+<section class="sheet solo-sec" id="solo" data-label="單頁" data-page="21" data-tone="solo">
   <div class="title" style="--c:2/8;--r:1">
     <h2>單頁</h2>
-    <p>Solo pages — six works without a facing page</p>
+    <p>Solo pages — three works without a facing page</p>
   </div>
-  <p class="intro" style="--c:8/12;--r:1;--as:end">有些作品找不到可以回答它的另一頁。它們不屬於任何一組，也就不必遵守裝訂線——這一章，中縫暫時消失，每件作品都站在書的正中央。</p>
+  <p class="intro" style="--c:8/12;--r:1;--as:end">有些作品始終找不到可以回答它的另一頁——一件來自光，兩件來自規則。它們不屬於任何一組，也就不必遵守裝訂線——這一章，中縫暫時消失，每件作品都站在書的正中央。</p>
 
   <a class="im" data-side="c" href="../shader-demos/grain-gradient-mesh.html?from=magazine:solo" tabindex="-1" aria-hidden="true" style="--c:4/10;--r:2"><img src="../shader-demos/thumbs/grain-gradient-mesh.webp" alt="" width="600" height="375" loading="lazy"></a>
   <div class="cap ca" style="--c:10/13;--r:2;--as:end">
@@ -598,79 +781,54 @@ body.night .night::before,html:not(.js) .night::before{opacity:1}
     <p class="tg">顆粒・靜謐・印刷<span>適合：首頁主視覺、藝文品牌背景</span></p>
   </div>
 
-  <a class="im" data-side="c" href="../shader-demos/risograph-print.html?from=magazine:solo" tabindex="-1" aria-hidden="true" style="--c:5/9;--r:3;--ar:4/5;--op:42% 50%"><img src="../shader-demos/thumbs/risograph-print.webp" alt="" width="600" height="375" loading="lazy"></a>
-  <div class="cap r ca" style="--c:1/5;--r:3;--as:center">
-    <p class="no"><em>光</em>11<span>媒材系列</span></p>
-    <h3><a href="../shader-demos/risograph-print.html?from=magazine:solo">偏移的花園</a></h3>
-    <p class="en">A GARDEN OUT OF REGISTER</p>
-    <p class="st">兩種油墨沒有對齊，卻讓花園多出一個季節。</p>
-    <p class="tg">套色・油墨・植物<span>適合：文化活動、海報、文創品牌</span></p>
+
+  <a class="im" data-side="c" href="../p5-demos/negotiated-territories.html?from=magazine:solo" tabindex="-1" aria-hidden="true" style="--c:5/10;--r:3;--ar:1.43"><picture><source media="(max-width:760px)" srcset="../p5-demos/thumbs/geometric/negotiated-territories-mobile.webp"><img src="../p5-demos/thumbs/geometric/negotiated-territories.webp" alt="" width="1000" height="700" loading="lazy"></picture></a>
+  <div class="cap r cb" style="--c:1/5;--r:3;--as:center">
+    <p class="no"><em>則</em>11<span>幾何之間</span></p>
+    <h3><a href="../p5-demos/negotiated-territories.html?from=magazine:solo">領土協商</a></h3>
+    <p class="en">NEGOTIATED TERRITORIES</p>
+    <p class="st">一塊領土取得更多空間，整張平面便重新協商。</p>
+    <p class="tg">領土・比例・讓位<span>適合：互動首頁、編輯封面、空間敘事</span></p>
   </div>
 
-  <a class="im" data-side="c" href="../shader-demos/darkroom-solarize.html?from=magazine:solo" tabindex="-1" aria-hidden="true" style="--c:4/8;--r:4;--ar:4/5;--op:50% 30%"><img src="../shader-demos/thumbs/darkroom-solarize.webp" alt="" width="600" height="375" loading="lazy"></a>
-  <div class="cap ca" style="--c:9/12;--r:4;--as:end">
-    <p class="no"><em>光</em>10<span>媒材系列</span></p>
-    <h3><a href="../shader-demos/darkroom-solarize.html?from=magazine:solo">銀鹽的第二次黎明</a></h3>
-    <p class="en">THE SECOND EXPOSURE</p>
-    <p class="st">一張相片在黑暗裡浮現，又被光重新拿走。</p>
-    <p class="tg">暗房・銀鹽・反轉<span>適合：攝影作品集、敘事轉場、開場顯影</span></p>
-  </div>
-
-  <a class="im" data-side="c" href="../shader-demos/glass-refraction.html?from=magazine:solo" tabindex="-1" aria-hidden="true" style="--c:6/11;--r:5"><img src="../shader-demos/thumbs/glass-refraction.webp" alt="" width="600" height="375" loading="lazy"></a>
-  <div class="cap r ca" style="--c:1/6;--r:5;--as:start">
-    <p class="no"><em>光</em>13<span>媒材系列</span></p>
-    <h3><a href="../shader-demos/glass-refraction.html?from=magazine:solo">透明的重量</a></h3>
-    <p class="en">THE WEIGHT OF TRANSPARENCY</p>
-    <p class="st">玻璃沒有顏色，只借來世界的一點偏差。</p>
-    <p class="tg">玻璃・色散・冷光<span>適合：產品展示、精品品牌、互動背景</span></p>
-  </div>
-
-  <a class="im" data-side="c" href="../shader-demos/domain-warp-fbm.html?from=magazine:solo" tabindex="-1" aria-hidden="true" style="--c:3/11;--r:6;--ar:2.6"><img src="../shader-demos/thumbs/domain-warp-fbm.webp" alt="" width="600" height="375" loading="lazy"></a>
-  <div class="cap ca" style="--c:3/7;--r:7;--mt:-12vh">
-    <p class="no"><em>光</em>05<span>效果系列</span></p>
-    <h3><a href="../shader-demos/domain-warp-fbm.html?from=magazine:solo">石頭裡的潮汐</a></h3>
-    <p class="en">THE INTERIOR OF STONE</p>
-    <p class="st">一塊石頭保留著海，卻從來不說它流動過。</p>
-    <p class="tg">大理石・地質・流動<span>適合：建築作品集、材質展示、沉浸背景</span></p>
-  </div>
-
-  <a class="im" data-side="c" href="../shader-demos/raymarching-sdf.html?from=magazine:solo" tabindex="-1" aria-hidden="true" style="--c:5/9;--r:8;--ar:1"><img src="../shader-demos/thumbs/raymarching-sdf.webp" alt="" width="600" height="375" loading="lazy"></a>
-  <div class="cap ca" style="--c:9/12;--r:8;--as:end">
-    <p class="no"><em>光</em>09<span>效果系列</span></p>
-    <h3><a href="../shader-demos/raymarching-sdf.html?from=magazine:solo">一個不存在的物件</a></h3>
-    <p class="en">AN OBJECT WITHOUT A PAST</p>
-    <p class="st">光在這裡停止解釋自己，只留下通往未知的邊緣。</p>
-    <p class="tg">黑洞・光環・深空<span>適合：科幻主視覺、沉浸式封面、展覽網站</span></p>
+  <a class="im" data-side="c" href="../p5-demos/a-beat-behind.html?from=magazine:solo" tabindex="-1" aria-hidden="true" style="--c:3/8;--r:4;--ar:1.43"><picture><source media="(max-width:760px)" srcset="../p5-demos/thumbs/geometric/a-beat-behind-mobile.webp"><img src="../p5-demos/thumbs/geometric/a-beat-behind.webp" alt="" width="1000" height="700" loading="lazy"></picture></a>
+  <div class="cap cb" style="--c:9/12;--r:4;--as:end">
+    <p class="no"><em>則</em>16<span>幾何之間</span></p>
+    <h3><a href="../p5-demos/a-beat-behind.html?from=magazine:solo">遲到半拍的群舞</a></h3>
+    <p class="en">A BEAT BEHIND</p>
+    <p class="st">群體共享一套規則，少數形狀仍保留自己的時間。</p>
+    <p class="tg">隊形・共同・延遲<span>適合：活動開場、群體敘事、動態標誌</span></p>
   </div>
 </section>
 
 <!-- ═════ INDEX ═════ -->
-<section class="sheet ix-sec" id="index" data-label="索引" data-page="15">
+<section class="sheet ix-sec" id="index" data-label="索引" data-page="22">
   <div class="l-side" style="--c:1/7;--r:1">
     <h2 class="hd" style="text-align:right">索引</h2>
-    <ol class="ix l" aria-label="光與物質 十六件">
+    <ol class="ix l" aria-label="光與物質 十七件">
       <li><span class="n">01</span><span class="t"><a href="../shader-demos/grain-gradient-mesh.html?from=magazine:index">紙上的氣候</a></span><span class="e">CHROMATIC WEATHER</span><a class="p s" href="#solo">單頁</a></li>
       <li><span class="n">02</span><span class="t"><a href="../shader-demos/noise-dissolve.html?from=magazine:index">兩個日落之間</a></span><span class="e">A CUT IN THE WEATHER</span><a class="p" href="#p10">消散</a></li>
       <li><span class="n">03</span><span class="t"><a href="../shader-demos/liquid-distortion.html?from=magazine:index">觸摸一池字跡</a></span><span class="e">THE WATER REMEMBERS</span><a class="p" href="#p05">等高</a></li>
       <li><span class="n">04</span><span class="t"><a href="../shader-demos/dithering-halftone.html?from=magazine:index">有限的灰階</a></span><span class="e">FOUR TONES OF SILENCE</span><a class="p" href="#p04">顆粒</a></li>
-      <li><span class="n">05</span><span class="t"><a href="../shader-demos/domain-warp-fbm.html?from=magazine:index">石頭裡的潮汐</a></span><span class="e">THE INTERIOR OF STONE</span><a class="p s" href="#solo">單頁</a></li>
+      <li><span class="n">05</span><span class="t"><a href="../shader-demos/domain-warp-fbm.html?from=magazine:index">石頭裡的潮汐</a></span><span class="e">THE INTERIOR OF STONE</span><a class="p" href="#p12">沉積</a></li>
       <li><span class="n">06</span><span class="t"><a href="../shader-demos/feedback-trails.html?from=magazine:index">遲到的光</a></span><span class="e">AFTER YOU HAVE LEFT</span><a class="p" href="#p09">群</a></li>
       <li><span class="n">07</span><span class="t"><a href="../shader-demos/reaction-diffusion.html?from=magazine:index">尚未命名的生命</a></span><span class="e">A CULTURE OF POSSIBILITY</span><a class="p" href="#p02">增殖</a></li>
       <li><span class="n">08</span><span class="t"><a href="../shader-demos/pixel-sorting.html?from=magazine:index">失序的肖像</a></span><span class="e">PORTRAIT IN TRANSIT</span><a class="p" href="#p08">分割</a></li>
-      <li><span class="n">09</span><span class="t"><a href="../shader-demos/raymarching-sdf.html?from=magazine:index">一個不存在的物件</a></span><span class="e">AN OBJECT WITHOUT A PAST</span><a class="p s" href="#solo">單頁</a></li>
-      <li><span class="n">10</span><span class="t"><a href="../shader-demos/darkroom-solarize.html?from=magazine:index">銀鹽的第二次黎明</a></span><span class="e">THE SECOND EXPOSURE</span><a class="p s" href="#solo">單頁</a></li>
-      <li><span class="n">11</span><span class="t"><a href="../shader-demos/risograph-print.html?from=magazine:index">偏移的花園</a></span><span class="e">A GARDEN OUT OF REGISTER</span><a class="p s" href="#solo">單頁</a></li>
+      <li><span class="n">09</span><span class="t"><a href="../shader-demos/raymarching-sdf.html?from=magazine:index">一個不存在的物件</a></span><span class="e">AN OBJECT WITHOUT A PAST</span><a class="p" href="#p16">空洞</a></li>
+      <li><span class="n">10</span><span class="t"><a href="../shader-demos/darkroom-solarize.html?from=magazine:index">銀鹽的第二次黎明</a></span><span class="e">THE SECOND EXPOSURE</span><a class="p" href="#p13">殘像</a></li>
+      <li><span class="n">11</span><span class="t"><a href="../shader-demos/risograph-print.html?from=magazine:index">偏移的花園</a></span><span class="e">A GARDEN OUT OF REGISTER</span><a class="p" href="#p11">套印</a></li>
       <li><span class="n">12</span><span class="t"><a href="../shader-demos/cyanotype.html?from=magazine:index">日光的標本</a></span><span class="e">A HERBARIUM OF LIGHT</span><a class="p" href="#p01">葉脈</a></li>
-      <li><span class="n">13</span><span class="t"><a href="../shader-demos/glass-refraction.html?from=magazine:index">透明的重量</a></span><span class="e">THE WEIGHT OF TRANSPARENCY</span><a class="p s" href="#solo">單頁</a></li>
+      <li><span class="n">13</span><span class="t"><a href="../shader-demos/glass-refraction.html?from=magazine:index">透明的重量</a></span><span class="e">THE WEIGHT OF TRANSPARENCY</span><a class="p" href="#p15">尺度</a></li>
       <li><span class="n">14</span><span class="t"><a href="../shader-demos/organic-growth.html?from=magazine:index">緩慢佔領</a></span><span class="e">THE PATIENCE OF CORAL</span><a class="p" href="#p06">擁擠</a></li>
       <li><span class="n">15</span><span class="t"><a href="../shader-demos/long-exposure.html?from=magazine:index">光走過的路</a></span><span class="e">THE PATH LIGHT TAKES</span><a class="p" href="#p03">軌跡</a></li>
       <li><span class="n">16</span><span class="t"><a href="../shader-demos/textile-moire.html?from=magazine:index">一處皺摺</a></span><span class="e">WORN GAUZE</span><a class="p" href="#p07">織</a></li>
+      <li><span class="n">17</span><span class="t"><a href="../shader-demos/thin-film.html?from=magazine:index">光的薄界</a></span><span class="e">THIN BOUNDARIES</span><a class="p" href="#p14">折</a></li>
     </ol>
-    <div class="coll"><b>光與物質</b>沒有攝影機，也沒有畫筆，只有光、數學，以及時間留下的痕跡。十六件原生 WebGL 作品，分為效果系列與媒材系列。<br><a href="../shader-demos/shader-demo-list.html">原始目錄 ↗</a></div>
+    <div class="coll"><b>光與物質</b>沒有攝影機，也沒有畫筆，只有光、數學，以及時間留下的痕跡。十七件原生 WebGL 作品，分為效果系列與媒材系列。<br><a href="../shader-demos/shader-demo-list.html">原始目錄 ↗</a></div>
   </div>
   <div class="r-side" style="--c:7/13;--r:1">
-    <p class="hd2">INDEX — 二十六件作品全覽<br>左頁：光與物質　右頁：規則的餘溫</p>
-    <ol class="ix r" aria-label="規則的餘溫 十件" style="margin-top:calc(6vh + clamp(40px,4.6vw,68px) - 4em)">
+    <p class="hd2">INDEX — 三十五件作品全覽<br>左頁：光與物質　右頁：規則的餘溫</p>
+    <ol class="ix r" aria-label="規則的餘溫 十八件" style="margin-top:calc(6vh + clamp(40px,4.6vw,68px) - 4em)">
       <li><span class="n">01</span><span class="t"><a href="../p5-demos/flow-field.html?seed=20261008&amp;from=magazine:index">風的手稿</a></span><span class="e">FLOW FIELD</span><a class="p" href="#p03">軌跡</a></li>
       <li><span class="n">02</span><span class="t"><a href="../p5-demos/contour-topography.html?seed=104729&amp;from=magazine:index">無名的海拔</a></span><span class="e">MARCHING SQUARES</span><a class="p" href="#p05">等高</a></li>
       <li><span class="n">03</span><span class="t"><a href="../p5-demos/recursive-subdivision.html?seed=271828&amp;from=magazine:index">房間與停頓</a></span><span class="e">RECURSIVE SUBDIVISION</span><a class="p" href="#p08">分割</a></li>
@@ -681,16 +839,24 @@ body.night .night::before,html:not(.js) .night::before{opacity:1}
       <li><span class="n">08</span><span class="t"><a href="../p5-demos/voronoi-stippling.html?seed=314159&amp;from=magazine:index">引力的銅版</a></span><span class="e">WEIGHTED VORONOI</span><a class="p" href="#p04">顆粒</a></li>
       <li><span class="n">09</span><span class="t"><a href="../p5-demos/boids-flocking.html?seed=65537&amp;from=magazine:index">共同的偏航</a></span><span class="e">BOIDS</span><a class="p" href="#p09">群</a></li>
       <li><span class="n">10</span><span class="t"><a href="../p5-demos/generative-typography.html?seed=104729&amp;from=magazine:index">字的餘溫</a></span><span class="e">GENERATIVE TYPOGRAPHY</span><a class="p" href="#p10">消散</a></li>
+      <li><span class="n">11</span><span class="t"><a href="../p5-demos/negotiated-territories.html?from=magazine:index">領土協商</a></span><span class="e">NEGOTIATED TERRITORIES</span><a class="p s" href="#solo">單頁</a></li>
+      <li><span class="n">12</span><span class="t"><a href="../p5-demos/registration-pending.html?from=magazine:index">尚未對準的印刷</a></span><span class="e">REGISTRATION, PENDING</span><a class="p" href="#p11">套印</a></li>
+      <li><span class="n">13</span><span class="t"><a href="../p5-demos/reverse-of-a-plane.html?from=magazine:index">平面有背面</a></span><span class="e">THE REVERSE OF A PLANE</span><a class="p" href="#p14">折</a></li>
+      <li><span class="n">14</span><span class="t"><a href="../p5-demos/moving-absence.html?from=magazine:index">空白正在移動</a></span><span class="e">MOVING ABSENCE</span><a class="p" href="#p16">空洞</a></li>
+      <li><span class="n">15</span><span class="t"><a href="../p5-demos/chromatic-sediments.html?from=magazine:index">色彩沉積</a></span><span class="e">CHROMATIC SEDIMENTS</span><a class="p" href="#p12">沉積</a></li>
+      <li><span class="n">16</span><span class="t"><a href="../p5-demos/a-beat-behind.html?from=magazine:index">遲到半拍的群舞</a></span><span class="e">A BEAT BEHIND</span><a class="p s" href="#solo">單頁</a></li>
+      <li><span class="n">17</span><span class="t"><a href="../p5-demos/within-the-same-frame.html?from=magazine:index">同一張圖的不同尺度</a></span><span class="e">WITHIN THE SAME FRAME</span><a class="p" href="#p15">尺度</a></li>
+      <li><span class="n">18</span><span class="t"><a href="../p5-demos/residual-geometry.html?from=magazine:index">幾何的餘溫</a></span><span class="e">RESIDUAL GEOMETRY</span><a class="p" href="#p13">殘像</a></li>
     </ol>
-    <div class="coll"><b>規則的餘溫</b>從一條規則，長出一個世界。十件 p5.js 生成式研究；每個種子都是一份可重現的手稿。<br><a href="../p5-demos/p5-demo-list.html">原始目錄 ↗</a></div>
+    <div class="coll"><b>規則的餘溫</b>從一條規則，長出一個世界。十八件 p5.js 研究：十件生成式手稿，八件幾何色塊。<br><a href="../p5-demos/p5-demo-list.html">原始目錄 ↗</a></div>
   </div>
 </section>
 
 <!-- ═════ CLOSE ═════ -->
-<footer class="sheet close" id="close" data-label="闔上" data-page="16">
+<footer class="sheet close" id="close" data-label="闔上" data-page="23">
   <div class="colo l" style="--c:2/6;--r:1">
     <b>對頁 第一期</b>
-    收錄「光與物質」十六件原生 WebGL 作品<br>與「規則的餘溫」十件 p5.js 1.11.11 作品。<br>所有圖像皆為作品實際輸出，無外部字體。
+    收錄「光與物質」十七件原生 WebGL 作品<br>與「規則的餘溫」十八件 p5.js 1.11.11 作品。<br>所有圖像皆為作品實際輸出，無外部字體。
   </div>
   <div class="hinge" style="--c:6/8;--r:1;--as:end"><i>—</i><b style="color:var(--ink)">闔上</b><s>CLOSE</s></div>
   <div class="colo" style="--c:8/12;--r:1">
