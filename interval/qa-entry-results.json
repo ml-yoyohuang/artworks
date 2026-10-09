@@ -1,0 +1,52 @@
+{
+  "browser": "151.0.7922.34",
+  "devices": [
+    {
+      "device": "1440×900 desktop",
+      "animation": true,
+      "backgroundPause": true,
+      "reducedMotion": true,
+      "repeatedEntry": [
+        {
+          "textures": 4,
+          "geometries": 6,
+          "canvases": 1
+        },
+        {
+          "textures": 4,
+          "geometries": 6,
+          "canvases": 1
+        },
+        {
+          "textures": 4,
+          "geometries": 6,
+          "canvases": 1
+        }
+      ]
+    },
+    {
+      "device": "390×844 DPR2 touch emulation",
+      "animation": true,
+      "backgroundPause": true,
+      "reducedMotion": true,
+      "repeatedEntry": [
+        {
+          "textures": 4,
+          "geometries": 6,
+          "canvases": 1
+        },
+        {
+          "textures": 4,
+          "geometries": 6,
+          "canvases": 1
+        },
+        {
+          "textures": 4,
+          "geometries": 6,
+          "canvases": 1
+        }
+      ]
+    }
+  ],
+  "errors": []
+}
