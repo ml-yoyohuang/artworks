@@ -120,4 +120,7 @@
 
 ## 交付紀錄
 
-（推送後補記）
+- 已成功推送至 **`origin/main`**，未使用備案分支。
+- 展間 commit hash：**`0821be3e1c38071f3fb0f641355d3a5159b814f2`**（`feat: add 3D digital showroom "From Daylight into the Darkroom"`）。
+- 本段由後續 `docs: record showroom delivery` 提交補記；最終分支 tip 可由 `git rev-parse origin/main` 查得。
+- 製作期間，另一個工作流程在 main 新增了《對頁》雜誌（`a96bf1a`、`1166c08`），其中為 26 件作品頁加入「從雜誌進入時返回雜誌」的連結邏輯。該變更不影響作品畫面，錄製的短片仍然有效；展間檢視器的來源不是雜誌，原頁返回連結維持目錄連結並在檢視器中隱藏。本任務未修改這些檔案。
