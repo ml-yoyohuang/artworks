@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>光的薄界 — 光與物質</title>
+<meta name="description" content="極薄的表面，讓光顯出深度。移動觀看的位置，發現偏心折痕裡的另一種光。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314121b'/%3E%3Cpath d='M6 22L10 7L26 10L21 25Z' fill='%23b7abc8'/%3E%3C/svg%3E">
+<link rel="canonical" href="https://ml-yoyohuang.github.io/artworks/shader-demos/thin-film.html">
+<meta property="og:type" content="website"><meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="光的薄界 — Thin Boundaries"><meta property="og:description" content="一個幾乎沒有厚度的表面，藏著另一種光。">
+<meta property="og:url" content="https://ml-yoyohuang.github.io/artworks/shader-demos/thin-film.html">
+<meta property="og:image" content="https://ml-yoyohuang.github.io/artworks/shader-demos/assets/thin-film-preview.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="懸浮於暗色空間的薄膜，偏心折痕映出珍珠白、煙紫與少量銅金。">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://ml-yoyohuang.github.io/artworks/shader-demos/assets/thin-film-preview.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VisualArtwork","name":"光的薄界","alternateName":"Thin Boundaries","dateCreated":"2026-10-09","inLanguage":"zh-Hant","artMedium":"GLSL / WebGL / 程序化膜面 / 薄膜干涉近似","description":"一處偏心的折痕，藏著觀看位置尚未抵達的顏色。","url":"https://ml-yoyohuang.github.io/artworks/shader-demos/thin-film.html","image":"https://ml-yoyohuang.github.io/artworks/shader-demos/assets/thin-film-preview.jpg"}</script>
+<style>
+:root{--bg:#14121b;--fg:#eee9e2;--line:#eee9e240}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--fg)}body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer}a:focus-visible,button:focus-visible,summary:focus-visible,.stage:focus-visible{outline:2px solid #c9bddf;outline-offset:6px}header{position:absolute;z-index:3;top:30px;left:38px;right:38px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.14em}.back{padding-bottom:6px;border-bottom:1px solid currentColor}.folio{opacity:.65}.stage{position:relative;height:100svh;min-height:680px;overflow:hidden;isolation:isolate;touch-action:pan-y}canvas,.fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}.fallback img{width:100%;height:100%;object-fit:cover}canvas{z-index:1}.fallback{z-index:0}.intro{position:absolute;z-index:2;bottom:42px;left:38px;max-width:500px;pointer-events:none}.kicker{font-size:10px;letter-spacing:.24em;color:#cbc1d9;margin:0 0 14px}h1{font-size:clamp(28px,3vw,44px);font-weight:400;letter-spacing:.12em;line-height:1.25;margin:0 0 15px}.statement{font-size:12px;letter-spacing:.06em;line-height:1.9;margin:0;color:#d0cad1}.controls{position:absolute;right:38px;bottom:44px;z-index:3;display:flex;gap:12px}button{border:1px solid var(--line);background:#14121b99;padding:11px 16px;font-size:11px;letter-spacing:.1em;min-width:86px;touch-action:manipulation}button:hover,button[aria-pressed=true]{background:#eee9e217;border-color:#c5bbd6}button:disabled{opacity:.45;cursor:default}.hint{position:absolute;z-index:2;right:38px;top:88px;font-size:10px;line-height:1.8;letter-spacing:.08em;color:#c5bdcb;text-align:right;margin:0;pointer-events:none}.notice{position:absolute;z-index:2;left:38px;top:88px;font-size:11px;line-height:1.9;max-width:320px;color:#e4dce9;margin:0}.notice[hidden]{display:none}details{position:relative;max-width:1200px;margin:auto;padding:24px 38px 32px;border-top:1px solid var(--line);font-size:12px;line-height:2;color:#d0cad1}summary{font-size:10px;letter-spacing:.16em;cursor:pointer;width:max-content}.notes{max-width:660px;padding-top:15px}.notes p{margin:0 0 15px}.medium{font-size:10px;letter-spacing:.1em;color:#b7aebf}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:700px){header{top:23px;left:22px;right:22px;font-size:10px}.stage{min-height:700px;height:100svh}.intro{left:22px;right:22px;bottom:107px;max-width:none}h1{font-size:30px}.statement{font-size:11px;max-width:320px}.kicker{font-size:9px;margin-bottom:12px}.controls{left:22px;right:auto;bottom:29px}.hint{right:22px;top:74px;font-size:9px}.notice{left:22px;top:118px;max-width:280px;font-size:10px}details{padding:22px}.fallback{object-position:57% 43%}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main>
+<section class="stage" tabindex="0" role="region" aria-label="光的薄界，互動作品觀看區" aria-describedby="view-help">
+<picture class="fallback"><source media="(max-width:700px)" srcset="assets/thin-film-mobile.webp"><source media="(max-aspect-ratio:1/1)" srcset="assets/thin-film-tablet.webp"><img src="assets/thin-film-fallback.webp" alt="光的薄界的實際靜止畫面：一張偏心折起的珠光薄膜" width="1440" height="900"></picture>
+<canvas aria-hidden="true"></canvas>
+<header><a class="back" href="shader-demo-list.html">← 光與物質 / 作品目錄</a><span class="folio">17 / 17 · 2026</span></header>
+<p class="hint" id="view-help">移動觀看的位置，發現另一種光。<br>拖曳，或聚焦畫面後使用方向鍵。</p>
+<p class="notice" role="status" aria-live="polite" hidden></p>
+<div class="intro"><p class="kicker">THIN BOUNDARIES / A SURFACE OF LIGHT</p><h1>光的薄界</h1><p class="statement">極薄的表面，讓光顯出深度。<br>一處偏心的折痕，藏著觀看位置尚未抵達的顏色。</p></div>
+<div class="controls" aria-label="觀看控制"><button id="play" type="button" aria-pressed="false">暫停</button><button id="close" type="button" aria-pressed="false">細看</button></div>
+<span class="sr-only" id="motion-state" aria-live="polite"></span>
+</section>
+<details><summary>作品筆記</summary><div class="notes"><p>一片懸浮的薄膜，被不對稱的張力輕輕折起。光沿著折面移動，珍珠白、煙紫與銅金在同一個表面輪流浮現。觀看的位置改變，表面才透露另一層深度。</p><p>膜面與厚度場固定在物件座標上；依形變重新計算法線，以多波長的薄膜反射近似呈現虹彩。這是為即時觀看設計的光學與張力近似，沒有完整的布料或光譜路徑追蹤模擬。</p><p>暫停會停止自動演化，仍可手動觀看；「細看」靠近折痕。方向鍵調整角度，Home 回到正面；手機可水平拖曳，垂直滑動仍可捲頁。</p><p class="medium">2026 · 原生 WebGL / 程序化膜面 / 薄膜干涉<br>適合：作品封面、材質研究、沉浸式展覽入口。</p></div></details>
+</main>
+<noscript><p style="padding:20px 38px">目前顯示作品的靜止預覽。啟用 JavaScript 後可互動觀看。</p></noscript>
+<script id="surface-glsl" type="x-shader/x-vertex">
+uniform float uTime,uForm;uniform vec2 uView;uniform float uClose,uAspect,uMobile;
+const float PI=3.14159265359;
+// One stable membrane coordinate system: force, folds and thickness all use q.
+float heightAt(vec2 q){
+ float cycle=.5-.5*cos(uTime*2.*PI/67.);
+ float tension=.31+.16*cycle;
+ float crease=q.x+.44*q.y-.19;
+ float spread=exp(-.48*dot(q,q));
+ float fold=tension*(2./(1.+exp(-14.*crease))-1.)*spread;
+ float bow=.17*sin(q.x*2.15+q.y*.68)+.085*q.y*q.y;
+ float pull=.10*exp(-dot(q-vec2(-.64,.59),q-vec2(-.64,.59))*5.);
+ float breathing=.022*sin(uTime*.113+q.y*2.1)*sin(q.x*1.9+.3);
+ float companion=.021*sin(crease*33.+q.y*1.6)*exp(-crease*crease*17.)*(.55+.45*sin(q.y*2.+.4));
+ float curl=.075*exp(-pow((.94-abs(q.y))/.15,2.))*sin(q.x*3.+.4);
+ if(uForm<.5)return bow+fold+pull+breathing+companion+curl;
+ if(uForm<1.5)return bow+.36*q.x*q.y+.16*sin(q.y*3.+cycle*.4)+breathing;
+ return bow+fold*.76+.18*sin(q.y*2.4+q.x)*q.x+breathing;
+}
+mat3 turn(){float ay=-.26+uView.x*.31,ax=.24+uView.y*.24,az=-.23;mat3 y=mat3(cos(ay),0.,-sin(ay),0.,1.,0.,sin(ay),0.,cos(ay));mat3 x=mat3(1.,0.,0.,0.,cos(ax),sin(ax),0.,-sin(ax),cos(ax));mat3 z=mat3(cos(az),sin(az),0.,-sin(az),cos(az),0.,0.,0.,1.);return z*y*x;}
+vec3 surface(vec2 q){return vec3(q.x*1.45,q.y*1.10,heightAt(q));}
+vec2 projected(vec3 p){float scale=mix(.73,.89,uClose);scale*=mix(min(1.,uAspect*.82),uAspect*.76,uMobile);vec2 xy=p.xy*scale;xy.x/=uAspect;xy+=mix(vec2(.115,.055),vec2(.02,.18),max(uMobile,1.-step(1.05,uAspect)));return xy;}
+</script>
+<script id="vertex-glsl" type="x-shader/x-vertex">
+precision highp float;
+attribute vec2 aUV;varying vec2 vUV;varying vec3 vNormal,vPosition;
+SURFACE
+void main(){vec2 q=aUV;float e=.002;vec3 dx=surface(q+vec2(e,0.))-surface(q-vec2(e,0.)),dy=surface(q+vec2(0.,e))-surface(q-vec2(0.,e));mat3 rot=turn();vNormal=rot*normalize(cross(dx,dy));vPosition=rot*surface(q);vUV=q;vec2 xy=projected(vPosition);gl_Position=vec4(xy,-vPosition.z*.12,1.);}
+</script>
+<script id="fragment-glsl" type="x-shader/x-fragment">
+precision highp float;
+varying vec2 vUV;varying vec3 vNormal,vPosition;
+uniform float uTime,uForm,uTheme;uniform vec2 uResolution;uniform vec3 uSpectrum[16];
+const float PI=3.14159265359;
+float shape(vec2 q){float a=atan(q.y,q.x);float edge=.98+.038*sin(a*3.+.4)+.028*cos(a*5.-.6);float d=pow(pow(abs(q.x),4.)+pow(abs(q.y/.86),4.),.25)-edge;if(uForm>1.5){vec2 h=q-vec2(.30,.21);float cut=length(h/vec2(.12,.37))-1.;d=max(d,-cut*.12);}return d;}
+vec3 background(vec2 st){float glow=exp(-dot((st-vec2(.57,.58))*vec2(1.1,.9),(st-vec2(.57,.58))*vec2(1.1,.9))*5.);return uTheme>.5?mix(vec3(.73,.70,.66),vec3(.87,.84,.79),glow):mix(vec3(.007,.006,.013),vec3(.030,.023,.043),glow);}
+// Fresnel amplitudes at air / dielectric / air interfaces, coherent Airy sum.
+// Thickness and wavelengths are nanometres; phase is the round-trip optical path.
+float reflectance(float ci,float thickness,float wavelength){float n=1.46;float ct=sqrt(max(.001,1.-(1.-ci*ci)/(n*n)));float rs=(ci-n*ct)/(ci+n*ct);float rp=(n*ci-ct)/(n*ci+ct);float R1=rs*rs,R2=rp*rp;float wave=sin(2.*PI*n*thickness*ct/wavelength);float a=4.*R1*wave*wave,b=4.*R2*wave*wave;return .5*(a/(pow(1.-R1,2.)+a)+b/(pow(1.-R2,2.)+b));}
+vec3 film(float ci,float thickness){vec3 rgb=vec3(0.);for(int i=0;i<16;i++){float wavelength=400.+float(i)*20.;rgb+=uSpectrum[i]*reflectance(ci,thickness,wavelength);}return max(rgb,vec3(0.));}
+float lightPanel(vec3 r,vec3 aim,float xwidth,float ywidth){vec3 z=normalize(aim),x=normalize(cross(vec3(0.,1.,0.),z)),y=cross(z,x);vec2 s=vec2(dot(r,x),dot(r,y));return exp(-pow(abs(s.x)/xwidth,4.)-pow(abs(s.y)/ywidth,4.))*smoothstep(.1,.55,dot(r,z));}
+void main(){vec2 st=gl_FragCoord.xy/uResolution;vec3 bg=background(st);float edge=shape(vUV),aa=2.7/uResolution.y;if(edge>aa)discard;vec3 N=normalize(vNormal);if(!gl_FrontFacing)N=-N;vec3 V=normalize(vec3(0.,0.,6.)-vPosition);float ci=max(.025,abs(dot(N,V)));vec3 r=reflect(-V,N);
+ float crease=vUV.x+.44*vUV.y-.19;
+ float thickness=400.+42.*vUV.y+22.*vUV.x+24.*exp(-crease*crease*75.)+10.*sin(vUV.x*3.4+vUV.y*2.3)+1.6*sin(vUV.y*29.+vUV.x*11.)*exp(-crease*crease*12.);
+ vec3 reflectColor=film(ci,thickness)*.78+vec3(.028);
+ float window=lightPanel(r,vec3(-.52,.68,.72),.51,.20),strip=lightPanel(r,vec3(-.85,-.26,-.35),.14,.72),upper=lightPanel(r,vec3(.10,.88,.42),.9,.25);
+ vec3 light=vec3(.67,.62,.80)+vec3(3.5,3.3,3.1)*window+vec3(1.9,1.75,1.8)*strip+vec3(.58,.61,.69)*upper;
+ float soft=max(0.,dot(N,normalize(vec3(-.6,.6,1.))));float grazing=pow(1.-ci,4.);
+ vec3 transmitted=bg*(vec3(1.)-reflectColor)*.76;
+ vec3 color=transmitted+reflectColor*light*1.9;
+ color+=vec3(.90,.85,.81)*(window*.22+strip*.43);
+ color+=vec3(.13,.105,.12)*soft*.24+vec3(.40,.36,.43)*grazing*.20;
+ float rim=1.-smoothstep(-.017,-.003,edge);color+=vec3(.40,.37,.45)*rim*.20;
+ float grain=fract(sin(dot(gl_FragCoord.xy,vec2(12.9898,78.233)))*43758.5453)-.5;color+=grain*.0018;
+ color=mix(bg,color,1.-smoothstep(-aa,aa,edge));color=color/(1.+color*.36);color=pow(max(color,vec3(0.)),vec3(1./2.2));gl_FragColor=vec4(color,1.);
+}
+</script>
+<script>
+(()=>{'use strict';
+const stage=document.querySelector('.stage'),canvas=stage.querySelector('canvas'),notice=document.querySelector('.notice'),play=document.querySelector('#play'),close=document.querySelector('#close'),state=document.querySelector('#motion-state'),reduced=matchMedia('(prefers-reduced-motion: reduce)');
+let release=null,snapshot=null;
+function mount(){if(release)release();const events=new AbortController();const on=(target,type,fn,options={})=>target.addEventListener(type,fn,{...options,signal:events.signal});let gl,program,bgProgram,mesh,index,quad,raf=0,previous=0,clock=snapshot?.clock??0,visible=true,lost=false,failed=false,paused=snapshot?.paused??reduced.matches,zoom=snapshot?.zoom??0,zoomTarget=snapshot?.zoomTarget??0,target=snapshot?.target??[0,0],view=snapshot?.view??[0,0],drag=null,scale=1,slow=0,frames=0,average=16;const resources=[];let disposed=false;
+function ui(){close.setAttribute('aria-pressed',String(!!zoomTarget));close.textContent=zoomTarget?'退遠':'細看';play.textContent=paused?'播放':'暫停';play.setAttribute('aria-pressed',String(paused));state.textContent=paused?(reduced.matches?'靜態觀看；可手動調整觀看角度。':'已暫停；可手動調整觀看角度。'):'正在播放。';}
+function stop(){cancelAnimationFrame(raf);raf=0;previous=0;}
+function fallback(message){stop();failed=true;document.querySelector('.hint').hidden=true;canvas.style.visibility='hidden';notice.hidden=false;notice.textContent=message+'目前顯示這件作品的實際靜止預覽。';play.disabled=close.disabled=true;}
+function build(){gl=canvas.getContext('webgl2',{alpha:false,antialias:true,preserveDrawingBuffer:true})||canvas.getContext('webgl',{alpha:false,antialias:true,preserveDrawingBuffer:true});if(!gl){fallback('此環境無法啟用 WebGL。');return;}const g2=typeof WebGL2RenderingContext!=='undefined'&&gl instanceof WebGL2RenderingContext;
+ function shader(source,type){if(g2){source='#version 300 es\n'+source.replace(/attribute /g,'in ').replace(/varying /g,type===gl.VERTEX_SHADER?'out ':'in ');if(type===gl.FRAGMENT_SHADER)source=source.replace('precision highp float;','precision highp float;out vec4 fragColor;').replace(/gl_FragColor/g,'fragColor');}const s=gl.createShader(type);resources.push(['shader',s]);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('無法建立膜面的光影。');return s;}
+ function make(v,f){const p=gl.createProgram();resources.push(['program',p]);gl.attachShader(p,shader(v,gl.VERTEX_SHADER));gl.attachShader(p,shader(f,gl.FRAGMENT_SHADER));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error('無法連結膜面的光影。');return {p,a:gl.getAttribLocation(p,'aUV'),u:Object.fromEntries(['uTime','uForm','uView','uClose','uAspect','uMobile','uResolution','uTheme','uSpectrum[0]'].map(n=>[n,gl.getUniformLocation(p,n)]))};}
+ const surface=document.querySelector('#surface-glsl').textContent;program=make(document.querySelector('#vertex-glsl').textContent.replace('SURFACE',surface),document.querySelector('#fragment-glsl').textContent);
+ const bgV='attribute vec2 aUV;void main(){gl_Position=vec4(aUV,0.,1.);}';const bgF='precision highp float;uniform vec2 uResolution;uniform float uTheme;void main(){vec2 st=gl_FragCoord.xy/uResolution;float g=exp(-dot((st-vec2(.57,.58))*vec2(1.1,.9),(st-vec2(.57,.58))*vec2(1.1,.9))*5.);vec3 c=uTheme>.5?mix(vec3(.73,.70,.66),vec3(.87,.84,.79),g):mix(vec3(.007,.006,.013),vec3(.030,.023,.043),g);c=c/(1.+c*.36);gl_FragColor=vec4(pow(c,vec3(1./2.2)),1.);}';bgProgram=make(bgV,bgF);
+ const nx=innerWidth<700?108:168,ny=innerWidth<700?84:128,vertices=[],indices=[];for(let y=0;y<=ny;y++)for(let x=0;x<=nx;x++)vertices.push(-1.16+2.32*x/nx,-1.16+2.32*y/ny);for(let y=0;y<ny;y++)for(let x=0;x<nx;x++){const a=y*(nx+1)+x,b=a+nx+1;indices.push(a,a+1,b,a+1,b+1,b);}function buffer(type,data){const b=gl.createBuffer();resources.push(['buffer',b]);gl.bindBuffer(type,b);gl.bufferData(type,data,gl.STATIC_DRAW);return b;}mesh=buffer(gl.ARRAY_BUFFER,new Float32Array(vertices));index=buffer(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(indices));quad=buffer(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]));canvas.dataset.renderer=g2?'WebGL2':'WebGL1';canvas.dataset.triangles=indices.length/3;
+ // Wyman / Sloan / Shirley (JCGT 2013), asymmetric Gaussian CIE XYZ fits.
+ function gaussian(w,center,left,right){const t=(w-center)*(w<center?left:right);return Math.exp(-.5*t*t);}const weights=[],white=[0,0,0];for(let i=0;i<16;i++){const w=400+i*20;const X=1.056*gaussian(w,599.8,.0264,.0323)+.362*gaussian(w,442,.0624,.0374)-.065*gaussian(w,501.1,.049,.0382);const Y=.821*gaussian(w,568.8,.0213,.0247)+.286*gaussian(w,530.9,.0613,.0322);const Z=1.217*gaussian(w,437,.0845,.0278)+.681*gaussian(w,459,.0385,.0725);const rgb=[3.2406*X-1.5372*Y-.4986*Z,-.9689*X+1.8758*Y+.0415*Z,.0557*X-.204*Y+1.057*Z];weights.push(rgb);rgb.forEach((v,j)=>white[j]+=v);}const spectrum=new Float32Array(weights.flatMap(w=>w.map((v,j)=>v/white[j])));gl.useProgram(program.p);gl.uniform3fv(program.u['uSpectrum[0]'],spectrum);
+ function uniforms(p){const u=p.u;gl.useProgram(p.p);gl.uniform1f(u.uTime,clock);gl.uniform1f(u.uForm,0);gl.uniform1f(u.uTheme,0);gl.uniform2f(u.uView,...view);gl.uniform1f(u.uClose,zoom);gl.uniform1f(u.uAspect,canvas.width/canvas.height);gl.uniform1f(u.uMobile,innerWidth<700?1:0);gl.uniform2f(u.uResolution,canvas.width,canvas.height);}
+ function draw(){gl.viewport(0,0,canvas.width,canvas.height);gl.disable(gl.DEPTH_TEST);uniforms(bgProgram);gl.bindBuffer(gl.ARRAY_BUFFER,quad);gl.enableVertexAttribArray(bgProgram.a);gl.vertexAttribPointer(bgProgram.a,2,gl.FLOAT,false,0,0);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);gl.clear(gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);uniforms(program);gl.bindBuffer(gl.ARRAY_BUFFER,mesh);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,index);gl.enableVertexAttribArray(program.a);gl.vertexAttribPointer(program.a,2,gl.FLOAT,false,0,0);gl.drawElements(gl.TRIANGLES,indices.length,gl.UNSIGNED_SHORT,0);canvas.dataset.time=clock.toFixed(4);canvas.dataset.view=view.join(',');canvas.dataset.zoom=zoom.toFixed(4);}
+ function resize(){const r=stage.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2)*(innerWidth<700?.75:1)*scale;canvas.width=Math.max(2,Math.round(r.width*d));canvas.height=Math.max(2,Math.round(r.height*d));wake();}
+ function loop(ts){raf=0;if(disposed||document.hidden||!visible||lost||failed)return;if(previous&&ts-previous<(innerWidth<700?1000/30:1000/60)-.75){raf=requestAnimationFrame(loop);return;}const dt=previous?Math.min((ts-previous)/1000,.06):1/60;if(previous&&!paused){average=average*.96+(ts-previous)*.04;if(++frames>150&&average>(innerWidth<700?46:27)&&scale>.55){if(++slow>45){scale=Math.max(.55,scale*.8);resize();frames=slow=0;}}}previous=ts;if(!paused)clock+=dt;const blend=1.-Math.exp(-dt*6.);for(let i=0;i<2;i++)view[i]+=(target[i]-view[i])*blend;zoom+=(zoomTarget-zoom)*blend;const moving=Math.abs(view[0]-target[0])+Math.abs(view[1]-target[1])+Math.abs(zoom-zoomTarget)>.0001;if(!moving){view=[...target];zoom=zoomTarget;}draw();if(!paused||moving)raf=requestAnimationFrame(loop);else previous=0;}
+ function wake(){if(!raf&&!disposed&&!document.hidden&&visible&&!lost&&!failed)raf=requestAnimationFrame(loop);}
+ on(play,'click',()=>{paused=!paused;ui();previous=0;wake();});on(close,'click',()=>{zoomTarget=1-zoomTarget;close.setAttribute('aria-pressed',String(!!zoomTarget));close.textContent=zoomTarget?'退遠':'細看';wake();});
+ function aim(e){const r=stage.getBoundingClientRect();target=[Math.max(-1,Math.min(1,(e.clientX-r.left)/r.width*2-1)),Math.max(-1,Math.min(1,1-(e.clientY-r.top)/r.height*2))];wake();}
+ on(stage,'pointermove',e=>{if(e.target.closest('button,a'))return;if(e.pointerType==='mouse')aim(e);else if(drag){target=[Math.max(-1,Math.min(1,drag.view[0]+(e.clientX-drag.x)/170)),Math.max(-1,Math.min(1,drag.view[1]-(e.clientY-drag.y)/230))];wake();}});on(stage,'pointerdown',e=>{if(e.target.closest('button,a'))return;drag={x:e.clientX,y:e.clientY,view:[...view]};if(e.pointerType==='mouse')aim(e);});const settle=()=>{drag=null;target=[0,0];wake();};on(stage,'pointerleave',settle);on(stage,'pointerup',e=>{if(e.pointerType!=='mouse')settle();else drag=null;});on(stage,'pointercancel',settle);on(stage,'blur',settle);
+ on(stage,'keydown',e=>{if(e.target!==stage)return;const commands={ArrowLeft:[-.16,0],ArrowRight:[.16,0],ArrowUp:[0,.16],ArrowDown:[0,-.16]};if(commands[e.key]){e.preventDefault();target=target.map((v,i)=>Math.max(-1,Math.min(1,v+commands[e.key][i])));wake();}else if(e.key==='Home'){e.preventDefault();settle();}});
+ on(window,'resize',resize);on(document,'visibilitychange',()=>{stop();if(!document.hidden)wake();});on(reduced,'change',()=>{paused=reduced.matches;ui();stop();wake();});const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(!visible)stop();else wake();},{threshold:0});observer.observe(stage);resources.push(['observer',observer]);resize();ui();canvas.style.visibility='visible';document.querySelector('.hint').hidden=false;notice.hidden=true;play.disabled=close.disabled=false;wake();
+ }
+ function clear(){stop();events.abort();for(const [type,r] of resources){if(type==='observer')r.disconnect();else if(gl&&!lost&&!gl.isContextLost()){if(type==='buffer')gl.deleteBuffer(r);if(type==='program')gl.deleteProgram(r);if(type==='shader')gl.deleteShader(r);}}resources.length=0;}
+ release=()=>{snapshot={clock,paused,zoom,zoomTarget,target:[...target],view:[...view]};disposed=true;clear();};on(canvas,'webglcontextlost',e=>{e.preventDefault();lost=true;fallback('繪圖暫時中斷。');});on(canvas,'webglcontextrestored',()=>{mount();});try{build()}catch(e){fallback('即時作品無法啟動。');}ui();
+}
+window.addEventListener('pagehide',()=>{if(release)release();release=null;});window.addEventListener('pageshow',()=>{if(!release)mount();});mount();
+// Preserve the established return-to-magazine convention when entering from that issue.
+const back=document.querySelector('.back'),from=/^magazine(?::([a-z0-9-]+))?$/.exec(new URLSearchParams(location.search).get('from')||'');if(from){back.href='../magazine/index.html'+(from[1]?'#'+from[1]:'');back.textContent='← 對頁 / 第一期';}
+})();
+</script>
+</body></html>
