@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>它剛剛在這裡 · It Was Just Here — 平面的八種禮節 · 規則之後</title>
 <meta name="description" content="形狀離開之後，它曾經存在的位置仍在參與畫面。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="平面的八種禮節 · 規則之後">
+<meta property="og:title" content="它剛剛在這裡 — 平面的八種禮節 · 規則之後">
+<meta property="og:description" content="形狀離開之後，它曾經存在的位置仍在參與畫面。">
+<meta property="og:url" content="https://ml-yoyohuang.github.io/artworks/p5-demos2/residual-geometry.html">
+<meta property="og:image" content="https://ml-yoyohuang.github.io/artworks/p5-demos2/assets/og/residual-geometry.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="它剛剛在這裡：It Was Just Here">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="它剛剛在這裡 — 平面的八種禮節 · 規則之後">
+<meta name="twitter:description" content="形狀離開之後，它曾經存在的位置仍在參與畫面。">
+<meta name="twitter:image" content="https://ml-yoyohuang.github.io/artworks/p5-demos2/assets/og/residual-geometry.jpg">
+<meta name="twitter:image:alt" content="它剛剛在這裡：It Was Just Here">
 <link rel="icon" href="data:,">
 <style>
 :root {
@@ -196,7 +212,7 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
       if (s.kind === 'circle') ctx.arc(c[0], c[1], s.r * unit, 0, A.TAU);
       else { var d = dims(s); ctx.rect(c[0] - d[0] / 2, c[1] - d[1] / 2, d[0], d[1]); }
       if (fill) { ctx.fillStyle = A.rgba(fill); ctx.fill(); }
-      if (line) { ctx.strokeStyle = A.rgba(line); ctx.lineWidth = Math.max(2.4, unit * 0.0045); ctx.lineJoin = 'miter'; ctx.stroke(); }
+      if (line) { ctx.strokeStyle = A.rgba(line); ctx.lineWidth = Math.max(4.8, unit * 0.009); ctx.lineJoin = 'miter'; ctx.stroke(); }
     }
     function hitShape(x, y) {
       for (var i = shapes.length - 1; i >= 0; i--) {
@@ -288,7 +304,7 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
       traces.slice().sort(function (a, b) { return a.t - b.t; }).forEach(function (tr) {
         var s = shapes[tr.s], f = A.smooth(0, LIFE, now - tr.t);
         var fill = A.mix(s.trace, PAPER, 0.15 + 0.85 * f);
-        var line = s.kind === 'rect' ? A.mix(NAVY, PAPER, 0.5 + 0.5 * f) : null;
+        var line = null; // 痕跡只留色面，不加外框
         drawShape(ctx, s, tr.q, fill, line);
       });
       shapes.forEach(function (s) { drawShape(ctx, s, s.pos, s.col, null); });
