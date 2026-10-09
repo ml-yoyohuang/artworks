@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>幾何的餘溫 — 規則的餘溫</title>
+    <meta
+      name="description"
+      content="形狀離開之後，原來的位置仍繼續參與畫面。"
+    />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="assets/geometric/exhibit.css" />
+  </head>
+  <body style="--art-bg: #f2e7dc">
+    <div class="shell">
+      <header class="mast">
+        <a class="back" href="p5-demo-list.html#geometric">← 規則的餘溫</a>
+        <div class="edition">GEOMETRY, IN RELATION<br />STUDY 18 / 18</div>
+      </header>
+      <main class="exhibit">
+        <div class="art-column">
+          <div class="canvas-frame" data-slug="residual-geometry">
+            <picture
+              ><source
+                media="(max-width:760px)"
+                srcset="thumbs/geometric/residual-geometry-mobile.webp" />
+              <img
+                class="fallback"
+                src="thumbs/geometric/residual-geometry.webp"
+                width="1000"
+                height="700"
+                alt="清晰的紅色矩形、藍色圓與灰綠色帶旁，留有淡粉色面與輪廓的歷史痕跡。"
+            /></picture>
+          </div>
+          <div class="work-tools">
+            <button id="pause" type="button">暫停動態</button
+            ><button id="reset" type="button">回到初始</button
+            ><button id="download" type="button">下載 PNG</button
+            ><span class="caption">SEED <span id="seed">271828</span></span>
+          </div>
+          <p id="notice" role="status"></p>
+          <noscript
+            ><p>
+              目前顯示這件作品的策展停格。啟用 JavaScript
+              可探索互動，也可繼續閱讀與前往其他作品。
+            </p></noscript
+          >
+        </div>
+        <aside class="label">
+          <div class="category">現在 / 歷史 / 重量</div>
+          <h1>幾何的餘溫</h1>
+          <div class="english">Residual Geometry</div>
+          <p class="rule">形狀離開之後，原來的位置仍繼續參與畫面。</p>
+          <p class="statement">
+            形狀離開之後，原來的位置仍留下淡色。鮮紅的矩形、深藍的圓與灰綠色帶保持清晰硬邊，過去則以薄色與輪廓留在紙上。現在與歷史互相覆蓋，也彼此讓出空間。觀看改變幾何的路徑，痕跡讓已經完成的移動，繼續以另一種重量存在。
+          </p>
+          <div class="interaction">
+            先選擇形狀，再輕觸新位置；桌面也可拖動，痕跡會慢慢退去。
+            <div class="keyboard">
+              畫布聚焦後：1／2／3 選形狀，←／→ 選新位置；空白鍵暫停。
+            </div>
+          </div>
+          <div class="scene-controls" aria-label="作品觀看控制"></div>
+          <p class="media">p5.js · 獨立歷史姿態 · 上限八筆 · 約十二秒消退</p>
+        </aside>
+      </main>
+      <nav class="neighbors" aria-label="前後作品">
+        <a href="within-the-same-frame.html">← 同一張圖的不同尺度</a
+        ><a class="next" href="negotiated-territories.html">領土協商 →</a>
+      </nav>
+    </div>
+    <script src="lib/p5.min.js"></script>
+    <script src="assets/geometric/exhibit.js"></script>
+    <script>
+      (() => {
+        "use strict";
+        const metadata = {
+          slug: "residual-geometry",
+          title: "幾何的餘溫",
+          en: "Residual Geometry",
+          bg: "#F2E7DC",
+          ink: "#293C54",
+          accent: "#D9493F",
+          seed: 271828,
+          time: 0,
+          tags: "現在・歷史・重量",
+          rule: "形狀離開之後，原來的位置仍繼續參與畫面。",
+          statement:
+            "形狀離開之後，原來的位置仍留下淡色。鮮紅的矩形、深藍的圓與灰綠色帶保持清晰硬邊，過去則以薄色與輪廓留在紙上。現在與歷史互相覆蓋，也彼此讓出空間。觀看改變幾何的路徑，痕跡讓已經完成的移動，繼續以另一種重量存在。",
+          hint: "先選擇形狀，再輕觸新位置；桌面也可拖動，痕跡會慢慢退去。",
+          keys: "畫布聚焦後：1／2／3 選形狀，←／→ 選新位置；空白鍵暫停。",
+          media: "p5.js · 獨立歷史姿態 · 上限八筆 · 約十二秒消退",
+          alt: "清晰的紅色矩形、藍色圓與灰綠色帶旁，留有淡粉色面與輪廓的歷史痕跡。",
+          number: 18,
+        };
+        if (!window.GeometryExhibit) {
+          document.querySelector("#notice").textContent =
+            "目前顯示策展停格；互動程式未能載入，您仍可閱讀及前往其他作品。";
+          document
+            .querySelectorAll(".work-tools button")
+            .forEach((b) => (b.disabled = true));
+          return;
+        }
+        GeometryExhibit.mount(metadata, (c, s) => {
+          const { p, frame: f, rng: R, clamp, lerp } = c;
+          const original = [
+              [0.27, 0.35],
+              [0.73, 0.59],
+              [0.52, 0.83],
+            ].map((q) => q.map((v) => v + R(-0.012, 0.012))),
+            destinations = [
+              [0.36, 0.47],
+              [0.62, 0.38],
+              [0.53, 0.71],
+            ],
+            colors = ["#D9493F", "#293C54", "#B9C3AE"];
+          let selected = s?.selected ?? 0;
+          let objects =
+            s?.objects ??
+            original.map((pos, id) => ({
+              id,
+              pos: pos.slice(),
+              target: pos.slice(),
+              anchor: pos.slice(),
+              manual: false,
+            }));
+          let history = s?.history ?? [
+              { id: 0, pos: [0.17, 0.28], time: c.time - 7 },
+              { id: 1, pos: [0.79, 0.7], time: c.time - 4 },
+              { id: 2, pos: [0.44, 0.9], time: c.time - 1 },
+            ],
+            last = c.time;
+          function remember(q) {
+            history.push({ id: q.id, pos: q.pos.slice(), time: c.time });
+            if (history.length > 8) history.shift();
+            q.anchor = q.pos.slice();
+          }
+          function move(point) {
+            const q = objects[selected],
+              target = [
+                clamp((point.x - f.x) / f.w, 0.2, 0.8),
+                clamp((point.y - f.y) / f.h, 0.2, 0.88),
+              ];
+            if (
+              Math.hypot(q.target[0] - target[0], q.target[1] - target[1]) <
+              0.005
+            )
+              return;
+            if (
+              !q.manual ||
+              Math.hypot(q.pos[0] - q.anchor[0], q.pos[1] - q.anchor[1]) > 0.105
+            )
+              remember(q);
+            q.manual = true;
+            q.target = target;
+            if (c.instant()) q.pos = target.slice();
+          }
+          function shape(g, id, pos, color, alpha = 255, outline = false) {
+            g.push();
+            g.translate(f.x + pos[0] * f.w, f.y + pos[1] * f.h);
+            const col = g.color(color);
+            col.setAlpha(alpha);
+            if (outline) {
+              g.noFill();
+              g.stroke(col);
+              g.strokeWeight(1.2);
+            } else {
+              g.fill(col);
+              g.noStroke();
+            }
+            if (id === 0) {
+              g.rectMode(g.CENTER);
+              g.rect(0, 0, f.w * 0.34, f.h * 0.37);
+            } else if (id === 1) g.circle(0, 0, Math.min(f.w, f.h) * 0.34);
+            else {
+              g.rectMode(g.CENTER);
+              g.rect(0, 0, f.w * 0.57, f.h * 0.075);
+            }
+            g.pop();
+          }
+          return {
+            drag: true,
+            controls: [
+              {
+                id: "shape",
+                kind: "select",
+                label: "移動一個形狀",
+                options: [
+                  ["0", "紅色矩形"],
+                  ["1", "藍色圓"],
+                  ["2", "灰綠色帶"],
+                ],
+                value: () => selected,
+                change: (v) => {
+                  selected = Number(v);
+                },
+              },
+            ],
+            active: () => true,
+            update(dt, t) {
+              for (const q of objects) {
+                if (!q.manual) {
+                  const phase = ((t + q.id * 8) % 32) / 32,
+                    v =
+                      phase < 0.4
+                        ? c.ease(phase / 0.4)
+                        : phase < 0.6
+                          ? 1
+                          : 1 - c.ease((phase - 0.6) / 0.4);
+                  q.target = original[q.id].map((x, i) =>
+                    lerp(x, destinations[q.id][i], v),
+                  );
+                }
+                const a = 1 - Math.exp(-dt * 4);
+                q.pos = q.pos.map((x, i) => lerp(x, q.target[i], a));
+                if (
+                  Math.hypot(q.pos[0] - q.anchor[0], q.pos[1] - q.anchor[1]) >
+                  0.105
+                )
+                  remember(q);
+              }
+              history = history.filter((q) => t - q.time < 12);
+              last = t;
+            },
+            paint(g) {
+              g.background("#F2E7DC");
+              for (const h of history) {
+                const age = c.reduced
+                    ? Math.min(8, Math.max(0, c.time - h.time))
+                    : c.time - h.time,
+                  opacity = clamp(1 - age / 12) * 120;
+                shape(
+                  g,
+                  h.id,
+                  h.pos,
+                  h.id === 1 ? "#B9C3AE" : "#E4AAA5",
+                  opacity,
+                  h.id === 1,
+                );
+              }
+              for (const q of objects) shape(g, q.id, q.pos, colors[q.id]);
+              g.rectMode(p.CORNER);
+            },
+            pointer(type, q) {
+              if (type === "down") {
+                let nearest = null,
+                  best = Infinity;
+                for (const o of objects) {
+                  const d = Math.hypot(
+                    q.x - f.x - o.pos[0] * f.w,
+                    q.y - f.y - o.pos[1] * f.h,
+                  );
+                  if (d < best && d < Math.min(f.w, f.h) * 0.22) {
+                    nearest = o;
+                    best = d;
+                  }
+                }
+                if (nearest) selected = nearest.id;
+                return true;
+              }
+              if (type === "click" || type === "drag") {
+                move(q);
+                return true;
+              }
+              return false;
+            },
+            key(key) {
+              if (["1", "2", "3"].includes(key)) selected = Number(key) - 1;
+              else if (key === "ArrowRight" || key === "ArrowLeft") {
+                const n = key === "ArrowRight" ? 1 : 0,
+                  pos = n ? destinations[selected] : original[selected];
+                move({ x: f.x + pos[0] * f.w, y: f.y + pos[1] * f.h });
+              } else return false;
+              return true;
+            },
+            snapshot: () => ({
+              selected,
+              objects: objects.map((q) => ({
+                ...q,
+                pos: q.pos.slice(),
+                target: q.target.slice(),
+                anchor: q.anchor.slice(),
+              })),
+              history: history.map((q) => ({ ...q, pos: q.pos.slice() })),
+              historyCount: history.length,
+              historyLimit: 8,
+            }),
+          };
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>空白正在移動 — 規則的餘溫</title>
+    <meta name="description" content="空白帶走表面，讓下方的關係取得輪廓。" />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="assets/geometric/exhibit.css" />
+  </head>
+  <body style="--art-bg: #eee9db">
+    <div class="shell">
+      <header class="mast">
+        <a class="back" href="p5-demo-list.html#geometric">← 規則的餘溫</a>
+        <div class="edition">GEOMETRY, IN RELATION<br />STUDY 14 / 18</div>
+      </header>
+      <main class="exhibit">
+        <div class="art-column">
+          <div class="canvas-frame" data-slug="moving-absence">
+            <picture
+              ><source
+                media="(max-width:760px)"
+                srcset="thumbs/geometric/moving-absence-mobile.webp" />
+              <img
+                class="fallback"
+                src="thumbs/geometric/moving-absence.webp"
+                width="1000"
+                height="700"
+                alt="大型赭紅矩形與近黑半圓被圓形開口切開，露出下層杏色與細長色帶。"
+            /></picture>
+          </div>
+          <div class="work-tools">
+            <button id="pause" type="button">暫停動態</button
+            ><button id="reset" type="button">回到初始</button
+            ><button id="download" type="button">下載 PNG</button
+            ><span class="caption">SEED <span id="seed">104729</span></span>
+          </div>
+          <p id="notice" role="status"></p>
+          <noscript
+            ><p>
+              目前顯示這件作品的策展停格。啟用 JavaScript
+              可探索互動，也可繼續閱讀與前往其他作品。
+            </p></noscript
+          >
+        </div>
+        <aside class="label">
+          <div class="category">缺席 / 斷面 / 重心</div>
+          <h1>空白正在移動</h1>
+          <div class="english">Moving Absence</div>
+          <p class="rule">空白帶走表面，讓下方的關係取得輪廓。</p>
+          <p class="statement">
+            空白穿過赭紅與近黑的色塊，帶走一部分表面，也讓下方的杏色出現。被移除的地方仍有分量：它牽動重心、打開距離，使完整的形狀暫時取得另一種讀法。觀眾移動的並不是一個蓋在畫面上的圓，而是一個真正改變前景的開口。
+          </p>
+          <div class="interaction">
+            用游標引導空白，手機輕觸位置；也可直接選擇三個觀看位置。
+            <div class="keyboard">
+              畫布聚焦後：1／2／3 選位置，←／→ 切換，Esc 恢復慢速路徑。
+            </div>
+          </div>
+          <div class="scene-controls" aria-label="作品觀看控制"></div>
+          <p class="media">
+            p5.js · 離屏前景 · destination-out 遮罩 · 32 秒路徑
+          </p>
+        </aside>
+      </main>
+      <nav class="neighbors" aria-label="前後作品">
+        <a href="reverse-of-a-plane.html">← 平面有背面</a
+        ><a class="next" href="chromatic-sediments.html">色彩沉積 →</a>
+      </nav>
+    </div>
+    <script src="lib/p5.min.js"></script>
+    <script src="assets/geometric/exhibit.js"></script>
+    <script>
+      (() => {
+        "use strict";
+        const metadata = {
+          slug: "moving-absence",
+          title: "空白正在移動",
+          en: "Moving Absence",
+          bg: "#EEE9DB",
+          ink: "#242623",
+          accent: "#A83F36",
+          seed: 104729,
+          time: 0,
+          tags: "缺席・斷面・重心",
+          rule: "空白帶走表面，讓下方的關係取得輪廓。",
+          statement:
+            "空白穿過赭紅與近黑的色塊，帶走一部分表面，也讓下方的杏色出現。被移除的地方仍有分量：它牽動重心、打開距離，使完整的形狀暫時取得另一種讀法。觀眾移動的並不是一個蓋在畫面上的圓，而是一個真正改變前景的開口。",
+          hint: "用游標引導空白，手機輕觸位置；也可直接選擇三個觀看位置。",
+          keys: "畫布聚焦後：1／2／3 選位置，←／→ 切換，Esc 恢復慢速路徑。",
+          media: "p5.js · 離屏前景 · destination-out 遮罩 · 32 秒路徑",
+          alt: "大型赭紅矩形與近黑半圓被圓形開口切開，露出下層杏色與細長色帶。",
+          number: 14,
+        };
+        if (!window.GeometryExhibit) {
+          document.querySelector("#notice").textContent =
+            "目前顯示策展停格；互動程式未能載入，您仍可閱讀及前往其他作品。";
+          document
+            .querySelectorAll(".work-tools button")
+            .forEach((b) => (b.disabled = true));
+          return;
+        }
+        GeometryExhibit.mount(metadata, (c, s) => {
+          const { p, frame: f, rng: R, clamp, ease } = c,
+            under = c.layer(),
+            front = c.layer(),
+            mask = c.layer();
+          const positions = [
+            [0.59, 0.44],
+            [0.32, 0.65],
+            [0.72, 0.62],
+          ].map((q) => q.map((v) => v + R(-0.012, 0.012)));
+          let pos = s?.pos ?? positions[0].slice(),
+            target = s?.target ?? pos.slice(),
+            manual = s?.manual ?? false,
+            choice = s?.choice ?? "auto";
+          under.noStroke();
+          under.fill("#E8B58C");
+          under.rect(f.x, f.y, f.w, f.h);
+          under.fill("#EEE9DB");
+          under.rect(
+            f.x + f.w * 0.13,
+            f.y + f.h * 0.08,
+            f.w * 0.72,
+            f.h * 0.26,
+          );
+          under.fill("#242623");
+          under.rect(f.x, f.y + f.h * 0.77, f.w, f.h * 0.035);
+          front.noStroke();
+          front.fill("#A83F36");
+          front.rect(
+            f.x + f.w * 0.035,
+            f.y + f.h * 0.07,
+            f.w * 0.68,
+            f.h * 0.83,
+          );
+          front.fill("#242623");
+          front.arc(
+            f.x + f.w * 0.7,
+            f.y + f.h * 0.48,
+            Math.min(f.w * 0.6, f.h * 0.92),
+            Math.min(f.w * 0.6, f.h * 0.92),
+            -p.HALF_PI,
+            p.HALF_PI,
+            p.CHORD,
+          );
+          const diameter = Math.min(f.w, f.h) * 0.39;
+          function choose(index) {
+            if (index === "auto") {
+              choice = "auto";
+              manual = false;
+              return;
+            }
+            choice = String(index);
+            manual = true;
+            target = positions[Number(index)].slice();
+            if (c.instant()) pos = target.slice();
+          }
+          function move(q) {
+            choice = "custom";
+            manual = true;
+            target = [
+              clamp((q.x - f.x) / f.w, 0.15, 0.85),
+              clamp((q.y - f.y) / f.h, 0.17, 0.83),
+            ];
+            if (c.instant()) pos = target.slice();
+          }
+          return {
+            drag: true,
+            controls: [
+              {
+                id: "position",
+                kind: "select",
+                label: "空白位置",
+                options: [
+                  ["auto", "慢速路徑"],
+                  ["0", "接縫"],
+                  ["1", "左側斷面"],
+                  ["2", "右側弧線"],
+                  ["custom", "目前位置"],
+                ],
+                value: () => choice,
+                change: (v) => {
+                  if (v !== "custom") choose(v);
+                },
+              },
+            ],
+            active: () =>
+              !manual ||
+              Math.hypot(pos[0] - target[0], pos[1] - target[1]) > 0.0001,
+            update(dt, t) {
+              if (!manual) {
+                const phase = ((t % 32) / 32) * 3,
+                  i = Math.floor(phase),
+                  u = ease(phase - i);
+                target = positions[i].map(
+                  (x, j) => x + (positions[(i + 1) % 3][j] - x) * u,
+                );
+              }
+              const a = 1 - Math.exp(-dt * 6);
+              pos = pos.map((x, j) => x + (target[j] - x) * a);
+            },
+            paint(g) {
+              g.background("#EEE9DB");
+              g.image(under, 0, 0);
+              mask.clear();
+              mask.image(front, 0, 0);
+              const dc = mask.drawingContext;
+              dc.save();
+              dc.globalCompositeOperation = "destination-out";
+              mask.noStroke();
+              mask.fill(0);
+              mask.circle(f.x + pos[0] * f.w, f.y + pos[1] * f.h, diameter);
+              dc.restore();
+              g.image(mask, 0, 0);
+            },
+            pointer(type, q) {
+              if (type === "hover" || type === "click" || type === "drag") {
+                if (
+                  q.x < f.x ||
+                  q.x > f.x + f.w ||
+                  q.y < f.y ||
+                  q.y > f.y + f.h
+                )
+                  return false;
+                move(q);
+                return true;
+              }
+              return false;
+            },
+            key(key) {
+              if (["1", "2", "3"].includes(key))
+                choose(String(Number(key) - 1));
+              else if (key === "ArrowRight" || key === "ArrowLeft") {
+                const index = choice.match(/^[0-2]$/) ? Number(choice) : 0;
+                choose(String((index + (key === "ArrowRight" ? 1 : 2)) % 3));
+              } else if (key === "Escape") choose("auto");
+              else return false;
+              return true;
+            },
+            resume() {
+              choose("auto");
+            },
+            snapshot: () => ({ pos, target, manual, choice, diameter }),
+          };
+        });
+      })();
+    </script>
+  </body>
+</html>

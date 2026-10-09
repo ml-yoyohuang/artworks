@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>平面有背面 — 規則的餘溫</title>
+    <meta
+      name="description"
+      content="沿一條邊翻起的平面，把另一種顏色帶進觀看。"
+    />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="assets/geometric/exhibit.css" />
+  </head>
+  <body style="--art-bg: #ece8da">
+    <div class="shell">
+      <header class="mast">
+        <a class="back" href="p5-demo-list.html#geometric">← 規則的餘溫</a>
+        <div class="edition">GEOMETRY, IN RELATION<br />STUDY 13 / 18</div>
+      </header>
+      <main class="exhibit">
+        <div class="art-column">
+          <div class="canvas-frame" data-slug="reverse-of-a-plane">
+            <picture
+              ><source
+                media="(max-width:760px)"
+                srcset="thumbs/geometric/reverse-of-a-plane-mobile.webp" />
+              <img
+                class="fallback"
+                src="thumbs/geometric/reverse-of-a-plane.webp"
+                width="1000"
+                height="700"
+                alt="有大小層級的灰綠色平面沿固定邊緣翻折，露出紫色背面與靛色底層。"
+            /></picture>
+          </div>
+          <div class="work-tools">
+            <button id="pause" type="button">暫停動態</button
+            ><button id="reset" type="button">回到初始</button
+            ><button id="download" type="button">下載 PNG</button
+            ><span class="caption">SEED <span id="seed">271828</span></span>
+          </div>
+          <p id="notice" role="status"></p>
+          <noscript
+            ><p>
+              目前顯示這件作品的策展停格。啟用 JavaScript
+              可探索互動，也可繼續閱讀與前往其他作品。
+            </p></noscript
+          >
+        </div>
+        <aside class="label">
+          <div class="category">表面 / 鉸鏈 / 揭露</div>
+          <h1>平面有背面</h1>
+          <div class="english">The Reverse of a Plane</div>
+          <p class="rule">沿一條邊翻起的平面，把另一種顏色帶進觀看。</p>
+          <p class="statement">
+            色塊以一張平面的姿態出現，背面卻藏著另一種顏色。當其中一片沿固定的鉸鏈翻起，原有構圖便多出深度，也露出被遮蔽的靛色。灰綠留在表面，紫色只在背面現身。觀看沿著一條具體的邊前進，短暫越過表面的完整，再讓它合上。
+          </p>
+          <div class="interaction">
+            點選一片平面翻開，再次選取即可合上。
+            <div class="keyboard">
+              畫布聚焦後：←／→ 選片，Enter 翻開或合上，Esc 全部合上。
+            </div>
+          </div>
+          <div class="scene-controls" aria-label="作品觀看控制"></div>
+          <p class="media">
+            p5.js · 3D 頂點旋轉的 2D 透視投影 · 面法線與深度排序
+          </p>
+        </aside>
+      </main>
+      <nav class="neighbors" aria-label="前後作品">
+        <a href="registration-pending.html">← 尚未對準的印刷</a
+        ><a class="next" href="moving-absence.html">空白正在移動 →</a>
+      </nav>
+    </div>
+    <script src="lib/p5.min.js"></script>
+    <script src="assets/geometric/exhibit.js"></script>
+    <script>
+      (() => {
+        "use strict";
+        const metadata = {
+          slug: "reverse-of-a-plane",
+          title: "平面有背面",
+          en: "The Reverse of a Plane",
+          bg: "#ECE8DA",
+          ink: "#292A50",
+          accent: "#8B48B8",
+          seed: 271828,
+          time: 0,
+          tags: "表面・鉸鏈・揭露",
+          rule: "沿一條邊翻起的平面，把另一種顏色帶進觀看。",
+          statement:
+            "色塊以一張平面的姿態出現，背面卻藏著另一種顏色。當其中一片沿固定的鉸鏈翻起，原有構圖便多出深度，也露出被遮蔽的靛色。灰綠留在表面，紫色只在背面現身。觀看沿著一條具體的邊前進，短暫越過表面的完整，再讓它合上。",
+          hint: "點選一片平面翻開，再次選取即可合上。",
+          keys: "畫布聚焦後：←／→ 選片，Enter 翻開或合上，Esc 全部合上。",
+          media: "p5.js · 3D 頂點旋轉的 2D 透視投影 · 面法線與深度排序",
+          alt: "有大小層級的灰綠色平面沿固定邊緣翻折，露出紫色背面與靛色底層。",
+          number: 13,
+        };
+        if (!window.GeometryExhibit) {
+          document.querySelector("#notice").textContent =
+            "目前顯示策展停格；互動程式未能載入，您仍可閱讀及前往其他作品。";
+          document
+            .querySelectorAll(".work-tools button")
+            .forEach((b) => (b.disabled = true));
+          return;
+        }
+        GeometryExhibit.mount(metadata, (c, s) => {
+          const { frame: f, rng: R, lerp, inPoly } = c;
+          let selected = s?.selected ?? 0;
+          const panels = [
+            [0.055, 0.09, 0.5, 0.46, "right"],
+            [0.63, 0.09, 0.31, 0.3, "left"],
+            [0.63, 0.47, 0.31, 0.45, "left"],
+            [0.055, 0.65, 0.34, 0.27, "top"],
+            [0.455, 0.66, 0.1, 0.26, "top"],
+          ].map((q, i) => ({
+            id: i,
+            x: f.x + q[0] * f.w,
+            y: f.y + q[1] * f.h,
+            w: (q[2] + R(-0.008, 0.008)) * f.w,
+            h: (q[3] + R(-0.009, 0.009)) * f.h,
+            hinge: q[4],
+            angle: s?.angles?.[i] ?? (c.reduced && i === 0 ? 122 : 0),
+            target: s?.targets?.[i] ?? (c.reduced && i === 0 ? 122 : 0),
+          }));
+          let faces = [];
+          function projected(q) {
+            const a = (q.angle * Math.PI) / 180,
+              hx = q.hinge === "right" ? q.x + q.w : q.x,
+              hy = q.y,
+              D = 3000;
+            const pts = [
+              [q.x, q.y],
+              [q.x + q.w, q.y],
+              [q.x + q.w, q.y + q.h],
+              [q.x, q.y + q.h],
+            ].map(([x, y]) => {
+              let X = x,
+                Y = y,
+                Z = 0;
+              if (q.hinge === "top") {
+                const v = y - hy;
+                Y = hy + v * Math.cos(a);
+                Z = v * Math.sin(a);
+              } else {
+                const u = x - hx,
+                  dir = q.hinge === "right" ? 1 : -1;
+                X = hx + u * Math.cos(a);
+                Z = -u * Math.sin(a * dir);
+              }
+              const scale = D / (D - Z);
+              return {
+                x: f.x + f.w / 2 + (X - f.x - f.w / 2) * scale,
+                y: f.y + f.h / 2 + (Y - f.y - f.h / 2) * scale,
+                z: Z,
+              };
+            });
+            return {
+              q,
+              pts,
+              z: pts.reduce((s, v) => s + v.z, 0) / 4,
+              back: Math.cos(a) < 0,
+            };
+          }
+          function choose(id) {
+            selected = id;
+            const open = panels[id].target > 0;
+            for (const q of panels) q.target = q.id === id && !open ? 122 : 0;
+            if (c.instant()) panels.forEach((q) => (q.angle = q.target));
+          }
+          return {
+            active: () =>
+              panels.some((q) => Math.abs(q.angle - q.target) > 0.025),
+            update(dt) {
+              for (const q of panels)
+                q.angle = lerp(q.angle, q.target, 1 - Math.exp(-dt * 4));
+            },
+            paint(g) {
+              g.background("#ECE8DA");
+              g.noStroke();
+              for (const q of panels) {
+                g.fill("#292A50");
+                g.rect(q.x, q.y, q.w, q.h);
+              }
+              g.fill("#8D9C83");
+              g.rect(
+                f.x + f.w * 0.055,
+                f.y + f.h * 0.575,
+                f.w * 0.5,
+                f.h * 0.028,
+              );
+              faces = panels.map(projected).sort((a, b) => a.z - b.z);
+              for (const face of faces) {
+                g.fill(face.back ? "#8B48B8" : "#8D9C83");
+                g.stroke("#ECE8DA");
+                g.strokeWeight(1.25);
+                g.beginShape();
+                face.pts.forEach((v) => g.vertex(v.x, v.y));
+                g.endShape(g.CLOSE);
+                if (face.q.id === selected) {
+                  g.noFill();
+                  g.stroke(face.back ? "#ECE8DA99" : "#292A5060");
+                  g.strokeWeight(0.8);
+                  const ps = face.pts;
+                  g.line(ps[0].x, ps[0].y, ps[1].x, ps[1].y);
+                }
+              }
+            },
+            pointer(type, q) {
+              if (type !== "click") return false;
+              const face = [...faces]
+                .reverse()
+                .find((f) => inPoly(q.x, q.y, f.pts));
+              if (face) choose(face.q.id);
+              return !!face;
+            },
+            key(key) {
+              if (key === "ArrowRight" || key === "ArrowLeft") {
+                selected = (selected + (key === "ArrowRight" ? 1 : 4)) % 5;
+              } else if (key === "Enter") choose(selected);
+              else if (key === "Escape") {
+                panels.forEach((q) => {
+                  q.target = 0;
+                  if (c.instant()) q.angle = 0;
+                });
+              } else return false;
+              return true;
+            },
+            snapshot: () => ({
+              selected,
+              angles: panels.map((q) => q.angle),
+              targets: panels.map((q) => q.target),
+              faces: faces.map((q) => ({
+                id: q.q.id,
+                back: q.back,
+                z: q.z,
+                points: q.pts,
+              })),
+            }),
+          };
+        });
+      })();
+    </script>
+  </body>
+</html>
