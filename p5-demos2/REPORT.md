@@ -74,7 +74,7 @@
 ## 推送
 
 - 分支：`main`（`git push origin main`）
-- 主要 commit：見下方（由後續的 docs commit 記錄）
+- 主要 commit：`e83acdd`（feat: add 10 p5.js generative art demo pages and p5-demo-list index）；本報告的雜湊值由其後的 docs commit 補上。
 
 ## CLAUDE.md
 
