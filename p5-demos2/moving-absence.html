@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>空白正在移動 · Moving Absence — 規則之後</title>
+<meta name="description" content="空白能夠改變色塊的形狀，也能改變觀看的重心。">
+<link rel="icon" href="data:,">
+<style>
+:root {
+  --art: #EEE9DB;
+  --page: #f1eee8; --ink: #1d1c1a; --muted: rgba(29,28,26,.56); --line: rgba(29,28,26,.16);
+  --accent: #A83F36;
+  --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --page: #171614; --ink: #ebe6dc; --muted: rgba(235,230,220,.56); --line: rgba(235,230,220,.16); }
+}
+* { box-sizing: border-box; }
+html { background: var(--page); }
+body { margin: 0; color: var(--ink); background: var(--page); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+.hall { display: grid; grid-template-columns: minmax(0, 1fr) 340px; min-height: 100vh; min-height: 100svh; }
+.work { position: relative; padding: 28px 0 28px 28px; min-width: 0; }
+.stage { position: relative; width: 100%; height: calc(100vh - 56px); height: calc(100svh - 56px); min-height: 420px; background: var(--art); overflow: hidden; }
+.stage canvas { display: block; outline: none; touch-action: manipulation; }
+.stage canvas:focus-visible { box-shadow: inset 0 0 0 2px var(--accent); }
+.stage .still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: var(--art); }
+.stage.live .still { display: none; }
+.stage .fail { position: absolute; left: 16px; right: 16px; bottom: 14px; margin: 0; font-size: 12.5px; line-height: 1.7; color: #1d1c1a; background: rgba(255,255,255,.82); padding: 8px 12px; display: none; }
+.stage.failed .fail { display: block; }
+.label { padding: 34px 32px 28px 30px; display: flex; flex-direction: column; gap: 0; }
+.back { font-size: 12px; letter-spacing: .14em; color: var(--muted); text-decoration: none; align-self: flex-start; padding: 4px 0; }
+.back:hover, .back:focus-visible { color: var(--ink); }
+.no { font-family: var(--mono); font-size: 10.5px; letter-spacing: .24em; color: var(--muted); margin-top: 44px; }
+h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4px; line-height: 1.3; }
+.en { font-size: 12.5px; letter-spacing: .1em; color: var(--muted); margin: 0; }
+.thesis { font-size: 14px; line-height: 1.85; margin: 22px 0 0; padding-left: 12px; border-left: 2px solid var(--accent); }
+.hint { font-size: 12.5px; line-height: 1.8; color: var(--muted); margin: 18px 0 0; }
+.hint kbd { font-family: var(--mono); font-size: 11px; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; }
+.extra { margin-top: 16px; }
+.extra label { display: block; font-size: 11.5px; letter-spacing: .12em; color: var(--muted); margin-bottom: 6px; }
+.extra input[type=range] { width: 100%; accent-color: var(--accent); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: inherit; font-size: 12px; letter-spacing: .06em; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px 6px 9px; min-height: 34px; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; }
+.chip i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.chip[aria-pressed=true] { border-color: var(--ink); background: var(--ink); color: var(--page); }
+.controls { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+.btn { font: inherit; font-size: 12px; letter-spacing: .08em; color: var(--ink); background: transparent; border: 1px solid var(--line); padding: 7px 12px; min-height: 36px; cursor: pointer; }
+.btn:hover, .chip:hover { border-color: var(--ink); }
+.btn:focus-visible, .chip:focus-visible, .back:focus-visible, .pn a:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn[hidden] { display: none; }
+.statement { font-size: 13.5px; line-height: 1.95; margin: 26px 0 0; }
+.tech { font-size: 11.5px; line-height: 1.75; color: var(--muted); margin: 14px 0 0; }
+.pn { margin-top: auto; padding-top: 28px; display: flex; justify-content: space-between; gap: 12px; font-size: 12px; letter-spacing: .06em; }
+.pn a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.pn a:hover { border-color: var(--ink); }
+.pn small { display: block; font-size: 10.5px; color: var(--muted); letter-spacing: .14em; margin-bottom: 2px; }
+.pn .next { text-align: right; }
+.seed { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--muted); margin-top: 14px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 899px) {
+  .hall { grid-template-columns: minmax(0, 1fr); }
+  .work { padding: 0; order: 2; }
+  .stage { height: auto; aspect-ratio: var(--narrow-ratio, 4 / 5); max-height: 78svh; min-height: 0; width: 100%; }
+  .label { display: contents; }
+  .label > .head { order: 1; padding: 18px 18px 16px; }
+  .label > .body { order: 3; padding: 4px 18px 28px; }
+  .no { margin-top: 18px; }
+  h1 { font-size: 25px; }
+  .thesis { margin-top: 14px; font-size: 13.5px; }
+}
+@media (min-width: 640px) and (max-width: 899px) { .stage { aspect-ratio: 4 / 3; } }
+@media (min-width: 900px) { .label > .head, .label > .body { display: contents; } }
+
+</style>
+</head>
+<body>
+<main class="hall">
+  <section class="work" aria-label="作品">
+    <div class="stage" id="stage">
+      <img class="still" src="thumbs/geo-moving-absence.jpg" alt="暖米色畫面上有赭紅長方形、近黑半圓與杏色色帶，一個大圓形開口切穿它們，露出下方深色底與細橫線。">
+      <p class="fail">這是作品的靜態停格。互動版需要 JavaScript、Canvas 與同資料夾中的 <code>lib/p5.min.js</code>。</p>
+    </div>
+  </section>
+  <aside class="label">
+    <div class="head">
+      <a class="back" href="p5-demo-list.html#geometric">← 規則之後 · 目錄</a>
+      <div class="no">平面上的關係 04 / 08</div>
+      <h1>空白正在移動</h1>
+      <p class="en">Moving Absence</p>
+      <p class="thesis">空白能夠改變色塊的形狀，也能改變觀看的重心。</p>
+    </div>
+    <div class="body">
+      <p class="hint" id="hint">一個圓形的缺席會緩慢巡行五個位置。滑鼠移入畫面即由你引導；觸控請輕點想看的位置，或用下方按鈕切換。鍵盤：<kbd>←</kbd><kbd>→</kbd> 或 <kbd>1</kbd>–<kbd>5</kbd>。</p>
+      <div class="extra"><label>空白的位置</label><div class="chips"><button class="chip" type="button" data-station="0" aria-pressed="false">位置一</button><button class="chip" type="button" data-station="1" aria-pressed="false">位置二</button><button class="chip" type="button" data-station="2" aria-pressed="false">位置三</button><button class="chip" type="button" data-station="3" aria-pressed="false">位置四</button><button class="chip" type="button" data-station="4" aria-pressed="false">位置五</button></div></div>
+      <div class="controls">
+        <button class="btn" id="pause" type="button" aria-pressed="false">暫停</button>
+        <button class="btn" id="reset" type="button">回到初始</button>
+        <button class="btn" id="save" type="button">匯出 PNG</button>
+      </div>
+      <p class="statement">赭紅的長方、近黑的半圓與一條杏色橫帶組成一幅穩定的畫面。一個圓形的空白穿過它們，帶走一部分表面，下方另一張夜色的構圖便從開口浮現。被移除的地方仍有分量：它切出新的弧線與斷面，牽動重心，讓完整的形狀暫時取得另一種讀法。</p>
+      <p class="tech">p5.js 1.11.13 · 前景與下層各快取一次，每格以 even-odd 裁切在前景挖出真正的開口 · 自主路徑與觀眾引導共用同一個平滑趨近的狀態。</p>
+      <nav class="pn" aria-label="前後作品">
+        <a class="prev" href="reverse-of-a-plane.html"><small>前一件</small>平面有背面</a>
+        <a class="next" href="chromatic-sediments.html"><small>下一件</small>色彩沉積</a>
+      </nav>
+      <div class="seed" id="seed"></div>
+    </div>
+  </aside>
+</main>
+<noscript><style>.stage .fail{display:block}</style></noscript>
+<script src="lib/p5.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var SLUG = 'moving-absence', DEFAULT_SEED = 104729;
+  var stage = document.getElementById('stage');
+  function fail(err) { stage.classList.remove('live'); stage.classList.add('failed'); if (err && window.console) console.warn('[geometric] ' + SLUG + ':', err); }
+  if (typeof window.p5 !== 'function') { fail(); return; }
+  var probe = document.createElement('canvas');
+  if (!probe.getContext || !probe.getContext('2d')) { fail(); return; }
+
+  var TAU = Math.PI * 2;
+  var q = new URLSearchParams(location.search);
+  var seed = /^\d{1,9}$/.test(q.get('seed') || '') ? parseInt(q.get('seed'), 10) : DEFAULT_SEED;
+  var reduced = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  document.getElementById('seed').textContent = 'seed ' + seed + (seed === DEFAULT_SEED ? ' · 展出版' : '');
+
+  function rng(salt) {
+    var a = (seed * 2654435761 + (salt || 0) * 40503 + 1013904223) >>> 0;
+    function r() { a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }
+    r.range = function (lo, hi) { return lo + r() * (hi - lo); };
+    r.int = function (lo, hi) { return Math.floor(lo + r() * (hi - lo + 1)); };
+    r.pick = function (arr) { return arr[Math.floor(r() * arr.length)]; };
+    r.chance = function (pr) { return r() < pr; };
+    return r;
+  }
+  function hex(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
+  function rgba(c, a) { return 'rgba(' + Math.round(c[0]) + ',' + Math.round(c[1]) + ',' + Math.round(c[2]) + ',' + (a === undefined ? 1 : a) + ')'; }
+  function mix(c1, c2, t) { return [c1[0] + (c2[0] - c1[0]) * t, c1[1] + (c2[1] - c1[1]) * t, c1[2] + (c2[2] - c1[2]) * t]; }
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function smooth(e0, e1, x) { var t = clamp((x - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); }
+  function inOut(t) { t = clamp(t, 0, 1); return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  // 以時間為準的指數趨近；dt 已截斷，切回分頁時不會追趕
+  function approach(cur, target, dt, rate) { return target + (cur - target) * Math.exp(-dt * rate); }
+
+  var last = 0, inst = null, api = {}, paused = false, visible = true, onscreen = true;
+  var A = {
+    TAU: TAU, rng: rng, hex: hex, rgba: rgba, mix: mix, clamp: clamp, lerp: lerp, smooth: smooth, inOut: inOut, approach: approach,
+    reduced: reduced, coarse: !!(window.matchMedia && matchMedia('(pointer: coarse)').matches), get seed() { return seed; },
+    // 每一格的秒數，最多 1/20 秒
+    tick: function () { var now = performance.now(), dt = last ? (now - last) / 1000 : 0; last = now; return Math.min(dt, 0.05); },
+    wake: function () { if (!inst) return; if (!paused && visible && onscreen) { if (!inst.isLooping()) { last = 0; inst.loop(); } } else inst.redraw(); },
+    sleep: function () { if (inst && inst.isLooping()) inst.noLoop(); },
+    get paused() { return paused; },
+    // 釋放離屏圖層（不用 p5.Graphics.remove，1.11 在此情境會拋錯）
+    dispose: function (g) { if (g && g.elt && g.elt.parentNode) g.elt.parentNode.removeChild(g.elt); },
+    narrow: function () { return stage.clientWidth < 640 || stage.clientHeight > stage.clientWidth * 1.05; }
+  };
+
+  // ── 04 空白正在移動：前景與下層各自快取；以 even-odd 裁切在前景挖出真正的開口 ──
+  function sketch(p, A, api) {
+    var GROUND = A.hex('#EEE9DB'), OCHRE = A.hex('#A83F36'), NIGHT = A.hex('#242623'), APRICOT = A.hex('#E8B58C');
+    var W, H, fg, bg, stations, R, pos, target, seg, st = 0, clock = 0, mode = 'auto', idle = 0, chips = [];
+    var MOVE = 4.2, HOLD = 3.6;
+
+    var lay;
+    function design() {
+      var r = A.rng(4), j = function (v, d) { return v + r.range(-d, d); };
+      lay = {
+        red: [j(0.1, 0.02), 0.1, j(0.44, 0.03), 0.9],
+        semi: [j(0.71, 0.03), 0.9, j(0.33, 0.02)],
+        apri: [j(0.53, 0.02), 0.1, 0.93, j(0.3, 0.03)],
+        bar: [j(0.49, 0.01), 0.1, 0.012, 0.8],
+        disc: [j(0.6, 0.04), j(0.44, 0.04), 0.13]
+      };
+      // 策展過的停留點：每一處都切出不同的負空間
+      stations = [[0.44, 0.52], [0.72, 0.8], [0.27, 0.3], [0.86, 0.22], [0.58, 0.58]];
+      if (r.chance(0.5)) stations.push(stations.shift());
+    }
+    function P(x, y) { var narrow = H > W * 1.05; return narrow ? [y * W, x * H] : [x * W, y * H]; }
+    function rect(c, a, b) { var q = P(a[0], a[1]), s = P(b[0], b[1]); c.fillRect(Math.min(q[0], s[0]), Math.min(q[1], s[1]), Math.abs(s[0] - q[0]), Math.abs(s[1] - q[1])); }
+
+    function build() {
+      W = p.width; H = p.height; R = Math.min(W, H) * 0.19;
+      [fg, bg].forEach(A.dispose);
+      fg = p.createGraphics(W, H); bg = p.createGraphics(W, H);
+      var c = fg.drawingContext, m = Math.min(W, H), narrow = H > W * 1.05;
+      c.fillStyle = A.rgba(GROUND); c.fillRect(0, 0, W, H);
+      c.fillStyle = A.rgba(OCHRE); rect(c, [lay.red[0], lay.red[1]], [lay.red[2], lay.red[3]]);
+      c.fillStyle = A.rgba(APRICOT); rect(c, [lay.apri[0], lay.apri[1]], [lay.apri[2], lay.apri[3]]);
+      c.fillStyle = A.rgba(NIGHT); rect(c, [lay.bar[0], lay.bar[1]], [lay.bar[0] + lay.bar[2], lay.bar[3]]);
+      var sc = P(lay.semi[0], lay.semi[1]);
+      c.beginPath(); c.arc(sc[0], sc[1], lay.semi[2] * m, narrow ? Math.PI / 2 : Math.PI, narrow ? Math.PI * 1.5 : A.TAU); c.closePath(); c.fill();
+      // 下層：另一張夜色的構圖，只有缺席時才看得見
+      var d = bg.drawingContext;
+      d.fillStyle = A.rgba(NIGHT); d.fillRect(0, 0, W, H);
+      d.strokeStyle = A.rgba(APRICOT, 0.75); d.lineWidth = 1;
+      var gap = Math.max(7, m * 0.018);
+      d.beginPath();
+      if (narrow) for (var x = gap / 2; x < W; x += gap) { d.moveTo(x, 0); d.lineTo(x, H); }
+      else for (var y = gap / 2; y < H; y += gap) { d.moveTo(0, y); d.lineTo(W, y); }
+      d.stroke();
+      var dc = P(lay.disc[0], lay.disc[1]);
+      d.fillStyle = A.rgba(OCHRE); d.beginPath(); d.arc(dc[0], dc[1], lay.disc[2] * m, 0, A.TAU); d.fill();
+      d.fillStyle = A.rgba(APRICOT); var sq = m * 0.07, q2 = P(0.2, 0.74); d.fillRect(q2[0] - sq / 2, q2[1] - sq / 2, sq, sq);
+    }
+    function stationXY(i) { return P(stations[i][0], stations[i][1]); }
+    function clampPos(q) { return [A.clamp(q[0], R * 0.6, W - R * 0.6), A.clamp(q[1], R * 0.6, H - R * 0.6)]; }
+    function setChips() { chips.forEach(function (b, i) { b.setAttribute('aria-pressed', mode !== 'free' && i === st ? 'true' : 'false'); }); }
+    function goStation(i, instant) {
+      st = (i + stations.length) % stations.length; mode = 'auto'; target = clampPos(stationXY(st));
+      seg = { from: pos.slice(), to: target }; clock = 0;
+      if (instant || A.reduced) { pos = target.slice(); seg.from = pos.slice(); clock = MOVE; }
+      setChips(); A.wake();
+    }
+
+    p.setup = function () {
+      design(); build();
+      pos = clampPos(stationXY(0)); target = pos.slice(); seg = { from: pos.slice(), to: pos.slice() }; clock = MOVE;
+      var el = p.canvas;
+      el.addEventListener('pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        mode = 'follow'; target = clampPos([e.offsetX, e.offsetY]); idle = 0; setChips(); A.wake();
+      });
+      el.addEventListener('pointerleave', function () { if (mode === 'follow') { mode = 'free'; idle = 0; A.wake(); } });
+      el.addEventListener('click', function (e) {
+        if (e.pointerType === 'mouse') return;
+        mode = 'free'; target = clampPos([e.offsetX, e.offsetY]); idle = 0; if (A.reduced) pos = target.slice(); setChips(); A.wake();
+      });
+      chips = Array.prototype.slice.call(document.querySelectorAll('[data-station]'));
+      chips.forEach(function (b) { b.addEventListener('click', function () { goStation(+b.dataset.station, false); }); });
+      setChips();
+    };
+
+    p.draw = function () {
+      var dt = A.tick();
+      if (mode === 'auto' && !A.reduced && !A.paused) {
+        clock += dt;
+        if (clock > MOVE + HOLD) { clock = 0; st = (st + 1) % stations.length; seg = { from: pos.slice(), to: clampPos(stationXY(st)) }; setChips(); }
+        var k = A.inOut(clock / MOVE);
+        pos = [A.lerp(seg.from[0], seg.to[0], k), A.lerp(seg.from[1], seg.to[1], k)];
+      } else if (mode !== 'auto') {
+        var rate = mode === 'follow' ? 5 : 2.6;
+        pos = [A.approach(pos[0], target[0], dt, rate), A.approach(pos[1], target[1], dt, rate)];
+        if (mode === 'free') {
+          idle += dt;
+          // 無人操作一段時間後，回到最近的策展位置，再接續自主路徑
+          if (idle > 6 && !A.reduced) {
+            var best = 0, bd = 1e9;
+            stations.forEach(function (s, i) { var q = clampPos(stationXY(i)), d = Math.hypot(q[0] - pos[0], q[1] - pos[1]); if (d < bd) { bd = d; best = i; } });
+            st = best; mode = 'auto'; clock = 0; seg = { from: pos.slice(), to: clampPos(stationXY(st)) }; setChips();
+          }
+        }
+      }
+      var ctx = p.drawingContext;
+      p.image(bg, 0, 0, W, H);
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(0, 0, W, H);
+      ctx.moveTo(pos[0] + R, pos[1]); ctx.arc(pos[0], pos[1], R, 0, A.TAU);
+      ctx.clip('evenodd');
+      p.image(fg, 0, 0, W, H);
+      ctx.restore();
+    };
+
+    api.animating = function () {
+      if (A.reduced) return false;
+      return mode === 'auto' || mode === 'follow' || Math.hypot(pos[0] - target[0], pos[1] - target[1]) > 0.3 || mode === 'free';
+    };
+    api.resize = function () { build(); pos = clampPos(stationXY(st)); target = pos.slice(); seg = { from: pos.slice(), to: pos.slice() }; clock = MOVE; };
+    api.reset = function () { goStation(0, true); };
+    api.tag = function () { return 'pos' + Math.round(pos[0] / W * 100) + 'x' + Math.round(pos[1] / H * 100); };
+    api.key = function (e) {
+      var k = e.key;
+      if (k === 'ArrowRight' || k === 'ArrowDown') { goStation(st + 1); return true; }
+      if (k === 'ArrowLeft' || k === 'ArrowUp') { goStation(st - 1); return true; }
+      if (/^[1-5]$/.test(k)) { goStation(+k - 1); return true; }
+      return false;
+    };
+  }
+
+  function size() { return [Math.max(10, Math.floor(stage.clientWidth)), Math.max(10, Math.floor(stage.clientHeight))]; }
+  function start() {
+    if (inst) { inst.remove(); inst = null; }
+    api = {};
+    try {
+      inst = new p5(function (p) {
+        sketch(p, A, api);
+        var userSetup = p.setup, userDraw = p.draw;
+        p.setup = function () {
+          var s = size();
+          p.pixelDensity(Math.min(2, window.devicePixelRatio || 1));
+          var c = p.createCanvas(s[0], s[1]);
+          c.elt.setAttribute('tabindex', '0');
+          c.elt.setAttribute('role', 'img');
+          c.elt.setAttribute('aria-label', document.querySelector('.still').alt);
+          c.elt.addEventListener('keydown', function (e) { if (api.key && api.key(e)) { e.preventDefault(); A.wake(); } });
+          userSetup();
+          stage.classList.add('live');
+          last = 0;
+        };
+        p.draw = function () {
+          userDraw();
+          if (paused || !visible || !onscreen || !(api.animating && api.animating())) p.noLoop();
+        };
+      }, stage);
+    } catch (e) { fail(e); }
+  }
+  A.restart = start;
+  A.setPaused = function (v) { if (paused !== !!v) document.getElementById('pause').click(); };
+
+  var pauseBtn = document.getElementById('pause');
+  pauseBtn.addEventListener('click', function () {
+    paused = !paused;
+    pauseBtn.textContent = paused ? '繼續' : '暫停';
+    pauseBtn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+    if (api.pause) api.pause(paused);
+    if (paused) A.sleep(); else A.wake();
+  });
+  document.getElementById('reset').addEventListener('click', function () { if (api.reset) { api.reset(); A.wake(); } });
+  document.getElementById('save').addEventListener('click', function () {
+    if (!inst) return;
+    var tag = api.tag ? api.tag() : '';
+    inst.saveCanvas(SLUG + '-seed' + seed + (tag ? '-' + tag : ''), 'png');
+  });
+  var rt = 0, lastSize = '';
+  if (window.ResizeObserver) {
+    new ResizeObserver(function () {
+      clearTimeout(rt);
+      rt = setTimeout(function () {
+        var s = size(), key = s.join('x');
+        if (!inst || key === lastSize) return;
+        lastSize = key;
+        inst.resizeCanvas(s[0], s[1]);
+        if (api.resize) api.resize(s[0], s[1]);
+        A.wake(); inst.redraw();
+      }, 120);
+    }).observe(stage);
+  }
+  document.addEventListener('visibilitychange', function () { visible = !document.hidden; if (visible) A.wake(); else A.sleep(); });
+  if (window.IntersectionObserver) {
+    new IntersectionObserver(function (es) { onscreen = es[0].isIntersecting; if (onscreen) A.wake(); else A.sleep(); }, { threshold: 0.05 }).observe(stage);
+  }
+  window.addEventListener('pageshow', function (e) { if (e.persisted && !inst) start(); });
+  window.addEventListener('pagehide', function (e) { if (!e.persisted && inst) { inst.remove(); inst = null; } });
+  start();
+  lastSize = size().join('x');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>領土協商 · Negotiated Territories — 規則之後</title>
+<meta name="description" content="一個區域取得更多空間，必然改變鄰近區域的存在方式。">
+<link rel="icon" href="data:,">
+<style>
+:root {
+  --art: #F3EFE5;
+  --page: #f1eee8; --ink: #1d1c1a; --muted: rgba(29,28,26,.56); --line: rgba(29,28,26,.16);
+  --accent: #F27636;
+  --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --page: #171614; --ink: #ebe6dc; --muted: rgba(235,230,220,.56); --line: rgba(235,230,220,.16); }
+}
+* { box-sizing: border-box; }
+html { background: var(--page); }
+body { margin: 0; color: var(--ink); background: var(--page); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+.hall { display: grid; grid-template-columns: minmax(0, 1fr) 340px; min-height: 100vh; min-height: 100svh; }
+.work { position: relative; padding: 28px 0 28px 28px; min-width: 0; }
+.stage { position: relative; width: 100%; height: calc(100vh - 56px); height: calc(100svh - 56px); min-height: 420px; background: var(--art); overflow: hidden; }
+.stage canvas { display: block; outline: none; touch-action: manipulation; }
+.stage canvas:focus-visible { box-shadow: inset 0 0 0 2px var(--accent); }
+.stage .still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: var(--art); }
+.stage.live .still { display: none; }
+.stage .fail { position: absolute; left: 16px; right: 16px; bottom: 14px; margin: 0; font-size: 12.5px; line-height: 1.7; color: #1d1c1a; background: rgba(255,255,255,.82); padding: 8px 12px; display: none; }
+.stage.failed .fail { display: block; }
+.label { padding: 34px 32px 28px 30px; display: flex; flex-direction: column; gap: 0; }
+.back { font-size: 12px; letter-spacing: .14em; color: var(--muted); text-decoration: none; align-self: flex-start; padding: 4px 0; }
+.back:hover, .back:focus-visible { color: var(--ink); }
+.no { font-family: var(--mono); font-size: 10.5px; letter-spacing: .24em; color: var(--muted); margin-top: 44px; }
+h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4px; line-height: 1.3; }
+.en { font-size: 12.5px; letter-spacing: .1em; color: var(--muted); margin: 0; }
+.thesis { font-size: 14px; line-height: 1.85; margin: 22px 0 0; padding-left: 12px; border-left: 2px solid var(--accent); }
+.hint { font-size: 12.5px; line-height: 1.8; color: var(--muted); margin: 18px 0 0; }
+.hint kbd { font-family: var(--mono); font-size: 11px; border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; }
+.extra { margin-top: 16px; }
+.extra label { display: block; font-size: 11.5px; letter-spacing: .12em; color: var(--muted); margin-bottom: 6px; }
+.extra input[type=range] { width: 100%; accent-color: var(--accent); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: inherit; font-size: 12px; letter-spacing: .06em; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px 6px 9px; min-height: 34px; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; }
+.chip i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.chip[aria-pressed=true] { border-color: var(--ink); background: var(--ink); color: var(--page); }
+.controls { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+.btn { font: inherit; font-size: 12px; letter-spacing: .08em; color: var(--ink); background: transparent; border: 1px solid var(--line); padding: 7px 12px; min-height: 36px; cursor: pointer; }
+.btn:hover, .chip:hover { border-color: var(--ink); }
+.btn:focus-visible, .chip:focus-visible, .back:focus-visible, .pn a:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn[hidden] { display: none; }
+.statement { font-size: 13.5px; line-height: 1.95; margin: 26px 0 0; }
+.tech { font-size: 11.5px; line-height: 1.75; color: var(--muted); margin: 14px 0 0; }
+.pn { margin-top: auto; padding-top: 28px; display: flex; justify-content: space-between; gap: 12px; font-size: 12px; letter-spacing: .06em; }
+.pn a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.pn a:hover { border-color: var(--ink); }
+.pn small { display: block; font-size: 10.5px; color: var(--muted); letter-spacing: .14em; margin-bottom: 2px; }
+.pn .next { text-align: right; }
+.seed { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--muted); margin-top: 14px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 899px) {
+  .hall { grid-template-columns: minmax(0, 1fr); }
+  .work { padding: 0; order: 2; }
+  .stage { height: auto; aspect-ratio: var(--narrow-ratio, 4 / 5); max-height: 78svh; min-height: 0; width: 100%; }
+  .label { display: contents; }
+  .label > .head { order: 1; padding: 18px 18px 16px; }
+  .label > .body { order: 3; padding: 4px 18px 28px; }
+  .no { margin-top: 18px; }
+  h1 { font-size: 25px; }
+  .thesis { margin-top: 14px; font-size: 13.5px; }
+}
+@media (min-width: 640px) and (max-width: 899px) { .stage { aspect-ratio: 4 / 3; } }
+@media (min-width: 900px) { .label > .head, .label > .body { display: contents; } }
+
+</style>
+</head>
+<body>
+<main class="hall">
+  <section class="work" aria-label="作品">
+    <div class="stage" id="stage">
+      <img class="still" src="thumbs/geo-negotiated-territories.jpg" alt="米白底上一張由十塊矩形拼成的平面：一塊佔近一半面積的深藍主體、數塊灰綠與暖米色區域，以及一道細長的橘色帶。">
+      <p class="fail">這是作品的靜態停格。互動版需要 JavaScript、Canvas 與同資料夾中的 <code>lib/p5.min.js</code>。</p>
+    </div>
+  </section>
+  <aside class="label">
+    <div class="head">
+      <a class="back" href="p5-demo-list.html#geometric">← 規則之後 · 目錄</a>
+      <div class="no">平面上的關係 01 / 08</div>
+      <h1>領土協商</h1>
+      <p class="en">Negotiated Territories</p>
+      <p class="thesis">一個區域取得更多空間，必然改變鄰近區域的存在方式。</p>
+    </div>
+    <div class="body">
+      <p class="hint" id="hint">滑鼠靠近任一色塊，它會慢慢取得空間；點一下鎖定，再點一次解除。觸控：輕點鎖定、輕點他處換焦點。鍵盤：選取畫面後按 <kbd>←</kbd><kbd>→</kbd> 選塊、<kbd>Enter</kbd> 鎖定、<kbd>Esc</kbd> 解除。</p>
+
+      <div class="controls">
+        <button class="btn" id="pause" type="button" aria-pressed="false">暫停</button>
+        <button class="btn" id="reset" type="button">回到初始</button>
+        <button class="btn" id="save" type="button">匯出 PNG</button>
+      </div>
+      <p class="statement">十塊領土拼成一張沒有縫隙的平面。每一塊都有自己的位置，卻沒有獨立於他者的空間：當其中一塊擴張，畫面不是被推開，而是沿著共用的切割線重新分配比例。觀看與選擇成為一次短暫的協商，深藍的主體、灰綠的中段與一道橘色斷句，在讓位與佔據之間找到新的平衡。</p>
+      <p class="tech">p5.js 1.11.13 · 二元分割樹（每個節點保存分割軸、基準比例與目前比例）· 擴張只改祖先比例，並依子樹最小尺寸夾在可行範圍內，中途也維持合法拼接。</p>
+      <nav class="pn" aria-label="前後作品">
+        <a class="prev" href="p5-demo-list.html#geometric"><small>前一件</small>回到目錄</a>
+        <a class="next" href="registration-pending.html"><small>下一件</small>尚未對準的印刷</a>
+      </nav>
+      <div class="seed" id="seed"></div>
+    </div>
+  </aside>
+</main>
+<noscript><style>.stage .fail{display:block}</style></noscript>
+<script src="lib/p5.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var SLUG = 'negotiated-territories', DEFAULT_SEED = 161803;
+  var stage = document.getElementById('stage');
+  function fail(err) { stage.classList.remove('live'); stage.classList.add('failed'); if (err && window.console) console.warn('[geometric] ' + SLUG + ':', err); }
+  if (typeof window.p5 !== 'function') { fail(); return; }
+  var probe = document.createElement('canvas');
+  if (!probe.getContext || !probe.getContext('2d')) { fail(); return; }
+
+  var TAU = Math.PI * 2;
+  var q = new URLSearchParams(location.search);
+  var seed = /^\d{1,9}$/.test(q.get('seed') || '') ? parseInt(q.get('seed'), 10) : DEFAULT_SEED;
+  var reduced = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  document.getElementById('seed').textContent = 'seed ' + seed + (seed === DEFAULT_SEED ? ' · 展出版' : '');
+
+  function rng(salt) {
+    var a = (seed * 2654435761 + (salt || 0) * 40503 + 1013904223) >>> 0;
+    function r() { a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }
+    r.range = function (lo, hi) { return lo + r() * (hi - lo); };
+    r.int = function (lo, hi) { return Math.floor(lo + r() * (hi - lo + 1)); };
+    r.pick = function (arr) { return arr[Math.floor(r() * arr.length)]; };
+    r.chance = function (pr) { return r() < pr; };
+    return r;
+  }
+  function hex(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
+  function rgba(c, a) { return 'rgba(' + Math.round(c[0]) + ',' + Math.round(c[1]) + ',' + Math.round(c[2]) + ',' + (a === undefined ? 1 : a) + ')'; }
+  function mix(c1, c2, t) { return [c1[0] + (c2[0] - c1[0]) * t, c1[1] + (c2[1] - c1[1]) * t, c1[2] + (c2[2] - c1[2]) * t]; }
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function smooth(e0, e1, x) { var t = clamp((x - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); }
+  function inOut(t) { t = clamp(t, 0, 1); return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  // 以時間為準的指數趨近；dt 已截斷，切回分頁時不會追趕
+  function approach(cur, target, dt, rate) { return target + (cur - target) * Math.exp(-dt * rate); }
+
+  var last = 0, inst = null, api = {}, paused = false, visible = true, onscreen = true;
+  var A = {
+    TAU: TAU, rng: rng, hex: hex, rgba: rgba, mix: mix, clamp: clamp, lerp: lerp, smooth: smooth, inOut: inOut, approach: approach,
+    reduced: reduced, coarse: !!(window.matchMedia && matchMedia('(pointer: coarse)').matches), get seed() { return seed; },
+    // 每一格的秒數，最多 1/20 秒
+    tick: function () { var now = performance.now(), dt = last ? (now - last) / 1000 : 0; last = now; return Math.min(dt, 0.05); },
+    wake: function () { if (!inst) return; if (!paused && visible && onscreen) { if (!inst.isLooping()) { last = 0; inst.loop(); } } else inst.redraw(); },
+    sleep: function () { if (inst && inst.isLooping()) inst.noLoop(); },
+    get paused() { return paused; },
+    // 釋放離屏圖層（不用 p5.Graphics.remove，1.11 在此情境會拋錯）
+    dispose: function (g) { if (g && g.elt && g.elt.parentNode) g.elt.parentNode.removeChild(g.elt); },
+    narrow: function () { return stage.clientWidth < 640 || stage.clientHeight > stage.clientWidth * 1.05; }
+  };
+
+  // ── 01 領土協商：一棵二元分割樹。所有區域共用同一組切割線，擴張只改祖先的比例 ──
+  function sketch(p, A, api) {
+    var BG = A.hex('#F3EFE5'), DEEP = A.hex('#E4DCCB'), NAVY = A.hex('#172F4D'), SAGE = A.hex('#B6C2A4'), ORANGE = A.hex('#F27636');
+    var root, leaves = [], hover = null, locked = null, kb = -1, W, H, wide, M, G, MIN;
+
+    function node(axis, ratio, a, b) { return { axis: axis, base: ratio, ratio: ratio, target: ratio, kids: [a, b] }; }
+    function leaf(id, col, role) { return { leaf: true, id: id, col: col, role: role, r: null }; }
+
+    // 生成語法：一個主體、兩條斷句般的細長帶、其餘中型區域
+    function build() {
+      var r = A.rng(1);
+      var r0 = r.range(0.56, 0.62), ra = r.range(0.7, 0.78);
+      var stripA = leaf('strip-a', NAVY, 'slender'), stripB = leaf('strip-b', DEEP, 'slender');
+      var main = leaf('main', NAVY, 'main');
+      var Aside = r.chance(0.5)
+        ? node('S', ra, main, node('L', r.range(0.3, 0.45), stripA, stripB))
+        : node('S', 1 - ra, node('L', r.range(0.55, 0.7), stripB, stripA), main);
+      var b1b = r.chance(0.65) ? node('S', r.range(0.4, 0.6), leaf('b1b', DEEP, 'mid'), leaf('b1c', SAGE, 'mid')) : leaf('b1b', DEEP, 'mid');
+      var B1 = node('L', r.range(0.48, 0.62), leaf('b1a', SAGE, 'mid'), b1b);
+      var B2 = node('L', r.range(0.26, 0.36), leaf('slit', ORANGE, 'slender'), node('S', r.range(0.42, 0.6), leaf('b2a', SAGE, 'mid'), leaf('b2b', DEEP, 'mid')));
+      var Bside = r.chance(0.5) ? node('S', r.range(0.42, 0.58), B1, B2) : node('S', r.range(0.42, 0.58), B2, B1);
+      root = r.chance(0.5) ? node('L', r0, Aside, Bside) : node('L', 1 - r0, Bside, Aside);
+      leaves = [];
+      (function walk(n) { if (n.leaf) leaves.push(n); else { walk(n.kids[0]); walk(n.kids[1]); } })(root);
+    }
+
+    function layoutSize() {
+      W = p.width; H = p.height; wide = W >= H;
+      var m = Math.min(W, H);
+      M = Math.round(m * (A.narrow() ? 0.06 : 0.075)); G = Math.max(3, Math.round(m * 0.007)); MIN = Math.max(16, m * 0.045);
+    }
+    function dir(n) { return (n.axis === 'L') === wide ? 'x' : 'y'; }
+    // 子樹在某方向上至少需要的長度
+    function minExt(n, d) {
+      if (n.leaf) return MIN;
+      var a = minExt(n.kids[0], d), b = minExt(n.kids[1], d);
+      return dir(n) === d ? a + b : Math.max(a, b);
+    }
+    function contains(n, l) { return n === l || (!n.leaf && (contains(n.kids[0], l) || contains(n.kids[1], l))); }
+    function bounds(n, ext) {
+      var lo = minExt(n.kids[0], dir(n)) / ext, hi = 1 - minExt(n.kids[1], dir(n)) / ext;
+      return lo > hi ? [0.5, 0.5] : [lo, hi];
+    }
+    // 依焦點計算每個節點的目標比例（由上而下，以目標版面計算可行範圍）
+    function targets(n, x, y, w, h, focus) {
+      if (n.leaf) return;
+      var d = dir(n), ext = d === 'x' ? w : h, bd = bounds(n, ext), t = A.clamp(n.base, bd[0], bd[1]);
+      if (focus && contains(n, focus)) {
+        var first = contains(n.kids[0], focus), k = 0.62;
+        t = first ? A.lerp(t, bd[1], k) : A.lerp(t, bd[0], k);
+      }
+      n.target = t;
+      if (d === 'x') { targets(n.kids[0], x, y, w * t, h, focus); targets(n.kids[1], x + w * t, y, w * (1 - t), h, focus); }
+      else { targets(n.kids[0], x, y, w, h * t, focus); targets(n.kids[1], x, y + h * t, w, h * (1 - t), focus); }
+    }
+    // 由上而下套用目前比例，並在當下尺寸中再夾一次，確保中途也是合法拼接
+    function place(n, x, y, w, h) {
+      if (n.leaf) { n.r = [x, y, w, h]; return; }
+      var d = dir(n), bd = bounds(n, d === 'x' ? w : h), t = A.clamp(n.ratio, bd[0], bd[1]);
+      if (d === 'x') { place(n.kids[0], x, y, w * t, h); place(n.kids[1], x + w * t, y, w * (1 - t), h); }
+      else { place(n.kids[0], x, y, w, h * t); place(n.kids[1], x, y + h * t, w, h * (1 - t)); }
+    }
+    function eachNode(f) { (function walk(n) { if (!n.leaf) { f(n); walk(n.kids[0]); walk(n.kids[1]); } })(root); }
+    function focus() { return locked || hover; }
+    function leafAt(x, y) {
+      for (var i = 0; i < leaves.length; i++) { var r = leaves[i].r; if (x >= r[0] && x <= r[0] + r[2] && y >= r[1] && y <= r[1] + r[3]) return leaves[i]; }
+      return null;
+    }
+    function retarget() {
+      targets(root, M, M, W - 2 * M, H - 2 * M, focus());
+      if (A.reduced) eachNode(function (n) { n.ratio = n.target; });
+      A.wake();
+    }
+
+    p.setup = function () {
+      build(); layoutSize();
+      place(root, M, M, W - 2 * M, H - 2 * M);
+      retarget();
+      var el = p.canvas;
+      el.addEventListener('pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        var l = leafAt(e.offsetX, e.offsetY);
+        if (l !== hover) { hover = l; retarget(); }
+      });
+      el.addEventListener('focus', A.wake); el.addEventListener('blur', A.wake);
+      el.addEventListener('pointerleave', function () { if (hover) { hover = null; retarget(); } });
+      el.addEventListener('click', function (e) {
+        var l = leafAt(e.offsetX, e.offsetY);
+        locked = l && l !== locked ? l : null;
+        kb = l ? leaves.indexOf(l) : kb;
+        retarget();
+      });
+    };
+
+    p.draw = function () {
+      var dt = A.tick(), moving = false;
+      eachNode(function (n) {
+        var rate = focus() ? 2.4 : 1.1;
+        n.ratio = A.approach(n.ratio, n.target, dt, rate);
+        if (Math.abs(n.ratio - n.target) < 0.0004) n.ratio = n.target; else moving = true;
+      });
+      api._moving = moving;
+      place(root, M, M, W - 2 * M, H - 2 * M);
+      var ctx = p.drawingContext;
+      ctx.fillStyle = A.rgba(BG); ctx.fillRect(0, 0, W, H);
+      for (var i = 0; i < leaves.length; i++) {
+        var l = leaves[i], r = l.r;
+        ctx.fillStyle = A.rgba(l.col);
+        ctx.fillRect(r[0] + G / 2, r[1] + G / 2, Math.max(0, r[2] - G), Math.max(0, r[3] - G));
+      }
+      // 被鎖定或鍵盤選取的區域：一條安靜的內框
+      var mark = locked || (kb >= 0 && document.activeElement === p.canvas ? leaves[kb] : null);
+      if (mark) {
+        var mr = mark.r, ins = G / 2 + Math.max(6, G * 2);
+        ctx.strokeStyle = A.rgba(mark.col === NAVY || mark.col === ORANGE ? BG : NAVY, 0.9);
+        ctx.lineWidth = locked ? 1.5 : 1;
+        if (!locked) ctx.setLineDash([4, 4]);
+        ctx.strokeRect(mr[0] + ins, mr[1] + ins, mr[2] - ins * 2, mr[3] - ins * 2);
+        ctx.setLineDash([]);
+      }
+    };
+
+    api.animating = function () { return !!api._moving; };
+    api.resize = function () { layoutSize(); retarget(); };
+    api.reset = function () { locked = null; hover = null; kb = -1; eachNode(function (n) { n.ratio = n.base; }); retarget(); };
+    api.tag = function () { return focus() ? 'focus-' + focus().id : 'rest'; };
+    api.key = function (e) {
+      var k = e.key;
+      if (k === 'ArrowRight' || k === 'ArrowDown') { kb = (kb + 1) % leaves.length; return true; }
+      if (k === 'ArrowLeft' || k === 'ArrowUp') { kb = (kb - 1 + leaves.length) % leaves.length; return true; }
+      if ((k === 'Enter' || k === ' ') && kb >= 0) { locked = locked === leaves[kb] ? null : leaves[kb]; retarget(); return true; }
+      if (k === 'Escape') { locked = null; retarget(); return true; }
+      return false;
+    };
+  }
+
+  function size() { return [Math.max(10, Math.floor(stage.clientWidth)), Math.max(10, Math.floor(stage.clientHeight))]; }
+  function start() {
+    if (inst) { inst.remove(); inst = null; }
+    api = {};
+    try {
+      inst = new p5(function (p) {
+        sketch(p, A, api);
+        var userSetup = p.setup, userDraw = p.draw;
+        p.setup = function () {
+          var s = size();
+          p.pixelDensity(Math.min(2, window.devicePixelRatio || 1));
+          var c = p.createCanvas(s[0], s[1]);
+          c.elt.setAttribute('tabindex', '0');
+          c.elt.setAttribute('role', 'img');
+          c.elt.setAttribute('aria-label', document.querySelector('.still').alt);
+          c.elt.addEventListener('keydown', function (e) { if (api.key && api.key(e)) { e.preventDefault(); A.wake(); } });
+          userSetup();
+          stage.classList.add('live');
+          last = 0;
+        };
+        p.draw = function () {
+          userDraw();
+          if (paused || !visible || !onscreen || !(api.animating && api.animating())) p.noLoop();
+        };
+      }, stage);
+    } catch (e) { fail(e); }
+  }
+  A.restart = start;
+  A.setPaused = function (v) { if (paused !== !!v) document.getElementById('pause').click(); };
+
+  var pauseBtn = document.getElementById('pause');
+  pauseBtn.addEventListener('click', function () {
+    paused = !paused;
+    pauseBtn.textContent = paused ? '繼續' : '暫停';
+    pauseBtn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+    if (api.pause) api.pause(paused);
+    if (paused) A.sleep(); else A.wake();
+  });
+  document.getElementById('reset').addEventListener('click', function () { if (api.reset) { api.reset(); A.wake(); } });
+  document.getElementById('save').addEventListener('click', function () {
+    if (!inst) return;
+    var tag = api.tag ? api.tag() : '';
+    inst.saveCanvas(SLUG + '-seed' + seed + (tag ? '-' + tag : ''), 'png');
+  });
+  var rt = 0, lastSize = '';
+  if (window.ResizeObserver) {
+    new ResizeObserver(function () {
+      clearTimeout(rt);
+      rt = setTimeout(function () {
+        var s = size(), key = s.join('x');
+        if (!inst || key === lastSize) return;
+        lastSize = key;
+        inst.resizeCanvas(s[0], s[1]);
+        if (api.resize) api.resize(s[0], s[1]);
+        A.wake(); inst.redraw();
+      }, 120);
+    }).observe(stage);
+  }
+  document.addEventListener('visibilitychange', function () { visible = !document.hidden; if (visible) A.wake(); else A.sleep(); });
+  if (window.IntersectionObserver) {
+    new IntersectionObserver(function (es) { onscreen = es[0].isIntersecting; if (onscreen) A.wake(); else A.sleep(); }, { threshold: 0.05 }).observe(stage);
+  }
+  window.addEventListener('pageshow', function (e) { if (e.persisted && !inst) start(); });
+  window.addEventListener('pagehide', function (e) { if (!e.persisted && inst) { inst.remove(); inst = null; } });
+  start();
+  lastSize = size().join('x');
+})();
+</script>
+</body>
+</html>

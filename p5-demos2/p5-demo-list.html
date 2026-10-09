@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>規則之後 · p5.js 生成作品集（第二輯）</title>
-<meta name="description" content="十件以 p5.js 寫成的生成式作品：流場、等高線、遞迴切割、圓形填充、Truchet、差異生長、空間殖民、加權 Voronoi 點描、boids 與生成式字體。">
+<meta name="description" content="以 p5.js 寫成的十八件生成式作品：第一部十件生長式作品，第二部「平面上的關係」八件幾何與色塊的互動作品。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="規則之後">
 <meta property="og:title" content="規則之後 — p5.js 生成作品集（第二輯）">
-<meta property="og:description" content="十件以 p5.js 寫成的生成式作品，各自只遵守一條簡單的規則：流場、等高線、遞迴切割、圓形填充、Truchet、差異生長、空間殖民、點描、鳥群與字。">
+<meta property="og:description" content="十八件以 p5.js 寫成的生成式作品：十件各自只遵守一條規則的生長式作品，以及八件研究平面關係的幾何互動作品。">
 <meta property="og:url" content="https://ml-yoyohuang.github.io/artworks/p5-demos2/p5-demo-list.html">
 <meta property="og:image" content="https://ml-yoyohuang.github.io/artworks/p5-demos2/assets/og-image.jpg">
 <meta property="og:image:type" content="image/jpeg">
@@ -18,7 +18,7 @@
 <meta property="og:image:alt" content="規則之後：紙色封面上的標題，搭配流場、等高線、藍曬葉脈、漆金 Truchet、銅版點描與生成式字體六件作品。">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="規則之後 — p5.js 生成作品集（第二輯）">
-<meta name="twitter:description" content="十件以 p5.js 寫成的生成式作品，各自只遵守一條簡單的規則：流場、等高線、遞迴切割、圓形填充、Truchet、差異生長、空間殖民、點描、鳥群與字。">
+<meta name="twitter:description" content="十八件以 p5.js 寫成的生成式作品：十件各自只遵守一條規則的生長式作品，以及八件研究平面關係的幾何互動作品。">
 <meta name="twitter:image" content="https://ml-yoyohuang.github.io/artworks/p5-demos2/assets/og-image.jpg">
 <meta name="twitter:image:alt" content="規則之後：紙色封面上的標題，搭配流場、等高線、藍曬葉脈、漆金 Truchet、銅版點描與生成式字體六件作品。">
 <link rel="icon" href="data:,">
@@ -54,6 +54,10 @@ h2 small { font-size: 11.5px; font-weight: 400; letter-spacing: .08em; color: va
 .rule { font-size: 13.5px; line-height: 1.85; margin: 0 0 10px; opacity: .85; }
 .tags { list-style: none; padding: 0; margin: 0 0 8px; display: flex; flex-wrap: wrap; gap: 6px; }
 .tags li { font-size: 11px; letter-spacing: .08em; padding: 2px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+.part { margin-top: 84px; padding-top: 44px; border-top: 1px solid var(--line); }
+.part-head { display: grid; grid-template-columns: 1fr minmax(0, 420px); gap: 40px; align-items: end; margin-bottom: 40px; }
+.part-title { font-size: clamp(28px, 4vw, 44px); font-weight: 300; letter-spacing: .14em; margin: 0; }
+@media (max-width: 760px) { .part-head { grid-template-columns: 1fr; gap: 16px; } .part { margin-top: 56px; padding-top: 30px; } }
 .place { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.7; }
 .place span { font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; margin-right: .8em; color: var(--ink); opacity: .6; }
 footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 11.5px; color: var(--muted); letter-spacing: .06em; line-height: 1.8; }
@@ -75,7 +79,7 @@ footer a { color: inherit; }
       <p class="eyebrow">P5.JS GENERATIVE WORKS · VOL. 2</p>
       <h1>規則之後<small>AFTER THE RULE</small></h1>
     </div>
-    <p class="lede">十件作品，各自只遵守一條簡單的規則。演算法負責重複，手的痕跡留在線寬、抖動與墨色的疊加裡；靜態的作品會在十幾秒內慢慢長成，然後停下，成為一張畫。點進任一件，按「重新生成」換一顆種子。</p>
+    <p class="lede">第一部十件作品，各自只遵守一條簡單的規則。演算法負責重複，手的痕跡留在線寬、抖動與墨色的疊加裡；靜態的作品會在十幾秒內慢慢長成，然後停下，成為一張畫。點進任一件，按「重新生成」換一顆種子。</p>
   </header>
   <ol class="grid">
     <li class="card">
@@ -199,6 +203,111 @@ footer a { color: inherit; }
       </a>
     </li>
   </ol>
+  <section class="part" id="geometric" aria-labelledby="geo-title">
+    <header class="part-head">
+      <div><p class="eyebrow">PART II · RELATIONS ON A PLANE</p>
+      <h2 id="geo-title" class="part-title">平面上的關係</h2></div>
+      <p class="lede">八件以幾何與色塊為主體的互動作品。每一件研究一種關係——讓位、套合、翻面、缺席、沉積、遲到、尺度與殘留——並把它交給觀眾的手。首次進入即是策展過的構圖；畫布可用滑鼠、觸控或鍵盤操作。</p>
+    </header>
+    <ol class="grid">
+    <li class="card">
+      <a href="negotiated-territories.html">
+        <div class="thumb" style="background:#F3EFE5"><img src="thumbs/geo-negotiated-territories.jpg" alt="米白底上一張由十塊矩形拼成的平面：一塊佔近一半面積的深藍主體、數塊灰綠與暖米色區域，以及一道細長的橘色帶。" loading="lazy" width="900" height="709"></div>
+        <div class="meta">
+          <div class="no">G01<span class="sw"><i style="background:#F3EFE5"></i><i style="background:#F27636"></i></span></div>
+          <h2>領土協商<small>Negotiated Territories</small></h2>
+          <p class="rule">一個區域取得更多空間，必然改變鄰近區域的存在方式。</p>
+          <ul class="tags"><li>協商</li><li>分割樹</li><li>比例</li></ul>
+          <p class="place"><span>適合</span>關於我們、組織架構、資源分配說明</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="registration-pending.html">
+        <div class="thumb" style="background:#F2EBDD"><img src="thumbs/geo-registration-pending.jpg" alt="米色紙上的套色印刷構圖：藍色大圓、紅色矩形與粉色半圓彼此稍微錯開，重疊處呈現深紫與暗紅。" loading="lazy" width="900" height="709"></div>
+        <div class="meta">
+          <div class="no">G02<span class="sw"><i style="background:#F2EBDD"></i><i style="background:#2948BA"></i></span></div>
+          <h2>尚未對準的印刷<small>Registration, Pending</small></h2>
+          <p class="rule">影像的完整，是幾層各自存在的色彩在某個時刻相遇。</p>
+          <ul class="tags"><li>套印</li><li>色版</li><li>乘色</li></ul>
+          <p class="place"><span>適合</span>出版與印刷品牌、活動主視覺、頁首</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="reverse-of-a-plane.html">
+        <div class="thumb" style="background:#ECE8DA"><img src="thumbs/geo-reverse-of-a-plane.jpg" alt="淺米色底上五片大小不一的灰綠色面板，其中一片沿邊翻起，露出紫色背面與下方深靛色的空間。" loading="lazy" width="900" height="709"></div>
+        <div class="meta">
+          <div class="no">G03<span class="sw"><i style="background:#ECE8DA"></i><i style="background:#8B48B8"></i></span></div>
+          <h2>平面有背面<small>The Reverse of a Plane</small></h2>
+          <p class="rule">看似完整的表面，仍保留著尚未被看見的一面。</p>
+          <ul class="tags"><li>翻折</li><li>背面</li><li>揭露</li></ul>
+          <p class="place"><span>適合</span>產品揭曉、作品集封面、互動式說明</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="moving-absence.html">
+        <div class="thumb" style="background:#EEE9DB"><img src="thumbs/geo-moving-absence.jpg" alt="暖米色畫面上有赭紅長方形、近黑半圓與杏色色帶，一個大圓形開口切穿它們，露出下方深色底與細橫線。" loading="lazy" width="900" height="709"></div>
+        <div class="meta">
+          <div class="no">G04<span class="sw"><i style="background:#EEE9DB"></i><i style="background:#A83F36"></i></span></div>
+          <h2>空白正在移動<small>Moving Absence</small></h2>
+          <p class="rule">空白能夠改變色塊的形狀，也能改變觀看的重心。</p>
+          <ul class="tags"><li>負空間</li><li>遮罩</li><li>重心</li></ul>
+          <p class="place"><span>適合</span>首頁主視覺、攝影作品集、品牌宣言</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="chromatic-sediments.html">
+        <div class="thumb" style="background:#E9E1D1"><img src="thumbs/geo-chromatic-sediments.jpg" alt="米色底上由下而上堆疊的水平色層：深棕、霧粉、灰紫的厚層之間夾著細黃線，中段一條斷層使部分地層錯開。" loading="lazy" width="900" height="709"></div>
+        <div class="meta">
+          <div class="no">G05<span class="sw"><i style="background:#E9E1D1"></i><i style="background:#48362E"></i></span></div>
+          <h2>色彩沉積<small>Chromatic Sediments</small></h2>
+          <p class="rule">時間被轉譯成厚度，閱讀留下不同顏色的層。</p>
+          <ul class="tags"><li>地層</li><li>時間</li><li>進度</li></ul>
+          <p class="place"><span>適合</span>年表、長文閱讀進度、歷史頁</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="a-beat-behind.html">
+        <div class="thumb" style="background:#F1ECDF"><img src="thumbs/geo-a-beat-behind.jpg" alt="淺米色底上，深綠長條、珊瑚色方塊與淺藍細條排成整齊隊形，其中幾個形狀落後，還在移動途中。" loading="lazy" width="900" height="709"></div>
+        <div class="meta">
+          <div class="no">G06<span class="sw"><i style="background:#F1ECDF"></i><i style="background:#EB7764"></i></span></div>
+          <h2>遲到半拍的群舞<small>A Beat Behind</small></h2>
+          <p class="rule">群體共享一套規則，個體仍保留自己的時間。</p>
+          <ul class="tags"><li>編舞</li><li>群體</li><li>延遲</li></ul>
+          <p class="place"><span>適合</span>團隊介紹、協作產品、活動節目單</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="within-the-same-frame.html">
+        <div class="thumb" style="background:#EFE8D8"><img src="thumbs/geo-within-the-same-frame.jpg" alt="暖米色畫面上幾個大小不一的色塊：酒紅、霧藍、深灰藍，每個色塊內又有更小的同色系構圖。" loading="lazy" width="900" height="709"></div>
+        <div class="meta">
+          <div class="no">G07<span class="sw"><i style="background:#EFE8D8"></i><i style="background:#74384C"></i></span></div>
+          <h2>同一張圖的不同尺度<small>Within the Same Frame</small></h2>
+          <p class="rule">靠近一個局部，會改變它在世界裡的分量。</p>
+          <ul class="tags"><li>遞迴</li><li>縮放</li><li>尺度</li></ul>
+          <p class="place"><span>適合</span>網站地圖、產品架構、知識導覽</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="residual-geometry.html">
+        <div class="thumb" style="background:#F2E7DC"><img src="thumbs/geo-residual-geometry.jpg" alt="米色紙上一個紅色圓形與兩塊深藍矩形，旁邊留著淡粉與灰綠的褪色印記，標示它們先前的位置。" loading="lazy" width="900" height="709"></div>
+        <div class="meta">
+          <div class="no">G08<span class="sw"><i style="background:#F2E7DC"></i><i style="background:#D9493F"></i></span></div>
+          <h2>幾何的餘溫<small>Residual Geometry</small></h2>
+          <p class="rule">形狀離開之後，它曾經存在的位置仍在參與畫面。</p>
+          <ul class="tags"><li>痕跡</li><li>時間</li><li>殘影</li></ul>
+          <p class="place"><span>適合</span>回顧頁、版本紀錄、紀念專題</p>
+        </div>
+      </a>
+    </li>
+    </ol>
+  </section>
   <footer>
     <span>以 <a href="lib/README.md">p5.js 1.11.13</a>（LGPL 2.1）繪製；所有素材皆由程式生成，可直接以檔案開啟。</span>
     <span class="mono" id="seed"></span>

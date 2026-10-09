@@ -18,7 +18,7 @@
 | 資料夾 | 內容 | 創作工具 |
 | --- | --- | --- |
 | [`shader-demos2/`](shader-demos2/shader-demo-list.html) | 慢物質 Slow Matter — GLSL 研究 | Claude |
-| [`p5-demos2/`](p5-demos2/p5-demo-list.html) | 規則之後 — p5.js 生成作品集（第二輯） | Claude |
+| [`p5-demos2/`](p5-demos2/p5-demo-list.html) | 規則之後 — p5.js 生成作品集（第二輯）：十件生長式作品＋八件幾何互動作品「平面上的關係」 | Claude |
 | [`magazine2/`](magazine2/index.html) | 間物 BETWEEN MATTER — 介紹 `shader-demos2` 與 `p5-demos2` 作品的雜誌頁 | 排版：Codex |
 
 ## 觀看方式
