@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>05 漆金結 · Lacquer Knot — p5 生成作品集</title>
+<meta name="description" content="每塊磚只能選擇轉或不轉，金線卻因此再也找不到起點與終點。">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:,">
+<style>
+:root {
+  --bg: #15110e;
+  --ink: #ecd6a2;
+  --muted: rgba(204,166,92,.62);
+  --btn-bg: rgba(21,17,14,.6);
+  --btn-line: rgba(204,166,92,.55);
+  --panel: rgba(21,17,14,.94);
+  --radius: 0;
+  --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --pad: 22px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--ink); }
+body { font-family: var(--font); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+#stage { position: fixed; inset: 0; }
+#stage canvas { display: block; }
+.chrome { position: fixed; left: 0; right: 0; z-index: 2; display: flex; justify-content: space-between; gap: 16px; padding: 0 var(--pad); pointer-events: none; }
+.chrome > * { pointer-events: auto; }
+.top { top: 0; align-items: center; padding-top: calc(18px + env(safe-area-inset-top)); }
+.foot { bottom: 0; align-items: flex-end; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+.back { font-size: 12px; letter-spacing: .16em; color: var(--muted); text-decoration: none; padding: 8px 0; transition: color .3s; }
+.back:hover, .back:focus-visible { color: var(--ink); }
+.back span { display: inline-block; transition: transform .3s; }
+.back:hover span { transform: translateX(-3px); }
+.controls { display: flex; gap: 8px; }
+.btn { font: inherit; font-size: 12px; letter-spacing: .1em; color: var(--ink); background: var(--btn-bg); border: 1px solid var(--btn-line); padding: 7px 13px; cursor: pointer; transition: background .25s, color .25s, border-color .25s; border-radius: var(--radius); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.btn:hover, .btn:focus-visible { background: var(--ink); color: var(--bg); border-color: var(--ink); outline: none; }
+.btn:active { transform: translateY(1px); }
+.caption { max-width: min(540px, 100%); }
+.no { font-family: var(--mono); font-size: 10.5px; letter-spacing: .22em; color: var(--muted); }
+.title { font-size: 15px; font-weight: 500; letter-spacing: .12em; margin: 5px 0 3px; }
+.title small { font-size: 11px; font-weight: 400; letter-spacing: .08em; color: var(--muted); margin-left: .6em; }
+.rule { font-size: 13px; line-height: 1.75; margin: 0; color: var(--ink); opacity: .78; }
+details { margin-top: 6px; }
+summary { list-style: none; cursor: pointer; font-size: 11.5px; letter-spacing: .14em; color: var(--muted); display: inline-flex; align-items: center; gap: .5em; padding: 3px 0; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: ""; width: 14px; height: 1px; background: currentColor; transition: width .3s; }
+details[open] summary::before { width: 26px; }
+summary:hover, summary:focus-visible { color: var(--ink); outline: none; }
+.about { margin-top: 10px; padding: 16px 18px; max-height: 48vh; overflow: auto; background: var(--panel); border-left: 1px solid var(--btn-line); font-size: 12.5px; line-height: 1.8; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.about h3 { font-size: 11px; font-weight: 500; letter-spacing: .2em; color: var(--muted); margin: 12px 0 2px; }
+.about h3:first-child { margin-top: 0; }
+.about p, .about ul { margin: 0; }
+.about ul { padding-left: 1.1em; }
+.about code { font-family: var(--mono); font-size: 11.5px; }
+.seed { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; color: var(--muted); white-space: nowrap; padding-bottom: 3px; user-select: all; }
+#status { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; font-size: 12px; letter-spacing: .3em; color: var(--muted); z-index: 1; pointer-events: none; }
+.computing #status { display: flex; }
+.computing #stage { visibility: hidden; }
+#fallback { position: fixed; inset: 0; z-index: 5; display: none; align-items: center; justify-content: center; padding: 32px; background: var(--bg); text-align: center; }
+#fallback.show { display: flex; }
+#fallback div { max-width: 420px; font-size: 14px; line-height: 1.9; }
+#fallback a { color: inherit; }
+@media (max-width: 699px) {
+  :root { --pad: 16px; }
+  .top { padding-top: calc(12px + env(safe-area-inset-top)); }
+  .foot { padding-bottom: calc(14px + env(safe-area-inset-bottom)); gap: 10px; }
+  .btn { padding: 7px 10px; font-size: 11.5px; letter-spacing: .06em; }
+  .rule { font-size: 12.5px; line-height: 1.7; }
+  .seed { position: absolute; right: var(--pad); top: -2px; }
+  .caption { max-width: 100%; }
+}
+.btn{letter-spacing:.24em;padding-left:15px;padding-right:13px;box-shadow:inset 0 0 0 3px rgba(21,17,14,1),inset 0 0 0 4px rgba(204,166,92,.25)}.btn:hover,.btn:focus-visible{background:#cca65c;border-color:#cca65c;color:#15110e;box-shadow:none}
+</style>
+</head>
+<body>
+<div id="stage" aria-label="漆金結：每塊磚只能選擇轉或不轉，金線卻因此再也找不到起點與終點。" role="img"></div>
+<div id="status">正在安靜地完成畫面</div>
+<header class="chrome top">
+  <a class="back" href="p5-demo-list.html"><span>←</span> 目錄</a>
+  <nav class="controls" aria-label="作品控制">
+    <button class="btn" id="regen" type="button" title="換一個新的種子">重新生成</button>
+    <button class="btn" id="save" type="button" title="把目前畫面存成 PNG">下載 PNG</button>
+  </nav>
+</header>
+<footer class="chrome foot">
+  <div class="caption">
+    <div class="no">05 / 10</div>
+    <h1 class="title">漆金結<small>Lacquer Knot</small></h1>
+    <p class="rule">每塊磚只能選擇轉或不轉，金線卻因此再也找不到起點與終點。</p>
+    <details>
+      <summary>關於這件作品</summary>
+      <div class="about">
+        <h3>原理</h3>
+        <p>每一塊方磚畫著兩道四分之一圓弧，只有兩種擺法；相鄰磚的弧在邊的中點相接，連成沒有盡頭的帶子。弧把平面分成兩類區域，以格點座標的奇偶決定底色，因此整片漆面永遠能一致地上色。擺法並非全然隨機：一張低頻 noise 把畫面分成「圓環」「波紋」「迷宮」三種方言。</p>
+        <h3>核心參數</h3>
+        <ul><li>磚的大小：約 50px（手機 34px）</li><li>帶寬：磚寬的 20%</li><li>三種方言的分區：noise 門檻 0.4 / 0.6</li><li>由中心向外、雙梭相向織出</li></ul>
+        <h3>適合的位置</h3>
+        <p>頁尾紋樣、包裝與票券、節慶活動頁。</p>
+        <h3>參照</h3>
+        <p>Sébastien Truchet 於 1704 年發表方磚組合的研究；四分之一圓弧版本由 Cyril Stanley Smith 於 1987 年提出。</p>
+      </div>
+    </details>
+  </div>
+  <div class="seed" id="seed" title="目前的種子；網址加上 ?seed= 可重現">seed —</div>
+</footer>
+<div id="fallback" role="alert"><div>這件作品需要 JavaScript 與同資料夾中的 <code>lib/p5.min.js</code> 才能繪製。<br>若你看到這段文字，代表腳本沒有載入成功：請確認檔案完整、瀏覽器允許執行 JavaScript，然後重新整理。<br><a href="p5-demo-list.html">回到目錄</a></div></div>
+<noscript><style>#fallback{display:flex}</style></noscript>
+<script src="lib/p5.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var SLUG = 'truchet-tiles';
+  var body = document.body;
+  var fallback = document.getElementById('fallback');
+  function showFallback(err) {
+    fallback.classList.add('show');
+    body.classList.remove('computing');
+    if (err && window.console) console.warn('[p5-demos2] ' + SLUG + ':', err);
+  }
+  if (typeof window.p5 !== 'function') { showFallback(); return; }
+
+  var TAU = Math.PI * 2;
+  function parseSeed(v) { return v && /^\d{1,9}$/.test(v) ? parseInt(v, 10) : null; }
+  function freshSeed() { return 1 + Math.floor(Math.random() * 999998); }
+  var seed = parseSeed(new URLSearchParams(location.search).get('seed'));
+  if (seed === null) seed = freshSeed();
+  var reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+
+  // 可重現的亂數：mulberry32。結構用 p.random（已 randomSeed），細節各自取用獨立序列，避免受影格節奏影響。
+  function rng(salt) {
+    var a = (seed * 2654435761 + (salt || 0) * 40503 + 1013904223) >>> 0;
+    function r() {
+      a = (a + 0x6D2B79F5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    r.range = function (lo, hi) { return lo + r() * (hi - lo); };
+    r.int = function (lo, hi) { return Math.floor(lo + r() * (hi - lo + 1)); };
+    r.pick = function (arr) { return arr[Math.floor(r() * arr.length)]; };
+    r.chance = function (pr) { return r() < pr; };
+    r.gauss = function () { var u = 1 - r(), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(TAU * v); };
+    return r;
+  }
+  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + (a === undefined ? 1 : a) + ')'; }
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function smooth(e0, e1, x) { var t = clamp((x - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); }
+
+  var A = {
+    TAU: TAU, rng: rng, rgba: rgba, clamp: clamp, lerp: lerp, smooth: smooth,
+    reduced: reduced, coarse: coarse,
+    get seed() { return seed; },
+    density: function () { return Math.min(2, window.devicePixelRatio || 1); },
+    compact: function (w) { return w < 700; },
+    // 複雜度係數：1440×900 筆電約為 1，手機約 0.3–0.45
+    load: function (w, h) { var f = clamp((w * h) / (1440 * 900), 0.3, 1.25); return coarse ? f * 0.85 : f; },
+    // 作品的「版心」：留給文字的上下邊距
+    frame: function (w, h) {
+      var c = w < 700, top = c ? 62 : 80, bottom = c ? 172 : 136, side = c ? 18 : Math.max(64, Math.round(w * 0.055));
+      return { x: side, y: top, w: w - side * 2, h: h - top - bottom };
+    },
+    // 以時間決定進度（0→1）；減少動態時直接回傳 1
+    pacer: function (seconds) {
+      var t0 = performance.now();
+      return function () { return reduced ? 1 : clamp((performance.now() - t0) / (seconds * 1000), 0, 1); };
+    },
+    budget: function () { return reduced ? 36 : 10; },
+    done: function (p) { p._artDone = true; p.noLoop(); body.classList.remove('computing'); body.classList.add('complete'); },
+    paper: function (p, w, h, o) {
+      var g = p.createGraphics(w, h);
+      g.pixelDensity(1);
+      var ctx = g.drawingContext, r = rng(o.salt || 11), i, n, x, y, a, l;
+      ctx.fillStyle = rgba(o.base); ctx.fillRect(0, 0, w, h);
+      // 紙張的雲紋：柔邊的徑向漸層，避免出現可辨識的圓斑
+      n = Math.round(w * h / 9000);
+      for (i = 0; i < n; i++) {
+        var c = r.chance(0.5) ? o.dark : o.light, mx = r() * w, my = r() * h, mr = r.range(40, 220);
+        var mg = ctx.createRadialGradient(mx, my, 0, mx, my, mr);
+        mg.addColorStop(0, rgba(c, r.range(0.01, 0.028) * (o.mottle || 1))); mg.addColorStop(1, rgba(c, 0));
+        ctx.fillStyle = mg; ctx.fillRect(mx - mr, my - mr, mr * 2, mr * 2);
+      }
+      n = Math.round(w * h / 120 * (o.fibre === undefined ? 1 : o.fibre));
+      ctx.lineCap = 'round';
+      for (i = 0; i < n; i++) {
+        x = r() * w; y = r() * h; a = r() * TAU; l = r.range(2, 14);
+        ctx.strokeStyle = rgba(r.chance(0.55) ? o.dark : o.light, r.range(0.03, 0.09));
+        ctx.lineWidth = r.range(0.3, 0.9);
+        ctx.beginPath(); ctx.moveTo(x, y); ctx.quadraticCurveTo(x + Math.cos(a + 0.6) * l * 0.6, y + Math.sin(a + 0.6) * l * 0.6, x + Math.cos(a) * l, y + Math.sin(a) * l); ctx.stroke();
+      }
+      n = Math.round(w * h / 900 * (o.speck === undefined ? 1 : o.speck));
+      for (i = 0; i < n; i++) { ctx.fillStyle = rgba(o.dark, r.range(0.05, 0.22)); a = r.range(0.4, 1.4); ctx.fillRect(r() * w, r() * h, a, a); }
+      if (o.vignette) {
+        var gr = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.25, w / 2, h / 2, Math.hypot(w, h) * 0.6);
+        gr.addColorStop(0, rgba(o.dark, 0)); gr.addColorStop(1, rgba(o.dark, o.vignette));
+        ctx.fillStyle = gr; ctx.fillRect(0, 0, w, h);
+      }
+      return g;
+    }
+  };
+
+  // ── 漆金結：Smith 式四分之一圓 Truchet，依格點奇偶上漆，金線如梭般逐塊織出 ──
+  function sketch(p, A) {
+    var BG = [21, 17, 14], LACQ = [46, 22, 17], CINN = [138, 40, 27], GOLD = [204, 166, 92];
+    var W, H, F, ctx, pace, tiles = [], s, cols, rows, ox, oy, bw;
+    var DUR = 13, SPAN = 0.16;
+
+    p.setup = function () {
+      W = p.windowWidth; H = p.windowHeight;
+      p.pixelDensity(A.density());
+      p.createCanvas(W, H);
+      p.randomSeed(A.seed); p.noiseSeed(A.seed);
+      ctx = p.drawingContext;
+      F = A.frame(W, H);
+      p.image(A.paper(p, W, H, { base: BG, dark: [0, 0, 0], light: [70, 50, 34], fibre: 0.3, speck: 0.2, mottle: 1.5, vignette: 0.4 }), 0, 0, W, H);
+      layout();
+      pace = A.pacer(DUR);
+    };
+
+    function layout() {
+      var unit = Math.sqrt(F.w * F.h) / 900;
+      s = Math.max(28, Math.round((W < 700 ? 34 : 50) * Math.max(0.85, unit)));
+      cols = Math.floor(F.w / s); rows = Math.floor(F.h / s);
+      ox = Math.round(F.x + (F.w - cols * s) / 2); oy = Math.round(F.y + (F.h - rows * s) / 2);
+      bw = s * 0.2;
+      // 外框：雙線金邊
+      ctx.strokeStyle = A.rgba(GOLD, 0.75); ctx.lineWidth = 1;
+      ctx.strokeRect(ox - 7.5, oy - 7.5, cols * s + 15, rows * s + 15);
+      ctx.strokeStyle = A.rgba(GOLD, 0.35); ctx.lineWidth = 0.6;
+      ctx.strokeRect(ox - 11.5, oy - 11.5, cols * s + 23, rows * s + 23);
+      // 結構：三種「方言」佔據不同區域 —— 圓環、波紋、迷宮
+      var zs = p.random(0.05, 0.08), cx = cols / 2, cy = rows / 2, rnd = A.rng(5);
+      var shift = p.random(-0.06, 0.06);
+      for (var j = 0; j < rows; j++) for (var i = 0; i < cols; i++) {
+        var v = p.noise(i * zs + 3, j * zs + 3) + shift, o;
+        if (v < 0.4) o = (i + j) % 2;
+        else if (v > 0.6) o = (i % 2) ^ ((j >> 1) % 2 ? 1 : 0) ? 1 : 0;
+        else o = rnd() < 0.5 ? 1 : 0;
+        var d = Math.hypot((i + 0.5 - cx) / cols, (j + 0.5 - cy) / rows * (rows / cols)) / 0.72;
+        tiles.push({ i: i, j: j, o: o, x: ox + i * s, y: oy + j * s, start: A.clamp(d * 0.78 + (p.noise(i * 0.3, j * 0.3) - 0.5) * 0.12, 0, 1 - SPAN), q: -1, fl: rnd() * 1000 });
+      }
+      tiles.sort(function (a, b) { return a.start - b.start; });
+    }
+
+    function parityCol(vi, vj) { return (vi + vj) % 2 ? LACQ : BG; }
+    // 每塊磚的兩個弧心（格點），依方向而定
+    function centers(t) {
+      return t.o === 0
+        ? [[t.x, t.y, 0, Math.PI / 2, t.i, t.j], [t.x + s, t.y + s, Math.PI, Math.PI * 1.5, t.i + 1, t.j + 1]]
+        : [[t.x + s, t.y, Math.PI / 2, Math.PI, t.i + 1, t.j], [t.x, t.y + s, Math.PI * 1.5, Math.PI * 2, t.i, t.j + 1]];
+    }
+
+    function ground(t) {
+      var cs = centers(t), other = t.o === 0 ? [t.i + 1, t.j] : [t.i, t.j];
+      ctx.fillStyle = A.rgba(parityCol(other[0], other[1]));
+      ctx.fillRect(t.x, t.y, s, s);
+      ctx.fillStyle = A.rgba(parityCol(cs[0][4], cs[0][5]));
+      cs.forEach(function (c) { ctx.beginPath(); ctx.moveTo(c[0], c[1]); ctx.arc(c[0], c[1], s / 2, c[2], c[3]); ctx.closePath(); ctx.fill(); });
+      // 金粉（nashiji）
+      var r = A.rng(Math.floor(t.fl) + 3);
+      for (var k = 0; k < 4; k++) { ctx.fillStyle = A.rgba(GOLD, r.range(0.25, 0.7)); var z = r.range(0.4, 1.1); ctx.fillRect(t.x + r() * s, t.y + r() * s, z, z); }
+    }
+
+    function band(t, q0, q1) {
+      var cs = centers(t), r0 = s / 2 - bw / 2, r1 = s / 2 + bw / 2, e = 0.004;
+      cs.forEach(function (c, k) {
+        var span = c[3] - c[2];
+        // 兩條弧相向而行，像兩支梭子
+        var a0 = k ? c[3] - span * q1 : c[2] + span * q0, a1 = k ? c[3] - span * q0 : c[2] + span * q1;
+        a0 -= e; a1 += e;
+        ctx.fillStyle = A.rgba(CINN);
+        ctx.beginPath(); ctx.arc(c[0], c[1], r1, a0, a1); ctx.arc(c[0], c[1], r0, a1, a0, true); ctx.closePath(); ctx.fill();
+        ctx.strokeStyle = A.rgba(GOLD); ctx.lineWidth = Math.max(1, s * 0.03);
+        ctx.beginPath(); ctx.arc(c[0], c[1], r1, a0, a1); ctx.stroke();
+        ctx.beginPath(); ctx.arc(c[0], c[1], r0, a0, a1); ctx.stroke();
+        ctx.strokeStyle = A.rgba(GOLD, 0.45); ctx.lineWidth = 0.6;
+        ctx.beginPath(); ctx.arc(c[0], c[1], s / 2, a0, a1); ctx.stroke();
+      });
+    }
+
+    p.draw = function () {
+      var t0 = performance.now(), budget = A.budget(), f = pace(), pending = false;
+      ctx.lineCap = 'butt';
+      for (var n = 0; n < tiles.length; n++) {
+        var t = tiles[n];
+        if (t.start > f) { pending = true; break; }
+        if (t.q >= 1) continue;
+        if (performance.now() - t0 > budget) { pending = true; break; }
+        var q = A.clamp((f - t.start) / SPAN, 0, 1);
+        if (t.q < 0) { ground(t); t.q = 0; }
+        if (q > t.q) { band(t, t.q, q); t.q = q; }
+        if (t.q < 1) pending = true;
+      }
+      if (!pending && f >= 1) A.done(p);
+    };
+  }
+
+  var stage = document.getElementById('stage');
+  var seedEl = document.getElementById('seed');
+  var inst = null, lastW = window.innerWidth, lastH = window.innerHeight, resizeTimer = 0;
+  function start() {
+    if (inst) { inst.remove(); inst = null; }
+    seedEl.textContent = 'seed ' + seed;
+    try { var u = new URL(location.href); u.searchParams.set('seed', seed); history.replaceState(null, '', u.href); } catch (e) { /* file:// 某些瀏覽器不允許，忽略 */ }
+    body.classList.remove('complete');
+    body.classList.toggle('computing', reduced);
+    try { inst = new p5(function (p) { sketch(p, A); }, stage); } catch (e) { showFallback(e); }
+  }
+  A.restart = start;
+  document.getElementById('regen').addEventListener('click', function () { seed = freshSeed(); start(); });
+  document.getElementById('save').addEventListener('click', function () { if (inst) inst.saveCanvas(SLUG + '-seed' + seed, 'png'); });
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      var w = window.innerWidth, h = window.innerHeight;
+      if (w === lastW && Math.abs(h - lastH) < 120) return; // 手機網址列伸縮不重排
+      lastW = w; lastH = h;
+      if (inst && inst.artResize) inst.artResize(w, h); else start();
+    }, 240);
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (!inst) return;
+    if (document.hidden) inst.noLoop();
+    else if (!inst._artDone) inst.loop();
+  });
+  start();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>04 細胞的禮貌 · The Courtesy of Cells — p5 生成作品集</title>
+<meta name="description" content="每個圓從一點開始長大，碰到鄰居就停下，於是擁擠也有了禮貌。">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:,">
+<style>
+:root {
+  --bg: #f4edec;
+  --ink: #3a2550;
+  --muted: rgba(72,46,112,.55);
+  --btn-bg: rgba(244,237,236,.6);
+  --btn-line: rgba(72,46,112,.35);
+  --panel: rgba(244,237,236,.95);
+  --radius: 999px;
+  --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --pad: 22px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--ink); }
+body { font-family: var(--font); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+#stage { position: fixed; inset: 0; }
+#stage canvas { display: block; }
+.chrome { position: fixed; left: 0; right: 0; z-index: 2; display: flex; justify-content: space-between; gap: 16px; padding: 0 var(--pad); pointer-events: none; }
+.chrome > * { pointer-events: auto; }
+.top { top: 0; align-items: center; padding-top: calc(18px + env(safe-area-inset-top)); }
+.foot { bottom: 0; align-items: flex-end; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+.back { font-size: 12px; letter-spacing: .16em; color: var(--muted); text-decoration: none; padding: 8px 0; transition: color .3s; }
+.back:hover, .back:focus-visible { color: var(--ink); }
+.back span { display: inline-block; transition: transform .3s; }
+.back:hover span { transform: translateX(-3px); }
+.controls { display: flex; gap: 8px; }
+.btn { font: inherit; font-size: 12px; letter-spacing: .1em; color: var(--ink); background: var(--btn-bg); border: 1px solid var(--btn-line); padding: 7px 13px; cursor: pointer; transition: background .25s, color .25s, border-color .25s; border-radius: var(--radius); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.btn:hover, .btn:focus-visible { background: var(--ink); color: var(--bg); border-color: var(--ink); outline: none; }
+.btn:active { transform: translateY(1px); }
+.caption { max-width: min(540px, 100%); }
+.no { font-family: var(--mono); font-size: 10.5px; letter-spacing: .22em; color: var(--muted); }
+.title { font-size: 15px; font-weight: 500; letter-spacing: .12em; margin: 5px 0 3px; }
+.title small { font-size: 11px; font-weight: 400; letter-spacing: .08em; color: var(--muted); margin-left: .6em; }
+.rule { font-size: 13px; line-height: 1.75; margin: 0; color: var(--ink); opacity: .78; }
+details { margin-top: 6px; }
+summary { list-style: none; cursor: pointer; font-size: 11.5px; letter-spacing: .14em; color: var(--muted); display: inline-flex; align-items: center; gap: .5em; padding: 3px 0; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: ""; width: 14px; height: 1px; background: currentColor; transition: width .3s; }
+details[open] summary::before { width: 26px; }
+summary:hover, summary:focus-visible { color: var(--ink); outline: none; }
+.about { margin-top: 10px; padding: 16px 18px; max-height: 48vh; overflow: auto; background: var(--panel); border-left: 1px solid var(--btn-line); font-size: 12.5px; line-height: 1.8; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.about h3 { font-size: 11px; font-weight: 500; letter-spacing: .2em; color: var(--muted); margin: 12px 0 2px; }
+.about h3:first-child { margin-top: 0; }
+.about p, .about ul { margin: 0; }
+.about ul { padding-left: 1.1em; }
+.about code { font-family: var(--mono); font-size: 11.5px; }
+.seed { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; color: var(--muted); white-space: nowrap; padding-bottom: 3px; user-select: all; }
+#status { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; font-size: 12px; letter-spacing: .3em; color: var(--muted); z-index: 1; pointer-events: none; }
+.computing #status { display: flex; }
+.computing #stage { visibility: hidden; }
+#fallback { position: fixed; inset: 0; z-index: 5; display: none; align-items: center; justify-content: center; padding: 32px; background: var(--bg); text-align: center; }
+#fallback.show { display: flex; }
+#fallback div { max-width: 420px; font-size: 14px; line-height: 1.9; }
+#fallback a { color: inherit; }
+@media (max-width: 699px) {
+  :root { --pad: 16px; }
+  .top { padding-top: calc(12px + env(safe-area-inset-top)); }
+  .foot { padding-bottom: calc(14px + env(safe-area-inset-bottom)); gap: 10px; }
+  .btn { padding: 7px 10px; font-size: 11.5px; letter-spacing: .06em; }
+  .rule { font-size: 12.5px; line-height: 1.7; }
+  .seed { position: absolute; right: var(--pad); top: -2px; }
+  .caption { max-width: 100%; }
+}
+.btn:hover,.btn:focus-visible{background:#e28aa6;border-color:#e28aa6;color:#2a1838}
+</style>
+</head>
+<body>
+<div id="stage" aria-label="細胞的禮貌：每個圓從一點開始長大，碰到鄰居就停下，於是擁擠也有了禮貌。" role="img"></div>
+<div id="status">正在安靜地完成畫面</div>
+<header class="chrome top">
+  <a class="back" href="p5-demo-list.html"><span>←</span> 目錄</a>
+  <nav class="controls" aria-label="作品控制">
+    <button class="btn" id="regen" type="button" title="換一個新的種子">重新生成</button>
+    <button class="btn" id="save" type="button" title="把目前畫面存成 PNG">下載 PNG</button>
+  </nav>
+</header>
+<footer class="chrome foot">
+  <div class="caption">
+    <div class="no">04 / 10</div>
+    <h1 class="title">細胞的禮貌<small>The Courtesy of Cells</small></h1>
+    <p class="rule">每個圓從一點開始長大，碰到鄰居就停下，於是擁擠也有了禮貌。</p>
+    <details>
+      <summary>關於這件作品</summary>
+      <div class="about">
+        <h3>原理</h3>
+        <p>在一個帶裂片的橢圓組織內不斷丟下候選點，每一點用網格只檢查附近的圓，求出它能長到多大而不碰到鄰居；半徑同時受一張低頻 noise 尺寸場限制，讓大小細胞成片分布。幾個看不見的管腔先佔住空間，細胞只能圍著它們排列。計算分批在多個影格完成，再由一個管腔向外依序長出。</p>
+        <h3>核心參數</h3>
+        <ul><li>候選點：約 70,000 次（依螢幕縮減）</li><li>半徑：約 2–34px，由尺寸場與邊緣衰減決定</li><li>管腔：2–4 個</li><li>色彩：仿蘇木精（紫）與伊紅（粉）染色</li></ul>
+        <h3>適合的位置</h3>
+        <p>生技醫療品牌、社群與成員頁、空狀態插圖。</p>
+      </div>
+    </details>
+  </div>
+  <div class="seed" id="seed" title="目前的種子；網址加上 ?seed= 可重現">seed —</div>
+</footer>
+<div id="fallback" role="alert"><div>這件作品需要 JavaScript 與同資料夾中的 <code>lib/p5.min.js</code> 才能繪製。<br>若你看到這段文字，代表腳本沒有載入成功：請確認檔案完整、瀏覽器允許執行 JavaScript，然後重新整理。<br><a href="p5-demo-list.html">回到目錄</a></div></div>
+<noscript><style>#fallback{display:flex}</style></noscript>
+<script src="lib/p5.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var SLUG = 'circle-packing';
+  var body = document.body;
+  var fallback = document.getElementById('fallback');
+  function showFallback(err) {
+    fallback.classList.add('show');
+    body.classList.remove('computing');
+    if (err && window.console) console.warn('[p5-demos2] ' + SLUG + ':', err);
+  }
+  if (typeof window.p5 !== 'function') { showFallback(); return; }
+
+  var TAU = Math.PI * 2;
+  function parseSeed(v) { return v && /^\d{1,9}$/.test(v) ? parseInt(v, 10) : null; }
+  function freshSeed() { return 1 + Math.floor(Math.random() * 999998); }
+  var seed = parseSeed(new URLSearchParams(location.search).get('seed'));
+  if (seed === null) seed = freshSeed();
+  var reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+
+  // 可重現的亂數：mulberry32。結構用 p.random（已 randomSeed），細節各自取用獨立序列，避免受影格節奏影響。
+  function rng(salt) {
+    var a = (seed * 2654435761 + (salt || 0) * 40503 + 1013904223) >>> 0;
+    function r() {
+      a = (a + 0x6D2B79F5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    r.range = function (lo, hi) { return lo + r() * (hi - lo); };
+    r.int = function (lo, hi) { return Math.floor(lo + r() * (hi - lo + 1)); };
+    r.pick = function (arr) { return arr[Math.floor(r() * arr.length)]; };
+    r.chance = function (pr) { return r() < pr; };
+    r.gauss = function () { var u = 1 - r(), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(TAU * v); };
+    return r;
+  }
+  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + (a === undefined ? 1 : a) + ')'; }
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function smooth(e0, e1, x) { var t = clamp((x - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); }
+
+  var A = {
+    TAU: TAU, rng: rng, rgba: rgba, clamp: clamp, lerp: lerp, smooth: smooth,
+    reduced: reduced, coarse: coarse,
+    get seed() { return seed; },
+    density: function () { return Math.min(2, window.devicePixelRatio || 1); },
+    compact: function (w) { return w < 700; },
+    // 複雜度係數：1440×900 筆電約為 1，手機約 0.3–0.45
+    load: function (w, h) { var f = clamp((w * h) / (1440 * 900), 0.3, 1.25); return coarse ? f * 0.85 : f; },
+    // 作品的「版心」：留給文字的上下邊距
+    frame: function (w, h) {
+      var c = w < 700, top = c ? 62 : 80, bottom = c ? 172 : 136, side = c ? 18 : Math.max(64, Math.round(w * 0.055));
+      return { x: side, y: top, w: w - side * 2, h: h - top - bottom };
+    },
+    // 以時間決定進度（0→1）；減少動態時直接回傳 1
+    pacer: function (seconds) {
+      var t0 = performance.now();
+      return function () { return reduced ? 1 : clamp((performance.now() - t0) / (seconds * 1000), 0, 1); };
+    },
+    budget: function () { return reduced ? 36 : 10; },
+    done: function (p) { p._artDone = true; p.noLoop(); body.classList.remove('computing'); body.classList.add('complete'); },
+    paper: function (p, w, h, o) {
+      var g = p.createGraphics(w, h);
+      g.pixelDensity(1);
+      var ctx = g.drawingContext, r = rng(o.salt || 11), i, n, x, y, a, l;
+      ctx.fillStyle = rgba(o.base); ctx.fillRect(0, 0, w, h);
+      // 紙張的雲紋：柔邊的徑向漸層，避免出現可辨識的圓斑
+      n = Math.round(w * h / 9000);
+      for (i = 0; i < n; i++) {
+        var c = r.chance(0.5) ? o.dark : o.light, mx = r() * w, my = r() * h, mr = r.range(40, 220);
+        var mg = ctx.createRadialGradient(mx, my, 0, mx, my, mr);
+        mg.addColorStop(0, rgba(c, r.range(0.01, 0.028) * (o.mottle || 1))); mg.addColorStop(1, rgba(c, 0));
+        ctx.fillStyle = mg; ctx.fillRect(mx - mr, my - mr, mr * 2, mr * 2);
+      }
+      n = Math.round(w * h / 120 * (o.fibre === undefined ? 1 : o.fibre));
+      ctx.lineCap = 'round';
+      for (i = 0; i < n; i++) {
+        x = r() * w; y = r() * h; a = r() * TAU; l = r.range(2, 14);
+        ctx.strokeStyle = rgba(r.chance(0.55) ? o.dark : o.light, r.range(0.03, 0.09));
+        ctx.lineWidth = r.range(0.3, 0.9);
+        ctx.beginPath(); ctx.moveTo(x, y); ctx.quadraticCurveTo(x + Math.cos(a + 0.6) * l * 0.6, y + Math.sin(a + 0.6) * l * 0.6, x + Math.cos(a) * l, y + Math.sin(a) * l); ctx.stroke();
+      }
+      n = Math.round(w * h / 900 * (o.speck === undefined ? 1 : o.speck));
+      for (i = 0; i < n; i++) { ctx.fillStyle = rgba(o.dark, r.range(0.05, 0.22)); a = r.range(0.4, 1.4); ctx.fillRect(r() * w, r() * h, a, a); }
+      if (o.vignette) {
+        var gr = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.25, w / 2, h / 2, Math.hypot(w, h) * 0.6);
+        gr.addColorStop(0, rgba(o.dark, 0)); gr.addColorStop(1, rgba(o.dark, o.vignette));
+        ctx.fillStyle = gr; ctx.fillRect(0, 0, w, h);
+      }
+      return g;
+    }
+  };
+
+  // ── 細胞的禮貌：網格加速的圓形填充（分批計算），再如染色切片般一顆顆長出 ──
+  function sketch(p, A) {
+    var BG = [244, 237, 236], PURPLE = [72, 46, 112], PINK = [226, 138, 166];
+    var W, H, F, ctx, base, bctx, pace, cells = [], lumens = [], phase = 0, attempts = 0, maxTry;
+    var grid, gw, gh, gs, bigR, rMin, gap, blob, order, shown = 0, growing = [];
+    var DUR = 18, GROW = 0.55;
+
+    p.setup = function () {
+      W = p.windowWidth; H = p.windowHeight;
+      p.pixelDensity(A.density());
+      p.createCanvas(W, H);
+      p.randomSeed(A.seed); p.noiseSeed(A.seed);
+      ctx = p.drawingContext;
+      F = A.frame(W, H);
+      base = p.createGraphics(W, H);
+      bctx = base.drawingContext;
+      base.image(A.paper(p, W, H, { base: BG, dark: [140, 100, 120], light: [255, 252, 252], vignette: 0.08, fibre: 0.7 }), 0, 0, W, H);
+      plan();
+      p.image(base, 0, 0, W, H);
+    };
+
+    function plan() {
+      var m = Math.min(F.w, F.h), load = A.load(W, H);
+      bigR = m * (W < 700 ? 0.055 : 0.047);
+      rMin = Math.max(1.3, m * 0.0028);
+      gap = Math.max(1, m * 0.0016);
+      gs = bigR * 2;
+      gw = Math.ceil(W / gs) + 1; gh = Math.ceil(H / gs) + 1;
+      grid = []; for (var i = 0; i < gw * gh; i++) grid.push([]);
+      maxTry = Math.round(70000 * A.clamp(load, 0.4, 1.1));
+      // 組織的輪廓：一個帶著裂片的橢圓團塊
+      blob = { cx: F.x + F.w * p.random(0.46, 0.54), cy: F.y + F.h * p.random(0.46, 0.54), rx: F.w * 0.41, ry: F.h * 0.41,
+        lobes: p.random(2.5, 4.5), ph: p.random(A.TAU), amp: p.random(0.08, 0.14) };
+      // 管腔：幾個看不見的空洞，細胞只能圍著它們排列
+      var nL = p.random([2, 3, 3, 4]);
+      for (var k = 0, guard = 0; k < nL && guard < 200; guard++) {
+        var r = m * p.random(0.06, 0.13), ang = p.random(A.TAU), d = p.random(0.05, 0.55);
+        var L = { x: blob.cx + Math.cos(ang) * d * blob.rx, y: blob.cy + Math.sin(ang) * d * blob.ry, r: r };
+        if (inside(L.x, L.y) < 0.35) continue;
+        if (lumens.some(function (o) { return Math.hypot(o.x - L.x, o.y - L.y) < o.r + L.r + m * 0.06; })) continue;
+        lumens.push(L); k++;
+      }
+      var sizeSeed = p.random(100);
+      blob.size = function (x, y) {
+        var n = p.noise(x * 2.2 / m + sizeSeed, y * 2.2 / m);
+        return A.smooth(0.3, 0.72, n);
+      };
+    }
+
+    // 0 在邊界外，1 在中心
+    function inside(x, y) {
+      var dx = (x - blob.cx) / blob.rx, dy = (y - blob.cy) / blob.ry, a = Math.atan2(dy, dx);
+      var R = 1 + blob.amp * Math.sin(a * Math.round(blob.lobes) + blob.ph) + 0.06 * (p.noise(Math.cos(a) + 5, Math.sin(a) + 5) - 0.5);
+      return 1 - Math.hypot(dx, dy) / R;
+    }
+
+    function freeRadius(x, y, cap) {
+      var best = cap, i, j, k;
+      for (k = 0; k < lumens.length; k++) {
+        var L = lumens[k], d = Math.hypot(L.x - x, L.y - y) - L.r - gap * 3;
+        if (d < best) best = d;
+      }
+      if (best < rMin) return best;
+      var cx = (x / gs) | 0, cy = (y / gs) | 0;
+      for (j = cy - 1; j <= cy + 1; j++) {
+        if (j < 0 || j >= gh) continue;
+        for (i = cx - 1; i <= cx + 1; i++) {
+          if (i < 0 || i >= gw) continue;
+          var list = grid[j * gw + i];
+          for (k = 0; k < list.length; k++) {
+            var c = list[k], dd = Math.hypot(c.x - x, c.y - y) - c.r - gap;
+            if (dd < best) { best = dd; if (best < rMin) return best; }
+          }
+        }
+      }
+      return best;
+    }
+
+    function tryOne() {
+      attempts++;
+      var x = F.x + p.random() * F.w, y = F.y + p.random() * F.h;
+      var ins = inside(x, y), cap;
+      if (ins <= 0) {
+        // 團塊之外只剩零星的游離細胞
+        if (p.random() > 0.035 || ins < -0.18) return;
+        cap = rMin * p.random(1, 2.2);
+      } else {
+        var edge = A.smooth(0, 0.25, ins);
+        cap = A.lerp(rMin * 2.2, bigR, (0.22 + 0.78 * blob.size(x, y)) * edge) * p.random(0.75, 1);
+      }
+      if (x - cap < F.x || x + cap > F.x + F.w || y - cap < F.y || y + cap > F.y + F.h) cap = Math.min(cap, x - F.x, F.x + F.w - x, y - F.y, F.y + F.h - y);
+      var r = freeRadius(x, y, cap);
+      if (r < rMin) return;
+      var rr = A.rng(cells.length + 7);
+      var c = { x: x, y: y, r: r, i: cells.length, a1: rr.range(0.02, 0.06), a2: rr.range(0.01, 0.04), p1: rr() * A.TAU, p2: rr() * A.TAU,
+        na: rr() * A.TAU, nd: rr.range(0.1, 0.32), nr: rr.range(0.24, 0.34), dots: rr.int(1, 3), dp: rr() * A.TAU, pinkDot: rr() < 0.35 };
+      cells.push(c);
+      grid[((y / gs) | 0) * gw + ((x / gs) | 0)].push(c);
+    }
+
+    function blobPath(g, c, R, k1) {
+      var n = R > 12 ? 30 : 18;
+      g.beginPath();
+      for (var s = 0; s <= n; s++) {
+        var a = s / n * A.TAU, rr = R * (1 + c.a1 * Math.sin(2 * a + c.p1 + k1) + c.a2 * Math.sin(3 * a + c.p2));
+        if (s === 0) g.moveTo(c.x + Math.cos(a) * rr, c.y + Math.sin(a) * rr); else g.lineTo(c.x + Math.cos(a) * rr, c.y + Math.sin(a) * rr);
+      }
+      g.closePath();
+    }
+
+    function drawCell(g, c, s) {
+      var R = c.r * s;
+      if (R < 0.4) return;
+      g.globalCompositeOperation = 'multiply';
+      if (c.r < 4.2) {
+        g.fillStyle = A.rgba(c.pinkDot ? PINK : PURPLE, c.pinkDot ? 0.75 : 0.72);
+        g.beginPath(); g.arc(c.x, c.y, R * 0.85, 0, A.TAU); g.fill();
+      } else {
+        // 洋紅色的細胞質：薄薄地刷兩層，邊緣再沉一點
+        g.fillStyle = A.rgba(PINK, 0.24); blobPath(g, c, R, 0); g.fill();
+        g.fillStyle = A.rgba(PINK, 0.16); blobPath(g, c, R * 0.86, 1.3); g.fill();
+        g.strokeStyle = A.rgba(PINK, 0.5); g.lineWidth = 0.9; blobPath(g, c, R * 0.98, 0.4); g.stroke();
+        if (c.r > 11) { g.strokeStyle = A.rgba(PURPLE, 0.42); g.lineWidth = 0.7; blobPath(g, c, R * 0.99, 2.1); g.stroke(); }
+        // 紫色的細胞核
+        var nx = c.x + Math.cos(c.na) * c.nd * R, ny = c.y + Math.sin(c.na) * c.nd * R, nr = R * c.nr;
+        g.fillStyle = A.rgba(PURPLE, 0.7);
+        g.beginPath(); g.ellipse(nx, ny, nr, nr * 0.82, c.na, 0, A.TAU); g.fill();
+        if (c.r > 9) {
+          g.fillStyle = A.rgba(PURPLE, 0.6);
+          for (var k = 0; k < c.dots; k++) {
+            var a = c.dp + k * 2.1;
+            g.beginPath(); g.arc(nx + Math.cos(a) * nr * 0.45, ny + Math.sin(a) * nr * 0.45, Math.max(0.6, nr * 0.16), 0, A.TAU); g.fill();
+          }
+        }
+      }
+      g.globalCompositeOperation = 'source-over';
+    }
+
+    function lumenRims() {
+      lumens.forEach(function (L) {
+        bctx.strokeStyle = A.rgba(PINK, 0.22); bctx.lineWidth = 1.2;
+        bctx.beginPath(); bctx.arc(L.x, L.y, L.r + gap, 0, A.TAU); bctx.stroke();
+      });
+    }
+
+    function ease(t) { var c1 = 1.4, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); }
+
+    p.draw = function () {
+      var t0 = performance.now(), budget = A.budget();
+      if (phase === 0) {
+        while (attempts < maxTry && performance.now() - t0 < budget + 4) for (var q = 0; q < 200; q++) tryOne();
+        if (attempts < maxTry) return;
+        // 生長的順序：自一個管腔附近向外擴散
+        var o = lumens.length ? lumens[0] : { x: blob.cx, y: blob.cy };
+        cells.forEach(function (c) { c.k = Math.hypot(c.x - o.x, c.y - o.y) + p.noise(c.x * 0.01, c.y * 0.01) * Math.min(F.w, F.h) * 0.35; });
+        order = cells.slice().sort(function (a, b) { return a.k - b.k; });
+        lumenRims();
+        phase = 1; pace = A.pacer(DUR);
+        return;
+      }
+      var f = pace(), now = performance.now();
+      var target = Math.min(order.length, Math.floor(f / (1 - (A.reduced ? 0 : 0.03)) * order.length));
+      while (shown < target) { growing.push({ c: order[shown], t: now }); shown++; }
+      var still = [];
+      for (var i = 0; i < growing.length; i++) {
+        var gcell = growing[i];
+        if (A.reduced || now - gcell.t >= GROW * 1000) { drawCell(bctx, gcell.c, 1); if (A.reduced && performance.now() - t0 > budget) { still = still.concat(growing.slice(i + 1)); break; } }
+        else still.push(gcell);
+      }
+      growing = still;
+      p.image(base, 0, 0, W, H);
+      for (i = 0; i < growing.length; i++) drawCell(ctx, growing[i].c, ease((now - growing[i].t) / (GROW * 1000)));
+      if (shown >= order.length && !growing.length) A.done(p);
+    };
+  }
+
+  var stage = document.getElementById('stage');
+  var seedEl = document.getElementById('seed');
+  var inst = null, lastW = window.innerWidth, lastH = window.innerHeight, resizeTimer = 0;
+  function start() {
+    if (inst) { inst.remove(); inst = null; }
+    seedEl.textContent = 'seed ' + seed;
+    try { var u = new URL(location.href); u.searchParams.set('seed', seed); history.replaceState(null, '', u.href); } catch (e) { /* file:// 某些瀏覽器不允許，忽略 */ }
+    body.classList.remove('complete');
+    body.classList.toggle('computing', reduced);
+    try { inst = new p5(function (p) { sketch(p, A); }, stage); } catch (e) { showFallback(e); }
+  }
+  A.restart = start;
+  document.getElementById('regen').addEventListener('click', function () { seed = freshSeed(); start(); });
+  document.getElementById('save').addEventListener('click', function () { if (inst) inst.saveCanvas(SLUG + '-seed' + seed, 'png'); });
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      var w = window.innerWidth, h = window.innerHeight;
+      if (w === lastW && Math.abs(h - lastH) < 120) return; // 手機網址列伸縮不重排
+      lastW = w; lastH = h;
+      if (inst && inst.artResize) inst.artResize(w, h); else start();
+    }, 240);
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (!inst) return;
+    if (document.hidden) inst.noLoop();
+    else if (!inst._artDone) inst.loop();
+  });
+  start();
+})();
+</script>
+</body>
+</html>

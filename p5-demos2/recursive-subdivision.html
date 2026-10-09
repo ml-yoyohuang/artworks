@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>03 切分的秩序 · Order by Division — p5 生成作品集</title>
+<meta name="description" content="一個矩形被切成兩半，每一半再決定要不要繼續切，直到每個房間都剛好夠住。">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:,">
+<style>
+:root {
+  --bg: #e4dfd3;
+  --ink: #1f1f1f;
+  --muted: rgba(31,31,31,.55);
+  --btn-bg: rgba(228,223,211,.6);
+  --btn-line: #1f1f1f;
+  --panel: rgba(228,223,211,.95);
+  --radius: 0;
+  --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --pad: 22px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--ink); }
+body { font-family: var(--font); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+#stage { position: fixed; inset: 0; }
+#stage canvas { display: block; }
+.chrome { position: fixed; left: 0; right: 0; z-index: 2; display: flex; justify-content: space-between; gap: 16px; padding: 0 var(--pad); pointer-events: none; }
+.chrome > * { pointer-events: auto; }
+.top { top: 0; align-items: center; padding-top: calc(18px + env(safe-area-inset-top)); }
+.foot { bottom: 0; align-items: flex-end; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+.back { font-size: 12px; letter-spacing: .16em; color: var(--muted); text-decoration: none; padding: 8px 0; transition: color .3s; }
+.back:hover, .back:focus-visible { color: var(--ink); }
+.back span { display: inline-block; transition: transform .3s; }
+.back:hover span { transform: translateX(-3px); }
+.controls { display: flex; gap: 8px; }
+.btn { font: inherit; font-size: 12px; letter-spacing: .1em; color: var(--ink); background: var(--btn-bg); border: 1px solid var(--btn-line); padding: 7px 13px; cursor: pointer; transition: background .25s, color .25s, border-color .25s; border-radius: var(--radius); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.btn:hover, .btn:focus-visible { background: var(--ink); color: var(--bg); border-color: var(--ink); outline: none; }
+.btn:active { transform: translateY(1px); }
+.caption { max-width: min(540px, 100%); }
+.no { font-family: var(--mono); font-size: 10.5px; letter-spacing: .22em; color: var(--muted); }
+.title { font-size: 15px; font-weight: 500; letter-spacing: .12em; margin: 5px 0 3px; }
+.title small { font-size: 11px; font-weight: 400; letter-spacing: .08em; color: var(--muted); margin-left: .6em; }
+.rule { font-size: 13px; line-height: 1.75; margin: 0; color: var(--ink); opacity: .78; }
+details { margin-top: 6px; }
+summary { list-style: none; cursor: pointer; font-size: 11.5px; letter-spacing: .14em; color: var(--muted); display: inline-flex; align-items: center; gap: .5em; padding: 3px 0; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: ""; width: 14px; height: 1px; background: currentColor; transition: width .3s; }
+details[open] summary::before { width: 26px; }
+summary:hover, summary:focus-visible { color: var(--ink); outline: none; }
+.about { margin-top: 10px; padding: 16px 18px; max-height: 48vh; overflow: auto; background: var(--panel); border-left: 1px solid var(--btn-line); font-size: 12.5px; line-height: 1.8; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.about h3 { font-size: 11px; font-weight: 500; letter-spacing: .2em; color: var(--muted); margin: 12px 0 2px; }
+.about h3:first-child { margin-top: 0; }
+.about p, .about ul { margin: 0; }
+.about ul { padding-left: 1.1em; }
+.about code { font-family: var(--mono); font-size: 11.5px; }
+.seed { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; color: var(--muted); white-space: nowrap; padding-bottom: 3px; user-select: all; }
+#status { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; font-size: 12px; letter-spacing: .3em; color: var(--muted); z-index: 1; pointer-events: none; }
+.computing #status { display: flex; }
+.computing #stage { visibility: hidden; }
+#fallback { position: fixed; inset: 0; z-index: 5; display: none; align-items: center; justify-content: center; padding: 32px; background: var(--bg); text-align: center; }
+#fallback.show { display: flex; }
+#fallback div { max-width: 420px; font-size: 14px; line-height: 1.9; }
+#fallback a { color: inherit; }
+@media (max-width: 699px) {
+  :root { --pad: 16px; }
+  .top { padding-top: calc(12px + env(safe-area-inset-top)); }
+  .foot { padding-bottom: calc(14px + env(safe-area-inset-bottom)); gap: 10px; }
+  .btn { padding: 7px 10px; font-size: 11.5px; letter-spacing: .06em; }
+  .rule { font-size: 12.5px; line-height: 1.7; }
+  .seed { position: absolute; right: var(--pad); top: -2px; }
+  .caption { max-width: 100%; }
+}
+.btn{border-width:1.5px;font-weight:500}.btn:hover,.btn:focus-visible{background:#2440c4;border-color:#2440c4;color:#fff}
+</style>
+</head>
+<body>
+<div id="stage" aria-label="切分的秩序：一個矩形被切成兩半，每一半再決定要不要繼續切，直到每個房間都剛好夠住。" role="img"></div>
+<div id="status">正在安靜地完成畫面</div>
+<header class="chrome top">
+  <a class="back" href="p5-demo-list.html"><span>←</span> 目錄</a>
+  <nav class="controls" aria-label="作品控制">
+    <button class="btn" id="regen" type="button" title="換一個新的種子">重新生成</button>
+    <button class="btn" id="save" type="button" title="把目前畫面存成 PNG">下載 PNG</button>
+  </nav>
+</header>
+<footer class="chrome foot">
+  <div class="caption">
+    <div class="no">03 / 10</div>
+    <h1 class="title">切分的秩序<small>Order by Division</small></h1>
+    <p class="rule">一個矩形被切成兩半，每一半再決定要不要繼續切，直到每個房間都剛好夠住。</p>
+    <details>
+      <summary>關於這件作品</summary>
+      <div class="about">
+        <h3>原理</h3>
+        <p>從整個版心開始，以廣度優先的順序遞迴切割：長邊優先被切，切點從 1/2、1/3、黃金比例等少數比例中挑選，越深的層級越不容易再切。切完之後，依面積排名策展填色：一到兩塊鈷藍、一到兩塊炭黑交叉排線，其餘少量排線，大多留白。所有筆畫交給模擬的筆式繪圖機，以來回不抬筆的方式畫出。</p>
+        <h3>核心參數</h3>
+        <ul><li>最小房間：約 34px</li><li>最大深度：8 層</li><li>切割比例：1/2、1/3、2/3、0.382、0.618</li><li>線寬隨層級由 3px 遞減至 1px</li></ul>
+        <h3>適合的位置</h3>
+        <p>作品集網格、建築事務所首頁、章節分隔。</p>
+        <h3>參照</h3>
+        <p>色塊與黑線的節制關係，可對照 Piet Mondrian 1920 年代的格狀構成。</p>
+      </div>
+    </details>
+  </div>
+  <div class="seed" id="seed" title="目前的種子；網址加上 ?seed= 可重現">seed —</div>
+</footer>
+<div id="fallback" role="alert"><div>這件作品需要 JavaScript 與同資料夾中的 <code>lib/p5.min.js</code> 才能繪製。<br>若你看到這段文字，代表腳本沒有載入成功：請確認檔案完整、瀏覽器允許執行 JavaScript，然後重新整理。<br><a href="p5-demo-list.html">回到目錄</a></div></div>
+<noscript><style>#fallback{display:flex}</style></noscript>
+<script src="lib/p5.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var SLUG = 'recursive-subdivision';
+  var body = document.body;
+  var fallback = document.getElementById('fallback');
+  function showFallback(err) {
+    fallback.classList.add('show');
+    body.classList.remove('computing');
+    if (err && window.console) console.warn('[p5-demos2] ' + SLUG + ':', err);
+  }
+  if (typeof window.p5 !== 'function') { showFallback(); return; }
+
+  var TAU = Math.PI * 2;
+  function parseSeed(v) { return v && /^\d{1,9}$/.test(v) ? parseInt(v, 10) : null; }
+  function freshSeed() { return 1 + Math.floor(Math.random() * 999998); }
+  var seed = parseSeed(new URLSearchParams(location.search).get('seed'));
+  if (seed === null) seed = freshSeed();
+  var reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+
+  // 可重現的亂數：mulberry32。結構用 p.random（已 randomSeed），細節各自取用獨立序列，避免受影格節奏影響。
+  function rng(salt) {
+    var a = (seed * 2654435761 + (salt || 0) * 40503 + 1013904223) >>> 0;
+    function r() {
+      a = (a + 0x6D2B79F5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    r.range = function (lo, hi) { return lo + r() * (hi - lo); };
+    r.int = function (lo, hi) { return Math.floor(lo + r() * (hi - lo + 1)); };
+    r.pick = function (arr) { return arr[Math.floor(r() * arr.length)]; };
+    r.chance = function (pr) { return r() < pr; };
+    r.gauss = function () { var u = 1 - r(), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(TAU * v); };
+    return r;
+  }
+  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + (a === undefined ? 1 : a) + ')'; }
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function smooth(e0, e1, x) { var t = clamp((x - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); }
+
+  var A = {
+    TAU: TAU, rng: rng, rgba: rgba, clamp: clamp, lerp: lerp, smooth: smooth,
+    reduced: reduced, coarse: coarse,
+    get seed() { return seed; },
+    density: function () { return Math.min(2, window.devicePixelRatio || 1); },
+    compact: function (w) { return w < 700; },
+    // 複雜度係數：1440×900 筆電約為 1，手機約 0.3–0.45
+    load: function (w, h) { var f = clamp((w * h) / (1440 * 900), 0.3, 1.25); return coarse ? f * 0.85 : f; },
+    // 作品的「版心」：留給文字的上下邊距
+    frame: function (w, h) {
+      var c = w < 700, top = c ? 62 : 80, bottom = c ? 172 : 136, side = c ? 18 : Math.max(64, Math.round(w * 0.055));
+      return { x: side, y: top, w: w - side * 2, h: h - top - bottom };
+    },
+    // 以時間決定進度（0→1）；減少動態時直接回傳 1
+    pacer: function (seconds) {
+      var t0 = performance.now();
+      return function () { return reduced ? 1 : clamp((performance.now() - t0) / (seconds * 1000), 0, 1); };
+    },
+    budget: function () { return reduced ? 36 : 10; },
+    done: function (p) { p._artDone = true; p.noLoop(); body.classList.remove('computing'); body.classList.add('complete'); },
+    paper: function (p, w, h, o) {
+      var g = p.createGraphics(w, h);
+      g.pixelDensity(1);
+      var ctx = g.drawingContext, r = rng(o.salt || 11), i, n, x, y, a, l;
+      ctx.fillStyle = rgba(o.base); ctx.fillRect(0, 0, w, h);
+      // 紙張的雲紋：柔邊的徑向漸層，避免出現可辨識的圓斑
+      n = Math.round(w * h / 9000);
+      for (i = 0; i < n; i++) {
+        var c = r.chance(0.5) ? o.dark : o.light, mx = r() * w, my = r() * h, mr = r.range(40, 220);
+        var mg = ctx.createRadialGradient(mx, my, 0, mx, my, mr);
+        mg.addColorStop(0, rgba(c, r.range(0.01, 0.028) * (o.mottle || 1))); mg.addColorStop(1, rgba(c, 0));
+        ctx.fillStyle = mg; ctx.fillRect(mx - mr, my - mr, mr * 2, mr * 2);
+      }
+      n = Math.round(w * h / 120 * (o.fibre === undefined ? 1 : o.fibre));
+      ctx.lineCap = 'round';
+      for (i = 0; i < n; i++) {
+        x = r() * w; y = r() * h; a = r() * TAU; l = r.range(2, 14);
+        ctx.strokeStyle = rgba(r.chance(0.55) ? o.dark : o.light, r.range(0.03, 0.09));
+        ctx.lineWidth = r.range(0.3, 0.9);
+        ctx.beginPath(); ctx.moveTo(x, y); ctx.quadraticCurveTo(x + Math.cos(a + 0.6) * l * 0.6, y + Math.sin(a + 0.6) * l * 0.6, x + Math.cos(a) * l, y + Math.sin(a) * l); ctx.stroke();
+      }
+      n = Math.round(w * h / 900 * (o.speck === undefined ? 1 : o.speck));
+      for (i = 0; i < n; i++) { ctx.fillStyle = rgba(o.dark, r.range(0.05, 0.22)); a = r.range(0.4, 1.4); ctx.fillRect(r() * w, r() * h, a, a); }
+      if (o.vignette) {
+        var gr = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.25, w / 2, h / 2, Math.hypot(w, h) * 0.6);
+        gr.addColorStop(0, rgba(o.dark, 0)); gr.addColorStop(1, rgba(o.dark, o.vignette));
+        ctx.fillStyle = gr; ctx.fillRect(0, 0, w, h);
+      }
+      return g;
+    }
+  };
+
+  // ── 切分的秩序：先算出整棵切割樹與所有筆畫，再讓「筆式繪圖機」依序畫出 ──
+  function sketch(p, A) {
+    var PAPER = [228, 223, 211], CHAR = [31, 31, 31], COBALT = [36, 64, 196];
+    var W, H, F, ctx, pace, ops = [], total = 0, cursor = 0, opi = 0, opDone = 0;
+    var DUR = 20, PIECE = 3;
+
+    p.setup = function () {
+      W = p.windowWidth; H = p.windowHeight;
+      p.pixelDensity(A.density());
+      p.createCanvas(W, H);
+      p.randomSeed(A.seed); p.noiseSeed(A.seed);
+      ctx = p.drawingContext;
+      F = A.frame(W, H);
+      p.image(A.paper(p, W, H, { base: PAPER, dark: [96, 90, 78], light: [250, 247, 240], vignette: 0.1, mottle: 1.3 }), 0, 0, W, H);
+      build();
+      pace = A.pacer(DUR);
+    };
+
+    function line(x1, y1, x2, y2, w, col, a) {
+      var len = Math.hypot(x2 - x1, y2 - y1);
+      if (len < 0.5) return;
+      ops.push({ x1: x1, y1: y1, x2: x2, y2: y2, len: len, w: w, col: col, a: a, ph: p.random(1000) });
+      total += len;
+    }
+
+    function hatch(r, ang, gap, w, col, a, inset) {
+      var x0 = r.x + inset, y0 = r.y + inset, x1 = r.x + r.w - inset, y1 = r.y + r.h - inset;
+      if (x1 - x0 < 2 || y1 - y0 < 2) return;
+      var dx = Math.cos(ang), dy = Math.sin(ang), nx = -dy, ny = dx;
+      var cx = (x0 + x1) / 2, cy = (y0 + y1) / 2, R = Math.hypot(x1 - x0, y1 - y0) / 2, flip = false;
+      for (var s = -R; s <= R; s += gap) {
+        var px = cx + nx * s, py = cy + ny * s, tmin = -1e9, tmax = 1e9;
+        // 與矩形求交
+        if (Math.abs(dx) > 1e-6) { var ta = (x0 - px) / dx, tb = (x1 - px) / dx; tmin = Math.max(tmin, Math.min(ta, tb)); tmax = Math.min(tmax, Math.max(ta, tb)); }
+        else if (px < x0 || px > x1) continue;
+        if (Math.abs(dy) > 1e-6) { var tc = (y0 - py) / dy, td = (y1 - py) / dy; tmin = Math.max(tmin, Math.min(tc, td)); tmax = Math.min(tmax, Math.max(tc, td)); }
+        else if (py < y0 || py > y1) continue;
+        if (tmax - tmin < 1) continue;
+        var j = p.random(-0.6, 0.6);
+        // 往返交替，像繪圖機不抬筆來回走
+        if (flip) line(px + dx * (tmax + j), py + dy * (tmax + j), px + dx * (tmin - j), py + dy * (tmin - j), w, col, a);
+        else line(px + dx * (tmin - j), py + dy * (tmin - j), px + dx * (tmax + j), py + dy * (tmax + j), w, col, a);
+        flip = !flip;
+      }
+    }
+
+    function build() {
+      var unit = Math.sqrt(F.w * F.h) / 900;
+      var minS = Math.max(22, 34 * unit);
+      var ratios = [0.5, 0.5, 1 / 3, 2 / 3, 0.382, 0.618];
+      var queue = [{ x: F.x, y: F.y, w: F.w, h: F.h, d: 0 }], leaves = [], cuts = [];
+      while (queue.length) {
+        var r = queue.shift();
+        var big = Math.min(r.w, r.h);
+        var pr = r.d < 2 ? 1 : A.clamp(0.95 - r.d * 0.11 + (big / (minS * 6)) * 0.25, 0, 0.92);
+        if (r.w * r.h > F.w * F.h * 0.16 && big >= minS * 2) pr = 1;
+        if (big < minS * 2 || p.random() > pr || r.d > 7) { leaves.push(r); continue; }
+        var vertical = r.w / r.h > 1.3 ? true : r.h / r.w > 1.3 ? false : p.random() < 0.5;
+        var span = vertical ? r.w : r.h, t = p.random(ratios);
+        if (span * Math.min(t, 1 - t) < minS) t = 0.5;
+        if (span * 0.5 < minS) { leaves.push(r); continue; }
+        var c = Math.round(span * t);
+        if (vertical) {
+          cuts.push({ x1: r.x + c, y1: r.y, x2: r.x + c, y2: r.y + r.h, d: r.d });
+          queue.push({ x: r.x, y: r.y, w: c, h: r.h, d: r.d + 1 }, { x: r.x + c, y: r.y, w: r.w - c, h: r.h, d: r.d + 1 });
+        } else {
+          cuts.push({ x1: r.x, y1: r.y + c, x2: r.x + r.w, y2: r.y + c, d: r.d });
+          queue.push({ x: r.x, y: r.y, w: r.w, h: c, d: r.d + 1 }, { x: r.x, y: r.y + c, w: r.w, h: r.h - c, d: r.d + 1 });
+        }
+      }
+      var widths = [3.0, 2.3, 1.7, 1.3, 1.1, 1, 1, 1, 1];
+      // 外框
+      var bw = 3.2, X0 = F.x, Y0 = F.y, X1 = F.x + F.w, Y1 = F.y + F.h;
+      line(X0, Y0, X1, Y0, bw, CHAR, 0.9); line(X1, Y0, X1, Y1, bw, CHAR, 0.9);
+      line(X1, Y1, X0, Y1, bw, CHAR, 0.9); line(X0, Y1, X0, Y0, bw, CHAR, 0.9);
+      cuts.forEach(function (c) {
+        var o = p.random(0, 4); // 筆尖微微越界
+        if (c.x1 === c.x2) line(c.x1, c.y1 - o * 0.3, c.x2, c.y2 + o, widths[c.d], CHAR, 0.88);
+        else line(c.x1 - o * 0.3, c.y1, c.x2 + o, c.y2, widths[c.d], CHAR, 0.88);
+      });
+
+      // 策展填色：大結構由規則決定，細節才隨機
+      var byArea = leaves.slice().sort(function (a, b) { return b.w * b.h - a.w * a.h; });
+      var used = new Set(), n = byArea.length;
+      function pickIn(lo, hi, ok) {
+        var cand = byArea.slice(Math.floor(n * lo), Math.max(Math.floor(n * lo) + 1, Math.floor(n * hi))).filter(function (r) { return !used.has(r) && (!ok || ok(r)); });
+        if (!cand.length) return null;
+        var r = p.random(cand); used.add(r); return r;
+      }
+      function far(from) { return function (r) { return !from || Math.hypot(r.x - from.x, r.y - from.y) > Math.min(F.w, F.h) * 0.45; }; }
+      var blue = pickIn(0.08, 0.4), blue2 = p.random() < 0.55 ? pickIn(0.35, 0.75, far(blue)) : null;
+      var dark = [pickIn(0.4, 0.85, far(blue))];
+      if (p.random() < 0.6) dark.push(pickIn(0.55, 1, far(dark[0])));
+      var ring = pickIn(0.0, 0.5, function (r) { var q = r.w / r.h; return q > 0.75 && q < 1.33; });
+      var fills = [];
+      if (blue) fills.push([blue, 'solid', COBALT]);
+      if (blue2) fills.push([blue2, 'solid', COBALT]);
+      dark.forEach(function (r) { if (r) fills.push([r, 'cross', CHAR]); });
+      if (ring) fills.push([ring, 'ring', p.random() < 0.5 ? COBALT : CHAR]);
+      var limit = F.w * F.h * 0.07;
+      leaves.forEach(function (r) {
+        if (used.has(r)) return;
+        var roll = p.random();
+        if (r.w * r.h > limit) roll = 1; // 大房間保持留白
+        if (roll < 0.2) fills.push([r, 'hatch', CHAR]);
+        else if (roll < 0.3) fills.push([r, 'rule', CHAR]);
+      });
+      // 讓填色依由左上至右下的「工作順序」繪製
+      fills.sort(function (a, b) { return (a[0].x + a[0].y * 1.6) - (b[0].x + b[0].y * 1.6); });
+      fills.forEach(function (fl) {
+        var r = fl[0], col = fl[2];
+        if (fl[1] === 'solid') { hatch(r, Math.PI / 4, 1.5, 1.6, col, 0.78, 4); hatch(r, -Math.PI / 4, 2.6, 1.2, col, 0.5, 4); }
+        else if (fl[1] === 'cross') { hatch(r, Math.PI / 4, 1.7, 1.4, col, 0.8, 4); hatch(r, -Math.PI / 4, 1.7, 1.4, col, 0.75, 4); }
+        else if (fl[1] === 'hatch') { hatch(r, p.random([Math.PI / 4, -Math.PI / 4, Math.PI / 3]), p.random([4.5, 6, 8]), 0.75, col, 0.75, 5); }
+        else if (fl[1] === 'rule') { hatch(r, p.random() < 0.5 ? 0 : Math.PI / 2, p.random([3.5, 5]), 0.7, col, 0.7, 5); }
+        else if (fl[1] === 'ring') {
+          var cx = r.x + r.w / 2, cy = r.y + r.h / 2, R0 = Math.min(r.w, r.h) * 0.36, seg = 90;
+          for (var k = 0; k < 3; k++) {
+            var R = R0 - k * 4.5;
+            for (var s = 0; s < seg; s++) {
+              var a0 = s / seg * A.TAU - Math.PI / 2, a1 = (s + 1) / seg * A.TAU - Math.PI / 2;
+              line(cx + Math.cos(a0) * R, cy + Math.sin(a0) * R, cx + Math.cos(a1) * R, cy + Math.sin(a1) * R, k ? 0.7 : 1.4, col, 0.85);
+            }
+          }
+        }
+      });
+    }
+
+    // 沿筆畫取點：垂直方向加入極細的雜訊抖動
+    function at(o, s) {
+      var t = s / o.len, wob = (p.noise(o.ph + s * 0.012) - 0.5) * 1.1;
+      var nx = -(o.y2 - o.y1) / o.len, ny = (o.x2 - o.x1) / o.len;
+      return [o.x1 + (o.x2 - o.x1) * t + nx * wob, o.y1 + (o.y2 - o.y1) * t + ny * wob];
+    }
+
+    p.draw = function () {
+      var t0 = performance.now(), budget = A.budget();
+      var target = pace() * total;
+      ctx.globalCompositeOperation = 'multiply';
+      ctx.lineCap = 'butt';
+      while (cursor < target && opi < ops.length) {
+        if (performance.now() - t0 > budget) break;
+        var o = ops[opi];
+        var end = Math.min(o.len, opDone + (target - cursor), opDone + 240);
+        ctx.strokeStyle = A.rgba(o.col, o.a);
+        var a = at(o, opDone);
+        while (opDone < end) {
+          var nxt = Math.min(end, opDone + PIECE), b = at(o, nxt);
+          ctx.lineWidth = o.w * (0.8 + 0.4 * p.noise(o.ph + 50 + opDone * 0.02));
+          ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+          cursor += nxt - opDone; opDone = nxt; a = b;
+        }
+        if (opDone >= o.len - 1e-6) { opi++; opDone = 0; }
+      }
+      ctx.globalCompositeOperation = 'source-over';
+      if (opi >= ops.length) A.done(p);
+    };
+  }
+
+  var stage = document.getElementById('stage');
+  var seedEl = document.getElementById('seed');
+  var inst = null, lastW = window.innerWidth, lastH = window.innerHeight, resizeTimer = 0;
+  function start() {
+    if (inst) { inst.remove(); inst = null; }
+    seedEl.textContent = 'seed ' + seed;
+    try { var u = new URL(location.href); u.searchParams.set('seed', seed); history.replaceState(null, '', u.href); } catch (e) { /* file:// 某些瀏覽器不允許，忽略 */ }
+    body.classList.remove('complete');
+    body.classList.toggle('computing', reduced);
+    try { inst = new p5(function (p) { sketch(p, A); }, stage); } catch (e) { showFallback(e); }
+  }
+  A.restart = start;
+  document.getElementById('regen').addEventListener('click', function () { seed = freshSeed(); start(); });
+  document.getElementById('save').addEventListener('click', function () { if (inst) inst.saveCanvas(SLUG + '-seed' + seed, 'png'); });
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      var w = window.innerWidth, h = window.innerHeight;
+      if (w === lastW && Math.abs(h - lastH) < 120) return; // 手機網址列伸縮不重排
+      lastW = w; lastH = h;
+      if (inst && inst.artResize) inst.artResize(w, h); else start();
+    }, 240);
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (!inst) return;
+    if (document.hidden) inst.noLoop();
+    else if (!inst._artDone) inst.loop();
+  });
+  start();
+})();
+</script>
+</body>
+</html>

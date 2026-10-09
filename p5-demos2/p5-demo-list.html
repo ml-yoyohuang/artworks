@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>規則之後 · p5.js 生成作品集（第二輯）</title>
+<meta name="description" content="十件以 p5.js 寫成的生成式作品：流場、等高線、遞迴切割、圓形填充、Truchet、差異生長、空間殖民、加權 Voronoi 點描、boids 與生成式字體。">
+<link rel="icon" href="data:,">
+<style>
+:root {
+  --bg: #f1eee8; --ink: #1d1c1a; --muted: rgba(29,28,26,.55); --line: rgba(29,28,26,.14);
+  --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); font-family: var(--font); -webkit-font-smoothing: antialiased; background: var(--bg); }
+#bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+#bg canvas { display: block; }
+.wrap { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; padding: 72px 40px 56px; }
+header.intro { display: grid; grid-template-columns: 1fr minmax(0, 420px); gap: 40px; align-items: end; padding-bottom: 44px; border-bottom: 1px solid var(--line); margin-bottom: 44px; }
+.eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .24em; color: var(--muted); margin: 0 0 18px; }
+h1 { font-size: clamp(40px, 6vw, 76px); font-weight: 300; letter-spacing: .14em; line-height: 1.1; margin: 0; }
+h1 small { display: block; font-size: 13px; font-weight: 400; letter-spacing: .3em; color: var(--muted); margin-top: 14px; }
+.lede { font-size: 14px; line-height: 2; margin: 0; color: var(--ink); opacity: .82; }
+ol.grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 44px 32px; }
+.card a { display: block; color: inherit; text-decoration: none; }
+.thumb { aspect-ratio: 16 / 10; overflow: hidden; background: #ddd; box-shadow: 0 1px 0 var(--line); }
+.thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.2,1), filter .6s; filter: saturate(.92); }
+.card a:hover .thumb img, .card a:focus-visible .thumb img { transform: scale(1.035); filter: saturate(1); }
+.card a:focus-visible { outline: 1px solid var(--ink); outline-offset: 6px; }
+.meta { padding-top: 16px; }
+.no { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+.sw { display: inline-flex; gap: 3px; }
+.sw i { width: 9px; height: 9px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); }
+h2 { font-size: 19px; font-weight: 500; letter-spacing: .14em; margin: 8px 0 6px; }
+h2 small { font-size: 11.5px; font-weight: 400; letter-spacing: .08em; color: var(--muted); margin-left: .7em; }
+.rule { font-size: 13.5px; line-height: 1.85; margin: 0 0 10px; opacity: .85; }
+.tags { list-style: none; padding: 0; margin: 0 0 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+.tags li { font-size: 11px; letter-spacing: .08em; padding: 2px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+.place { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.7; }
+.place span { font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; margin-right: .8em; color: var(--ink); opacity: .6; }
+footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 11.5px; color: var(--muted); letter-spacing: .06em; line-height: 1.8; }
+footer a { color: inherit; }
+.mono { font-family: var(--mono); }
+@media (max-width: 760px) {
+  .wrap { padding: 44px 18px 40px; }
+  header.intro { grid-template-columns: 1fr; gap: 22px; padding-bottom: 30px; margin-bottom: 30px; }
+  ol.grid { grid-template-columns: 1fr; gap: 36px; }
+}
+@media (prefers-reduced-motion: reduce) { .thumb img { transition: none; } }
+</style>
+</head>
+<body>
+<div id="bg" aria-hidden="true"></div>
+<main class="wrap">
+  <header class="intro">
+    <div>
+      <p class="eyebrow">P5.JS GENERATIVE WORKS · VOL. 2</p>
+      <h1>規則之後<small>AFTER THE RULE</small></h1>
+    </div>
+    <p class="lede">十件作品，各自只遵守一條簡單的規則。演算法負責重複，手的痕跡留在線寬、抖動與墨色的疊加裡；靜態的作品會在十幾秒內慢慢長成，然後停下，成為一張畫。點進任一件，按「重新生成」換一顆種子。</p>
+  </header>
+  <ol class="grid">
+    <li class="card">
+      <a href="flow-field.html?seed=2024">
+        <div class="thumb" style="background:linear-gradient(135deg, #efe9dc 0%, #efe9dc 45%, #1c1b19 46%, #1c1b19 78%, #26408b 79%)"><img src="thumbs/flow-field.jpg" alt="順風千行（種子 2024）的完成畫面" loading="lazy" width="720" height="450"></div>
+        <div class="meta">
+          <div class="no">01<span class="sw"><i style="background:#efe9dc"></i><i style="background:#1c1b19"></i><i style="background:#26408b"></i></span></div>
+          <h2>順風千行<small>A Thousand Lines Downwind</small></h2>
+          <p class="rule">一千條線從左側出發，順著看不見的風前進，一碰到彼此，就安靜地停下。</p>
+          <ul class="tags"><li>風</li><li>髮絲</li><li>筆觸</li><li>筆式繪圖機</li></ul>
+          <p class="place"><span>適合</span>品牌首頁主視覺、長文頁首、載入過場</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="contour-topography.html?seed=4096">
+        <div class="thumb" style="background:linear-gradient(135deg, #0d1310 0%, #0d1310 45%, #9db59a 46%, #9db59a 78%, #e2b55c 79%)"><img src="thumbs/contour-topography.jpg" alt="靜默測繪（種子 4096）的完成畫面" loading="lazy" width="720" height="450"></div>
+        <div class="meta">
+          <div class="no">02<span class="sw"><i style="background:#0d1310"></i><i style="background:#9db59a"></i><i style="background:#e2b55c"></i></span></div>
+          <h2>靜默測繪<small>Quiet Survey</small></h2>
+          <p class="rule">一座不存在的山被切成等距的薄片，每一片的邊緣，化成一條永不交錯的線。</p>
+          <ul class="tags"><li>地圖</li><li>測繪</li><li>冷靜理性</li><li>等高線</li></ul>
+          <p class="place"><span>適合</span>數據產品背景、年度報告封面、關於我們</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="recursive-subdivision.html?seed=27182">
+        <div class="thumb" style="background:linear-gradient(135deg, #e4dfd3 0%, #e4dfd3 45%, #1f1f1f 46%, #1f1f1f 78%, #2440c4 79%)"><img src="thumbs/recursive-subdivision.jpg" alt="切分的秩序（種子 27182）的完成畫面" loading="lazy" width="720" height="450"></div>
+        <div class="meta">
+          <div class="no">03<span class="sw"><i style="background:#e4dfd3"></i><i style="background:#1f1f1f"></i><i style="background:#2440c4"></i></span></div>
+          <h2>切分的秩序<small>Order by Division</small></h2>
+          <p class="rule">一個矩形被切成兩半，每一半再決定要不要繼續切，直到每個房間都剛好夠住。</p>
+          <ul class="tags"><li>構成主義</li><li>建築感</li><li>平面分割</li><li>筆式繪圖機</li></ul>
+          <p class="place"><span>適合</span>作品集網格、建築事務所首頁、章節分隔</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="circle-packing.html?seed=314">
+        <div class="thumb" style="background:linear-gradient(135deg, #f4edec 0%, #f4edec 45%, #482e70 46%, #482e70 78%, #e28aa6 79%)"><img src="thumbs/circle-packing.jpg" alt="細胞的禮貌（種子 314）的完成畫面" loading="lazy" width="720" height="450"></div>
+        <div class="meta">
+          <div class="no">04<span class="sw"><i style="background:#f4edec"></i><i style="background:#482e70"></i><i style="background:#e28aa6"></i></span></div>
+          <h2>細胞的禮貌<small>The Courtesy of Cells</small></h2>
+          <p class="rule">每個圓從一點開始長大，碰到鄰居就停下，於是擁擠也有了禮貌。</p>
+          <ul class="tags"><li>細胞</li><li>泡沫</li><li>有秩序的擁擠</li><li>染色切片</li></ul>
+          <p class="place"><span>適合</span>生技醫療品牌、社群與成員頁、空狀態插圖</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="truchet-tiles.html?seed=2024">
+        <div class="thumb" style="background:linear-gradient(135deg, #15110e 0%, #15110e 45%, #9e3221 46%, #9e3221 78%, #cca65c 79%)"><img src="thumbs/truchet-tiles.jpg" alt="漆金結（種子 2024）的完成畫面" loading="lazy" width="720" height="450"></div>
+        <div class="meta">
+          <div class="no">05<span class="sw"><i style="background:#15110e"></i><i style="background:#9e3221"></i><i style="background:#cca65c"></i></span></div>
+          <h2>漆金結<small>Lacquer Knot</small></h2>
+          <p class="rule">每塊磚只能選擇轉或不轉，金線卻因此再也找不到起點與終點。</p>
+          <ul class="tags"><li>圖騰</li><li>迷宮</li><li>織品紋樣</li><li>漆器</li></ul>
+          <p class="place"><span>適合</span>頁尾紋樣、包裝與票券、節慶活動頁</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="differential-growth.html?seed=99991">
+        <div class="thumb" style="background:linear-gradient(135deg, #0e1416 0%, #0e1416 45%, #467a76 46%, #467a76 78%, #e0775a 79%)"><img src="thumbs/differential-growth.jpg" alt="夜珊瑚（種子 99991）的完成畫面" loading="lazy" width="720" height="450"></div>
+        <div class="meta">
+          <div class="no">06<span class="sw"><i style="background:#0e1416"></i><i style="background:#467a76"></i><i style="background:#e0775a"></i></span></div>
+          <h2>夜珊瑚<small>Night Coral</small></h2>
+          <p class="rule">一條閉合的線，相鄰的點牽著手，稍遠的點互相推開；線無處可去，只好向外起皺。</p>
+          <ul class="tags"><li>珊瑚</li><li>腦紋</li><li>會呼吸的線</li><li>年輪</li></ul>
+          <p class="place"><span>適合</span>研究機構與實驗室、展覽頁、Hero 動態背景</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="space-colonization.html?seed=2024">
+        <div class="thumb" style="background:linear-gradient(135deg, #ece7da 0%, #ece7da 45%, #1b3e70 46%, #1b3e70 78%, #eef3f1 79%)"><img src="thumbs/space-colonization.jpg" alt="藍曬葉脈（種子 2024）的完成畫面" loading="lazy" width="720" height="450"></div>
+        <div class="meta">
+          <div class="no">07<span class="sw"><i style="background:#ece7da"></i><i style="background:#1b3e70"></i><i style="background:#eef3f1"></i></span></div>
+          <h2>藍曬葉脈<small>Cyanotype Venation</small></h2>
+          <p class="rule">看不見的養分散在葉形之中，枝條朝最近的那些生長，抵達之處，便把它們收下。</p>
+          <ul class="tags"><li>樹枝</li><li>葉脈</li><li>神經</li><li>藍曬</li></ul>
+          <p class="place"><span>適合</span>永續與農業品牌、知識圖譜、章節扉頁</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="voronoi-stippling.html?seed=123457">
+        <div class="thumb" style="background:linear-gradient(135deg, #ece3cf 0%, #ece3cf 45%, #2b1f17 46%, #2b1f17 78%, #8a3b25 79%)"><img src="thumbs/voronoi-stippling.jpg" alt="銅版星圖（種子 123457）的完成畫面" loading="lazy" width="720" height="450"></div>
+        <div class="meta">
+          <div class="no">08<span class="sw"><i style="background:#ece3cf"></i><i style="background:#2b1f17"></i><i style="background:#8a3b25"></i></span></div>
+          <h2>銅版星圖<small>Copperplate Bodies</small></h2>
+          <p class="rule">幾千枚墨點一次次移向自己領地中最暗的重心，直到明暗只剩疏密在說話。</p>
+          <ul class="tags"><li>銅版畫</li><li>科學插圖</li><li>點描</li><li>筆式繪圖機</li></ul>
+          <p class="place"><span>適合</span>出版與書封、博物館網站、長文插圖</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="boids-flocking.html?seed=8128">
+        <div class="thumb" style="background:linear-gradient(135deg, #d6cdc4 0%, #d6cdc4 45%, #1b1a20 46%, #1b1a20 78%, #b4502f 79%)"><img src="thumbs/boids-flocking.jpg" alt="黃昏群舞（種子 8128）的完成畫面" loading="lazy" width="720" height="450"></div>
+        <div class="meta">
+          <div class="no">09<span class="sw"><i style="background:#d6cdc4"></i><i style="background:#1b1a20"></i><i style="background:#b4502f"></i></span></div>
+          <h2>黃昏群舞<small>Murmuration at Dusk</small></h2>
+          <p class="rule">每隻鳥只看身旁幾隻鄰居：靠近、對齊、別相撞。沒有領袖，形狀卻自己浮現。</p>
+          <ul class="tags"><li>鳥群</li><li>魚群</li><li>集體意識</li><li>互動</li></ul>
+          <p class="place"><span>適合</span>社群與協作產品、互動式首頁、活動倒數頁</p>
+        </div>
+      </a>
+    </li>
+    <li class="card">
+      <a href="generative-typography.html?seed=42">
+        <div class="thumb" style="background:linear-gradient(135deg, #0c0c0d 0%, #0c0c0d 45%, #e8e2d6 46%, #e8e2d6 78%, #ff4a2a 79%)"><img src="thumbs/generative-typography.jpg" alt="字散（種子 42）的完成畫面" loading="lazy" width="720" height="450"></div>
+        <div class="meta">
+          <div class="no">10<span class="sw"><i style="background:#0c0c0d"></i><i style="background:#e8e2d6"></i><i style="background:#ff4a2a"></i></span></div>
+          <h2>字散<small>A Character Disperses</small></h2>
+          <p class="rule">一個字被拆成上千枚細筆，左邊還記得自己的形狀，右邊已隨風離開。</p>
+          <ul class="tags"><li>文字</li><li>拆解</li><li>生長</li><li>溶解</li></ul>
+          <p class="place"><span>適合</span>標題動畫、品牌口號頁、展覽主視覺</p>
+        </div>
+      </a>
+    </li>
+  </ol>
+  <footer>
+    <span>以 <a href="lib/README.md">p5.js 1.11.13</a>（LGPL 2.1）繪製；所有素材皆由程式生成，可直接以檔案開啟。</span>
+    <span class="mono" id="seed"></span>
+  </footer>
+</main>
+<script src="lib/p5.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  if (typeof window.p5 !== 'function') return; // 背景只是點綴；沒有它頁面依然完整
+  var m = /[?&]seed=(\d{1,9})/.exec(location.search);
+  var seed = m ? parseInt(m[1], 10) : 1 + Math.floor(Math.random() * 999998);
+  document.getElementById('seed').textContent = 'seed ' + seed;
+  var host = document.getElementById('bg'), inst = null, lastW = 0, timer = 0;
+  // 背景：稀疏、極淡的流場，畫一次就停（noLoop）
+  function sketch(p) {
+    p.setup = function () {
+      var W = window.innerWidth, H = window.innerHeight;
+      p.pixelDensity(Math.min(2, window.devicePixelRatio || 1));
+      p.createCanvas(W, H);
+      p.randomSeed(seed); p.noiseSeed(seed);
+      p.noLoop();
+      var ctx = p.drawingContext, n = Math.round(Math.min(160, W * H / 9000)), scl = 1.6 / Math.max(W, H);
+      p.clear();
+      ctx.lineCap = 'round';
+      for (var i = 0; i < n; i++) {
+        var x = p.random(-40, W), y = p.random(H), len = p.random(80, 260);
+        ctx.strokeStyle = 'rgba(29,28,26,' + p.random(0.035, 0.085).toFixed(3) + ')';
+        ctx.lineWidth = p.random(0.5, 1.1);
+        ctx.beginPath(); ctx.moveTo(x, y);
+        for (var k = 0; k < len; k += 3) {
+          var a = (p.noise(x * scl, y * scl) - 0.5) * 3.6;
+          x += Math.cos(a) * 3; y += Math.sin(a) * 3;
+          ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+    };
+  }
+  function start() { if (inst) inst.remove(); lastW = window.innerWidth; inst = new p5(sketch, host); }
+  window.addEventListener('resize', function () {
+    clearTimeout(timer);
+    timer = setTimeout(function () { if (window.innerWidth !== lastW) start(); }, 300);
+  });
+  start();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>02 靜默測繪 · Quiet Survey — p5 生成作品集</title>
+<meta name="description" content="一座不存在的山被切成等距的薄片，每一片的邊緣，化成一條永不交錯的線。">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:,">
+<style>
+:root {
+  --bg: #0d1310;
+  --ink: #cfdccb;
+  --muted: rgba(157,181,154,.62);
+  --btn-bg: rgba(13,19,16,.55);
+  --btn-line: rgba(157,181,154,.38);
+  --panel: rgba(13,19,16,.92);
+  --radius: 2px;
+  --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --pad: 22px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--ink); }
+body { font-family: var(--font); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+#stage { position: fixed; inset: 0; }
+#stage canvas { display: block; }
+.chrome { position: fixed; left: 0; right: 0; z-index: 2; display: flex; justify-content: space-between; gap: 16px; padding: 0 var(--pad); pointer-events: none; }
+.chrome > * { pointer-events: auto; }
+.top { top: 0; align-items: center; padding-top: calc(18px + env(safe-area-inset-top)); }
+.foot { bottom: 0; align-items: flex-end; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+.back { font-size: 12px; letter-spacing: .16em; color: var(--muted); text-decoration: none; padding: 8px 0; transition: color .3s; }
+.back:hover, .back:focus-visible { color: var(--ink); }
+.back span { display: inline-block; transition: transform .3s; }
+.back:hover span { transform: translateX(-3px); }
+.controls { display: flex; gap: 8px; }
+.btn { font: inherit; font-size: 12px; letter-spacing: .1em; color: var(--ink); background: var(--btn-bg); border: 1px solid var(--btn-line); padding: 7px 13px; cursor: pointer; transition: background .25s, color .25s, border-color .25s; border-radius: var(--radius); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.btn:hover, .btn:focus-visible { background: var(--ink); color: var(--bg); border-color: var(--ink); outline: none; }
+.btn:active { transform: translateY(1px); }
+.caption { max-width: min(540px, 100%); }
+.no { font-family: var(--mono); font-size: 10.5px; letter-spacing: .22em; color: var(--muted); }
+.title { font-size: 15px; font-weight: 500; letter-spacing: .12em; margin: 5px 0 3px; }
+.title small { font-size: 11px; font-weight: 400; letter-spacing: .08em; color: var(--muted); margin-left: .6em; }
+.rule { font-size: 13px; line-height: 1.75; margin: 0; color: var(--ink); opacity: .78; }
+details { margin-top: 6px; }
+summary { list-style: none; cursor: pointer; font-size: 11.5px; letter-spacing: .14em; color: var(--muted); display: inline-flex; align-items: center; gap: .5em; padding: 3px 0; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: ""; width: 14px; height: 1px; background: currentColor; transition: width .3s; }
+details[open] summary::before { width: 26px; }
+summary:hover, summary:focus-visible { color: var(--ink); outline: none; }
+.about { margin-top: 10px; padding: 16px 18px; max-height: 48vh; overflow: auto; background: var(--panel); border-left: 1px solid var(--btn-line); font-size: 12.5px; line-height: 1.8; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.about h3 { font-size: 11px; font-weight: 500; letter-spacing: .2em; color: var(--muted); margin: 12px 0 2px; }
+.about h3:first-child { margin-top: 0; }
+.about p, .about ul { margin: 0; }
+.about ul { padding-left: 1.1em; }
+.about code { font-family: var(--mono); font-size: 11.5px; }
+.seed { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; color: var(--muted); white-space: nowrap; padding-bottom: 3px; user-select: all; }
+#status { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; font-size: 12px; letter-spacing: .3em; color: var(--muted); z-index: 1; pointer-events: none; }
+.computing #status { display: flex; }
+.computing #stage { visibility: hidden; }
+#fallback { position: fixed; inset: 0; z-index: 5; display: none; align-items: center; justify-content: center; padding: 32px; background: var(--bg); text-align: center; }
+#fallback.show { display: flex; }
+#fallback div { max-width: 420px; font-size: 14px; line-height: 1.9; }
+#fallback a { color: inherit; }
+@media (max-width: 699px) {
+  :root { --pad: 16px; }
+  .top { padding-top: calc(12px + env(safe-area-inset-top)); }
+  .foot { padding-bottom: calc(14px + env(safe-area-inset-bottom)); gap: 10px; }
+  .btn { padding: 7px 10px; font-size: 11.5px; letter-spacing: .06em; }
+  .rule { font-size: 12.5px; line-height: 1.7; }
+  .seed { position: absolute; right: var(--pad); top: -2px; }
+  .caption { max-width: 100%; }
+}
+.btn{font-family:var(--mono);font-size:11px;letter-spacing:.14em}.btn:hover,.btn:focus-visible{background:#e2b55c;border-color:#e2b55c;color:#0d1310}
+</style>
+</head>
+<body>
+<div id="stage" aria-label="靜默測繪：一座不存在的山被切成等距的薄片，每一片的邊緣，化成一條永不交錯的線。" role="img"></div>
+<div id="status">正在安靜地完成畫面</div>
+<header class="chrome top">
+  <a class="back" href="p5-demo-list.html"><span>←</span> 目錄</a>
+  <nav class="controls" aria-label="作品控制">
+    <button class="btn" id="regen" type="button" title="換一個新的種子">重新生成</button>
+    <button class="btn" id="save" type="button" title="把目前畫面存成 PNG">下載 PNG</button>
+  </nav>
+</header>
+<footer class="chrome foot">
+  <div class="caption">
+    <div class="no">02 / 10</div>
+    <h1 class="title">靜默測繪<small>Quiet Survey</small></h1>
+    <p class="rule">一座不存在的山被切成等距的薄片，每一片的邊緣，化成一條永不交錯的線。</p>
+    <details>
+      <summary>關於這件作品</summary>
+      <div class="about">
+        <h3>原理</h3>
+        <p>先以三座高斯山峰、一處窪地與多層 noise 疊出一張高度場，大結構的位置只在設計好的範圍內浮動。接著用 marching squares 在每個等距高度上逐格判斷 16 種情況，以線性內插找出等高線穿過格邊的位置。每五條取一條加粗為計曲線，最後標出峰頂標高。</p>
+        <h3>核心參數</h3>
+        <ul><li>等高距：36 層（手機 26 層）</li><li>取樣格：約 4.5px</li><li>計曲線：每 5 層一條，琥珀色</li><li>低於第三層的區域以點陣標示水面</li></ul>
+        <h3>適合的位置</h3>
+        <p>數據產品背景、年度報告封面、關於我們。</p>
+      </div>
+    </details>
+  </div>
+  <div class="seed" id="seed" title="目前的種子；網址加上 ?seed= 可重現">seed —</div>
+</footer>
+<div id="fallback" role="alert"><div>這件作品需要 JavaScript 與同資料夾中的 <code>lib/p5.min.js</code> 才能繪製。<br>若你看到這段文字，代表腳本沒有載入成功：請確認檔案完整、瀏覽器允許執行 JavaScript，然後重新整理。<br><a href="p5-demo-list.html">回到目錄</a></div></div>
+<noscript><style>#fallback{display:flex}</style></noscript>
+<script src="lib/p5.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var SLUG = 'contour-topography';
+  var body = document.body;
+  var fallback = document.getElementById('fallback');
+  function showFallback(err) {
+    fallback.classList.add('show');
+    body.classList.remove('computing');
+    if (err && window.console) console.warn('[p5-demos2] ' + SLUG + ':', err);
+  }
+  if (typeof window.p5 !== 'function') { showFallback(); return; }
+
+  var TAU = Math.PI * 2;
+  function parseSeed(v) { return v && /^\d{1,9}$/.test(v) ? parseInt(v, 10) : null; }
+  function freshSeed() { return 1 + Math.floor(Math.random() * 999998); }
+  var seed = parseSeed(new URLSearchParams(location.search).get('seed'));
+  if (seed === null) seed = freshSeed();
+  var reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+
+  // 可重現的亂數：mulberry32。結構用 p.random（已 randomSeed），細節各自取用獨立序列，避免受影格節奏影響。
+  function rng(salt) {
+    var a = (seed * 2654435761 + (salt || 0) * 40503 + 1013904223) >>> 0;
+    function r() {
+      a = (a + 0x6D2B79F5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    r.range = function (lo, hi) { return lo + r() * (hi - lo); };
+    r.int = function (lo, hi) { return Math.floor(lo + r() * (hi - lo + 1)); };
+    r.pick = function (arr) { return arr[Math.floor(r() * arr.length)]; };
+    r.chance = function (pr) { return r() < pr; };
+    r.gauss = function () { var u = 1 - r(), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(TAU * v); };
+    return r;
+  }
+  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + (a === undefined ? 1 : a) + ')'; }
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function smooth(e0, e1, x) { var t = clamp((x - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); }
+
+  var A = {
+    TAU: TAU, rng: rng, rgba: rgba, clamp: clamp, lerp: lerp, smooth: smooth,
+    reduced: reduced, coarse: coarse,
+    get seed() { return seed; },
+    density: function () { return Math.min(2, window.devicePixelRatio || 1); },
+    compact: function (w) { return w < 700; },
+    // 複雜度係數：1440×900 筆電約為 1，手機約 0.3–0.45
+    load: function (w, h) { var f = clamp((w * h) / (1440 * 900), 0.3, 1.25); return coarse ? f * 0.85 : f; },
+    // 作品的「版心」：留給文字的上下邊距
+    frame: function (w, h) {
+      var c = w < 700, top = c ? 62 : 80, bottom = c ? 172 : 136, side = c ? 18 : Math.max(64, Math.round(w * 0.055));
+      return { x: side, y: top, w: w - side * 2, h: h - top - bottom };
+    },
+    // 以時間決定進度（0→1）；減少動態時直接回傳 1
+    pacer: function (seconds) {
+      var t0 = performance.now();
+      return function () { return reduced ? 1 : clamp((performance.now() - t0) / (seconds * 1000), 0, 1); };
+    },
+    budget: function () { return reduced ? 36 : 10; },
+    done: function (p) { p._artDone = true; p.noLoop(); body.classList.remove('computing'); body.classList.add('complete'); },
+    paper: function (p, w, h, o) {
+      var g = p.createGraphics(w, h);
+      g.pixelDensity(1);
+      var ctx = g.drawingContext, r = rng(o.salt || 11), i, n, x, y, a, l;
+      ctx.fillStyle = rgba(o.base); ctx.fillRect(0, 0, w, h);
+      // 紙張的雲紋：柔邊的徑向漸層，避免出現可辨識的圓斑
+      n = Math.round(w * h / 9000);
+      for (i = 0; i < n; i++) {
+        var c = r.chance(0.5) ? o.dark : o.light, mx = r() * w, my = r() * h, mr = r.range(40, 220);
+        var mg = ctx.createRadialGradient(mx, my, 0, mx, my, mr);
+        mg.addColorStop(0, rgba(c, r.range(0.01, 0.028) * (o.mottle || 1))); mg.addColorStop(1, rgba(c, 0));
+        ctx.fillStyle = mg; ctx.fillRect(mx - mr, my - mr, mr * 2, mr * 2);
+      }
+      n = Math.round(w * h / 120 * (o.fibre === undefined ? 1 : o.fibre));
+      ctx.lineCap = 'round';
+      for (i = 0; i < n; i++) {
+        x = r() * w; y = r() * h; a = r() * TAU; l = r.range(2, 14);
+        ctx.strokeStyle = rgba(r.chance(0.55) ? o.dark : o.light, r.range(0.03, 0.09));
+        ctx.lineWidth = r.range(0.3, 0.9);
+        ctx.beginPath(); ctx.moveTo(x, y); ctx.quadraticCurveTo(x + Math.cos(a + 0.6) * l * 0.6, y + Math.sin(a + 0.6) * l * 0.6, x + Math.cos(a) * l, y + Math.sin(a) * l); ctx.stroke();
+      }
+      n = Math.round(w * h / 900 * (o.speck === undefined ? 1 : o.speck));
+      for (i = 0; i < n; i++) { ctx.fillStyle = rgba(o.dark, r.range(0.05, 0.22)); a = r.range(0.4, 1.4); ctx.fillRect(r() * w, r() * h, a, a); }
+      if (o.vignette) {
+        var gr = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.25, w / 2, h / 2, Math.hypot(w, h) * 0.6);
+        gr.addColorStop(0, rgba(o.dark, 0)); gr.addColorStop(1, rgba(o.dark, o.vignette));
+        ctx.fillStyle = gr; ctx.fillRect(0, 0, w, h);
+      }
+      return g;
+    }
+  };
+
+  // ── 靜默測繪：高度場 → marching squares，由低到高一層一層描出 ──
+  function sketch(p, A) {
+    var BG = [13, 19, 16], SAGE = [157, 181, 154], AMBER = [226, 181, 92];
+    var W, H, F, ctx, pace, cs, gw, gh, hv, levels, drawnLevels = 0, LV, annotated = false;
+    var DUR = 15;
+
+    p.setup = function () {
+      W = p.windowWidth; H = p.windowHeight;
+      p.pixelDensity(A.density());
+      p.createCanvas(W, H);
+      p.randomSeed(A.seed); p.noiseSeed(A.seed);
+      ctx = p.drawingContext;
+      F = A.frame(W, H);
+      p.image(A.paper(p, W, H, { base: BG, dark: [0, 0, 0], light: [70, 96, 80], fibre: 0.35, speck: 0.4, mottle: 1.6, vignette: 0.45 }), 0, 0, W, H);
+      heights();
+      sheet();
+      pace = A.pacer(DUR);
+    };
+
+    function heights() {
+      var unit = Math.sqrt(F.w * F.h) / 900;
+      cs = Math.max(3.5, Math.round(4.5 * unit * 2) / 2);
+      gw = Math.ceil(F.w / cs) + 1; gh = Math.ceil(F.h / cs) + 1;
+      hv = new Float32Array(gw * gh);
+      var m = Math.min(F.w, F.h), portrait = F.h > F.w;
+      // 大結構由設計決定：一座主峰、一道副嶺、一處窪地；位置只在小範圍內浮動
+      var peaks = [
+        { x: portrait ? p.random(0.4, 0.6) : p.random(0.56, 0.68), y: portrait ? p.random(0.28, 0.4) : p.random(0.34, 0.5), r: p.random(0.3, 0.38), h: 1 },
+        { x: portrait ? p.random(0.3, 0.55) : p.random(0.2, 0.32), y: portrait ? p.random(0.66, 0.78) : p.random(0.6, 0.74), r: p.random(0.2, 0.26), h: p.random(0.55, 0.72) },
+        { x: p.random(0.05, 0.95), y: p.random(0.05, 0.95), r: p.random(0.12, 0.18), h: p.random(0.25, 0.4) }
+      ];
+      var basin = { x: p.random(0.15, 0.85), y: p.random(0.15, 0.85), r: 0.22 };
+      var warp = p.random(0.08, 0.14), rough = p.random(0.16, 0.24);
+      var lo = 1e9, hi = -1e9, i, j;
+      for (j = 0; j < gh; j++) {
+        for (i = 0; i < gw; i++) {
+          var u = i * cs / F.w, v = j * cs / F.h;
+          var wx = u + warp * (p.noise(u * 2.2, v * 2.2) - 0.5) * 2;
+          var wy = v + warp * (p.noise(u * 2.2 + 40, v * 2.2 + 40) - 0.5) * 2;
+          var e = 0;
+          for (var k = 0; k < 3; k++) {
+            var P = peaks[k], dx = (wx - P.x) * F.w / m, dy = (wy - P.y) * F.h / m;
+            e += P.h * Math.exp(-(dx * dx + dy * dy) / (2 * P.r * P.r));
+          }
+          var bx = (wx - basin.x) * F.w / m, by = (wy - basin.y) * F.h / m;
+          e -= 0.18 * Math.exp(-(bx * bx + by * by) / (2 * basin.r * basin.r));
+          var n = p.noise(wx * 4 + 9, wy * 4 + 9) * 0.6 + p.noise(wx * 9 + 3, wy * 9 + 3) * 0.3 + p.noise(wx * 20, wy * 20) * 0.1;
+          e += rough * (n - 0.5) * (0.6 + e);
+          hv[j * gw + i] = e;
+          if (e < lo) lo = e; if (e > hi) hi = e;
+        }
+      }
+      for (i = 0; i < hv.length; i++) hv[i] = (hv[i] - lo) / (hi - lo);
+      LV = W < 700 ? 26 : 36;
+      levels = [];
+      for (i = 0; i < LV; i++) levels.push((i + 0.6) / (LV + 0.2));
+    }
+
+    // 圖框、方格十字與比例尺：冷靜的測繪語彙
+    function sheet() {
+      ctx.save();
+      ctx.strokeStyle = A.rgba(SAGE, 0.4); ctx.lineWidth = 0.8;
+      ctx.strokeRect(F.x - 0.5, F.y - 0.5, F.w + 1, F.h + 1);
+      ctx.strokeStyle = A.rgba(SAGE, 0.16); ctx.lineWidth = 0.6;
+      ctx.strokeRect(F.x - 6.5, F.y - 6.5, F.w + 13, F.h + 13);
+      var step = W < 700 ? 60 : 90, x, y, n = 0;
+      ctx.font = '9px ' + getComputedStyle(document.body).getPropertyValue('--mono');
+      ctx.fillStyle = A.rgba(SAGE, 0.45);
+      ctx.strokeStyle = A.rgba(SAGE, 0.4);
+      ctx.textAlign = 'center';
+      for (x = F.x + step; x < F.x + F.w - 10; x += step) {
+        ctx.beginPath(); ctx.moveTo(x, F.y - 6); ctx.lineTo(x, F.y); ctx.moveTo(x, F.y + F.h); ctx.lineTo(x, F.y + F.h + 6); ctx.stroke();
+        if (W >= 700) ctx.fillText(String(++n).padStart(2, '0'), x, F.y - 10);
+      }
+      ctx.textAlign = 'right'; n = 0;
+      for (y = F.y + step; y < F.y + F.h - 10; y += step) {
+        ctx.beginPath(); ctx.moveTo(F.x - 6, y); ctx.lineTo(F.x, y); ctx.moveTo(F.x + F.w, y); ctx.lineTo(F.x + F.w + 6, y); ctx.stroke();
+        if (W >= 700) ctx.fillText(String.fromCharCode(65 + (n++ % 26)), F.x - 10, y + 3);
+      }
+      ctx.strokeStyle = A.rgba(SAGE, 0.13);
+      for (x = F.x + step; x < F.x + F.w - 10; x += step) for (y = F.y + step; y < F.y + F.h - 10; y += step) {
+        ctx.beginPath(); ctx.moveTo(x - 3, y); ctx.lineTo(x + 3, y); ctx.moveTo(x, y - 3); ctx.lineTo(x, y + 3); ctx.stroke();
+      }
+      // 低地：以點陣標示水面
+      ctx.fillStyle = A.rgba(SAGE, 0.22);
+      var water = levels[2];
+      for (var j = 1; j < gh; j += 3) for (var i = (j % 2) + 1; i < gw; i += 3) {
+        if (hv[j * gw + i] < water) ctx.fillRect(F.x + i * cs - 0.5, F.y + j * cs - 0.5, 1, 1);
+      }
+      ctx.restore();
+    }
+
+    function contour(t) {
+      var segs = [], i, j;
+      function ip(a, b) { return (t - a) / (b - a); }
+      for (j = 0; j < gh - 1; j++) {
+        var y0 = F.y + j * cs;
+        for (i = 0; i < gw - 1; i++) {
+          var a = hv[j * gw + i], b = hv[j * gw + i + 1], c = hv[(j + 1) * gw + i + 1], d = hv[(j + 1) * gw + i];
+          var idx = (a > t ? 8 : 0) | (b > t ? 4 : 0) | (c > t ? 2 : 0) | (d > t ? 1 : 0);
+          if (idx === 0 || idx === 15) continue;
+          var x0 = F.x + i * cs;
+          var top = [x0 + cs * ip(a, b), y0], right = [x0 + cs, y0 + cs * ip(b, c)];
+          var bot = [x0 + cs * ip(d, c), y0 + cs], left = [x0, y0 + cs * ip(a, d)];
+          switch (idx) {
+            case 1: case 14: segs.push(left, bot); break;
+            case 2: case 13: segs.push(bot, right); break;
+            case 3: case 12: segs.push(left, right); break;
+            case 4: case 11: segs.push(top, right); break;
+            case 6: case 9: segs.push(top, bot); break;
+            case 7: case 8: segs.push(left, top); break;
+            case 5: case 10:
+              var center = (a + b + c + d) / 4 > t;
+              if ((idx === 5) === center) { segs.push(left, top, bot, right); } else { segs.push(left, bot, top, right); }
+              break;
+          }
+        }
+      }
+      return segs;
+    }
+
+    function stroke(segs, col, a, w) {
+      ctx.strokeStyle = A.rgba(col, a); ctx.lineWidth = w;
+      ctx.beginPath();
+      for (var k = 0; k < segs.length; k += 2) { ctx.moveTo(segs[k][0], segs[k][1]); ctx.lineTo(segs[k + 1][0], segs[k + 1][1]); }
+      ctx.stroke();
+    }
+
+    function annotate() {
+      // 峰頂：十字與標高
+      var R = Math.round(12 * 4.5 / cs), found = [];
+      for (var j = R; j < gh - R; j += 2) for (var i = R; i < gw - R; i += 2) {
+        var v = hv[j * gw + i]; if (v < 0.62) continue;
+        var top = true;
+        for (var dj = -R; dj <= R && top; dj += 2) for (var di = -R; di <= R; di += 2) if (hv[(j + dj) * gw + i + di] > v) { top = false; break; }
+        if (top) found.push([F.x + i * cs, F.y + j * cs, v]);
+      }
+      ctx.font = '9.5px ' + getComputedStyle(document.body).getPropertyValue('--mono');
+      ctx.textAlign = 'left';
+      found.slice(0, 4).forEach(function (q) {
+        ctx.strokeStyle = A.rgba(AMBER, 0.9); ctx.lineWidth = 0.9;
+        ctx.beginPath(); ctx.moveTo(q[0] - 4, q[1]); ctx.lineTo(q[0] + 4, q[1]); ctx.moveTo(q[0], q[1] - 4); ctx.lineTo(q[0], q[1] + 4); ctx.stroke();
+        ctx.fillStyle = A.rgba(AMBER, 0.85);
+        var m = Math.round(240 + q[2] * 1620);
+        ctx.fillText(String(m).replace(/(\d)(?=(\d{3})$)/, '$1 '), q[0] + 7, q[1] - 6);
+      });
+      // 比例尺
+      var bx = F.x + F.w - 118, by = F.y + F.h - 16;
+      if (W < 700) bx = F.x + F.w - 96;
+      ctx.strokeStyle = A.rgba(SAGE, 0.7); ctx.lineWidth = 0.8;
+      ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx + 80, by); ctx.moveTo(bx, by - 3); ctx.lineTo(bx, by + 3); ctx.moveTo(bx + 40, by - 2); ctx.lineTo(bx + 40, by + 2); ctx.moveTo(bx + 80, by - 3); ctx.lineTo(bx + 80, by + 3); ctx.stroke();
+      ctx.fillStyle = A.rgba(SAGE, 0.6); ctx.textAlign = 'center';
+      ctx.fillText('0', bx, by - 7); ctx.fillText('500 m', bx + 80, by - 7);
+    }
+
+    p.draw = function () {
+      var t0 = performance.now(), budget = A.budget(), f = pace();
+      var target = Math.floor(f * (LV + 1));
+      ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      while (drawnLevels < Math.min(LV, target) && performance.now() - t0 < budget) {
+        var k = drawnLevels, segs = contour(levels[k]);
+        if (k % 5 === 4) {
+          stroke(segs, AMBER, 0.13, 4.5);
+          stroke(segs, AMBER, 0.95, 1.35);
+        } else {
+          stroke(segs, SAGE, 0.62, 0.8);
+        }
+        drawnLevels++;
+      }
+      if (drawnLevels >= LV && f >= 1 && !annotated) { annotate(); annotated = true; A.done(p); }
+    };
+  }
+
+  var stage = document.getElementById('stage');
+  var seedEl = document.getElementById('seed');
+  var inst = null, lastW = window.innerWidth, lastH = window.innerHeight, resizeTimer = 0;
+  function start() {
+    if (inst) { inst.remove(); inst = null; }
+    seedEl.textContent = 'seed ' + seed;
+    try { var u = new URL(location.href); u.searchParams.set('seed', seed); history.replaceState(null, '', u.href); } catch (e) { /* file:// 某些瀏覽器不允許，忽略 */ }
+    body.classList.remove('complete');
+    body.classList.toggle('computing', reduced);
+    try { inst = new p5(function (p) { sketch(p, A); }, stage); } catch (e) { showFallback(e); }
+  }
+  A.restart = start;
+  document.getElementById('regen').addEventListener('click', function () { seed = freshSeed(); start(); });
+  document.getElementById('save').addEventListener('click', function () { if (inst) inst.saveCanvas(SLUG + '-seed' + seed, 'png'); });
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      var w = window.innerWidth, h = window.innerHeight;
+      if (w === lastW && Math.abs(h - lastH) < 120) return; // 手機網址列伸縮不重排
+      lastW = w; lastH = h;
+      if (inst && inst.artResize) inst.artResize(w, h); else start();
+    }, 240);
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (!inst) return;
+    if (document.hidden) inst.noLoop();
+    else if (!inst._artDone) inst.loop();
+  });
+  start();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>07 藍曬葉脈 · Cyanotype Venation — p5 生成作品集</title>
+<meta name="description" content="看不見的養分散在葉形之中，枝條朝最近的那些生長，抵達之處，便把它們收下。">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:,">
+<style>
+:root {
+  --bg: #ece7da;
+  --ink: #1b3e70;
+  --muted: rgba(27,62,112,.58);
+  --btn-bg: rgba(236,231,218,.65);
+  --btn-line: rgba(27,62,112,.4);
+  --panel: rgba(236,231,218,.95);
+  --radius: 0;
+  --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --pad: 22px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--ink); }
+body { font-family: var(--font); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+#stage { position: fixed; inset: 0; }
+#stage canvas { display: block; }
+.chrome { position: fixed; left: 0; right: 0; z-index: 2; display: flex; justify-content: space-between; gap: 16px; padding: 0 var(--pad); pointer-events: none; }
+.chrome > * { pointer-events: auto; }
+.top { top: 0; align-items: center; padding-top: calc(18px + env(safe-area-inset-top)); }
+.foot { bottom: 0; align-items: flex-end; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+.back { font-size: 12px; letter-spacing: .16em; color: var(--muted); text-decoration: none; padding: 8px 0; transition: color .3s; }
+.back:hover, .back:focus-visible { color: var(--ink); }
+.back span { display: inline-block; transition: transform .3s; }
+.back:hover span { transform: translateX(-3px); }
+.controls { display: flex; gap: 8px; }
+.btn { font: inherit; font-size: 12px; letter-spacing: .1em; color: var(--ink); background: var(--btn-bg); border: 1px solid var(--btn-line); padding: 7px 13px; cursor: pointer; transition: background .25s, color .25s, border-color .25s; border-radius: var(--radius); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.btn:hover, .btn:focus-visible { background: var(--ink); color: var(--bg); border-color: var(--ink); outline: none; }
+.btn:active { transform: translateY(1px); }
+.caption { max-width: min(540px, 100%); }
+.no { font-family: var(--mono); font-size: 10.5px; letter-spacing: .22em; color: var(--muted); }
+.title { font-size: 15px; font-weight: 500; letter-spacing: .12em; margin: 5px 0 3px; }
+.title small { font-size: 11px; font-weight: 400; letter-spacing: .08em; color: var(--muted); margin-left: .6em; }
+.rule { font-size: 13px; line-height: 1.75; margin: 0; color: var(--ink); opacity: .78; }
+details { margin-top: 6px; }
+summary { list-style: none; cursor: pointer; font-size: 11.5px; letter-spacing: .14em; color: var(--muted); display: inline-flex; align-items: center; gap: .5em; padding: 3px 0; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: ""; width: 14px; height: 1px; background: currentColor; transition: width .3s; }
+details[open] summary::before { width: 26px; }
+summary:hover, summary:focus-visible { color: var(--ink); outline: none; }
+.about { margin-top: 10px; padding: 16px 18px; max-height: 48vh; overflow: auto; background: var(--panel); border-left: 1px solid var(--btn-line); font-size: 12.5px; line-height: 1.8; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.about h3 { font-size: 11px; font-weight: 500; letter-spacing: .2em; color: var(--muted); margin: 12px 0 2px; }
+.about h3:first-child { margin-top: 0; }
+.about p, .about ul { margin: 0; }
+.about ul { padding-left: 1.1em; }
+.about code { font-family: var(--mono); font-size: 11.5px; }
+.seed { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; color: var(--muted); white-space: nowrap; padding-bottom: 3px; user-select: all; }
+#status { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; font-size: 12px; letter-spacing: .3em; color: var(--muted); z-index: 1; pointer-events: none; }
+.computing #status { display: flex; }
+.computing #stage { visibility: hidden; }
+#fallback { position: fixed; inset: 0; z-index: 5; display: none; align-items: center; justify-content: center; padding: 32px; background: var(--bg); text-align: center; }
+#fallback.show { display: flex; }
+#fallback div { max-width: 420px; font-size: 14px; line-height: 1.9; }
+#fallback a { color: inherit; }
+@media (max-width: 699px) {
+  :root { --pad: 16px; }
+  .top { padding-top: calc(12px + env(safe-area-inset-top)); }
+  .foot { padding-bottom: calc(14px + env(safe-area-inset-bottom)); gap: 10px; }
+  .btn { padding: 7px 10px; font-size: 11.5px; letter-spacing: .06em; }
+  .rule { font-size: 12.5px; line-height: 1.7; }
+  .seed { position: absolute; right: var(--pad); top: -2px; }
+  .caption { max-width: 100%; }
+}
+.btn:hover,.btn:focus-visible{background:#1b3e70;border-color:#1b3e70;color:#eef3f1}
+</style>
+</head>
+<body>
+<div id="stage" aria-label="藍曬葉脈：看不見的養分散在葉形之中，枝條朝最近的那些生長，抵達之處，便把它們收下。" role="img"></div>
+<div id="status">正在安靜地完成畫面</div>
+<header class="chrome top">
+  <a class="back" href="p5-demo-list.html"><span>←</span> 目錄</a>
+  <nav class="controls" aria-label="作品控制">
+    <button class="btn" id="regen" type="button" title="換一個新的種子">重新生成</button>
+    <button class="btn" id="save" type="button" title="把目前畫面存成 PNG">下載 PNG</button>
+  </nav>
+</header>
+<footer class="chrome foot">
+  <div class="caption">
+    <div class="no">07 / 10</div>
+    <h1 class="title">藍曬葉脈<small>Cyanotype Venation</small></h1>
+    <p class="rule">看不見的養分散在葉形之中，枝條朝最近的那些生長，抵達之處，便把它們收下。</p>
+    <details>
+      <summary>關於這件作品</summary>
+      <div class="about">
+        <h3>原理</h3>
+        <p>先沿葉軸鋪好主脈，再在葉形內撒下數千個養分點。每一輪，每個養分點找出影響半徑內最近的枝節點，枝節點朝所有指向它的養分點的平均方向長出一小段；枝條一旦靠得夠近，那個養分點就被收下並移除。最近點搜尋以網格加速，並分批在多個影格完成。長完之後以管線模型加粗：匯入的末梢越多，枝越粗。</p>
+        <h3>核心參數</h3>
+        <ul><li>養分點：約 3,400（依螢幕縮減）</li><li>步長 D：約 3.4px；影響半徑：11D；收下距離：2.2D</li><li>葉片：寬螢幕三片、窄螢幕一片</li><li>粗細：末梢數的 0.42 次方</li></ul>
+        <h3>適合的位置</h3>
+        <p>永續與農業品牌、知識圖譜、章節扉頁。</p>
+        <h3>參照</h3>
+        <p>演算法出自 Runions 等人〈Modeling and visualization of leaf venation patterns〉（SIGGRAPH 2005）；藍曬植物圖可參照 Anna Atkins 1843 年的藍曬圖集。</p>
+      </div>
+    </details>
+  </div>
+  <div class="seed" id="seed" title="目前的種子；網址加上 ?seed= 可重現">seed —</div>
+</footer>
+<div id="fallback" role="alert"><div>這件作品需要 JavaScript 與同資料夾中的 <code>lib/p5.min.js</code> 才能繪製。<br>若你看到這段文字，代表腳本沒有載入成功：請確認檔案完整、瀏覽器允許執行 JavaScript，然後重新整理。<br><a href="p5-demo-list.html">回到目錄</a></div></div>
+<noscript><style>#fallback{display:flex}</style></noscript>
+<script src="lib/p5.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var SLUG = 'space-colonization';
+  var body = document.body;
+  var fallback = document.getElementById('fallback');
+  function showFallback(err) {
+    fallback.classList.add('show');
+    body.classList.remove('computing');
+    if (err && window.console) console.warn('[p5-demos2] ' + SLUG + ':', err);
+  }
+  if (typeof window.p5 !== 'function') { showFallback(); return; }
+
+  var TAU = Math.PI * 2;
+  function parseSeed(v) { return v && /^\d{1,9}$/.test(v) ? parseInt(v, 10) : null; }
+  function freshSeed() { return 1 + Math.floor(Math.random() * 999998); }
+  var seed = parseSeed(new URLSearchParams(location.search).get('seed'));
+  if (seed === null) seed = freshSeed();
+  var reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+
+  // 可重現的亂數：mulberry32。結構用 p.random（已 randomSeed），細節各自取用獨立序列，避免受影格節奏影響。
+  function rng(salt) {
+    var a = (seed * 2654435761 + (salt || 0) * 40503 + 1013904223) >>> 0;
+    function r() {
+      a = (a + 0x6D2B79F5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    r.range = function (lo, hi) { return lo + r() * (hi - lo); };
+    r.int = function (lo, hi) { return Math.floor(lo + r() * (hi - lo + 1)); };
+    r.pick = function (arr) { return arr[Math.floor(r() * arr.length)]; };
+    r.chance = function (pr) { return r() < pr; };
+    r.gauss = function () { var u = 1 - r(), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(TAU * v); };
+    return r;
+  }
+  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + (a === undefined ? 1 : a) + ')'; }
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function smooth(e0, e1, x) { var t = clamp((x - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); }
+
+  var A = {
+    TAU: TAU, rng: rng, rgba: rgba, clamp: clamp, lerp: lerp, smooth: smooth,
+    reduced: reduced, coarse: coarse,
+    get seed() { return seed; },
+    density: function () { return Math.min(2, window.devicePixelRatio || 1); },
+    compact: function (w) { return w < 700; },
+    // 複雜度係數：1440×900 筆電約為 1，手機約 0.3–0.45
+    load: function (w, h) { var f = clamp((w * h) / (1440 * 900), 0.3, 1.25); return coarse ? f * 0.85 : f; },
+    // 作品的「版心」：留給文字的上下邊距
+    frame: function (w, h) {
+      var c = w < 700, top = c ? 62 : 80, bottom = c ? 172 : 136, side = c ? 18 : Math.max(64, Math.round(w * 0.055));
+      return { x: side, y: top, w: w - side * 2, h: h - top - bottom };
+    },
+    // 以時間決定進度（0→1）；減少動態時直接回傳 1
+    pacer: function (seconds) {
+      var t0 = performance.now();
+      return function () { return reduced ? 1 : clamp((performance.now() - t0) / (seconds * 1000), 0, 1); };
+    },
+    budget: function () { return reduced ? 36 : 10; },
+    done: function (p) { p._artDone = true; p.noLoop(); body.classList.remove('computing'); body.classList.add('complete'); },
+    paper: function (p, w, h, o) {
+      var g = p.createGraphics(w, h);
+      g.pixelDensity(1);
+      var ctx = g.drawingContext, r = rng(o.salt || 11), i, n, x, y, a, l;
+      ctx.fillStyle = rgba(o.base); ctx.fillRect(0, 0, w, h);
+      // 紙張的雲紋：柔邊的徑向漸層，避免出現可辨識的圓斑
+      n = Math.round(w * h / 9000);
+      for (i = 0; i < n; i++) {
+        var c = r.chance(0.5) ? o.dark : o.light, mx = r() * w, my = r() * h, mr = r.range(40, 220);
+        var mg = ctx.createRadialGradient(mx, my, 0, mx, my, mr);
+        mg.addColorStop(0, rgba(c, r.range(0.01, 0.028) * (o.mottle || 1))); mg.addColorStop(1, rgba(c, 0));
+        ctx.fillStyle = mg; ctx.fillRect(mx - mr, my - mr, mr * 2, mr * 2);
+      }
+      n = Math.round(w * h / 120 * (o.fibre === undefined ? 1 : o.fibre));
+      ctx.lineCap = 'round';
+      for (i = 0; i < n; i++) {
+        x = r() * w; y = r() * h; a = r() * TAU; l = r.range(2, 14);
+        ctx.strokeStyle = rgba(r.chance(0.55) ? o.dark : o.light, r.range(0.03, 0.09));
+        ctx.lineWidth = r.range(0.3, 0.9);
+        ctx.beginPath(); ctx.moveTo(x, y); ctx.quadraticCurveTo(x + Math.cos(a + 0.6) * l * 0.6, y + Math.sin(a + 0.6) * l * 0.6, x + Math.cos(a) * l, y + Math.sin(a) * l); ctx.stroke();
+      }
+      n = Math.round(w * h / 900 * (o.speck === undefined ? 1 : o.speck));
+      for (i = 0; i < n; i++) { ctx.fillStyle = rgba(o.dark, r.range(0.05, 0.22)); a = r.range(0.4, 1.4); ctx.fillRect(r() * w, r() * h, a, a); }
+      if (o.vignette) {
+        var gr = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.25, w / 2, h / 2, Math.hypot(w, h) * 0.6);
+        gr.addColorStop(0, rgba(o.dark, 0)); gr.addColorStop(1, rgba(o.dark, o.vignette));
+        ctx.fillStyle = gr; ctx.fillRect(0, 0, w, h);
+      }
+      return g;
+    }
+  };
+
+  // ── 藍曬葉脈：葉形內的養分點 + 空間殖民演算法（網格加速、分批成長），最後依管線模型加粗 ──
+  function sketch(p, A) {
+    var PAPER = [236, 231, 218], BLUE = [27, 62, 112], DEEP = [14, 36, 74], WHITE = [238, 243, 241], PALE = [120, 160, 196];
+    var W, H, F, ctx, pace, leaves = [], nodes = [], att = [], gw, gh, cell, head = [], D, di, dk;
+    var tips = [], started = [], phase = 0, iter = 0, MAXIT = 190, thick = 0, desc, lastGrow = 0, drawnSeg = 0, thickPace;
+    var DUR = 20;
+
+    p.setup = function () {
+      W = p.windowWidth; H = p.windowHeight;
+      p.pixelDensity(A.density());
+      p.createCanvas(W, H);
+      p.randomSeed(A.seed); p.noiseSeed(A.seed);
+      ctx = p.drawingContext;
+      F = A.frame(W, H);
+      p.image(A.paper(p, W, H, { base: PAPER, dark: [120, 110, 90], light: [255, 253, 247], vignette: 0.08 }), 0, 0, W, H);
+      coat();
+      design();
+      pace = A.pacer(DUR);
+    };
+
+    // 刷上感光液：一塊邊緣參差的藍，左右兩端留下刷毛的痕跡
+    function coat() {
+      var r = A.rng(9), k, x, y;
+      ctx.save();
+      ctx.fillStyle = A.rgba(BLUE);
+      ctx.beginPath();
+      for (k = 0; k <= 60; k++) { x = A.lerp(F.x, F.x + F.w, k / 60); ctx[k ? 'lineTo' : 'moveTo'](x, F.y + (p.noise(k * 0.4, 1) - 0.5) * 8); }
+      for (k = 0; k <= 40; k++) { y = A.lerp(F.y, F.y + F.h, k / 40); ctx.lineTo(F.x + F.w + (p.noise(k * 0.5, 2) - 0.3) * 16, y); }
+      for (k = 60; k >= 0; k--) { x = A.lerp(F.x, F.x + F.w, k / 60); ctx.lineTo(x, F.y + F.h + (p.noise(k * 0.4, 3) - 0.5) * 8); }
+      for (k = 40; k >= 0; k--) { y = A.lerp(F.y, F.y + F.h, k / 40); ctx.lineTo(F.x - (p.noise(k * 0.5, 4) - 0.3) * 16, y); }
+      ctx.closePath(); ctx.fill();
+      ctx.clip();
+      // 刷痕：極淡的長橫筆
+      for (k = 0; k < 90; k++) {
+        y = F.y + r() * F.h;
+        ctx.strokeStyle = A.rgba(r() < 0.6 ? DEEP : PALE, r.range(0.04, 0.1));
+        ctx.lineWidth = r.range(2, 14);
+        ctx.beginPath(); ctx.moveTo(F.x - 20, y); ctx.bezierCurveTo(F.x + F.w * 0.3, y + r.range(-4, 4), F.x + F.w * 0.7, y + r.range(-4, 4), F.x + F.w + 20, y + r.range(-3, 3)); ctx.stroke();
+      }
+      // 不均勻的曝光
+      for (k = 0; k < 60; k++) {
+        x = F.x + r() * F.w; y = F.y + r() * F.h; var mr = r.range(60, 260);
+        var g = ctx.createRadialGradient(x, y, 0, x, y, mr);
+        g.addColorStop(0, A.rgba(r() < 0.65 ? DEEP : PALE, r.range(0.06, 0.16))); g.addColorStop(1, A.rgba(DEEP, 0));
+        ctx.fillStyle = g; ctx.fillRect(x - mr, y - mr, mr * 2, mr * 2);
+      }
+      ctx.restore();
+      // 刷毛：兩端短促的乾筆
+      for (k = 0; k < 120; k++) {
+        var left = r() < 0.5, yy = F.y + r() * F.h, len = r.range(6, 34);
+        x = left ? F.x + r.range(-4, 10) : F.x + F.w + r.range(-10, 4);
+        ctx.strokeStyle = A.rgba(BLUE, r.range(0.25, 0.7)); ctx.lineWidth = r.range(0.6, 2.2);
+        ctx.beginPath(); ctx.moveTo(x, yy); ctx.lineTo(x + (left ? -len : len), yy + r.range(-1.5, 1.5)); ctx.stroke();
+      }
+    }
+
+    function makeLeaf(bx, by, ang, len, wid, asym) {
+      return { bx: bx, by: by, ang: ang, len: len, wid: wid, asym: asym, ca: Math.cos(ang), sa: Math.sin(ang), ph: p.random(100), curve: p.random(-0.08, 0.08) };
+    }
+    // 葉形座標：u 沿主脈 0→1，v 垂直
+    function toLeaf(L, x, y) {
+      var dx = x - L.bx, dy = y - L.by;
+      var u = (dx * L.ca + dy * L.sa) / L.len, v = (-dx * L.sa + dy * L.ca) / L.len;
+      return [u, v - L.curve * Math.sin(Math.PI * u)];
+    }
+    function halfW(L, u, side) {
+      if (u <= 0 || u >= 1) return 0;
+      var w = L.wid * Math.pow(Math.sin(Math.PI * Math.pow(u, 0.75)), 0.85);
+      w *= 1 + 0.03 * Math.sin(u * 60 + L.ph); // 細鋸齒
+      return w * (side > 0 ? 1 + L.asym : 1 - L.asym);
+    }
+    function inLeaf(L, x, y) { var q = toLeaf(L, x, y); return Math.abs(q[1]) < halfW(L, q[0], q[1]); }
+    function fromLeaf(L, u, v) {
+      v += L.curve * Math.sin(Math.PI * u);
+      return [L.bx + (u * L.ca - v * L.sa) * L.len, L.by + (u * L.sa + v * L.ca) * L.len];
+    }
+
+    function design() {
+      var wide = F.w > F.h * 1.15, m = Math.min(F.w, F.h);
+      var bx = F.x + F.w * p.random(0.46, 0.54), by = F.y + F.h * 0.985;
+      if (wide) {
+        var L0 = F.h * 0.96;
+        leaves.push(makeLeaf(bx, by, -Math.PI / 2 + p.random(-0.1, 0.1), L0, 0.25, p.random(-0.06, 0.06)));
+        leaves.push(makeLeaf(bx - L0 * 0.03, by, -Math.PI / 2 - p.random(0.95, 1.1), L0 * p.random(0.62, 0.72), 0.25, p.random(-0.06, 0.06)));
+        if (F.w > F.h * 1.5) leaves.push(makeLeaf(bx + L0 * 0.03, by, -Math.PI / 2 + p.random(0.9, 1.05), L0 * p.random(0.55, 0.66), 0.26, p.random(-0.06, 0.06)));
+      } else {
+        leaves.push(makeLeaf(bx, by, -Math.PI / 2 + p.random(-0.08, 0.08), F.h * 0.95, Math.min(0.3, F.w / F.h * 0.6), p.random(-0.05, 0.05)));
+      }
+      // 葉面：比周圍淺的藍（被遮住的光）
+      leaves.forEach(function (L) {
+        ctx.save();
+        ctx.beginPath(); ctx.rect(F.x, F.y, F.w, F.h); ctx.clip();
+        ctx.shadowColor = A.rgba(WHITE, 0.4); ctx.shadowBlur = 6;
+        ctx.fillStyle = A.rgba(PALE, 0.38);
+        ctx.beginPath();
+        var k, q;
+        for (k = 0; k <= 80; k++) { q = fromLeaf(L, k / 80, halfW(L, k / 80, 1)); if (k) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); }
+        for (k = 80; k >= 0; k--) { q = fromLeaf(L, k / 80, -halfW(L, k / 80, -1)); ctx.lineTo(q[0], q[1]); }
+        ctx.closePath(); ctx.fill();
+        ctx.restore();
+      });
+      var load = A.load(W, H);
+      D = Math.max(2.6, 3.4 * m / 700);
+      di = D * 11; dk = D * 2.2;
+      var total = Math.round(3400 * A.clamp(load, 0.42, 1.1));
+      var areas = leaves.map(function (L) { return L.len * L.len * L.wid; }), sum = areas.reduce(function (a, b) { return a + b; }, 0);
+      leaves.forEach(function (L, li) {
+        var want = Math.round(total * areas[li] / sum), got = 0, guard = 0;
+        while (got < want && guard++ < want * 40) {
+          var u = Math.pow(p.random(), 0.9), v = p.random(-0.5, 0.5) * L.wid * 2.4;
+          if (Math.abs(v) >= halfW(L, u, v) * 0.96) continue;
+          var q = fromLeaf(L, u, v);
+          if (q[0] < F.x + 2 || q[0] > F.x + F.w - 2 || q[1] < F.y + 2 || q[1] > F.y + F.h - 2) continue;
+          att.push({ x: q[0], y: q[1], alive: true, best: -1, bd: 0 }); got++;
+        }
+        // 葉柄：從基部開始的第一個節點
+        // 主脈：先沿葉軸鋪好，側脈才由它長出
+        tips.push(nodes.length); started.push(true);
+        var steps = Math.floor(L.len * 0.86 / D), prev = -1;
+        for (var q = 0; q <= steps; q++) {
+          var pt = fromLeaf(L, q / steps * 0.86, 0);
+          if (pt[0] < F.x || pt[0] > F.x + F.w || pt[1] < F.y || pt[1] > F.y + F.h + 2) continue;
+          nodes.push({ x: pt[0], y: pt[1], parent: prev, dx: L.ca, dy: L.sa, leaf: li, ax: 0, ay: 0, n: 0, rib: true });
+          prev = nodes.length - 1;
+        }
+      });
+      cell = di;
+      gw = Math.ceil(W / cell) + 1; gh = Math.ceil(H / cell) + 1;
+      for (var i = 0; i < gw * gh; i++) head.push([]);
+      nodes.forEach(function (nd, k) { addToGrid(k); });
+      ctx.lineCap = 'round';
+      nodes.forEach(function (nd, k) { if (nd.parent >= 0) seg(k, 1.1, WHITE, 0.6); });
+    }
+    function addToGrid(k) {
+      var nd = nodes[k], gx = A.clamp((nd.x / cell) | 0, 0, gw - 1), gy = A.clamp((nd.y / cell) | 0, 0, gh - 1);
+      head[gy * gw + gx].push(k);
+    }
+
+    function grow() {
+      var i, j, k, a, list, nd, added = 0;
+      for (i = 0; i < nodes.length; i++) { nodes[i].ax = 0; nodes[i].ay = 0; nodes[i].n = 0; }
+      for (i = 0; i < att.length; i++) {
+        a = att[i]; if (!a.alive) continue;
+        var gx = (a.x / cell) | 0, gy = (a.y / cell) | 0, best = -1, bd = di * di;
+        for (j = gy - 1; j <= gy + 1; j++) {
+          if (j < 0 || j >= gh) continue;
+          for (var g = gx - 1; g <= gx + 1; g++) {
+            if (g < 0 || g >= gw) continue;
+            list = head[j * gw + g];
+            for (k = 0; k < list.length; k++) {
+              nd = nodes[list[k]];
+              var dx = a.x - nd.x, dy = a.y - nd.y, d2 = dx * dx + dy * dy;
+              if (d2 < bd) { bd = d2; best = list[k]; }
+            }
+          }
+        }
+        if (best < 0) continue;
+        if (bd < dk * dk) { a.alive = false; continue; }
+        nd = nodes[best]; var d = Math.sqrt(bd);
+        nd.ax += (a.x - nd.x) / d; nd.ay += (a.y - nd.y) / d; nd.n++;
+      }
+      var len = nodes.length;
+      for (i = 0; i < len; i++) if (nodes[i].n > 0) started[nodes[i].leaf] = true;
+      for (i = 0; i < len; i++) {
+        nd = nodes[i];
+        var dxn, dyn;
+        if (nd.n > 0) {
+          dxn = nd.ax / nd.n + nd.dx * 0.25; dyn = nd.ay / nd.n + nd.dy * 0.25;
+        } else if (tips[nd.leaf] === i && !started[nd.leaf] && iter < 400) {
+          var Lf = leaves[nd.leaf];
+          dxn = Lf.ca; dyn = Lf.sa; // 尚未感到養分：沿主脈方向伸出葉柄
+        } else continue;
+        var m = Math.hypot(dxn, dyn); if (m < 1e-6) continue;
+        dxn /= m; dyn /= m;
+        var nx = nd.x + dxn * D, ny = nd.y + dyn * D;
+        // 避免在同一位置重複長出
+        if (nd.lastX !== undefined && Math.abs(nd.lastX - nx) < 0.3 && Math.abs(nd.lastY - ny) < 0.3) continue;
+        nd.lastX = nx; nd.lastY = ny;
+        nd.kids = (nd.kids || 0) + 1;
+        nodes.push({ x: nx, y: ny, parent: i, dx: dxn, dy: dyn, leaf: nd.leaf, ax: 0, ay: 0, n: 0 });
+        addToGrid(nodes.length - 1);
+        if (tips[nd.leaf] === i) tips[nd.leaf] = nodes.length - 1;
+        added++;
+      }
+      iter++;
+      return added;
+    }
+
+    function seg(k, w, col, a) {
+      var nd = nodes[k], pr = nodes[nd.parent];
+      ctx.strokeStyle = A.rgba(col, a); ctx.lineWidth = w;
+      ctx.beginPath(); ctx.moveTo(pr.x, pr.y); ctx.lineTo(nd.x, nd.y); ctx.stroke();
+    }
+
+    p.draw = function () {
+      var t0 = performance.now(), budget = A.budget();
+      ctx.lineCap = 'round';
+      if (phase === 0) {
+        var f = pace(), target = Math.floor(f * 0.86 * MAXIT);
+        while (iter < target && performance.now() - t0 < budget) {
+          var before = nodes.length, added = grow();
+          for (var k = before; k < nodes.length; k++) seg(k, 0.7, WHITE, 0.5);
+          if (added === 0 && iter > 30) { iter = MAXIT; break; }
+        }
+        if ((iter >= MAXIT || f >= 1 && iter >= target) && f >= 0.8) {
+          // 管線模型：越多末梢匯入，枝越粗
+          desc = new Float32Array(nodes.length);
+          for (k = nodes.length - 1; k > 0; k--) { desc[k] += 1; if (nodes[k].parent >= 0) desc[nodes[k].parent] += desc[k]; }
+          phase = 1; drawnSeg = 0; thickPace = A.pacer(DUR * 0.14);
+        }
+        if (!A.reduced || phase === 0) return;
+      }
+      var tf = thickPace(), tgt = Math.floor(tf * nodes.length);
+      var scale = D / 3.4;
+      while (drawnSeg < tgt && performance.now() - t0 < budget) {
+        k = drawnSeg++;
+        if (nodes[k].parent < 0) continue;
+        var w = Math.min(7 * scale, 0.55 + Math.pow(desc[k], 0.42) * 0.3 * scale);
+        seg(k, w, WHITE, 0.9);
+      }
+      if (drawnSeg >= nodes.length) A.done(p);
+    };
+  }
+
+  var stage = document.getElementById('stage');
+  var seedEl = document.getElementById('seed');
+  var inst = null, lastW = window.innerWidth, lastH = window.innerHeight, resizeTimer = 0;
+  function start() {
+    if (inst) { inst.remove(); inst = null; }
+    seedEl.textContent = 'seed ' + seed;
+    try { var u = new URL(location.href); u.searchParams.set('seed', seed); history.replaceState(null, '', u.href); } catch (e) { /* file:// 某些瀏覽器不允許，忽略 */ }
+    body.classList.remove('complete');
+    body.classList.toggle('computing', reduced);
+    try { inst = new p5(function (p) { sketch(p, A); }, stage); } catch (e) { showFallback(e); }
+  }
+  A.restart = start;
+  document.getElementById('regen').addEventListener('click', function () { seed = freshSeed(); start(); });
+  document.getElementById('save').addEventListener('click', function () { if (inst) inst.saveCanvas(SLUG + '-seed' + seed, 'png'); });
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      var w = window.innerWidth, h = window.innerHeight;
+      if (w === lastW && Math.abs(h - lastH) < 120) return; // 手機網址列伸縮不重排
+      lastW = w; lastH = h;
+      if (inst && inst.artResize) inst.artResize(w, h); else start();
+    }, 240);
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (!inst) return;
+    if (document.hidden) inst.noLoop();
+    else if (!inst._artDone) inst.loop();
+  });
+  start();
+})();
+</script>
+</body>
+</html>

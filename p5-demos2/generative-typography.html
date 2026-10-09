@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>10 字散 · A Character Disperses — p5 生成作品集</title>
+<meta name="description" content="一個字被拆成上千枚細筆，左邊還記得自己的形狀，右邊已隨風離開。">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:,">
+<style>
+:root {
+  --bg: #0c0c0d;
+  --ink: #e8e2d6;
+  --muted: rgba(232,226,214,.45);
+  --btn-bg: rgba(12,12,13,.5);
+  --btn-line: rgba(232,226,214,.26);
+  --panel: rgba(12,12,13,.92);
+  --radius: 0;
+  --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --pad: 22px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--ink); }
+body { font-family: var(--font); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+#stage { position: fixed; inset: 0; }
+#stage canvas { display: block; }
+.chrome { position: fixed; left: 0; right: 0; z-index: 2; display: flex; justify-content: space-between; gap: 16px; padding: 0 var(--pad); pointer-events: none; }
+.chrome > * { pointer-events: auto; }
+.top { top: 0; align-items: center; padding-top: calc(18px + env(safe-area-inset-top)); }
+.foot { bottom: 0; align-items: flex-end; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+.back { font-size: 12px; letter-spacing: .16em; color: var(--muted); text-decoration: none; padding: 8px 0; transition: color .3s; }
+.back:hover, .back:focus-visible { color: var(--ink); }
+.back span { display: inline-block; transition: transform .3s; }
+.back:hover span { transform: translateX(-3px); }
+.controls { display: flex; gap: 8px; }
+.btn { font: inherit; font-size: 12px; letter-spacing: .1em; color: var(--ink); background: var(--btn-bg); border: 1px solid var(--btn-line); padding: 7px 13px; cursor: pointer; transition: background .25s, color .25s, border-color .25s; border-radius: var(--radius); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.btn:hover, .btn:focus-visible { background: var(--ink); color: var(--bg); border-color: var(--ink); outline: none; }
+.btn:active { transform: translateY(1px); }
+.caption { max-width: min(540px, 100%); }
+.no { font-family: var(--mono); font-size: 10.5px; letter-spacing: .22em; color: var(--muted); }
+.title { font-size: 15px; font-weight: 500; letter-spacing: .12em; margin: 5px 0 3px; }
+.title small { font-size: 11px; font-weight: 400; letter-spacing: .08em; color: var(--muted); margin-left: .6em; }
+.rule { font-size: 13px; line-height: 1.75; margin: 0; color: var(--ink); opacity: .78; }
+details { margin-top: 6px; }
+summary { list-style: none; cursor: pointer; font-size: 11.5px; letter-spacing: .14em; color: var(--muted); display: inline-flex; align-items: center; gap: .5em; padding: 3px 0; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: ""; width: 14px; height: 1px; background: currentColor; transition: width .3s; }
+details[open] summary::before { width: 26px; }
+summary:hover, summary:focus-visible { color: var(--ink); outline: none; }
+.about { margin-top: 10px; padding: 16px 18px; max-height: 48vh; overflow: auto; background: var(--panel); border-left: 1px solid var(--btn-line); font-size: 12.5px; line-height: 1.8; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.about h3 { font-size: 11px; font-weight: 500; letter-spacing: .2em; color: var(--muted); margin: 12px 0 2px; }
+.about h3:first-child { margin-top: 0; }
+.about p, .about ul { margin: 0; }
+.about ul { padding-left: 1.1em; }
+.about code { font-family: var(--mono); font-size: 11.5px; }
+.seed { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; color: var(--muted); white-space: nowrap; padding-bottom: 3px; user-select: all; }
+#status { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; font-size: 12px; letter-spacing: .3em; color: var(--muted); z-index: 1; pointer-events: none; }
+.computing #status { display: flex; }
+.computing #stage { visibility: hidden; }
+#fallback { position: fixed; inset: 0; z-index: 5; display: none; align-items: center; justify-content: center; padding: 32px; background: var(--bg); text-align: center; }
+#fallback.show { display: flex; }
+#fallback div { max-width: 420px; font-size: 14px; line-height: 1.9; }
+#fallback a { color: inherit; }
+@media (max-width: 699px) {
+  :root { --pad: 16px; }
+  .top { padding-top: calc(12px + env(safe-area-inset-top)); }
+  .foot { padding-bottom: calc(14px + env(safe-area-inset-bottom)); gap: 10px; }
+  .btn { padding: 7px 10px; font-size: 11.5px; letter-spacing: .06em; }
+  .rule { font-size: 12.5px; line-height: 1.7; }
+  .seed { position: absolute; right: var(--pad); top: -2px; }
+  .caption { max-width: 100%; }
+}
+.btn{border-width:0;border-left:2px solid #ff4a2a;padding-left:11px}.btn:hover,.btn:focus-visible{background:#ff4a2a;color:#0c0c0d}#stage canvas{cursor:crosshair}
+</style>
+</head>
+<body>
+<div id="stage" aria-label="字散：一個字被拆成上千枚細筆，左邊還記得自己的形狀，右邊已隨風離開。" role="img"></div>
+<div id="status">正在安靜地完成畫面</div>
+<header class="chrome top">
+  <a class="back" href="p5-demo-list.html"><span>←</span> 目錄</a>
+  <nav class="controls" aria-label="作品控制">
+    <button class="btn" id="regen" type="button" title="換一個新的種子">重新生成</button>
+    <button class="btn" id="save" type="button" title="把目前畫面存成 PNG">下載 PNG</button>
+  </nav>
+</header>
+<footer class="chrome foot">
+  <div class="caption">
+    <div class="no">10 / 10</div>
+    <h1 class="title">字散<small>A Character Disperses</small></h1>
+    <p class="rule">一個字被拆成上千枚細筆，左邊還記得自己的形狀，右邊已隨風離開。</p>
+    <details>
+      <summary>關於這件作品</summary>
+      <div class="about">
+        <h3>原理</h3>
+        <p>以系統內建的明體在暫存圖層寫下一個字，按抖動格點取樣成上千枚斜向細筆，方向由低頻 noise 微微扭轉。每枚細筆依水平位置與 noise 得到「溶解程度」：越往右越早離開，沿著 noise 風場飄移，只在畫布上留下極淡的軌跡；少數帶著朱紅。移動游標或手指可以攪動正在飄散的筆觸。</p>
+        <h3>核心參數</h3>
+        <ul><li>字庫：風、霧、息、散、夢、光、雨、逝、流、雲、聲、影</li><li>細筆間距：約 4px</li><li>溶解帶：字寬的 42%–98%</li><li>模擬：固定 1,100 步</li></ul>
+        <h3>適合的位置</h3>
+        <p>標題動畫、品牌口號頁、展覽主視覺。</p>
+      </div>
+    </details>
+  </div>
+  <div class="seed" id="seed" title="目前的種子；網址加上 ?seed= 可重現">seed —</div>
+</footer>
+<div id="fallback" role="alert"><div>這件作品需要 JavaScript 與同資料夾中的 <code>lib/p5.min.js</code> 才能繪製。<br>若你看到這段文字，代表腳本沒有載入成功：請確認檔案完整、瀏覽器允許執行 JavaScript，然後重新整理。<br><a href="p5-demo-list.html">回到目錄</a></div></div>
+<noscript><style>#fallback{display:flex}</style></noscript>
+<script src="lib/p5.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var SLUG = 'generative-typography';
+  var body = document.body;
+  var fallback = document.getElementById('fallback');
+  function showFallback(err) {
+    fallback.classList.add('show');
+    body.classList.remove('computing');
+    if (err && window.console) console.warn('[p5-demos2] ' + SLUG + ':', err);
+  }
+  if (typeof window.p5 !== 'function') { showFallback(); return; }
+
+  var TAU = Math.PI * 2;
+  function parseSeed(v) { return v && /^\d{1,9}$/.test(v) ? parseInt(v, 10) : null; }
+  function freshSeed() { return 1 + Math.floor(Math.random() * 999998); }
+  var seed = parseSeed(new URLSearchParams(location.search).get('seed'));
+  if (seed === null) seed = freshSeed();
+  var reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+
+  // 可重現的亂數：mulberry32。結構用 p.random（已 randomSeed），細節各自取用獨立序列，避免受影格節奏影響。
+  function rng(salt) {
+    var a = (seed * 2654435761 + (salt || 0) * 40503 + 1013904223) >>> 0;
+    function r() {
+      a = (a + 0x6D2B79F5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    r.range = function (lo, hi) { return lo + r() * (hi - lo); };
+    r.int = function (lo, hi) { return Math.floor(lo + r() * (hi - lo + 1)); };
+    r.pick = function (arr) { return arr[Math.floor(r() * arr.length)]; };
+    r.chance = function (pr) { return r() < pr; };
+    r.gauss = function () { var u = 1 - r(), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(TAU * v); };
+    return r;
+  }
+  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + (a === undefined ? 1 : a) + ')'; }
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function smooth(e0, e1, x) { var t = clamp((x - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); }
+
+  var A = {
+    TAU: TAU, rng: rng, rgba: rgba, clamp: clamp, lerp: lerp, smooth: smooth,
+    reduced: reduced, coarse: coarse,
+    get seed() { return seed; },
+    density: function () { return Math.min(2, window.devicePixelRatio || 1); },
+    compact: function (w) { return w < 700; },
+    // 複雜度係數：1440×900 筆電約為 1，手機約 0.3–0.45
+    load: function (w, h) { var f = clamp((w * h) / (1440 * 900), 0.3, 1.25); return coarse ? f * 0.85 : f; },
+    // 作品的「版心」：留給文字的上下邊距
+    frame: function (w, h) {
+      var c = w < 700, top = c ? 62 : 80, bottom = c ? 172 : 136, side = c ? 18 : Math.max(64, Math.round(w * 0.055));
+      return { x: side, y: top, w: w - side * 2, h: h - top - bottom };
+    },
+    // 以時間決定進度（0→1）；減少動態時直接回傳 1
+    pacer: function (seconds) {
+      var t0 = performance.now();
+      return function () { return reduced ? 1 : clamp((performance.now() - t0) / (seconds * 1000), 0, 1); };
+    },
+    budget: function () { return reduced ? 36 : 10; },
+    done: function (p) { p._artDone = true; p.noLoop(); body.classList.remove('computing'); body.classList.add('complete'); },
+    paper: function (p, w, h, o) {
+      var g = p.createGraphics(w, h);
+      g.pixelDensity(1);
+      var ctx = g.drawingContext, r = rng(o.salt || 11), i, n, x, y, a, l;
+      ctx.fillStyle = rgba(o.base); ctx.fillRect(0, 0, w, h);
+      // 紙張的雲紋：柔邊的徑向漸層，避免出現可辨識的圓斑
+      n = Math.round(w * h / 9000);
+      for (i = 0; i < n; i++) {
+        var c = r.chance(0.5) ? o.dark : o.light, mx = r() * w, my = r() * h, mr = r.range(40, 220);
+        var mg = ctx.createRadialGradient(mx, my, 0, mx, my, mr);
+        mg.addColorStop(0, rgba(c, r.range(0.01, 0.028) * (o.mottle || 1))); mg.addColorStop(1, rgba(c, 0));
+        ctx.fillStyle = mg; ctx.fillRect(mx - mr, my - mr, mr * 2, mr * 2);
+      }
+      n = Math.round(w * h / 120 * (o.fibre === undefined ? 1 : o.fibre));
+      ctx.lineCap = 'round';
+      for (i = 0; i < n; i++) {
+        x = r() * w; y = r() * h; a = r() * TAU; l = r.range(2, 14);
+        ctx.strokeStyle = rgba(r.chance(0.55) ? o.dark : o.light, r.range(0.03, 0.09));
+        ctx.lineWidth = r.range(0.3, 0.9);
+        ctx.beginPath(); ctx.moveTo(x, y); ctx.quadraticCurveTo(x + Math.cos(a + 0.6) * l * 0.6, y + Math.sin(a + 0.6) * l * 0.6, x + Math.cos(a) * l, y + Math.sin(a) * l); ctx.stroke();
+      }
+      n = Math.round(w * h / 900 * (o.speck === undefined ? 1 : o.speck));
+      for (i = 0; i < n; i++) { ctx.fillStyle = rgba(o.dark, r.range(0.05, 0.22)); a = r.range(0.4, 1.4); ctx.fillRect(r() * w, r() * h, a, a); }
+      if (o.vignette) {
+        var gr = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.25, w / 2, h / 2, Math.hypot(w, h) * 0.6);
+        gr.addColorStop(0, rgba(o.dark, 0)); gr.addColorStop(1, rgba(o.dark, o.vignette));
+        ctx.fillStyle = gr; ctx.fillRect(0, 0, w, h);
+      }
+      return g;
+    }
+  };
+
+  // ── 字散：以系統字體在暫存圖層寫下一個字，取樣成細筆；左側定影，右側依固定步數的風場離開 ──
+  function sketch(p, A) {
+    var BG = [12, 12, 13], BONE = [232, 226, 214], RED = [255, 74, 42], ASH = [120, 116, 108];
+    var CHARS = ['風', '霧', '息', '散', '夢', '光', '雨', '逝', '流', '雲', '聲', '影'];
+    var W, H, F, ctx, trail, tctx, pace, parts = [], movers = [], ch, steps = 0, STEPS = 1100, born = 0, order;
+    var gbox, sp, ptr = { x: 0, y: 0, on: false, vx: 0, vy: 0 };
+    var DUR = 21, BIRTH = 0.28, baked = false;
+
+    p.setup = function () {
+      W = p.windowWidth; H = p.windowHeight;
+      p.pixelDensity(A.density());
+      p.createCanvas(W, H);
+      p.randomSeed(A.seed); p.noiseSeed(A.seed);
+      ctx = p.drawingContext;
+      F = A.frame(W, H);
+      trail = p.createGraphics(W, H);
+      tctx = trail.drawingContext;
+      trail.image(A.paper(p, W, H, { base: BG, dark: [0, 0, 0], light: [60, 58, 54], fibre: 0.3, speck: 0.3, mottle: 1.4, vignette: 0.5 }), 0, 0, W, H);
+      ch = CHARS[Math.floor(p.random(CHARS.length))];
+      glyph();
+      pointer(p.canvas);
+      pace = A.pacer(DUR);
+    };
+
+    function glyph() {
+      var compact = W < 700;
+      var size = Math.floor(Math.min(F.h * (compact ? 0.78 : 0.98), F.w * (compact ? 0.86 : 0.6)));
+      var gx = F.x + F.w * (compact ? 0.47 : 0.4), gy = F.y + F.h * (compact ? 0.44 : 0.5);
+      var cv = document.createElement('canvas');
+      cv.width = cv.height = Math.ceil(size * 1.2);
+      var c = cv.getContext('2d', { willReadFrequently: true }), gw = cv.width, gh = cv.height;
+      c.fillStyle = '#000'; c.fillRect(0, 0, gw, gh);
+      c.fillStyle = '#fff'; c.textAlign = 'center'; c.textBaseline = 'middle';
+      c.font = '600 ' + size + 'px "Songti TC", "STSong", "Noto Serif TC", "Noto Serif CJK TC", "Source Han Serif TC", "PMingLiU", "MingLiU", serif';
+      c.fillText(ch, gw / 2, gh / 2 + size * 0.04);
+      var data = c.getImageData(0, 0, gw, gh).data;
+      var ox = gx - gw / 2, oy = gy - gh / 2;
+      var unit = Math.sqrt(F.w * F.h) / 900;
+      sp = Math.max(3.2, 4.1 * unit);
+      var r = A.rng(13), minX = 1e9, maxX = -1e9, i;
+      for (var y = sp / 2; y < gh; y += sp) for (var x = sp / 2; x < gw; x += sp) {
+        var jx = x + (r() - 0.5) * sp * 0.8, jy = y + (r() - 0.5) * sp * 0.8;
+        var ix = Math.round(jx), iy = Math.round(jy);
+        if (ix < 0 || iy < 0 || ix >= gw || iy >= gh) continue;
+        if (data[(iy * gw + ix) * 4] < 128) continue;
+        parts.push({ hx: ox + jx, hy: oy + jy, x: ox + jx, y: oy + jy, a: 0, red: false });
+        minX = Math.min(minX, ox + jx); maxX = Math.max(maxX, ox + jx);
+      }
+      gbox = { x0: minX, x1: maxX };
+      // 細筆的方向：銅版雕刻般的斜向排線，被低頻雜訊微微扭轉
+      var base = p.random(0.75, 1.05);
+      for (i = 0; i < parts.length; i++) {
+        var q = parts[i];
+        q.ang = base + (p.noise(q.hx * 0.008, q.hy * 0.008) - 0.5) * 1.3;
+        q.len = sp * r.range(1.1, 1.9);
+        var xn = (q.hx - minX) / Math.max(1, maxX - minX);
+        // 溶解程度：越往右越鬆動；邊界被雜訊打散
+        q.d = A.smooth(0.42, 0.98, xn + (p.noise(q.hx * 0.012 + 50, q.hy * 0.012) - 0.5) * 0.45);
+        q.leave = q.d > 0.12 && r() < Math.pow(q.d, 0.7);
+        q.when = q.leave ? A.lerp(0.95, 0.36, q.d) + r.range(-0.05, 0.05) : 2;
+        q.red = q.leave && r() < 0.04;
+        q.k = Math.hypot(q.hx - gx, q.hy - gy) + p.noise(q.hx * 0.02, q.hy * 0.02) * size * 0.5;
+        q.vx = 0; q.vy = 0; q.life = 1;
+      }
+      order = parts.slice().sort(function (a, b) { return a.k - b.k; });
+    }
+
+    function pointer(el) {
+      el.style.touchAction = 'none';
+      function at(e) {
+        var b = el.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top;
+        if (ptr.on) { ptr.vx = x - ptr.x; ptr.vy = y - ptr.y; }
+        ptr.x = x; ptr.y = y; ptr.on = true;
+      }
+      el.addEventListener('pointermove', at);
+      el.addEventListener('pointerdown', at);
+      el.addEventListener('pointerleave', function () { ptr.on = false; });
+      el.addEventListener('pointerup', function (e) { if (e.pointerType !== 'mouse') ptr.on = false; });
+      el.addEventListener('pointercancel', function () { ptr.on = false; });
+    }
+
+    function stroke(g, q, x, y, col, a, w) {
+      var dx = Math.cos(q.ang) * q.len / 2, dy = Math.sin(q.ang) * q.len / 2;
+      g.strokeStyle = A.rgba(col, a); g.lineWidth = w;
+      g.beginPath(); g.moveTo(x - dx, y - dy); g.lineTo(x + dx, y + dy); g.stroke();
+    }
+
+    function step() {
+      var s = steps / STEPS, i, q;
+      for (i = 0; i < parts.length; i++) {
+        q = parts[i];
+        if (q.leave && !q.moving && q.born && s >= q.when) { q.moving = true; movers.push(q); }
+      }
+      tctx.lineCap = 'round';
+      var alive = [];
+      for (i = 0; i < movers.length; i++) {
+        q = movers[i];
+        var n1 = p.noise(q.x * 0.004, q.y * 0.004, s * 2), n2 = p.noise(q.x * 0.004 + 70, q.y * 0.004, s * 2);
+        q.vx = q.vx * 0.94 + (0.55 + n1 * 1.3) * 0.12;
+        q.vy = q.vy * 0.94 + ((n2 - 0.56) * 2.2) * 0.12;
+        if (ptr.on && !A.reduced) {
+          var dx = q.x - ptr.x, dy = q.y - ptr.y, d = Math.hypot(dx, dy);
+          if (d < 90) { var f = (1 - d / 90) * 0.5; q.vx += (dx / (d + 1)) * f + ptr.vx * 0.02; q.vy += (dy / (d + 1)) * f + ptr.vy * 0.02; }
+        }
+        var ox = q.x, oy = q.y;
+        q.x += q.vx; q.y += q.vy;
+        q.life -= 0.0045 + q.d * 0.002;
+        tctx.strokeStyle = A.rgba(q.red ? RED : BONE, (q.red ? 0.22 : 0.075) * Math.max(0, q.life));
+        tctx.lineWidth = q.red ? 0.9 : 0.6;
+        tctx.beginPath(); tctx.moveTo(ox, oy); tctx.lineTo(q.x, q.y); tctx.stroke();
+        if (q.life > 0 && q.x < W + 20 && q.y > -20 && q.y < H + 20) alive.push(q); else q.dead = true;
+      }
+      movers = alive;
+      steps++;
+    }
+
+    p.draw = function () {
+      var t0 = performance.now(), budget = A.budget(), f = pace();
+      // 生長：細筆由字心向外一枚枚落下
+      var tb = Math.min(order.length, Math.floor(A.clamp(f / BIRTH, 0, 1) * order.length));
+      tctx.lineCap = 'round';
+      while (born < tb) {
+        var q = order[born++]; q.born = true;
+        if (!q.leave) stroke(tctx, q, q.hx, q.hy, BONE, 0.88, 0.85);
+        else if (q.d < 0.5) stroke(tctx, q, q.hx, q.hy, ASH, 0.25, 0.6); // 離開前留下的極淡印痕
+      }
+      var target = Math.floor(f * STEPS);
+      while (steps < target && performance.now() - t0 < budget) step();
+      var finished = steps >= STEPS && born >= order.length;
+      if (A.reduced && !finished) return;
+      if (finished && !baked) {
+        // 還沒來得及出發的細筆，定影在原處
+        baked = true;
+        for (var b = 0; b < order.length; b++) if (order[b].leave && !order[b].moving) stroke(tctx, order[b], order[b].hx, order[b].hy, BONE, 0.88, 0.85);
+      }
+      p.image(trail, 0, 0, W, H);
+      if (finished) { A.done(p); return; }
+      // 仍在字上、尚未出發的細筆，以及正在飄移的頭部
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = A.rgba(BONE, 0.88); ctx.lineWidth = 0.85;
+      ctx.beginPath();
+      for (var i = 0; i < born; i++) {
+        var o = order[i];
+        if (!o.leave || o.moving) continue;
+        var dx = Math.cos(o.ang) * o.len / 2, dy = Math.sin(o.ang) * o.len / 2;
+        ctx.moveTo(o.hx - dx, o.hy - dy); ctx.lineTo(o.hx + dx, o.hy + dy);
+      }
+      ctx.stroke();
+      for (i = 0; i < movers.length; i++) {
+        o = movers[i];
+        var a = Math.max(0, o.life);
+        ctx.fillStyle = A.rgba(o.red ? RED : BONE, a * 0.7);
+        ctx.fillRect(o.x - 0.6, o.y - 0.6, 1.2, 1.2);
+      }
+      ptr.vx *= 0.8; ptr.vy *= 0.8;
+    };
+  }
+
+  var stage = document.getElementById('stage');
+  var seedEl = document.getElementById('seed');
+  var inst = null, lastW = window.innerWidth, lastH = window.innerHeight, resizeTimer = 0;
+  function start() {
+    if (inst) { inst.remove(); inst = null; }
+    seedEl.textContent = 'seed ' + seed;
+    try { var u = new URL(location.href); u.searchParams.set('seed', seed); history.replaceState(null, '', u.href); } catch (e) { /* file:// 某些瀏覽器不允許，忽略 */ }
+    body.classList.remove('complete');
+    body.classList.toggle('computing', reduced);
+    try { inst = new p5(function (p) { sketch(p, A); }, stage); } catch (e) { showFallback(e); }
+  }
+  A.restart = start;
+  document.getElementById('regen').addEventListener('click', function () { seed = freshSeed(); start(); });
+  document.getElementById('save').addEventListener('click', function () { if (inst) inst.saveCanvas(SLUG + '-seed' + seed, 'png'); });
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      var w = window.innerWidth, h = window.innerHeight;
+      if (w === lastW && Math.abs(h - lastH) < 120) return; // 手機網址列伸縮不重排
+      lastW = w; lastH = h;
+      if (inst && inst.artResize) inst.artResize(w, h); else start();
+    }, 240);
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (!inst) return;
+    if (document.hidden) inst.noLoop();
+    else if (!inst._artDone) inst.loop();
+  });
+  start();
+})();
+</script>
+</body>
+</html>
