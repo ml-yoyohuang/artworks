@@ -4,8 +4,8 @@
   "subtitle": "一間線上美術館：規則生成形狀，光生成影像",
   "year": 2026,
   "artist": "（藝術家名稱）",
-  "statement": "一條規則落在紙上，就開始生長；一道光落進黑暗，就開始顯影。本展沿著一天的光線佈置：白晝的展廳裡，十件 p5.js 生成式作品像素描與版畫，讓形狀從簡單的規則中慢慢長出；穿過光線逐漸退去的長廊，十六件 GLSL 作品不再被照亮，而是自己成為光源。在暗房最深處，一張相片浮現，又被光重新拿走——觀看，也是一次曝光。",
-  "credits": "p5.js 生成式演算法 10 件 · GLSL 即時運算 16 件 · 2026",
+  "statement": "一條規則落在紙上，就開始生長；一道光落進黑暗，就開始顯影。本展沿著一天的光線佈置：白晝的展廳裡，十八件 p5.js 生成式作品像素描、版畫與色面，讓形狀與關係從簡單的規則中慢慢長出；穿過光線逐漸退去的長廊，十七件 GLSL 作品不再被照亮，而是自己成為光源。在暗房最深處，一張相片浮現，又被光重新拿走——觀看，也是一次曝光。",
+  "credits": "p5.js 生成式演算法 18 件 · GLSL 即時運算 17 件 · 2026",
   "media": {
     "p5": "p5.js 生成式演算法",
     "glsl": "GLSL 即時運算"
@@ -43,7 +43,14 @@
       "label": "第一廳",
       "name": "規則的花園",
       "nameEn": "THE GARDEN OF RULES",
-      "intro": "這裡的每一件作品，都只從一條規則開始：風的方向、圓的邊界、點的引力。演算法像一位園丁，不決定花的樣子，只照料生長的條件。請像看版畫一樣靠近它們，觀看形狀如何在時間裡慢慢完成。陳列由淺色紙面走向深色底，為接下來的長廊預先調暗。"
+      "intro": "這裡的每一件作品，都只從一條規則開始：風的方向、圓的邊界、點的引力。演算法像一位園丁，不決定花的樣子，只照料生長的條件。請像看版畫一樣靠近它們，觀看形狀如何在時間裡慢慢完成。陳列由淺色紙面走向深色底。"
+    },
+    {
+      "id": "plane",
+      "label": "第二廳",
+      "name": "幾何之間",
+      "nameEn": "GEOMETRY, IN RELATION",
+      "intro": "這一廳的八件作品不再描繪線條，而是安排平面：一塊顏色取得更多空間，鄰近的顏色便讓位；一片平面翻起，背面的顏色進入觀看。規則在這裡管理的是關係——比例、對位、遲到與餘溫。請在作品前停留，也走進作品，親手推動它們。"
     },
     {
       "id": "corridor",
@@ -54,10 +61,10 @@
     },
     {
       "id": "darkroom",
-      "label": "第二廳",
+      "label": "第三廳",
       "name": "暗房",
       "nameEn": "THE DARKROOM",
-      "intro": "在暗房裡，影像不需要被照亮，它們本身就是光。十四件 GLSL 即時運算作品如燈箱般懸掛，把顏色投向地板與牆面：從紙、布、石、水與玻璃，到生命、記憶與一張逐漸失序的臉。沿著中軸走到最深處，終點作品正在顯影。"
+      "intro": "在暗房裡，影像不需要被照亮，它們本身就是光。十五件 GLSL 即時運算作品如燈箱般懸掛，把顏色投向地板與牆面：從紙、布、石、水、玻璃與薄膜，到生命、記憶與一張逐漸失序的臉。沿著中軸走到最深處，終點作品正在顯影。"
     }
   ],
   "works": [
@@ -72,6 +79,15 @@
     { "id": "boids-flocking", "hall": "garden", "kind": "p5", "title": "共同的偏航", "titleEn": "BOIDS", "statement": "每一道微光跟隨鄰近的微光，游標則成為短暫的潮汐。", "src": "../p5-demos/boids-flocking.html", "seed": 65537, "palette": ["#102526", "#d5e2d4"], "aspect": 1.6 },
     { "id": "generative-typography", "hall": "garden", "kind": "p5", "title": "字的餘溫", "titleEn": "GENERATIVE TYPOGRAPHY", "statement": "字被拆成微小的筆畫，邊緣先鬆動，中心仍記得自己的形狀。", "src": "../p5-demos/generative-typography.html", "seed": 104729, "palette": ["#271f39", "#f0b6b5"], "aspect": 1.605 },
 
+    { "id": "negotiated-territories", "hall": "plane", "kind": "p5", "title": "領土協商", "titleEn": "NEGOTIATED TERRITORIES", "statement": "一塊領土取得更多空間，整張平面便重新協商。", "src": "../p5-demos/negotiated-territories.html", "seed": 161803, "palette": ["#F3EFE5", "#172F4D"], "aspect": 1.429 },
+    { "id": "registration-pending", "hall": "plane", "kind": "p5", "title": "尚未對準的印刷", "titleEn": "REGISTRATION, PENDING", "statement": "幾層各自存在的顏色，在對準的一刻取得重量。", "src": "../p5-demos/registration-pending.html", "seed": 65537, "palette": ["#F2EBDD", "#2948BA"], "aspect": 1.429 },
+    { "id": "reverse-of-a-plane", "hall": "plane", "kind": "p5", "title": "平面有背面", "titleEn": "THE REVERSE OF A PLANE", "statement": "沿一條邊翻起的平面，把另一種顏色帶進觀看。", "src": "../p5-demos/reverse-of-a-plane.html", "seed": 271828, "palette": ["#ECE8DA", "#292A50"], "aspect": 1.429 },
+    { "id": "moving-absence", "hall": "plane", "kind": "p5", "title": "空白正在移動", "titleEn": "MOVING ABSENCE", "statement": "空白帶走表面，讓下方的關係取得輪廓。", "src": "../p5-demos/moving-absence.html", "seed": 104729, "palette": ["#EEE9DB", "#242623"], "aspect": 1.429 },
+    { "id": "chromatic-sediments", "hall": "plane", "kind": "p5", "title": "色彩沉積", "titleEn": "CHROMATIC SEDIMENTS", "statement": "時間被壓成厚薄不等的層，倒退便能回到先前的平面。", "src": "../p5-demos/chromatic-sediments.html", "seed": 314159, "palette": ["#E9E1D1", "#48362E"], "aspect": 1.429 },
+    { "id": "a-beat-behind", "hall": "plane", "kind": "p5", "title": "遲到半拍的群舞", "titleEn": "A BEAT BEHIND", "statement": "群體共享一套規則，少數形狀仍保留自己的時間。", "src": "../p5-demos/a-beat-behind.html", "seed": 161803, "palette": ["#F1ECDF", "#264D43"], "aspect": 1.429 },
+    { "id": "within-the-same-frame", "hall": "plane", "kind": "p5", "title": "同一張圖的不同尺度", "titleEn": "WITHIN THE SAME FRAME", "statement": "進入一塊顏色，讓原本的局部成為新的整體。", "src": "../p5-demos/within-the-same-frame.html", "seed": 104729, "palette": ["#EFE8D8", "#26343B"], "aspect": 1.429 },
+    { "id": "residual-geometry", "hall": "plane", "kind": "p5", "title": "幾何的餘溫", "titleEn": "RESIDUAL GEOMETRY", "statement": "形狀離開之後，原來的位置仍繼續參與畫面。", "src": "../p5-demos/residual-geometry.html", "seed": 271828, "palette": ["#F2E7DC", "#293C54"], "aspect": 1.429 },
+
     { "id": "long-exposure", "hall": "corridor", "kind": "glsl", "title": "光走過的路", "titleEn": "THE PATH LIGHT TAKES", "statement": "快門沒有關上，夜便把經過的時間寫成線。", "src": "../shader-demos/long-exposure.html", "palette": ["#080e19", "#df9c5a", "#577e9f"] },
 
     { "id": "cyanotype", "hall": "darkroom", "kind": "glsl", "title": "日光的標本", "titleEn": "A HERBARIUM OF LIGHT", "statement": "葉子離開了紙，日光卻把它的沉默留成藍色。", "src": "../shader-demos/cyanotype.html", "palette": ["#082b57", "#366b91", "#e7e6ce"] },
@@ -82,6 +98,7 @@
     { "id": "domain-warp-fbm", "hall": "darkroom", "kind": "glsl", "title": "石頭裡的潮汐", "titleEn": "THE INTERIOR OF STONE", "statement": "一塊石頭保留著海，卻從來不說它流動過。", "src": "../shader-demos/domain-warp-fbm.html", "palette": ["#192325", "#798e86", "#d5cdb4"] },
     { "id": "liquid-distortion", "hall": "darkroom", "kind": "glsl", "title": "觸摸一池字跡", "titleEn": "THE WATER REMEMBERS", "statement": "每一次靠近，都讓平靜多留下一圈回音。", "src": "../shader-demos/liquid-distortion.html", "palette": ["#102c39", "#8fa7a4", "#d6e1cb"] },
     { "id": "glass-refraction", "hall": "darkroom", "kind": "glsl", "title": "透明的重量", "titleEn": "THE WEIGHT OF TRANSPARENCY", "statement": "玻璃沒有顏色，只借來世界的一點偏差。", "src": "../shader-demos/glass-refraction.html", "palette": ["#d5e3e3", "#24435a", "#9cabb8"] },
+    { "id": "thin-film", "hall": "darkroom", "kind": "glsl", "title": "光的薄界", "titleEn": "THIN BOUNDARIES / A SURFACE OF LIGHT", "statement": "極薄的表面，讓光顯出深度。一處偏心的折痕，藏著觀看位置尚未抵達的顏色。", "src": "../shader-demos/thin-film.html", "palette": ["#27222f", "#8e769d", "#aaa28c"] },
     { "id": "reaction-diffusion", "hall": "darkroom", "kind": "glsl", "title": "尚未命名的生命", "titleEn": "A CULTURE OF POSSIBILITY", "statement": "生命還沒有名字，便已開始分裂與靠近。", "src": "../shader-demos/reaction-diffusion.html", "palette": ["#102f2b", "#83b5a0", "#e0dfb5"] },
     { "id": "organic-growth", "hall": "darkroom", "kind": "glsl", "title": "緩慢佔領", "titleEn": "THE PATIENCE OF CORAL", "statement": "微小的生命不急著抵達，只學會一寸一寸地留下來。", "src": "../shader-demos/organic-growth.html", "palette": ["#202225", "#ae5752", "#d49677"] },
     { "id": "feedback-trails", "hall": "darkroom", "kind": "glsl", "title": "遲到的光", "titleEn": "AFTER YOU HAVE LEFT", "statement": "你離開之後，光仍在原地練習記憶。", "src": "../shader-demos/feedback-trails.html", "palette": ["#100e1c", "#aa83c4", "#74adae"] },

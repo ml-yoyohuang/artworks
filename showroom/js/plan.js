@@ -10,8 +10,9 @@ export const ROOMS = {
   // Open-air rooms have no roof; `walls` overrides the height of single sides.
   lobby:    { id: 'lobby',    x0: -7,  x1: 7,     z0: 0.15,  z1: 11,    h: 3.8, open: true, walls: { s: 1.1, e: 1.1, w: 1.1 } },
   garden:   { id: 'garden',   x0: -7,  x1: 7,     z0: -26,   z1: -0.15, h: 3.8, open: true },
-  corridor: { id: 'corridor', x0: -1.75, x1: 1.75, z0: -48,  z1: -26.3, h: 3.6 },
-  darkroom: { id: 'darkroom', x0: -40, x1: -2.05, z0: -54.4, z1: -38.4, h: 4.6 },
+  plane:    { id: 'plane',    x0: -7,  x1: 7,     z0: -48.3, z1: -26.3, h: 3.8, open: true },
+  corridor: { id: 'corridor', x0: -1.75, x1: 1.75, z0: -70.3, z1: -48.6, h: 3.6 },
+  darkroom: { id: 'darkroom', x0: -40, x1: -2.05, z0: -76.7, z1: -60.7, h: 4.6 },
 };
 
 /** Wall thickness between and around rooms. */
@@ -19,20 +20,22 @@ export const WALL = 0.3;
 
 /** Framed openings that are not walkable: a picture window toward the landmark. */
 export const WINDOWS = [
-  { room: 'garden', side: 'n', a: 2.7, b: 6.3, sill: 0.8, head: 2.9 },
+  { room: 'plane', side: 'n', a: 2.7, b: 6.3, sill: 0.8, head: 2.9 },
 ];
 
 // A door is a passage through a wall. `axis` is the direction of travel through it.
 export const DOORS = [
   { id: 'd1', a: 'lobby', b: 'garden', axis: 'z', x0: -1.6, x1: 1.6, z0: -0.15, z1: 0.15, h: 3.4 },
-  { id: 'd2', a: 'garden', b: 'corridor', axis: 'z', x0: -1.75, x1: 1.75, z0: -26.3, z1: -26, h: 3.6 },
-  { id: 'd3', a: 'corridor', b: 'darkroom', axis: 'x', x0: -2.05, x1: -1.75, z0: -47.6, z1: -45.2, h: 3.0 },
+  { id: 'd2', a: 'garden', b: 'plane', axis: 'z', x0: -1.6, x1: 1.6, z0: -26.3, z1: -26, h: 3.4 },
+  { id: 'd3', a: 'plane', b: 'corridor', axis: 'z', x0: -1.75, x1: 1.75, z0: -48.6, z1: -48.3, h: 3.6 },
+  { id: 'd4', a: 'corridor', b: 'darkroom', axis: 'x', x0: -2.05, x1: -1.75, z0: -69.9, z1: -67.5, h: 3.0 },
 ];
 
 // Free-standing furniture that blocks movement: benches.
 export const BENCHES = [
   { room: 'garden', x: 0, z: -14.5, w: 2.6, d: 0.55, h: 0.44, color: 0xe6e2d6 },
-  { room: 'darkroom', x: -34.2, z: -46.4, w: 2.4, d: 0.55, h: 0.44, color: 0x101011 },
+  { room: 'plane', x: 0, z: -38.5, w: 2.6, d: 0.55, h: 0.44, color: 0xe6e2d6 },
+  { room: 'darkroom', x: -34.2, z: -68.7, w: 2.4, d: 0.55, h: 0.44, color: 0x101011 },
 ];
 
 export const START = { x: 0, z: 8.6, yaw: 0 };
@@ -137,6 +140,7 @@ export function route(from, to) {
  */
 export function hang(works) {
   const garden = works.filter((w) => w.hall === 'garden');
+  const plane = works.filter((w) => w.hall === 'plane');
   const corridor = works.filter((w) => w.hall === 'corridor');
   const dark = works.filter((w) => w.hall === 'darkroom' && !w.finale);
   const finale = works.filter((w) => w.finale);
@@ -144,20 +148,23 @@ export function hang(works) {
   const out = new Map();
 
   // First hall: staggered hang, odd on the west wall, even on the east wall, 4 m apart on each wall.
-  garden.forEach((w, i) => {
+  // Day halls: staggered hang, odd on the west wall, even on the east wall, 4 m apart on each wall.
+  const dayHall = (list, R) => list.forEach((w, i) => {
     const west = i % 2 === 0;
-    const z = -5.5 - i * 2.0;
+    const z = R.z1 - 5.35 - i * 2.0;
     // constant image area, so prints of different proportions carry equal weight
     const a = w.aspect || 1.6, area = 0.74;
     const pw = Math.sqrt(area * a), ph = Math.sqrt(area / a);
-    out.set(w.id, { x: west ? G.x0 : G.x1, y: 1.55, z, nx: west ? 1 : -1, nz: 0, w: pw, h: ph, style: 'print', room: 'garden' });
+    out.set(w.id, { x: west ? R.x0 : R.x1, y: 1.55, z, nx: west ? 1 : -1, nz: 0, w: pw, h: ph, style: 'print', room: R.id });
   });
+  dayHall(garden, G);
+  dayHall(plane, ROOMS.plane);
   // Corridor: a single work on the end wall.
   corridor.forEach((w) => out.set(w.id, { x: 0, y: 1.62, z: C.z0, nx: 0, nz: 1, w: 1.5, h: 0.9375, style: 'lightbox', room: 'corridor' }));
   // Darkroom: lightboxes alternate north / south along the axis.
   dark.forEach((w, i) => {
     const north = i % 2 === 0;
-    const x = -6.2 - i * 2.05;
+    const x = -6.2 - i * 1.95;
     out.set(w.id, { x, y: 1.65, z: north ? D.z0 : D.z1, nx: 0, nz: north ? 1 : -1, w: 1.76, h: 1.1, style: 'lightbox', room: 'darkroom' });
   });
   // Finale: alone on the deepest wall, on the door axis.

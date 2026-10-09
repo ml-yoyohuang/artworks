@@ -174,15 +174,16 @@ export class PlanMap {
     const grad = sv('linearGradient', { id: 'corrGrad', x1: '0', y1: '1', x2: '0', y2: '0' });
     [['0', '#f1efea'], ['0.45', '#9b9993'], ['1', '#141414']].forEach(([o, c]) => grad.append(sv('stop', { offset: o, 'stop-color': c })));
     defs.append(grad); svg.append(defs);
-    const fills = { lobby: '#f3f1ec', garden: '#efede7', corridor: 'url(#corrGrad)', darkroom: '#161616' };
+    const fills = { lobby: '#f3f1ec', garden: '#efede7', plane: '#efede7', corridor: 'url(#corrGrad)', darkroom: '#161616' };
     for (const r of Object.values(ROOMS)) plan.append(sv('rect', { class: 'map-room', x: r.x0, y: r.z0, width: r.x1 - r.x0, height: r.z1 - r.z0, fill: fills[r.id] }));
-    for (const d of DOORS) plan.append(sv('rect', { x: d.x0 - 0.02, y: d.z0 - 0.02, width: d.x1 - d.x0 + 0.04, height: d.z1 - d.z0 + 0.04, fill: d.id === 'd3' ? '#161616' : '#f1efea' }));
+    for (const d of DOORS) plan.append(sv('rect', { x: d.x0 - 0.02, y: d.z0 - 0.02, width: d.x1 - d.x0 + 0.04, height: d.z1 - d.z0 + 0.04, fill: d.b === 'darkroom' ? '#161616' : '#f1efea' }));
     const label = (txt, x, y, light, anchor = 'middle') => { const t = sv('text', { class: `map-label${light ? ' light' : ''}`, x, y, 'text-anchor': anchor }); t.textContent = txt; plan.append(t); };
     const H = Object.fromEntries(ex.halls.map((h) => [h.id, h]));
     label(H.lobby.name, 0, 6.4);
-    label(`${H.garden.label}　${H.garden.name}`, 0, -1.9);
-    label(`${H.darkroom.label}　${H.darkroom.name}`, -21, -46.05, true);
-    const ct = sv('text', { class: 'map-label', x: -2.5, y: -33, 'text-anchor': 'end' }); ct.textContent = `${H.corridor.label}　${H.corridor.name}`; plan.append(ct);
+    label(`${H.garden.label}　${H.garden.name}`, 0, ROOMS.garden.z1 - 1.75);
+    label(`${H.plane.label}　${H.plane.name}`, 0, ROOMS.plane.z1 - 1.75);
+    label(`${H.darkroom.label}　${H.darkroom.name}`, -21, (ROOMS.darkroom.z0 + ROOMS.darkroom.z1) / 2 + 0.35, true);
+    const ct = sv('text', { class: 'map-label', x: -2.5, y: (ROOMS.corridor.z0 + ROOMS.corridor.z1) / 2, 'text-anchor': 'end' }); ct.textContent = `${H.corridor.label}　${H.corridor.name}`; plan.append(ct);
 
     ex.works.forEach((w, i) => {
       const p = placements.get(w.id);

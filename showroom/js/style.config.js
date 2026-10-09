@@ -42,7 +42,7 @@ export const STYLE = {
 
   // ---- distant landmark (visual anchor) + vertical light pillar ----
   landmark: {
-    x: 23, z: -81,            // on the sight line through the first hall's window
+    x: 27, z: -104,           // on the sight line through the second hall's window
     width: 6, height: 34, depth: 3,
     color: '#D4A08A',         // same as deep sand: it should read as a shape in the haze
     baseWidth: 12, baseHeight: 3.2, baseDepth: 6,   // accent-coloured plinth

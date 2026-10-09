@@ -174,6 +174,9 @@ export function buildWorld(scene, renderer, exhibition, quality) {
 
   // ---------- garden ----------
   add(slab(G, 0, 1, floorMat(G, { blockers: benchesIn('garden'), base: 0.94 })));
+  const PL = ROOMS.plane;
+  add(slab(PL, 0, 1, floorMat(PL, { blockers: benchesIn('plane'), base: 0.94 })));
+  openRoom(PL, gardenWall);
   openRoom(G, gardenWall);
   for (const w of WINDOWS) add(windowReveal(w, outerWall));
 
@@ -227,7 +230,7 @@ export function buildWorld(scene, renderer, exhibition, quality) {
 
   // ---------- door reveals ----------
   for (const d of DOORS) {
-    const mat = d.id === 'd3' ? darkWall : d.id === 'd2' ? gardenWall : lobbyWall;
+    const mat = d.b === 'darkroom' ? darkWall : d.b === 'lobby' || d.a === 'lobby' ? lobbyWall : gardenWall;
     const faces = d.axis === 'z'
       ? [[[V(d.x0, 0, d.z0), V(d.x0, 0, d.z1), V(d.x0, d.h, d.z1), V(d.x0, d.h, d.z0)], V(1, 0, 0)],
          [[V(d.x1, 0, d.z0), V(d.x1, 0, d.z1), V(d.x1, d.h, d.z1), V(d.x1, d.h, d.z0)], V(-1, 0, 0)],
@@ -238,12 +241,12 @@ export function buildWorld(scene, renderer, exhibition, quality) {
     for (const [P, n] of faces) group.add(new THREE.Mesh(quad(P, P.map(() => [0.5, 0.5]), n), mat));
     // threshold
     const P = [V(d.x0, 0.001, d.z0), V(d.x1, 0.001, d.z0), V(d.x1, 0.001, d.z1), V(d.x0, 0.001, d.z1)];
-    const thr = new THREE.Mesh(quad(P, P.map(() => [0.5, 0.5]), V(0, 1, 0)), d.id === 'd3' ? darkFloor : new THREE.MeshStandardMaterial({ color: albedo(STYLE.palette.groundDeep, STYLE.ground.albedoSaturation), roughness: 1 }));
+    const thr = new THREE.Mesh(quad(P, P.map(() => [0.5, 0.5]), V(0, 1, 0)), d.b === 'darkroom' ? darkFloor : new THREE.MeshStandardMaterial({ color: albedo(STYLE.palette.groundDeep, STYLE.ground.albedoSaturation), roughness: 1 }));
     group.add(thr);
   }
   // corridor walls continue through the hall's end wall
   {
-    const dz = DOORS.find((d) => d.id === 'd2');
+    const dz = DOORS.find((d) => d.b === 'corridor');
     for (const x of [dz.x0, dz.x1]) {
       const n = V(x < 0 ? 1 : -1, 0, 0);
       const P = [V(x, 0, dz.z0), V(x, 0, dz.z1), V(x, dz.h, dz.z1), V(x, dz.h, dz.z0)];
@@ -290,9 +293,14 @@ export function buildWorld(scene, renderer, exhibition, quality) {
     m.position.set(G.x0 + 0.01, 1.62, -2.35); group.add(m);
   }
   {
+    const t = hallText(halls.plane, false, 1100);
+    const m = textPlane(t.texture, 2.2, t.aspect); m.rotation.y = Math.PI / 2;
+    m.position.set(ROOMS.plane.x0 + 0.01, 1.62, ROOMS.plane.z1 - 2.2); group.add(m);
+  }
+  {
     const t = hallText(halls.corridor, false, 1000);
     const m = textPlane(t.texture, 1.5, t.aspect); m.rotation.y = Math.PI / 2;
-    m.position.set(C.x0 + 0.01, 1.55, -28.2); group.add(m);
+    m.position.set(C.x0 + 0.01, 1.55, C.z1 - 1.9); group.add(m);
   }
   {
     const t = hallText(halls.darkroom, true, 1100);
@@ -309,14 +317,14 @@ export function buildWorld(scene, renderer, exhibition, quality) {
     // azimuth 0 = light travelling toward −z; position is opposite the travel direction
     const el = THREE.MathUtils.degToRad(LT.sunElevation), az = THREE.MathUtils.degToRad(LT.sunAzimuth);
     const dir = new THREE.Vector3(Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el));
-    sun.target.position.set(0, 0, -8);
+    sun.target.position.set(0, 0, -19);
     sun.position.copy(sun.target.position).addScaledVector(dir, 45);
   }
   scene.add(sun, sun.target);
   if (quality.shadows) {
     sun.castShadow = true;
     sun.shadow.mapSize.set(quality.shadowSize, quality.shadowSize);
-    const cam = sun.shadow.camera; cam.left = -24; cam.right = 24; cam.top = 24; cam.bottom = -24; cam.near = 1; cam.far = 100;
+    const cam = sun.shadow.camera; cam.left = -34; cam.right = 34; cam.top = 34; cam.bottom = -34; cam.near = 1; cam.far = 110;
     sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.03; sun.shadow.radius = LT.shadowRadius; sun.shadow.intensity = LT.shadowIntensity;
     renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.shadowMap.autoUpdate = false; renderer.shadowMap.needsUpdate = true;
