@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>遲到半拍的群舞 · A Beat Behind — 規則之後</title>
+<title>晚到的那幾位 · The Few Who Arrive Late — 平面的八種禮節 · 規則之後</title>
 <meta name="description" content="群體共享一套規則，個體仍保留自己的時間。">
 <link rel="icon" href="data:,">
 <style>
 :root {
-  --art: #F1ECDF;
+  --art: #161616;
   --page: #f1eee8; --ink: #1d1c1a; --muted: rgba(29,28,26,.56); --line: rgba(29,28,26,.16);
-  --accent: #EB7764;
+  --accent: #F0B400;
   --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
@@ -79,31 +79,31 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 <main class="hall">
   <section class="work" aria-label="作品">
     <div class="stage" id="stage">
-      <img class="still" src="thumbs/geo-a-beat-behind.jpg" alt="淺米色底上，深綠長條、珊瑚色方塊與淺藍細條排成整齊隊形，其中幾個形狀落後，還在移動途中。">
+      <img class="still" src="thumbs/geo-a-beat-behind.jpg" alt="深色舞台上，骨白長條、鎘黃方塊與鋼藍細條排成隊形，其中幾個形狀落後，還在移動途中。">
       <p class="fail">這是作品的靜態停格。互動版需要 JavaScript、Canvas 與同資料夾中的 <code>lib/p5.min.js</code>。</p>
     </div>
   </section>
   <aside class="label">
     <div class="head">
       <a class="back" href="p5-demo-list.html#geometric">← 規則之後 · 目錄</a>
-      <div class="no">平面上的關係 06 / 08</div>
-      <h1>遲到半拍的群舞</h1>
-      <p class="en">A Beat Behind</p>
+      <div class="no">平面的八種禮節 06 / 08</div>
+      <h1>晚到的那幾位</h1>
+      <p class="en">The Few Who Arrive Late</p>
       <p class="thesis">群體共享一套規則，個體仍保留自己的時間。</p>
     </div>
     <div class="body">
       <p class="hint" id="hint">二十七個形狀依同一條時間軸移動、停留、轉向。點一個形狀或下方按鈕，可以讓那一群暫時留在原地；再按一次，它會以稍快的節奏追回群體。鍵盤：<kbd>1</kbd>–<kbd>3</kbd> 切換、<kbd>Esc</kbd> 全部放開。</p>
-      <div class="extra"><label>留住一群</label><div class="chips"><button class="chip" type="button" data-group="0" aria-pressed="false"><i style="background:#264D43"></i>深綠</button><button class="chip" type="button" data-group="1" aria-pressed="false"><i style="background:#EB7764"></i>珊瑚</button><button class="chip" type="button" data-group="2" aria-pressed="false"><i style="background:#A9CAD2"></i>淺藍</button></div></div>
+      <div class="extra"><label>留住一群</label><div class="chips"><button class="chip" type="button" data-group="0" aria-pressed="false"><i style="background:#EDE6D6"></i>骨白</button><button class="chip" type="button" data-group="1" aria-pressed="false"><i style="background:#F0B400"></i>鎘黃</button><button class="chip" type="button" data-group="2" aria-pressed="false"><i style="background:#7F98AA"></i>鋼藍</button></div></div>
       <div class="controls">
         <button class="btn" id="pause" type="button" aria-pressed="false">暫停</button>
         <button class="btn" id="reset" type="button">回到初始</button>
         <button class="btn" id="save" type="button">匯出 PNG</button>
       </div>
-      <p class="statement">深綠、珊瑚與淺藍三群形狀，依同一套編舞在橫列、折角、分組與方陣之間移動。多數準時抵達，少數總是慢上半拍，在隊形裡留下短暫的空位，也讓共同的節奏被看見。觀眾可以留住其中一群，看它在放開後如何重新合流。</p>
+      <p class="statement">燈暗下來的舞台上，骨白、鎘黃與鋼藍三群舞者依同一套編舞，在橫列、折角、分組與方陣之間移動。大多數準時抵達，總有幾位慢上半拍，在隊形裡留下短暫的空位——共同的節奏，正是因為這些空位才被看見。你可以把其中一群留在原地，看它放開後怎麼追回來。</p>
       <p class="tech">p5.js 1.11.13 · 四個隊形、每輪 27.6 秒的時間軸；每個模組以固定的延遲讀取同一條時間 · 留住一群只凍結它的局部時鐘，放開後以 1.5 倍速追回。</p>
       <nav class="pn" aria-label="前後作品">
-        <a class="prev" href="chromatic-sediments.html"><small>前一件</small>色彩沉積</a>
-        <a class="next" href="within-the-same-frame.html"><small>下一件</small>同一張圖的不同尺度</a>
+        <a class="prev" href="chromatic-sediments.html"><small>前一件</small>讀過的厚度</a>
+        <a class="next" href="within-the-same-frame.html"><small>下一件</small>門後還有門</a>
       </nav>
       <div class="seed" id="seed"></div>
     </div>
@@ -162,7 +162,8 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 
   // ── 06 遲到半拍的群舞：四個隊形、一條 27.6 秒的編舞時間軸；每個模組以自己的延遲讀取同一條時間 ──
   function sketch(p, A, api) {
-    var GROUND = A.hex('#F1ECDF'), GREEN = A.hex('#264D43'), CORAL = A.hex('#EB7764'), BLUE = A.hex('#A9CAD2');
+    // 一座暗下來的舞台：骨白、鎘黃與鋼藍三群舞者
+    var GROUND = A.hex('#161616'), GREEN = A.hex('#EDE6D6'), CORAL = A.hex('#F0B400'), BLUE = A.hex('#7F98AA');
     var MOVE = 2.4, HOLD1 = 1.8, TURN = 0.9, HOLD2 = 1.8, SEG = MOVE + HOLD1 + TURN + HOLD2, NF = 4, LOOP = SEG * NF;
     var mods = [], forms = [], clock = 0, lag = [0, 0, 0], held = [false, false, false], W, H, box, u, chips = [], still = 0;
     var GROUPS = [{ n: 13, col: GREEN, w: 1.9, h: 0.72 }, { n: 6, col: CORAL, w: 0.95, h: 0.95 }, { n: 8, col: BLUE, w: 1.35, h: 0.6 }];

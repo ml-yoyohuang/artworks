@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>尚未對準的印刷 · Registration, Pending — 規則之後</title>
+<title>三色未合 · Three Inks, Not Yet One — 平面的八種禮節 · 規則之後</title>
 <meta name="description" content="影像的完整，是幾層各自存在的色彩在某個時刻相遇。">
 <link rel="icon" href="data:,">
 <style>
 :root {
-  --art: #F2EBDD;
+  --art: #F3EEE3;
   --page: #f1eee8; --ink: #1d1c1a; --muted: rgba(29,28,26,.56); --line: rgba(29,28,26,.16);
-  --accent: #2948BA;
+  --accent: #0F7C86;
   --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
@@ -79,31 +79,31 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 <main class="hall">
   <section class="work" aria-label="作品">
     <div class="stage" id="stage">
-      <img class="still" src="thumbs/geo-registration-pending.jpg" alt="米色紙上的套色印刷構圖：藍色大圓、紅色矩形與粉色半圓彼此稍微錯開，重疊處呈現深紫與暗紅。">
+      <img class="still" src="thumbs/geo-registration-pending.jpg" alt="米白紙上的三色套印：藍綠大圓、黃色矩形與玫瑰色半圓稍微錯開，疊印處呈現深綠、橘紅與深藍。">
       <p class="fail">這是作品的靜態停格。互動版需要 JavaScript、Canvas 與同資料夾中的 <code>lib/p5.min.js</code>。</p>
     </div>
   </section>
   <aside class="label">
     <div class="head">
       <a class="back" href="p5-demo-list.html#geometric">← 規則之後 · 目錄</a>
-      <div class="no">平面上的關係 02 / 08</div>
-      <h1>尚未對準的印刷</h1>
-      <p class="en">Registration, Pending</p>
+      <div class="no">平面的八種禮節 02 / 08</div>
+      <h1>三色未合</h1>
+      <p class="en">Three Inks, Not Yet One</p>
       <p class="thesis">影像的完整，是幾層各自存在的色彩在某個時刻相遇。</p>
     </div>
     <div class="body">
-      <p class="hint" id="hint">作品沿 32 秒的時間軸分離、靠近、對準、再錯開。拖動「套印」滑桿自己尋找對準的一刻；按「繼續」回到自動。鍵盤：<kbd>←</kbd><kbd>→</kbd> 微調、<kbd>Enter</kbd> 跳到對準。</p>
+      <p class="hint" id="hint">作品沿 32 秒的時間軸分離、靠近、對準、再錯開。拖動「套印」滑桿自己尋找三色合一的那一刻；按「繼續」回到自動。鍵盤：<kbd>←</kbd><kbd>→</kbd> 微調、<kbd>Enter</kbd> 跳到對準。</p>
       <div class="extra"><label for="progress">套印</label><input type="range" id="progress" min="0" max="999" value="300" aria-label="套印時間軸"></div>
       <div class="controls">
         <button class="btn" id="pause" type="button" aria-pressed="false">暫停</button>
         <button class="btn" id="reset" type="button">回到初始</button>
         <button class="btn" id="save" type="button">匯出 PNG</button>
       </div>
-      <p class="statement">一張圖像暫時拆成三個彼此錯開的色彩世界：鈷藍的圓、朱紅的方、淡粉的半圓。它們靠近時，交疊處以乘色取得新的重量；對準的那幾秒，畫面停下來讓人看清它本來的樣子，然後又隨著微小的位移與轉角鬆開。邊上的套印記號誠實地記錄每一次錯位。</p>
+      <p class="statement">一張圖被拆成三張色版：藍綠的圓、向日葵黃的方、玫瑰色的半圓。它們各自偏離一點，在紙上留下錯開的邊；靠近時，疊印處長出原本不存在的綠、橘紅與深藍。對準的那幾秒，三種顏色終於成為同一張圖，然後又隨著微小的位移與轉角各自鬆開。</p>
       <p class="tech">p5.js 1.11.13 · 三個色版各自快取為離屏圖層，每格只做位移、旋轉與 multiply 合成 · 這是程序化的油墨美學，不是物理印刷模擬。</p>
       <nav class="pn" aria-label="前後作品">
-        <a class="prev" href="negotiated-territories.html"><small>前一件</small>領土協商</a>
-        <a class="next" href="reverse-of-a-plane.html"><small>下一件</small>平面有背面</a>
+        <a class="prev" href="negotiated-territories.html"><small>前一件</small>讓出一寸</a>
+        <a class="next" href="reverse-of-a-plane.html"><small>下一件</small>背面也是顏色</a>
       </nav>
       <div class="seed" id="seed"></div>
     </div>
@@ -162,7 +162,8 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 
   // ── 02 尚未對準的印刷：同一個向量場景拆成三個快取色版，以乘色疊印，沿一條 32 秒的時間軸分離與套合 ──
   function sketch(p, A, api) {
-    var PAPER = A.hex('#F2EBDD'), COBALT = A.hex('#2948BA'), VERMIL = A.hex('#E14A3A'), PINK = A.hex('#E7A9B6');
+    // 孔版印刷式的三色：藍綠、向日葵黃、玫瑰；疊印得到綠、橘紅與深藍
+    var PAPER = A.hex('#F3EEE3'), COBALT = A.hex('#0F7C86'), VERMIL = A.hex('#EFC33A'), PINK = A.hex('#E0528A');
     var T = 32, u = 0.3, W, H, box, paper, plates = [], dirs = [], slider, scene;
 
     // 場景：以「版面框」的正規化座標描述（寬版），窄版時轉置

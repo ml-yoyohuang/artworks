@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>空白正在移動 · Moving Absence — 規則之後</title>
+<title>缺席者的散步 · The Absent One Takes a Walk — 平面的八種禮節 · 規則之後</title>
 <meta name="description" content="空白能夠改變色塊的形狀，也能改變觀看的重心。">
 <link rel="icon" href="data:,">
 <style>
 :root {
-  --art: #EEE9DB;
+  --art: #EDE7DD;
   --page: #f1eee8; --ink: #1d1c1a; --muted: rgba(29,28,26,.56); --line: rgba(29,28,26,.16);
-  --accent: #A83F36;
+  --accent: #4A2340;
   --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
@@ -79,31 +79,31 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 <main class="hall">
   <section class="work" aria-label="作品">
     <div class="stage" id="stage">
-      <img class="still" src="thumbs/geo-moving-absence.jpg" alt="暖米色畫面上有赭紅長方形、近黑半圓與杏色色帶，一個大圓形開口切穿它們，露出下方深色底與細橫線。">
+      <img class="still" src="thumbs/geo-moving-absence.jpg" alt="淺麻色畫面上有茄紫長方形、墨色半圓與粉膚色色帶，一個大圓形開口切穿它們，露出下方帶細線的檸檬黃底。">
       <p class="fail">這是作品的靜態停格。互動版需要 JavaScript、Canvas 與同資料夾中的 <code>lib/p5.min.js</code>。</p>
     </div>
   </section>
   <aside class="label">
     <div class="head">
       <a class="back" href="p5-demo-list.html#geometric">← 規則之後 · 目錄</a>
-      <div class="no">平面上的關係 04 / 08</div>
-      <h1>空白正在移動</h1>
-      <p class="en">Moving Absence</p>
+      <div class="no">平面的八種禮節 04 / 08</div>
+      <h1>缺席者的散步</h1>
+      <p class="en">The Absent One Takes a Walk</p>
       <p class="thesis">空白能夠改變色塊的形狀，也能改變觀看的重心。</p>
     </div>
     <div class="body">
-      <p class="hint" id="hint">一個圓形的缺席會緩慢巡行五個位置。滑鼠移入畫面即由你引導；觸控請輕點想看的位置，或用下方按鈕切換。鍵盤：<kbd>←</kbd><kbd>→</kbd> 或 <kbd>1</kbd>–<kbd>5</kbd>。</p>
+      <p class="hint" id="hint">一個圓形的缺席會緩慢走過五個位置。滑鼠移入畫面即由你引導；觸控請輕點想看的位置，或用下方按鈕切換。鍵盤：<kbd>←</kbd><kbd>→</kbd> 或 <kbd>1</kbd>–<kbd>5</kbd>。</p>
       <div class="extra"><label>空白的位置</label><div class="chips"><button class="chip" type="button" data-station="0" aria-pressed="false">位置一</button><button class="chip" type="button" data-station="1" aria-pressed="false">位置二</button><button class="chip" type="button" data-station="2" aria-pressed="false">位置三</button><button class="chip" type="button" data-station="3" aria-pressed="false">位置四</button><button class="chip" type="button" data-station="4" aria-pressed="false">位置五</button></div></div>
       <div class="controls">
         <button class="btn" id="pause" type="button" aria-pressed="false">暫停</button>
         <button class="btn" id="reset" type="button">回到初始</button>
         <button class="btn" id="save" type="button">匯出 PNG</button>
       </div>
-      <p class="statement">赭紅的長方、近黑的半圓與一條杏色橫帶組成一幅穩定的畫面。一個圓形的空白穿過它們，帶走一部分表面，下方另一張夜色的構圖便從開口浮現。被移除的地方仍有分量：它切出新的弧線與斷面，牽動重心，讓完整的形狀暫時取得另一種讀法。</p>
+      <p class="statement">茄紫的長方、墨色的半圓與一條粉膚色的帶子，組成一幅穩定的畫面。一個圓形的缺席在其中慢慢散步：它走到哪裡，表面就在哪裡消失，底下一層檸檬黃的光便透出來。被拿走的地方反而最亮，牽動重心，也讓原本完整的形狀暫時換了一種讀法。</p>
       <p class="tech">p5.js 1.11.13 · 前景與下層各快取一次，每格以 even-odd 裁切在前景挖出真正的開口 · 自主路徑與觀眾引導共用同一個平滑趨近的狀態。</p>
       <nav class="pn" aria-label="前後作品">
-        <a class="prev" href="reverse-of-a-plane.html"><small>前一件</small>平面有背面</a>
-        <a class="next" href="chromatic-sediments.html"><small>下一件</small>色彩沉積</a>
+        <a class="prev" href="reverse-of-a-plane.html"><small>前一件</small>背面也是顏色</a>
+        <a class="next" href="chromatic-sediments.html"><small>下一件</small>讀過的厚度</a>
       </nav>
       <div class="seed" id="seed"></div>
     </div>
@@ -162,7 +162,8 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 
   // ── 04 空白正在移動：前景與下層各自快取；以 even-odd 裁切在前景挖出真正的開口 ──
   function sketch(p, A, api) {
-    var GROUND = A.hex('#EEE9DB'), OCHRE = A.hex('#A83F36'), NIGHT = A.hex('#242623'), APRICOT = A.hex('#E8B58C');
+    // 茄紫、墨與粉膚色；缺席之處透出一層檸檬黃——空白反而是光
+    var GROUND = A.hex('#EDE7DD'), OCHRE = A.hex('#4A2340'), NIGHT = A.hex('#1E1C1B'), APRICOT = A.hex('#E8C3BC'), LEMON = A.hex('#EBCB3F');
     var W, H, fg, bg, stations, R, pos, target, seg, st = 0, clock = 0, mode = 'auto', idle = 0, chips = [];
     var MOVE = 4.2, HOLD = 3.6;
 
@@ -196,8 +197,8 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
       c.beginPath(); c.arc(sc[0], sc[1], lay.semi[2] * m, narrow ? Math.PI / 2 : Math.PI, narrow ? Math.PI * 1.5 : A.TAU); c.closePath(); c.fill();
       // 下層：另一張夜色的構圖，只有缺席時才看得見
       var d = bg.drawingContext;
-      d.fillStyle = A.rgba(NIGHT); d.fillRect(0, 0, W, H);
-      d.strokeStyle = A.rgba(APRICOT, 0.75); d.lineWidth = 1;
+      d.fillStyle = A.rgba(LEMON); d.fillRect(0, 0, W, H);
+      d.strokeStyle = A.rgba(NIGHT, 0.55); d.lineWidth = 1;
       var gap = Math.max(7, m * 0.018);
       d.beginPath();
       if (narrow) for (var x = gap / 2; x < W; x += gap) { d.moveTo(x, 0); d.lineTo(x, H); }
@@ -205,7 +206,7 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
       d.stroke();
       var dc = P(lay.disc[0], lay.disc[1]);
       d.fillStyle = A.rgba(OCHRE); d.beginPath(); d.arc(dc[0], dc[1], lay.disc[2] * m, 0, A.TAU); d.fill();
-      d.fillStyle = A.rgba(APRICOT); var sq = m * 0.07, q2 = P(0.2, 0.74); d.fillRect(q2[0] - sq / 2, q2[1] - sq / 2, sq, sq);
+      d.fillStyle = A.rgba(NIGHT); var sq = m * 0.07, q2 = P(0.2, 0.74); d.fillRect(q2[0] - sq / 2, q2[1] - sq / 2, sq, sq);
     }
     function stationXY(i) { return P(stations[i][0], stations[i][1]); }
     function clampPos(q) { return [A.clamp(q[0], R * 0.6, W - R * 0.6), A.clamp(q[1], R * 0.6, H - R * 0.6)]; }

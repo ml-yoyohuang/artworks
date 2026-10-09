@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>平面有背面 · The Reverse of a Plane — 規則之後</title>
+<title>背面也是顏色 · The Back Is Also a Colour — 平面的八種禮節 · 規則之後</title>
 <meta name="description" content="看似完整的表面，仍保留著尚未被看見的一面。">
 <link rel="icon" href="data:,">
 <style>
 :root {
-  --art: #ECE8DA;
+  --art: #B9B2A5;
   --page: #f1eee8; --ink: #1d1c1a; --muted: rgba(29,28,26,.56); --line: rgba(29,28,26,.16);
-  --accent: #8B48B8;
+  --accent: #2F45C8;
   --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
@@ -79,31 +79,31 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 <main class="hall">
   <section class="work" aria-label="作品">
     <div class="stage" id="stage">
-      <img class="still" src="thumbs/geo-reverse-of-a-plane.jpg" alt="淺米色底上五片大小不一的灰綠色面板，其中一片沿邊翻起，露出紫色背面與下方深靛色的空間。">
+      <img class="still" src="thumbs/geo-reverse-of-a-plane.jpg" alt="石灰色底上五片大小不一的白色紙片，其中一片沿邊翻起，露出群青色背面與下方的深色空間。">
       <p class="fail">這是作品的靜態停格。互動版需要 JavaScript、Canvas 與同資料夾中的 <code>lib/p5.min.js</code>。</p>
     </div>
   </section>
   <aside class="label">
     <div class="head">
       <a class="back" href="p5-demo-list.html#geometric">← 規則之後 · 目錄</a>
-      <div class="no">平面上的關係 03 / 08</div>
-      <h1>平面有背面</h1>
-      <p class="en">The Reverse of a Plane</p>
+      <div class="no">平面的八種禮節 03 / 08</div>
+      <h1>背面也是顏色</h1>
+      <p class="en">The Back Is Also a Colour</p>
       <p class="thesis">看似完整的表面，仍保留著尚未被看見的一面。</p>
     </div>
     <div class="body">
-      <p class="hint" id="hint">點選任一片灰綠的面，它會沿一條邊翻起，露出紫色的背面與下方的靛色；再點一次合上。鍵盤：<kbd>←</kbd><kbd>→</kbd> 選片、<kbd>Enter</kbd> 翻起或合上、<kbd>Esc</kbd> 合上。</p>
+      <p class="hint" id="hint">點選任一片白紙，它會沿一條邊翻起，露出群青的背面與下方的深色；再點一次合上。鍵盤：<kbd>←</kbd><kbd>→</kbd> 選片、<kbd>Enter</kbd> 翻起或合上、<kbd>Esc</kbd> 合上。</p>
 
       <div class="controls">
         <button class="btn" id="pause" type="button" aria-pressed="false">暫停</button>
         <button class="btn" id="reset" type="button">回到初始</button>
         <button class="btn" id="save" type="button">匯出 PNG</button>
       </div>
-      <p class="statement">五片灰綠的面先以一張完整海報的姿態出現。當其中一片沿著自己的鉸鏈翻起，背面的紫色才第一次被看見，原本被它蓋住的靛色與圖形也同時露出。觀看沿著一條邊前進，平面多出了厚度，也多出了另一層構圖；合上之後，表面又回到完整。</p>
+      <p class="statement">石灰色的底上，幾片粉筆白的紙安靜地排成一張海報，看起來已經完整。直到其中一片沿著自己的邊翻起，群青才第一次出現——那是一直被它背在身後的顏色；被它蓋住的位置，也露出另一層深色的構圖。合上之後，白色回到表面，但你已經知道它的另一面。</p>
       <p class="tech">p5.js 1.11.13 · 每片面在 3D 中繞鉸鏈旋轉（Rodrigues 公式）再做透視投影 · 由法線判斷正反面、依平均深度排序遮擋，並沿光線投下陰影。</p>
       <nav class="pn" aria-label="前後作品">
-        <a class="prev" href="registration-pending.html"><small>前一件</small>尚未對準的印刷</a>
-        <a class="next" href="moving-absence.html"><small>下一件</small>空白正在移動</a>
+        <a class="prev" href="registration-pending.html"><small>前一件</small>三色未合</a>
+        <a class="next" href="moving-absence.html"><small>下一件</small>缺席者的散步</a>
       </nav>
       <div class="seed" id="seed"></div>
     </div>
@@ -162,7 +162,8 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 
   // ── 03 平面有背面：每片色塊繞自己的鉸鏈做真正的 3D 旋轉，再以透視投影回畫布；法線決定正反面 ──
   function sketch(p, A, api) {
-    var GROUND = A.hex('#ECE8DA'), FRONT = A.hex('#8D9C83'), FRONT2 = A.hex('#A3AF98'), BACK = A.hex('#8B48B8'), DEEP = A.hex('#292A50');
+    // 石灰色的底上，幾片粉筆白的紙；群青只藏在背面
+    var GROUND = A.hex('#B9B2A5'), FRONT = A.hex('#F6F3EC'), FRONT2 = A.hex('#E9E4DA'), BACK = A.hex('#2F45C8'), DEEP = A.hex('#1D1B1A');
     var W, H, box, pieces = [], spec, open = -1, sel = -1, PHI = Math.PI * 0.7, intro = null;
     var L = (function () { var v = [-0.35, -0.55, 1], m = Math.hypot(v[0], v[1], v[2]); return [v[0] / m, v[1] / m, v[2] / m]; })();
 
@@ -288,7 +289,11 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
       pieces.forEach(function (pc) { if (pc.t > 0.001) under(ctx, pc); });
       // 投影陰影：沿光線把掀起的面壓回桌面
       pieces.forEach(function (pc) {
-        if (pc.t <= 0.001) return;
+        if (pc.t <= 0.001) {
+          // 平放的紙片：極淺的落影，像剪紙貼在板上
+          ctx.save(); ctx.translate(1.5, 2.5); path(ctx, pc.pts); ctx.fillStyle = A.rgba(DEEP, 0.14); ctx.fill(); ctx.restore();
+          return;
+        }
         var sh = pc.v3.map(function (v) { return [v[0] - L[0] / L[2] * v[2], v[1] - L[1] / L[2] * v[2]]; });
         path(ctx, sh); ctx.fillStyle = A.rgba(DEEP, 0.16 * Math.min(1, pc.t * 4)); ctx.fill();
       });

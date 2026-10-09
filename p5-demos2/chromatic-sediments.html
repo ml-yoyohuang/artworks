@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>色彩沉積 · Chromatic Sediments — 規則之後</title>
+<title>讀過的厚度 · The Thickness of What Was Read — 平面的八種禮節 · 規則之後</title>
 <meta name="description" content="時間被轉譯成厚度，閱讀留下不同顏色的層。">
 <link rel="icon" href="data:,">
 <style>
 :root {
-  --art: #E9E1D1;
+  --art: #EEE9DE;
   --page: #f1eee8; --ink: #1d1c1a; --muted: rgba(29,28,26,.56); --line: rgba(29,28,26,.16);
-  --accent: #48362E;
+  --accent: #23283F;
   --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
@@ -79,16 +79,16 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 <main class="hall">
   <section class="work" aria-label="作品">
     <div class="stage" id="stage">
-      <img class="still" src="thumbs/geo-chromatic-sediments.jpg" alt="米色底上由下而上堆疊的水平色層：深棕、霧粉、灰紫的厚層之間夾著細黃線，中段一條斷層使部分地層錯開。">
+      <img class="still" src="thumbs/geo-chromatic-sediments.jpg" alt="淺紙色底上由下而上堆疊的水平色層：藍黑、舊紙色與石板灰的厚層之間夾著螢光黃綠細線，中段一條斷層使部分地層錯開。">
       <p class="fail">這是作品的靜態停格。互動版需要 JavaScript、Canvas 與同資料夾中的 <code>lib/p5.min.js</code>。</p>
     </div>
   </section>
   <aside class="label">
     <div class="head">
       <a class="back" href="p5-demo-list.html#geometric">← 規則之後 · 目錄</a>
-      <div class="no">平面上的關係 05 / 08</div>
-      <h1>色彩沉積</h1>
-      <p class="en">Chromatic Sediments</p>
+      <div class="no">平面的八種禮節 05 / 08</div>
+      <h1>讀過的厚度</h1>
+      <p class="en">The Thickness of What Was Read</p>
       <p class="thesis">時間被轉譯成厚度，閱讀留下不同顏色的層。</p>
     </div>
     <div class="body">
@@ -99,11 +99,11 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
         <button class="btn" id="reset" type="button">回到初始</button>
         <button class="btn" id="save" type="button">匯出 PNG</button>
       </div>
-      <p class="statement">時間被壓成一層層不同的顏色。深棕與灰紫的厚層之間，偶爾只留下一道極薄的硫黃黃；某一刻，一條斷層讓先前的地層錯動，之後的沉積又把落差填平。當觀看倒退，較早的平面原樣回來，沉積成為一段可以來回走動的時間。</p>
+      <p class="statement">讀過的東西會留下厚度。藍黑墨水、舊紙與石板灰一層層壓在一起，偶爾夾著一道極薄的螢光筆色——那是曾經特別在意的一行。某一刻，一條斷層讓先前的層錯開，之後的閱讀又把落差慢慢填平。把時間往回拉，較早的平面原樣回來，像重新翻開還沒讀到那裡的書。</p>
       <p class="tech">p5.js 1.11.13 · 畫面只由種子、層資料與進度 p 計算，不在拖動時追加任何圖形 · 每層有沉積區間、壓實與斷層前後的不同行為。</p>
       <nav class="pn" aria-label="前後作品">
-        <a class="prev" href="moving-absence.html"><small>前一件</small>空白正在移動</a>
-        <a class="next" href="a-beat-behind.html"><small>下一件</small>遲到半拍的群舞</a>
+        <a class="prev" href="moving-absence.html"><small>前一件</small>缺席者的散步</a>
+        <a class="next" href="a-beat-behind.html"><small>下一件</small>晚到的那幾位</a>
       </nav>
       <div class="seed" id="seed"></div>
     </div>
@@ -162,7 +162,8 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 
   // ── 05 色彩沉積：畫面＝固定種子＋層資料＋進度 p。往返進度不會累加任何物件 ──
   function sketch(p, A, api) {
-    var GROUND = A.hex('#E9E1D1'), BROWN = A.hex('#48362E'), PINK = A.hex('#CA9699'), SULFUR = A.hex('#D7CB48'), MAUVE = A.hex('#797083');
+    // 閱讀的顏色：藍黑墨水、舊紙、石板灰；極薄的層是螢光筆
+    var GROUND = A.hex('#EEE9DE'), BROWN = A.hex('#23283F'), PINK = A.hex('#C9B48C'), SULFUR = A.hex('#E3EC3C'), MAUVE = A.hex('#6E7C91');
     var layers = [], fault, prog = 0.42, slider, W, H, F, AUTO = 26;
 
     function design() {

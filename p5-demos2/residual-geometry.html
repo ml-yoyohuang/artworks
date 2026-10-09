@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>幾何的餘溫 · Residual Geometry — 規則之後</title>
+<title>它剛剛在這裡 · It Was Just Here — 平面的八種禮節 · 規則之後</title>
 <meta name="description" content="形狀離開之後，它曾經存在的位置仍在參與畫面。">
 <link rel="icon" href="data:,">
 <style>
 :root {
-  --art: #F2E7DC;
+  --art: #F4EFE6;
   --page: #f1eee8; --ink: #1d1c1a; --muted: rgba(29,28,26,.56); --line: rgba(29,28,26,.16);
-  --accent: #D9493F;
+  --accent: #E4572E;
   --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
@@ -79,30 +79,30 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 <main class="hall">
   <section class="work" aria-label="作品">
     <div class="stage" id="stage">
-      <img class="still" src="thumbs/geo-residual-geometry.jpg" alt="米色紙上一個紅色圓形與兩塊深藍矩形，旁邊留著淡粉與灰綠的褪色印記，標示它們先前的位置。">
+      <img class="still" src="thumbs/geo-residual-geometry.jpg" alt="米色紙上一個朱橘色圓形與兩塊深綠矩形，旁邊留著淺水色與淡玫瑰色的褪色印記，標示它們先前的位置。">
       <p class="fail">這是作品的靜態停格。互動版需要 JavaScript、Canvas 與同資料夾中的 <code>lib/p5.min.js</code>。</p>
     </div>
   </section>
   <aside class="label">
     <div class="head">
       <a class="back" href="p5-demo-list.html#geometric">← 規則之後 · 目錄</a>
-      <div class="no">平面上的關係 08 / 08</div>
-      <h1>幾何的餘溫</h1>
-      <p class="en">Residual Geometry</p>
+      <div class="no">平面的八種禮節 08 / 08</div>
+      <h1>它剛剛在這裡</h1>
+      <p class="en">It Was Just Here</p>
       <p class="thesis">形狀離開之後，它曾經存在的位置仍在參與畫面。</p>
     </div>
     <div class="body">
-      <p class="hint" id="hint">形狀會輪流移往新的位置，原處留下慢慢褪去的痕跡。滑鼠可直接拖動形狀；或點選形狀後再點空白處讓它移過去（觸控同樣）。鍵盤：<kbd>←</kbd><kbd>→</kbd> 選形狀、<kbd>1</kbd>–<kbd>6</kbd> 移到指定位置。</p>
+      <p class="hint" id="hint">形狀會輪流移往新的位置，原處留下慢慢褪去的補色痕跡。滑鼠可直接拖動形狀；或點選形狀後再點空白處讓它移過去（觸控同樣）。鍵盤：<kbd>←</kbd><kbd>→</kbd> 選形狀、<kbd>1</kbd>–<kbd>6</kbd> 移到指定位置。</p>
 
       <div class="controls">
         <button class="btn" id="pause" type="button" aria-pressed="false">暫停</button>
         <button class="btn" id="reset" type="button">回到初始</button>
         <button class="btn" id="save" type="button">匯出 PNG</button>
       </div>
-      <p class="statement">一個紅圓與兩塊深藍的矩形在畫面裡輪流移動。形狀離開之後，原處留下一層淡粉或灰綠，十多秒才安靜地退回紙色。現在與過去互相覆蓋，也彼此讓出空間：觀看改變了幾何的路徑，痕跡則讓那些已經完成的移動，繼續以另一種重量留在畫面裡。</p>
-      <p class="tech">p5.js 1.11.13 · 現在的形狀與歷史姿態分開保存，只在有意義的位移後記錄；每個形狀最多 4 筆、全體最多 10 筆 · 痕跡以顏色退向紙色、由舊到新不透明繪製，避免疊成灰霧。</p>
+      <p class="statement">盯著一個顏色再移開視線，眼睛會在原處留下它的補色。一個朱橘的圓與兩塊深綠的矩形輪流移動；它們離開之後，原位留下淺水色與淡玫瑰的印記，十多秒才安靜地退回紙色。現在與剛才彼此覆蓋：痕跡不是影子，而是你記得它的方式。</p>
+      <p class="tech">p5.js 1.11.13 · 現在的形狀與歷史姿態分開保存，只在有意義的位移後記錄；每個形狀最多 4 筆、全體最多 10 筆 · 痕跡取形狀的補色，以顏色退向紙色、由舊到新不透明繪製，避免疊成灰霧。</p>
       <nav class="pn" aria-label="前後作品">
-        <a class="prev" href="within-the-same-frame.html"><small>前一件</small>同一張圖的不同尺度</a>
+        <a class="prev" href="within-the-same-frame.html"><small>前一件</small>門後還有門</a>
         <a class="next" href="p5-demo-list.html#geometric"><small>下一件</small>回到目錄</a>
       </nav>
       <div class="seed" id="seed"></div>
@@ -162,7 +162,8 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 
   // ── 08 幾何的餘溫：現在的形狀與歷史姿態分開保存；歷史有上限，以「色彩向紙色退去」而非透明疊加消退 ──
   function sketch(p, A, api) {
-    var PAPER = A.hex('#F2E7DC'), RED = A.hex('#D9493F'), PINK = A.hex('#E4AAA5'), NAVY = A.hex('#293C54'), SAGE = A.hex('#B9C3AE');
+    // 痕跡用補色：盯著一個顏色移開視線，眼睛會留下它的補色——朱橘留下淺水色，深綠留下淡玫瑰
+    var PAPER = A.hex('#F4EFE6'), RED = A.hex('#E4572E'), PINK = A.hex('#BFE3E0'), NAVY = A.hex('#1F4A3F'), SAGE = A.hex('#F1C9C9');
     var LIFE = 11, PER = 4, CAP = 10, MOVE = 1.9, GAPT = 5.2;
     var W, H, box, unit, shapes, slots, traces = [], now = 0, next = 0, turn = 0, sel = 0, drag = null, rnd;
 

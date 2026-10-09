@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>同一張圖的不同尺度 · Within the Same Frame — 規則之後</title>
+<title>門後還有門 · A Door Behind the Door — 平面的八種禮節 · 規則之後</title>
 <meta name="description" content="靠近一個局部，會改變它在世界裡的分量。">
 <link rel="icon" href="data:,">
 <style>
 :root {
-  --art: #EFE8D8;
+  --art: #E9E1CF;
   --page: #f1eee8; --ink: #1d1c1a; --muted: rgba(29,28,26,.56); --line: rgba(29,28,26,.16);
-  --accent: #74384C;
+  --accent: #B8613F;
   --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
@@ -79,31 +79,31 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 <main class="hall">
   <section class="work" aria-label="作品">
     <div class="stage" id="stage">
-      <img class="still" src="thumbs/geo-within-the-same-frame.jpg" alt="暖米色畫面上幾個大小不一的色塊：酒紅、霧藍、深灰藍，每個色塊內又有更小的同色系構圖。">
+      <img class="still" src="thumbs/geo-within-the-same-frame.jpg" alt="灰泥色畫面上幾個大小不一的色塊：陶土、煤煙、藍灰與橄欖，每個色塊內又有更小的同色系構圖。">
       <p class="fail">這是作品的靜態停格。互動版需要 JavaScript、Canvas 與同資料夾中的 <code>lib/p5.min.js</code>。</p>
     </div>
   </section>
   <aside class="label">
     <div class="head">
       <a class="back" href="p5-demo-list.html#geometric">← 規則之後 · 目錄</a>
-      <div class="no">平面上的關係 07 / 08</div>
-      <h1>同一張圖的不同尺度</h1>
-      <p class="en">Within the Same Frame</p>
+      <div class="no">平面的八種禮節 07 / 08</div>
+      <h1>門後還有門</h1>
+      <p class="en">A Door Behind the Door</p>
       <p class="thesis">靠近一個局部，會改變它在世界裡的分量。</p>
     </div>
     <div class="body">
-      <p class="hint" id="hint">點選任一色塊即可進入，它會成為新的整體；用「回上一層」或「回全景」返回。最多五層。鍵盤：<kbd>←</kbd><kbd>→</kbd> 選塊、<kbd>Enter</kbd> 進入、<kbd>Esc</kbd> 上一層、<kbd>Home</kbd> 全景。</p>
+      <p class="hint" id="hint">點選任一色塊即可走進去，它會成為新的整體；用「回上一層」或「回全景」返回。最多五層。鍵盤：<kbd>←</kbd><kbd>→</kbd> 選塊、<kbd>Enter</kbd> 進入、<kbd>Esc</kbd> 上一層、<kbd>Home</kbd> 全景。</p>
       <div class="extra"><div class="chips"><button class="chip" type="button" id="up">回上一層</button><button class="chip" type="button" id="top">回全景</button><span class="chip" id="level" aria-live="polite" style="cursor:default;border-style:dashed">層級 1 / 5</span></div></div>
       <div class="controls">
         <button class="btn" id="pause" type="button" aria-pressed="false">暫停</button>
         <button class="btn" id="reset" type="button">回到初始</button>
         <button class="btn" id="save" type="button">匯出 PNG</button>
       </div>
-      <p class="statement">每一個色塊裡都藏著下一幅構圖。進入之後，原本細小的局部成為整體，背景、主色與強調色的角色依深度輪替，比例的語言卻保持不變。畫面沒有唯一的尺度：觀看的位置參與決定了何者重要，而每一層都留著一塊空白，提醒你剛才從哪裡來。</p>
+      <p class="statement">每一個色塊都是一扇門，門後是另一個房間。灰泥、煤煙、陶土、門板的藍灰與橄欖，依深度輪流擔任牆、門與燈；走進去之後，原本細小的局部變成整個空間，比例的語言卻沒有改變。每個房間都留著一塊空白，像沒有關上的門，提醒你剛才是從哪裡走進來的。</p>
       <p class="tech">p5.js 1.11.13 · 以路徑為身份的遞迴構圖樹，按需生成、最多五層，小於門檻的子區域合併為父色塊 · 相機在對數尺度上連續縮放。</p>
       <nav class="pn" aria-label="前後作品">
-        <a class="prev" href="a-beat-behind.html"><small>前一件</small>遲到半拍的群舞</a>
-        <a class="next" href="residual-geometry.html"><small>下一件</small>幾何的餘溫</a>
+        <a class="prev" href="a-beat-behind.html"><small>前一件</small>晚到的那幾位</a>
+        <a class="next" href="residual-geometry.html"><small>下一件</small>它剛剛在這裡</a>
       </nav>
       <div class="seed" id="seed"></div>
     </div>
@@ -162,7 +162,8 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 
   // ── 07 同一張圖的不同尺度：以路徑為身份的遞迴構圖樹，按需生成；相機在對數尺度上連續進入局部 ──
   function sketch(p, A, api) {
-    var PAL = ['#EFE8D8', '#26343B', '#74384C', '#9BB7C1', '#BDA15A'].map(A.hex);
+    // 室內的顏色：灰泥、煤煙、陶土、門板的藍灰、橄欖；依深度輪流當牆、門與燈
+    var PAL = ['#E9E1CF', '#23211F', '#B8613F', '#5D7383', '#4E5434'].map(A.hex);
     var MAXD = 5, root, stack = [], view, from, to, tt = 1, hover = null, kb = -1, W, H, levelEl, drawn = 0;
 
     function hashPath(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }

@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>領土協商 · Negotiated Territories — 規則之後</title>
+<title>讓出一寸 · An Inch, Given Up — 平面的八種禮節 · 規則之後</title>
 <meta name="description" content="一個區域取得更多空間，必然改變鄰近區域的存在方式。">
 <link rel="icon" href="data:,">
 <style>
 :root {
-  --art: #F3EFE5;
+  --art: #F1ECE2;
   --page: #f1eee8; --ink: #1d1c1a; --muted: rgba(29,28,26,.56); --line: rgba(29,28,26,.16);
-  --accent: #F27636;
+  --accent: #1F7A9C;
   --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
@@ -79,31 +79,31 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 <main class="hall">
   <section class="work" aria-label="作品">
     <div class="stage" id="stage">
-      <img class="still" src="thumbs/geo-negotiated-territories.jpg" alt="米白底上一張由十塊矩形拼成的平面：一塊佔近一半面積的深藍主體、數塊灰綠與暖米色區域，以及一道細長的橘色帶。">
+      <img class="still" src="thumbs/geo-negotiated-territories.jpg" alt="暖白底上由十塊矩形拼成的地景：一塊佔近一半的深土色主體、數塊稻田綠與麥稈色區域，以及一道細長的翠鳥藍色帶。">
       <p class="fail">這是作品的靜態停格。互動版需要 JavaScript、Canvas 與同資料夾中的 <code>lib/p5.min.js</code>。</p>
     </div>
   </section>
   <aside class="label">
     <div class="head">
       <a class="back" href="p5-demo-list.html#geometric">← 規則之後 · 目錄</a>
-      <div class="no">平面上的關係 01 / 08</div>
-      <h1>領土協商</h1>
-      <p class="en">Negotiated Territories</p>
+      <div class="no">平面的八種禮節 01 / 08</div>
+      <h1>讓出一寸</h1>
+      <p class="en">An Inch, Given Up</p>
       <p class="thesis">一個區域取得更多空間，必然改變鄰近區域的存在方式。</p>
     </div>
     <div class="body">
-      <p class="hint" id="hint">滑鼠靠近任一色塊，它會慢慢取得空間；點一下鎖定，再點一次解除。觸控：輕點鎖定、輕點他處換焦點。鍵盤：選取畫面後按 <kbd>←</kbd><kbd>→</kbd> 選塊、<kbd>Enter</kbd> 鎖定、<kbd>Esc</kbd> 解除。</p>
+      <p class="hint" id="hint">滑鼠靠近任一塊土地，它會慢慢取得空間；點一下鎖定，再點一次解除。觸控：輕點鎖定、輕點他處換焦點。鍵盤：選取畫面後按 <kbd>←</kbd><kbd>→</kbd> 選塊、<kbd>Enter</kbd> 鎖定、<kbd>Esc</kbd> 解除。</p>
 
       <div class="controls">
         <button class="btn" id="pause" type="button" aria-pressed="false">暫停</button>
         <button class="btn" id="reset" type="button">回到初始</button>
         <button class="btn" id="save" type="button">匯出 PNG</button>
       </div>
-      <p class="statement">十塊領土拼成一張沒有縫隙的平面。每一塊都有自己的位置，卻沒有獨立於他者的空間：當其中一塊擴張，畫面不是被推開，而是沿著共用的切割線重新分配比例。觀看與選擇成為一次短暫的協商，深藍的主體、灰綠的中段與一道橘色斷句，在讓位與佔據之間找到新的平衡。</p>
+      <p class="statement">從高處看，土地是一張沒有縫隙的拼圖：深色的土、稻田、麥稈，還有一道翠鳥藍的河當作邊界。每一塊都有自己的位置，卻沒有獨立於鄰居的空間。當你靠近其中一塊，它慢慢取得面積，其他區域沿著共用的界線一寸一寸讓出；放手之後，地景又回到原來的協議。</p>
       <p class="tech">p5.js 1.11.13 · 二元分割樹（每個節點保存分割軸、基準比例與目前比例）· 擴張只改祖先比例，並依子樹最小尺寸夾在可行範圍內，中途也維持合法拼接。</p>
       <nav class="pn" aria-label="前後作品">
         <a class="prev" href="p5-demo-list.html#geometric"><small>前一件</small>回到目錄</a>
-        <a class="next" href="registration-pending.html"><small>下一件</small>尚未對準的印刷</a>
+        <a class="next" href="registration-pending.html"><small>下一件</small>三色未合</a>
       </nav>
       <div class="seed" id="seed"></div>
     </div>
@@ -162,7 +162,8 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
 
   // ── 01 領土協商：一棵二元分割樹。所有區域共用同一組切割線，擴張只改祖先的比例 ──
   function sketch(p, A, api) {
-    var BG = A.hex('#F3EFE5'), DEEP = A.hex('#E4DCCB'), NAVY = A.hex('#172F4D'), SAGE = A.hex('#B6C2A4'), ORANGE = A.hex('#F27636');
+    // 從空中看見的土地：深色的土、稻田、麥稈，一道翠鳥藍的河當作邊界
+    var BG = A.hex('#F1ECE2'), DEEP = A.hex('#E2D3A8'), NAVY = A.hex('#4F3424'), SAGE = A.hex('#A9B48A'), ORANGE = A.hex('#1F7A9C');
     var root, leaves = [], hover = null, locked = null, kb = -1, W, H, wide, M, G, MIN;
 
     function node(axis, ratio, a, b) { return { axis: axis, base: ratio, ratio: ratio, target: ratio, kids: [a, b] }; }
