@@ -133,15 +133,21 @@ export async function startApp({ ex, quality, viewer, reducedMotion, onProgress,
   const modeBtn = $('btn-mode');
   const coarse = matchMedia('(pointer: coarse)').matches;
   let dismissHint = () => {};
+  /** Restart a one-shot CSS animation class. */
+  function replay(node, cls) { node.classList.remove(cls); void node.offsetWidth; node.classList.add(cls); }
   function setMode(m) {
     mode = m;
     modeBtn.setAttribute('aria-pressed', String(m === 'walk'));
     modeBtn.setAttribute('aria-label', m === 'walk' ? '移動方式：自由行走（切換為點擊移動）' : '移動方式：點擊移動（切換為自由行走）');
     $('joystick').hidden = !(m === 'walk' && coarse);
+    // a standing legend replaces the one-off hint while walking
+    $('walkhelp').hidden = m !== 'walk';
+    if (m === 'walk') replay($('walkhelp'), 'enter');
+    $('walkhelp').classList.toggle('touch', coarse);
     document.body.classList.toggle('joy', m === 'walk' && coarse);
     if (m === 'click' && document.pointerLockElement) document.exitPointerLock();
     dismissHint();
-    dismissHint = showHint(m === 'click' ? ex.ui.hintClick : coarse ? ex.ui.hintWalkTouch : ex.ui.hintWalk, `showroom.hint.${m}`);
+    if (m === 'click') dismissHint = showHint(ex.ui.hintClick, 'showroom.hint.click');
   }
   modeBtn.addEventListener('click', () => setMode(mode === 'click' ? 'walk' : 'click'));
   const strip = new WorkStrip(ex, (id) => focusWork(id));
@@ -226,6 +232,8 @@ export async function startApp({ ex, quality, viewer, reducedMotion, onProgress,
   }
   document.addEventListener('pointerlockchange', () => {
     $('crosshair').hidden = document.pointerLockElement !== stage;
+    const wh = $('walkhelp'), locked = document.pointerLockElement === stage;
+    if (wh.classList.contains('locked') !== locked) { wh.classList.toggle('locked', locked); replay(wh, 'swap'); }
   });
 
   // ---------- joystick ----------

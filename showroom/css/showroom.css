@@ -95,6 +95,25 @@ body.dark { --ui-bg-solid: #121212; }
 #minimap .mm-me { fill: currentColor; }
 #minimap .mm-cone { fill: currentColor; opacity: .16; }
 
+/* ---------- free-walk legend (only in walk mode) ---------- */
+#walkhelp { position: fixed; left: max(22px, env(safe-area-inset-left)); bottom: max(20px, env(safe-area-inset-bottom)); z-index: 9; color: var(--ui-fg); font-size: 10.5px; letter-spacing: .1em; line-height: 1; transition: opacity 1.2s var(--ease), color .8s; pointer-events: none; }
+#walkhelp p { margin: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; opacity: .78; }
+#walkhelp p + p { margin-top: 10px; }
+#walkhelp .wh-mouse { min-height: 19px; }   /* same height for both lines, so swapping does not jump */
+/* small entrance with a slight settle whenever the legend appears or its line changes */
+@keyframes whIn { 0% { opacity: 0; transform: translateY(5px); } 60% { opacity: 1; transform: translateY(-1.5px); } 100% { opacity: 1; transform: none; } }
+#walkhelp.enter p, #walkhelp.swap .wh-mouse > span { animation: whIn .5s var(--ease) both; }
+#walkhelp.enter p + p { animation-delay: .06s; }
+#walkhelp .row { display: inline-flex; align-items: center; gap: 3px; }
+#walkhelp kbd { display: inline-flex; align-items: center; justify-content: center; min-width: 19px; height: 19px; padding: 0 5px; margin-right: 1px; border: 1px solid currentColor; border-radius: 4px; font: inherit; font-size: 9.5px; letter-spacing: .04em; opacity: .9; }
+#walkhelp .row kbd + kbd { margin-left: 0; }
+#walkhelp .locked, #walkhelp.locked .free, #walkhelp .wh-touch, #walkhelp.touch .wh-keys, #walkhelp.touch .wh-mouse { display: none; }
+#walkhelp.locked .locked { display: inline; }
+#walkhelp.touch .wh-touch { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+#walkhelp.touch { bottom: calc(max(30px, env(safe-area-inset-bottom)) + 118px); left: max(26px, env(safe-area-inset-left)); white-space: nowrap; }
+body.idle #walkhelp { opacity: .5; }
+body.focused #walkhelp, body.viewing #walkhelp { opacity: 0; }
+
 /* quiet UI: fade when idle, step aside while a work is open */
 body.idle #strip:not(:focus-within), body.idle #minimap:not(:focus), body.idle #corner:not(:focus-within) { opacity: .18; }
 body.focused #strip, body.viewing #strip, body.viewing #minimap { opacity: 0; pointer-events: none; }
@@ -188,4 +207,5 @@ body.dark #card { background: rgba(18, 18, 18, 0.92); color: #e7e3da; --line: rg
 }
 @media (prefers-reduced-motion: reduce) {
   #card, #lobby, #viewer, #strip, #minimap { transition-duration: .2s; }
+  #walkhelp.enter p, #walkhelp.swap .wh-mouse > span { animation: none; }
 }

@@ -25,8 +25,6 @@
     "prev": "上一件",
     "next": "下一件",
     "hintClick": "點擊地面移動・拖曳環顧・點擊作品靠近觀看",
-    "hintWalk": "WASD 或方向鍵行走・點擊畫面後以滑鼠環顧・Esc 釋放滑鼠",
-    "hintWalkTouch": "左下搖桿行走・拖曳畫面環顧",
     "noWebGL": "此瀏覽器無法啟用 WebGL，已改以作品列表呈現。所有作品仍可開啟觀看。",
     "fileProtocol": "此展間需要透過本機伺服器開啟（ES module 無法以 file:// 執行）。請參考 showroom/README.md。"
   },
