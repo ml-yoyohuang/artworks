@@ -1,0 +1,479 @@
+[
+  {
+    "kind": "shader",
+    "id": "grain-gradient-mesh",
+    "href": "../shader-demos2/grain-gradient-mesh.html",
+    "img": "../shader-demos2/thumbs/grain-gradient-mesh.jpg",
+    "name": "校樣之晨",
+    "en": "Morning Proof · Grain Gradient Mesh",
+    "desc": "這個畫面像一張剛從印刷機取下的校樣，顏色還在紙纖維裡慢慢沉澱。",
+    "tags": "安靜 · 紙感 · 高級",
+    "use": "品牌首頁主視覺、作品集封面、長文頁首",
+    "colors": [
+      "#ECE5D8",
+      "#9FAE95",
+      "#E2AE8E",
+      "#2A2926"
+    ],
+    "no": "S01",
+    "series": "效果研究"
+  },
+  {
+    "kind": "shader",
+    "id": "noise-dissolve",
+    "href": "../shader-demos2/noise-dissolve.html",
+    "img": "../shader-demos2/thumbs/noise-dissolve.jpg",
+    "name": "兩卷底片",
+    "en": "Two Reels · Noise Mask Dissolve",
+    "desc": "這個畫面像兩卷底片在放映機裡交換了記憶。",
+    "tags": "電影感 · 餘燼 · 夜",
+    "use": "作品集章節轉場、影像品牌首頁、活動倒數頁",
+    "colors": [
+      "#0E1424",
+      "#EFE6CF",
+      "#D9572B",
+      "#7A2E1D"
+    ],
+    "no": "S02",
+    "series": "效果研究"
+  },
+  {
+    "kind": "shader",
+    "id": "liquid-distortion",
+    "href": "../shader-demos2/liquid-distortion.html",
+    "img": "../shader-demos2/thumbs/liquid-distortion.jpg",
+    "name": "午後泳池",
+    "en": "Afternoon Pool · Liquid Ripple Distortion",
+    "desc": "這個畫面像午後無人的泳池，等著被指尖喚醒。",
+    "tags": "清涼 · 安靜 · 陽光",
+    "use": "夏季活動頁、旅宿與生活品牌首頁、互動式頁首",
+    "colors": [
+      "#7CC6C0",
+      "#0E4A53",
+      "#F3F0E4",
+      "#E8735A"
+    ],
+    "no": "S03",
+    "series": "效果研究"
+  },
+  {
+    "kind": "shader",
+    "id": "dithering-halftone",
+    "href": "../shader-demos2/dithering-halftone.html",
+    "img": "../shader-demos2/thumbs/dithering-halftone.jpg",
+    "name": "側臉與紅日",
+    "en": "Profile & Red Sun · Ordered Dither / Halftone",
+    "desc": "這個畫面像一張連夜印好、還帶著油墨味的傳單。",
+    "tags": "態度 · 印刷 · 宣言",
+    "use": "活動海報頁、獨立刊物封面、宣言式品牌頁首",
+    "colors": [
+      "#E8E3D3",
+      "#151515",
+      "#D9372B"
+    ],
+    "no": "S04",
+    "series": "效果研究"
+  },
+  {
+    "kind": "shader",
+    "id": "domain-warp-fbm",
+    "href": "../shader-demos2/domain-warp-fbm.html",
+    "img": "../shader-demos2/thumbs/domain-warp-fbm.jpg",
+    "name": "石中之水",
+    "en": "Water in Stone · Nested Domain Warp",
+    "desc": "這個畫面像剖開一塊石頭，看見它曾經是水。",
+    "tags": "沉靜 · 礦物 · 時間",
+    "use": "珠寶與精品品牌主視覺、建材或室內設計作品頁、長文章節底圖",
+    "colors": [
+      "#08241D",
+      "#2C6A4E",
+      "#A6CFA4",
+      "#C8A44B"
+    ],
+    "no": "S05",
+    "series": "效果研究"
+  },
+  {
+    "kind": "shader",
+    "id": "feedback-trails",
+    "href": "../shader-demos2/feedback-trails.html",
+    "img": "../shader-demos2/thumbs/feedback-trails.jpg",
+    "name": "殘光",
+    "en": "Afterglow · Feedback Trails",
+    "desc": "這個畫面像黃昏裡被記住的一道光，走過之後還捨不得散去。",
+    "tags": "夢境 · 時間 · 溫柔",
+    "use": "個人網站首頁、音樂或詩作專題、夜間模式主視覺",
+    "colors": [
+      "#170F2B",
+      "#B39BE0",
+      "#F5C6A5"
+    ],
+    "no": "S06",
+    "series": "效果研究"
+  },
+  {
+    "kind": "shader",
+    "id": "reaction-diffusion",
+    "href": "../shader-demos2/reaction-diffusion.html",
+    "img": "../shader-demos2/thumbs/reaction-diffusion.jpg",
+    "name": "石紋",
+    "en": "Stele · Gray-Scott Reaction–Diffusion",
+    "desc": "這個畫面像一塊古老的石板，刻下的紋路還在石頭裡慢慢生長。",
+    "tags": "古老 · 沉靜 · 生長",
+    "use": "歷史或文化主題專題、博物館與展覽主視覺、品牌紋樣",
+    "colors": [
+      "#CFC6B4",
+      "#5E564B",
+      "#4F8E97",
+      "#9C4A35"
+    ],
+    "no": "S07",
+    "series": "效果研究"
+  },
+  {
+    "kind": "shader",
+    "id": "pixel-sorting",
+    "href": "../shader-demos2/pixel-sorting.html",
+    "img": "../shader-demos2/thumbs/pixel-sorting.jpg",
+    "name": "斷訊",
+    "en": "Signal Loss · GPU Pixel Sorting",
+    "desc": "這個畫面像一則正在融化的訊號，字還在，意思卻一行行往下流。",
+    "tags": "數位 · 冷冽 · 崩解",
+    "use": "科技品牌發表頁、音樂專輯或活動主視覺、404 與維護頁",
+    "colors": [
+      "#0B0B0E",
+      "#C6F032",
+      "#CDD0D6",
+      "#FF5A1F"
+    ],
+    "no": "S08",
+    "series": "效果研究"
+  },
+  {
+    "kind": "shader",
+    "id": "raymarching-sdf",
+    "href": "../shader-demos2/raymarching-sdf.html",
+    "img": "../shader-demos2/thumbs/raymarching-sdf.jpg",
+    "name": "石膏習作",
+    "en": "Plaster Study · Raymarched SDF",
+    "desc": "這個畫面像美術館角落的一件石膏習作，光在它的孔洞裡慢慢午睡。",
+    "tags": "靜物 · 溫潤 · 留白",
+    "use": "建築或設計事務所首頁、藝廊展覽頁、產品形象頁",
+    "colors": [
+      "#E7E2DA",
+      "#4A3F36",
+      "#F2D4A9"
+    ],
+    "no": "S09",
+    "series": "效果研究"
+  },
+  {
+    "kind": "shader",
+    "id": "darkroom-solarize",
+    "href": "../shader-demos2/darkroom-solarize.html",
+    "img": "../shader-demos2/thumbs/darkroom-solarize.jpg",
+    "name": "顯影",
+    "en": "Latent Hour · Darkroom Solarization",
+    "desc": "這個畫面像一張還在顯影液中、慢慢浮現的相片。",
+    "tags": "暗房 · 等待 · 記憶",
+    "use": "攝影作品集首頁、展覽開場、回憶與紀實專題頁首",
+    "colors": [
+      "#3B0A06",
+      "#E8DFCC",
+      "#110F0E"
+    ],
+    "no": "S10",
+    "series": "媒材研究"
+  },
+  {
+    "kind": "shader",
+    "id": "risograph-print",
+    "href": "../shader-demos2/risograph-print.html",
+    "img": "../shader-demos2/thumbs/risograph-print.jpg",
+    "name": "套色",
+    "en": "Two-Drum Still Life · Risograph Print",
+    "desc": "這個畫面像兩道油墨各走各的，在紙上偶然重疊。",
+    "tags": "俏皮 · 手作 · 溫度",
+    "use": "獨立刊物與小誌網站、活動海報頁、文創品牌商品頁",
+    "colors": [
+      "#F2EDE2",
+      "#FF4FA3",
+      "#1F5FBF"
+    ],
+    "no": "S11",
+    "series": "媒材研究"
+  },
+  {
+    "kind": "shader",
+    "id": "cyanotype",
+    "href": "../shader-demos2/cyanotype.html",
+    "img": "../shader-demos2/thumbs/cyanotype.jpg",
+    "name": "日光標本",
+    "en": "Sun Herbarium · Cyanotype",
+    "desc": "這個畫面像植物在陽光下躺了一個午後，留下的白色影子。",
+    "tags": "靜謐 · 植物 · 時間",
+    "use": "植物或自然品牌首頁、手作工作室介紹、慢生活專欄頁首",
+    "colors": [
+      "#10295A",
+      "#081633",
+      "#EFEBE0"
+    ],
+    "no": "S12",
+    "series": "媒材研究"
+  },
+  {
+    "kind": "shader",
+    "id": "glass-refraction",
+    "href": "../shader-demos2/glass-refraction.html",
+    "img": "../shader-demos2/thumbs/glass-refraction.jpg",
+    "name": "隔著玻璃",
+    "en": "Behind Reeded Glass · Refraction",
+    "desc": "這個畫面像隔著一扇老玻璃窗，看見午後模糊的庭院。",
+    "tags": "朦朧 · 距離 · 清涼",
+    "use": "室內設計與建築事務所首頁、選物店形象頁、會員登入背景",
+    "colors": [
+      "#23493D",
+      "#E6ECE8",
+      "#D98C7A",
+      "#101815"
+    ],
+    "no": "S13",
+    "series": "媒材研究"
+  },
+  {
+    "kind": "shader",
+    "id": "organic-growth",
+    "href": "../shader-demos2/organic-growth.html",
+    "img": "../shader-demos2/thumbs/organic-growth.jpg",
+    "name": "石上地衣",
+    "en": "Lichen on Stone · Stochastic Cellular Growth",
+    "desc": "這個畫面像一塊石頭，用幾十年慢慢記下自己被誰住過。",
+    "tags": "緩慢 · 共生 · 年輪",
+    "use": "自然與永續品牌、研究單位網站、長篇專題的章節底圖",
+    "colors": [
+      "#A6A49B",
+      "#C7D266",
+      "#DD7333",
+      "#2B2C27"
+    ],
+    "no": "S14",
+    "series": "媒材研究"
+  },
+  {
+    "kind": "shader",
+    "id": "long-exposure",
+    "href": "../shader-demos2/long-exposure.html",
+    "img": "../shader-demos2/thumbs/long-exposure.jpg",
+    "name": "北天曝光",
+    "en": "North Sky · Long-Exposure Accumulation",
+    "desc": "這個畫面像一台整夜沒關的相機，把星星走過的路都留了下來。",
+    "tags": "守候 · 時間 · 夜",
+    "use": "天文與戶外品牌、攝影作品集首頁、夜間活動頁",
+    "colors": [
+      "#0A1324",
+      "#EDEFF5",
+      "#2B5866",
+      "#F1A33D"
+    ],
+    "no": "S15",
+    "series": "媒材研究"
+  },
+  {
+    "kind": "shader",
+    "id": "textile-moire",
+    "href": "../shader-demos2/textile-moire.html",
+    "img": "../shader-demos2/thumbs/textile-moire.jpg",
+    "name": "紗上波紋",
+    "en": "Veiled Weave · Textile Moiré",
+    "desc": "這個畫面像兩層布輕輕交疊，紋理之間浮出一片不存在的水光。",
+    "tags": "織物 · 細密 · 呼吸",
+    "use": "服飾與織品品牌、設計工作室首頁、展覽主視覺",
+    "colors": [
+      "#22305A",
+      "#D9CEB8",
+      "#A3412D"
+    ],
+    "no": "S16",
+    "series": "媒材研究"
+  },
+  {
+    "kind": "p5",
+    "id": "flow-field",
+    "href": "../p5-demos2/flow-field.html?seed=2024",
+    "img": "../p5-demos2/thumbs/flow-field.jpg",
+    "name": "順風千行",
+    "en": "A Thousand Lines Downwind",
+    "desc": "一千條線從左側出發，順著看不見的風前進，一碰到彼此，就安靜地停下。",
+    "tags": "風 · 髮絲 · 筆觸 · 筆式繪圖機",
+    "use": "品牌首頁主視覺、長文頁首、載入過場",
+    "colors": [
+      "#efe9dc",
+      "#1c1b19",
+      "#26408b"
+    ],
+    "no": "P01",
+    "series": "規則研究"
+  },
+  {
+    "kind": "p5",
+    "id": "contour-topography",
+    "href": "../p5-demos2/contour-topography.html?seed=4096",
+    "img": "../p5-demos2/thumbs/contour-topography.jpg",
+    "name": "靜默測繪",
+    "en": "Quiet Survey",
+    "desc": "一座不存在的山被切成等距的薄片，每一片的邊緣，化成一條永不交錯的線。",
+    "tags": "地圖 · 測繪 · 冷靜理性 · 等高線",
+    "use": "數據產品背景、年度報告封面、關於我們",
+    "colors": [
+      "#0d1310",
+      "#9db59a",
+      "#e2b55c"
+    ],
+    "no": "P02",
+    "series": "規則研究"
+  },
+  {
+    "kind": "p5",
+    "id": "recursive-subdivision",
+    "href": "../p5-demos2/recursive-subdivision.html?seed=27182",
+    "img": "../p5-demos2/thumbs/recursive-subdivision.jpg",
+    "name": "切分的秩序",
+    "en": "Order by Division",
+    "desc": "一個矩形被切成兩半，每一半再決定要不要繼續切，直到每個房間都剛好夠住。",
+    "tags": "構成主義 · 建築感 · 平面分割 · 筆式繪圖機",
+    "use": "作品集網格、建築事務所首頁、章節分隔",
+    "colors": [
+      "#e4dfd3",
+      "#1f1f1f",
+      "#2440c4"
+    ],
+    "no": "P03",
+    "series": "規則研究"
+  },
+  {
+    "kind": "p5",
+    "id": "circle-packing",
+    "href": "../p5-demos2/circle-packing.html?seed=314",
+    "img": "../p5-demos2/thumbs/circle-packing.jpg",
+    "name": "細胞的禮貌",
+    "en": "The Courtesy of Cells",
+    "desc": "每個圓從一點開始長大，碰到鄰居就停下，於是擁擠也有了禮貌。",
+    "tags": "細胞 · 泡沫 · 有秩序的擁擠 · 染色切片",
+    "use": "生技醫療品牌、社群與成員頁、空狀態插圖",
+    "colors": [
+      "#f4edec",
+      "#482e70",
+      "#e28aa6"
+    ],
+    "no": "P04",
+    "series": "規則研究"
+  },
+  {
+    "kind": "p5",
+    "id": "truchet-tiles",
+    "href": "../p5-demos2/truchet-tiles.html?seed=2024",
+    "img": "../p5-demos2/thumbs/truchet-tiles.jpg",
+    "name": "漆金結",
+    "en": "Lacquer Knot",
+    "desc": "每塊磚只能選擇轉或不轉，金線卻因此再也找不到起點與終點。",
+    "tags": "圖騰 · 迷宮 · 織品紋樣 · 漆器",
+    "use": "頁尾紋樣、包裝與票券、節慶活動頁",
+    "colors": [
+      "#15110e",
+      "#9e3221",
+      "#cca65c"
+    ],
+    "no": "P05",
+    "series": "規則研究"
+  },
+  {
+    "kind": "p5",
+    "id": "differential-growth",
+    "href": "../p5-demos2/differential-growth.html?seed=99991",
+    "img": "../p5-demos2/thumbs/differential-growth.jpg",
+    "name": "夜珊瑚",
+    "en": "Night Coral",
+    "desc": "一條閉合的線，相鄰的點牽著手，稍遠的點互相推開；線無處可去，只好向外起皺。",
+    "tags": "珊瑚 · 腦紋 · 會呼吸的線 · 年輪",
+    "use": "研究機構與實驗室、展覽頁、Hero 動態背景",
+    "colors": [
+      "#0e1416",
+      "#467a76",
+      "#e0775a"
+    ],
+    "no": "P06",
+    "series": "規則研究"
+  },
+  {
+    "kind": "p5",
+    "id": "space-colonization",
+    "href": "../p5-demos2/space-colonization.html?seed=2024",
+    "img": "../p5-demos2/thumbs/space-colonization.jpg",
+    "name": "藍曬葉脈",
+    "en": "Cyanotype Venation",
+    "desc": "看不見的養分散在葉形之中，枝條朝最近的那些生長，抵達之處，便把它們收下。",
+    "tags": "樹枝 · 葉脈 · 神經 · 藍曬",
+    "use": "永續與農業品牌、知識圖譜、章節扉頁",
+    "colors": [
+      "#ece7da",
+      "#1b3e70",
+      "#eef3f1"
+    ],
+    "no": "P07",
+    "series": "規則研究"
+  },
+  {
+    "kind": "p5",
+    "id": "voronoi-stippling",
+    "href": "../p5-demos2/voronoi-stippling.html?seed=123457",
+    "img": "../p5-demos2/thumbs/voronoi-stippling.jpg",
+    "name": "銅版星圖",
+    "en": "Copperplate Bodies",
+    "desc": "幾千枚墨點一次次移向自己領地中最暗的重心，直到明暗只剩疏密在說話。",
+    "tags": "銅版畫 · 科學插圖 · 點描 · 筆式繪圖機",
+    "use": "出版與書封、博物館網站、長文插圖",
+    "colors": [
+      "#ece3cf",
+      "#2b1f17",
+      "#8a3b25"
+    ],
+    "no": "P08",
+    "series": "規則研究"
+  },
+  {
+    "kind": "p5",
+    "id": "boids-flocking",
+    "href": "../p5-demos2/boids-flocking.html?seed=8128",
+    "img": "../p5-demos2/thumbs/boids-flocking.jpg",
+    "name": "黃昏群舞",
+    "en": "Murmuration at Dusk",
+    "desc": "每隻鳥只看身旁幾隻鄰居：靠近、對齊、別相撞。沒有領袖，形狀卻自己浮現。",
+    "tags": "鳥群 · 魚群 · 集體意識 · 互動",
+    "use": "社群與協作產品、互動式首頁、活動倒數頁",
+    "colors": [
+      "#d6cdc4",
+      "#1b1a20",
+      "#b4502f"
+    ],
+    "no": "P09",
+    "series": "規則研究"
+  },
+  {
+    "kind": "p5",
+    "id": "generative-typography",
+    "href": "../p5-demos2/generative-typography.html?seed=42",
+    "img": "../p5-demos2/thumbs/generative-typography.jpg",
+    "name": "字散",
+    "en": "A Character Disperses",
+    "desc": "一個字被拆成上千枚細筆，左邊還記得自己的形狀，右邊已隨風離開。",
+    "tags": "文字 · 拆解 · 生長 · 溶解",
+    "use": "標題動畫、品牌口號頁、展覽主視覺",
+    "colors": [
+      "#0c0c0d",
+      "#e8e2d6",
+      "#ff4a2a"
+    ],
+    "no": "P10",
+    "series": "規則研究"
+  }
+]

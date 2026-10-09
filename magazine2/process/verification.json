@@ -1,0 +1,104 @@
+{
+  "results": [
+    {
+      "width": 320,
+      "scrollWidth": 320,
+      "loadedImages": true,
+      "visibleWorks": 26,
+      "mainLandmarks": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "actualFonts": {
+        "fonts": [
+          {
+            "familyName": "Songti TC",
+            "postScriptName": "STSongti-TC-Regular",
+            "isCustomFont": false,
+            "glyphCount": 9
+          }
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390,
+      "loadedImages": true,
+      "visibleWorks": 26,
+      "mainLandmarks": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "actualFonts": {
+        "fonts": [
+          {
+            "familyName": "Songti TC",
+            "postScriptName": "STSongti-TC-Regular",
+            "isCustomFont": false,
+            "glyphCount": 9
+          }
+        ]
+      }
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768,
+      "loadedImages": true,
+      "visibleWorks": 26,
+      "mainLandmarks": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "actualFonts": {
+        "fonts": [
+          {
+            "familyName": "Songti TC",
+            "postScriptName": "STSongti-TC-Regular",
+            "isCustomFont": false,
+            "glyphCount": 9
+          }
+        ]
+      }
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024,
+      "loadedImages": true,
+      "visibleWorks": 26,
+      "mainLandmarks": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "actualFonts": {
+        "fonts": [
+          {
+            "familyName": "Songti TC",
+            "postScriptName": "STSongti-TC-Regular",
+            "isCustomFont": false,
+            "glyphCount": 9
+          }
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "loadedImages": true,
+      "visibleWorks": 26,
+      "mainLandmarks": 1,
+      "brokenAnchors": [],
+      "reducedMotion": true,
+      "actualFonts": {
+        "fonts": [
+          {
+            "familyName": "Songti TC",
+            "postScriptName": "STSongti-TC-Regular",
+            "isCustomFont": false,
+            "glyphCount": 9
+          }
+        ]
+      }
+    }
+  ],
+  "noJs": {
+    "works": 26,
+    "toolsHidden": true
+  },
+  "errors": []
+}
