@@ -119,6 +119,13 @@
 
 目錄頁已加入 Open Graph 與 Twitter Card meta，網址沿用第一輯的 GitHub Pages 路徑：`https://ml-yoyohuang.github.io/artworks/shader-demos2/`。
 
+### 各作品頁的 OG
+
+16 個作品頁各自有一張 `assets/og/<檔名>.jpg`（1200×630，90–300KB）。
+
+- **版面：** 上方是作品本身的畫面（介面文字已隱藏），下方一條使用該頁底色與字色的資訊列，列出編號、標題、創作自述與系列名稱。
+- **meta：** 每頁都已加入 Open Graph 與 Twitter Card，分享時顯示該頁自己的預覽圖與創作自述。
+
 ## Git
 
 - **CLAUDE.md：** repo 中不存在 CLAUDE.md，也沒有 CONTRIBUTING.md 或其他貢獻規範。
