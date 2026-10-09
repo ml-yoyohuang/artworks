@@ -6,8 +6,8 @@ import { Post } from './post.js';
 import { STYLE } from './style.config.js';
 import { Artworks } from './artworks.js';
 import { Navigator } from './navigation.js';
-import { hang, START, ENTER_TARGET, isWalkable, EYE } from './plan.js';
-import { Card, PlanMap, openLayer, closeLayer, topLayer, closeTop, hallToast, showHint } from './ui.js';
+import { hang, START, ENTER_TARGET, isWalkable, clampWalkable, ROOMS, EYE } from './plan.js';
+import { Card, PlanMap, WorkStrip, MiniMap, idleFade, openLayer, closeLayer, topLayer, closeTop, showHint } from './ui.js';
 
 const $ = (id) => document.getElementById(id);
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -101,10 +101,18 @@ export async function startApp({ ex, quality, viewer, reducedMotion, onProgress,
     if (!focused) return;
     focused = null; art.focusedId = null; card.hide(); offset.tx = 0; offset.ty = 0;
   }
+  /** Where 返回 / Esc takes you: the middle of the work's hall, looking along the route. */
+  function hallHome(roomId) {
+    const R = ROOMS[roomId] || ROOMS.garden;
+    const p = clampWalkable((R.x0 + R.x1) / 2, (R.z0 + R.z1) / 2, roomId);
+    return { x: p.x, z: p.z, yaw: roomId === 'darkroom' ? Math.PI / 2 : 0 };
+  }
   function leaveFocus() {
     if (!focused) return;
+    const room = art.get(focused)?.place.room;
     dropFocus();
-    if (returnPose) nav.goTo(returnPose.x, returnPose.z, { yaw: returnPose.yaw, pitch: returnPose.pitch });
+    const home = hallHome(room);
+    nav.goTo(home.x, home.z, { yaw: home.yaw, pitch: STYLE.camera.restPitch });
     returnPose = null;
   }
   function step(dir) {
@@ -130,12 +138,14 @@ export async function startApp({ ex, quality, viewer, reducedMotion, onProgress,
     modeBtn.setAttribute('aria-pressed', String(m === 'walk'));
     modeBtn.setAttribute('aria-label', m === 'walk' ? '移動方式：自由行走（切換為點擊移動）' : '移動方式：點擊移動（切換為自由行走）');
     $('joystick').hidden = !(m === 'walk' && coarse);
+    document.body.classList.toggle('joy', m === 'walk' && coarse);
     if (m === 'click' && document.pointerLockElement) document.exitPointerLock();
     dismissHint();
     dismissHint = showHint(m === 'click' ? ex.ui.hintClick : coarse ? ex.ui.hintWalkTouch : ex.ui.hintWalk, `showroom.hint.${m}`);
   }
   modeBtn.addEventListener('click', () => setMode(mode === 'click' ? 'walk' : 'click'));
-  $('btn-map').addEventListener('click', () => openMap());
+  const strip = new WorkStrip(ex, (id) => focusWork(id));
+  const minimap = new MiniMap(() => openMap());
   $('btn-list').addEventListener('click', () => openList());
   function openMap() {
     map.setPose(nav.pos.x, nav.pos.z, nav.yaw);
@@ -268,7 +278,7 @@ export async function startApp({ ex, quality, viewer, reducedMotion, onProgress,
   });
 
   // ---------- loop ----------
-  let currentRoom = null;
+  let currentRoom = null, stripTick = 0;
   const perf = { frames: 0, acc: 0, fps: 0, samples: [] };
   let pixelRatio = quality.pixelRatio;
   function renderOnce() {
@@ -300,9 +310,16 @@ export async function startApp({ ex, quality, viewer, reducedMotion, onProgress,
     ring.visible = ringMat.opacity > 0.01;
 
     art.update(camera, dt, now);
+    minimap.setPose(nav.pos.x, nav.pos.z, nav.yaw);
+    if (now - stripTick > 250) {
+      stripTick = now;
+      let best = focused, bd = 7;
+      if (!best) for (const it of art.items) if (it.place.room === nav.room && it.dist < bd && it.visible) { bd = it.dist; best = it.work.id; }
+      strip.setActive(best);
+    }
     const room = nav.room;
     if (room && room !== currentRoom) {
-      if (currentRoom && room !== 'lobby') hallToast(ex.halls.find((h) => h.id === room));
+      strip.setHall(room);
       currentRoom = room;
     }
     post.render(day);
@@ -330,7 +347,8 @@ export async function startApp({ ex, quality, viewer, reducedMotion, onProgress,
     entered = true;
     $('lobby').classList.add('leaving');
     setTimeout(() => { $('lobby').hidden = true; }, 1400);
-    $('corner').hidden = false;
+    $('corner').hidden = false; $('strip').hidden = false; $('minimap').hidden = false;
+    idleFade();
     setMode('click');
     nav.goTo(ENTER_TARGET.x, ENTER_TARGET.z, { yaw: ENTER_TARGET.yaw, pitch: STYLE.camera.restPitch, speed: 0.75 });
     // later halls stream in once the visitor is inside

@@ -58,13 +58,20 @@
 
 <!-- Corner controls: only three entries -->
 <nav id="corner" aria-label="展間工具" hidden>
-  <button type="button" id="btn-map" aria-haspopup="dialog">導覽圖</button>
   <button type="button" id="btn-mode" aria-pressed="false"><span class="mode-a">點擊移動</span><span class="sep" aria-hidden="true">／</span><span class="mode-b">自由行走</span></button>
   <button type="button" id="btn-list" aria-haspopup="dialog">作品列表</button>
 </nav>
 
 <p id="hint" role="status" aria-live="polite" hidden></p>
-<div id="hallname" role="status" aria-live="polite"></div>
+<button type="button" id="minimap" aria-label="小地圖：開啟導覽圖" aria-haspopup="dialog" hidden></button>
+<nav id="strip" aria-label="本廳作品" hidden>
+  <p id="strip-hall" aria-live="polite"></p>
+  <div class="strip-row">
+    <button type="button" id="strip-prev" class="strip-arrow" aria-label="前五件">‹</button>
+    <div id="strip-track"></div>
+    <button type="button" id="strip-next" class="strip-arrow" aria-label="後五件">›</button>
+  </div>
+</nav>
 <div id="crosshair" aria-hidden="true" hidden></div>
 <div id="joystick" aria-hidden="true" hidden><span class="knob"></span></div>
 

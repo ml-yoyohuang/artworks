@@ -242,14 +242,6 @@ export class PlanMap {
 }
 
 // ---------------------------------------------------------------- small helpers
-export function hallToast(hall) {
-  const n = $('hallname');
-  n.innerHTML = '';
-  n.append(el('small', { text: hall.label }), el('span', { text: hall.name }));
-  n.classList.add('on');
-  clearTimeout(hallToast.t); hallToast.t = setTimeout(() => n.classList.remove('on'), 4200);
-}
-
 export function showHint(text, key) {
   let seen = false;
   try { seen = localStorage.getItem(key) === '1'; } catch (e) { /* storage unavailable */ }
@@ -263,4 +255,94 @@ export function showHint(text, key) {
   };
   setTimeout(dismiss, 9000);
   return dismiss;
+}
+
+// ---------------------------------------------------------------- work strip
+/** Numbered circles for the works of the hall you are in; about five visible at once. */
+export class WorkStrip {
+  constructor(ex, onPick) {
+    this.ex = ex; this.onPick = onPick;
+    this.node = $('strip'); this.track = $('strip-track'); this.label = $('strip-hall');
+    this.prev = $('strip-prev'); this.next = $('strip-next');
+    this.hall = null; this.active = null; this.buttons = new Map();
+    const step = (d) => this.track.scrollBy({ left: d * this.track.clientWidth, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    this.prev.addEventListener('click', () => step(-1));
+    this.next.addEventListener('click', () => step(1));
+    this.track.addEventListener('scroll', () => this.arrows(), { passive: true });
+    this.track.addEventListener('wheel', (e) => { if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { this.track.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive: false });
+  }
+  /** All works, always; a tiny dot marks where a new hall begins. */
+  build() {
+    if (this.buttons.size) return;
+    let prevHall = null;
+    this.ex.works.forEach((w, i) => {
+      if (prevHall && w.hall !== prevHall) this.track.append(el('span', { class: 'hall-sep', 'aria-hidden': 'true' }));
+      const b = el('button', { type: 'button', class: 'dot', 'aria-label': `${pad(i + 1)} ${w.title}`, onclick: () => this.onPick(w.id) },
+        el('span', { class: 'num', text: pad(i + 1) }), el('span', { class: 'tip', text: w.title, 'aria-hidden': 'true' }));
+      b.dataset.hall = w.hall; prevHall = w.hall;
+      this.track.append(b); this.buttons.set(w.id, b);
+    });
+    this.node.classList.add('scrolls');
+    requestAnimationFrame(() => this.arrows());
+  }
+  setHall(hallId) {
+    this.build();
+    if (hallId === this.hall) return;
+    this.hall = hallId;
+    const hall = this.ex.halls.find((h) => h.id === hallId);
+    this.label.textContent = !hall ? '' : hallId === 'lobby' ? hall.name : `${hall.label}　${hall.name}`;
+    // bring this hall's first work to the start of the strip
+    const first = this.track.querySelector(`.dot[data-hall="${hallId}"]`);
+    if (first) this.track.scrollTo({ left: first.offsetLeft - this.track.offsetLeft - 4, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }
+  setActive(id) {
+    if (id === this.active) return;
+    this.buttons.get(this.active)?.classList.remove('on');
+    this.buttons.get(this.active)?.removeAttribute('aria-current');
+    this.active = id;
+    const b = this.buttons.get(id);
+    if (!b) return;
+    b.classList.add('on'); b.setAttribute('aria-current', 'true');
+    // keep the current work in view without fighting a visitor who is scrolling
+    const t = this.track, l = b.offsetLeft - t.offsetLeft;
+    if (l < t.scrollLeft || l + b.offsetWidth > t.scrollLeft + t.clientWidth) t.scrollTo({ left: l - t.clientWidth / 2 + b.offsetWidth / 2, behavior: 'smooth' });
+  }
+  arrows() {
+    const t = this.track;
+    this.prev.disabled = t.scrollLeft <= 2;
+    this.next.disabled = t.scrollLeft + t.clientWidth >= t.scrollWidth - 2;
+  }
+}
+
+// ---------------------------------------------------------------- mini map
+/** A tiny plan around the visitor: room outlines, your position and view direction. */
+export class MiniMap {
+  constructor(onOpen) {
+    this.node = $('minimap');
+    this.node.addEventListener('click', onOpen);
+    const svg = sv('svg', { 'aria-hidden': 'true', viewBox: '0 0 40 30' });
+    // landscape orientation, like the full map: the route reads left → right
+    this.plan = sv('g'); svg.append(this.plan);
+    for (const r of Object.values(ROOMS)) this.plan.append(sv('rect', { class: `mm-room${r.id === 'darkroom' ? ' dark' : ''}`, x: r.x0, y: r.z0, width: r.x1 - r.x0, height: r.z1 - r.z0 }));
+    for (const d of DOORS) this.plan.append(sv('rect', { class: 'mm-door', x: d.x0, y: d.z0, width: d.x1 - d.x0, height: d.z1 - d.z0 }));
+    this.cone = sv('path', { class: 'mm-cone' }); this.me = sv('circle', { class: 'mm-me', r: 0.9 });
+    this.plan.append(this.cone, this.me);
+    this.node.append(svg);
+  }
+  setPose(x, z, yaw) {
+    // world (x, z) → minimap (−z, x); keep the visitor centred
+    this.plan.setAttribute('transform', `translate(${20 + z} ${15 - x}) rotate(90)`);
+    this.me.setAttribute('cx', x); this.me.setAttribute('cy', z);
+    const r = 6, a = 0.55, f = (s) => [x - Math.sin(yaw + s) * r, z - Math.cos(yaw + s) * r];
+    const [ax, az] = f(a), [bx, bz] = f(-a);
+    this.cone.setAttribute('d', `M${x} ${z} L${ax} ${az} A${r} ${r} 0 0 1 ${bx} ${bz} Z`);
+  }
+}
+
+/** Fades quiet UI after a few seconds without input. */
+export function idleFade(delay = 3000) {
+  let t = 0;
+  const wake = () => { document.body.classList.remove('idle'); clearTimeout(t); t = setTimeout(() => document.body.classList.add('idle'), delay); };
+  for (const ev of ['pointermove', 'pointerdown', 'keydown', 'wheel', 'touchstart', 'focusin']) addEventListener(ev, wake, { passive: true });
+  wake();
 }
