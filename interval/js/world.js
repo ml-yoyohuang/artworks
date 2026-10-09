@@ -58,7 +58,7 @@ export class MuseumWorld {
  entry(){
   // A clear path rises through four suspended stair plates toward the membrane.
   this.box([5.5,.2,30],[0,-.12,7],this.groundColor);
-  for(const [x,y,z] of [[1.8,.45,-10],[1.1,1.35,-16],[.4,2.25,-22],[-.3,3.15,-28]])this.box([6.2,.14,5.4],[x,y,z],'#dde5e4');
+  for(const [x,y,z] of [[1.8,.45,-13],[1.1,1.35,-19],[.4,2.25,-25],[-.3,3.15,-31]])this.box([6.2,.14,5.4],[x,y,z],'#dde5e4');
   this.line([[-2.65,.025,15],[-2.65,.025,-7]],'#eff1e8',.45);
   this.line([[2.65,.025,15],[2.65,.025,-7]],'#eff1e8',.45);
   const positions=[],colors=[],idx=[],segments=112,rows=20;
@@ -70,13 +70,13 @@ export class MuseumWorld {
   }}
   const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));geometry.setAttribute('color',new T.Float32BufferAttribute(colors,3));geometry.setIndex(idx);
   const material=new T.MeshPhysicalMaterial({color:'#ffffff',side:T.DoubleSide,vertexColors:true,roughness:.32,metalness:.12,iridescence:.4,iridescenceIOR:1.34,iridescenceThicknessRange:[180,380]});this.resources.push(material);
-  const mesh=this.mesh(geometry,material,[-.4,8.6,-32],[.08,-.2,-.13]);mesh.castShadow=false;mesh.receiveShadow=false;
+  const mesh=this.mesh(geometry,material,[-.4,10.6,-35],[.08,-.2,-.13]);mesh.castShadow=false;mesh.receiveShadow=false;
   this.entryFilm={mesh,base:Float32Array.from(geometry.attributes.position.array),elapsed:0,last:0,segments,rows};this.disturbEntryFilm(0);
  }
  disturbEntryFilm(time){
   const {mesh,base,segments,rows}=this.entryFilm,points=mesh.geometry.attributes.position,colors=mesh.geometry.attributes.color,color=new T.Color();
   for(let i=0;i<points.count;i++){const u=Math.floor(i/(segments+1))/rows,a=(i%(segments+1))/segments*Math.PI*2,envelope=Math.sin(Math.PI*u);
-   points.setXYZ(i,base[i*3],base[i*3+1],envelope*(.45*Math.sin(a*2+time*.19)+.18*Math.sin(a*3-u*3-time*.13)));
+   points.setXYZ(i,base[i*3]*(1+.045*u*Math.sin(a*2+time*.31)),base[i*3+1]*(1+.065*u*Math.cos(a*3-time*.27)),envelope*(1.2*Math.sin(a*2+time*.4)+.48*Math.sin(a*3-u*3-time*.27))+u*.18*Math.sin(a*2-time*.24));
    const spiral=a+u*11-time*.2,band=.5+.5*Math.sin(spiral),highlight=Math.pow(.5+.5*Math.sin(spiral+.8),5);color.setHSL(.49+.22*band,.46+.18*envelope,.54+.17*highlight);colors.setXYZ(i,color.r,color.g,color.b);
   }
   points.needsUpdate=true;colors.needsUpdate=true;mesh.geometry.computeVertexNormals();const normals=mesh.geometry.attributes.normal,normal=new T.Vector3();for(let row=0;row<=rows;row++){const first=row*(segments+1),last=first+segments;normal.set(normals.getX(first)+normals.getX(last),normals.getY(first)+normals.getY(last),normals.getZ(first)+normals.getZ(last)).normalize();normals.setXYZ(first,normal.x,normal.y,normal.z);normals.setXYZ(last,normal.x,normal.y,normal.z);}normals.needsUpdate=true;mesh.material.roughness=.32+.018*Math.sin(time*.16);mesh.material.iridescenceThicknessRange[0]=180+18*Math.sin(time*.12);mesh.material.iridescenceThicknessRange[1]=380+22*Math.sin(time*.12);
