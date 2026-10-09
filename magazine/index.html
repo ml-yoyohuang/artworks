@@ -64,8 +64,9 @@ body.night .folio{background:#0f1314;color:#e6e1d4;border-color:rgba(230,225,212
 .cover .k{right:calc(50% + 1.4vw);bottom:5vh;color:var(--ink)}
 .cover .z{left:calc(50% + 1.4vw);top:calc(var(--hh) + 5vh);color:var(--ink)}
 .cover .k span,.cover .z span{display:block}
-.cover .k span{background:url(../shader-demos/thumbs/long-exposure.webp) 40% 50%/cover,#11151c;-webkit-background-clip:text;background-clip:text;color:transparent}
-.cover .z span{background:url(../p5-demos/thumbs/truchet-tiles.webp) 50% 50%/cover,#132e43;-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover .k span,.cover .z span{background-repeat:no-repeat;background-size:auto 120%}
+.cover .k span{background:url(../shader-demos/thumbs/long-exposure.webp) no-repeat calc(40% + var(--bx,0px)) calc(50% + var(--by,0px))/auto 120%,#11151c;-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover .z span{background:url(../p5-demos/thumbs/truchet-tiles.webp) no-repeat calc(50% + var(--bx,0px)) calc(50% + var(--by,0px))/auto 120%,#132e43;-webkit-background-clip:text;background-clip:text;color:transparent}
 .cover .issue{position:absolute;left:var(--m);top:calc(var(--hh) + 5vh);max-width:40vw}
 .cover .issue h1{font-family:var(--serif);font-size:clamp(22px,2.1vw,30px);letter-spacing:.32em;line-height:1.7}
 .cover .issue p{margin-top:14px;font-family:var(--latin);font-style:italic;font-size:12px;letter-spacing:.08em;opacity:.65}
@@ -111,8 +112,12 @@ body.night .folio{background:#0f1314;color:#e6e1d4;border-color:rgba(230,225,212
 .spread{padding:18vh var(--m)}
 .spread+.spread{padding-top:10vh}
 .im{display:block;position:relative;aspect-ratio:var(--ar,1.6);overflow:hidden;background:#d6d0c2}
-.im img{object-position:var(--op,50% 50%);transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
-.im:hover img{transform:scale(1.025)}
+.im img{object-position:var(--op,50% 50%);transition:scale 1.1s cubic-bezier(.2,.7,.2,1)}
+.im:hover img{scale:1.025}
+/* parallax: frames stay on the grid; only the picture, the hinge words and notes drift */
+.js .im[data-par] img{scale:1.07;translate:0 var(--py,0)}
+.js .im[data-par]:hover img{scale:1.095}
+.js [data-par-self]{translate:0 var(--py,0px)}
 .bleed-l{margin-left:calc(-1*var(--m))}
 .bleed-r{margin-right:calc(-1*var(--m))}
 .press-l{margin-right:calc(var(--cg)/-2)}
@@ -199,7 +204,7 @@ body.night .night::before,html:not(.js) .night::before{opacity:1}
 .colo a{border-bottom:1px solid rgba(35,39,42,.35)}
 
 /* ── reveal: every image opens from the fold outward ── */
-.js .im[data-side] img{transition:clip-path 1.3s cubic-bezier(.65,0,.15,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.js .im[data-side] img{transition:clip-path 1.3s cubic-bezier(.65,0,.15,1),scale 1.1s cubic-bezier(.2,.7,.2,1)}
 .js .im[data-side=l]:not(.in) img{clip-path:inset(0 0 0 100%)}
 .js .im[data-side=r]:not(.in) img{clip-path:inset(0 100% 0 0)}
 .js .im[data-side=c]:not(.in) img{clip-path:inset(0 50% 0 50%)}
@@ -208,6 +213,7 @@ body.night .night::before,html:not(.js) .night::before{opacity:1}
   html{scroll-behavior:auto}
   .js .im[data-side] img{clip-path:none!important;transition:none}
   .im img{transition:none}
+  .js .im[data-par] img,.js [data-par-self]{translate:none}
 }
 
 /* ── narrow screens: the fold turns sideways ── */
@@ -246,6 +252,7 @@ body.night .night::before,html:not(.js) .night::before{opacity:1}
   .spread .hinge b,.spread .hinge s{writing-mode:horizontal-tb}
   .spread .hinge b{font-size:30px}
   .spread .hinge s{display:none}
+  .js .spread .hinge[data-par-self]{translate:none}
   .spread .im{width:84%;margin:0}
   .spread .im[data-side=r],.spread .im.mr{align-self:flex-end}
   .spread .cap{margin:20px 0 52px}
@@ -720,6 +727,64 @@ body.night .night::before,html:not(.js) .night::before{opacity:1}
   }
   let tick=0;addEventListener('scroll',()=>{if(!tick){tick=requestAnimationFrame(()=>{tick=0;update();});}},{passive:true});
   addEventListener('resize',update);update();
+
+  /* scroll parallax — a few pixels of depth, never enough to break the grid */
+  if(!motion.matches){
+    const items=[];
+    const add=(sel,amp,unit,self)=>document.querySelectorAll(sel).forEach(el=>{if(self)el.setAttribute('data-par-self','');else el.setAttribute('data-par','');items.push({el,amp,unit,self,cur:0,on:false});});
+    add('.spread .im,.solo-sec .im',3.2,'%',false);   // picture lags inside its frame
+    add('.spread .hinge',34,'px',true);               // words on the binding slide slower
+    add('.spread .note',-14,'px',true);               // notes sit a hair above the page
+    add('.ed .fig',40,'px',true);
+    const vis=new IntersectionObserver(es=>es.forEach(e=>{const it=items.find(i=>i.el===e.target);if(it)it.on=e.isIntersecting;}),{rootMargin:'25% 0px'});
+    items.forEach(i=>vis.observe(i.el));
+    const narrow=matchMedia('(max-width:760px)');
+    function para(){
+      const vh=innerHeight;
+      for(const it of items){
+        if(!it.on)continue;
+        const r=it.el.getBoundingClientRect(),off=it.self?it.cur:0;
+        const c=r.top-off+r.height/2,p=Math.max(-1,Math.min(1,(c-vh/2)/(vh/2+r.height/2)));
+        let v=-p*it.amp;if(it.self&&narrow.matches&&it.el.classList.contains('hinge'))v=0;
+        it.cur=v;it.el.style.setProperty('--py',v.toFixed(it.unit==='%'?2:1)+it.unit);
+      }
+    }
+    let pt=0;addEventListener('scroll',()=>{if(!pt)pt=requestAnimationFrame(()=>{pt=0;para();});},{passive:true});
+    addEventListener('resize',para);para();
+  }
+
+  /* cover: the pictures inside 光 and 則 answer each other across the binding.
+     With a mouse they follow the cursor; without one (touch) scrolling opens them
+     outward from the binding — 光 slides left and up, 則 right and down. */
+  const cover=document.getElementById('cover'),K=cover.querySelector('.k span'),Z=cover.querySelector('.z span');
+  if(!motion.matches){
+    const fine=matchMedia('(hover:hover) and (pointer:fine)');
+    let tx=0,ty=0,cx=0,cy=0,sy=0,run=0,inView=true;
+    new IntersectionObserver(([e])=>{inView=e.isIntersecting;if(inView)kick();}).observe(cover);
+    function frame(){
+      run=0;if(!inView)return;
+      const ss=Math.min(scrollY,cover.offsetHeight);
+      if(!fine.matches){
+        const p=Math.min(1,ss/(cover.offsetHeight*.5));
+        tx=-p;ty=-p;sy=0;
+        cx+=(tx-cx)*.12;cy+=(ty-cy)*.12;
+        const fs=parseFloat(getComputedStyle(K).fontSize),ax=fs*.22,ay=fs*.06;
+        K.style.setProperty('--bx',(cx*ax).toFixed(2)+'px');K.style.setProperty('--by',(cy*ay).toFixed(2)+'px');
+        Z.style.setProperty('--bx',(-cx*ax).toFixed(2)+'px');Z.style.setProperty('--by',(-cy*ay).toFixed(2)+'px');
+      }else{
+        cx+=(tx-cx)*.055;cy+=(ty-cy)*.055;sy+=(ss-sy)*.12;
+        K.style.setProperty('--bx',(cx*22).toFixed(2)+'px');K.style.setProperty('--by',(cy*14-sy*.05).toFixed(2)+'px');
+        Z.style.setProperty('--bx',(-cx*22).toFixed(2)+'px');Z.style.setProperty('--by',(cy*14+sy*.035).toFixed(2)+'px');
+      }
+      if(Math.abs(tx-cx)>.001||Math.abs(ty-cy)>.001||(fine.matches&&Math.abs(ss-sy)>.1))kick();
+    }
+    function kick(){if(!run)run=requestAnimationFrame(frame);}
+    addEventListener('pointermove',e=>{if(!fine.matches||!inView)return;tx=e.clientX/innerWidth*2-1;ty=e.clientY/innerHeight*2-1;kick();},{passive:true});
+    document.documentElement.addEventListener('pointerleave',()=>{if(fine.matches){tx=ty=0;kick();}});
+    addEventListener('scroll',kick,{passive:true});
+    fine.addEventListener('change',()=>{tx=ty=cx=cy=0;kick();});
+    kick();
+  }
 
   /* the night spread needs someone to pass through */
   const night=document.querySelector('.night');
