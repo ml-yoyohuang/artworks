@@ -70,9 +70,9 @@
     touchPlayed = true;
     art.classList.remove('is-motion-paused');
     touchAnimation = image.animate([
-      {filter:'saturate(.88) contrast(.975)'},
-      {filter:'saturate(1) contrast(1)'}
-    ], {duration:1800, easing:'cubic-bezier(.22,.61,.36,1)'});
+      {filter:'saturate(.35) contrast(.88) brightness(1.08)'},
+      {filter:'saturate(1) contrast(1) brightness(1)'}
+    ], {duration:1600, easing:'cubic-bezier(.22,.61,.36,1)'});
     touchAnimation.onfinish = () => { touchAnimation = null; };
   }
   function ready() {
@@ -100,8 +100,8 @@
       const rect = art.getBoundingClientRect();
       const x = Math.max(-1,Math.min(1,(pendingPoint.x-rect.left)/rect.width*2-1));
       const y = Math.max(-1,Math.min(1,(pendingPoint.y-rect.top)/rect.height*2-1));
-      inset.style.setProperty('--plate-x',`${(x*3).toFixed(2)}px`);
-      inset.style.setProperty('--plate-y',`${(y*3).toFixed(2)}px`);
+      inset.style.setProperty('--plate-x',`${(x*14).toFixed(2)}px`);
+      inset.style.setProperty('--plate-y',`${(y*12).toFixed(2)}px`);
     });
   });
   art.addEventListener('pointerleave', () => { inside = false; rest(); });

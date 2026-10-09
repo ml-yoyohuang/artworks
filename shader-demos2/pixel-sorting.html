@@ -122,6 +122,34 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
 <div id="fallback" hidden role="alert"><div class="box"><h2></h2><p></p><details hidden><summary>技術細節</summary><pre></pre></details><a href="shader-demo-list.html">← 回到目錄</a></div></div>
 <noscript><div style="position:fixed;inset:0;display:grid;place-items:center;padding:32px;background:#0B0B0E;color:#CDD0D6;font-size:14px;line-height:2">這件作品以 JavaScript 與 WebGL 即時繪製，請啟用 JavaScript 後再觀看。</div></noscript>
 <script>
+// Preserve the collection that opened this work, including file:// and new tabs.
+(function () {
+  'use strict';
+  var fromMagazine = new URLSearchParams(location.search).get('from') === 'magazine2';
+  var destination = new URL('../magazine2/index.html', location.href);
+  if (!fromMagazine && document.referrer) {
+    try {
+      var referrer = new URL(document.referrer);
+      var directory = destination.pathname.replace(/index\.html$/, '');
+      fromMagazine = referrer.origin === destination.origin &&
+        (referrer.pathname === destination.pathname || referrer.pathname === directory);
+    } catch (_) {}
+  }
+  if (!fromMagazine) return;
+  var back = document.querySelector('a.back');
+  if (back) {
+    back.href = '../magazine2/index.html#index';
+    back.innerHTML = '<span>←</span> 間物 · 作品索引';
+    back.setAttribute('aria-label', '返回間物作品索引');
+  }
+  var fallback = document.querySelector('#fallback a');
+  if (fallback) {
+    fallback.href = '../magazine2/index.html#index';
+    fallback.textContent = '← 回到間物作品索引';
+  }
+})();
+</script>
+<script>
 /* Studio runtime — 每頁內嵌的共用 WebGL 小框架（無外部依賴）
    WebGL2 優先，WebGL1 降級；GLSL 一律以 ES 1.00 撰寫，兩種環境都能編譯。 */
 (function () {
