@@ -1,0 +1,54 @@
+{
+  "checks": [
+    {
+      "device": "1440×900 desktop",
+      "animation": "pixel change + increasing animation time",
+      "background": "time and RAF stopped, no catch-up on resume",
+      "reduced": "static pixels and time; resumed when disabled",
+      "elsewhere": "stopped away from the threshold, released after changing room",
+      "memory": [
+        {
+          "textures": 20,
+          "geometries": 85,
+          "canvases": 1
+        },
+        {
+          "textures": 20,
+          "geometries": 85,
+          "canvases": 1
+        },
+        {
+          "textures": 20,
+          "geometries": 85,
+          "canvases": 1
+        }
+      ]
+    },
+    {
+      "device": "390×844 DPR2 touch emulation",
+      "animation": "pixel change + increasing animation time",
+      "background": "time and RAF stopped, no catch-up on resume",
+      "reduced": "static pixels and time; resumed when disabled",
+      "elsewhere": "stopped away from the threshold, released after changing room",
+      "memory": [
+        {
+          "textures": 13,
+          "geometries": 67,
+          "canvases": 1
+        },
+        {
+          "textures": 13,
+          "geometries": 67,
+          "canvases": 1
+        },
+        {
+          "textures": 13,
+          "geometries": 67,
+          "canvases": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "browser": "151.0.7922.34"
+}

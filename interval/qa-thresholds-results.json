@@ -1,0 +1,14 @@
+{
+  "browser": "151.0.7922.34",
+  "checks": [
+    "desktop exit 1: next-room preview and label, door click transitions to 2",
+    "desktop exit 2: next-room preview and label, keyboard Enter transitions to 3",
+    "desktop exit 3: next-room preview and label, named button transitions to 4",
+    "desktop exit 4: next-room preview and label, named button transitions to 5",
+    "touch-emulated exit 1: next-room preview and label, door click transitions to 2",
+    "touch-emulated exit 2: next-room preview and label, named button transitions to 3",
+    "touch-emulated exit 3: next-room preview and label, named button transitions to 4",
+    "touch-emulated exit 4: next-room preview and label, named button transitions to 5"
+  ],
+  "errors": []
+}

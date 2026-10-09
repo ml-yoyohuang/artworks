@@ -1,0 +1,933 @@
+{
+  "environment": {
+    "platform": "darwin",
+    "playwright": "1.62.1",
+    "browser": "151.0.7922.34",
+    "renderer": "SwiftShader",
+    "viewports": [
+      "1440×900 desktop",
+      "390×844 touch/mobile emulation"
+    ]
+  },
+  "inventory": [
+    "p5demos2--flow-field",
+    "p5demos2--contour-topography",
+    "p5demos2--boids-flocking",
+    "p5demos2--generative-typography",
+    "p5demos2--voronoi-stippling",
+    "p5demos2--negotiated-territories",
+    "p5demos2--registration-pending",
+    "p5demos2--reverse-of-a-plane",
+    "p5demos2--moving-absence",
+    "p5demos2--chromatic-sediments",
+    "p5demos2--a-beat-behind",
+    "p5demos2--within-the-same-frame",
+    "p5demos2--residual-geometry",
+    "p5demos2--recursive-subdivision",
+    "p5demos2--truchet-tiles",
+    "p5demos2--differential-growth",
+    "p5demos2--space-colonization",
+    "p5demos2--circle-packing",
+    "shaderdemos2--organic-growth",
+    "shaderdemos2--reaction-diffusion",
+    "shaderdemos2--domain-warp-fbm",
+    "shaderdemos2--cyanotype",
+    "shaderdemos2--noise-dissolve",
+    "shaderdemos2--darkroom-solarize",
+    "shaderdemos2--risograph-print",
+    "shaderdemos2--feedback-trails",
+    "shaderdemos2--long-exposure",
+    "shaderdemos2--pixel-sorting",
+    "shaderdemos2--dithering-halftone",
+    "shaderdemos2--grain-gradient-mesh",
+    "shaderdemos2--thin-film",
+    "shaderdemos2--glass-refraction",
+    "shaderdemos2--liquid-distortion",
+    "shaderdemos2--textile-moire",
+    "shaderdemos2--raymarching-sdf"
+  ],
+  "works": [
+    {
+      "id": "p5demos2--flow-field",
+      "series": "p5-demos2",
+      "section": 1,
+      "name": "順風千行",
+      "url": "http://localhost:8000/p5-demos2/flow-field.html?seed=2024",
+      "canvasCount": 2,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "重新生成新種子"
+      ],
+      "regenerated": true,
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--contour-topography",
+      "series": "p5-demos2",
+      "section": 1,
+      "name": "靜默測繪",
+      "url": "http://localhost:8000/p5-demos2/contour-topography.html?seed=4096",
+      "canvasCount": 2,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "重新生成新種子"
+      ],
+      "regenerated": true,
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--boids-flocking",
+      "series": "p5-demos2",
+      "section": 1,
+      "name": "黃昏群舞",
+      "url": "http://localhost:8000/p5-demos2/boids-flocking.html?seed=8128",
+      "canvasCount": 2,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "重新生成新種子"
+      ],
+      "regenerated": true,
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--generative-typography",
+      "series": "p5-demos2",
+      "section": 1,
+      "name": "字散",
+      "url": "http://localhost:8000/p5-demos2/generative-typography.html?seed=42",
+      "canvasCount": 3,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "重新生成新種子"
+      ],
+      "regenerated": true,
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--voronoi-stippling",
+      "series": "p5-demos2",
+      "section": 1,
+      "name": "銅版星圖",
+      "url": "http://localhost:8000/p5-demos2/voronoi-stippling.html?seed=123457",
+      "canvasCount": 3,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "重新生成新種子"
+      ],
+      "regenerated": true,
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--negotiated-territories",
+      "series": "p5-demos2",
+      "section": 2,
+      "name": "讓出一寸",
+      "url": "http://localhost:8000/p5-demos2/negotiated-territories.html?seed=161803",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "回到初始"
+      ],
+      "imageChanged": true,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--registration-pending",
+      "series": "p5-demos2",
+      "section": 2,
+      "name": "三色未合",
+      "url": "http://localhost:8000/p5-demos2/registration-pending.html?seed=65537",
+      "canvasCount": 5,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "回到初始"
+      ],
+      "imageChanged": true,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--reverse-of-a-plane",
+      "series": "p5-demos2",
+      "section": 2,
+      "name": "背面也是顏色",
+      "url": "http://localhost:8000/p5-demos2/reverse-of-a-plane.html?seed=271828",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "回到初始"
+      ],
+      "imageChanged": true,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--moving-absence",
+      "series": "p5-demos2",
+      "section": 2,
+      "name": "缺席者的散步",
+      "url": "http://localhost:8000/p5-demos2/moving-absence.html?seed=104729",
+      "canvasCount": 3,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "回到初始"
+      ],
+      "imageChanged": true,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--chromatic-sediments",
+      "series": "p5-demos2",
+      "section": 2,
+      "name": "讀過的厚度",
+      "url": "http://localhost:8000/p5-demos2/chromatic-sediments.html?seed=161803",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "回到初始"
+      ],
+      "imageChanged": true,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--a-beat-behind",
+      "series": "p5-demos2",
+      "section": 2,
+      "name": "晚到的那幾位",
+      "url": "http://localhost:8000/p5-demos2/a-beat-behind.html?seed=161803",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "回到初始"
+      ],
+      "imageChanged": true,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--within-the-same-frame",
+      "series": "p5-demos2",
+      "section": 2,
+      "name": "門後還有門",
+      "url": "http://localhost:8000/p5-demos2/within-the-same-frame.html?seed=104729",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "回到初始"
+      ],
+      "level": "層級 3 / 5",
+      "returnLevel": "層級 1 / 5",
+      "imageChanged": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--residual-geometry",
+      "series": "p5-demos2",
+      "section": 2,
+      "name": "它剛剛在這裡",
+      "url": "http://localhost:8000/p5-demos2/residual-geometry.html?seed=271828",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "回到初始"
+      ],
+      "imageChanged": true,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--recursive-subdivision",
+      "series": "p5-demos2",
+      "section": 2,
+      "name": "切分的秩序",
+      "url": "http://localhost:8000/p5-demos2/recursive-subdivision.html?seed=27182",
+      "canvasCount": 2,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "重新生成新種子"
+      ],
+      "regenerated": true,
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--truchet-tiles",
+      "series": "p5-demos2",
+      "section": 2,
+      "name": "漆金結",
+      "url": "http://localhost:8000/p5-demos2/truchet-tiles.html?seed=2024",
+      "canvasCount": 2,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "重新生成新種子"
+      ],
+      "regenerated": true,
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--differential-growth",
+      "series": "p5-demos2",
+      "section": 3,
+      "name": "夜珊瑚",
+      "url": "http://localhost:8000/p5-demos2/differential-growth.html?seed=99991",
+      "canvasCount": 3,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "重新生成新種子"
+      ],
+      "regenerated": true,
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--space-colonization",
+      "series": "p5-demos2",
+      "section": 3,
+      "name": "藍曬葉脈",
+      "url": "http://localhost:8000/p5-demos2/space-colonization.html?seed=2024",
+      "canvasCount": 2,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "重新生成新種子"
+      ],
+      "regenerated": true,
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "p5demos2--circle-packing",
+      "series": "p5-demos2",
+      "section": 3,
+      "name": "細胞的禮貌",
+      "url": "http://localhost:8000/p5-demos2/circle-packing.html?seed=314",
+      "canvasCount": 3,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "重新生成新種子"
+      ],
+      "regenerated": true,
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--organic-growth",
+      "series": "shader-demos2",
+      "section": 3,
+      "name": "石上地衣",
+      "url": "http://localhost:8000/shader-demos2/organic-growth.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--reaction-diffusion",
+      "series": "shader-demos2",
+      "section": 3,
+      "name": "石紋",
+      "url": "http://localhost:8000/shader-demos2/reaction-diffusion.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--domain-warp-fbm",
+      "series": "shader-demos2",
+      "section": 3,
+      "name": "石中之水",
+      "url": "http://localhost:8000/shader-demos2/domain-warp-fbm.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--cyanotype",
+      "series": "shader-demos2",
+      "section": 3,
+      "name": "日光標本",
+      "url": "http://localhost:8000/shader-demos2/cyanotype.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--noise-dissolve",
+      "series": "shader-demos2",
+      "section": 4,
+      "name": "兩卷底片",
+      "url": "http://localhost:8000/shader-demos2/noise-dissolve.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--darkroom-solarize",
+      "series": "shader-demos2",
+      "section": 4,
+      "name": "顯影",
+      "url": "http://localhost:8000/shader-demos2/darkroom-solarize.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--risograph-print",
+      "series": "shader-demos2",
+      "section": 4,
+      "name": "套色",
+      "url": "http://localhost:8000/shader-demos2/risograph-print.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--feedback-trails",
+      "series": "shader-demos2",
+      "section": 4,
+      "name": "殘光",
+      "url": "http://localhost:8000/shader-demos2/feedback-trails.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--long-exposure",
+      "series": "shader-demos2",
+      "section": 4,
+      "name": "北天曝光",
+      "url": "http://localhost:8000/shader-demos2/long-exposure.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--pixel-sorting",
+      "series": "shader-demos2",
+      "section": 4,
+      "name": "斷訊",
+      "url": "http://localhost:8000/shader-demos2/pixel-sorting.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--dithering-halftone",
+      "series": "shader-demos2",
+      "section": 4,
+      "name": "側臉與紅日",
+      "url": "http://localhost:8000/shader-demos2/dithering-halftone.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--grain-gradient-mesh",
+      "series": "shader-demos2",
+      "section": 4,
+      "name": "校樣之晨",
+      "url": "http://localhost:8000/shader-demos2/grain-gradient-mesh.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--thin-film",
+      "series": "shader-demos2",
+      "section": 5,
+      "name": "薄處有光",
+      "url": "http://localhost:8000/shader-demos2/thin-film.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "detail": "true",
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--glass-refraction",
+      "series": "shader-demos2",
+      "section": 5,
+      "name": "隔著玻璃",
+      "url": "http://localhost:8000/shader-demos2/glass-refraction.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--liquid-distortion",
+      "series": "shader-demos2",
+      "section": 5,
+      "name": "午後泳池",
+      "url": "http://localhost:8000/shader-demos2/liquid-distortion.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--textile-moire",
+      "series": "shader-demos2",
+      "section": 5,
+      "name": "紗上波紋",
+      "url": "http://localhost:8000/shader-demos2/textile-moire.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    },
+    {
+      "id": "shaderdemos2--raymarching-sdf",
+      "series": "shader-demos2",
+      "section": 5,
+      "name": "石膏習作",
+      "url": "http://localhost:8000/shader-demos2/raymarching-sdf.html",
+      "canvasCount": 1,
+      "activeIframes": 1,
+      "actions": [
+        "滑桿至80%",
+        "畫布點擊、方向鍵與Enter",
+        "原作參數按鈕"
+      ],
+      "imageChanged": true,
+      "fallbackVisible": false,
+      "returnPreserved": true,
+      "pass": true
+    }
+  ],
+  "checks": [
+    "system reduced-motion detected",
+    "original next-work link intercepted; return location preserved",
+    "8 repeated viewer cycles: 0 remaining iframe, 1 gallery canvas, stable renderer textures/geometries",
+    "complete desktop route through all 35 artwork stations and ending",
+    "guided tour: start, pause, all 10 stops via skip, exit",
+    "door-behind-door architectural transition; original work remains accessible",
+    "catalogue search, empty state, section filter, reset to 35",
+    "390×844 DPR2 touch emulation: complete 35-station route, ending, no horizontal overflow",
+    "mobile original-work touch and close"
+  ],
+  "errors": [],
+  "repeated": [
+    {
+      "frames": 0,
+      "canvases": 1,
+      "memory": {
+        "pending": 0,
+        "textures": 22,
+        "geometries": 76,
+        "calls": 121,
+        "scheduled": false
+      }
+    },
+    {
+      "frames": 0,
+      "canvases": 1,
+      "memory": {
+        "pending": 0,
+        "textures": 22,
+        "geometries": 76,
+        "calls": 121,
+        "scheduled": false
+      }
+    },
+    {
+      "frames": 0,
+      "canvases": 1,
+      "memory": {
+        "pending": 0,
+        "textures": 22,
+        "geometries": 76,
+        "calls": 121,
+        "scheduled": false
+      }
+    },
+    {
+      "frames": 0,
+      "canvases": 1,
+      "memory": {
+        "pending": 0,
+        "textures": 22,
+        "geometries": 76,
+        "calls": 121,
+        "scheduled": false
+      }
+    },
+    {
+      "frames": 0,
+      "canvases": 1,
+      "memory": {
+        "pending": 0,
+        "textures": 22,
+        "geometries": 76,
+        "calls": 121,
+        "scheduled": false
+      }
+    },
+    {
+      "frames": 0,
+      "canvases": 1,
+      "memory": {
+        "pending": 0,
+        "textures": 22,
+        "geometries": 76,
+        "calls": 121,
+        "scheduled": false
+      }
+    },
+    {
+      "frames": 0,
+      "canvases": 1,
+      "memory": {
+        "pending": 0,
+        "textures": 22,
+        "geometries": 76,
+        "calls": 121,
+        "scheduled": false
+      }
+    },
+    {
+      "frames": 0,
+      "canvases": 1,
+      "memory": {
+        "pending": 0,
+        "textures": 22,
+        "geometries": 76,
+        "calls": 121,
+        "scheduled": false
+      }
+    }
+  ],
+  "path": [
+    {
+      "room": 1,
+      "station": 1
+    },
+    {
+      "room": 1,
+      "station": 2
+    },
+    {
+      "room": 1,
+      "station": 3
+    },
+    {
+      "room": 1,
+      "station": 4
+    },
+    {
+      "room": 1,
+      "station": 5
+    },
+    {
+      "room": 1,
+      "station": 6
+    },
+    {
+      "room": 2,
+      "station": 1
+    },
+    {
+      "room": 2,
+      "station": 2
+    },
+    {
+      "room": 2,
+      "station": 3
+    },
+    {
+      "room": 2,
+      "station": 4
+    },
+    {
+      "room": 2,
+      "station": 5
+    },
+    {
+      "room": 2,
+      "station": 6
+    },
+    {
+      "room": 2,
+      "station": 7
+    },
+    {
+      "room": 2,
+      "station": 8
+    },
+    {
+      "room": 2,
+      "station": 9
+    },
+    {
+      "room": 2,
+      "station": 10
+    },
+    {
+      "room": 2,
+      "station": 11
+    },
+    {
+      "room": 3,
+      "station": 1
+    },
+    {
+      "room": 3,
+      "station": 2
+    },
+    {
+      "room": 3,
+      "station": 3
+    },
+    {
+      "room": 3,
+      "station": 4
+    },
+    {
+      "room": 3,
+      "station": 5
+    },
+    {
+      "room": 3,
+      "station": 6
+    },
+    {
+      "room": 3,
+      "station": 7
+    },
+    {
+      "room": 3,
+      "station": 8
+    },
+    {
+      "room": 4,
+      "station": 1
+    },
+    {
+      "room": 4,
+      "station": 2
+    },
+    {
+      "room": 4,
+      "station": 3
+    },
+    {
+      "room": 4,
+      "station": 4
+    },
+    {
+      "room": 4,
+      "station": 5
+    },
+    {
+      "room": 4,
+      "station": 6
+    },
+    {
+      "room": 4,
+      "station": 7
+    },
+    {
+      "room": 4,
+      "station": 8
+    },
+    {
+      "room": 4,
+      "station": 9
+    },
+    {
+      "room": 5,
+      "station": 1
+    },
+    {
+      "room": 5,
+      "station": 2
+    },
+    {
+      "room": 5,
+      "station": 3
+    },
+    {
+      "room": 5,
+      "station": 4
+    },
+    {
+      "room": 5,
+      "station": 5
+    },
+    {
+      "room": 5,
+      "station": 6
+    }
+  ]
+}

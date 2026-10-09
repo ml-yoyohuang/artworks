@@ -1,0 +1,8 @@
+{
+  "checks": [
+    "1440×900 desktop: label state, toggle/close, exit animation, rapid reopen, Escape, reduced motion, hover and press feedback",
+    "390×844 DPR2 touch emulation: label state, toggle/close, exit animation, rapid reopen, Escape, reduced motion"
+  ],
+  "errors": [],
+  "browser": "151.0.7922.34"
+}

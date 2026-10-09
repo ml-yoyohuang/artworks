@@ -1,0 +1,100 @@
+# 間隙美術館 INTERVAL
+
+首展 **世界尚未對齊／A World Still Aligning**。一座漂浮在暮色中的美術館；五個展廳，以五種不同的空間規則呈現第二輯的 35 件生成藝術作品。
+
+## 啟動
+
+在 `artworks` 專案根目錄執行：
+
+```sh
+python3 -m http.server 8000 --bind 127.0.0.1
+```
+
+開啟 <http://localhost:8000/interval/>。不需要安裝網站依賴、編譯、後端或登入。ES modules 與 JSON 需要 HTTP，不能直接雙擊 `index.html`。
+
+- `interval/?flat`：完整平面觀看模式，適合低效能裝置。
+- `interval/collection.html`：免 JavaScript 的完整作品目錄。
+- `interval/screenshots/`：實際桌機與手機模擬畫面索引。
+
+## 操作
+
+- 拖曳環顧；點地面或圓環前進。所有移動都限定到可理解的觀看位置。
+- 點作品或標籤靠近，選「進入作品」啟動原作；「返回展間」保留開啟時的展區、位置與朝向。
+- 左右位置按鈕依序走過當區所有作品；末站再前進會進入下一區。終廳提供返回入口、繼續參觀與全部作品。
+- 「展區」可直接換區；「全部作品」可搜尋、篩選並直接前往任何展品。
+- 「帶我逛展」有十個停留點，每站 16 秒。可以暫停、繼續、跳過與退出；手動操作、打開面板或進入原作會暫停導覽。
+- 鍵盤：方向鍵環顧；W／S 前後換站；A／D 在中央路徑側移；Enter 選最近作品（出口站位則前往下一廳）；Esc 收起資訊。所有 HTML 控制可用 Tab。
+- 手機使用觸控環顧與定點移動。靠近作品時會調整觀看距離，讓完整比例留在畫面上方。
+- 「減少動態」控制展場鏡頭；也自動跟隨系統 `prefers-reduced-motion`。原作保留自己的系統設定與暫停控制。在 iframe 內的鍵盤屬於原作，請使用上方「返回展間」結束。
+
+## 五個展區
+
+| 展區 | 件數 | 建築規則 |
+| --- | ---: | --- |
+| 01 風的測量室 | 5 | 懸掛的薄屏，錯位頂板與遠近的測量 |
+| 02 共處的平面 | 10 | 色面、斷開平台與遞進門框 |
+| 03 慢物質花園 | 7 | 深色標本展具、枝脈支撐的懸島 |
+| 04 記憶顯影室 | 8 | 交疊半透明隔板與比較影像的位置 |
+| 05 薄處有光 | 5 | 大幅開闊的觀看距離，主作與小幅側廳展品 |
+
+入口的虹彩膜是程序建築意象；第二展區的錯位門框也是策展性建築，均不取代原作品。展場使用第二輯原有 JPEG 真實停格，沒有影片冒充即時互動。作品模式直接載入原 HTML，保留構圖、自述與原有控制。沒有修改作品、雜誌或既有 showroom。
+
+## 內容修改
+
+`exhibition.json` 是唯一策展資料來源：
+
+- `sections`：中英文名稱、牆文、空間異常與主色。
+- `works`：帶系列識別的唯一 `id`、來源系列與 slug、原名、英文名、`selfStatement` 原自述、短自述 `summary`、互動提示、展區、預覽類型與路徑、`aspect` 比例、`source` 原頁、`entry` 含展出版 seed 的入口。
+- `placement`：米為尺度的 x／y／z、展屏寬度、yaw。z 越負代表越深入。
+- `viewpoint`：桌機觀看基準；執行時依螢幕與資訊卡調整構圖。
+
+請保留 `p5demos2--`、`shaderdemos2--` 的系列識別，勿用同名第一輯縮圖或原頁覆蓋。現有 ID 以系列去除連字號再接 `--slug` 表示，例如 `p5demos2--flow-field`。預覽必須保持原圖完整比例；34 張沿用原作 720×450 停格；《薄處有光》另從第二輯原作擷取 1600×1000 完整停格，以保留巨幅細節。全部比例為 1.6，擷取來源與條件記在 `previewCapture`。
+
+修改資料後同步產生免 JavaScript 目錄：
+
+```sh
+python3 interval/tools/build-collection.py
+```
+
+`js/world.js` 管理三維建築、材質、受限移動、光線與資源釋放；`js/app.js` 管理 HTML 介面、策展導覽與原作生命週期；`css/museum.css` 管理響應式排版。
+
+## 資源與靜態部署
+
+Three.js 重用專案釘選的 `showroom/vendor/three/build/`（r186，MIT，授權見原 vendor）。不新增 CDN 或第三方網站依賴。p5 與 GLSL 使用第二輯原有資源與授權。
+
+展場只有一個 renderer。只為當區作品載入 GPU 材質，換區釋放幾何、材質、紋理與陰影；列表僅為 lazy-loading 靜態 JPEG。作品模式只允許一個 iframe，關閉即清空並移除。原作自行保有必要的離屏畫布，並非額外同時播放多件作品。展場停止時不持續 rAF；導覽暫停與背景分頁也停止 rAF。移動持續過慢時降低解析度及陰影，再降至平面模式。
+
+作品材質採 sRGB、MeshBasicMaterial、`toneMapped:false`、`fog:false`，不受展場照明染色。建築使用柔和陰影與霧，沒有 bloom、裝飾粒子或鏡面地板。聲音未加入。
+
+相對路徑支援 `/interval/` 與 `/artworks/interval/` 等部署前綴。部署時保留同層的 `p5-demos2/`、`shader-demos2/` 及 `showroom/vendor/three/`，不要只上傳 `interval/`。原作品的獨立入口維持可用。
+
+## 驗證
+
+詳見 [驗證報告](REPORT.md)、[35 件逐件結果](qa-results.json)、[降級結果](qa-failure-results.json)、[互動與子路徑結果](qa-extra-results.json)。截圖在 [畫面索引](screenshots/index.html)。
+
+可使用已安裝的 Playwright 執行：
+
+```sh
+node interval/tools/verify.cjs
+node interval/tools/verify-fallback.cjs
+node interval/tools/verify-sizes.cjs
+node interval/tools/capture-views.cjs
+```
+
+如 Playwright 不在 Node 的搜尋路徑，設定 `PLAYWRIGHT_MODULE` 為套件目錄。`INTERVAL_URL` 可指定館的完整入口 URL。`INTERVAL_RESUME=1` 只重做尚未通過的逐件項目，預設完整重跑。互動與部署測試 `verify-interactions.cjs` 另需一個子路徑伺服器；可用 `INTERVAL_DEPLOY_URL` 指定。
+
+手機結果為瀏覽器模擬，沒有實體手機、Safari／Firefox 或硬體 GPU 的效能量測。本地驗證完成後，使用者於 2026-10-10 授權提交與發布；GitHub Pages 由 main 根目錄自動發布。
+
+### 下一展區的門洞
+
+每個出口可窺見下一廳的建築片段：色面、安靜的深色門廊、半透明展板，以及終廳門內的黑色薄膜。抵達出口時顯示下一廳名稱與引導文字；點門洞、選擇具名「前往…」按鈕，或在展場按 Enter，即可經舒適轉場前往。減少動態仍採直接換位。
+
+引導文字存於 `exhibition.json` 各展區的 `exitText`；門內建築片段由 `js/world.js` 的 `threshold()` 維護。它是建築預示，完整展廳仍在換區時載入。出口不載入鄰區作品停格，也不啟動鄰區作品或新增 WebGL context。黑色薄膜是獨立的程序建築意象，由 `blackMembrane()` 與 `disturbMembrane()` 控制；只在靠近出口時以最多 30 fps 擾動，背景分頁、原作模式與減少動態時停止更新。
+
+### 作品卡與按鈕動效
+
+作品卡進場約 280 ms、退場約 170 ms，由 `js/app.js` 的 `showCard()`／`hideCard()` 統一處理取消與快速切換。已開啟標籤以淺色底、減號及 `aria-expanded=true` 表示，可再點擊收起；手機保留在資訊卡上方。按鈕採微幅上移、按下縮放與顏色回饋。系統或手動減少動態時取消卡片動畫、位移與縮放。樣式位於 `css/museum.css`。
+
+終廳入口的薄膜覆蓋整面方形牆，四邊固定、內部向前起伏；網格與波形由 `blackMembrane()`／`disturbMembrane()` 維護。
+
+換站列固定使用「上一站／站位名稱／下一站」三個按鈕，左右 padding 為 0；《門後還有門》沿用作品卡中的「進入作品」，不另顯示同名按鈕。

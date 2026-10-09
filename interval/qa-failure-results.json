@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "WebGL unavailable: 35 true thumbnails and HTML entries; p5 artwork still interactive",
+    "manual low-performance flat mode",
+    "HTTP404 artwork load failure: visible original link, retry, return and released iframe",
+    "no JavaScript: full static HTML collection, 35 original entrances",
+    "synthetic visibilitychange: gallery + tour rAF stop completely, resume without catch-up",
+    "context lost: gallery canvas released, fallback available"
+  ],
+  "failures": []
+}

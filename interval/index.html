@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>間隙美術館 INTERVAL — 世界尚未對齊</title>
+<meta name="description" content="一座漂浮在無盡暮色中的美術館。35 件生成藝術作品，五種不同的空間規則。世界尚未對齊／A World Still Aligning。">
+<meta name="theme-color" content="#222e39"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='none' stroke='%23c8c8bc' stroke-width='3' d='M6 27V5h8m4 0h8v22h-8M14 27H6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/museum.css?v=help-circle-1">
+</head>
+<body>
+<a class="skip" href="collection.html">跳至全部作品</a>
+<div id="world" aria-label="美術館三維展場，拖曳環顧、點地面前進" tabindex="0" role="application"></div>
+<img id="loading-preview" src="../shader-demos2/thumbs/thin-film.jpg" alt="薄處有光的真實停格" fetchpriority="high">
+<div id="veil" aria-hidden="true"></div>
+<header class="masthead">
+<button id="home" class="brand" aria-label="返回入口"><span class="mark" aria-hidden="true">Ⅱ</span><span>間隙美術館<small>INTERVAL</small></span></button>
+<nav aria-label="主要選單"><button id="about-button">展覽敘事 <span>↗</span></button><button id="map-button">展區 <span>＋</span></button><button id="list-button">全部作品 <span class="count">35</span></button></nav>
+</header>
+<main>
+<section id="intro" class="intro"><div class="edition">INAUGURAL EXHIBITION　／　首展 2026</div><h1>世界尚未對齊</h1><p class="english">A World Still Aligning</p><p class="lead">一座漂浮在無盡暮色中的美術館。<br>每個展廳，都遵守一種不同的物理規則。</p><div class="entry-actions"><button id="enter" class="primary">進入展覽 <span>↗</span></button><button id="intro-tour">帶我逛展 <span>→</span></button></div><p id="status" role="status">正在建立暮色中的步道…　可先觀看全部作品</p></section>
+<section id="chapter" hidden><span id="chapter-number">01 / 05</span><button id="chapter-name" aria-label="閱讀本展區策展文字"></button><p id="chapter-rule"></p></section>
+<div id="labels" aria-label="展品位置"></div>
+<div id="reticle" hidden aria-hidden="true">＋</div>
+<aside id="threshold" hidden aria-live="polite"><p class="eyebrow" id="threshold-number"></p><h2 id="threshold-name"></h2><p id="threshold-text"></p><small>點門洞，或選擇下方按鈕前往 ↗</small></aside>
+<div id="room-controls" hidden><button id="previous-stop" aria-label="上一個觀看位置">←</button><button id="stop-label">觀看位置</button><button id="next-stop" aria-label="下一個觀看位置">→</button></div>
+<div id="tourbar" hidden><span id="tour-text"></span><button id="tour-pause">暫停</button><button id="tour-next">跳過 →</button><button id="tour-exit" aria-label="退出導覽">×</button><div id="tour-progress"></div></div>
+<aside id="work-card" hidden aria-label="作品資訊"><button id="card-close" class="close" aria-label="收起作品資訊">×</button><p id="work-series" class="eyebrow"></p><h2 id="work-name"></h2><p id="work-en" class="english"></p><p id="work-summary"></p><p class="preview-note">展場影像為原作品靜態停格</p><button id="open-work" class="primary">進入作品 <span>↗</span></button></aside>
+<div id="ending" hidden><p>世界仍未完全對齊。<br><small>謝謝你在間隙中停留。</small></p><button id="ending-home">返回入口</button><button id="ending-continue">繼續參觀</button><button id="ending-list">全部作品 →</button></div>
+</main>
+<footer id="footer"><p id="hint">35 件作品　·　5 個展區　·　按自己的節奏</p><div id="footer-controls" hidden><button id="tour-start">帶我逛展</button><button id="motion" aria-pressed="false">減少動態</button><button id="help-button" aria-label="操作說明">?</button></div><p class="coordinates" id="coordinates">建築意象　／　暮色未盡</p></footer>
+<dialog id="map-dialog" aria-labelledby="map-title"><button class="close" data-close aria-label="關閉展區導覽">×</button><p class="eyebrow">SPATIAL INDEX　／　五種空間規則</p><h2 id="map-title">在間隙之間</h2><div id="map-rooms"></div><p class="small">各展區以短暫淡出銜接。可以隨時改變路線。</p></dialog>
+<dialog id="about-dialog" aria-labelledby="about-title"><button class="close" data-close aria-label="關閉展覽敘事">×</button><p id="about-eyebrow" class="eyebrow">CURATORIAL NOTE</p><h2 id="about-title">世界尚未對齊</h2><p id="about-text"></p><div class="about-line"></div><p class="small">18 件「規則之後」＋ 17 件「慢物質」<br>展場採原作停格；選擇「進入作品」才啟動原作即時互動。</p></dialog>
+<dialog id="help-dialog" aria-labelledby="help-title"><button class="close" data-close aria-label="關閉操作說明">×</button><p class="eyebrow">TAKE YOUR TIME</p><h2 id="help-title">慢慢走，也可以停下來</h2><p>拖曳畫面環顧；點地面圓環或空白地面前進。點作品或標籤靠近，再選「進入作品」。關閉後回到同一站位與朝向。</p><p>鍵盤：方向鍵環顧，W／S 前後走至觀看位置，A／D 側移，Enter 選擇最近作品（出口站位則前往下一廳），Esc 收起面板。Tab 可選全部控制項。</p><p>手機使用觸控環顧與定點移動。跨平台移動會短暫淡出。「帶我逛展」每站停留 16 秒，隨時暫停、跳過或退出。</p><p><a href="?flat">使用平面觀看模式 ↗</a>　·　<a href="collection.html">免 JavaScript 目錄 ↗</a></p><p class="small">原作品內的按鍵屬於作品。若焦點在作品內，請使用上方「返回展間」關閉。「減少動態」控制展場鏡頭；原作依系統設定或自身的暫停控制。</p></dialog>
+<dialog id="catalog-dialog" aria-labelledby="catalog-title"><button class="close" data-close aria-label="關閉全部作品">×</button><p class="eyebrow">COLLECTION　／　SECOND EDITIONS ONLY</p><h2 id="catalog-title">全部作品 <small>35</small></h2><label class="search-label" for="search">尋找一件作品</label><input id="search" type="search" placeholder="作品名稱、媒材或展區"><div id="filters" aria-label="作品展區篩選"></div><div id="catalog"></div><p id="empty" hidden>沒有符合的作品。</p></dialog>
+<dialog id="viewer" aria-labelledby="viewer-title"><div class="viewer-head"><div><span class="live-dot"></span><span id="viewer-title"></span><small>原作即時互動</small></div><div><a id="original-link" target="_blank" rel="noopener">開啟原作品 ↗</a><button id="viewer-close">返回展間 ×</button></div></div><div id="viewer-body"><img id="viewer-preview" alt="作品真實停格"><p id="viewer-status" role="status">正在載入原作品…</p><div id="frame-host"></div><div id="viewer-error" hidden><p>原作品暫時無法啟動。你可以返回展間或開啟原作品頁。</p><button id="viewer-retry">重新載入</button></div></div></dialog>
+<noscript><div class="no-script">此館的三維空間需要 JavaScript。所有作品仍可由<a href="collection.html">完整作品目錄</a>開啟。</div></noscript>
+<script type="module" src="js/app.js?v=help-circle-1"></script>
+</body></html>

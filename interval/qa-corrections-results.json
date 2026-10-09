@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "35 cards and static collection: decoded text, no creator attribution, three-button station controls; original interaction return",
+    "desktop: complete five-room route and final next-stop returns to room 1 entrance",
+    "mobile: complete five-room route and final next-stop returns to room 1 entrance"
+  ],
+  "errors": [],
+  "devices": [
+    "1440×900 desktop, macOS SwiftShader",
+    "390×844 DPR2 touch emulation"
+  ],
+  "browser": "151.0.7922.34"
+}

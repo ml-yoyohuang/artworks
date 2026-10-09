@@ -1,0 +1,85 @@
+{
+  "checks": [
+    "simulated /artworks/ deployment: 35 previews + 35 source pages HTTP200, relative Three.js modules and JSON loaded",
+    "subpath interactive iframe: original recursive-door controls and thin-film detail work",
+    "all eight geometric artworks: specific keyboard actions, chips where applicable, and reset",
+    "mobile thin-film full view and detail; mobile artwork card and guided-tour screenshots",
+    "default-motion desktop drag changes orientation",
+    "gallery keyboard: arrow orientation + W station movement",
+    "default-motion flock artwork: pointer interaction and regenerate",
+    "synthetic original-iframe visibility: thin-film rAF stops and resumes"
+  ],
+  "errors": [],
+  "geometry": [
+    {
+      "name": "讓出一寸",
+      "keys": [
+        "ArrowRight",
+        "Enter"
+      ],
+      "changed": true,
+      "reset": true
+    },
+    {
+      "name": "三色未合",
+      "keys": [
+        "Enter"
+      ],
+      "changed": true,
+      "reset": true
+    },
+    {
+      "name": "背面也是顏色",
+      "keys": [
+        "ArrowRight",
+        "Enter"
+      ],
+      "changed": true,
+      "reset": true
+    },
+    {
+      "name": "缺席者的散步",
+      "keys": [
+        "3"
+      ],
+      "changed": true,
+      "chipClicked": true,
+      "reset": true
+    },
+    {
+      "name": "讀過的厚度",
+      "keys": [
+        "Home"
+      ],
+      "changed": true,
+      "reset": true
+    },
+    {
+      "name": "晚到的那幾位",
+      "keys": [
+        "2"
+      ],
+      "changed": true,
+      "chipClicked": true,
+      "reset": true
+    },
+    {
+      "name": "門後還有門",
+      "keys": [
+        "ArrowRight",
+        "Enter"
+      ],
+      "changed": true,
+      "reset": true
+    },
+    {
+      "name": "它剛剛在這裡",
+      "keys": [
+        "ArrowRight",
+        "3"
+      ],
+      "changed": true,
+      "reset": true
+    }
+  ]
+}

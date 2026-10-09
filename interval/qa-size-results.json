@@ -1,0 +1,23 @@
+[
+  {
+    "width": 320,
+    "height": 640,
+    "errors": [],
+    "ctaVisible": true,
+    "noOverflow": true
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "errors": [],
+    "ctaVisible": true,
+    "noOverflow": true
+  },
+  {
+    "width": 1024,
+    "height": 768,
+    "errors": [],
+    "ctaVisible": true,
+    "noOverflow": true
+  }
+]
