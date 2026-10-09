@@ -1,0 +1,3868 @@
+{
+  "browser": "151.0.7922.34",
+  "devices": [
+    {
+      "mobile": false,
+      "views": [
+        {
+          "id": "p5demos2--flow-field",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--flow-field",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--flow-field",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--flow-field",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--flow-field",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--flow-field",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--contour-topography",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--contour-topography",
+              "camera": [
+                1.536,
+                2,
+                0.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--contour-topography",
+              "camera": [
+                1.536,
+                2,
+                0.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--contour-topography",
+              "camera": [
+                1.536,
+                2,
+                0.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--contour-topography",
+              "camera": [
+                1.536,
+                2,
+                0.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--contour-topography",
+              "camera": [
+                1.536,
+                2,
+                0.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--boids-flocking",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--boids-flocking",
+              "camera": [
+                -1.344,
+                2,
+                -16.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--boids-flocking",
+              "camera": [
+                -1.344,
+                2,
+                -16.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--boids-flocking",
+              "camera": [
+                -1.344,
+                2,
+                -16.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--boids-flocking",
+              "camera": [
+                -1.344,
+                2,
+                -16.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--boids-flocking",
+              "camera": [
+                -1.344,
+                2,
+                -16.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--generative-typography",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--generative-typography",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -19.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--generative-typography",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -19.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--generative-typography",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -19.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--generative-typography",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -19.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--generative-typography",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -19.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--voronoi-stippling",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--voronoi-stippling",
+              "camera": [
+                -1.216,
+                2,
+                -36.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--voronoi-stippling",
+              "camera": [
+                -1.216,
+                2,
+                -36.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--voronoi-stippling",
+              "camera": [
+                -1.216,
+                2,
+                -36.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--voronoi-stippling",
+              "camera": [
+                -1.216,
+                2,
+                -36.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--voronoi-stippling",
+              "camera": [
+                -1.216,
+                2,
+                -36.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--negotiated-territories",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--negotiated-territories",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--negotiated-territories",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--negotiated-territories",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--negotiated-territories",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--negotiated-territories",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--registration-pending",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--registration-pending",
+              "camera": [
+                1.536,
+                2,
+                0.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--registration-pending",
+              "camera": [
+                1.536,
+                2,
+                0.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--registration-pending",
+              "camera": [
+                1.536,
+                2,
+                0.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--registration-pending",
+              "camera": [
+                1.536,
+                2,
+                0.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--registration-pending",
+              "camera": [
+                1.536,
+                2,
+                0.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--reverse-of-a-plane",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--reverse-of-a-plane",
+              "camera": [
+                -1.632,
+                2,
+                -16.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--reverse-of-a-plane",
+              "camera": [
+                -1.632,
+                2,
+                -16.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--reverse-of-a-plane",
+              "camera": [
+                -1.632,
+                2,
+                -16.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--reverse-of-a-plane",
+              "camera": [
+                -1.632,
+                2,
+                -16.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--reverse-of-a-plane",
+              "camera": [
+                -1.632,
+                2,
+                -16.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--moving-absence",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--moving-absence",
+              "camera": [
+                1.376,
+                2,
+                -19.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--moving-absence",
+              "camera": [
+                1.376,
+                2,
+                -19.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--moving-absence",
+              "camera": [
+                1.376,
+                2,
+                -19.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--moving-absence",
+              "camera": [
+                1.376,
+                2,
+                -19.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--moving-absence",
+              "camera": [
+                1.376,
+                2,
+                -19.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--chromatic-sediments",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--chromatic-sediments",
+              "camera": [
+                -1.536,
+                2,
+                -36.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--chromatic-sediments",
+              "camera": [
+                -1.536,
+                2,
+                -36.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--chromatic-sediments",
+              "camera": [
+                -1.536,
+                2,
+                -36.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--chromatic-sediments",
+              "camera": [
+                -1.536,
+                2,
+                -36.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--chromatic-sediments",
+              "camera": [
+                -1.536,
+                2,
+                -36.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--a-beat-behind",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--a-beat-behind",
+              "camera": [
+                1.536,
+                2,
+                -39.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--a-beat-behind",
+              "camera": [
+                1.536,
+                2,
+                -39.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--a-beat-behind",
+              "camera": [
+                1.536,
+                2,
+                -39.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--a-beat-behind",
+              "camera": [
+                1.536,
+                2,
+                -39.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--a-beat-behind",
+              "camera": [
+                1.536,
+                2,
+                -39.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--within-the-same-frame",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--within-the-same-frame",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                -56.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--within-the-same-frame",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                -56.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--within-the-same-frame",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                -56.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--within-the-same-frame",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                -56.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--within-the-same-frame",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                -56.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--residual-geometry",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--residual-geometry",
+              "camera": [
+                1.632,
+                2,
+                -59.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--residual-geometry",
+              "camera": [
+                1.632,
+                2,
+                -59.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--residual-geometry",
+              "camera": [
+                1.632,
+                2,
+                -59.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--residual-geometry",
+              "camera": [
+                1.632,
+                2,
+                -59.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--residual-geometry",
+              "camera": [
+                1.632,
+                2,
+                -59.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--recursive-subdivision",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--recursive-subdivision",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -104.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--recursive-subdivision",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -104.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--recursive-subdivision",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -104.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--recursive-subdivision",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -104.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--recursive-subdivision",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -104.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--truchet-tiles",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--truchet-tiles",
+              "camera": [
+                1.7280000000000002,
+                2,
+                -107.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--truchet-tiles",
+              "camera": [
+                1.7280000000000002,
+                2,
+                -107.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--truchet-tiles",
+              "camera": [
+                1.7280000000000002,
+                2,
+                -107.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--truchet-tiles",
+              "camera": [
+                1.7280000000000002,
+                2,
+                -107.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--truchet-tiles",
+              "camera": [
+                1.7280000000000002,
+                2,
+                -107.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--differential-growth",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--differential-growth",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--differential-growth",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--differential-growth",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--differential-growth",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--differential-growth",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                3.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--space-colonization",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--space-colonization",
+              "camera": [
+                1.4080000000000001,
+                2,
+                -1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--space-colonization",
+              "camera": [
+                1.4080000000000001,
+                2,
+                -1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--space-colonization",
+              "camera": [
+                1.4080000000000001,
+                2,
+                -1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--space-colonization",
+              "camera": [
+                1.4080000000000001,
+                2,
+                -1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--space-colonization",
+              "camera": [
+                1.4080000000000001,
+                2,
+                -1.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--circle-packing",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--circle-packing",
+              "camera": [
+                -2.08,
+                2,
+                -18.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--circle-packing",
+              "camera": [
+                -2.08,
+                2,
+                -18.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--circle-packing",
+              "camera": [
+                -2.08,
+                2,
+                -18.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--circle-packing",
+              "camera": [
+                -2.08,
+                2,
+                -18.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--circle-packing",
+              "camera": [
+                -2.08,
+                2,
+                -18.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--organic-growth",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--organic-growth",
+              "camera": [
+                1.8559999999999999,
+                2,
+                -23.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--organic-growth",
+              "camera": [
+                1.8559999999999999,
+                2,
+                -23.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--organic-growth",
+              "camera": [
+                1.8559999999999999,
+                2,
+                -23.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--organic-growth",
+              "camera": [
+                1.8559999999999999,
+                2,
+                -23.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--organic-growth",
+              "camera": [
+                1.8559999999999999,
+                2,
+                -23.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--reaction-diffusion",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--reaction-diffusion",
+              "camera": [
+                -1.472,
+                2,
+                -40.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--reaction-diffusion",
+              "camera": [
+                -1.472,
+                2,
+                -40.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--reaction-diffusion",
+              "camera": [
+                -1.472,
+                2,
+                -40.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--reaction-diffusion",
+              "camera": [
+                -1.472,
+                2,
+                -40.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--reaction-diffusion",
+              "camera": [
+                -1.472,
+                2,
+                -40.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--domain-warp-fbm",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--domain-warp-fbm",
+              "camera": [
+                1.632,
+                2,
+                -45.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--domain-warp-fbm",
+              "camera": [
+                1.632,
+                2,
+                -45.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--domain-warp-fbm",
+              "camera": [
+                1.632,
+                2,
+                -45.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--domain-warp-fbm",
+              "camera": [
+                1.632,
+                2,
+                -45.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--domain-warp-fbm",
+              "camera": [
+                1.632,
+                2,
+                -45.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--cyanotype",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--cyanotype",
+              "camera": [
+                -1.952,
+                2,
+                -62.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--cyanotype",
+              "camera": [
+                -1.952,
+                2,
+                -62.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--cyanotype",
+              "camera": [
+                -1.952,
+                2,
+                -62.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--cyanotype",
+              "camera": [
+                -1.952,
+                2,
+                -62.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--cyanotype",
+              "camera": [
+                -1.952,
+                2,
+                -62.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--noise-dissolve",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--noise-dissolve",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--noise-dissolve",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--noise-dissolve",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--noise-dissolve",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--noise-dissolve",
+              "camera": [
+                -1.536,
+                2,
+                3.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--darkroom-solarize",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--darkroom-solarize",
+              "camera": [
+                1.536,
+                2,
+                -0.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--darkroom-solarize",
+              "camera": [
+                1.536,
+                2,
+                -0.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--darkroom-solarize",
+              "camera": [
+                1.536,
+                2,
+                -0.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--darkroom-solarize",
+              "camera": [
+                1.536,
+                2,
+                -0.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--darkroom-solarize",
+              "camera": [
+                1.536,
+                2,
+                -0.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--risograph-print",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--risograph-print",
+              "camera": [
+                -1.696,
+                2,
+                -18.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--risograph-print",
+              "camera": [
+                -1.696,
+                2,
+                -18.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--risograph-print",
+              "camera": [
+                -1.696,
+                2,
+                -18.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--risograph-print",
+              "camera": [
+                -1.696,
+                2,
+                -18.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--risograph-print",
+              "camera": [
+                -1.696,
+                2,
+                -18.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--feedback-trails",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--feedback-trails",
+              "camera": [
+                1.44,
+                2,
+                -22.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--feedback-trails",
+              "camera": [
+                1.44,
+                2,
+                -22.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--feedback-trails",
+              "camera": [
+                1.44,
+                2,
+                -22.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--feedback-trails",
+              "camera": [
+                1.44,
+                2,
+                -22.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--feedback-trails",
+              "camera": [
+                1.44,
+                2,
+                -22.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--long-exposure",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--long-exposure",
+              "camera": [
+                -1.536,
+                2,
+                -40.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--long-exposure",
+              "camera": [
+                -1.536,
+                2,
+                -40.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--long-exposure",
+              "camera": [
+                -1.536,
+                2,
+                -40.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--long-exposure",
+              "camera": [
+                -1.536,
+                2,
+                -40.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--long-exposure",
+              "camera": [
+                -1.536,
+                2,
+                -40.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--pixel-sorting",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--pixel-sorting",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -44.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--pixel-sorting",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -44.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--pixel-sorting",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -44.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--pixel-sorting",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -44.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--pixel-sorting",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -44.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--dithering-halftone",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--dithering-halftone",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -62.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--dithering-halftone",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -62.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--dithering-halftone",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -62.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--dithering-halftone",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -62.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--dithering-halftone",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -62.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--grain-gradient-mesh",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--grain-gradient-mesh",
+              "camera": [
+                1.568,
+                2,
+                -66.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--grain-gradient-mesh",
+              "camera": [
+                1.568,
+                2,
+                -66.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--grain-gradient-mesh",
+              "camera": [
+                1.568,
+                2,
+                -66.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--grain-gradient-mesh",
+              "camera": [
+                1.568,
+                2,
+                -66.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--grain-gradient-mesh",
+              "camera": [
+                1.568,
+                2,
+                -66.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--thin-film",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--thin-film",
+              "camera": [
+                0,
+                2,
+                0.9739877166806821
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--thin-film",
+              "camera": [
+                0,
+                2,
+                0.9739877166806821
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--thin-film",
+              "camera": [
+                0,
+                2,
+                0.9739877166806821
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--thin-film",
+              "camera": [
+                0,
+                2,
+                0.9739877166806821
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--thin-film",
+              "camera": [
+                0,
+                2,
+                0.9739877166806821
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--glass-refraction",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--glass-refraction",
+              "camera": [
+                -4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--glass-refraction",
+              "camera": [
+                -4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--glass-refraction",
+              "camera": [
+                -4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--glass-refraction",
+              "camera": [
+                -4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--glass-refraction",
+              "camera": [
+                -4,
+                2,
+                11.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--liquid-distortion",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--liquid-distortion",
+              "camera": [
+                4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--liquid-distortion",
+              "camera": [
+                4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--liquid-distortion",
+              "camera": [
+                4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--liquid-distortion",
+              "camera": [
+                4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--liquid-distortion",
+              "camera": [
+                4,
+                2,
+                11.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--textile-moire",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--textile-moire",
+              "camera": [
+                -4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--textile-moire",
+              "camera": [
+                -4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--textile-moire",
+              "camera": [
+                -4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--textile-moire",
+              "camera": [
+                -4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--textile-moire",
+              "camera": [
+                -4,
+                2,
+                1.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--raymarching-sdf",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--raymarching-sdf",
+              "camera": [
+                4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--raymarching-sdf",
+              "camera": [
+                4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--raymarching-sdf",
+              "camera": [
+                4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--raymarching-sdf",
+              "camera": [
+                4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--raymarching-sdf",
+              "camera": [
+                4,
+                2,
+                1.5
+              ]
+            }
+          ]
+        }
+      ],
+      "completePath": true
+    },
+    {
+      "mobile": true,
+      "views": [
+        {
+          "id": "p5demos2--flow-field",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--flow-field",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--flow-field",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--flow-field",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--flow-field",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--flow-field",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--contour-topography",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--contour-topography",
+              "camera": [
+                1.536,
+                2,
+                4.389437005205897
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--contour-topography",
+              "camera": [
+                1.536,
+                2,
+                4.389437005205897
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--contour-topography",
+              "camera": [
+                1.536,
+                2,
+                4.389437005205897
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--contour-topography",
+              "camera": [
+                1.536,
+                2,
+                4.389437005205897
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--contour-topography",
+              "camera": [
+                1.536,
+                2,
+                4.389437005205897
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--boids-flocking",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--boids-flocking",
+              "camera": [
+                -1.344,
+                2,
+                -14.226697640048354
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--boids-flocking",
+              "camera": [
+                -1.344,
+                2,
+                -14.226697640048354
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--boids-flocking",
+              "camera": [
+                -1.344,
+                2,
+                -14.226697640048354
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--boids-flocking",
+              "camera": [
+                -1.344,
+                2,
+                -14.226697640048354
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--boids-flocking",
+              "camera": [
+                -1.344,
+                2,
+                -14.226697640048354
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--generative-typography",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--generative-typography",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -18.61195590740914
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--generative-typography",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -18.61195590740914
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--generative-typography",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -18.61195590740914
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--generative-typography",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -18.61195590740914
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--generative-typography",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -18.61195590740914
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--voronoi-stippling",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--voronoi-stippling",
+              "camera": [
+                -1.216,
+                2,
+                -33.07231575058103
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--voronoi-stippling",
+              "camera": [
+                -1.216,
+                2,
+                -33.07231575058103
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--voronoi-stippling",
+              "camera": [
+                -1.216,
+                2,
+                -33.07231575058103
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--voronoi-stippling",
+              "camera": [
+                -1.216,
+                2,
+                -33.07231575058103
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--voronoi-stippling",
+              "camera": [
+                -1.216,
+                2,
+                -33.07231575058103
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--negotiated-territories",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--negotiated-territories",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--negotiated-territories",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--negotiated-territories",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--negotiated-territories",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--negotiated-territories",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--registration-pending",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--registration-pending",
+              "camera": [
+                1.536,
+                2,
+                2.3115496041647177
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--registration-pending",
+              "camera": [
+                1.536,
+                2,
+                2.3115496041647177
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--registration-pending",
+              "camera": [
+                1.536,
+                2,
+                2.3115496041647177
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--registration-pending",
+              "camera": [
+                1.536,
+                2,
+                2.3115496041647177
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--registration-pending",
+              "camera": [
+                1.536,
+                2,
+                2.3115496041647177
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--reverse-of-a-plane",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--reverse-of-a-plane",
+              "camera": [
+                -1.632,
+                2,
+                -11.91793386111371
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--reverse-of-a-plane",
+              "camera": [
+                -1.632,
+                2,
+                -11.91793386111371
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--reverse-of-a-plane",
+              "camera": [
+                -1.632,
+                2,
+                -11.91793386111371
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--reverse-of-a-plane",
+              "camera": [
+                -1.632,
+                2,
+                -11.91793386111371
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--reverse-of-a-plane",
+              "camera": [
+                -1.632,
+                2,
+                -11.91793386111371
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--moving-absence",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--moving-absence",
+              "camera": [
+                1.376,
+                2,
+                -18.15020315162221
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--moving-absence",
+              "camera": [
+                1.376,
+                2,
+                -18.15020315162221
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--moving-absence",
+              "camera": [
+                1.376,
+                2,
+                -18.15020315162221
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--moving-absence",
+              "camera": [
+                1.376,
+                2,
+                -18.15020315162221
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--moving-absence",
+              "camera": [
+                1.376,
+                2,
+                -18.15020315162221
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--chromatic-sediments",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--chromatic-sediments",
+              "camera": [
+                -1.536,
+                2,
+                -33.30319212847449
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--chromatic-sediments",
+              "camera": [
+                -1.536,
+                2,
+                -33.30319212847449
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--chromatic-sediments",
+              "camera": [
+                -1.536,
+                2,
+                -33.30319212847449
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--chromatic-sediments",
+              "camera": [
+                -1.536,
+                2,
+                -33.30319212847449
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--chromatic-sediments",
+              "camera": [
+                -1.536,
+                2,
+                -33.30319212847449
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--a-beat-behind",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--a-beat-behind",
+              "camera": [
+                1.536,
+                2,
+                -37.68845039583528
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--a-beat-behind",
+              "camera": [
+                1.536,
+                2,
+                -37.68845039583528
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--a-beat-behind",
+              "camera": [
+                1.536,
+                2,
+                -37.68845039583528
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--a-beat-behind",
+              "camera": [
+                1.536,
+                2,
+                -37.68845039583528
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--a-beat-behind",
+              "camera": [
+                1.536,
+                2,
+                -37.68845039583528
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--within-the-same-frame",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--within-the-same-frame",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                -51.91793386111371
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--within-the-same-frame",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                -51.91793386111371
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--within-the-same-frame",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                -51.91793386111371
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--within-the-same-frame",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                -51.91793386111371
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--within-the-same-frame",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                -51.91793386111371
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--residual-geometry",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--residual-geometry",
+              "camera": [
+                1.632,
+                2,
+                -57.457574017941816
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--residual-geometry",
+              "camera": [
+                1.632,
+                2,
+                -57.457574017941816
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--residual-geometry",
+              "camera": [
+                1.632,
+                2,
+                -57.457574017941816
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--residual-geometry",
+              "camera": [
+                1.632,
+                2,
+                -57.457574017941816
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--residual-geometry",
+              "camera": [
+                1.632,
+                2,
+                -57.457574017941816
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--recursive-subdivision",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--recursive-subdivision",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -102.22669764004836
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--recursive-subdivision",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -102.22669764004836
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--recursive-subdivision",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -102.22669764004836
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--recursive-subdivision",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -102.22669764004836
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--recursive-subdivision",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -102.22669764004836
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--truchet-tiles",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--truchet-tiles",
+              "camera": [
+                1.7280000000000002,
+                2,
+                -106.61195590740914
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--truchet-tiles",
+              "camera": [
+                1.7280000000000002,
+                2,
+                -106.61195590740914
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--truchet-tiles",
+              "camera": [
+                1.7280000000000002,
+                2,
+                -106.61195590740914
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--truchet-tiles",
+              "camera": [
+                1.7280000000000002,
+                2,
+                -106.61195590740914
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--truchet-tiles",
+              "camera": [
+                1.7280000000000002,
+                2,
+                -106.61195590740914
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--differential-growth",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--differential-growth",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                6.46593149363204
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--differential-growth",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                6.46593149363204
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--differential-growth",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                6.46593149363204
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--differential-growth",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                6.46593149363204
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--differential-growth",
+              "camera": [
+                -1.6640000000000001,
+                2,
+                6.46593149363204
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--space-colonization",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--space-colonization",
+              "camera": [
+                1.4080000000000001,
+                2,
+                1.2350551157385752
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--space-colonization",
+              "camera": [
+                1.4080000000000001,
+                2,
+                1.2350551157385752
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--space-colonization",
+              "camera": [
+                1.4080000000000001,
+                2,
+                1.2350551157385752
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--space-colonization",
+              "camera": [
+                1.4080000000000001,
+                2,
+                1.2350551157385752
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--space-colonization",
+              "camera": [
+                1.4080000000000001,
+                2,
+                1.2350551157385752
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p5demos2--circle-packing",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--circle-packing",
+              "camera": [
+                -2.08,
+                2,
+                -17.61195590740914
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--circle-packing",
+              "camera": [
+                -2.08,
+                2,
+                -17.61195590740914
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--circle-packing",
+              "camera": [
+                -2.08,
+                2,
+                -17.61195590740914
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--circle-packing",
+              "camera": [
+                -2.08,
+                2,
+                -17.61195590740914
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "p5demos2--circle-packing",
+              "camera": [
+                -2.08,
+                2,
+                -17.61195590740914
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--organic-growth",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--organic-growth",
+              "camera": [
+                1.8559999999999999,
+                2,
+                -21.91932677372875
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--organic-growth",
+              "camera": [
+                1.8559999999999999,
+                2,
+                -21.91932677372875
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--organic-growth",
+              "camera": [
+                1.8559999999999999,
+                2,
+                -21.91932677372875
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--organic-growth",
+              "camera": [
+                1.8559999999999999,
+                2,
+                -21.91932677372875
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--organic-growth",
+              "camera": [
+                1.8559999999999999,
+                2,
+                -21.91932677372875
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--reaction-diffusion",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--reaction-diffusion",
+              "camera": [
+                -1.472,
+                2,
+                -37.07231575058103
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--reaction-diffusion",
+              "camera": [
+                -1.472,
+                2,
+                -37.07231575058103
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--reaction-diffusion",
+              "camera": [
+                -1.472,
+                2,
+                -37.07231575058103
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--reaction-diffusion",
+              "camera": [
+                -1.472,
+                2,
+                -37.07231575058103
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--reaction-diffusion",
+              "camera": [
+                -1.472,
+                2,
+                -37.07231575058103
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--domain-warp-fbm",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--domain-warp-fbm",
+              "camera": [
+                1.632,
+                2,
+                -44.15020315162221
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--domain-warp-fbm",
+              "camera": [
+                1.632,
+                2,
+                -44.15020315162221
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--domain-warp-fbm",
+              "camera": [
+                1.632,
+                2,
+                -44.15020315162221
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--domain-warp-fbm",
+              "camera": [
+                1.632,
+                2,
+                -44.15020315162221
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--domain-warp-fbm",
+              "camera": [
+                1.632,
+                2,
+                -44.15020315162221
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--cyanotype",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--cyanotype",
+              "camera": [
+                -1.952,
+                2,
+                -59.99582126215489
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--cyanotype",
+              "camera": [
+                -1.952,
+                2,
+                -59.99582126215489
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--cyanotype",
+              "camera": [
+                -1.952,
+                2,
+                -59.99582126215489
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--cyanotype",
+              "camera": [
+                -1.952,
+                2,
+                -59.99582126215489
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--cyanotype",
+              "camera": [
+                -1.952,
+                2,
+                -59.99582126215489
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--noise-dissolve",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--noise-dissolve",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--noise-dissolve",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--noise-dissolve",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--noise-dissolve",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--noise-dissolve",
+              "camera": [
+                -1.536,
+                2,
+                6.696807871525504
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--darkroom-solarize",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--darkroom-solarize",
+              "camera": [
+                1.536,
+                2,
+                2.004178737845111
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--darkroom-solarize",
+              "camera": [
+                1.536,
+                2,
+                2.004178737845111
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--darkroom-solarize",
+              "camera": [
+                1.536,
+                2,
+                2.004178737845111
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--darkroom-solarize",
+              "camera": [
+                1.536,
+                2,
+                2.004178737845111
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--darkroom-solarize",
+              "camera": [
+                1.536,
+                2,
+                2.004178737845111
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--risograph-print",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--risograph-print",
+              "camera": [
+                -1.696,
+                2,
+                -16.226697640048354
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--risograph-print",
+              "camera": [
+                -1.696,
+                2,
+                -16.226697640048354
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--risograph-print",
+              "camera": [
+                -1.696,
+                2,
+                -16.226697640048354
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--risograph-print",
+              "camera": [
+                -1.696,
+                2,
+                -16.226697640048354
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--risograph-print",
+              "camera": [
+                -1.696,
+                2,
+                -16.226697640048354
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--feedback-trails",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--feedback-trails",
+              "camera": [
+                1.44,
+                2,
+                -19.303192128474496
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--feedback-trails",
+              "camera": [
+                1.44,
+                2,
+                -19.303192128474496
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--feedback-trails",
+              "camera": [
+                1.44,
+                2,
+                -19.303192128474496
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--feedback-trails",
+              "camera": [
+                1.44,
+                2,
+                -19.303192128474496
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--feedback-trails",
+              "camera": [
+                1.44,
+                2,
+                -19.303192128474496
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--long-exposure",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--long-exposure",
+              "camera": [
+                -1.536,
+                2,
+                -37.764944884261425
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--long-exposure",
+              "camera": [
+                -1.536,
+                2,
+                -37.764944884261425
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--long-exposure",
+              "camera": [
+                -1.536,
+                2,
+                -37.764944884261425
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--long-exposure",
+              "camera": [
+                -1.536,
+                2,
+                -37.764944884261425
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--long-exposure",
+              "camera": [
+                -1.536,
+                2,
+                -37.764944884261425
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--pixel-sorting",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--pixel-sorting",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -42.457574017941816
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--pixel-sorting",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -42.457574017941816
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--pixel-sorting",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -42.457574017941816
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--pixel-sorting",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -42.457574017941816
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--pixel-sorting",
+              "camera": [
+                1.7919999999999998,
+                2,
+                -42.457574017941816
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--dithering-halftone",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--dithering-halftone",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -60.68845039583528
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--dithering-halftone",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -60.68845039583528
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--dithering-halftone",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -60.68845039583528
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--dithering-halftone",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -60.68845039583528
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--dithering-halftone",
+              "camera": [
+                -1.4080000000000001,
+                2,
+                -60.68845039583528
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--grain-gradient-mesh",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--grain-gradient-mesh",
+              "camera": [
+                1.568,
+                2,
+                -64.22669764004836
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--grain-gradient-mesh",
+              "camera": [
+                1.568,
+                2,
+                -64.22669764004836
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--grain-gradient-mesh",
+              "camera": [
+                1.568,
+                2,
+                -64.22669764004836
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--grain-gradient-mesh",
+              "camera": [
+                1.568,
+                2,
+                -64.22669764004836
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--grain-gradient-mesh",
+              "camera": [
+                1.568,
+                2,
+                -64.22669764004836
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--thin-film",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--thin-film",
+              "camera": [
+                0,
+                2,
+                13.396401568281082
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--thin-film",
+              "camera": [
+                0,
+                2,
+                13.396401568281082
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--thin-film",
+              "camera": [
+                0,
+                2,
+                13.396401568281082
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--thin-film",
+              "camera": [
+                0,
+                2,
+                13.396401568281082
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--thin-film",
+              "camera": [
+                0,
+                2,
+                13.396401568281082
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--glass-refraction",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--glass-refraction",
+              "camera": [
+                -4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--glass-refraction",
+              "camera": [
+                -4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--glass-refraction",
+              "camera": [
+                -4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--glass-refraction",
+              "camera": [
+                -4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--glass-refraction",
+              "camera": [
+                -4,
+                2,
+                11.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--liquid-distortion",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--liquid-distortion",
+              "camera": [
+                4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--liquid-distortion",
+              "camera": [
+                4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--liquid-distortion",
+              "camera": [
+                4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--liquid-distortion",
+              "camera": [
+                4,
+                2,
+                11.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--liquid-distortion",
+              "camera": [
+                4,
+                2,
+                11.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--textile-moire",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--textile-moire",
+              "camera": [
+                -4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--textile-moire",
+              "camera": [
+                -4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--textile-moire",
+              "camera": [
+                -4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--textile-moire",
+              "camera": [
+                -4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--textile-moire",
+              "camera": [
+                -4,
+                2,
+                1.5
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shaderdemos2--raymarching-sdf",
+          "visibility": [
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--raymarching-sdf",
+              "camera": [
+                4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--raymarching-sdf",
+              "camera": [
+                4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--raymarching-sdf",
+              "camera": [
+                4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--raymarching-sdf",
+              "camera": [
+                4,
+                2,
+                1.5
+              ]
+            },
+            {
+              "clear": true,
+              "inFrame": true,
+              "blocker": "shaderdemos2--raymarching-sdf",
+              "camera": [
+                4,
+                2,
+                1.5
+              ]
+            }
+          ]
+        }
+      ],
+      "completePath": true
+    }
+  ],
+  "errors": []
+}

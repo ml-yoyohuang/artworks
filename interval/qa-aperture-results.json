@@ -1,0 +1,71 @@
+{
+  "browser": "151.0.7922.34",
+  "devices": [
+    {
+      "mobile": false,
+      "view": {
+        "clear": true,
+        "screen": [
+          -0.08715966862770427,
+          0.2504284802902289,
+          0.9887431772801535
+        ],
+        "position": [
+          -4.7,
+          7.4,
+          -88
+        ],
+        "rotation": [
+          0,
+          0.16,
+          -0.08,
+          "XYZ"
+        ],
+        "elapsed": 0,
+        "lowest": 5.394196212139101,
+        "highestArtwork": 4.5,
+        "frameZ": -71,
+        "greenZ": -96,
+        "raf": false
+      },
+      "animation": true,
+      "backgroundPause": true,
+      "reducedMotion": true,
+      "stableResources": true,
+      "errors": []
+    },
+    {
+      "mobile": true,
+      "view": {
+        "clear": true,
+        "screen": [
+          -0.25592076931538166,
+          0.21236153601245222,
+          0.9887431772801535
+        ],
+        "position": [
+          -4.7,
+          7.4,
+          -88
+        ],
+        "rotation": [
+          0,
+          0.16,
+          -0.08,
+          "XYZ"
+        ],
+        "elapsed": 0,
+        "lowest": 5.394196212139101,
+        "highestArtwork": 4.5,
+        "frameZ": -71,
+        "greenZ": -96,
+        "raf": false
+      },
+      "animation": true,
+      "backgroundPause": true,
+      "reducedMotion": true,
+      "stableResources": true,
+      "errors": []
+    }
+  ]
+}

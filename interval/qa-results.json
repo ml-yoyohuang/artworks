@@ -672,7 +672,7 @@
     "8 repeated viewer cycles: 0 remaining iframe, 1 gallery canvas, stable renderer textures/geometries",
     "complete desktop route through all 35 artwork stations and ending",
     "guided tour: start, pause, all 10 stops via skip, exit",
-    "door-behind-door architectural transition; original work remains accessible",
+    "recursive-door work: standard three-button controls; original work remains accessible",
     "catalogue search, empty state, section filter, reset to 35",
     "390×844 DPR2 touch emulation: complete 35-station route, ending, no horizontal overflow",
     "mobile original-work touch and close"
@@ -684,10 +684,16 @@
       "canvases": 1,
       "memory": {
         "pending": 0,
-        "textures": 22,
-        "geometries": 76,
-        "calls": 121,
-        "scheduled": false
+        "textures": 13,
+        "geometries": 60,
+        "calls": 71,
+        "scheduled": false,
+        "moving": false,
+        "entryOffset": 0,
+        "entryTilt": 0,
+        "ambient": false,
+        "membraneTime": null,
+        "entryFilmTime": null
       }
     },
     {
@@ -695,10 +701,16 @@
       "canvases": 1,
       "memory": {
         "pending": 0,
-        "textures": 22,
-        "geometries": 76,
-        "calls": 121,
-        "scheduled": false
+        "textures": 13,
+        "geometries": 60,
+        "calls": 71,
+        "scheduled": false,
+        "moving": false,
+        "entryOffset": 0,
+        "entryTilt": 0,
+        "ambient": false,
+        "membraneTime": null,
+        "entryFilmTime": null
       }
     },
     {
@@ -706,10 +718,16 @@
       "canvases": 1,
       "memory": {
         "pending": 0,
-        "textures": 22,
-        "geometries": 76,
-        "calls": 121,
-        "scheduled": false
+        "textures": 13,
+        "geometries": 60,
+        "calls": 71,
+        "scheduled": false,
+        "moving": false,
+        "entryOffset": 0,
+        "entryTilt": 0,
+        "ambient": false,
+        "membraneTime": null,
+        "entryFilmTime": null
       }
     },
     {
@@ -717,10 +735,16 @@
       "canvases": 1,
       "memory": {
         "pending": 0,
-        "textures": 22,
-        "geometries": 76,
-        "calls": 121,
-        "scheduled": false
+        "textures": 13,
+        "geometries": 60,
+        "calls": 71,
+        "scheduled": false,
+        "moving": false,
+        "entryOffset": 0,
+        "entryTilt": 0,
+        "ambient": false,
+        "membraneTime": null,
+        "entryFilmTime": null
       }
     },
     {
@@ -728,10 +752,16 @@
       "canvases": 1,
       "memory": {
         "pending": 0,
-        "textures": 22,
-        "geometries": 76,
-        "calls": 121,
-        "scheduled": false
+        "textures": 13,
+        "geometries": 60,
+        "calls": 71,
+        "scheduled": false,
+        "moving": false,
+        "entryOffset": 0,
+        "entryTilt": 0,
+        "ambient": false,
+        "membraneTime": null,
+        "entryFilmTime": null
       }
     },
     {
@@ -739,10 +769,16 @@
       "canvases": 1,
       "memory": {
         "pending": 0,
-        "textures": 22,
-        "geometries": 76,
-        "calls": 121,
-        "scheduled": false
+        "textures": 13,
+        "geometries": 60,
+        "calls": 71,
+        "scheduled": false,
+        "moving": false,
+        "entryOffset": 0,
+        "entryTilt": 0,
+        "ambient": false,
+        "membraneTime": null,
+        "entryFilmTime": null
       }
     },
     {
@@ -750,10 +786,16 @@
       "canvases": 1,
       "memory": {
         "pending": 0,
-        "textures": 22,
-        "geometries": 76,
-        "calls": 121,
-        "scheduled": false
+        "textures": 13,
+        "geometries": 60,
+        "calls": 71,
+        "scheduled": false,
+        "moving": false,
+        "entryOffset": 0,
+        "entryTilt": 0,
+        "ambient": false,
+        "membraneTime": null,
+        "entryFilmTime": null
       }
     },
     {
@@ -761,10 +803,16 @@
       "canvases": 1,
       "memory": {
         "pending": 0,
-        "textures": 22,
-        "geometries": 76,
-        "calls": 121,
-        "scheduled": false
+        "textures": 13,
+        "geometries": 60,
+        "calls": 71,
+        "scheduled": false,
+        "moving": false,
+        "entryOffset": 0,
+        "entryTilt": 0,
+        "ambient": false,
+        "membraneTime": null,
+        "entryFilmTime": null
       }
     }
   ],
@@ -836,6 +884,10 @@
     {
       "room": 2,
       "station": 11
+    },
+    {
+      "room": 2,
+      "station": 12
     },
     {
       "room": 3,
