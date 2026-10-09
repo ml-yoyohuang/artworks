@@ -577,7 +577,8 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
     'float H(vec2 p){',
     ' float h=uSail.x*p.x*p.y+uSail.y*(p.x*p.x-p.y*p.y)*.5+uSail.z*(1.-dot(p*vec2(.8,1.2),p*vec2(.8,1.2)))*.5;',
     ' h+=uPin.x*exp(-dot(p-C0,p-C0)*5.)+uPin.y*exp(-dot(p-C1,p-C1)*5.)+uPin.z*exp(-dot(p-C2,p-C2)*7.);',
-    ' h+=.016*sin(dot(p,vec2(1.7,1.1))*2.4-uTime*.21)*smoothstep(1.3,.3,length(p));',
+    ' float fall=smoothstep(1.3,.3,length(p));',
+    ' h+=(.016*sin(dot(p,vec2(1.7,1.1))*2.4-uTime*.21)+.022*sin(dot(p,vec2(1.3,.4))*1.8+uTime*.88)+.015*sin(dot(p,vec2(-.5,1.2))*2.3-uTime*.57))*fall;',
     ' float dh=sdHole(p);h+=uLip*.05*exp(-max(dh,0.)*9.)*smoothstep(-.02,.02,dh);',
     ' vec2 q=p-uPress.xy;h-=uPress.z*exp(-dot(q,q)*10.);',
     ' return h;}',
@@ -585,11 +586,11 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
     'float vn(vec2 p){return vnoise(p)*2.-1.;}',
     'float thick(vec2 p,out float halo){',
     ' float t=uTime;',
-    ' vec2 w=p+.18*vec2(vn(p*1.4+vec2(0.,t*.012))+.5*vn(p*3.1+3.3),vn(p*1.4+vec2(5.2,-t*.01))+.5*vn(p*2.9-7.1));',
+    ' vec2 w=p+.18*vec2(vn(p*1.4+vec2(0.,t*.035))+.5*vn(p*3.1+3.3),vn(p*1.4+vec2(5.2,-t*.03))+.5*vn(p*2.9-7.1));',
     ' float drain=smoothstep(.9,-.9,w.y);',
     ' float d=mix(840.,1180.,pow(drain,1.2))+70.*vn(w*2.3+9.);',
     ' float dh=max(sdHole(p),0.);',
-    ' float near=smoothstep(.0,.46,dh+.018*vn(p*3.+t*.01));',
+    ' float near=smoothstep(.0,.46,dh+.018*vn(p*3.+t*.03));',
     ' halo=1.-near;',
     ' d=mix(6.,d,pow(near,1.1));',
     ' float b=exp(-pow((dot(w,normalize(vec2(.8,-.6)))-uBand)/.14,2.));',
@@ -739,9 +740,12 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
     btnPause.setAttribute('aria-pressed', v ? 'true' : 'false');
     btnPause.querySelector('span').textContent = v ? '播放' : '暫停';
   }
+  var hint = document.querySelector('.caption .hint'), hintText = hint ? hint.textContent : '';
+  function showState() { if (hint) hint.textContent = S.params.paused ? '已暫停 · 仍可微調觀看角度' : hintText; }
   var prefersStill = S.reduced;
-  if (prefersStill) setPaused(1);
-  S.on('reduced', function (r) { prefersStill = r; if (r) setPaused(1); });
+  if (prefersStill) { setPaused(1); flow = 0; }
+  showState();
+  S.on('reduced', function (r) { prefersStill = r; if (r) setPaused(1); showState(); });
 
   function mat(yaw, pitch, roll) {
     var cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch), cr = Math.cos(roll), sr = Math.sin(roll);
@@ -756,11 +760,14 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
 
   var qt = parseFloat(new URLSearchParams(location.search).get('t'));
   var art = isFinite(qt) ? qt : (prefersStill ? 46 : 21); // 首次載入就落在「緩慢受力」的構圖；靜止觀看停在張力移轉
-  var zoom = 0, press = 0, last = performance.now();
+  var zoom = 0, press = 0, last = performance.now(), flow = 1;
   S.start(function () {
-    var now = performance.now(), dt = Math.min(.05, Math.max(0, (now - last) / 1000)); last = now;
+    var now = performance.now(), raw = Math.max(0, (now - last) / 1000), dt = Math.min(.05, raw); last = now;
     var playing = !S.params.paused;
-    if (playing) art += dt;
+    // 減速與起步以真實經過時間計算，慢速裝置上也會在約 1.5 秒內完全停下
+    flow += ((playing ? 1 : 0) - flow) * (1 - Math.exp(-Math.min(raw, .5) * 4));
+    if (flow < .002 && !playing) flow = 0;
+    art += dt * flow;
 
     var p = S.pointer, w = c.clientWidth || 1, h = c.clientHeight || 1, aspect = w / h, portrait = aspect < .85;
     // 目標視角：滑鼠懸停時跟隨位置；拖曳（含觸控）時累加；離開後回到原位
@@ -808,12 +815,12 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
     });
 
     // 暫停或靜止觀看時，只在視角還在移動時繼續繪製，其餘時間不更新
-    var settling = Math.abs(view.ty - view.yaw) + Math.abs(view.tp - view.pitch) + Math.abs(view.vy) + Math.abs(view.vp) + Math.abs(zt - zoom) + press > .0008;
+    var settling = Math.abs(view.ty - view.yaw) + Math.abs(view.tp - view.pitch) + Math.abs(view.vy) + Math.abs(view.vp) + Math.abs(zt - zoom) + press + flow > .0008;
     S.reduced = !playing;
     if (!playing && settling) S.invalidate();
   });
   // 控制項切換時：播放就恢復連續繪製
-  S.on('param', function () { if (!S.params.paused) { S.reduced = false; last = performance.now(); } S.invalidate(); if (!S._raf) S._kick(); });
+  S.on('param', function () { showState(); if (!S.params.paused) { S.reduced = false; last = performance.now(); } S.invalidate(); if (!S._raf) S._kick(); });
 })();
 </script>
 </body>
