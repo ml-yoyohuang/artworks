@@ -30,3 +30,14 @@ dialog[data-state=closing]::backdrop{animation:dialog-backdrop-out 180ms ease bo
 @keyframes dialog-backdrop-out{from{opacity:1}to{opacity:0}}
 .reduce-motion dialog::backdrop{animation:none!important}
 @media(prefers-reduced-motion:reduce){dialog::backdrop{animation:none!important}}
+
+/* Exhibition title C: one small displacement, one opening in the last glyph. */
+#exhibition-title .title-glyph{display:inline-block;position:relative}
+#exhibition-title .title-space{visibility:hidden}
+#exhibition-title .title-half{position:absolute;inset:0;display:block}
+#exhibition-title .top{clip-path:polygon(0 0,100% 0,100% 53.85%,0 53.85%)}
+#exhibition-title .bottom{clip-path:polygon(0 53.85%,100% 53.85%,100% 100%,0 100%)}
+#exhibition-title[data-state=settled] .title-glyph:nth-child(3),#exhibition-title[data-state=settled] .title-glyph:nth-child(4){transform:translateY(.055em)}
+#exhibition-title[data-state=settled] .top{transform:translateY(-.0085em)}
+#exhibition-title[data-state=settled] .bottom{transform:translateY(.0085em)}
+@media(prefers-reduced-motion:reduce){#exhibition-title .title-glyph:nth-child(3),#exhibition-title .title-glyph:nth-child(4){transform:translateY(.055em)}#exhibition-title .top{transform:translateY(-.0085em)}#exhibition-title .bottom{transform:translateY(.0085em)}}
