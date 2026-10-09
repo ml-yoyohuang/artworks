@@ -12,12 +12,18 @@ function setProgress(p, label) {
   document.querySelector('.progress').setAttribute('aria-valuenow', String(pct));
 }
 
-function webgl() {
+/** three.js r186 needs WebGL2 and import maps; report which one is missing. */
+function support() {
+  // HTMLScriptElement.supports is newer than import maps themselves; only trust a definite "no".
+  if (window.HTMLScriptElement && HTMLScriptElement.supports && !HTMLScriptElement.supports('importmap')) {
+    return { reason: '此瀏覽器版本不支援 import map（需要 iOS 16.4／Safari 16.4、Chrome 89 以上）。' };
+  }
   try {
     const c = document.createElement('canvas');
-    const gl = c.getContext('webgl2') || c.getContext('webgl');
-    return gl || null;
-  } catch (e) { return null; }
+    const gl = c.getContext('webgl2');
+    if (gl) return { gl };
+    return { reason: c.getContext('webgl') ? '此裝置只支援 WebGL1，3D 展間需要 WebGL2。' : '此瀏覽器無法啟用 WebGL。' };
+  } catch (e) { return { reason: '此瀏覽器無法啟用 WebGL。' }; }
 }
 
 async function boot() {
@@ -44,13 +50,13 @@ async function boot() {
   const listNode = $('listview');
   const openList = () => openLayer(listNode);
 
-  const gl = webgl();
+  const { gl, reason } = support();
   if (!gl) {
     // No WebGL: the list *is* the exhibition.
     renderList(ex, { onEnter: openWork, standalone: true });
     $('lobby').hidden = true;
     listNode.querySelector('[data-close]').hidden = true;
-    const note = document.createElement('p'); note.className = 'sheet-note'; note.style.padding = '18px max(24px, 6vw) 0'; note.textContent = ex.ui.noWebGL;
+    const note = document.createElement('p'); note.className = 'sheet-note'; note.style.padding = '18px max(24px, 6vw) 0'; note.textContent = `${reason} ${ex.ui.noWebGL.replace(/^此瀏覽器無法啟用 WebGL，/, '')}`;
     listNode.insertBefore(note, $('list-body'));
     openLayer(listNode);
     return;
@@ -75,7 +81,7 @@ async function boot() {
     enter.addEventListener('click', () => app.enter());
   } catch (err) {
     console.warn(err);
-    $('notice').textContent = '3D 展間無法啟動，已改以作品列表呈現。';
+    $('notice').textContent = `3D 展間無法啟動，已改以作品列表呈現。（原因：${err && err.message ? err.message : err}）`;
     $('notice').hidden = false;
     renderList(ex, { onEnter: openWork, standalone: true });
     openList();
