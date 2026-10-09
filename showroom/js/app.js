@@ -1,6 +1,9 @@
 // The 3D gallery: renderer, input, focus on a work, render loop.
 import * as THREE from 'three';
 import { buildWorld } from './world.js';
+import { installHeightFog, updateAtmosphere } from './atmosphere.js';
+import { Post } from './post.js';
+import { STYLE } from './style.config.js';
 import { Artworks } from './artworks.js';
 import { Navigator } from './navigation.js';
 import { hang, START, ENTER_TARGET, isWalkable, EYE } from './plan.js';
@@ -11,7 +14,7 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export async function startApp({ ex, quality, viewer, reducedMotion, onProgress, openList }) {
   const stage = $('stage');
-  const renderer = new THREE.WebGLRenderer({ antialias: quality.antialias, powerPreference: 'high-performance' });
+  const renderer = new THREE.WebGLRenderer({ antialias: quality.antialias, powerPreference: 'high-performance', stencil: true });
   renderer.setPixelRatio(quality.pixelRatio);
   renderer.setSize(innerWidth, innerHeight);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -19,13 +22,15 @@ export async function startApp({ ex, quality, viewer, reducedMotion, onProgress,
   renderer.toneMappingExposure = 1;
   stage.append(renderer.domElement);
 
+  installHeightFog();
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.05, 120);
+  const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.05, 900);
   const fitFov = () => { camera.aspect = innerWidth / innerHeight; camera.fov = camera.aspect < 0.8 ? 70 : camera.aspect < 1.2 ? 62 : 55; camera.updateProjectionMatrix(); };
   fitFov();
 
   const world = buildWorld(scene, renderer, ex, quality);
   onProgress(0.55);
+  const post = new Post(renderer, scene, camera, quality);
   const placements = hang(ex.works);
   const art = new Artworks(scene, ex, placements, quality);
   art.reducedMotion = reducedMotion;
@@ -41,7 +46,7 @@ export async function startApp({ ex, quality, viewer, reducedMotion, onProgress,
     fadeEl.classList.remove('on'); await wait(reducedMotion ? 260 : 480);
   }
   const nav = new Navigator(camera, { reducedMotion, fade });
-  nav.set(START.x, START.z, START.yaw, 0.04);
+  nav.set(START.x, START.z, START.yaw, STYLE.camera.restPitch);
 
   // ---------- floor ring ----------
   const ring = new THREE.Group();
@@ -268,7 +273,7 @@ export async function startApp({ ex, quality, viewer, reducedMotion, onProgress,
   let pixelRatio = quality.pixelRatio;
   function renderOnce() {
     camera.updateMatrixWorld();
-    renderer.render(scene, camera);
+    post.render(world.day);
   }
   function loop(now) {
     raf = requestAnimationFrame(loop);
@@ -286,8 +291,7 @@ export async function startApp({ ex, quality, viewer, reducedMotion, onProgress,
 
     const day = world.update(nav.pos, dt);
     document.body.classList.toggle('dark', day < 0.42);
-    document.documentElement.style.setProperty('--vig', (0.14 + 0.36 * (1 - day)).toFixed(3));
-    document.documentElement.style.setProperty('--grain', (0.045 + 0.035 * (1 - day)).toFixed(3));
+    updateAtmosphere(world.atmosphere, now / 1000, day, reducedMotion);
     const ringCol = day > 0.5 ? 0x2c2b28 : 0xe8e4da;
     ringMat.color.setHex(ringCol); dotMat.color.setHex(ringCol);
     if (performance.now() > ringHold && ringHold && !nav.busy) { ringHold = 0; ringTarget = 0; }
@@ -301,7 +305,7 @@ export async function startApp({ ex, quality, viewer, reducedMotion, onProgress,
       if (currentRoom && room !== 'lobby') hallToast(ex.halls.find((h) => h.id === room));
       currentRoom = room;
     }
-    renderer.render(scene, camera);
+    post.render(day);
 
     // adaptive resolution: step down when sustained frame rate is below target
     perf.frames++; perf.acc += dt;
@@ -328,7 +332,7 @@ export async function startApp({ ex, quality, viewer, reducedMotion, onProgress,
     setTimeout(() => { $('lobby').hidden = true; }, 1400);
     $('corner').hidden = false;
     setMode('click');
-    nav.goTo(ENTER_TARGET.x, ENTER_TARGET.z, { yaw: ENTER_TARGET.yaw, pitch: 0, speed: 0.75 });
+    nav.goTo(ENTER_TARGET.x, ENTER_TARGET.z, { yaw: ENTER_TARGET.yaw, pitch: STYLE.camera.restPitch, speed: 0.75 });
     // later halls stream in once the visitor is inside
     const rest = ex.works.filter((w) => w.hall !== 'garden').map((w) => w.id);
     (window.requestIdleCallback || ((f) => setTimeout(f, 600)))(() => art.loadPosters(rest));
@@ -336,7 +340,7 @@ export async function startApp({ ex, quality, viewer, reducedMotion, onProgress,
 
   // test & debugging hooks (read-only use by the verification scripts)
   window.__showroom = {
-    nav, art, world, camera, renderer, placements, perf, quality,
+    nav, art, world, camera, renderer, placements, perf, quality, post, scene,
     focusWork, leaveFocus, setMode, enter,
     get focused() { return focused; }, get mode() { return mode; }, get pixelRatio() { return pixelRatio; },
     tapScreen: (x, y) => tap(x, y, 'mouse'),

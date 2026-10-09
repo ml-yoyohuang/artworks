@@ -263,11 +263,3 @@ export function showHint(text, key) {
   setTimeout(dismiss, 9000);
   return dismiss;
 }
-
-export function grainTexture() {
-  const c = document.createElement('canvas'); c.width = c.height = 160;
-  const ctx = c.getContext('2d'); const img = ctx.createImageData(160, 160);
-  for (let i = 0; i < img.data.length; i += 4) { const v = Math.random() * 255; img.data[i] = img.data[i + 1] = img.data[i + 2] = v; img.data[i + 3] = 255; }
-  ctx.putImageData(img, 0, 0);
-  $('grain').style.backgroundImage = `url(${c.toDataURL()})`;
-}

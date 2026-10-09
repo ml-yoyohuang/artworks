@@ -3,6 +3,7 @@
 // become a short fade-through instead of a glide.
 import * as THREE from 'three';
 import { EYE, isWalkable, clampWalkable, route, roomAt, ROOMS } from './plan.js';
+import { STYLE } from './style.config.js';
 
 const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const easeOutSine = (t) => Math.sin((t * Math.PI) / 2);
@@ -48,7 +49,7 @@ export class Navigator {
     const pts = route({ x: this.pos.x, z: this.pos.z }, dest);
     let length = 0; for (let i = 1; i < pts.length; i++) length += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].z - pts[i - 1].z);
     const endYaw = yaw ?? (pts.length > 2 ? Math.atan2(-(dest.x - pts[pts.length - 2].x), -(dest.z - pts[pts.length - 2].z)) : this.tYaw);
-    const endPitch = pitch ?? 0;
+    const endPitch = pitch ?? STYLE.camera.restPitch;
     if (this.reducedMotion || length > fadeOver) {
       this.anim = { lockLook: true, fading: true };
       await this.fade(() => { this.set(dest.x, dest.z, endYaw, endPitch); });

@@ -31,10 +31,6 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
 #stage.can-pick { cursor: pointer; }
 #stage.dragging { cursor: grabbing; }
 
-/* soft optical finish: vignette + film grain, kept very low */
-#vignette { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(120% 95% at 50% 46%, transparent 52%, rgba(0, 0, 0, var(--vig, 0.16)) 100%); }
-#grain { position: fixed; inset: -50%; pointer-events: none; opacity: var(--grain, 0.05); mix-blend-mode: overlay; background-size: 160px 160px; animation: grain 0.9s steps(5) infinite; }
-@keyframes grain { 0% { transform: translate(0, 0); } 20% { transform: translate(-3%, 2%); } 40% { transform: translate(2%, -3%); } 60% { transform: translate(-2%, -1%); } 80% { transform: translate(3%, 3%); } }
 #fade { position: fixed; inset: 0; pointer-events: none; background: var(--fade-color, #f2f0eb); opacity: 0; transition: opacity .45s var(--ease); }
 #fade.on { opacity: 1; }
 
@@ -160,6 +156,5 @@ body.dark #card { background: rgba(18, 18, 18, 0.92); color: #e7e3da; --line: rg
   #hallname { bottom: max(150px, env(safe-area-inset-bottom)); }
 }
 @media (prefers-reduced-motion: reduce) {
-  #grain { animation: none; }
   #card, #lobby, #viewer, #hallname { transition-duration: .2s; }
 }

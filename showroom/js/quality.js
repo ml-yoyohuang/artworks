@@ -19,9 +19,9 @@ export function detectQuality(gl) {
   if (['low', 'medium', 'high'].includes(q)) tier = q;
   const dpr = window.devicePixelRatio || 1;
   const T = {
-    high:   { pixelRatio: Math.min(dpr, 2),   shadows: true,  shadowSize: 2048, areaLights: 6, maxVideos: 6, antialias: true,  minPixelRatio: 1 },
-    medium: { pixelRatio: Math.min(dpr, 1.5), shadows: true,  shadowSize: 1024, areaLights: 4, maxVideos: 4, antialias: true,  minPixelRatio: 0.85 },
-    low:    { pixelRatio: Math.min(dpr, 1),   shadows: false, shadowSize: 512,  areaLights: 2, maxVideos: 3, antialias: false, minPixelRatio: 0.5 },
+    high:   { pixelRatio: Math.min(dpr, 2),   shadows: true,  shadowSize: 2048, areaLights: 6, maxVideos: 6, antialias: true,  minPixelRatio: 1, post: true, msaa: 4, bloomScale: 1, dust: 320 },
+    medium: { pixelRatio: Math.min(dpr, 1.5), shadows: true,  shadowSize: 1024, areaLights: 4, maxVideos: 4, antialias: true,  minPixelRatio: 0.85, post: true, msaa: 2, bloomScale: 0.5, dust: 180 },
+    low:    { pixelRatio: Math.min(dpr, 1),   shadows: false, shadowSize: 512,  areaLights: 2, maxVideos: 3, antialias: false, minPixelRatio: 0.5, post: false, msaa: 0, bloomScale: 0.5, dust: 80 },
   }[tier];
   return { tier, mobile, renderer, targetFps: mobile ? 30 : 55, ...T };
 }

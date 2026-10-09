@@ -44,43 +44,17 @@ function fillPixels(c, fn) {
   return c;
 }
 
-/** Light polished concrete. One tile covers 2.4 m, with saw-cut joints on its edges. */
-export function concreteTile(base = [206, 201, 192], size = 512, seed = 3, joints = true) {
-  const c = fillPixels(canvas(size, size), (x, y) => {
-    const u = x / size, v = y / size;
-    const cloud = fbm(u * 6, v * 6, 6, seed, 5);
-    const speck = hash(x, y, seed) ;
-    let k = 0.9 + (cloud - 0.5) * 0.16 + (speck > 0.985 ? -0.07 : speck < 0.01 ? 0.05 : 0) + (hash(x >> 1, y >> 1, seed + 9) - 0.5) * 0.025;
-    if (joints) {
-      const e = Math.min(x, y, size - 1 - x, size - 1 - y);
-      if (e < 1.2) k *= 0.93; else if (e < 2.5) k *= 0.985;
-    }
-    return base.map((ch) => Math.max(0, Math.min(255, ch * k)));
-  });
-  return toTexture(c, { repeat: true, anisotropy: 8 });
-}
-
-/** Barely-there plaster for white walls. */
-export function plasterTile(base = [242, 240, 235], seed = 11) {
-  const c = fillPixels(canvas(256, 256), (x, y) => {
-    const n = fbm(x / 256 * 8, y / 256 * 8, 8, seed, 4);
-    const k = 0.985 + (n - 0.5) * 0.04 + (hash(x, y, seed) - 0.5) * 0.012;
-    return base.map((ch) => Math.min(255, ch * k));
-  });
-  return toTexture(c, { repeat: true });
-}
-
 /**
  * Wall occlusion: dark at the skirting line and ceiling, softer at corners.
  * u runs along the wall (0..1), v is height / room height.
  */
-export function wallAO(roomHeight) {
+export function wallAO(roomHeight, cove = true) {
   const W = 128, H = 256;
   const c = fillPixels(canvas(W, H), (x, y) => {
     const u = x / (W - 1), v = 1 - y / (H - 1), hy = v * roomHeight;
     let ao = 1;
     ao *= 1 - 0.42 * Math.exp(-hy / 0.32);                    // floor contact
-    ao *= 1 - 0.30 * Math.exp(-(roomHeight - hy) / 0.55);     // ceiling cove
+    if (cove) ao *= 1 - 0.30 * Math.exp(-(roomHeight - hy) / 0.55); // ceiling cove (roofed rooms)
     ao *= 1 - 0.22 * Math.exp(-Math.min(u, 1 - u) / 0.025);   // corners
     ao *= 0.94 + 0.06 * Math.min(1, hy / roomHeight * 1.6);   // daylight falls from above
     const g = 255 * ao; return [g, g, g];
@@ -127,8 +101,6 @@ export function corridorTexture(kind, length, lights, height) {
     const tone = albedoCurve(t);
     let k = tone;
     // texture grain (scaled so dark areas keep a faint concrete/plaster texture)
-    const grain = (fbm(x / 24, y / 24, 1e6, kind === 'floor' ? 5 : 8, 3) - 0.5) * (kind === 'floor' ? 0.09 : 0.03);
-    k *= 1 + grain;
     if (kind === 'wall') {
       const hy = (1 - across) * height;
       k *= 1 - 0.4 * Math.exp(-hy / 0.3);
@@ -141,9 +113,8 @@ export function corridorTexture(kind, length, lights, height) {
       k *= 1 - 0.35 * Math.exp(-edge / 0.35);
       let p = 0; for (const L of lights) p += L.b * Math.exp(-((along - L.d) ** 2) / 1.6) * Math.exp(-((across - 0.5) ** 2) / 0.09);
       k *= 1 + p * 0.55;
-      if ((along % 2.4) < 0.012 * length / 22) k *= 0.85; // floor joints
     } else {
-      k *= 0.92;
+      k *= 1.0;
     }
     const v = Math.max(0, Math.min(255, k * 255));
     return [v * 1.0, v * 0.992, v * 0.975];

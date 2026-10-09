@@ -1,9 +1,12 @@
-// Builds the architecture: rooms, doors, skylights, benches, wall texts and
+// Builds the architecture: rooms, doors, benches, wall texts and
 // the daylight rig. Returns handles the app needs every frame (zone lighting).
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { ROOMS, DOORS, BENCHES, corridorProgress } from './plan.js';
+import { ROOMS, DOORS, BENCHES, WINDOWS, WALL, corridorProgress } from './plan.js';
 import * as TX from './textures.js';
+import { STYLE } from './style.config.js';
+import { createSky, createGround, createLandmark, createClouds, createDust } from './atmosphere.js';
+import { sandMaterial, wallMaterial, setSparkle, albedo } from './materials.js';
 
 const TILE = 2.4; // metres covered by one concrete tile
 
@@ -29,20 +32,38 @@ function quad(p, uv1, normal) {
 
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
 
+const sideHeight = (room, side) => (room.walls && room.walls[side]) ?? room.h;
+
 /**
  * Wall pieces of one room side. side: 'n' (z=z0, faces +z), 's' (z=z1, faces -z),
- * 'w' (x=x0, faces +x), 'e' (x=x1, faces -x). Doors on that side are cut out.
+ * 'w' (x=x0, faces +x), 'e' (x=x1, faces -x). Doors and windows are cut out.
+ * With `outward`, builds the exterior face of the same wall (WALL thick), leaving
+ * out stretches that are the inner face of a neighbouring room.
  */
-function wallSide(room, side, material, uvFor) {
+function wallSide(room, side, material, uvFor, { outward = false, height = sideHeight(room, side) } = {}) {
   const meshes = [];
   const alongX = side === 'n' || side === 's';
-  const fixed = { n: room.z0, s: room.z1, w: room.x0, e: room.x1 }[side];
-  const normal = { n: V(0, 0, 1), s: V(0, 0, -1), w: V(1, 0, 0), e: V(-1, 0, 0) }[side];
-  const s0 = alongX ? room.x0 : room.z0, s1 = alongX ? room.x1 : room.z1;
+  const inner = { n: room.z0, s: room.z1, w: room.x0, e: room.x1 }[side];
+  const away = side === 'n' || side === 'w' ? -1 : 1;
+  const fixed = outward ? inner + away * WALL : inner;
+  let normal = { n: V(0, 0, 1), s: V(0, 0, -1), w: V(1, 0, 0), e: V(-1, 0, 0) }[side];
+  if (outward) normal = normal.clone().negate();
+  const ext = outward ? WALL : 0;
+  const s0 = (alongX ? room.x0 : room.z0) - ext, s1 = (alongX ? room.x1 : room.z1) + ext;
   const openings = DOORS.filter((d) => (d.a === room.id || d.b === room.id) && (alongX ? d.axis === 'z' : d.axis === 'x'))
-    .filter((d) => alongX ? Math.abs((d.z0 + d.z1) / 2 - fixed) < 0.5 : Math.abs((d.x0 + d.x1) / 2 - fixed) < 0.5)
-    .map((d) => ({ a: alongX ? d.x0 : d.z0, b: alongX ? d.x1 : d.z1, h: d.h }))
-    .sort((a, b) => a.a - b.a);
+    .filter((d) => alongX ? Math.abs((d.z0 + d.z1) / 2 - inner) < 0.5 : Math.abs((d.x0 + d.x1) / 2 - inner) < 0.5)
+    .map((d) => ({ a: alongX ? d.x0 : d.z0, b: alongX ? d.x1 : d.z1, top: d.h, bottom: 0 }));
+  for (const w of WINDOWS) if (w.room === room.id && w.side === side) openings.push({ a: w.a, b: w.b, top: w.head, bottom: w.sill });
+  if (outward) {
+    for (const o of Object.values(ROOMS)) {
+      if (o === room) continue;
+      const opp = { n: o.z1, s: o.z0, w: o.x1, e: o.x0 }[side];
+      if (Math.abs(opp - fixed) > 0.02) continue;
+      const a = Math.max(s0, alongX ? o.x0 : o.z0), b = Math.min(s1, alongX ? o.x1 : o.z1);
+      if (b > a) openings.push({ a, b, top: height, bottom: 0, covered: true });
+    }
+  }
+  openings.sort((p, q) => p.a - q.a);
   const pt = (s, y) => (alongX ? V(s, y, fixed) : V(fixed, y, s));
   const piece = (a, b, y0, y1) => {
     if (b - a < 1e-3 || y1 - y0 < 1e-3) return;
@@ -52,12 +73,48 @@ function wallSide(room, side, material, uvFor) {
     m.receiveShadow = true; meshes.push(m);
   };
   let cur = s0;
-  for (const o of openings) { piece(cur, o.a, 0, room.h); piece(o.a, o.b, o.h, room.h); cur = o.b; }
-  piece(cur, s1, 0, room.h);
+  for (const o of openings) {
+    const a = Math.max(o.a, cur);
+    piece(cur, a, 0, height);
+    if (o.b > a) {
+      if (!o.covered) { piece(a, o.b, Math.min(o.top, height), height); piece(a, o.b, 0, o.bottom); }
+      else if (!outward) piece(a, o.b, 0, height);
+    }
+    cur = Math.max(cur, o.b);
+  }
+  piece(cur, s1, 0, height);
   return meshes;
 }
 
-/** Horizontal surface with rectangular holes (skylight wells). */
+/** Flat top of a wall (open-air rooms), spanning its thickness. */
+function wallCap(room, side, material) {
+  const h = sideHeight(room, side);
+  const alongX = side === 'n' || side === 's';
+  const inner = { n: room.z0, s: room.z1, w: room.x0, e: room.x1 }[side];
+  const outer = inner + (side === 'n' || side === 'w' ? -1 : 1) * WALL;
+  const s0 = (alongX ? room.x0 : room.z0) - WALL, s1 = (alongX ? room.x1 : room.z1) + WALL;
+  const lo = Math.min(inner, outer), hi = Math.max(inner, outer);
+  const P = alongX ? [V(s0, h, lo), V(s1, h, lo), V(s1, h, hi), V(s0, h, hi)] : [V(lo, h, s0), V(hi, h, s0), V(hi, h, s1), V(lo, h, s1)];
+  return new THREE.Mesh(quad(P, P.map(() => [0.5, 0.5]), V(0, 1, 0)), material);
+}
+
+/** Reveal faces of a window through the wall thickness. */
+function windowReveal(w, material) {
+  const room = ROOMS[w.room];
+  const alongX = w.side === 'n' || w.side === 's';
+  const inner = { n: room.z0, s: room.z1, w: room.x0, e: room.x1 }[w.side];
+  const outer = inner + (w.side === 'n' || w.side === 'w' ? -1 : 1) * WALL;
+  const lo = Math.min(inner, outer), hi = Math.max(inner, outer);
+  const faces = alongX
+    ? [[[V(w.a, w.sill, lo), V(w.b, w.sill, lo), V(w.b, w.sill, hi), V(w.a, w.sill, hi)], V(0, 1, 0)],
+       [[V(w.a, w.head, lo), V(w.b, w.head, lo), V(w.b, w.head, hi), V(w.a, w.head, hi)], V(0, -1, 0)],
+       [[V(w.a, w.sill, lo), V(w.a, w.sill, hi), V(w.a, w.head, hi), V(w.a, w.head, lo)], V(1, 0, 0)],
+       [[V(w.b, w.sill, lo), V(w.b, w.sill, hi), V(w.b, w.head, hi), V(w.b, w.head, lo)], V(-1, 0, 0)]]
+    : [];
+  return faces.map(([P, n]) => { const m = new THREE.Mesh(quad(P, P.map(() => [0.5, 0.5]), n), material); m.receiveShadow = true; m.castShadow = true; return m; });
+}
+
+/** Horizontal surface, optionally with rectangular holes. */
 function slab(room, y, normalY, material, holes = []) {
   const xs = [room.x0, room.x1, ...holes.flatMap((h) => [h.x0, h.x1])].sort((a, b) => a - b);
   const zs = [room.z0, room.z1, ...holes.flatMap((h) => [h.z0, h.z1])].sort((a, b) => a - b);
@@ -75,22 +132,6 @@ function slab(room, y, normalY, material, holes = []) {
   return meshes;
 }
 
-/** Recessed skylight: four inner faces and a luminous diffuser at the top. */
-function skylight(h, y, depth, wallMat, glowMat) {
-  const g = new THREE.Group();
-  const yt = y + depth;
-  const faces = [
-    [[V(h.x0, y, h.z0), V(h.x1, y, h.z0), V(h.x1, yt, h.z0), V(h.x0, yt, h.z0)], V(0, 0, 1)],
-    [[V(h.x0, y, h.z1), V(h.x1, y, h.z1), V(h.x1, yt, h.z1), V(h.x0, yt, h.z1)], V(0, 0, -1)],
-    [[V(h.x0, y, h.z0), V(h.x0, y, h.z1), V(h.x0, yt, h.z1), V(h.x0, yt, h.z0)], V(1, 0, 0)],
-    [[V(h.x1, y, h.z0), V(h.x1, y, h.z1), V(h.x1, yt, h.z1), V(h.x1, yt, h.z0)], V(-1, 0, 0)],
-  ];
-  for (const [P, n] of faces) g.add(new THREE.Mesh(quad(P, P.map((q) => [0.5, (q.y - y) / depth * 0.5 + 0.5]), n), wallMat));
-  const top = new THREE.Mesh(quad([V(h.x0, yt, h.z0), V(h.x1, yt, h.z0), V(h.x1, yt, h.z1), V(h.x0, yt, h.z1)], [[0, 0], [1, 0], [1, 1], [0, 1]], V(0, -1, 0)), glowMat);
-  g.add(top);
-  return g;
-}
-
 function textPlane(tex, width, aspect, material = {}) {
   const m = new THREE.Mesh(new THREE.PlaneGeometry(width, width / aspect), new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, toneMapped: false, ...material }));
   m.renderOrder = 2;
@@ -102,40 +143,39 @@ export function buildWorld(scene, renderer, exhibition, quality) {
   const { lobby: L, garden: G, corridor: C, darkroom: D } = ROOMS;
 
   // ---------- materials ----------
-  const plaster = TX.plasterTile();
-  const concrete = TX.concreteTile();
-  const darkConcrete = TX.concreteTile([40, 40, 42], 512, 21);
-  const aoLobby = TX.wallAO(L.h), aoGarden = TX.wallAO(G.h), aoDark = TX.wallAO(D.h);
+  const aoLobby = TX.wallAO(L.h, false), aoGarden = TX.wallAO(G.h, false), aoDark = TX.wallAO(D.h);
   for (const t of [aoLobby, aoGarden, aoDark]) t.channel = 1;
 
-  const whiteWall = (ao) => new THREE.MeshStandardMaterial({ color: 0xf3f1ec, map: plaster, aoMap: ao, aoMapIntensity: 1, roughness: 0.94 });
+  const whiteWall = (ao) => wallMaterial(ao);
   const lobbyWall = whiteWall(aoLobby), gardenWall = whiteWall(aoGarden);
-  const ceilingMat = new THREE.MeshStandardMaterial({ color: 0xf1efea, map: plaster, roughness: 1, emissive: 0xd8d4cc, emissiveIntensity: 0.42 });
-  const glowMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(1.35, 1.34, 1.3) });
 
   const benchesIn = (room) => BENCHES.filter((b) => b.room === room);
   const floorMat = (room, opts) => {
     const ao = TX.floorAO(room, opts); ao.channel = 1;
-    return new THREE.MeshStandardMaterial({ color: 0xffffff, map: concrete, aoMap: ao, aoMapIntensity: 1, roughness: 0.62, metalness: 0 });
+    return sandMaterial({ aoMap: ao });
   };
 
-  const gardenSky = [{ x0: -1.7, x1: 1.7, z0: -23.6, z1: -2.6 }];
-  const lobbySky = [{ x0: -4.2, x1: 4.2, z0: 2.4, z1: 8.6 }];
 
   const group = new THREE.Group(); scene.add(group);
   const add = (arr) => arr.forEach((m) => group.add(m));
 
   // ---------- lobby ----------
-  add(slab(L, 0, 1, floorMat(L, { pools: lobbySky.map((p) => ({ ...p, soft: 2.4 })), base: 0.8 })));
-  add(slab(L, L.h, -1, ceilingMat, lobbySky));
-  lobbySky.forEach((h) => group.add(skylight(h, L.h, 0.7, ceilingMat, glowMat)));
-  for (const s of ['n', 's', 'w', 'e']) add(wallSide(L, s, lobbyWall));
+  const outerWall = wallMaterial(null);
+  const shadowing = (arr) => arr.map((m) => { m.castShadow = true; return m; });
+  const openRoom = (room, innerMat) => {
+    for (const s of ['n', 's', 'w', 'e']) {
+      add(shadowing(wallSide(room, s, innerMat)));
+      add(shadowing(wallSide(room, s, outerWall, null, { outward: true })));
+      group.add(wallCap(room, s, outerWall));
+    }
+  };
+  add(slab(L, 0, 1, floorMat(L, { base: 0.94 })));
+  openRoom(L, lobbyWall);
 
   // ---------- garden ----------
-  add(slab(G, 0, 1, floorMat(G, { pools: gardenSky.map((p) => ({ ...p, soft: 2.8 })), blockers: benchesIn('garden'), base: 0.8 })));
-  add(slab(G, G.h, -1, ceilingMat, gardenSky));
-  gardenSky.forEach((h) => group.add(skylight(h, G.h, 0.8, ceilingMat, glowMat)));
-  for (const s of ['n', 's', 'w', 'e']) add(wallSide(G, s, gardenWall));
+  add(slab(G, 0, 1, floorMat(G, { blockers: benchesIn('garden'), base: 0.94 })));
+  openRoom(G, gardenWall);
+  for (const w of WINDOWS) add(windowReveal(w, outerWall));
 
   // ---------- corridor: baked white → black ----------
   const len = C.z1 - C.z0;
@@ -147,9 +187,9 @@ export function buildWorld(scene, renderer, exhibition, quality) {
   const cWall = TX.corridorTexture('wall', len, fixtures, C.h); cWall.channel = 1;
   const cFloor = TX.corridorTexture('floor', len, fixtures, C.h); cFloor.channel = 1;
   const cCeil = TX.corridorTexture('ceiling', len, fixtures, C.h); cCeil.channel = 1;
-  const corridorWallMat = new THREE.MeshStandardMaterial({ map: cWall, roughness: 0.92 });
-  const corridorFloorMat = new THREE.MeshStandardMaterial({ map: cFloor, roughness: 0.5 });
-  const corridorCeilMat = new THREE.MeshStandardMaterial({ map: cCeil, roughness: 1 });
+  const corridorWallMat = new THREE.MeshStandardMaterial({ map: cWall, color: albedo(STYLE.walls.color, STYLE.walls.albedoSaturation), roughness: 1 });
+  const corridorFloorMat = new THREE.MeshStandardMaterial({ map: cFloor, color: albedo(STYLE.palette.groundLight, STYLE.ground.albedoSaturation), roughness: 0.8 });
+  const corridorCeilMat = new THREE.MeshStandardMaterial({ map: cCeil, color: albedo(STYLE.walls.color, STYLE.walls.albedoSaturation), roughness: 1 });
   const alongU = (q) => [(C.z1 - q.z) / len, q.y / C.h];
   add(wallSide(C, 'w', corridorWallMat, alongU));
   add(wallSide(C, 'e', corridorWallMat, alongU));
@@ -165,22 +205,25 @@ export function buildWorld(scene, renderer, exhibition, quality) {
   }
   // recessed downlights whose brightness drains away
   const discGeo = new THREE.CircleGeometry(0.11, 24);
-  const ringGeo = new THREE.RingGeometry(0.11, 0.135, 24);
-  const ringMat = new THREE.MeshStandardMaterial({ color: 0x8c8a85, roughness: 0.7 });
   for (const fx of fixtures) {
     const z = C.z1 - fx.d;
     const disc = new THREE.Mesh(discGeo, new THREE.MeshBasicMaterial({ color: new THREE.Color(1, 0.97, 0.9).multiplyScalar(0.04 + 1.5 * fx.b) }));
     disc.rotation.x = Math.PI / 2; disc.position.set(0, C.h - 0.004, z); group.add(disc);
-    const ring = new THREE.Mesh(ringGeo, ringMat); ring.rotation.x = Math.PI / 2; ring.position.set(0, C.h - 0.002, z); group.add(ring);
   }
 
   // ---------- darkroom ----------
   const darkWall = new THREE.MeshStandardMaterial({ color: 0x242424, roughness: 0.9, aoMap: aoDark });
   const darkFloorAO = TX.floorAO(D, { blockers: benchesIn('darkroom'), base: 1, strength: 0.5, edge: 0.6 }); darkFloorAO.channel = 1;
-  const darkFloor = new THREE.MeshStandardMaterial({ color: 0x9a9a9c, map: darkConcrete, aoMap: darkFloorAO, roughness: quality.tier === 'low' ? 0.42 : 0.3, metalness: 0 });
+  const darkFloor = new THREE.MeshStandardMaterial({ color: 0x101011, aoMap: darkFloorAO, roughness: quality.tier === 'low' ? 0.42 : 0.3, metalness: 0 });
   add(slab(D, 0, 1, darkFloor));
   add(slab(D, D.h, -1, new THREE.MeshStandardMaterial({ color: 0x060606, roughness: 1 })));
   for (const s of ['n', 's', 'w', 'e']) add(wallSide(D, s, darkWall));
+  for (const room of [C, D]) {
+    const top = room.h + 0.25;
+    for (const s of ['n', 's', 'w', 'e']) add(shadowing(wallSide(room, s, outerWall, null, { outward: true, height: top })));
+    const roof = { x0: room.x0 - WALL, x1: room.x1 + WALL, z0: room.z0 - WALL, z1: room.z1 + WALL };
+    add(slab(roof, top, 1, outerWall));
+  }
 
   // ---------- door reveals ----------
   for (const d of DOORS) {
@@ -195,7 +238,7 @@ export function buildWorld(scene, renderer, exhibition, quality) {
     for (const [P, n] of faces) group.add(new THREE.Mesh(quad(P, P.map(() => [0.5, 0.5]), n), mat));
     // threshold
     const P = [V(d.x0, 0.001, d.z0), V(d.x1, 0.001, d.z0), V(d.x1, 0.001, d.z1), V(d.x0, 0.001, d.z1)];
-    const thr = new THREE.Mesh(quad(P, P.map(() => [0.5, 0.5]), V(0, 1, 0)), d.id === 'd3' ? darkFloor : new THREE.MeshStandardMaterial({ color: 0xb9b4ab, roughness: 0.7 }));
+    const thr = new THREE.Mesh(quad(P, P.map(() => [0.5, 0.5]), V(0, 1, 0)), d.id === 'd3' ? darkFloor : new THREE.MeshStandardMaterial({ color: albedo(STYLE.palette.groundDeep, STYLE.ground.albedoSaturation), roughness: 1 }));
     group.add(thr);
   }
   // corridor walls continue through the hall's end wall
@@ -258,16 +301,23 @@ export function buildWorld(scene, renderer, exhibition, quality) {
   }
 
   // ---------- light rig ----------
-  const hemi = new THREE.HemisphereLight(0xfbf9f4, 0xa39d92, 1.65);
+  const D_ = STYLE.daylight, P_ = STYLE.palette, LT = STYLE.light;
+  const hemi = new THREE.HemisphereLight(new THREE.Color(LT.hemiSky), new THREE.Color(LT.hemiGround), LT.hemiIntensity);
   scene.add(hemi);
-  const sun = new THREE.DirectionalLight(0xfff6ea, 1.25);
-  sun.position.set(3.5, 22, -4); sun.target.position.set(-1.5, 0, -12);
+  const sun = new THREE.DirectionalLight(new THREE.Color(LT.sunColor), LT.sunIntensity);
+  {
+    // azimuth 0 = light travelling toward −z; position is opposite the travel direction
+    const el = THREE.MathUtils.degToRad(LT.sunElevation), az = THREE.MathUtils.degToRad(LT.sunAzimuth);
+    const dir = new THREE.Vector3(Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el));
+    sun.target.position.set(0, 0, -8);
+    sun.position.copy(sun.target.position).addScaledVector(dir, 45);
+  }
   scene.add(sun, sun.target);
   if (quality.shadows) {
     sun.castShadow = true;
     sun.shadow.mapSize.set(quality.shadowSize, quality.shadowSize);
-    const cam = sun.shadow.camera; cam.left = -16; cam.right = 16; cam.top = 26; cam.bottom = -26; cam.near = 1; cam.far = 50;
-    sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.02; sun.shadow.radius = 5;
+    const cam = sun.shadow.camera; cam.left = -24; cam.right = 24; cam.top = 24; cam.bottom = -24; cam.near = 1; cam.far = 100;
+    sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.03; sun.shadow.radius = LT.shadowRadius; sun.shadow.intensity = LT.shadowIntensity;
     renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.shadowMap.autoUpdate = false; renderer.shadowMap.needsUpdate = true;
   }
@@ -277,8 +327,15 @@ export function buildWorld(scene, renderer, exhibition, quality) {
   scene.environment = env;
   pmrem.dispose();
 
-  const bg = new THREE.Color();
-  scene.background = bg;
+  // sky + fog: horizon-coloured in daylight, sinking to black toward the darkroom
+  const sky = createSky(); scene.add(sky);
+  scene.add(createGround());
+  const landmark = createLandmark(); scene.add(landmark);
+  const clouds = createClouds(); scene.add(clouds);
+  const dust = createDust(quality.dust); scene.add(dust);
+  scene.background = null;
+  const fogDay = new THREE.Color(P_.skyHorizon), fogDark = new THREE.Color(STYLE.fog.darkColor);
+  scene.fog = new THREE.FogExp2(fogDay.clone(), STYLE.fog.density);
 
   /** Zone lighting: `day` is 1 in daylight halls, 0 deep in the darkroom. */
   let day = 1;
@@ -292,14 +349,15 @@ export function buildWorld(scene, renderer, exhibition, quality) {
   function update(pos, dt) {
     const target = dayAt(pos);
     day += (target - day) * Math.min(1, dt * 2.2);
-    hemi.intensity = 1.65 * day;
-    sun.intensity = 1.25 * day;
-    scene.environmentIntensity = 0.32 * day;
-    ceilingMat.emissiveIntensity = 0.42 * day;
-    renderer.toneMappingExposure = 1.0 + 0.12 * (1 - day);
-    bg.setRGB(0.01 * day, 0.01 * day, 0.01 * day);
+    hemi.intensity = LT.hemiIntensity * day;
+    sun.intensity = LT.sunIntensity * day;
+    scene.environmentIntensity = LT.envIntensity * day;
+    renderer.toneMappingExposure = D_.exposure + D_.darkExposureBoost * (1 - day);
+    scene.fog.color.copy(fogDark).lerp(fogDay, day);
+    sky.position.copy(pos);
+    setSparkle(day);
     return day;
   }
 
-  return { group, update, get day() { return day; }, hemi, sun };
+  return { group, update, get day() { return day; }, hemi, sun, atmosphere: { clouds, dust, landmark } };
 }

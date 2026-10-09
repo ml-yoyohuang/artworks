@@ -7,11 +7,20 @@ export const EYE = 1.6;
 export const BODY_RADIUS = 0.38;
 
 export const ROOMS = {
-  lobby:    { id: 'lobby',    x0: -7,  x1: 7,     z0: 0.15,  z1: 11,    h: 7.0 },
-  garden:   { id: 'garden',   x0: -7,  x1: 7,     z0: -26,   z1: -0.15, h: 5.2 },
+  // Open-air rooms have no roof; `walls` overrides the height of single sides.
+  lobby:    { id: 'lobby',    x0: -7,  x1: 7,     z0: 0.15,  z1: 11,    h: 3.8, open: true, walls: { s: 1.1, e: 1.1, w: 1.1 } },
+  garden:   { id: 'garden',   x0: -7,  x1: 7,     z0: -26,   z1: -0.15, h: 3.8, open: true },
   corridor: { id: 'corridor', x0: -1.75, x1: 1.75, z0: -48,  z1: -26.3, h: 3.6 },
   darkroom: { id: 'darkroom', x0: -40, x1: -2.05, z0: -54.4, z1: -38.4, h: 4.6 },
 };
+
+/** Wall thickness between and around rooms. */
+export const WALL = 0.3;
+
+/** Framed openings that are not walkable: a picture window toward the landmark. */
+export const WINDOWS = [
+  { room: 'garden', side: 'n', a: 2.7, b: 6.3, sill: 0.8, head: 2.9 },
+];
 
 // A door is a passage through a wall. `axis` is the direction of travel through it.
 export const DOORS = [
@@ -22,7 +31,7 @@ export const DOORS = [
 
 // Free-standing furniture that blocks movement: benches.
 export const BENCHES = [
-  { room: 'garden', x: 0, z: -14.5, w: 2.6, d: 0.55, h: 0.44, color: 0xdedad2 },
+  { room: 'garden', x: 0, z: -14.5, w: 2.6, d: 0.55, h: 0.44, color: 0xe6e2d6 },
   { room: 'darkroom', x: -34.2, z: -46.4, w: 2.4, d: 0.55, h: 0.44, color: 0x101011 },
 ];
 

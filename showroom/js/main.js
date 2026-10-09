@@ -1,6 +1,6 @@
 // Entry: loads the exhibition text, decides between the 3D room and the
 // 2D list (no WebGL), and reports loading progress in the entrance hall.
-import { renderList, Viewer, openLayer, closeLayer, grainTexture } from './ui.js';
+import { renderList, Viewer, openLayer, closeLayer } from './ui.js';
 
 const $ = (id) => document.getElementById(id);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -28,7 +28,6 @@ function support() {
 
 async function boot() {
   if (location.protocol === 'file:') return;
-  grainTexture();
   let ex;
   try {
     ex = await fetch('exhibition.json', { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });

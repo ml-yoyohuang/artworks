@@ -9,5 +9,7 @@ Files are copied unmodified:
 - `build/three.module.js`, `build/three.core.js`
 - `addons/lights/RectAreaLightUniformsLib.js`, `addons/lights/RectAreaLightTexturesLib.js` (from `examples/jsm/lights/`)
 - `addons/environments/RoomEnvironment.js` (from `examples/jsm/environments/`)
+- `addons/postprocessing/UnrealBloomPass.js`, `addons/postprocessing/Pass.js` (from `examples/jsm/postprocessing/`)
+- `addons/shaders/CopyShader.js`, `addons/shaders/LuminosityHighPassShader.js` (from `examples/jsm/shaders/`)
 
 License: MIT, see `LICENSE` (Copyright © 2010-2026 three.js authors).

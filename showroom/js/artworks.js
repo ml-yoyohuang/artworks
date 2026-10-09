@@ -6,6 +6,8 @@ import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUnifo
 import * as TX from './textures.js';
 
 const MEDIA = 'media/';
+/** 1 while the post pipeline renders the scene into its target (artwork mask on). */
+export const ART_MASK = { value: 0 };
 const tmpV = new THREE.Vector3();
 
 export class Artworks {
@@ -29,7 +31,18 @@ export class Artworks {
       g.position.set(p.x, 0, p.z);
       g.rotation.y = Math.atan2(p.nx, p.nz); // local +z = outward normal
       const pal = new THREE.Color(work.palette[0]);
-      const imgMat = new THREE.MeshBasicMaterial({ color: pal, toneMapped: false });
+      const imgMat = new THREE.MeshBasicMaterial({ color: pal, toneMapped: false, fog: false }); // artworks are never fogged
+      // alpha 0 marks artwork pixels, so post-processing can leave them untouched
+      // (only while post-processing reads it; on screen alpha must stay 1)
+      imgMat.onBeforeCompile = (sh) => {
+        sh.uniforms.uArtMask = ART_MASK;
+        sh.fragmentShader = sh.fragmentShader
+          .replace('#include <common>', '#include <common>\nuniform float uArtMask;')
+          .replace('#include <dithering_fragment>', '#include <dithering_fragment>\n\tgl_FragColor.a = mix( gl_FragColor.a, 0.0, uArtMask );');
+      };
+      imgMat.customProgramCacheKey = () => 'artwork-mask';
+      // stencil 1 marks artwork pixels so floating dust is never drawn over a work
+      Object.assign(imgMat, { stencilWrite: true, stencilRef: 1, stencilFunc: THREE.AlwaysStencilFunc, stencilZPass: THREE.ReplaceStencilOp });
       const image = new THREE.Mesh(new THREE.PlaneGeometry(p.w, p.h), imgMat);
       const item = { work, index: i + 1, place: p, group: g, image, imgMat, poster: null, video: null, vtex: null,
         state: 'idle', playing: false, color: new THREE.Color(work.palette[0]), targetColor: new THREE.Color(work.palette[0]),
