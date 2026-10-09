@@ -81,4 +81,6 @@ instance=new p5(p=>{
  document.querySelector('#download').addEventListener('click',()=>p.saveCanvas(meta.id+'-'+seed,'png'));
 },stage);
 })();
+</script><script>/* 從《對頁》雜誌進入時，返回連結改回雜誌對應的章節 */
+(()=>{const b=document.querySelector('a.back');if(!b)return;const m=/^magazine(?::([a-z0-9-]+))?$/.exec(new URLSearchParams(location.search).get('from')||'');let hit=!!m;if(!hit){try{const r=new URL(document.referrer);hit=r.origin===location.origin&&/\/magazine\/(index\.html)?$/.test(r.pathname);}catch(_){}}if(!hit)return;b.href='../magazine/index.html'+(m&&m[1]?'#'+m[1]:'');b.textContent='← 對頁 / 第一期';})();
 </script></body></html>

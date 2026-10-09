@@ -31,4 +31,6 @@ canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();fail('繪圖�
 resize();status.textContent=reduced.matches?'靜態觀看 · 已減少動態':(mode==='rd'||mode==='growth'?'觸摸畫面，播種生命':mode==='feedback'||CONFIG.slug==='liquid-distortion'?'移動游標或觸摸畫面':'');if(simProgram&&label==='RGBA8')status.textContent+=' · 8-bit 相容模式';canvas.dataset.renderer=webgl2?'WebGL2':'WebGL1';canvas.dataset.buffer=label;wake();
 }catch(e){fail(e.message);}
 })();
+</script><script>/* 從《對頁》雜誌進入時，返回連結改回雜誌對應的章節 */
+(()=>{const b=document.querySelector('a.back');if(!b)return;const m=/^magazine(?::([a-z0-9-]+))?$/.exec(new URLSearchParams(location.search).get('from')||'');let hit=!!m;if(!hit){try{const r=new URL(document.referrer);hit=r.origin===location.origin&&/\/magazine\/(index\.html)?$/.test(r.pathname);}catch(_){}}if(!hit)return;b.href='../magazine/index.html'+(m&&m[1]?'#'+m[1]:'');b.textContent='← 對頁 / 第一期';})();
 </script></body></html>
