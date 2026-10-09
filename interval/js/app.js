@@ -6,7 +6,7 @@ let cardAnimation=null,cardEpoch=0,focusGeneration=0;
 const dialogMotion=new Map();
 let entryBusy=false,entryGeneration=0;
 const entryPointer=matchMedia('(hover:hover) and (pointer:fine)');
-const entryMotion={hoverDistance:1.8,hoverDuration:1000,returnDuration:800,pressDistance:4.5,pressDuration:1250,holdDuration:160};
+const entryMotion={hoverDistance:1.8,hoverDuration:1000,returnDuration:800,pressDistance:4.5,pressDuration:1250,holdDuration:160,pressTilt:3*Math.PI/180};
 const exhibitionText='形狀如何共處，規則如何產生秩序，材料如何留下時間？這座漂浮在暮色中的館，讓五個展廳各自遵守不同的空間規則。從測量的薄屏、共處的色面，到生長的標本與交疊的曝光，最後在一張接近消失的膜前停下。世界不必先對齊，關係也能慢慢形成。';
 function setReduced(value){reduced=value;document.body.classList.toggle("reduce-motion",value);if(value)finishIntroTitle();if(value&&cardAnimation)cardAnimation.finish();if(value)for(const state of dialogMotion.values())state.animation?.finish();if(world){world.reduced=value;if(value)world.resetEntryApproach();if(world.membrane)world.membrane.last=0;if(world.entryFilm)world.entryFilm.last=0;world.invalidate();}$('motion').setAttribute('aria-pressed',String(value));$('motion').textContent=value?'動態已減少':'減少動態';}
 setReduced(reduced);reduceQuery.addEventListener('change',e=>setReduced(e.matches));$('motion').onclick=()=>setReduced(!reduced);
@@ -36,15 +36,13 @@ $('about-button').onclick=()=>showAbout();$('chapter-name').onclick=()=>showAbou
 function entryFeedback(amount,duration=entryMotion.hoverDuration){if(!entryBusy&&!$('veil').classList.contains('active')&&world?.section===0&&!reduced)world.approachEntry(amount,duration);}
 $('enter').addEventListener('pointerenter',()=>{if(entryPointer.matches)entryFeedback(entryMotion.hoverDistance);});
 $('enter').addEventListener('pointerleave',()=>entryFeedback(0,entryMotion.returnDuration));
-$('enter').addEventListener('pointerdown',()=>entryFeedback(entryMotion.pressDistance,entryMotion.pressDuration));
 $('enter').addEventListener('pointercancel',()=>entryFeedback(0,entryMotion.returnDuration));
 $('enter').addEventListener('focus',()=>{if(entryPointer.matches&&$('enter').matches(':focus-visible'))entryFeedback(entryMotion.hoverDistance);});
 $('enter').addEventListener('blur',()=>entryFeedback(0,entryMotion.returnDuration));
-$('enter').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')entryFeedback(entryMotion.pressDistance,entryMotion.pressDuration);});
 async function enterExhibition(){
  if(!world)return changeRoom(1);if(current!==0||entryBusy)return;
  entryBusy=true;$('enter').setAttribute('aria-busy','true');const generation=++entryGeneration,entryWorld=world;finishIntroTitle();
- const completed=reduced||await entryWorld.approachEntry(entryMotion.pressDistance,entryMotion.pressDuration);
+ const completed=reduced||await entryWorld.approachEntry(entryMotion.pressDistance,entryMotion.pressDuration,entryMotion.pressTilt);
  if(completed&&!reduced)await new Promise(r=>setTimeout(r,entryMotion.holdDuration));
  if(generation!==entryGeneration||world!==entryWorld||current!==0)return;
  entryBusy=false;$('enter').removeAttribute('aria-busy');if(completed&&!document.hidden)await changeRoom(1);
@@ -91,9 +89,9 @@ document.addEventListener('visibilitychange',()=>{world?.pause(document.hidden||
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.querySelector('dialog[open]')){hideCard();pauseTour();}});
 function fallback(reason){entryGeneration++;entryBusy=false;$('enter').removeAttribute('aria-busy');moveGeneration++;transitionGeneration++;$('veil').classList.remove('active');world?.shutdown();world=null;current=0;station=0;exitTour();updateChrome();$('work-card').hidden=true;document.body.classList.add('fallback');$('loading-preview').hidden=false;$('status').textContent=reason+' 所有 35 件作品可從目錄觀看。';$('enter').textContent='以作品目錄參觀 ↗';$('enter').onclick=()=>showDialog('catalog-dialog');$('intro-tour').hidden=true;$('room-controls').hidden=true;$('chapter').hidden=true;world=null;}
 async function boot(){try{const response=await fetch('exhibition.json');if(!response.ok)throw Error('資料未能載入');ex=await response.json();buildUI();if(new URLSearchParams(location.search).has('flat')){fallback('已切換為平面觀看模式。');return;}
- const {MuseumWorld}=await import('./world.js?v=entry-feedback-2');world=new MuseumWorld($('world'),ex,{onWork:w=>{if(selected?.id===w.id&&!$('work-card').hidden&&!$('work-card').inert)hideCard();else focusWork(w);},onStation:goStation,onPortal:()=>{},onReady:()=>{$('loading-preview').hidden=true;$('status').textContent='展覽已就緒　／　約 3 分鐘導覽，可隨時停留';},onFailure:fallback,reduced});
+ const {MuseumWorld}=await import('./world.js?v=entry-tilt-3');world=new MuseumWorld($('world'),ex,{onWork:w=>{if(selected?.id===w.id&&!$('work-card').hidden&&!$('work-card').inert)hideCard();else focusWork(w);},onStation:goStation,onPortal:()=>{},onReady:()=>{$('loading-preview').hidden=true;$('status').textContent='展覽已就緒　／　約 3 分鐘導覽，可隨時停留';},onFailure:fallback,reduced});
  // A read-only snapshot assists repeatable local QA and never starts artwork contexts.
- Object.defineProperty(window,'intervalState',{get:()=>({current,station,selected:selected?.id,viewer:viewerWork?.id,position:world?.snapshot(),tour:tour?{index:tour.index,paused:tour.paused}:null,render:world?{pending:world.pendingTextures,textures:world.renderer.info.memory.textures,geometries:world.renderer.info.memory.geometries,calls:world.renderer.info.render.calls,scheduled:!!world.raf,moving:!!world.animation||!!world.entryApproach,entryOffset:world.entryOffset,ambient:world.ambientActive(),membraneTime:world.membrane?.elapsed??null,entryFilmTime:world.entryFilm?.elapsed??null}:null})});
+ Object.defineProperty(window,'intervalState',{get:()=>({current,station,selected:selected?.id,viewer:viewerWork?.id,position:world?.snapshot(),tour:tour?{index:tour.index,paused:tour.paused}:null,render:world?{pending:world.pendingTextures,textures:world.renderer.info.memory.textures,geometries:world.renderer.info.memory.geometries,calls:world.renderer.info.render.calls,scheduled:!!world.raf,moving:!!world.animation||!!world.entryApproach,entryOffset:world.entryOffset,entryTilt:world.entryTilt,ambient:world.ambientActive(),membraneTime:world.membrane?.elapsed??null,entryFilmTime:world.entryFilm?.elapsed??null}:null})});
  }catch(err){fallback('三維展場無法啟動。');if(!ex){$('status').innerHTML='展覽資料未能載入。請確認以靜態伺服器開啟。<a href="collection.html">開啟完整作品目錄 ↗</a>';}}finally{startIntroTitle(()=>reduced);}
 }
 document.querySelector('.skip').onclick=e=>{if(ex){e.preventDefault();showDialog('catalog-dialog');}};
