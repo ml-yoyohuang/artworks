@@ -70,56 +70,101 @@ export function createGround() {
 }
 
 /**
- * Distant landmark: a plain monolith on an accent-coloured plinth, with a
- * vertical light pillar rising from it. The only saturated colour in the space.
+ * Red clay jars, half sunk into low sand mounds: the only saturated colour in
+ * the space. Profiles are lathed from a few points, so the forms stay minimal.
  */
-export function createLandmark() {
-  const L = STYLE.landmark, P = STYLE.pillar, C = STYLE.palette;
+export function createJars() {
+  const J = STYLE.jars, P = STYLE.palette;
   const group = new THREE.Group();
-  group.position.set(L.x, 0, L.z);
-  const fogged = (mat, k) => { mat.defines = { ...(mat.defines || {}), FOG_AMOUNT: k.toFixed(3) }; return mat; };
-  const stone = new THREE.Mesh(new THREE.BoxGeometry(L.width, L.height, L.depth), fogged(new THREE.MeshStandardMaterial({ color: new THREE.Color(L.color), roughness: 1 }), L.fogAmount));
-  stone.position.y = L.baseHeight + L.height / 2;
-  const base = new THREE.Mesh(new THREE.BoxGeometry(L.baseWidth, L.baseHeight, L.baseDepth), fogged(new THREE.MeshStandardMaterial({ color: new THREE.Color(C.accent), roughness: 0.9 }), L.baseFogAmount));
-  base.position.y = L.baseHeight / 2;
-  group.add(stone, base);
+  group.position.set(J.x, 0, J.z);
+  // radius, height (normalised): round belly, short neck, thin lip
+  const profile = [[0, 0], [0.3, 0.015], [0.47, 0.16], [0.53, 0.42], [0.47, 0.68], [0.3, 0.86], [0.19, 0.93], [0.19, 0.99], [0.215, 1.0], [0.2, 1.02], [0.17, 1.0]];
+  const clay = new THREE.MeshStandardMaterial({ color: new THREE.Color(P.accent), roughness: 0.92, side: THREE.DoubleSide });
+  clay.defines = { FOG_AMOUNT: J.fogAmount.toFixed(3) };
+  const sand = new THREE.MeshStandardMaterial({ color: new THREE.Color(P.groundDeep).lerp(new THREE.Color(P.groundLight), 0.5), roughness: 1 });
+  for (const j of J.items) {
+    const geo = new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r * j.height * 0.82, y * j.height)), 48);
+    const jar = new THREE.Mesh(geo, clay);
+    jar.position.set(j.x, -j.height * j.sunk, j.z);
+    jar.rotation.set(j.tiltX, j.turn, j.tiltZ);
+    jar.castShadow = true;
+    const mound = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), sand);
+    mound.scale.set(j.height * 0.95, j.height * 0.22, j.height * 0.95);
+    mound.position.set(j.x, -0.01, j.z);
+    mound.receiveShadow = true;
+    group.add(jar, mound);
+  }
+  return group;
+}
 
-  // light pillar: one vertical billboard that turns to face the visitor; a soft
-  // gaussian core plus a wide halo across its width, so it has no hard edge.
-  const mat = new THREE.ShaderMaterial({
-    transparent: true, depthWrite: false, fog: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide, toneMapped: false,
-    uniforms: {
-      color: { value: new THREE.Color(C.highlight) }, height: { value: P.height }, fadeIn: { value: P.fadeIn }, pulse: { value: 1 },
-      core: { value: P.radius }, halo: { value: P.haloRadius }, coreOpacity: { value: P.coreOpacity }, haloOpacity: { value: P.haloOpacity }, hdr: { value: P.hdr },
-    },
-    vertexShader: `uniform float halo; varying vec2 vP;
-      void main() {
-        vec3 centre = ( modelMatrix * vec4( 0.0, 0.0, 0.0, 1.0 ) ).xyz;
-        vec2 toCam = cameraPosition.xz - centre.xz;
-        float l = length( toCam );
-        vec2 f = l > 1e-3 ? toCam / l : vec2( 0.0, 1.0 );
-        vec3 right = vec3( f.y, 0.0, -f.x );
-        vP = vec2( position.x, position.y );            // x in metres across, y from the base
-        vec3 w = centre + right * position.x + vec3( 0.0, position.y, 0.0 );
-        gl_Position = projectionMatrix * viewMatrix * vec4( w, 1.0 );
-      }`,
-    fragmentShader: `uniform vec3 color; uniform float height; uniform float fadeIn; uniform float pulse;
-      uniform float core; uniform float halo; uniform float coreOpacity; uniform float haloOpacity; uniform float hdr; varying vec2 vP;
-      void main() {
-        float x = abs( vP.x );
-        float a = coreOpacity * exp( - x * x / ( core * core ) ) + haloOpacity * exp( - x * x / ( halo * halo * 0.35 ) );
-        float y = vP.y;
-        a *= smoothstep( 0.0, fadeIn, y ) * ( 1.0 - smoothstep( height * 0.2, height, y ) ) * pulse;
-        a = clamp( a, 0.0, 4.0 );
-        gl_FragColor = vec4( color * a * hdr, a );
-      }`,
-  });
-  const geo = new THREE.PlaneGeometry(P.haloRadius * 2.4, P.height, 1, 1);
-  geo.translate(0, P.height / 2, 0);
-  const beam = new THREE.Mesh(geo, mat);
-  beam.position.y = L.baseHeight; beam.renderOrder = 5; beam.frustumCulled = false;
-  group.add(beam);
-  group.userData.pillar = [beam];
+/**
+ * Wind trails: long ribbons arcing across the sky. Bright heads with long tails
+ * flow along each ribbon; the ribbon always turns its face toward the viewer.
+ */
+export function createWindTrails() {
+  const W = STYLE.windTrails, P = STYLE.palette;
+  let seed = W.seed;
+  const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  const group = new THREE.Group();
+  for (let k = 0; k < W.count; k++) {
+    const heading = W.heading + (rnd() - 0.5) * W.headingSpread;           // direction the wind blows
+    const dir = new THREE.Vector3(Math.sin(heading), 0, -Math.cos(heading));
+    const side = new THREE.Vector3(-dir.z, 0, dir.x);
+    const centre = new THREE.Vector3(W.centre[0] + (rnd() - 0.5) * W.spread, W.height[0] + rnd() * (W.height[1] - W.height[0]), W.centre[1] + (rnd() - 0.5) * W.spread);
+    const len = W.length[0] + rnd() * (W.length[1] - W.length[0]);
+    const amp = W.sway * (0.5 + rnd()), lift = W.lift * (rnd() - 0.5), ph = rnd() * 6.28;
+    const pts = [];
+    for (let i = 0; i <= 6; i++) {
+      const t = i / 6 - 0.5;
+      pts.push(centre.clone().addScaledVector(dir, t * len).addScaledVector(side, Math.sin(t * 2.6 + ph) * amp).add(new THREE.Vector3(0, Math.sin(t * 2.0 + ph) * lift, 0)));
+    }
+    const curve = new THREE.CatmullRomCurve3(pts, false, 'centripetal');
+    const N = 160, pos = [], tan = [], sideA = [], u = [], idx = [];
+    for (let i = 0; i <= N; i++) {
+      const p = curve.getPointAt(i / N), tg = curve.getTangentAt(i / N);
+      for (const sgn of [-1, 1]) { pos.push(p.x, p.y, p.z); tan.push(tg.x, tg.y, tg.z); sideA.push(sgn); u.push(i / N); }
+      if (i < N) { const a = i * 2; idx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); }
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    g.setAttribute('aTangent', new THREE.Float32BufferAttribute(tan, 3));
+    g.setAttribute('aSide', new THREE.Float32BufferAttribute(sideA, 1));
+    g.setAttribute('aU', new THREE.Float32BufferAttribute(u, 1));
+    g.setIndex(idx);
+    const mat = new THREE.ShaderMaterial({
+      transparent: true, depthWrite: false, fog: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide, toneMapped: false,
+      uniforms: {
+        time: { value: 0 }, color: { value: new THREE.Color(P.highlight) }, width: { value: W.width * (0.6 + rnd() * 0.8) },
+        opacity: { value: W.opacity * (0.55 + rnd() * 0.45) }, hdr: { value: W.hdr },
+        pulses: { value: 0 }, rate: { value: 0 }, offset: { value: rnd() }, softness: { value: W.softness }, fade: { value: 1 },
+      },
+      vertexShader: `attribute vec3 aTangent; attribute float aSide; attribute float aU; uniform float width; varying float vSide; varying float vU;
+        void main() {
+          vec3 toCam = normalize( cameraPosition - position );
+          vec3 off = cross( aTangent, toCam );
+          float l = length( off ); off = l > 1e-4 ? off / l : vec3( 0.0, 1.0, 0.0 );
+          float taper = sin( 3.14159 * aU );
+          vSide = aSide; vU = aU;
+          gl_Position = projectionMatrix * viewMatrix * vec4( position + off * width * taper * aSide, 1.0 );
+        }`,
+      fragmentShader: `uniform float time; uniform vec3 color; uniform float opacity; uniform float hdr; uniform float rate; uniform float pulses; uniform float offset; uniform float softness; uniform float fade; varying float vSide; varying float vU;
+        void main() {
+          float across = 1.0 - smoothstep( 0.15, 1.0, abs( vSide ) );
+          float f = fract( vU * pulses - time * rate + offset );
+          // a soft elongated dash: fades in and out symmetrically, no bright head
+          float streak = smoothstep( 0.0, softness, f ) * ( 1.0 - smoothstep( 1.0 - softness, 1.0, f ) ) * 0.85;
+          float ends = smoothstep( 0.0, 0.18, vU ) * ( 1.0 - smoothstep( 0.82, 1.0, vU ) );
+          float a = clamp( across * ( 0.12 + streak ) * ends * opacity * fade, 0.0, 2.0 );
+          gl_FragColor = vec4( color * a * hdr, a );
+        }`,
+    });
+    // one wind: every streak moves at the same speed in metres per second
+    const pulses = Math.round(W.pulses[0] + rnd() * (W.pulses[1] - W.pulses[0]));
+    mat.uniforms.pulses.value = pulses;
+    mat.uniforms.rate.value = W.windSpeed * pulses / curve.getLength();
+    const m = new THREE.Mesh(g, mat); m.frustumCulled = false; m.renderOrder = -4;
+    group.add(m);
+  }
   return group;
 }
 
@@ -180,13 +225,11 @@ export function createDust(count) {
 }
 
 /** Per-frame: advance slow motion (frozen under reduced motion), fade with daylight. */
-export function updateAtmosphere({ clouds, dust, landmark }, t, day, reduced) {
+export function updateAtmosphere({ clouds, dust, trails }, t, day, reduced) {
   const M = STYLE.motion;
   const time = reduced ? 0 : t;
-  if (clouds) { clouds.material.uniforms.time.value = time; clouds.position.x = 0; }
+  if (clouds) clouds.material.uniforms.time.value = time;
   if (dust) { dust.material.uniforms.time.value = time; dust.material.uniforms.opacity.value = M.dustOpacity * day; dust.visible = day > 0.02; }
-  if (landmark) {
-    const pulse = reduced ? 1 : 1 + M.pillarPulse * Math.sin((t / M.pillarPeriod) * Math.PI * 2);
-    for (const m of landmark.userData.pillar) m.material.uniforms.pulse.value = pulse;
-  }
+  if (trails) for (const m of trails.children) { m.material.uniforms.time.value = time; m.material.uniforms.fade.value = day; }
+  if (trails) trails.visible = day > 0.01;
 }

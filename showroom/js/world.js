@@ -5,7 +5,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { ROOMS, DOORS, BENCHES, WINDOWS, WALL, corridorProgress } from './plan.js';
 import * as TX from './textures.js';
 import { STYLE } from './style.config.js';
-import { createSky, createGround, createLandmark, createClouds, createDust } from './atmosphere.js';
+import { createSky, createGround, createJars, createWindTrails, createClouds, createDust } from './atmosphere.js';
 import { sandMaterial, wallMaterial, setSparkle, albedo } from './materials.js';
 
 const TILE = 2.4; // metres covered by one concrete tile
@@ -338,7 +338,8 @@ export function buildWorld(scene, renderer, exhibition, quality) {
   // sky + fog: horizon-coloured in daylight, sinking to black toward the darkroom
   const sky = createSky(); scene.add(sky);
   scene.add(createGround());
-  const landmark = createLandmark(); scene.add(landmark);
+  const jars = createJars(); scene.add(jars);
+  const trails = createWindTrails(); scene.add(trails);
   const clouds = createClouds(); scene.add(clouds);
   const dust = createDust(quality.dust); scene.add(dust);
   scene.background = null;
@@ -367,5 +368,5 @@ export function buildWorld(scene, renderer, exhibition, quality) {
     return day;
   }
 
-  return { group, update, get day() { return day; }, hemi, sun, atmosphere: { clouds, dust, landmark } };
+  return { group, update, get day() { return day; }, hemi, sun, atmosphere: { clouds, dust, trails, jars } };
 }

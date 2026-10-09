@@ -56,18 +56,18 @@ GitHub Pages 發布整個 repo 時，網址為 `…/artworks/showroom/`。
 
 | 區塊 | 主要參數 | 作用 |
 | --- | --- | --- |
-| `palette` | `groundLight` `groundDeep` `skyTop` `skyHorizon` `highlight` `accent` | 4 主色＋強調色。強調色只用在遠方地標的底座 |
+| `palette` | `groundLight` `groundDeep` `skyTop` `skyHorizon` `highlight` `accent` | 4 主色＋強調色。強調色只用在戶外半埋的紅色陶罐 |
 | `sky` | `horizonSoftness` `gradientPower` | 天頂→地平線漸層的柔和度 |
 | `fog` | `density` `heightBoost` `heightFalloff` `darkColor` | 指數霧濃度、貼地高度霧的強度與厚度；`darkColor` 讓暗房保持全黑 |
 | `light` | `sunColor` `sunIntensity` `sunElevation` `sunAzimuth` `shadowRadius` `shadowIntensity` `hemiSky` `hemiGround` `hemiIntensity` `envIntensity` | 一盞暖色主光（方向、強度、極柔陰影）與天空／地面半球光 |
-| `landmark` | `x` `z` `width` `height` `depth` `color` `baseWidth` `baseHeight` `baseDepth` `fogAmount` `baseFogAmount` | 遠方石碑與紅色底座；`fogAmount` 越低越能穿透霧 |
-| `pillar` | `radius` `haloRadius` `height` `coreOpacity` `haloOpacity` `hdr` `fadeIn` | 垂直光柱的核心、外暈、亮度（`hdr` 決定進入 bloom 的程度） |
+| `jars` | `x` `z` `fogAmount` `items[]`（`height` `sunk` `tiltX` `tiltZ` `turn`） | 戶外被沙半掩的紅色陶罐：位置、大小、埋入比例、傾斜；`fogAmount` 越低紅色越能穿透霧 |
+| `windTrails` | `count` `centre` `spread` `height` `length` `heading` `headingSpread` `sway` `lift` `width` `opacity` `hdr` `softness` `pulses` `windSpeed` | 天空中流動的風之光跡：數量、範圍、高度、單一風向、彎曲、寬度、亮度、光流柔和度與統一風速 |
 | `ground` | `albedoSaturation` `albedoBrightness` `roughness` `driftScale` `reliefScale` `reliefStrength` `sparkle*` `foregroundShade` `foregroundRange` | 沙地顏色、緩慢色彩漂移、表面起伏、視角閃爍亮點、近景明度（前中遠分層） |
 | `walls` | `color` `albedoSaturation` `albedoBrightness` `aoStrength` | 單色牆面；亮度決定牆在中景的明度層 |
 | `camera` | `restPitch` | 預設微仰角，讓地平線落在畫面低處 |
 | `bloom` | `strength` `radius` `threshold` `smoothWidth` | 柔和 bloom：高門檻、低強度 |
 | `vignette` | `strength` `darkStrength` `softness` | 暈影（只作用在空間，不覆蓋作品） |
-| `motion` | `cloud*` `dust*` `pillarPulse` `pillarPeriod` | 高空雲層、浮塵、光柱呼吸；所有週期都大於 4 秒，減少動態時靜止 |
+| `motion` | `cloud*` `dust*` | 高空雲層與浮塵；所有週期都大於 4 秒，減少動態時靜止 |
 | `daylight` | `exposure` `darkExposureBoost` | 白晝→暗房的曝光變化 |
 
-建築本身（牆高、取景窗位置）在 `js/plan.js` 的 `ROOMS` 與 `WINDOWS`。
+建築本身（牆高、取景窗位置）在 `js/plan.js` 的 `ROOMS` 與 `WINDOWS`；陶罐預設放在第二廳取景窗的視線上。

@@ -8,7 +8,7 @@ export const STYLE = {
     skyTop: '#BFC8AE',        // zenith
     skyHorizon: '#E8E6D6',    // horizon = fog colour
     highlight: '#FFF5DE',     // light pillar, sun, sparkle
-    accent: '#B8361F',        // used once: the base of the distant landmark
+    accent: '#B8361F',        // used once: the half-buried clay jars
   },
 
   // ---- sky dome ----
@@ -40,24 +40,35 @@ export const STYLE = {
     envIntensity: 0.12,
   },
 
-  // ---- distant landmark (visual anchor) + vertical light pillar ----
-  landmark: {
-    x: 27, z: -104,           // on the sight line through the second hall's window
-    width: 6, height: 34, depth: 3,
-    color: '#D4A08A',         // same as deep sand: it should read as a shape in the haze
-    baseWidth: 12, baseHeight: 3.2, baseDepth: 6,   // accent-coloured plinth
-    fogAmount: 0.65,          // 1 = fogged like everything else; lower keeps the silhouette
-    baseFogAmount: 0.1,       // the accent stays faintly visible through the haze
+  // ---- half-buried clay jars (the single accent) ----
+  jars: {
+    x: 13, z: -70,            // on the sight line through the second hall's window
+    fogAmount: 0.4,           // lower = the red stays clearer through the haze
+    items: [                  // positions relative to the group; height in metres; sunk = share below the sand
+      { x: 0, z: 0, height: 2.6, sunk: 0.34, tiltX: 0.14, tiltZ: -0.34, turn: 0 },
+      { x: -3.3, z: -7.8, height: 1.6, sunk: 0.24, tiltX: 0.26, tiltZ: 1.25, turn: 0.9 },
+    ],
   },
-  pillar: {
-    radius: 1.6,              // bright core
-    haloRadius: 6.5,          // soft outer glow
-    height: 420,
-    coreOpacity: 0.6,
-    haloOpacity: 0.14,
-    hdr: 1.8,                 // >1 lets the core cross the bloom threshold
-    fadeIn: 10,               // metres from the ground until full brightness
+
+  // ---- wind: flowing trails of light across the sky ----
+  windTrails: {
+    count: 9,
+    seed: 20261010,
+    centre: [14, -45],        // x, z of the area the trails cross
+    spread: 150,              // metres the trails are scattered over
+    height: [30, 78],         // metres above the sand
+    length: [170, 290],
+    heading: 0.55,            // radians: the one wind direction every trail follows (0 = toward −z)
+    headingSpread: 0.04,      // keep near 0: one wind, parallel trails
+    sway: 7, lift: 5,         // gentle bends only, so trails stay nearly parallel
+    width: 2.4,               // ribbon half-width in metres
+    opacity: 0.7,
+    hdr: 1.9,                 // >1 lets the bright heads bloom
+    softness: 0.35,           // share of each streak spent fading in/out (soft at both ends, no 'head')
+    pulses: [2, 4],           // streaks travelling along one ribbon
+    windSpeed: 8,             // metres per second, the same for every trail (one wind)
   },
+
   ground: {
     size: 1800,               // the sand plain that runs to the horizon
     albedoSaturation: 0.55,   // palette colour → surface colour (warm light adds saturation back)
@@ -103,7 +114,6 @@ export const STYLE = {
   motion: {
     cloudHeight: 150, cloudScale: 0.0085, cloudSpeed: 0.0045, cloudOpacity: 0.32,   // ≈ 220 s per noise cell
     dustBox: 14, dustSize: 1.1, dustOpacity: 0.55, dustPeriod: 14,                   // seconds per sway
-    pillarPulse: 0.06, pillarPeriod: 9,                                               // ±6 % brightness over 9 s
   },
 
   // ---- the walk from daylight to darkroom (kept from the original concept) ----

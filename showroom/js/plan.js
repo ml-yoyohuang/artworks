@@ -18,7 +18,7 @@ export const ROOMS = {
 /** Wall thickness between and around rooms. */
 export const WALL = 0.3;
 
-/** Framed openings that are not walkable: a picture window toward the landmark. */
+/** Framed openings that are not walkable: a picture window toward the clay jars. */
 export const WINDOWS = [
   { room: 'plane', side: 'n', a: 2.7, b: 6.3, sill: 0.8, head: 2.9 },
 ];
