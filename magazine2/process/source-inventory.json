@@ -16,7 +16,11 @@
       "#2A2926"
     ],
     "no": "S01",
-    "series": "效果研究"
+    "series": "效果研究",
+    "group": "effects",
+    "alt": "校樣之晨的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -35,7 +39,11 @@
       "#7A2E1D"
     ],
     "no": "S02",
-    "series": "效果研究"
+    "series": "效果研究",
+    "group": "effects",
+    "alt": "兩卷底片的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -54,7 +62,11 @@
       "#E8735A"
     ],
     "no": "S03",
-    "series": "效果研究"
+    "series": "效果研究",
+    "group": "effects",
+    "alt": "午後泳池的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -72,7 +84,11 @@
       "#D9372B"
     ],
     "no": "S04",
-    "series": "效果研究"
+    "series": "效果研究",
+    "group": "effects",
+    "alt": "側臉與紅日的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -91,7 +107,11 @@
       "#C8A44B"
     ],
     "no": "S05",
-    "series": "效果研究"
+    "series": "效果研究",
+    "group": "effects",
+    "alt": "石中之水的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -109,7 +129,11 @@
       "#F5C6A5"
     ],
     "no": "S06",
-    "series": "效果研究"
+    "series": "效果研究",
+    "group": "effects",
+    "alt": "殘光的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -128,7 +152,11 @@
       "#9C4A35"
     ],
     "no": "S07",
-    "series": "效果研究"
+    "series": "效果研究",
+    "group": "effects",
+    "alt": "石紋的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -147,7 +175,11 @@
       "#FF5A1F"
     ],
     "no": "S08",
-    "series": "效果研究"
+    "series": "效果研究",
+    "group": "effects",
+    "alt": "斷訊的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -165,7 +197,11 @@
       "#F2D4A9"
     ],
     "no": "S09",
-    "series": "效果研究"
+    "series": "效果研究",
+    "group": "effects",
+    "alt": "石膏習作的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -183,7 +219,11 @@
       "#110F0E"
     ],
     "no": "S10",
-    "series": "媒材研究"
+    "series": "媒材研究",
+    "group": "materials",
+    "alt": "顯影的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -201,7 +241,11 @@
       "#1F5FBF"
     ],
     "no": "S11",
-    "series": "媒材研究"
+    "series": "媒材研究",
+    "group": "materials",
+    "alt": "套色的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -219,7 +263,11 @@
       "#EFEBE0"
     ],
     "no": "S12",
-    "series": "媒材研究"
+    "series": "媒材研究",
+    "group": "materials",
+    "alt": "日光標本的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -238,7 +286,11 @@
       "#101815"
     ],
     "no": "S13",
-    "series": "媒材研究"
+    "series": "媒材研究",
+    "group": "materials",
+    "alt": "隔著玻璃的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -257,7 +309,11 @@
       "#2B2C27"
     ],
     "no": "S14",
-    "series": "媒材研究"
+    "series": "媒材研究",
+    "group": "materials",
+    "alt": "石上地衣的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -276,7 +332,11 @@
       "#F1A33D"
     ],
     "no": "S15",
-    "series": "媒材研究"
+    "series": "媒材研究",
+    "group": "materials",
+    "alt": "北天曝光的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "shader",
@@ -294,7 +354,34 @@
       "#A3412D"
     ],
     "no": "S16",
-    "series": "媒材研究"
+    "series": "媒材研究",
+    "group": "materials",
+    "alt": "紗上波紋的生成作品畫面",
+    "width": 720,
+    "height": 450
+  },
+  {
+    "kind": "shader",
+    "id": "thin-film",
+    "href": "../shader-demos2/thin-film.html",
+    "img": "../shader-demos2/thumbs/thin-film.jpg",
+    "name": "薄處有光",
+    "en": "Where It Thins · Thin-Film Interference",
+    "desc": "這個畫面像一張薄到快要消失的膜，光在開口旁排出一圈一圈的顏色。",
+    "tags": "珠光 · 張力 · 凝視",
+    "use": "作品集封面、材質與光學研究、沉浸式展覽入口",
+    "colors": [
+      "#161518",
+      "#E9E4DA",
+      "#8F86A8",
+      "#B88A5A"
+    ],
+    "no": "S17",
+    "series": "媒材研究",
+    "group": "materials",
+    "alt": "薄處有光的生成作品畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "p5",
@@ -312,7 +399,11 @@
       "#26408b"
     ],
     "no": "P01",
-    "series": "規則研究"
+    "series": "規則研究",
+    "group": "rules",
+    "alt": "順風千行（種子 2024）的完成畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "p5",
@@ -330,7 +421,11 @@
       "#e2b55c"
     ],
     "no": "P02",
-    "series": "規則研究"
+    "series": "規則研究",
+    "group": "rules",
+    "alt": "靜默測繪（種子 4096）的完成畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "p5",
@@ -348,7 +443,11 @@
       "#2440c4"
     ],
     "no": "P03",
-    "series": "規則研究"
+    "series": "規則研究",
+    "group": "rules",
+    "alt": "切分的秩序（種子 27182）的完成畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "p5",
@@ -366,7 +465,11 @@
       "#e28aa6"
     ],
     "no": "P04",
-    "series": "規則研究"
+    "series": "規則研究",
+    "group": "rules",
+    "alt": "細胞的禮貌（種子 314）的完成畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "p5",
@@ -384,7 +487,11 @@
       "#cca65c"
     ],
     "no": "P05",
-    "series": "規則研究"
+    "series": "規則研究",
+    "group": "rules",
+    "alt": "漆金結（種子 2024）的完成畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "p5",
@@ -402,7 +509,11 @@
       "#e0775a"
     ],
     "no": "P06",
-    "series": "規則研究"
+    "series": "規則研究",
+    "group": "rules",
+    "alt": "夜珊瑚（種子 99991）的完成畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "p5",
@@ -420,7 +531,11 @@
       "#eef3f1"
     ],
     "no": "P07",
-    "series": "規則研究"
+    "series": "規則研究",
+    "group": "rules",
+    "alt": "藍曬葉脈（種子 2024）的完成畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "p5",
@@ -438,7 +553,11 @@
       "#8a3b25"
     ],
     "no": "P08",
-    "series": "規則研究"
+    "series": "規則研究",
+    "group": "rules",
+    "alt": "銅版星圖（種子 123457）的完成畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "p5",
@@ -456,7 +575,11 @@
       "#b4502f"
     ],
     "no": "P09",
-    "series": "規則研究"
+    "series": "規則研究",
+    "group": "rules",
+    "alt": "黃昏群舞（種子 8128）的完成畫面",
+    "width": 720,
+    "height": 450
   },
   {
     "kind": "p5",
@@ -474,6 +597,178 @@
       "#ff4a2a"
     ],
     "no": "P10",
-    "series": "規則研究"
+    "series": "規則研究",
+    "group": "rules",
+    "alt": "字散（種子 42）的完成畫面",
+    "width": 720,
+    "height": 450
+  },
+  {
+    "kind": "p5",
+    "id": "negotiated-territories",
+    "href": "../p5-demos2/negotiated-territories.html",
+    "img": "../p5-demos2/thumbs/geo-negotiated-territories.jpg",
+    "name": "讓出一寸",
+    "en": "An Inch, Given Up",
+    "desc": "一個區域取得更多空間，必然改變鄰近區域的存在方式。",
+    "tags": "地景 · 協商 · 比例",
+    "use": "關於我們、組織架構、資源分配說明",
+    "colors": [
+      "#F1ECE2",
+      "#1F7A9C"
+    ],
+    "no": "G01",
+    "series": "平面關係",
+    "group": "geometric",
+    "alt": "暖白底上由十塊矩形拼成的地景：一塊佔近一半的深土色主體、數塊稻田綠與麥稈色區域，以及一道細長的翠鳥藍色帶。",
+    "width": 900,
+    "height": 709
+  },
+  {
+    "kind": "p5",
+    "id": "registration-pending",
+    "href": "../p5-demos2/registration-pending.html",
+    "img": "../p5-demos2/thumbs/geo-registration-pending.jpg",
+    "name": "三色未合",
+    "en": "Three Inks, Not Yet One",
+    "desc": "影像的完整，是幾層各自存在的色彩在某個時刻相遇。",
+    "tags": "孔版 · 套印 · 疊色",
+    "use": "出版與印刷品牌、活動主視覺、頁首",
+    "colors": [
+      "#F3EEE3",
+      "#0F7C86"
+    ],
+    "no": "G02",
+    "series": "平面關係",
+    "group": "geometric",
+    "alt": "米白紙上的三色套印：藍綠大圓、黃色矩形與玫瑰色半圓稍微錯開，疊印處呈現深綠、橘紅與深藍。",
+    "width": 900,
+    "height": 709
+  },
+  {
+    "kind": "p5",
+    "id": "reverse-of-a-plane",
+    "href": "../p5-demos2/reverse-of-a-plane.html",
+    "img": "../p5-demos2/thumbs/geo-reverse-of-a-plane.jpg",
+    "name": "背面也是顏色",
+    "en": "The Back Is Also a Colour",
+    "desc": "看似完整的表面，仍保留著尚未被看見的一面。",
+    "tags": "剪紙 · 翻折 · 群青",
+    "use": "產品揭曉、作品集封面、互動式說明",
+    "colors": [
+      "#B9B2A5",
+      "#2F45C8"
+    ],
+    "no": "G03",
+    "series": "平面關係",
+    "group": "geometric",
+    "alt": "石灰色底上五片大小不一的白色紙片，其中一片沿邊翻起，露出群青色背面與下方的深色空間。",
+    "width": 900,
+    "height": 709
+  },
+  {
+    "kind": "p5",
+    "id": "moving-absence",
+    "href": "../p5-demos2/moving-absence.html",
+    "img": "../p5-demos2/thumbs/geo-moving-absence.jpg",
+    "name": "缺席者的散步",
+    "en": "The Absent One Takes a Walk",
+    "desc": "空白能夠改變色塊的形狀，也能改變觀看的重心。",
+    "tags": "負空間 · 光 · 重心",
+    "use": "首頁主視覺、攝影作品集、品牌宣言",
+    "colors": [
+      "#EDE7DD",
+      "#4A2340"
+    ],
+    "no": "G04",
+    "series": "平面關係",
+    "group": "geometric",
+    "alt": "淺麻色畫面上有茄紫長方形、墨色半圓與粉膚色色帶，一個大圓形開口切穿它們，露出下方帶細線的檸檬黃底。",
+    "width": 900,
+    "height": 709
+  },
+  {
+    "kind": "p5",
+    "id": "chromatic-sediments",
+    "href": "../p5-demos2/chromatic-sediments.html",
+    "img": "../p5-demos2/thumbs/geo-chromatic-sediments.jpg",
+    "name": "讀過的厚度",
+    "en": "The Thickness of What Was Read",
+    "desc": "時間被轉譯成厚度，閱讀留下不同顏色的層。",
+    "tags": "閱讀 · 地層 · 螢光筆",
+    "use": "年表、長文閱讀進度、歷史頁",
+    "colors": [
+      "#EEE9DE",
+      "#23283F"
+    ],
+    "no": "G05",
+    "series": "平面關係",
+    "group": "geometric",
+    "alt": "淺紙色底上由下而上堆疊的水平色層：藍黑、舊紙色與石板灰的厚層之間夾著螢光黃綠細線，中段一條斷層使部分地層錯開。",
+    "width": 900,
+    "height": 709
+  },
+  {
+    "kind": "p5",
+    "id": "a-beat-behind",
+    "href": "../p5-demos2/a-beat-behind.html",
+    "img": "../p5-demos2/thumbs/geo-a-beat-behind.jpg",
+    "name": "晚到的那幾位",
+    "en": "The Few Who Arrive Late",
+    "desc": "群體共享一套規則，個體仍保留自己的時間。",
+    "tags": "舞台 · 編舞 · 延遲",
+    "use": "團隊介紹、協作產品、活動節目單",
+    "colors": [
+      "#161616",
+      "#F0B400"
+    ],
+    "no": "G06",
+    "series": "平面關係",
+    "group": "geometric",
+    "alt": "深色舞台上，骨白長條、鎘黃方塊與鋼藍細條排成隊形，其中幾個形狀落後，還在移動途中。",
+    "width": 900,
+    "height": 709
+  },
+  {
+    "kind": "p5",
+    "id": "within-the-same-frame",
+    "href": "../p5-demos2/within-the-same-frame.html",
+    "img": "../p5-demos2/thumbs/geo-within-the-same-frame.jpg",
+    "name": "門後還有門",
+    "en": "A Door Behind the Door",
+    "desc": "靠近一個局部，會改變它在世界裡的分量。",
+    "tags": "房間 · 遞迴 · 尺度",
+    "use": "網站地圖、產品架構、知識導覽",
+    "colors": [
+      "#E9E1CF",
+      "#B8613F"
+    ],
+    "no": "G07",
+    "series": "平面關係",
+    "group": "geometric",
+    "alt": "灰泥色畫面上幾個大小不一的色塊：陶土、煤煙、藍灰與橄欖，每個色塊內又有更小的同色系構圖。",
+    "width": 900,
+    "height": 709
+  },
+  {
+    "kind": "p5",
+    "id": "residual-geometry",
+    "href": "../p5-demos2/residual-geometry.html",
+    "img": "../p5-demos2/thumbs/geo-residual-geometry.jpg",
+    "name": "它剛剛在這裡",
+    "en": "It Was Just Here",
+    "desc": "形狀離開之後，它曾經存在的位置仍在參與畫面。",
+    "tags": "補色 · 餘像 · 痕跡",
+    "use": "回顧頁、版本紀錄、紀念專題",
+    "colors": [
+      "#F4EFE6",
+      "#E4572E"
+    ],
+    "no": "G08",
+    "series": "平面關係",
+    "group": "geometric",
+    "alt": "米色紙上一個朱橘色圓形與兩塊深綠矩形，旁邊留著淺水色與淡玫瑰色的褪色印記，標示它們先前的位置。",
+    "width": 900,
+    "height": 709
   }
 ]

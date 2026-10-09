@@ -1,0 +1,73 @@
+{
+  "reports": [
+    {
+      "width": 320,
+      "works": 35,
+      "loadedImages": 43,
+      "filters": [
+        35,
+        17,
+        18,
+        8
+      ],
+      "search": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "works": 35,
+      "loadedImages": 43,
+      "filters": [
+        35,
+        17,
+        18,
+        8
+      ],
+      "search": true,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "works": 35,
+      "loadedImages": 43,
+      "filters": [
+        35,
+        17,
+        18,
+        8
+      ],
+      "search": true,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "works": 35,
+      "loadedImages": 43,
+      "filters": [
+        35,
+        17,
+        18,
+        8
+      ],
+      "search": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "works": 35,
+      "loadedImages": 43,
+      "filters": [
+        35,
+        17,
+        18,
+        8
+      ],
+      "search": true,
+      "overflow": false
+    }
+  ],
+  "newReturnPages": 9,
+  "geometricNextPreservesSource": true,
+  "noJavaScriptWorks": 35,
+  "errors": []
+}

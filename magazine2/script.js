@@ -7,13 +7,19 @@
   const count = document.querySelector('#result-count');
   const empty = document.querySelector('.empty');
   let active = 'all';
+  function matchesFilter(work, filter) {
+    return filter === 'all' || work.dataset.kind === filter || work.dataset.series === filter;
+  }
+  buttons.forEach(button => {
+    button.querySelector('span').textContent = works.filter(work => matchesFilter(work, button.dataset.filter)).length;
+  });
   function update() {
     const query = search.value.trim().normalize('NFKC').toLocaleLowerCase();
     const words = query.split(/\s+/).filter(Boolean);
     let total = 0;
     for (const work of works) {
       const text = work.dataset.search.normalize('NFKC').toLocaleLowerCase();
-      const visible = (active === 'all' || work.dataset.kind === active) && words.every(word => text.includes(word));
+      const visible = matchesFilter(work, active) && words.every(word => text.includes(word));
       work.hidden = !visible;
       if (visible) total++;
     }

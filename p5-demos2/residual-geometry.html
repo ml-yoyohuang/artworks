@@ -126,6 +126,43 @@ h1 { font-size: 30px; font-weight: 400; letter-spacing: .16em; margin: 10px 0 4p
   </aside>
 </main>
 <noscript><style>.stage .fail{display:block}</style></noscript>
+<script>
+// Preserve the collection that opened this work, including file:// and new tabs.
+(function () {
+  'use strict';
+  var fromMagazine = new URLSearchParams(location.search).get('from') === 'magazine2';
+  var destination = new URL('../magazine2/index.html', location.href);
+  if (!fromMagazine && document.referrer) {
+    try {
+      var referrer = new URL(document.referrer);
+      var directory = destination.pathname.replace(/index\.html$/, '');
+      fromMagazine = referrer.origin === destination.origin &&
+        (referrer.pathname === destination.pathname || referrer.pathname === directory);
+    } catch (_) {}
+  }
+  if (!fromMagazine) return;
+  var back = document.querySelector('a.back');
+  if (back) {
+    back.href = '../magazine2/index.html#index';
+    back.innerHTML = '<span>←</span> 間物 · 作品索引';
+    back.setAttribute('aria-label', '返回間物作品索引');
+  }
+  document.querySelectorAll('.pn a').forEach(function (link) {
+    var next = new URL(link.href, location.href);
+    if (next.pathname.endsWith('/p5-demo-list.html')) {
+      link.href = '../magazine2/index.html#index';
+    } else {
+      next.searchParams.set('from', 'magazine2');
+      link.href = next.href;
+    }
+  });
+  var fallback = document.querySelector('#fallback a');
+  if (fallback) {
+    fallback.href = '../magazine2/index.html#index';
+    fallback.textContent = '← 回到間物作品索引';
+  }
+})();
+</script>
 <script src="lib/p5.min.js"></script>
 <script>
 (function () {

@@ -17,3 +17,9 @@
 .hero-inset,.hero-inset:hover{transform:translate(var(--plate-x,0px),var(--plate-y,0px)) rotate(-3deg);transition:transform .45s cubic-bezier(.22,.61,.36,1)}
 .hero-art.is-motion-paused .hero-main img,.hero-art.is-motion-paused .hero-inset{transition:none}
 @media(prefers-reduced-motion:reduce){.hero-art.is-exposed .hero-main img{filter:none;transform:none}.hero-inset,.hero-inset:hover{transform:rotate(-3deg)}}
+
+/* New surface studies retain the entire geometric composition. */
+.surface-story{padding-top:75px;margin-top:30px;border-top:0;padding-bottom:25px}
+.surface-paper img{aspect-ratio:900/709;object-fit:contain}
+.work[data-series="geometric"] img{object-fit:contain}
+@media(max-width:760px){.surface-story{padding-top:52px;margin-top:0;padding-bottom:0}.surface-story .margin-note{bottom:65px}.filters{flex-wrap:wrap;justify-content:flex-start;gap:6px 22px}.filters button{min-height:44px}.filters button[aria-pressed=true]::after{bottom:0}}
