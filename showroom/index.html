@@ -2,6 +2,10 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
+<script>
+  // Relative paths (css/, js/, media/) need the folder URL to end with "/".
+  if (/\/showroom$/.test(location.pathname)) location.replace(location.pathname + '/' + location.search + location.hash);
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>從白晝走進暗房 — 線上展間</title>
 <meta name="description" content="一間線上 3D 美術館：從明亮的白色展廳走進全黑的暗房，觀看十件 p5.js 生成式作品與十六件 GLSL 即時運算作品。">
