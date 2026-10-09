@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>從白晝走進暗房 — 線上展間</title>
+<meta name="description" content="一間線上 3D 美術館：從明亮的白色展廳走進全黑的暗房，觀看十件 p5.js 生成式作品與十六件 GLSL 即時運算作品。">
+<meta name="theme-color" content="#efede8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='16' height='32' fill='%23efede8'/%3E%3Crect x='16' width='16' height='32' fill='%23111'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/showroom.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/build/three.module.js", "three/addons/": "./vendor/three/addons/" } }
+</script>
+</head>
+<body>
+<div id="stage" aria-hidden="true"></div>
+<div id="vignette" aria-hidden="true"></div>
+<div id="grain" aria-hidden="true"></div>
+<div id="fade" aria-hidden="true"></div>
+
+<!-- Entrance: title, statement, loading progress -->
+<section id="lobby" aria-labelledby="ex-title">
+  <div class="lobby-inner">
+    <p class="overline"><span id="ex-kicker">線上展覽</span> · <span id="ex-year">2026</span></p>
+    <h1 id="ex-title">從白晝走進暗房</h1>
+    <p class="title-en" id="ex-title-en">FROM DAYLIGHT INTO THE DARKROOM</p>
+    <p class="statement" id="ex-statement"></p>
+    <div class="progress" role="progressbar" aria-label="展間載入進度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <span class="bar"><i id="progress-bar"></i></span>
+      <span class="progress-label" id="progress-label">展間準備中</span>
+    </div>
+    <div class="lobby-actions">
+      <button type="button" id="enter" class="primary" disabled>進入展覽</button>
+      <button type="button" id="lobby-list" class="quiet">作品列表</button>
+    </div>
+    <p class="notice" id="notice" role="alert" hidden></p>
+  </div>
+</section>
+
+<!-- Corner controls: only three entries -->
+<nav id="corner" aria-label="展間工具" hidden>
+  <button type="button" id="btn-map" aria-haspopup="dialog">導覽圖</button>
+  <button type="button" id="btn-mode" aria-pressed="false"><span class="mode-a">點擊移動</span><span class="sep" aria-hidden="true">／</span><span class="mode-b">自由行走</span></button>
+  <button type="button" id="btn-list" aria-haspopup="dialog">作品列表</button>
+</nav>
+
+<p id="hint" role="status" aria-live="polite" hidden></p>
+<div id="hallname" role="status" aria-live="polite"></div>
+<div id="crosshair" aria-hidden="true" hidden></div>
+<div id="joystick" aria-hidden="true" hidden><span class="knob"></span></div>
+
+<!-- Museum label for the focused work -->
+<aside id="card" role="dialog" aria-modal="false" aria-labelledby="card-title" hidden>
+  <p class="card-num" id="card-num"></p>
+  <h2 id="card-title"></h2>
+  <p class="card-en" id="card-en"></p>
+  <dl class="card-meta">
+    <div><dt class="sr-only">藝術家</dt><dd id="card-artist"></dd></div>
+    <div><dt class="sr-only">年份</dt><dd id="card-year"></dd></div>
+    <div><dt class="sr-only">媒材</dt><dd id="card-medium"></dd></div>
+  </dl>
+  <p class="card-statement" id="card-statement"></p>
+  <div class="card-actions">
+    <button type="button" id="card-enter" class="primary">進入作品</button>
+    <button type="button" id="card-back">返回</button>
+    <span class="card-step">
+      <button type="button" id="card-prev" aria-label="上一件">‹</button>
+      <button type="button" id="card-next" aria-label="下一件">›</button>
+    </span>
+  </div>
+</aside>
+
+<!-- Plan view -->
+<section id="mapview" class="sheet" role="dialog" aria-modal="true" aria-labelledby="map-title" hidden>
+  <header class="sheet-head">
+    <h2 id="map-title">導覽圖</h2>
+    <button type="button" class="close" data-close>關閉</button>
+  </header>
+  <p class="sheet-note">點選作品即前往該作品前方。</p>
+  <div id="map-svg"></div>
+</section>
+
+<!-- Accessible 2D list -->
+<section id="listview" class="sheet full" role="dialog" aria-modal="true" aria-labelledby="list-title" hidden>
+  <header class="sheet-head">
+    <h2 id="list-title">作品列表</h2>
+    <button type="button" class="close" data-close>關閉</button>
+  </header>
+  <div id="list-body"></div>
+</section>
+
+<!-- Full-screen work viewer -->
+<section id="viewer" role="dialog" aria-modal="true" aria-labelledby="viewer-title" hidden>
+  <header>
+    <span id="viewer-title"></span>
+    <button type="button" id="viewer-close">返回展間</button>
+  </header>
+  <iframe id="viewer-frame" title="作品" allow="fullscreen"></iframe>
+</section>
+
+<noscript><p class="noscript">這個展間需要 JavaScript。</p></noscript>
+<script>
+  // ES modules cannot run from file:// — explain instead of failing silently.
+  if (location.protocol === 'file:') {
+    document.addEventListener('DOMContentLoaded', function () {
+      var n = document.getElementById('notice');
+      n.textContent = '此展間需要透過本機伺服器開啟（ES module 無法以 file:// 執行）。請在 repo 根目錄執行「npx serve .」或「python3 -m http.server」，再開啟 /showroom/。';
+      n.hidden = false;
+      document.getElementById('progress-label').textContent = '無法以 file:// 開啟';
+    });
+  }
+</script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

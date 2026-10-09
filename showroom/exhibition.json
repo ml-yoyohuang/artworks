@@ -1,0 +1,94 @@
+{
+  "title": "從白晝走進暗房",
+  "titleEn": "FROM DAYLIGHT INTO THE DARKROOM",
+  "subtitle": "一間線上美術館：規則生成形狀，光生成影像",
+  "year": 2026,
+  "artist": "（藝術家名稱）",
+  "statement": "一條規則落在紙上，就開始生長；一道光落進黑暗，就開始顯影。本展沿著一天的光線佈置：白晝的展廳裡，十件 p5.js 生成式作品像素描與版畫，讓形狀從簡單的規則中慢慢長出；穿過光線逐漸退去的長廊，十六件 GLSL 作品不再被照亮，而是自己成為光源。在暗房最深處，一張相片浮現，又被光重新拿走——觀看，也是一次曝光。",
+  "credits": "p5.js 生成式演算法 10 件 · GLSL 即時運算 16 件 · 2026",
+  "media": {
+    "p5": "p5.js 生成式演算法",
+    "glsl": "GLSL 即時運算"
+  },
+  "ui": {
+    "enter": "進入展覽",
+    "loading": "展間準備中",
+    "ready": "展間已就緒",
+    "map": "導覽圖",
+    "list": "作品列表",
+    "modeClick": "點擊移動",
+    "modeWalk": "自由行走",
+    "enterWork": "進入作品",
+    "back": "返回",
+    "backToRoom": "返回展間",
+    "goTo": "在展間中前往",
+    "prev": "上一件",
+    "next": "下一件",
+    "hintClick": "點擊地面移動・拖曳環顧・點擊作品靠近觀看",
+    "hintWalk": "WASD 或方向鍵行走・點擊畫面後以滑鼠環顧・Esc 釋放滑鼠",
+    "hintWalkTouch": "左下搖桿行走・拖曳畫面環顧",
+    "noWebGL": "此瀏覽器無法啟用 WebGL，已改以作品列表呈現。所有作品仍可開啟觀看。",
+    "fileProtocol": "此展間需要透過本機伺服器開啟（ES module 無法以 file:// 執行）。請參考 showroom/README.md。"
+  },
+  "halls": [
+    {
+      "id": "lobby",
+      "label": "入口",
+      "name": "入口大廳",
+      "nameEn": "ENTRANCE HALL",
+      "intro": "挑高的白色大廳。請由正前方的門進入第一廳。"
+    },
+    {
+      "id": "garden",
+      "label": "第一廳",
+      "name": "規則的花園",
+      "nameEn": "THE GARDEN OF RULES",
+      "intro": "這裡的每一件作品，都只從一條規則開始：風的方向、圓的邊界、點的引力。演算法像一位園丁，不決定花的樣子，只照料生長的條件。請像看版畫一樣靠近它們，觀看形狀如何在時間裡慢慢完成。陳列由淺色紙面走向深色底，為接下來的長廊預先調暗。"
+    },
+    {
+      "id": "corridor",
+      "label": "長廊",
+      "name": "光的退場",
+      "nameEn": "THE RETREAT OF LIGHT",
+      "intro": "光線在這裡逐步退去。請放慢腳步，讓眼睛習慣黑暗。長廊盡頭只有一件作品：快門沒有關上，它把經過的時間寫成線。"
+    },
+    {
+      "id": "darkroom",
+      "label": "第二廳",
+      "name": "暗房",
+      "nameEn": "THE DARKROOM",
+      "intro": "在暗房裡，影像不需要被照亮，它們本身就是光。十四件 GLSL 即時運算作品如燈箱般懸掛，把顏色投向地板與牆面：從紙、布、石、水與玻璃，到生命、記憶與一張逐漸失序的臉。沿著中軸走到最深處，終點作品正在顯影。"
+    }
+  ],
+  "works": [
+    { "id": "flow-field", "hall": "garden", "kind": "p5", "title": "風的手稿", "titleEn": "FLOW FIELD", "statement": "一束線穿過看不見的風，將每次偏離留在紙上。", "src": "../p5-demos/flow-field.html", "seed": 20261008, "palette": ["#eee8da", "#263b39", "#a45437"], "aspect": 1.6 },
+    { "id": "contour-topography", "hall": "garden", "kind": "p5", "title": "無名的海拔", "titleEn": "MARCHING SQUARES", "statement": "山沒有名字，只以一圈圈相同高度的線記住自己。", "src": "../p5-demos/contour-topography.html", "seed": 104729, "palette": ["#e9edeb", "#294854"], "aspect": 1.6 },
+    { "id": "recursive-subdivision", "hall": "garden", "kind": "p5", "title": "房間與停頓", "titleEn": "RECURSIVE SUBDIVISION", "statement": "一塊平面不斷讓出房間，直到空白也成為建築。", "src": "../p5-demos/recursive-subdivision.html", "seed": 271828, "palette": ["#e8e0ce", "#272726"], "aspect": 1.6 },
+    { "id": "circle-packing", "hall": "garden", "kind": "p5", "title": "柔軟的擁擠", "titleEn": "CIRCLE PACKING", "statement": "每個圓只長到鄰居的邊界，擁擠因此有了溫柔的秩序。", "src": "../p5-demos/circle-packing.html", "seed": 42, "palette": ["#f1ddd1", "#8d3d46"], "aspect": 1.6 },
+    { "id": "differential-growth", "hall": "garden", "kind": "p5", "title": "慢慢展開的內側", "titleEn": "DIFFERENTIAL GROWTH", "statement": "線讓鄰近的點彼此退讓，又始終不肯鬆開相連的手。", "src": "../p5-demos/differential-growth.html", "seed": 57721, "palette": ["#e8e6d6", "#355347"], "aspect": 1.013 },
+    { "id": "space-colonization", "hall": "garden", "kind": "p5", "title": "朝光的分歧", "titleEn": "SPACE COLONIZATION", "statement": "枝條向尚未抵達的光靠近，走過之處便不再索求。", "src": "../p5-demos/space-colonization.html", "seed": 65537, "palette": ["#ece8dd", "#49483b"], "aspect": 1.543 },
+    { "id": "voronoi-stippling", "hall": "garden", "kind": "p5", "title": "引力的銅版", "titleEn": "WEIGHTED VORONOI", "statement": "點一次次移向墨色的重心，直到空白也被引力塑形。", "src": "../p5-demos/voronoi-stippling.html", "seed": 314159, "palette": ["#eae1cf", "#38322d"], "aspect": 1.013 },
+    { "id": "truchet-tiles", "hall": "garden", "kind": "p5", "title": "結的方向", "titleEn": "TRUCHET TILES", "statement": "每塊磚只轉四分之一圈，卻讓整片織紋找不到起點。", "src": "../p5-demos/truchet-tiles.html", "seed": 161803, "palette": ["#132e43", "#e4c998"], "aspect": 1.6 },
+    { "id": "boids-flocking", "hall": "garden", "kind": "p5", "title": "共同的偏航", "titleEn": "BOIDS", "statement": "每一道微光跟隨鄰近的微光，游標則成為短暫的潮汐。", "src": "../p5-demos/boids-flocking.html", "seed": 65537, "palette": ["#102526", "#d5e2d4"], "aspect": 1.6 },
+    { "id": "generative-typography", "hall": "garden", "kind": "p5", "title": "字的餘溫", "titleEn": "GENERATIVE TYPOGRAPHY", "statement": "字被拆成微小的筆畫，邊緣先鬆動，中心仍記得自己的形狀。", "src": "../p5-demos/generative-typography.html", "seed": 104729, "palette": ["#271f39", "#f0b6b5"], "aspect": 1.605 },
+
+    { "id": "long-exposure", "hall": "corridor", "kind": "glsl", "title": "光走過的路", "titleEn": "THE PATH LIGHT TAKES", "statement": "快門沒有關上，夜便把經過的時間寫成線。", "src": "../shader-demos/long-exposure.html", "palette": ["#080e19", "#df9c5a", "#577e9f"] },
+
+    { "id": "cyanotype", "hall": "darkroom", "kind": "glsl", "title": "日光的標本", "titleEn": "A HERBARIUM OF LIGHT", "statement": "葉子離開了紙，日光卻把它的沉默留成藍色。", "src": "../shader-demos/cyanotype.html", "palette": ["#082b57", "#366b91", "#e7e6ce"] },
+    { "id": "risograph-print", "hall": "darkroom", "kind": "glsl", "title": "偏移的花園", "titleEn": "A GARDEN OUT OF REGISTER", "statement": "兩種油墨沒有對齊，卻讓花園多出一個季節。", "src": "../shader-demos/risograph-print.html", "palette": ["#efdfbd", "#c65543", "#326966"] },
+    { "id": "grain-gradient-mesh", "hall": "darkroom", "kind": "glsl", "title": "紙上的氣候", "titleEn": "CHROMATIC WEATHER", "statement": "光在紙上緩慢交談，像一封沒有寄出的信。", "src": "../shader-demos/grain-gradient-mesh.html", "palette": ["#ece1ca", "#da6845", "#afa18a"] },
+    { "id": "noise-dissolve", "hall": "darkroom", "kind": "glsl", "title": "兩個日落之間", "titleEn": "A CUT IN THE WEATHER", "statement": "一個風景消失的地方，另一個風景正在醒來。", "src": "../shader-demos/noise-dissolve.html", "palette": ["#ebe6d9", "#161719", "#e62b1a"] },
+    { "id": "textile-moire", "hall": "darkroom", "kind": "glsl", "title": "一處皺摺", "titleEn": "WORN GAUZE / A STUDY OF TENSION", "statement": "兩層布稍微錯開，平面就開始有了呼吸。", "src": "../shader-demos/textile-moire.html", "palette": ["#ece7da", "#807565", "#2e2f2e"] },
+    { "id": "domain-warp-fbm", "hall": "darkroom", "kind": "glsl", "title": "石頭裡的潮汐", "titleEn": "THE INTERIOR OF STONE", "statement": "一塊石頭保留著海，卻從來不說它流動過。", "src": "../shader-demos/domain-warp-fbm.html", "palette": ["#192325", "#798e86", "#d5cdb4"] },
+    { "id": "liquid-distortion", "hall": "darkroom", "kind": "glsl", "title": "觸摸一池字跡", "titleEn": "THE WATER REMEMBERS", "statement": "每一次靠近，都讓平靜多留下一圈回音。", "src": "../shader-demos/liquid-distortion.html", "palette": ["#102c39", "#8fa7a4", "#d6e1cb"] },
+    { "id": "glass-refraction", "hall": "darkroom", "kind": "glsl", "title": "透明的重量", "titleEn": "THE WEIGHT OF TRANSPARENCY", "statement": "玻璃沒有顏色，只借來世界的一點偏差。", "src": "../shader-demos/glass-refraction.html", "palette": ["#d5e3e3", "#24435a", "#9cabb8"] },
+    { "id": "reaction-diffusion", "hall": "darkroom", "kind": "glsl", "title": "尚未命名的生命", "titleEn": "A CULTURE OF POSSIBILITY", "statement": "生命還沒有名字，便已開始分裂與靠近。", "src": "../shader-demos/reaction-diffusion.html", "palette": ["#102f2b", "#83b5a0", "#e0dfb5"] },
+    { "id": "organic-growth", "hall": "darkroom", "kind": "glsl", "title": "緩慢佔領", "titleEn": "THE PATIENCE OF CORAL", "statement": "微小的生命不急著抵達，只學會一寸一寸地留下來。", "src": "../shader-demos/organic-growth.html", "palette": ["#202225", "#ae5752", "#d49677"] },
+    { "id": "feedback-trails", "hall": "darkroom", "kind": "glsl", "title": "遲到的光", "titleEn": "AFTER YOU HAVE LEFT", "statement": "你離開之後，光仍在原地練習記憶。", "src": "../shader-demos/feedback-trails.html", "palette": ["#100e1c", "#aa83c4", "#74adae"] },
+    { "id": "raymarching-sdf", "hall": "darkroom", "kind": "glsl", "title": "一個不存在的物件", "titleEn": "EVENT HORIZON / THE EDGE OF LIGHT", "statement": "光在這裡停止解釋自己，只留下通往未知的邊緣。", "src": "../shader-demos/raymarching-sdf.html", "palette": ["#050919", "#243ddd", "#ff8e37"] },
+    { "id": "dithering-halftone", "hall": "darkroom", "kind": "glsl", "title": "有限的灰階", "titleEn": "FOUR TONES OF SILENCE", "statement": "光被拆成一粒一粒，仍然保有人的輪廓。", "src": "../shader-demos/dithering-halftone.html", "palette": ["#211c2b", "#ede4d2", "#967c88"] },
+    { "id": "pixel-sorting", "hall": "darkroom", "kind": "glsl", "title": "失序的肖像", "titleEn": "PORTRAIT IN TRANSIT", "statement": "當一張臉被光重新排列，身份也成為流動的條碼。", "src": "../shader-demos/pixel-sorting.html", "palette": ["#0d1029", "#e64d26", "#9397b0"] },
+
+    { "id": "darkroom-solarize", "hall": "darkroom", "kind": "glsl", "finale": true, "title": "銀鹽的第二次黎明", "titleEn": "THE SECOND EXPOSURE", "statement": "一張相片在黑暗裡浮現，又被光重新拿走。", "src": "../shader-demos/darkroom-solarize.html", "palette": ["#181716", "#c2b7a3", "#e8dfc9"] }
+  ]
+}
