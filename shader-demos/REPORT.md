@@ -290,4 +290,4 @@ Chromium / Playwright 在 1440×900 與 390×844 分別以 file:// 與本機靜�
 
 限制：沒有實體手機或 Safari / Firefox 的本次測試；觸控、手機和平板為 Chromium 模擬。材質使用有限波長、簡化環境、RGB 白點正規化、背景透射與張力高度場，沒有完整光譜路徑追蹤、偏振追蹤、真實折射場景或布料求解；物件沒有自相交折疊。分享平台可能快取舊圖片。
 
-根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；已遵守檔案範圍。只提交 `shader-demos/`，未動其他作品集或使用者未提交工作。推送分支與作品 commit hash 於完成推送後補記。
+根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md；已遵守檔案範圍。只提交 `shader-demos/`，未動其他作品集或使用者未提交工作。已成功推送至 `origin/main`，作品 commit hash：`dfadcb971ca190104229115a241e38275207d347`。交付紀錄由後續文件提交補記。
