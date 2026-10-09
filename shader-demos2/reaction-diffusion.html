@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>斑紋 — 慢物質 Slow Matter</title>
-<meta name="description" content="這個畫面像一張還在生長的獸皮，斑點自己決定要長成什麼樣子。">
-<meta name="theme-color" content="#D6A23F">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Crect%20width%3D%2732%27%20height%3D%2732%27%20fill%3D%27%23D6A23F%27/%3E%3Ccircle%20cx%3D%2713%27%20cy%3D%2717%27%20r%3D%278%27%20fill%3D%27%231E1C18%27/%3E%3Ccircle%20cx%3D%2720%27%20cy%3D%2714%27%20r%3D%275%27%20fill%3D%27%23F2E2B6%27%20opacity%3D%27.85%27/%3E%3C/svg%3E">
+<meta name="description" content="這個畫面像一塊古老的石板，刻下的紋路還在石頭裡慢慢生長。">
+<meta name="theme-color" content="#CFC6B4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Crect%20width%3D%2732%27%20height%3D%2732%27%20fill%3D%27%23CFC6B4%27/%3E%3Ccircle%20cx%3D%2713%27%20cy%3D%2717%27%20r%3D%278%27%20fill%3D%27%235E564B%27/%3E%3Ccircle%20cx%3D%2720%27%20cy%3D%2714%27%20r%3D%275%27%20fill%3D%27%234F8E97%27%20opacity%3D%27.85%27/%3E%3C/svg%3E">
 <style>
-:root{--bg:#D6A23F;--ui:#1E1C18;--line:rgba(30,28,24,.4);--panel:rgba(242,226,182,.9);--fb1:#F2E2B6;--fb2:#D6A23F;--scrim:rgba(214,162,63,.72);--track:rgba(30,28,24,.25);--track-on:#1E1C18;--track-h:3px;--thumb-bg:#1E1C18;--thumb-b:2px solid #F2E2B6;--thumb-w:15px;--thumb-h:15px;--btn-r:999px}
+:root{--bg:#CFC6B4;--ui:#3F3A33;--line:rgba(63,58,51,.35);--panel:rgba(214,206,190,.92);--fb1:#CFC6B4;--fb2:#9E978A;--scrim:rgba(207,198,180,.78);--track:rgba(63,58,51,.25);--track-on:#3F3A33;--track-h:2px;--thumb-bg:#4F8E97;--thumb-b:2px solid #CFC6B4;--thumb-w:14px;--thumb-h:14px;--btn-r:2px}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;overflow:hidden;background:var(--bg)}
 body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ui);-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;font-weight:400}
@@ -77,11 +77,11 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-.caption h1{font-weight:600;letter-spacing:.22em}.caption .statement{font-weight:500}.ctl label{font-weight:600}.btn{background:#1E1C18;color:#F2E2B6;border-color:#1E1C18;font-weight:600}.btn:hover{background:#F2E2B6;color:#1E1C18;border-color:#1E1C18}.notes summary{font-weight:600}
+.caption h1{font-weight:500;letter-spacing:.3em}.caption .statement{font-weight:500}.ctl label{font-weight:600}.btn{background:#3F3A33;color:#CFC6B4;border-color:#3F3A33;font-weight:600;letter-spacing:.2em}.btn:hover{background:#4F8E97;border-color:#4F8E97;color:#F2EEE6}.notes summary{font-weight:600}
 </style>
 </head>
 <body>
-<canvas id="c" role="img" aria-label="斑紋：這個畫面像一張還在生長的獸皮，斑點自己決定要長成什麼樣子。"></canvas>
+<canvas id="c" role="img" aria-label="斑紋：這個畫面像一塊古老的石板，刻下的紋路還在石頭裡慢慢生長。"></canvas>
 <div class="scrim" aria-hidden="true"></div>
 <div class="chrome">
   <a class="back" href="shader-demo-list.html">← 慢物質 · 目錄</a>
@@ -89,22 +89,22 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
   <details class="notes">
     <summary>筆記</summary>
     <div class="panel">
-      <h3>技術原理</h3><p>Gray-Scott 反應擴散：兩種虛構的化學物 U、V 在固定網格上擴散，V 吃掉 U 並自我複製，餵食率 F 與死亡率 k 決定最後長成斑點、條紋或迷宮。每一格跑十多次迭代；顯示時以 V 的梯度做浮雕光影，加上奶油色高光，像毛皮上的色素。不支援浮點時，把 U、V 各拆成高低兩個 8 位元通道，以 16 位元精度在 RGBA8 中運算。</p>
-      <h3>核心參數</h3><p><b>圖樣</b>：沿著一條挑選過的 F／k 路徑，由豹斑漸變為指紋條紋，再到迷宮。<b>速度</b>：每一格的迭代次數。<b>清除重播</b>：重新種下幾團胚芽，看它從頭長一次。</p>
-      <h3>適合的位置</h3><p>適合自然、生物或手工品牌的專題頁主視覺，也能截一塊作為包裝或周邊的紋樣；顏色溫暖飽和，建議搭配深色粗體標題。</p>
+      <h3>技術原理</h3><p>Gray-Scott 反應擴散：兩種虛構的化學物 U、V 在固定網格上擴散，V 吃掉 U 並自我複製，餵食率 F 與死亡率 k 決定紋路的樣貌；擴散沿著一個緩慢彎曲的方向場較快，紋路因此平行排列成條紋。顯示時把 V 的濃度平塗成石灰岩上殘留的顏料：暖灰褐為主，局部留下瑪雅藍與赤鐵紅，不做立體光影。不支援浮點時，把 U、V 各拆成高低兩個 8 位元通道，以 16 位元精度在 RGBA8 中運算。</p>
+      <h3>核心參數</h3><p><b>圖樣</b>：沿著一條挑選過的 F／k 路徑，在條紋與迷宮之間漸變（刻意不經過圓點狀態）。<b>速度</b>：每一格的迭代次數。<b>清除重播</b>：重新種下幾團胚芽，看它從頭長一次。</p>
+      <h3>適合的位置</h3><p>適合歷史、文化或博物館主題的專題頁主視覺，也能截一塊作為品牌紋樣；色調低、安靜，建議搭配深灰褐色標題。</p>
       <span class="state" id="state"></span>
     </div>
   </details>
   <section class="caption">
-    <p class="en">Pelt · Gray-Scott Reaction–Diffusion</p>
+    <p class="en">Stele · Gray-Scott Reaction–Diffusion</p>
     <h1>斑紋</h1>
-    <p class="statement">這個畫面像一張還在生長的獸皮，斑點自己決定要長成什麼樣子。</p>
-    <p class="hint">點按或拖曳，種下新的斑點</p>
+    <p class="statement">這個畫面像一塊古老的石板，刻下的紋路還在石頭裡慢慢生長。</p>
+    <p class="hint">點按或拖曳，種下新的紋路</p>
   </section>
-  <div class="controls"><div class="ctl"><label for="p-pattern">圖樣<output></output></label><input id="p-pattern" type="range" data-param="pattern" min="0" max="1" step="0.01" value="0.08" data-fmt="pct" aria-label="圖樣"></div><div class="ctl"><label for="p-speed">速度<output></output></label><input id="p-speed" type="range" data-param="speed" min="0" max="1" step="0.01" value="0.6" data-fmt="pct" aria-label="速度"></div><button class="btn" type="button" data-param="replay"><span>清除重播</span></button></div>
+  <div class="controls"><div class="ctl"><label for="p-pattern">圖樣<output></output></label><input id="p-pattern" type="range" data-param="pattern" min="0" max="1" step="0.01" value="0.0" data-fmt="pct" aria-label="圖樣"></div><div class="ctl"><label for="p-speed">速度<output></output></label><input id="p-speed" type="range" data-param="speed" min="0" max="1" step="0.01" value="0.6" data-fmt="pct" aria-label="速度"></div><button class="btn" type="button" data-param="replay"><span>清除重播</span></button></div>
 </div>
 <div id="fallback" hidden role="alert"><div class="box"><h2></h2><p></p><details hidden><summary>技術細節</summary><pre></pre></details><a href="shader-demo-list.html">← 回到目錄</a></div></div>
-<noscript><div style="position:fixed;inset:0;display:grid;place-items:center;padding:32px;background:#D6A23F;color:#1E1C18;font-size:14px;line-height:2">這件作品以 JavaScript 與 WebGL 即時繪製，請啟用 JavaScript 後再觀看。</div></noscript>
+<noscript><div style="position:fixed;inset:0;display:grid;place-items:center;padding:32px;background:#CFC6B4;color:#3F3A33;font-size:14px;line-height:2">這件作品以 JavaScript 與 WebGL 即時繪製，請啟用 JavaScript 後再觀看。</div></noscript>
 <script>
 /* Studio runtime — 每頁內嵌的共用 WebGL 小框架（無外部依賴）
    WebGL2 優先，WebGL1 降級；GLSL 一律以 ES 1.00 撰寫，兩種環境都能編譯。 */
@@ -509,6 +509,8 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
 
 </script>
 <script>
+var PATHS = [[.0370, .0600], [.0350, .0595], [.0330, .0590]];
+
 (function () {
   var S = new Studio({ resolution: 1, mobileScale: .75, needsFloat: true });
   if (!S.ok) return;
@@ -531,13 +533,20 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
     'vec2 at(vec2 o){return dec(texture2D(uS,vUv+o*uTexel));}',
     'void main(){',
     ' vec2 c=at(vec2(0.));',
-    ' vec2 lap=at(vec2(1.,0.))+at(vec2(-1.,0.))+at(vec2(0.,1.))+at(vec2(0.,-1.))-4.*c;',
+    // 各向異性擴散：沿著緩慢彎曲的方向場擴散較快，紋路因此平行排列成條紋
+    ' vec2 r=at(vec2(1.,0.)),l=at(vec2(-1.,0.)),u=at(vec2(0.,1.)),d=at(vec2(0.,-1.));',
+    ' vec2 ru=at(vec2(1.,1.)),lu=at(vec2(-1.,1.)),rd=at(vec2(1.,-1.)),ld=at(vec2(-1.,-1.));',
+    ' vec2 hxx=r+l-2.*c,hyy=u+d-2.*c,hxy=(ru-lu-rd+ld)*.25;',
+    ' vec2 g=vUv*vec2(uTexel.y/uTexel.x,1.);',
+    ' float ang=.55+fbm(g*.65+4.)*2.2;vec2 dd=vec2(cos(ang),sin(ang));',
+    ' vec2 along=dd.x*dd.x*hxx+2.*dd.x*dd.y*hxy+dd.y*dd.y*hyy;',
+    ' vec2 lap=(hxx+hyy-along)*1.6+along*.42;',
     // 微小的空間變異，讓同一張皮上的斑紋有疏密
     ' float f=uF+(vnoise(vUv*vec2(uTexel.y/uTexel.x,1.)*3.1)-.5)*.0016;',
     ' float uvv=c.x*c.y*c.y;',
     // 下緣留白：字幕所在的位置提高死亡率，讓圖樣自然退開
     ' float edge=vUv.y+(vnoise(vUv*vec2(uTexel.y/uTexel.x,1.)*5.)-.5)*.08;',
-    ' float k=uK+.014*max(smoothstep(uBand,uBand-.12,edge),smoothstep(.86,.97,edge));',
+    ' float k=uK+0.*max(smoothstep(uBand,uBand-.12,edge),smoothstep(.86,.97,edge));',
     ' vec2 n=c+vec2(.2097*lap.x-uvv+f*(1.-c.x),.105*lap.y+uvv-(f+k)*c.y);',
     ' gl_FragColor=enc(clamp(n,0.,1.));',
     '}'
@@ -550,7 +559,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
     ' vec2 p=vUv*vec2(uAspect,1.);',
     ' float m=0.;',
     ' if(uInit>.5){',
-    '  for(int i=0;i<12;i++){vec2 h=hash22(vec2(float(i)*7.1,uSeed));vec2 c=vec2(.06+.88*h.x,.42+.44*h.y)*vec2(uAspect,1.);',
+    '  for(int i=0;i<12;i++){vec2 h=hash22(vec2(float(i)*7.1,uSeed));vec2 c=vec2(.06+.88*h.x,.08+.84*h.y)*vec2(uAspect,1.);',
     '   float r=.035+.05*hash12(vec2(uSeed,float(i)));',
     '   float d=length(p-c)+(fbm(p*9.+float(i)*3.)-.5)*.06;m=max(m,smoothstep(r,r*.6,d));}',
     ' }else{',
@@ -564,34 +573,35 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
 
   var SHOW = CODEC + [
     'uniform sampler2D uS;uniform vec2 uGrid;uniform float uTime;',
-    'const vec3 OCHRE=vec3(.839,.635,.247);const vec3 INK=vec3(.118,.11,.094);const vec3 CREAM=vec3(.949,.886,.714);',
+    'const vec3 LIME=vec3(.812,.776,.706);const vec3 UMBER=vec3(.369,.337,.294);const vec3 MBLUE=vec3(.31,.557,.592);const vec3 HEM=vec3(.612,.29,.208);',
     'float V(vec2 uv){vec2 g=uv*uGrid-.5;vec2 i=floor(g),f=fract(g);f=f*f*(3.-2.*f);',
     ' float a=dec(texture2D(uS,(i+.5)/uGrid)).y,b=dec(texture2D(uS,(i+vec2(1.5,.5))/uGrid)).y,',
     ' c=dec(texture2D(uS,(i+vec2(.5,1.5))/uGrid)).y,d=dec(texture2D(uS,(i+1.5)/uGrid)).y;',
     ' return mix(mix(a,b,f.x),mix(c,d,f.x),f.y);}',
     'void main(){',
     ' vec2 fc=gl_FragCoord.xy;',
-    ' vec2 e=1./uGrid;',
+    ' vec2 g=vUv*vec2(uRes.x/uRes.y,1.);',
     ' float v=V(vUv);',
-    ' float vx=V(vUv+vec2(e.x,0.))-V(vUv-vec2(e.x,0.));',
-    ' float vy=V(vUv+vec2(0.,e.y))-V(vUv-vec2(0.,e.y));',
-    ' vec3 n=normalize(vec3(-vx,-vy,.09));',
-    ' float lit=dot(n,normalize(vec3(-.55,.6,.6)));',
-    ' float ink=smoothstep(.16,.3,v);',
-    // 底色：赭色上有極淡的奶油色斑駁
-    ' float mott=fbm(vUv*uGrid*.012+3.)*.9+vnoise(fc*.18)*.1;',
-    ' vec3 base=mix(OCHRE,mix(OCHRE,CREAM,.35),smoothstep(.45,.85,mott));',
-    ' base=mix(base,mix(OCHRE,INK,.22),smoothstep(.06,.16,v)*.7);',
-    // 色素：邊緣最濃，中心略透出暖褐（像豹斑的花心）
-    ' vec3 pig=mix(INK,mix(INK,OCHRE,.38),smoothstep(.34,.48,v)*.8);',
-    ' vec3 col=mix(base,pig,ink);',
-    ' float hi=max(lit-.62,0.)*2.4;',
-    ' col=mix(col,CREAM,clamp(hi,0.,1.)*mix(.75,.3,ink));',
-    ' col=mix(col,INK,clamp(.45-lit,0.,1.)*.45);',
-    ' col+=grain(fc,uTime*.31)*.06;',
-    ' float fib=vnoise(vec2(fc.x*.05,fc.y*.6))*vnoise(fc*.02);',
-    ' col=mix(col,CREAM,fib*.05);',
-    ' vec2 q=vUv-.5;col=mix(col,mix(col,INK,.35),smoothstep(.35,.85,length(q*vec2(1.,1.2))));',
+    // 石灰岩：大尺度的冷暖斑駁與風化水痕，全部平面、沒有坑洞與陰影
+    ' float m1=fbm(g*1.6+3.),m2=fbm(g*5.+11.);',
+    ' vec3 base=mix(LIME,mix(LIME,UMBER,.16),smoothstep(.35,.8,m1));',
+    ' base=mix(base,mix(LIME,vec3(1.),.18),smoothstep(.55,.9,m2)*.5);',
+    ' float stain=smoothstep(.5,.75,fbm(vec2(g.x*3.,g.y*.9)+7.));',
+    ' base=mix(base,mix(LIME,UMBER,.24),stain*.35);',
+    // 細長的石紋裂線（線，不是點）
+    ' float crack=1.-smoothstep(0.,.012,abs(gnoise(g*2.2+fbm(g*3.)*1.5)));',
+    ' base=mix(base,mix(LIME,UMBER,.4),crack*.45*smoothstep(.4,.7,m1));',
+    // 紋路：像刻痕裡殘留的顏料，平塗；邊緣隨石面風化而略為斷續
+    ' float wear=fbm(g*9.+5.);',
+    ' float ink=smoothstep(.15,.27,v+(wear-.5)*.06);',
+    ' float pm=fbm(g*.9+21.);',
+    ' vec3 pig=mix(UMBER,mix(LIME,UMBER,.7),wear*.5);',
+    ' pig=mix(pig,mix(MBLUE,UMBER,.18),smoothstep(.48,.62,pm));',
+    ' pig=mix(pig,mix(HEM,UMBER,.15),smoothstep(.62,.72,fbm(g*1.2+40.))*(1.-smoothstep(.48,.62,pm)));',
+    ' float fade=mix(.62,.92,smoothstep(.3,.7,fbm(g*2.+9.)));',
+    ' vec3 col=mix(base,pig,ink*fade);',
+    ' col+=grain(fc,uTime*.31)*.04;',
+    ' vec2 q=vUv-.5;col=mix(col,mix(col,UMBER,.28),smoothstep(.4,.9,length(q*vec2(1.,1.2))));',
     ' gl_FragColor=vec4(col,1.);',
     '}'
   ].join('\n');
@@ -599,7 +609,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
   var pp = null, gw = 0, gh = 0, aspect0 = 0, step, seed, show;
   function build() {
     var c = S.canvas, w = c.clientWidth || innerWidth, h = c.clientHeight || innerHeight;
-    var budget = S.coarse ? 256 * 256 : 384 * 384, a = w / h;
+    var budget = S.coarse ? 176 * 176 : 248 * 248, a = w / h;
     gw = Math.round(Math.sqrt(budget * a)); gh = Math.round(budget / gw);
     aspect0 = a;
     if (pp) pp.free();
@@ -613,7 +623,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
   if (!build()) return;
 
   // 圖樣路徑：豹斑 → 斑點條紋 → 指紋 → 迷宮
-  var PATH = [[.0300, .0620], [.0335, .0612], [.0370, .0600], [.0330, .0585], [.0290, .0570]];
+  var PATH = PATHS;
   function fk() {
     var x = S.params.pattern * (PATH.length - 1), i = Math.min(PATH.length - 2, Math.floor(x)), f = x - i;
     f = f * f * (3 - 2 * f);
@@ -639,7 +649,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:1px solid currentC
   }
 
   reseed();
-  if (S.reduced) iterate(S.coarse ? 2400 : 3000); else iterate(240);
+  if (S.reduced) iterate(S.coarse ? 3200 : 4200); else iterate(360);
 
   S.on('replay', function () { reseed(); if (S.reduced) iterate(S.coarse ? 2400 : 3000); });
   S.on('param', function (k) { if (S.reduced && k === 'pattern') iterate(900); });
