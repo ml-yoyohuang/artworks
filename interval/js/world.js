@@ -123,7 +123,7 @@ export class MuseumWorld {
  }
  lookAt(target){const dir=new T.Vector3(...target).sub(this.position);this.yaw=Math.atan2(-dir.x,-dir.z);this.pitch=Math.atan2(dir.y,Math.hypot(dir.x,dir.z));}
  resetEntryApproach(){this.entryApproach?.resolve(false);this.entryApproach=null;this.entryOffset=0;this.dirty=true;}
- approachEntry(target,duration=500){
+ approachEntry(target,duration=1000){
   this.entryApproach?.resolve(false);this.entryApproach=null;
   if(this.section!==0||this.reduced||this.suspended||document.hidden){this.entryOffset=0;this.invalidate();return Promise.resolve(false);}
   if(Math.abs(target-this.entryOffset)<.001){this.entryOffset=target;return Promise.resolve(true);}
