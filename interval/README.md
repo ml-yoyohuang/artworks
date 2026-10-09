@@ -103,6 +103,6 @@ node interval/tools/capture-views.cjs
 
 ### 極簡入口與虹彩膜
 
-入口收斂為連續霧白步道、一片偏離中軸的懸浮薄板與虹彩膜，移除支架、側平台、座椅及橫向測量線。手機採獨立取景與薄板比例，使主視覺完整留在標題上方。
+入口由霧白步道銜接四片向斜上方遞進的懸浮階梯薄板，虹彩碟片位於最高處。沒有棚架支柱；手機採獨立取景，使碟片完整留在標題上方。
 
-`entry()` 建立空間；`disturbEntryFilm()` 控制膜的局部形變、低彩度色彩與物理材質光澤。內外輪廓固定，沒有整體旋轉或搖晃。最多 30 fps，背景與減少動態時停止；換區釋放資源，無新增畫布、影片或 WebGL context。重跑驗證：`node interval/tools/verify-entry.cjs`。
+`entry()` 建立空間；`disturbEntryFilm()` 控制膜的局部形變、明亮冷色螺旋色帶與物理材質光澤。內外輪廓固定，沒有整體旋轉或搖晃。最多 30 fps，背景與減少動態時停止；換區釋放資源，無新增畫布、影片或 WebGL context。重跑驗證：`node interval/tools/verify-entry.cjs`。

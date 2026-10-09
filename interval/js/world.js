@@ -22,7 +22,7 @@ export class MuseumWorld {
  build(section){this.clear();this.renderer.shadowMap.needsUpdate=true;this.section=section;this.animation=null;const dark=section>=3;const bg=section===0?'#263542':section===1?'#77818a':section===2?'#676e76':section===3?'#0b191e':section===4?'#181f2a':'#101a25';this.scene.background=new T.Color(bg);this.scene.fog=new T.Fog(bg,section===0?24:22,section===0?110:section===1?72:80);
   const hemi=new T.HemisphereLight(dark?'#b9c8d9':'#e5e8e8',dark?'#475563':'#74695d',dark?1.3:2.8);this.scene.add(hemi);const sun=new T.DirectionalLight('#fff1d9',dark?2:3.2);sun.position.set(-9,19,9);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-18,right:18,top:20,bottom:-48});sun.shadow.radius=4;sun.shadow.bias=-.0005;sun.shadow.normalBias=.04;this.scene.add(sun,sun.target);sun.target.position.set(0,0,-10);
   this.groundColor=section===0?'#d8d8cc':section===1?'#d7d5cc':section===2?'#c7bfac':section===3?'#2b393a':section===4?'#4a4d51':'#6b7071';
-  if(!section){this.entry();this.stations=[];this.position.set(0,3,13);this.lookAt(innerWidth<900?[1.7,-1.8,-23]:[-8,4,-23]);return;}
+  if(!section){this.entry();this.stations=[];this.position.set(0,3,13);this.lookAt(innerWidth<900?[.7,-.6,-26]:[-8,4,-23]);return;}
   const works=this.ex.works.filter(w=>w.section===section);const end=Math.min(...works.map(w=>w.placement.z))-8;this.end=end;
   this.stations=[{name:'展廳入口',pos:[0,2,10],look:[0,2,-8]},...works.map(w=>({name:w.name,pos:this.viewFor(w).pos,look:this.viewFor(w).look,work:w})),{name:section===5?'終章 · 安靜的平台':'下一個展區',pos:section===5?[0,2,6]:[0,2,end+(innerWidth<700?11:8)],look:section===5?[0,3,-12]:[0,2.35,end-8]}];
   if(section!==2)this.box([section===5?23:16,.26,Math.abs(end)+30],[0,-.18,(end+14)/2],this.groundColor);
@@ -56,11 +56,11 @@ export class MuseumWorld {
  ambientActive(){return !this.reduced&&(!!this.entryFilm&&this.section===0||!!this.membrane&&this.section===4&&this.position.z<=this.end+11.05);}
  disturbMembrane(time){const {mesh,base}=this.membrane,points=mesh.geometry.attributes.position;for(let i=0;i<points.count;i++){const x=base[i*3],y=base[i*3+1];const edge=Math.max(0,(1-(x/3)**2)*(1-(y/3.12)**2));points.setZ(i,edge*(.44+.26*Math.sin(x*1.4+y*1.2+time*.47)+.12*Math.sin(y*2.3-x*.8-time*.31)+.05*Math.cos(x*3.1-y*2+time*.23)));}points.needsUpdate=true;mesh.geometry.computeVertexNormals();}
  entry(){
-  // Three quiet silhouettes: a continuous path, one suspended roof, one membrane.
-  this.box([5.5,.2,65],[0,-.12,-8],this.groundColor);
-  this.box([innerWidth<900?12:14,.16,8],[innerWidth<900?-.8:-2.8,11.4,-28],'#d7dbd2');
-  this.line([[-2.65,.025,15],[-2.65,.025,-30]],'#eff1e8',.45);
-  this.line([[2.65,.025,15],[2.65,.025,-30]],'#eff1e8',.45);
+  // A clear path rises through four suspended stair plates toward the membrane.
+  this.box([5.5,.2,30],[0,-.12,7],this.groundColor);
+  for(const [x,y,z] of [[1.8,.45,-10],[1.1,1.35,-16],[.4,2.25,-22],[-.3,3.15,-28]])this.box([6.2,.14,5.4],[x,y,z],'#dde5e4');
+  this.line([[-2.65,.025,15],[-2.65,.025,-7]],'#eff1e8',.45);
+  this.line([[2.65,.025,15],[2.65,.025,-7]],'#eff1e8',.45);
   const positions=[],colors=[],idx=[],segments=112,rows=20;
   for(let r=0;r<=rows;r++){const u=r/rows;for(let j=0;j<=segments;j++){
    const a=j/segments*Math.PI*2,radius=.8+3.8*u;
@@ -69,17 +69,17 @@ export class MuseumWorld {
    if(r<rows&&j<segments){const n=r*(segments+1)+j;idx.push(n,n+1,n+segments+1,n+1,n+segments+2,n+segments+1);}
   }}
   const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));geometry.setAttribute('color',new T.Float32BufferAttribute(colors,3));geometry.setIndex(idx);
-  const material=new T.MeshPhysicalMaterial({color:'#f2f0e8',side:T.DoubleSide,vertexColors:true,roughness:.24,metalness:.38,iridescence:.65,iridescenceIOR:1.34,iridescenceThicknessRange:[180,380]});this.resources.push(material);
-  const mesh=this.mesh(geometry,material,[3,5.7,-24],[.08,-.2,-.13]);mesh.castShadow=false;mesh.receiveShadow=false;
-  this.entryFilm={mesh,base:Float32Array.from(geometry.attributes.position.array),elapsed:0,last:0,segments,rows};this.disturbEntryFilm(0);this.contact(3,-24,11,7);
+  const material=new T.MeshPhysicalMaterial({color:'#ffffff',side:T.DoubleSide,vertexColors:true,roughness:.32,metalness:.12,iridescence:.4,iridescenceIOR:1.34,iridescenceThicknessRange:[180,380]});this.resources.push(material);
+  const mesh=this.mesh(geometry,material,[-.4,8.6,-32],[.08,-.2,-.13]);mesh.castShadow=false;mesh.receiveShadow=false;
+  this.entryFilm={mesh,base:Float32Array.from(geometry.attributes.position.array),elapsed:0,last:0,segments,rows};this.disturbEntryFilm(0);
  }
  disturbEntryFilm(time){
   const {mesh,base,segments,rows}=this.entryFilm,points=mesh.geometry.attributes.position,colors=mesh.geometry.attributes.color,color=new T.Color();
   for(let i=0;i<points.count;i++){const u=Math.floor(i/(segments+1))/rows,a=(i%(segments+1))/segments*Math.PI*2,envelope=Math.sin(Math.PI*u);
    points.setXYZ(i,base[i*3],base[i*3+1],envelope*(.45*Math.sin(a*2+time*.19)+.18*Math.sin(a*3-u*3-time*.13)));
-   color.setHSL((a/(Math.PI*2)+u*.3+.025*Math.sin(time*.17+u*2))%1,.09+.08*envelope,.48+.025*envelope*Math.sin(a*2+time*.21));colors.setXYZ(i,color.r,color.g,color.b);
+   const spiral=a+u*11-time*.2,band=.5+.5*Math.sin(spiral),highlight=Math.pow(.5+.5*Math.sin(spiral+.8),5);color.setHSL(.49+.22*band,.46+.18*envelope,.54+.17*highlight);colors.setXYZ(i,color.r,color.g,color.b);
   }
-  points.needsUpdate=true;colors.needsUpdate=true;mesh.geometry.computeVertexNormals();const normals=mesh.geometry.attributes.normal,normal=new T.Vector3();for(let row=0;row<=rows;row++){const first=row*(segments+1),last=first+segments;normal.set(normals.getX(first)+normals.getX(last),normals.getY(first)+normals.getY(last),normals.getZ(first)+normals.getZ(last)).normalize();normals.setXYZ(first,normal.x,normal.y,normal.z);normals.setXYZ(last,normal.x,normal.y,normal.z);}normals.needsUpdate=true;mesh.material.roughness=.24+.018*Math.sin(time*.16);mesh.material.iridescenceThicknessRange[0]=180+18*Math.sin(time*.12);mesh.material.iridescenceThicknessRange[1]=380+22*Math.sin(time*.12);
+  points.needsUpdate=true;colors.needsUpdate=true;mesh.geometry.computeVertexNormals();const normals=mesh.geometry.attributes.normal,normal=new T.Vector3();for(let row=0;row<=rows;row++){const first=row*(segments+1),last=first+segments;normal.set(normals.getX(first)+normals.getX(last),normals.getY(first)+normals.getY(last),normals.getZ(first)+normals.getZ(last)).normalize();normals.setXYZ(first,normal.x,normal.y,normal.z);normals.setXYZ(last,normal.x,normal.y,normal.z);}normals.needsUpdate=true;mesh.material.roughness=.32+.018*Math.sin(time*.16);mesh.material.iridescenceThicknessRange[0]=180+18*Math.sin(time*.12);mesh.material.iridescenceThicknessRange[1]=380+22*Math.sin(time*.12);
  }
  architecture(section,works,end){
   if(section===1){

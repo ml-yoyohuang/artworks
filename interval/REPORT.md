@@ -178,3 +178,10 @@
 - 每個模擬裝置重複進出入口三次，紋理、幾何及畫布數穩定（單一展場畫布），進入第一區即釋放入口動畫；沒有頁面錯誤。出口黑膜的暫停、恢復、像素變化及重複換區回歸通過。未使用實體手機或硬體 GPU 效能測試。
 
 結果：`qa-entry-results.json`、`qa-membrane-results.json`；重跑：`tools/verify-entry.cjs`。實際截圖：`screenshots/desktop-entry.png`、`screenshots/mobile-entry.png`。
+
+## 懸浮階梯與冷光螺旋
+
+- 依使用者示意移除頂部薄板，入口改為四片向斜上方遞進的霧白階梯薄板，碟片置於最高處。保留間隙與薄邊，桌機形成向左上延伸的輪廓。
+- 碟片恢復較明亮的青藍、冰紫及亮白螺旋色帶；降低金屬底色，螺旋緩慢流動，並維持局部形變。
+- Chromium 151.0.7922.34／SwiftShader，1440×900 桌機與 390×844 DPR2 手機觸控模擬實際檢視通過。入口時間及像素持續改變，背景與減少動態停止；每個裝置重複進出三次資源數穩定、單一畫布，無頁面錯誤。未使用實體手機。
+- 更新 `desktop-entry.png`、`mobile-entry.png`、`qa-entry-results.json`；重跑：`tools/verify-entry.cjs`。
