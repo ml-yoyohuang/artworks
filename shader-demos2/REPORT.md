@@ -113,6 +113,12 @@
 
 修訂後重新通過所有檢查：桌機與手機、WebGL1 無浮點、減少動態、無 WebGL、shader 編譯失敗、分頁隱藏暫停。縮圖與目錄也已更新。
 
+## 社群分享預覽圖（2026-10-09）
+
+`assets/og-image.jpg`：1200×630，JPEG，約 130KB。左側是系列名稱與一句說明，右側以 4×4 縮圖總覽全部 16 件作品，底色與目錄頁一致。
+
+目錄頁已加入 Open Graph 與 Twitter Card meta，網址沿用第一輯的 GitHub Pages 路徑：`https://ml-yoyohuang.github.io/artworks/shader-demos2/`。
+
 ## Git
 
 - **CLAUDE.md：** repo 中不存在 CLAUDE.md，也沒有 CONTRIBUTING.md 或其他貢獻規範。
