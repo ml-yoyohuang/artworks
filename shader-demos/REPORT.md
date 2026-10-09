@@ -305,4 +305,4 @@ Chromium / Playwright、ANGLE Metal 實測 1440×900 DPR 1 與 390×844 DPR 2，
 - 播放後時間繼續前進，角度互動與畫面變化恢復；暫停時細看保留相同時間與角度。系統切換 reduced-motion 後立即停止，游標不再改變作品。
 - 筆記開關、加號／減號、absolute 位置、手機面板尺寸及可見範圍通過，桌機與手機截圖逐張檢視；強制 WebGL1 的暫停操作通過。驗證與完整截圖位於 repo 外 `/private/tmp/thin-film-controls/`。
 
-手機仍為瀏覽器模擬，未新增實體手機或 Safari / Firefox 測試。根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md，已遵守修改範圍；只修改本作品與報告，未動未追蹤的 `shader-demos2/`。推送分支與修正 commit hash 於完成推送後補記。
+手機仍為瀏覽器模擬，未新增實體手機或 Safari / Firefox 測試。根目錄沒有 CLAUDE.md、CONTRIBUTING 或 AGENTS.md，已遵守修改範圍；只修改本作品與報告，未動未追蹤的 `shader-demos2/`。已成功推送至 `origin/main`，修正 commit hash：`faec7e4b2efdea2e97b85fe0589326d2cd9708a6`。交付紀錄由後續文件提交補記。
