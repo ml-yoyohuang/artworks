@@ -18,8 +18,8 @@ python3 -m http.server 8766 --bind 127.0.0.1
 |---|---|---|
 |[01](01-resonant-architecture.html)|共振建築，8 秒和弦更換，約 3 秒內改造通道|四聲部和弦與鐘音；持續音凝聚，同一組拱門、折板保留與變形|
 |[02](02-chord-loom.html)|和弦織機，8 秒樂句回返，16 秒變奏|低音粗經、旋律細緯、噪音短節點；交替上下遮擋；退出聲部留下疏鬆區|
-|[03](03-silence-cuts.html)|休止符，3 秒短裂、11 秒長沉默|聲音力度記憶決定切口深度；只有樂譜中的 rest 開啟表面|
-|[04](04-sound-fossil.html)|聲音化石，32 秒定型|固定 seed、樂譜與固定步長累積；節奏細層、長音脊線、樂句沿既有表面再次沉積|
+|[03](03-silence-cuts.html)|休止符，按住慢慢開縫、放開加深|聲音力度記憶決定切口深度；自動模式依 rest 留白|
+|[04](04-sound-fossil.html)|聲音化石，16 秒定型＋進度／倒數|固定 seed、樂譜與固定步長累積；節奏細層、長音脊線、樂句沿既有表面再次沉積|
 |[05](05-phase-tides.html)|相位潮汐，拖動即時交會，80 秒一輪|0.25 Hz 與 0.2625 Hz 的原創音型；畫面以同一時鐘與相位關係推導；可換 60／120 秒差值|
 |[06](06-breath-portrait.html)|呼吸雕塑，14 秒定型|延伸、斷續、迴旋三種合成示範；已知有聲音高控制扭轉，氣音噪音控制孔隙；保留兩件先前標本|
 |[07](07-echo-labyrinth.html)|回聲迷宮，第一回聲揭露牆面，4 秒後路徑改變|射線與已揭露牆相交；距離決定延遲與衰減；新牆參與下一輪路徑|
@@ -35,7 +35,15 @@ python3 -m http.server 8766 --bind 127.0.0.1
 
 建築調音／視點、織法、留白、相位速度與蓄能模式保留材料與主時間；呼吸切換完整示範才開始新標本。迷宮手動起點移動保留房間與已探到的牆。聲部開關立即停止持續聲音，保留已織歷史，新行記錄新的聲部狀態。呼吸示範切換留下前一件標本。
 
+### 可選古典主題與技術說明
+
+每頁「選擇聲音」含原創音源與八首古典主題；由 `classical.js` 自行編寫旋律、節奏、稀疏伴奏，Web Audio 即時合成，無外部錄音。它們是主題節選／程式改編，並非全曲或原編制演奏。切換從頭開始自動展演，選曲本身不會在首次播放前啟動音訊；親手操作使用各作品原有音源。潮汐用兩個略不同速度演奏同主題；其他作品將音符映射到既有材料事件，休止符保持真正無聲的樂句留白。原譜與署名見 [音源說明](MUSIC_CREDITS.md)。每頁 How to play 下方簡列實際使用技術。
+
+聲音化石把原創 32 秒全部事件等比例壓到 16 秒，完整材料結果一致，並非截掉後半段。進度條與剩餘秒數在暫停時凍結，定型後保留挖掘與回聽。沒有提供跳轉，確保累積歷史與聲音一致。
+
 ### 麥克風
+
+目前只有呼吸雕塑提供「用我的聲音」。其他頁的方案與適合度見 [麥克風擴充評估](MICROPHONE_REVIEW.md)，本次依「先評估」要求沒有新增收音頁。
 
 僅按下「用我的聲音」才請求權限。分析在本機，沒有 MediaRecorder、上傳或持久保存聲音；只保留當頁輪廓資料。RMS 使用開／關門檻，停頓保留為輪廓的一部分，按「留下這口氣」明確定型，最長 14 秒。週期相關信度不足不產生音高，氣流用頻譜平坦度與能量表現。麥克風不輸出至喇叭，避免回授。拒絕、無裝置、不支援或不安全來源皆回到合成示範。定型、暫停、換頁皆停止串流。輪廓不代表個性、情緒、健康或身份。
 
@@ -59,6 +67,7 @@ DPR 上限 1.6，畫面上限約 45 fps；減少動態偏好以 4 fps 保留生�
 
 - `assets/js/catalog.js`：八件策展資料；`tools/pages.mjs` 產生九個真實 HTML。
 - `assets/js/interactions.js`、`interaction-model.js`：八種互動、即時音訊與有界材料變更。
+- `assets/js/classical.js`：八首歷史主題、新伴奏與各作品事件映射。
 - `assets/js/model.js`：決定性作曲、固定步長材料與回聲路徑。
 - `assets/js/works.js`、`draw.js`：各自場景與投影／材料畫法。
 - `assets/js/audio.js`、`core.js`：聲音、UI、生命週期、麥克風。
@@ -71,10 +80,12 @@ DPR 上限 1.6，畫面上限約 45 fps；減少動態偏好以 4 fps 保留生�
 node sound3/tools/pages.mjs
 node sound3/tools/model-tests.mjs
 node sound3/tools/interaction-tests.mjs
+node sound3/tools/classical-tests.mjs
 node sound3/tools/static-check.mjs
 # 先啟動上述 HTTP，再執行（需要本機 Playwright 與 Chromium）：
 PLAYWRIGHT_MODULE=/absolute/path/to/node_modules/playwright node sound3/tools/interactive-check.cjs
 PLAYWRIGHT_MODULE=/absolute/path/to/node_modules/playwright node sound3/tools/interaction-edge-check.cjs
+PLAYWRIGHT_MODULE=/absolute/path/to/node_modules/playwright node sound3/tools/request-check.cjs
 # 同一原生渲染器輸出 PNG / WebP 縮圖：
 PLAYWRIGHT_MODULE=/absolute/path/to/node_modules/playwright node sound3/tools/previews.cjs
 ```

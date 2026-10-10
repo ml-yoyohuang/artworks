@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10T13:59:20.386Z",
+  "date": "2026-10-10T13:56:48.544Z",
   "base": "http://127.0.0.1:8766/sound3/",
   "pages": [
     {
@@ -51,36 +51,6 @@
       "device": "mobile",
       "file": "02-chord-loom.html",
       "pass": true
-    },
-    {
-      "device": "mobile",
-      "file": "03-silence-cuts.html",
-      "pass": true
-    },
-    {
-      "device": "mobile",
-      "file": "04-sound-fossil.html",
-      "pass": true
-    },
-    {
-      "device": "mobile",
-      "file": "05-phase-tides.html",
-      "pass": true
-    },
-    {
-      "device": "mobile",
-      "file": "06-breath-portrait.html",
-      "pass": true
-    },
-    {
-      "device": "mobile",
-      "file": "07-echo-labyrinth.html",
-      "pass": true
-    },
-    {
-      "device": "mobile",
-      "file": "08-stored-energy.html",
-      "pass": true
     }
   ],
   "limitations": [
@@ -88,5 +58,6 @@
     "No subjective listening",
     "Synthetic microphone input"
   ],
-  "pass": true
+  "pass": false,
+  "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(await p.evaluate(()=>Sound3.model.state.cuts.length)>=2)\n\n    at /Users/yoyohuang/dev/artworks/sound3/tools/interactive-check.cjs:13:199"
 }

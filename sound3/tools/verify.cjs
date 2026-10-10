@@ -4,7 +4,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const only=(process.env.SOUND3_ONLY||'').split(',').filter(Boolean),RESULT_FILE=process.env.SOUND3_RESULT||'results.json';
 const ROOT=path.resolve(__dirname,'..'),OUT=path.join(ROOT,'_qa'),BASE=process.env.SOUND3_URL||'http://127.0.0.1:8766/sound3/';
 const ids=['01-resonant-architecture','02-chord-loom','03-silence-cuts','04-sound-fossil','05-phase-tides','06-breath-portrait','07-echo-labyrinth','08-stored-energy'];
-const moments=[12,19,13,33,82,15,29,16];fs.mkdirSync(path.join(OUT,'shots'),{recursive:true});
+const moments=[12,19,13,17,82,15,29,16];fs.mkdirSync(path.join(OUT,'shots'),{recursive:true});
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 function watch(page,errors){page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});page.on('response',r=>{if(r.status()>=400&&!/favicon/.test(r.url()))errors.push(r.status()+' '+r.url())})}
 const snap=p=>p.evaluate(()=>Sound3.debug.snapshot());
@@ -29,7 +29,7 @@ async function representative(page,time){await page.waitForFunction(t=>Sound3.st
   await page.locator('#play').click();await wait(350);ok('resumeContinuous',(await snap(page)).time>p2.time+.15);
   // Every desktop work runs until its representative event; mobile mirrors the
   // fixed-step state to avoid pretending an accelerated inspection was real time.
-  if(device==='desktop')await representative(page,moments[i]);else{await page.locator('#play').click();await page.evaluate(t=>Sound3.debug.stepTo(t),[12,19,13,32,40,14,25,16][i]);}
+  if(device==='desktop')await representative(page,moments[i]);else{await page.locator('#play').click();await page.evaluate(t=>Sound3.debug.stepTo(t),[12,19,13,16,40,14,25,16][i]);}
   r.representative=await snap(page);ok('evolved',h0!==await hash(page));ok('fixedStepFollowsClock',r.representative.maxLag<.04,{maxLag:r.representative.maxLag});
   if(device==='desktop'&&r.representative.playing)await page.locator('#play').click();
   await page.screenshot({path:path.join(OUT,'shots',`${device}-${ids[i]}-representative.png`),fullPage:device==='mobile'});

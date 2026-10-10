@@ -1,0 +1,350 @@
+{
+  "pass": true,
+  "base": "http://127.0.0.1:8766/sound3/",
+  "checks": 68,
+  "results": [
+    {
+      "device": "desktop",
+      "holdGrowth": true,
+      "cancelDoesNotCommit": true
+    },
+    {
+      "device": "desktop",
+      "fossilCompletesAt16": true,
+      "pausedProgressStable": true,
+      "excavation": true
+    },
+    {
+      "device": "mobile",
+      "holdGrowth": true,
+      "cancelDoesNotCommit": true
+    },
+    {
+      "device": "mobile",
+      "fossilCompletesAt16": true,
+      "pausedProgressStable": true,
+      "excavation": true
+    },
+    {
+      "work": 1,
+      "track": "canon",
+      "peak": 0.06747491657733917
+    },
+    {
+      "work": 1,
+      "track": "prayer",
+      "peak": 0.06079523637890816
+    },
+    {
+      "work": 1,
+      "track": "elise",
+      "peak": 0.06465084105730057
+    },
+    {
+      "work": 1,
+      "track": "bolero",
+      "peak": 0.061155349016189575
+    },
+    {
+      "work": 1,
+      "track": "can-can",
+      "peak": 0.0653989389538765
+    },
+    {
+      "work": 1,
+      "track": "turkish",
+      "peak": 0.06203856319189072
+    },
+    {
+      "work": 1,
+      "track": "tell",
+      "peak": 0.0635889321565628
+    },
+    {
+      "work": 1,
+      "track": "hungarian",
+      "peak": 0.06822080910205841
+    },
+    {
+      "work": 2,
+      "track": "canon",
+      "peak": 0.06731273233890533
+    },
+    {
+      "work": 2,
+      "track": "prayer",
+      "peak": 0.06099376082420349
+    },
+    {
+      "work": 2,
+      "track": "elise",
+      "peak": 0.06415681540966034
+    },
+    {
+      "work": 2,
+      "track": "bolero",
+      "peak": 0.06115535646677017
+    },
+    {
+      "work": 2,
+      "track": "can-can",
+      "peak": 0.06539894640445709
+    },
+    {
+      "work": 2,
+      "track": "turkish",
+      "peak": 0.062021106481552124
+    },
+    {
+      "work": 2,
+      "track": "tell",
+      "peak": 0.0635889321565628
+    },
+    {
+      "work": 2,
+      "track": "hungarian",
+      "peak": 0.06822080910205841
+    },
+    {
+      "work": 3,
+      "track": "canon",
+      "peak": 0.06731273233890533
+    },
+    {
+      "work": 3,
+      "track": "prayer",
+      "peak": 0.04629682004451752
+    },
+    {
+      "work": 3,
+      "track": "elise",
+      "peak": 0.0645630806684494
+    },
+    {
+      "work": 3,
+      "track": "bolero",
+      "peak": 0.0617818683385849
+    },
+    {
+      "work": 3,
+      "track": "can-can",
+      "peak": 0.0663115531206131
+    },
+    {
+      "work": 3,
+      "track": "turkish",
+      "peak": 0.061497703194618225
+    },
+    {
+      "work": 3,
+      "track": "tell",
+      "peak": 0.06396332383155823
+    },
+    {
+      "work": 3,
+      "track": "hungarian",
+      "peak": 0.06511031836271286
+    },
+    {
+      "work": 4,
+      "track": "canon",
+      "peak": 0.0663946196436882
+    },
+    {
+      "work": 4,
+      "track": "prayer",
+      "peak": 0.06799909472465515
+    },
+    {
+      "work": 4,
+      "track": "elise",
+      "peak": 0.062117621302604675
+    },
+    {
+      "work": 4,
+      "track": "bolero",
+      "peak": 0.05857332795858383
+    },
+    {
+      "work": 4,
+      "track": "can-can",
+      "peak": 0.06415523588657379
+    },
+    {
+      "work": 4,
+      "track": "turkish",
+      "peak": 0.06479758024215698
+    },
+    {
+      "work": 4,
+      "track": "tell",
+      "peak": 0.06394141912460327
+    },
+    {
+      "work": 4,
+      "track": "hungarian",
+      "peak": 0.06753209233283997
+    },
+    {
+      "work": 5,
+      "track": "canon",
+      "peak": 0.06831304728984833
+    },
+    {
+      "work": 5,
+      "track": "prayer",
+      "peak": 0.05140801519155502
+    },
+    {
+      "work": 5,
+      "track": "elise",
+      "peak": 0.04018998146057129
+    },
+    {
+      "work": 5,
+      "track": "bolero",
+      "peak": 0.05816742032766342
+    },
+    {
+      "work": 5,
+      "track": "can-can",
+      "peak": 0.06773745268583298
+    },
+    {
+      "work": 5,
+      "track": "turkish",
+      "peak": 0.0663236603140831
+    },
+    {
+      "work": 5,
+      "track": "tell",
+      "peak": 0.0574076846241951
+    },
+    {
+      "work": 5,
+      "track": "hungarian",
+      "peak": 0.05567032843828201
+    },
+    {
+      "work": 6,
+      "track": "canon",
+      "peak": 0.04312661662697792
+    },
+    {
+      "work": 6,
+      "track": "prayer",
+      "peak": 0.04739814251661301
+    },
+    {
+      "work": 6,
+      "track": "elise",
+      "peak": 0.041950907558202744
+    },
+    {
+      "work": 6,
+      "track": "bolero",
+      "peak": 0.03981170430779457
+    },
+    {
+      "work": 6,
+      "track": "can-can",
+      "peak": 0.04370901361107826
+    },
+    {
+      "work": 6,
+      "track": "turkish",
+      "peak": 0.04081954061985016
+    },
+    {
+      "work": 6,
+      "track": "tell",
+      "peak": 0.04195084795355797
+    },
+    {
+      "work": 6,
+      "track": "hungarian",
+      "peak": 0.04534774646162987
+    },
+    {
+      "work": 7,
+      "track": "canon",
+      "peak": 0.050057552754879
+    },
+    {
+      "work": 7,
+      "track": "prayer",
+      "peak": 0.0413748137652874
+    },
+    {
+      "work": 7,
+      "track": "elise",
+      "peak": 0.04394061490893364
+    },
+    {
+      "work": 7,
+      "track": "bolero",
+      "peak": 0.04423486441373825
+    },
+    {
+      "work": 7,
+      "track": "can-can",
+      "peak": 0.04908698797225952
+    },
+    {
+      "work": 7,
+      "track": "turkish",
+      "peak": 0.04895327240228653
+    },
+    {
+      "work": 7,
+      "track": "tell",
+      "peak": 0.04582405090332031
+    },
+    {
+      "work": 7,
+      "track": "hungarian",
+      "peak": 0.04617323726415634
+    },
+    {
+      "work": 8,
+      "track": "canon",
+      "peak": 0.11042772233486176
+    },
+    {
+      "work": 8,
+      "track": "prayer",
+      "peak": 0.09884196519851685
+    },
+    {
+      "work": 8,
+      "track": "elise",
+      "peak": 0.10512197017669678
+    },
+    {
+      "work": 8,
+      "track": "bolero",
+      "peak": 0.10179835557937622
+    },
+    {
+      "work": 8,
+      "track": "can-can",
+      "peak": 0.10389484465122223
+    },
+    {
+      "work": 8,
+      "track": "turkish",
+      "peak": 0.10004344582557678
+    },
+    {
+      "work": 8,
+      "track": "tell",
+      "peak": 0.10346314311027527
+    },
+    {
+      "work": 8,
+      "track": "hungarian",
+      "peak": 0.11127685010433197
+    }
+  ],
+  "errors": []
+}

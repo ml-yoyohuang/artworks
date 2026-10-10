@@ -58,9 +58,9 @@ function silence(g,s,v){
  g.save();g.shadowColor='rgba(16,13,11,.3)';g.shadowBlur=26;g.shadowOffsetY=14;
  g.fillStyle='#34322f';g.beginPath();g.roundRect(-W/2,-H/2,W,H,3);g.fill();g.restore();
  // Four separated, gently curved apertures. One continuous inner fold replaces intersecting shards.
- const slots=new Map();for(const cut of s.cuts)slots.set(cut.slot??Math.floor(cut.axis)%4,cut);
- for(const [slot,cut] of slots){const age=Math.max(0,s.time-cut.start),expand=cut.manual?(s.holding?.14:ease(age/2.1)):age<cut.d?ease(age/Math.min(cut.d,1.7)):mix(1,.09,ease((age-cut.d)/2.5));
-  const L=360+cut.prior*170,x=(slot%2?1:-1)*W*.09,y=(slot-1.5)*H*.225,gape=3+expand*cut.depth*(Number(s.params.space||0)?1.25:1)*(v.mobile?104:66);
+ const slots=new Map();for(const cut of s.cuts)slots.set(cut.slot??Math.floor(cut.axis)%4,cut);if(s.pressCut)slots.set(s.pressCut.slot,s.pressCut);
+ for(const [slot,cut] of slots){const age=Math.max(0,s.time-cut.start),expand=cut.press?.08+.47*ease(age/2.4):cut.manual?mix(.08+.47*ease((cut.pressDuration||0)/2.4),1,ease(age/2.1)):age<cut.d?ease(age/Math.min(cut.d,1.7)):mix(1,.09,ease((age-cut.d)/2.5));
+  const prior=cut.press?clamp((age+.16)*.11,.12,.9):cut.prior,depth=cut.press?.35+prior*.7:cut.depth;const L=(360+prior*170)*(cut.press?mix(.35,1,ease(age/2.4)):cut.manual?mix(mix(.35,1,ease((cut.pressDuration||0)/2.4)),1,ease(age/2.1)):1),x=(slot%2?1:-1)*W*.09,y=(slot-1.5)*H*.225,gape=3+expand*depth*(Number(s.params.space||0)?1.25:1)*(v.mobile?104:66);
   g.save();g.translate(x,y);g.rotate(slot%2?.026:-.022);
   const aperture=()=>{g.beginPath();g.moveTo(-L/2,0);g.bezierCurveTo(-L*.2,-gape*.22,L*.24,-gape*.2,L/2,-3);g.bezierCurveTo(L*.22,gape*.6,-L*.16,gape*1.1,-L/2,0);g.closePath()};
   aperture();g.shadowColor='rgba(10,8,6,.48)';g.shadowBlur=12;g.shadowOffsetY=5;g.fillStyle='#211e1b';g.fill();g.shadowBlur=0;g.shadowOffsetY=0;
@@ -73,14 +73,14 @@ function silence(g,s,v){
 function fossil(g,s,v){
  const bg=g.createRadialGradient(-200,-190,0,0,50,650);bg.addColorStop(0,'#434649');bg.addColorStop(1,'#191e23');g.fillStyle=bg;g.fillRect(-v.w/2,-v.h/2,v.w,v.h);
  const rot=s.params.rotation??.3,sc=v.mobile?85:76;plinth(g,.6,sc,200);ellipse(g,0,191,210,52,'rgba(0,0,0,.28)');
- const progress=s.time===0?.48:clamp(s.time/32),height=110+progress*245;
+ const progress=s.time===0?.48:clamp(s.time/(s.params.fossilDuration??32)),height=110+progress*245;
  const profile=Array.from({length:94},(_,i)=>{const t=i/93,k=Math.floor(t*95),m=s.time===0?.4+noise(k,s.seed)*.5:s.material[k];return {y:t*height,r:75+65*Math.sin(t*Math.PI)**.7+m*62+Math.sin(t*28+s.seed)*7+Math.sin(t*63+s.seed)*2}});
  lathe(g,{profile,y:182,scale:v.mobile?1.45:1.17,angle:rot,color:[223,211,185],seed:s.seed,excavation:s.excavation});
  // Horizontal strata track actual recorded events; metallic veins follow reused pitch sectors.
  const layers=s.layers.length?s.layers:Array.from({length:30},(_,i)=>({t:i*.5,kind:i%8?'grain':'ridge',pitch:55}));
- for(let k=0;k<layers.length;k++){const t=clamp(layers[k].t/32),y=182-t*height*(v.mobile?1.45:1.17),r=(75+65*Math.sin(t*Math.PI)**.7+s.material[Math.floor(t*95)]*62)*(v.mobile?1.45:1.17),pts=[];for(let j=0;j<=48;j++){const a=j/48*Math.PI;pts.push([Math.cos(a)*r,y+Math.sin(a)*r*.27+Math.sin(j*.9+k)*1.4])}line(g,pts,layers[k].kind==='ridge'?'rgba(181,142,79,.75)':'rgba(84,72,57,.23)',layers[k].kind==='ridge'?2:1)}
+ for(let k=0;k<layers.length;k++){const t=clamp(layers[k].t/(s.params.fossilDuration??32)),y=182-t*height*(v.mobile?1.45:1.17),r=(75+65*Math.sin(t*Math.PI)**.7+s.material[Math.floor(t*95)]*62)*(v.mobile?1.45:1.17),pts=[];for(let j=0;j<=48;j++){const a=j/48*Math.PI;pts.push([Math.cos(a)*r,y+Math.sin(a)*r*.27+Math.sin(j*.9+k)*1.4])}line(g,pts,layers[k].kind==='ridge'?'rgba(181,142,79,.75)':'rgba(84,72,57,.23)',layers[k].kind==='ridge'?2:1)}
  for(let j=0;j<300;j++){const t=noise(j,s.seed),a=noise(j+70,s.seed)*Math.PI,r=(75+65*Math.sin(t*Math.PI)**.7+s.material[Math.floor(t*95)]*62)*(v.mobile?1.45:1.17);ellipse(g,Math.cos(a+rot*.3)*r,182-t*height*(v.mobile?1.45:1.17)+Math.sin(a)*r*.27,noise(j+88,s.seed)*1.7+.4,.65,'rgba(67,57,41,.22)')}
- if(s.selectedLayer){const yy=182-s.selectedLayer.t/32*height*(v.mobile?1.45:1.17);line(g,[[-150,yy],[150,yy]],'rgba(218,179,111,.55)',1.2)}
+ if(s.selectedLayer){const yy=182-s.selectedLayer.t/(s.params.fossilDuration??32)*height*(v.mobile?1.45:1.17);line(g,[[-150,yy],[150,yy]],'rgba(218,179,111,.55)',1.2)}
  if(s.complete){g.font='11px Arial';g.fillStyle='#ccc5b5';g.textAlign='center';g.fillText('標本已定型 · SEED '+s.seed,0,290);g.textAlign='left'}grain(g,v.w,v.h,s.seed,.035);
 }
 function tides(g,s,v){

@@ -1,3 +1,4 @@
+import {adaptClassical} from './classical.js';
 export const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 export const mix=(a,b,t)=>a+(b-a)*t;
 export const noise=(n,seed=4172)=>{const x=Math.sin(n*127.1+seed*13.13)*43758.5453;return x-Math.floor(x)};
@@ -48,7 +49,8 @@ export function score(index,seed,p={}){
  if(index===5){const demos=[[[.2,4.2,53,.25],[5,3.1,57,.36],[8.8,3.6,null,.3]],[[.2,1.8,62,.35],[2.3,1.4,65,.25],[4,2.5,null,.4],[7,1.8,60,.45],[9.3,2.8,57,.28]],[[.2,3,48,.4],[3.5,3.1,60,.24],[7,4.8,67,.36]]];for(const [t,d,n,v] of demos[Number(p.demo??0)])e.push(note(t,d,n==null?[]:[n],v,n==null?'breath':'voice',{kind:'breath',pitch:n,airy:n==null?.95:.22}));}
  if(index===6){const a=echoScore(seed,Number(p.origin??0));e=a.events;walls=a.walls;source=a.source;}
  if(index===7){for(let k=0;k<48;k++){const t=k*.65,sec=t%32,v=t<6?.2:t<16?.35+(t-6)*.035:t<20?.15:.28;e.push(note(t,.45,[40,47,52,59][k%4],v,'pluck',{kind:'injection'}));if(k%4===0)e.push(note(t,1.3,[40,52],v*.7,'bass',{kind:'injection'}));}}
- return {events:e.sort((a,b)=>a.t-b.t),walls,source};
+ if(index===3){const ratio=(p.fossilDuration??32)/32;for(const event of e){event.t*=ratio;event.d*=ratio}}
+ return adaptClassical(index,p.soundtrack,index===3?(p.fossilDuration??32):index===2?24:index===5?14:32,{events:e.sort((a,b)=>a.t-b.t),walls,source},p);
 }
 export function createModel(index,seed=4172,params={}){
  const data=score(index,seed,params);

@@ -15,6 +15,25 @@
 
 這些原創樂譜、聲音合成定義，以及由它們生成的聲音，隨本任務交付給 repository 擁有者；原創聲音採 **CC0 1.0 Universal** 公有領域貢獻。授權說明：https://creativecommons.org/publicdomain/zero/1.0/ 。無必須署名的外部曲目；仍在每頁保留原創署名。
 
-**沒有採用、下載、熱連或再散布第三方音樂。** `assets/audio/` 保留給未來合法音源，此版不需要任何 MP3/WAV。沒有把未使用曲目寫入實際署名，也沒有等待手動下載的功能。
+**沒有使用第三方演奏錄音、熱連、取樣庫或現代商業編曲。** 本版不需要任何 MP3/WAV。新增古典主題由 `assets/js/classical.js` 自行編寫音符與伴奏、即時合成。原譜僅供旋律核對，不隨網站散布掃描件。上面的原創音源 CC0 聲明僅涵蓋本展有權授權的新程式與原創素材，不把歷史原作冒稱為本展原創。
 
 觀眾選用麥克風時，聲音只在當前瀏覽器分析，不錄音、不上傳，不把其聲音當作本展可再散布素材。PNG 僅包含生成的形態與表面，不包含音訊。
+
+## 八首可選古典主題
+
+以下全部加入八頁聲音選單。編排為 **主題節選／程式改編**：簡化裝飾音、降低部分音域、自行加入稀疏低音伴奏，按作品時長調整速度；並非全曲或原編制演奏。原創音源仍為預設。
+
+|選單|原作者／作品|部分與原譜來源|
+|---|---|---|
+|卡農|Johann Pachelbel・Canon in D|旋律、固定低音；[歷史譜目](https://imslp.org/wiki/Canon_and_Gigue_in_D_major,_P.37_(Pachelbel,_Johann))|
+|少女的祈禱|Tekla Bądarzewska-Baranowska・Op.4|主題，省略裝飾音；核對 [C. F. Peters 歷史印本第 1 頁](https://vmirror.imslp.org/files/imglnks/usimg/b/b7/IMSLP32596-PMLP51317-Salonalbum_Peters_1_Badarzewska_La_Priere_d_une_Vierge.pdf)|
+|給愛麗絲|Ludwig van Beethoven・WoO 59|開頭迴旋主題；[原作譜目](https://imslp.org/wiki/F%C3%BCr_Elise,_WoO_59_(Beethoven,_Ludwig_van))|
+|波萊羅舞曲|Maurice Ravel・Boléro, M.81|第一主題、三拍節奏；[1929 原版譜目](https://imslp.org/wiki/Bol%C3%A9ro_(Ravel,_Maurice))|
+|天堂與地獄序曲|Jacques Offenbach・Orphée aux enfers|地獄加洛普／康康主題；[原作與序曲譜目](https://imslp.org/wiki/Orph%C3%A9e_aux_enfers_(Offenbach,_Jacques))。常見序曲由 Carl Binder 編整，此處取原作舞曲旋律，伴奏重新編寫|
+|莫札特—土耳其進行曲|Wolfgang Amadeus Mozart・K.331|第三樂章 Alla turca 開頭；[原作譜目](https://imslp.org/wiki/Piano_Sonata_No.11,_K.331_(Mozart,_Wolfgang_Amadeus))|
+|威廉泰爾序曲|Gioachino Rossini・Guillaume Tell|序曲終曲快板主題；[原作譜目](https://imslp.org/wiki/Guillaume_Tell_(Rossini,_Gioacchino))|
+|匈牙利舞曲第 5 號|Johannes Brahms・WoO 1, No.5|開頭主題，移調 G 小調；[歷史鋼琴譜](https://imslp.org/wiki/21_Hungarian_Dances_(Piano),_WoO_1_(Brahms,_Johannes))。主題來源包含 Béla Kéler 的 Bártfai emlék|
+
+歷史作品的權利與當代錄音、現代編曲不同；本版只使用歷史旋律重新編寫，不對外部演奏、現代譜面或全球各司法轄區作 CC0 聲明。每頁音源署名連結可查看以上曲目。
+
+選曲作用於自動展演；手動調音、織行、按住發聲、敲擊與探路仍使用作品原有回饋音源。潮汐以兩個時間演奏同一主題，休止符保留真正無聲的樂句間隙。切換歌曲會重新生成材料；化石的回聽使用目前選曲實際沉積的音符。

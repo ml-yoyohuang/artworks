@@ -1,0 +1,86 @@
+{
+  "pass": true,
+  "combinations": 16,
+  "results": [
+    {
+      "id": "01-resonant-architecture",
+      "track": "canon",
+      "pass": true
+    },
+    {
+      "id": "01-resonant-architecture",
+      "track": "prayer",
+      "pass": true
+    },
+    {
+      "id": "01-resonant-architecture",
+      "track": "elise",
+      "pass": true
+    },
+    {
+      "id": "01-resonant-architecture",
+      "track": "bolero",
+      "pass": true
+    },
+    {
+      "id": "01-resonant-architecture",
+      "track": "can-can",
+      "pass": true
+    },
+    {
+      "id": "01-resonant-architecture",
+      "track": "turkish",
+      "pass": true
+    },
+    {
+      "id": "01-resonant-architecture",
+      "track": "tell",
+      "pass": true
+    },
+    {
+      "id": "01-resonant-architecture",
+      "track": "hungarian",
+      "pass": true
+    },
+    {
+      "id": "02-chord-loom",
+      "track": "canon",
+      "pass": true
+    },
+    {
+      "id": "02-chord-loom",
+      "track": "prayer",
+      "pass": true
+    },
+    {
+      "id": "02-chord-loom",
+      "track": "elise",
+      "pass": true
+    },
+    {
+      "id": "02-chord-loom",
+      "track": "bolero",
+      "pass": true
+    },
+    {
+      "id": "02-chord-loom",
+      "track": "can-can",
+      "pass": true
+    },
+    {
+      "id": "02-chord-loom",
+      "track": "turkish",
+      "pass": true
+    },
+    {
+      "id": "02-chord-loom",
+      "track": "tell",
+      "pass": true
+    },
+    {
+      "id": "02-chord-loom",
+      "track": "hungarian",
+      "pass": true
+    }
+  ]
+}
