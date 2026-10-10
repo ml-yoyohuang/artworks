@@ -396,4 +396,4 @@ ZIP 保存原始 MIDI、LilyPond、參考 PDF、來源記錄及實際 Python 轉
 
 ## Sound 更新發布（2026-10-11）
 
-依使用者「先推版發布」指示，提交本對話完成的 sound 更新：可攜式八首樂譜、給愛麗絲／少女的祈禱及來源、改善卡農低音、16 件作品同步低音，以及完整卡農五種音色試聽室、說明文件、ZIP 與 QA 紀錄。新五種音色僅供 reusable 試聽，尚未套用展覽作品。發布前重新確認四份 QA 紀錄皆無 errors、16 頁包含已驗證的低音設定、ZIP 與正式檔一致，git diff --check 通過。只 stage sound；sound3 的另行修改保留。遠端 main 與本機一致；GitHub Pages 使用 main 根目錄自動部署。根目錄 CLAUDE.md／AGENTS.md 不存在。
+依使用者「先推版發布」指示，提交本對話完成的 sound 更新：可攜式八首樂譜、給愛麗絲／少女的祈禱及來源、改善卡農低音、16 件作品同步低音，以及完整卡農五種音色試聽室、說明文件、ZIP 與 QA 紀錄。新五種音色僅供 reusable 試聽，尚未套用展覽作品。發布前重新確認四份 QA 紀錄皆無 errors、16 頁包含已驗證的低音設定、ZIP 與正式檔一致。新增原始來源快照保留上游的行尾空白；排除這兩份來源快照後，程式與文件的差異空白檢查通過。只 stage sound；sound3 的另行修改保留。遠端 main 與本機一致；GitHub Pages 使用 main 根目錄自動部署。根目錄 CLAUDE.md／AGENTS.md 不存在。
