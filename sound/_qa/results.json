@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10T07:03:38.174Z",
+  "date": "2026-10-10T07:20:21.368Z",
   "checks": [
     {
       "slug": "jelly-wave",
@@ -27,25 +27,6 @@
       "audio": {
         "peak": 0.06252992153167725,
         "fps": 120.69809166648086,
-        "notes": 7,
-        "context": "running",
-        "version": "15.0.4"
-      },
-      "touchOrDrag": true,
-      "keyboard": true,
-      "tempo": true,
-      "mute": true,
-      "pauseAndResume": true,
-      "reducedMotion": true,
-      "noOverflow": true
-    },
-    {
-      "slug": "bubble-scale",
-      "device": "desktop",
-      "pixels": 442,
-      "audio": {
-        "peak": 0.05895412713289261,
-        "fps": 119.61330492966427,
         "notes": 7,
         "context": "running",
         "version": "15.0.4"
@@ -325,25 +306,6 @@
       "noOverflow": true
     },
     {
-      "slug": "bubble-scale",
-      "device": "mobile",
-      "pixels": 180,
-      "audio": {
-        "peak": 0.05895412713289261,
-        "fps": 120.95456031736325,
-        "notes": 7,
-        "context": "running",
-        "version": "15.0.4"
-      },
-      "touchOrDrag": true,
-      "keyboard": true,
-      "tempo": true,
-      "mute": true,
-      "pauseAndResume": true,
-      "reducedMotion": true,
-      "noOverflow": true
-    },
-    {
       "slug": "beat-candy",
       "device": "mobile",
       "pixels": 143,
@@ -591,6 +553,44 @@
       "noOverflow": true
     },
     {
+      "slug": "pendulum-swing",
+      "device": "mobile",
+      "pixels": 124,
+      "audio": {
+        "peak": 0.05664438009262085,
+        "fps": 119.39810271391615,
+        "notes": 6,
+        "context": "running",
+        "version": "15.0.4"
+      },
+      "touchOrDrag": true,
+      "keyboard": true,
+      "tempo": true,
+      "mute": true,
+      "pauseAndResume": true,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "bubble-scale",
+      "device": "desktop",
+      "pixels": 458,
+      "audio": {
+        "peak": 0.04374008625745773,
+        "fps": 120.40351448213092,
+        "notes": 7,
+        "context": "running",
+        "version": "15.0.4"
+      },
+      "touchOrDrag": true,
+      "keyboard": true,
+      "tempo": true,
+      "mute": true,
+      "pauseAndResume": true,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
       "slug": "index",
       "device": "desktop",
       "links": 16,
@@ -599,13 +599,13 @@
       "noOverflow": true
     },
     {
-      "slug": "pendulum-swing",
+      "slug": "bubble-scale",
       "device": "mobile",
-      "pixels": 124,
+      "pixels": 183,
       "audio": {
-        "peak": 0.05664438009262085,
-        "fps": 119.39810271391615,
-        "notes": 6,
+        "peak": 0.057231735438108444,
+        "fps": 119.49582582957562,
+        "notes": 7,
         "context": "running",
         "version": "15.0.4"
       },
