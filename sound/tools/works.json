@@ -1,0 +1,130 @@
+[
+  {
+    "slug": "jelly-wave",
+    "title": "果凍波",
+    "en": "Jelly, gently",
+    "bpm": 94,
+    "osc": "sine",
+    "mode": "soft"
+  },
+  {
+    "slug": "pendulum-swing",
+    "title": "彩虹鞦韆",
+    "en": "A chorus of arcs",
+    "bpm": 88,
+    "osc": "triangle",
+    "mode": "soft"
+  },
+  {
+    "slug": "ribbon-dance",
+    "title": "緞帶體操",
+    "en": "A little flourish",
+    "bpm": 108,
+    "osc": "triangle",
+    "mode": "soft"
+  },
+  {
+    "slug": "bubble-scale",
+    "title": "泡泡音階",
+    "en": "Notes in the air",
+    "bpm": 102,
+    "osc": "sine",
+    "mode": "soft"
+  },
+  {
+    "slug": "beat-candy",
+    "title": "節拍糖果",
+    "en": "Sweet accumulation",
+    "bpm": 116,
+    "osc": "triangle",
+    "mode": "drum"
+  },
+  {
+    "slug": "tap-floor",
+    "title": "踢踏地板",
+    "en": "A floor that listens",
+    "bpm": 112,
+    "osc": "square",
+    "mode": "drum"
+  },
+  {
+    "slug": "popcorn-rhythm",
+    "title": "爆米花節奏",
+    "en": "Small explosions",
+    "bpm": 128,
+    "osc": "triangle",
+    "mode": "drum"
+  },
+  {
+    "slug": "hopscotch",
+    "title": "跳房子",
+    "en": "One more square",
+    "bpm": 104,
+    "osc": "sine",
+    "mode": "drum"
+  },
+  {
+    "slug": "flower-choir",
+    "title": "合唱的花",
+    "en": "A garden in tune",
+    "bpm": 92,
+    "osc": "sine",
+    "mode": "choir"
+  },
+  {
+    "slug": "canon-ripples",
+    "title": "輪唱漣漪",
+    "en": "After you, again",
+    "bpm": 100,
+    "osc": "sine",
+    "mode": "canon"
+  },
+  {
+    "slug": "metronome-party",
+    "title": "節拍器派對",
+    "en": "Finding the together",
+    "bpm": 96,
+    "osc": "triangle",
+    "mode": "metro"
+  },
+  {
+    "slug": "signal-band",
+    "title": "交通號誌樂團",
+    "en": "The crossing sings",
+    "bpm": 110,
+    "osc": "triangle",
+    "mode": "signal"
+  },
+  {
+    "slug": "square-blocks",
+    "title": "方波積木",
+    "en": "A place for a pulse",
+    "bpm": 98,
+    "osc": "square",
+    "mode": "soft"
+  },
+  {
+    "slug": "saw-hills",
+    "title": "鋸齒山丘",
+    "en": "Downhill, uphill",
+    "bpm": 106,
+    "osc": "sawtooth",
+    "mode": "soft"
+  },
+  {
+    "slug": "crayon-wave",
+    "title": "波形塗鴉",
+    "en": "Please colour the sound",
+    "bpm": 90,
+    "osc": "triangle",
+    "mode": "soft"
+  },
+  {
+    "slug": "spring-dancer",
+    "title": "彈簧舞者",
+    "en": "Stretch, then smile",
+    "bpm": 118,
+    "osc": "triangle",
+    "mode": "drum"
+  }
+]

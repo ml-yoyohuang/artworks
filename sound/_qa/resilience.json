@@ -1,0 +1,24 @@
+{
+  "checks": [
+    {
+      "name": "CDN blocked",
+      "canvas": true,
+      "interaction": true,
+      "retryMessage": true
+    },
+    {
+      "name": "reduced motion on first load + audio playing",
+      "identicalCanvasPixels": true
+    },
+    {
+      "name": "160 BPM candy stress + hidden tab",
+      "durationSeconds": 20,
+      "stopsAudioWhenHidden": true,
+      "stopsFramesWhenHidden": true,
+      "fps": 119.90008326394671,
+      "frames": 2214,
+      "notes": 98,
+      "canvases": 1
+    }
+  ]
+}
