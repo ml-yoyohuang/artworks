@@ -36,6 +36,7 @@ sound2/
   assets/js/vendor/          Tone.js 15.0.4（MIT）與授權
   assets/audio/              兩首 CC BY 4.0 曲目（見 MUSIC_CREDITS.md）
   assets/previews/           目錄預覽圖（作品實際畫面）
+  assets/og-image.png        目錄頁社群預覽圖（1200×630，由 tools/og.html 經 tools/og.cjs 產生）
   tools/pages.py             重新產生十個 HTML 入口
   tools/verify.cjs           Playwright 驗收腳本
   _qa/                       驗收結果與截圖聯絡表
