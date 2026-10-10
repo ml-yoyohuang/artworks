@@ -1,0 +1,26 @@
+{
+  "checks": [
+    {
+      "device": "desktop",
+      "defaults": true,
+      "slidersChangeDrawing": true,
+      "originalAndReset": true,
+      "copyOrFallback": true,
+      "noOverflow": true,
+      "startButtonsCentered": 16,
+      "reportFooterRemoved": true,
+      "errors": []
+    },
+    {
+      "device": "mobile",
+      "defaults": true,
+      "slidersChangeDrawing": true,
+      "originalAndReset": true,
+      "copyOrFallback": true,
+      "noOverflow": true,
+      "startButtonsCentered": 16,
+      "reportFooterRemoved": true,
+      "errors": []
+    }
+  ]
+}

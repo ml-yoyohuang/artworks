@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10T09:42:41.551Z",
+  "date": "2026-10-10T09:50:32.330Z",
   "checks": [
     {
       "slug": "ribbon-dance",
@@ -38,18 +38,6 @@
       "noOverflow": true
     },
     {
-      "slug": "jelly-wave",
-      "device": "desktop",
-      "checks": {
-        "grabOMouth": true,
-        "collisionSquint": true,
-        "smileReturns": true
-      },
-      "reducedMotion": true,
-      "updatedMaterials": true,
-      "noOverflow": true
-    },
-    {
       "slug": "ribbon-dance",
       "device": "mobile",
       "checks": {
@@ -86,8 +74,56 @@
       "noOverflow": true
     },
     {
-      "slug": "jelly-wave",
+      "slug": "popcorn-rhythm",
+      "device": "desktop",
+      "checks": {
+        "fullChargeLeavesCanvas": true,
+        "autoBeatCannotInterrupt": true,
+        "landsBack": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "popcorn-rhythm",
       "device": "mobile",
+      "checks": {
+        "fullChargeLeavesCanvas": true,
+        "autoBeatCannotInterrupt": true,
+        "landsBack": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "flower-choir",
+      "device": "desktop",
+      "checks": {
+        "eightBeatPhrase": true,
+        "duckAndRestore": true,
+        "manualReturn": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "flower-choir",
+      "device": "mobile",
+      "checks": {
+        "eightBeatPhrase": true,
+        "duckAndRestore": true,
+        "manualReturn": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "jelly-wave",
+      "device": "desktop",
       "checks": {
         "grabOMouth": true,
         "collisionSquint": true,
@@ -98,48 +134,12 @@
       "noOverflow": true
     },
     {
-      "slug": "popcorn-rhythm",
-      "device": "desktop",
-      "checks": {
-        "fullChargeLeavesCanvas": true,
-        "autoBeatCannotInterrupt": true,
-        "landsBack": true
-      },
-      "reducedMotion": true,
-      "updatedMaterials": true,
-      "noOverflow": true
-    },
-    {
-      "slug": "popcorn-rhythm",
+      "slug": "jelly-wave",
       "device": "mobile",
       "checks": {
-        "fullChargeLeavesCanvas": true,
-        "autoBeatCannotInterrupt": true,
-        "landsBack": true
-      },
-      "reducedMotion": true,
-      "updatedMaterials": true,
-      "noOverflow": true
-    },
-    {
-      "slug": "flower-choir",
-      "device": "desktop",
-      "checks": {
-        "eightBeatPhrase": true,
-        "duckAndRestore": true,
-        "manualReturn": true
-      },
-      "reducedMotion": true,
-      "updatedMaterials": true,
-      "noOverflow": true
-    },
-    {
-      "slug": "flower-choir",
-      "device": "mobile",
-      "checks": {
-        "eightBeatPhrase": true,
-        "duckAndRestore": true,
-        "manualReturn": true
+        "grabOMouth": true,
+        "collisionSquint": true,
+        "smileReturns": true
       },
       "reducedMotion": true,
       "updatedMaterials": true,

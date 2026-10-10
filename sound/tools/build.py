@@ -72,6 +72,7 @@ for i,w in enumerate(WORKS):
  if slug in DIRECT:hint=DIRECT[slug][0]
  play_ui=(f'<div class="play-guide"><p>{DIRECT[slug][0]}</p><output id="play-feedback" aria-live="polite">{DIRECT[slug][1]} 先按「開始聆聽」即可奏音。</output></div>' if slug in DIRECT else '')
  extras=('<div class="gesture-tools"><button id="replay" disabled>重播這一筆</button><button id="clear-ink">清空紙面</button></div>' if slug=='crayon-wave' else '')
+ if slug=='jelly-wave':extras='<div class="gesture-tools"><a class="face-lab-link" href="jelly-face-lab.html">調整碰撞表情 ↗</a></div>'
  if slug=='pendulum-swing':extras='<div class="gesture-tools"><button id="calm-wind">讓風停下</button></div>'
  if slug=='beat-candy':extras='<div class="gesture-tools"><button id="clear-candy">清空糖果盤</button></div>'
  if slug=='square-blocks':extras='<div class="gesture-tools"><button id="building-plan">建築方案：1 / 4</button><button id="house-play">播放房子旋律</button><button id="house-only">只聽房子</button></div>'
@@ -95,7 +96,10 @@ for j,g in enumerate(GROUPS):
   slug,title,en,short,desc,hint,bg,palette,*_=w
   index+=f'<a class="card" href="{slug}.html"><div class="preview" style="background:{bg}"><img src="thumbs/{slug}.webp" alt="{title}的生成式畫面" loading="lazy" width="800" height="560"><span class="card-number">{i+1:02d}</span><span class="card-arrow">↗</span></div><span class="card-en">{en.upper()}</span><h3>{title}</h3><p>{short}</p></a>'
  index+='</div></section>'
-index+='''</main><footer><span>不必懂樂理。你已經在節奏裡。<br>原創生成藝術 / 六首古典樂譜・自由選曲 / 耳機與低音量推薦</span><div><a href="CREDITS.md">製作資訊 ↗</a><a href="REPORT.md">展覽製作紀錄 ↗</a></div></footer></div></body></html>'''
+index+='''</main><footer><span>不必懂樂理。你已經在節奏裡。<br>原創生成藝術 / 六首古典樂譜・自由選曲 / 耳機與低音量推薦</span><div><a href="CREDITS.md">製作資訊 ↗</a></div></footer></div></body></html>'''
 (ROOT/'index.html').write_text(index)
 (ROOT/'tools/works.json').write_text(json.dumps([dict(slug=w[0],title=w[1],en=w[2],bpm=library[recommendations[i]]['bpm'],osc=w[9],mode=w[10],recommended=recommendations[i]) for i,w in enumerate(WORKS)],ensure_ascii=False,indent=2))
 print('Built 16 standalone artworks + index.')
+
+face_lab=(ROOT/'tools/jelly-face-lab.template.html').read_text().replace('__BASE_CSS__',css).replace('__FACE_RENDERER__',(ROOT/'tools/jelly-face.js').read_text())
+(ROOT/'jelly-face-lab.html').write_text(face_lab)

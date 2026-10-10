@@ -1,7 +1,7 @@
 from pathlib import Path
 import json
 s={}
-s['jelly-wave']=(Path(__file__).parent/'scenes'/f'jelly-wave.js').read_text()
+s['jelly-wave']=(Path(__file__).parent/'jelly-face.js').read_text()+'\n'+(Path(__file__).parent/'scenes'/f'jelly-wave.js').read_text()
 s['pendulum-swing']=(Path(__file__).parent/'scenes'/f'pendulum-swing.js').read_text()
 s['ribbon-dance']=(Path(__file__).parent/'scenes'/f'ribbon-dance.js').read_text()
 s['bubble-scale']=(Path(__file__).parent/'scenes'/f'bubble-scale.js').read_text()
