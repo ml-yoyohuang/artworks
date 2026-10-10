@@ -1,3 +1,4 @@
+import {traceEcho} from './echo-geometry.js';
 // Hand-entered historical themes, reduced registers and new sparse accompaniments.
 // Durations are beats; R denotes a genuine rest. No recordings or sample libraries.
 export const classical = [
@@ -32,7 +33,7 @@ export function adaptClassical(index,id,duration,data,params={}){
   if(index===3)mapped.push({...e,kind:e.part==='bass'?'sustain':row++%8===0?'ridge':'grain',sector:(e.notes[0]+row)%16,phrase:Math.floor(e.beat/8)});
   if(index===4&&e.part==='melody')mapped.push({...e,kind:'tide'});
   if(index===5&&e.part==='melody')mapped.push({...e,kind:'breath',pitch:e.notes[0],airy:.18});
-  if(index===6&&e.part==='melody'){const k=row++%8,original=data.events.filter(n=>n.pulse===k),emission=original.find(n=>n.kind==='emission');mapped.push({...e,kind:'emission',source:data.source,pulse:row});for(const echo of original.filter(n=>n.kind==='echo')){const t=e.t+echo.t-emission.t;if(t+echo.d<duration)mapped.push({...echo,t,notes:[e.notes[0]],pulse:row})}}
+  if(index===6&&e.part==='melody'){const pulse=row++,active=4+data.events.filter(n=>n.kind==='partition'&&n.t<=e.t).length;mapped.push({...e,kind:'emission',source:data.source,pulse});for(const echo of traceEcho(data.walls.slice(0,active),data.source,data.source[0]*.013+pulse*.91,e.t)){if(echo.t+echo.d<duration)mapped.push({...echo,notes:[e.notes[0]],pulse})}}
   if(index===7)mapped.push({...e,v:e.part==='melody'?.58:.24,kind:'injection'});
  }
  if(index===2){ // Phrase breaths remain genuinely silent, including accompaniment.
