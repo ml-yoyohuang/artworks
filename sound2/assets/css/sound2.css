@@ -137,11 +137,15 @@ body.s2-index { --bg: #eeeae2; --fg: #1b1b19; --accent: #d9482b; background: var
 .ix-foot { display: flex; justify-content: space-between; gap: 30px; border-top: 1px solid #1b1b1924; margin-top: 40px; padding-top: 22px; font-size: 11px; line-height: 1.9; letter-spacing: .04em; opacity: .75; }
 .ix-credits-toggle { flex: none; align-self: flex-start; border: 1px solid #1b1b1933; background: transparent; border-radius: 30px; min-height: 36px; padding: 6px 14px; font-size: 11px; letter-spacing: .06em; cursor: pointer; color: inherit; }
 .ix-credits-toggle:hover, .ix-credits-toggle[aria-expanded="true"] { background: #1b1b19; color: #eeeae2; }
-.ix-credits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; padding: 26px 0 10px; font-size: 12px; line-height: 1.9; letter-spacing: .03em; }
+.ix-credits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; padding: 30px 0 12px; }
 .ix-credits[hidden] { display: none; }
-.ix-credits h2 { font-family: var(--serif); font-weight: 500; font-size: 15px; letter-spacing: .08em; margin: 0 0 8px; }
-.ix-credits p { margin: 0 0 12px; opacity: .82; }
-.ix-cite { font-family: var(--mono); font-size: 11px; line-height: 1.75; overflow-wrap: anywhere; }
+.ix-credits h2 { font-family: var(--serif); font-weight: 500; font-size: 19px; letter-spacing: .06em; line-height: 1.35; margin: 0 0 10px; }
+.ix-credits h2 span { display: block; font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: .1em; color: var(--accent); margin-bottom: 10px; }
+.ix-credits p { margin: 0 0 12px; font-size: 13px; line-height: 1.85; letter-spacing: .03em; opacity: .82; max-width: 460px; }
+.ix-credits a { text-decoration-color: #1b1b1955; text-underline-offset: 3px; }
+.ix-credits a:hover { color: var(--accent); }
+.ix-credits .ix-cite { font-size: 11px; line-height: 1.9; letter-spacing: .04em; overflow-wrap: anywhere; }
+.ix-credits .ix-cite em { font-family: var(--serif); font-size: 13px; letter-spacing: .02em; }
 @media (max-width: 960px) {
   .ix { padding: 24px 28px 34px; }
   .ix-hero { grid-template-columns: 1fr; gap: 34px; padding: 50px 0 44px; }
@@ -159,5 +163,5 @@ body.s2-index { --bg: #eeeae2; --fg: #1b1b19; --accent: #d9482b; background: var
   .ix-card:nth-child(2) figure { aspect-ratio: 4 / 4.4; }
   .ix-foot { display: block; }
   .ix-credits-toggle { display: block; margin-top: 14px; }
-  .ix-credits { grid-template-columns: 1fr; gap: 8px; }
+  .ix-credits { grid-template-columns: 1fr; gap: 14px; }
 }
