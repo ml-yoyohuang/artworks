@@ -29,6 +29,10 @@ library=json.loads(score)
 recommendations=['hungarian','canon','hungarian','turkish','bolero','cancan','cancan','william','canon','canon','bolero','bolero','turkish','william','hungarian','cancan']
 pairings=['急緩交替，讓果凍收縮與彈回。','錯開的聲部，陪鞦韆散開再相遇。','旋律轉折，讓緞帶縮起再舒展。','輕巧裝飾音，像檸檬汽水裡的小泡泡。','固定節奏逐漸長大，糖果也越落越熱鬧。','鮮明重音，邀請整片地板一起踢踏。','快板帶動一群種子的爆跳。','奔馳的節奏，陪小球跨過下一格。','輪流進場的聲部，像花朵互相接唱。','原本的輪唱結構，在水面留下時間差。','穩定小鼓與漸強，讓派對逐步聚攏。','反覆節奏漸強，路口逐層亮起。','俐落音符與方波轉角，搭出輕快的小房子。','奔馳主題，讓滑行更有向前的動力。','忽快忽慢，讓蠟筆留下有呼吸的字跡。','強拍一起蓄力，彈簧跳成小小的舞隊。']
 DIRECT={
+ 'jelly-wave':('抓住果凍或白圈拖曳，左低右高；碰到邊界擠扁，放開帶著慣性彈回。','白圈是抓取點；自己的奏音立即回應，伴奏維持原調。'),
+ 'pendulum-swing':('點彩色擺錘推一下，鄰座會回應；拖下方白圈控制向左、向右的風。','箭頭標出風向；離中心越遠，風力越強，放開保留風力。'),
+ 'beat-candy':('按住連續撒糖果，左右移動換落點與音高；放開就停，白邊是你的糖果。','下方清盤可重新堆疊；最多保留 72 顆，自動糖果隨音樂繼續。'),
+ 'square-blocks':('抓每棟最上層的白框上下拖曳；上方加高、下方降低，放開落定並奏音。','每棟 1–5 層，越高唱越高；屋形按鈕獨立切換，樓層保留。'),
  'canon-ripples':('抓住三個圓點拖曳聲源；點空白水面，立即奏一滴水，左低右高。','聲源跟著指尖；舊漣漪留在出發的位置。'),
  'signal-band':('直接點紅、黃、綠燈奏低、中、高音；按住滑過燈號也能連奏。','白圈是你點亮的燈；用下方按鈕切換燈光編排。'),
  'ribbon-dance':('抓住白圈端點牽引緞帶，放開回彈；點一下或按翻一圈，立即奏音。','拖曳左低右高；短點翻圈，長拖牽引。'),
@@ -50,6 +54,9 @@ for i,w in enumerate(WORKS):
  if slug in DIRECT:hint=DIRECT[slug][0]
  play_ui=(f'<div class="play-guide"><p>{DIRECT[slug][0]}</p><output id="play-feedback" aria-live="polite">{DIRECT[slug][1]} 先按「開始聆聽」即可奏音。</output></div>' if slug in DIRECT else '')
  extras=('<div class="gesture-tools"><button id="replay" disabled>重播這一筆</button><button id="clear-ink">清空紙面</button></div>' if slug=='crayon-wave' else '')
+ if slug=='pendulum-swing':extras='<div class="gesture-tools"><button id="calm-wind">讓風停下</button></div>'
+ if slug=='beat-candy':extras='<div class="gesture-tools"><button id="clear-candy">清空糖果盤</button></div>'
+ if slug=='square-blocks':extras='<div class="gesture-tools"><button id="building-plan">建築方案：1 / 4</button></div>'
  if slug=='canon-ripples':extras='<div class="gesture-tools"><button id="reset-water">聲源回到原位</button></div>'
  if slug=='signal-band':extras='<div class="gesture-tools"><button id="pattern">燈光編排：接力</button></div>'
  if slug=='ribbon-dance':extras='<div class="gesture-tools"><button id="flip-ribbon">翻一圈</button></div>'

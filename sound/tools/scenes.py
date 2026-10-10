@@ -1,19 +1,11 @@
 from pathlib import Path
 import json
 s={}
-s['jelly-wave']=r'''
-const jelly={x:500,y:355,vx:65,vy:0,stretch:0};
-const scene={note(midi,velocity){if(!state.held)jelly.vy-=(midi%5+1)*velocity*9;},reset(){jelly.vy=0;},update(dt){const tx=state.held?100+state.x*800:500+Math.sin(state.time*.65)*120,ty=state.held?140+state.y*380:355;jelly.vx+=(tx-jelly.x)*dt*9;jelly.vy+=(ty-jelly.y)*dt*12;jelly.vx*=Math.exp(-dt*1.8);jelly.vy*=Math.exp(-dt*2);jelly.x+=jelly.vx*dt;jelly.y+=jelly.vy*dt;if(jelly.x<260||jelly.x>740){jelly.x=clamp(jelly.x,260,740);jelly.vx*=-.85;}if(jelly.y<230||jelly.y>470){jelly.y=clamp(jelly.y,230,470);jelly.vy*=-.8;}jelly.stretch=mix(jelly.stretch,jelly.vx*.0005,1-Math.exp(-dt*8));},tap(){jelly.vy-=150;},draw(){const t=state.time;ellipse(500,566,240,20,INK+'12');dashed([[100,350],[900,350]]);text('SOFT / BOUNCE / REPEAT',500,630,11,INK+'80');ctx.save();ctx.translate(jelly.x,jelly.y);ctx.rotate(jelly.stretch);const path=new Path2D();for(let i=0;i<=160;i++){const a=i/160*TAU,r=1+.07*Math.sin(3*a+t*3)+.055*Math.sin(5*a-t*2)+state.pulse*.06*Math.cos(2*a);const x=Math.cos(a)*245*r,y=Math.sin(a)*175*r*(1-jelly.stretch);i?path.lineTo(x,y):path.moveTo(x,y);}path.closePath();ctx.fillStyle=C[0];ctx.fill(path);ctx.save();ctx.clip(path);for(let k=0;k<5;k++){const pts=[];for(let i=0;i<=80;i++){let x=-280+i*7,y=(k-2)*39+Math.sin(x*.013+t*3+k*.65)*(28+state.pulse*17);pts.push([x,y]);}line(pts,k%2?'#f6e7dc':C[1],18);}ctx.restore();ctx.lineWidth=3;ctx.strokeStyle=C[0];ctx.stroke(path);ellipse(-90,-110,47,10,'#fff5e7a0',-.35);circle(90,4,6,INK);circle(119,4,6,INK);ctx.beginPath();ctx.arc(104,17,13,.1,Math.PI-.1);ctx.strokeStyle=INK;ctx.lineWidth=2;ctx.stroke();ctx.restore();circle(180,170,24,C[2]);circle(820,480,34,C[3]);circle(790,180,11,C[1]);}};
-'''
-s['pendulum-swing']=r'''
-const scene={draw(){const t=state.time,points=[];ctx.lineWidth=1;for(let r=180;r<420;r+=80){ctx.beginPath();ctx.arc(500,155,r,.15,Math.PI-.15);ctx.strokeStyle=INK+'0d';ctx.stroke();}line([[125,125],[875,125]],INK,3);for(let i=0;i<12;i++){const ax=170+i*55,len=220+i*13,ang=Math.sin(t*Math.sqrt(760/len)+i*.22)*(.18+state.x*.28+state.force*.035);const x=ax+Math.sin(ang)*len,y=125+Math.cos(ang)*len;line([[ax,125],[x,y]],INK+'70',2);circle(ax,125,4,INK);points.push([x,y]);ellipse(x,y+65,22,4,INK+'0b');circle(x,y,26+(i%3)*4,C[i%4]);ctx.beginPath();ctx.arc(x-3,y-3,14,3.5,4.7);ctx.strokeStyle='#fff8e6b0';ctx.lineWidth=3;ctx.stroke();text(String(i+1).padStart(2,'0'),ax,590,10,INK+'65');}line(points,INK+'20',1.5);text('TWELVE LENGTHS / ONE HORIZON',500,640,11,INK+'80');}};
-'''
+s['jelly-wave']=(Path(__file__).parent/'scenes'/f'jelly-wave.js').read_text()
+s['pendulum-swing']=(Path(__file__).parent/'scenes'/f'pendulum-swing.js').read_text()
 s['ribbon-dance']=(Path(__file__).parent/'scenes'/f'ribbon-dance.js').read_text()
 s['bubble-scale']=(Path(__file__).parent/'scenes'/f'bubble-scale.js').read_text()
-s['beat-candy']=r'''
-const candies=[];let candyId=0;function drop(x,y){const i=candyId++;candies.push({x,y,vx:(rnd(i+123)-.5)*60,vy:20,r:20+rnd(i+124)*9,a:rnd(i)*TAU,va:(rnd(i+10)-.5)*3,c:i%4,kind:i%3});if(candies.length>72)candies.shift();}
-const scene={init(){for(let i=0;i<44;i++)drop(320+(i%9)*43+(rnd(i+16)-.5)*20,565-Math.floor(i/9)*42);},tap(){for(let i=0;i<3;i++)drop(200+state.x*600+i*25,150-i*50);},reset(){candies.splice(36);},beat(){drop(350+state.x*300,100);if(state.playing&&state.trackId==='bolero'&&state.strong)for(let i=0;i<Math.floor(state.energy*4);i++)drop(280+i*110,100-i*20);},update(dt){for(const b of candies){b.vy+=dt*420;b.x+=b.vx*dt;b.y+=b.vy*dt;b.a+=b.va*dt;if(b.y>565-b.r){b.y=565-b.r;b.vy=-Math.abs(b.vy)*.22;b.vx*=.94;b.va*=.85;}if(b.x<170+b.r||b.x>830-b.r){b.x=clamp(b.x,170+b.r,830-b.r);b.vx*=-.7;}}for(let n=0;n<2;n++)for(let i=0;i<candies.length;i++)for(let j=i+1;j<candies.length;j++){const a=candies[i],b=candies[j],dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||.1,m=a.r+b.r;if(d<m){let nx=dx/d,ny=dy/d,p=(m-d)*.5;a.x-=nx*p;a.y-=ny*p;b.x+=nx*p;b.y+=ny*p;let v=(b.vx-a.vx)*nx+(b.vy-a.vy)*ny;if(v<0){a.vx+=v*nx*.6;a.vy+=v*ny*.6;b.vx-=v*nx*.6;b.vy-=v*ny*.6;}}}},draw(){ellipse(500,580,332,21,INK+'10');line([[165,565],[835,565]],INK+'55',2);dashed([[500,90],[500,190]],INK+'25');for(const b of candies){ctx.save();ctx.translate(b.x,b.y);ctx.rotate(b.a);if(b.kind===0){rect(-b.r,-b.r,b.r*2,b.r*2,C[b.c],8);rect(-b.r+5,-b.r+5,b.r*2-10,5,'#fff7df65',3);}else if(b.kind===1){ellipse(0,0,b.r*1.12,b.r*.83,C[b.c]);line([[-b.r*.6,-4],[b.r*.6,-4]],'#fff7df80',4);}else{circle(0,0,b.r,C[b.c]);circle(0,0,b.r*.44,CONFIG.bg);}ctx.restore();}text('TIME, WITH A LITTLE WEIGHT',500,640,11,INK+'80');}};
-'''
+s['beat-candy']=(Path(__file__).parent/'scenes'/f'beat-candy.js').read_text()
 s['tap-floor']=(Path(__file__).parent/'scenes'/f'tap-floor.js').read_text()
 s['popcorn-rhythm']=(Path(__file__).parent/'scenes'/f'popcorn-rhythm.js').read_text()
 s['hopscotch']=(Path(__file__).parent/'scenes'/f'hopscotch.js').read_text()
@@ -21,9 +13,7 @@ s['flower-choir']=(Path(__file__).parent/'scenes'/f'flower-choir.js').read_text(
 s['canon-ripples']=(Path(__file__).parent/'scenes'/f'canon-ripples.js').read_text()
 s['metronome-party']=(Path(__file__).parent/'scenes'/f'metronome-party.js').read_text()
 s['signal-band']=(Path(__file__).parent/'scenes'/f'signal-band.js').read_text()
-s['square-blocks']=r'''
-let plan=0;const scene={tap(){plan=(plan+1)%4;},draw(){const t=state.time;ellipse(500,575,345,15,INK+'0c');const size=56;for(let house=0;house<3;house++){const bx=212+house*248,by=550,height=3+((house+plan)%3);for(let row=0;row<height;row++)for(let col=0;col<3;col++){const p=Math.max(0,state.pulse-(row+col)*.13),x=bx+col*size,y=by-row*size-p*8-Math.sin(t*2+col+row)*2;rect(x,y-size,size-4,size-4,C[(house+row+plan)%4],4);rect(x+5,y-size+5,size-14,5,'#fff8e660',2);if(row===1&&col!==1){rect(x+17,y-size+16,19,22,CONFIG.bg,2);line([[x+26,y-size+16],[x+26,y-18]],INK+'50',1);}if(row===0&&col===1)rect(x+16,y-40,24,40,INK,3);}ctx.beginPath();ctx.moveTo(bx-8,by-height*size);ctx.lineTo(bx+82,by-height*size-60-(state.y-.5)*35);ctx.lineTo(bx+172,by-height*size);ctx.closePath();ctx.fillStyle=C[(house+plan+1)%4];ctx.fill();}let pts=[];for(let i=0;i<16;i++){let x=150+i*46,y=155+((i+plan)%4<2?0:34);if(i)pts.push([x,pts.at(-1)[1]]);pts.push([x,y]);}line(pts,C[1]+'70',4);text('A SMALL HOME FOR A HARD-EDGED WAVE',500,640,11,INK+'80');}};
-'''
+s['square-blocks']=(Path(__file__).parent/'scenes'/f'square-blocks.js').read_text()
 s['saw-hills']=(Path(__file__).parent/'scenes'/f'saw-hills.js').read_text()
 s['crayon-wave']=(Path(__file__).parent/'scenes'/f'crayon-wave.js').read_text()
 s['spring-dancer']=(Path(__file__).parent/'scenes'/f'spring-dancer.js').read_text()

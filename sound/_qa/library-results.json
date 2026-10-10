@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10T08:59:40.264Z",
+  "date": "2026-10-10T09:12:59.422Z",
   "checks": [
     {
       "slug": "jelly-wave",
@@ -13,7 +13,7 @@
         0,
         2
       ],
-      "peak": 0.007687158416956663,
+      "peak": 0.0037614910397678614,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -23,12 +23,12 @@
       "score": "turkish",
       "trackId": "turkish",
       "title": "土耳其進行曲",
-      "events": 11,
+      "events": 8,
       "voices": [
-        6,
-        5
+        5,
+        3
       ],
-      "peak": 0.05150754749774933,
+      "peak": 0.021585525944828987,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -44,7 +44,7 @@
         4,
         3
       ],
-      "peak": 0.029309948906302452,
+      "peak": 0.01518923044204712,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -59,7 +59,7 @@
         3,
         5
       ],
-      "peak": 0.019405938684940338,
+      "peak": 0.009520063176751137,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -69,13 +69,13 @@
       "score": "bolero",
       "trackId": "bolero",
       "title": "波萊羅舞曲（主題選段）",
-      "events": 8,
+      "events": 10,
       "voices": [
-        1,
         2,
-        5
+        2,
+        6
       ],
-      "peak": 0.004703968297690153,
+      "peak": 0.0018925881013274193,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -90,7 +90,7 @@
         6,
         7
       ],
-      "peak": 0.020081033930182457,
+      "peak": 0.009036464616656303,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -107,7 +107,7 @@
         0,
         2
       ],
-      "peak": 0.008358868770301342,
+      "peak": 0.0034618827048689127,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -122,7 +122,7 @@
         6,
         5
       ],
-      "peak": 0.049230244010686874,
+      "peak": 0.02133471891283989,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -132,13 +132,13 @@
       "score": "hungarian",
       "trackId": "hungarian",
       "title": "匈牙利舞曲第 5 號",
-      "events": 10,
+      "events": 8,
       "voices": [
-        3,
+        2,
         4,
-        3
+        2
       ],
-      "peak": 0.028619838878512383,
+      "peak": 0.015722863376140594,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -153,7 +153,7 @@
         3,
         5
       ],
-      "peak": 0.02106425166130066,
+      "peak": 0.010791161097586155,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -163,13 +163,13 @@
       "score": "bolero",
       "trackId": "bolero",
       "title": "波萊羅舞曲（主題選段）",
-      "events": 8,
+      "events": 10,
       "voices": [
-        1,
         2,
-        5
+        2,
+        6
       ],
-      "peak": 0.004132153932005167,
+      "peak": 0.0018594692228361964,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -184,7 +184,7 @@
         6,
         7
       ],
-      "peak": 0.019899383187294006,
+      "peak": 0.008944208733737469,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -201,7 +201,7 @@
         0,
         2
       ],
-      "peak": 0.0034592212177813053,
+      "peak": 0.0034618827048689127,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -216,7 +216,7 @@
         6,
         5
       ],
-      "peak": 0.022151874378323555,
+      "peak": 0.022463276982307434,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -232,7 +232,7 @@
         4,
         3
       ],
-      "peak": 0.015080657787621021,
+      "peak": 0.019014602527022362,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -247,7 +247,7 @@
         3,
         5
       ],
-      "peak": 0.008603059686720371,
+      "peak": 0.010791161097586155,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -257,13 +257,13 @@
       "score": "bolero",
       "trackId": "bolero",
       "title": "波萊羅舞曲（主題選段）",
-      "events": 8,
+      "events": 10,
       "voices": [
-        1,
         2,
-        5
+        2,
+        6
       ],
-      "peak": 0.002101411810144782,
+      "peak": 0.0021259791683405638,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -278,7 +278,7 @@
         6,
         7
       ],
-      "peak": 0.012868824414908886,
+      "peak": 0.011937186121940613,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -295,7 +295,7 @@
         0,
         2
       ],
-      "peak": 0.003758332459256053,
+      "peak": 0.0037614910397678614,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -310,7 +310,7 @@
         6,
         5
       ],
-      "peak": 0.022871920838952065,
+      "peak": 0.022177333012223244,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -326,7 +326,7 @@
         4,
         3
       ],
-      "peak": 0.01518992055207491,
+      "peak": 0.013189475983381271,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -341,7 +341,7 @@
         3,
         5
       ],
-      "peak": 0.008732671849429607,
+      "peak": 0.009855919517576694,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -372,7 +372,7 @@
         6,
         7
       ],
-      "peak": 0.009036464616656303,
+      "peak": 0.00902590248733759,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -389,7 +389,7 @@
         0,
         2
       ],
-      "peak": 0.007654442451894283,
+      "peak": 0.003292483976110816,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -404,7 +404,7 @@
         6,
         5
       ],
-      "peak": 0.045918334275484085,
+      "peak": 0.021396849304437637,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -420,7 +420,7 @@
         4,
         3
       ],
-      "peak": 0.03372703492641449,
+      "peak": 0.013456388376653194,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -435,7 +435,7 @@
         3,
         5
       ],
-      "peak": 0.01862802729010582,
+      "peak": 0.009507748298346996,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -445,13 +445,13 @@
       "score": "bolero",
       "trackId": "bolero",
       "title": "波萊羅舞曲（主題選段）",
-      "events": 8,
+      "events": 10,
       "voices": [
-        1,
         2,
-        5
+        2,
+        6
       ],
-      "peak": 0.004132153932005167,
+      "peak": 0.002101411810144782,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -466,7 +466,7 @@
         6,
         7
       ],
-      "peak": 0.02093067578971386,
+      "peak": 0.009428449906408787,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -483,7 +483,7 @@
         0,
         2
       ],
-      "peak": 0.00461998675018549,
+      "peak": 0.003292483976110816,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -493,12 +493,12 @@
       "score": "turkish",
       "trackId": "turkish",
       "title": "土耳其進行曲",
-      "events": 8,
+      "events": 11,
       "voices": [
-        5,
-        3
+        6,
+        5
       ],
-      "peak": 0.012339921668171883,
+      "peak": 0.013241761364042759,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -514,7 +514,7 @@
         4,
         3
       ],
-      "peak": 0.010494599118828773,
+      "peak": 0.009938772767782211,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -529,7 +529,7 @@
         3,
         5
       ],
-      "peak": 0.007414138410240412,
+      "peak": 0.005815270356833935,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -539,11 +539,11 @@
       "score": "bolero",
       "trackId": "bolero",
       "title": "波萊羅舞曲（主題選段）",
-      "events": 8,
+      "events": 10,
       "voices": [
-        1,
         2,
-        5
+        2,
+        6
       ],
       "peak": 0.0012447674525901675,
       "playing": true,
@@ -560,7 +560,7 @@
         6,
         7
       ],
-      "peak": 0.00702314730733633,
+      "peak": 0.007242427207529545,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -592,7 +592,7 @@
         6,
         5
       ],
-      "peak": 0.02251412346959114,
+      "peak": 0.020864440128207207,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -608,7 +608,7 @@
         4,
         3
       ],
-      "peak": 0.015209520235657692,
+      "peak": 0.012433254159986973,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -623,7 +623,7 @@
         3,
         5
       ],
-      "peak": 0.00827336497604847,
+      "peak": 0.010027295909821987,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -633,11 +633,11 @@
       "score": "bolero",
       "trackId": "bolero",
       "title": "波萊羅舞曲（主題選段）",
-      "events": 8,
+      "events": 10,
       "voices": [
-        1,
         2,
-        5
+        2,
+        6
       ],
       "peak": 0.0018594692228361964,
       "playing": true,
@@ -654,7 +654,7 @@
         6,
         7
       ],
-      "peak": 0.01247226819396019,
+      "peak": 0.009418804198503494,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -671,7 +671,7 @@
         0,
         2
       ],
-      "peak": 0.003292483976110816,
+      "peak": 0.0032286762725561857,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -686,7 +686,7 @@
         6,
         5
       ],
-      "peak": 0.022018134593963623,
+      "peak": 0.022707629948854446,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -702,7 +702,7 @@
         4,
         3
       ],
-      "peak": 0.014429121278226376,
+      "peak": 0.01442839577794075,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -717,7 +717,7 @@
         3,
         5
       ],
-      "peak": 0.010964799672365189,
+      "peak": 0.009733118116855621,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -727,11 +727,11 @@
       "score": "bolero",
       "trackId": "bolero",
       "title": "波萊羅舞曲（主題選段）",
-      "events": 8,
+      "events": 10,
       "voices": [
-        1,
         2,
-        5
+        2,
+        6
       ],
       "peak": 0.0018925881013274193,
       "playing": true,
@@ -765,107 +765,13 @@
         0,
         2
       ],
-      "peak": 0.0037630097940564156,
+      "peak": 0.0034592212177813053,
       "playing": true,
       "tempo": 96,
       "rate": 1
     },
     {
       "slug": "flower-choir",
-      "score": "turkish",
-      "trackId": "turkish",
-      "title": "土耳其進行曲",
-      "events": 11,
-      "voices": [
-        6,
-        5
-      ],
-      "peak": 0.022870508953928947,
-      "playing": true,
-      "tempo": 126,
-      "rate": 1
-    },
-    {
-      "slug": "flower-choir",
-      "score": "hungarian",
-      "trackId": "hungarian",
-      "title": "匈牙利舞曲第 5 號",
-      "events": 10,
-      "voices": [
-        3,
-        4,
-        3
-      ],
-      "peak": 0.01518992055207491,
-      "playing": true,
-      "tempo": 126,
-      "rate": 1
-    },
-    {
-      "slug": "flower-choir",
-      "score": "cancan",
-      "trackId": "cancan",
-      "title": "天堂與地獄序曲・康康舞段（選段）",
-      "events": 8,
-      "voices": [
-        3,
-        5
-      ],
-      "peak": 0.009398164227604866,
-      "playing": true,
-      "tempo": 144,
-      "rate": 1
-    },
-    {
-      "slug": "flower-choir",
-      "score": "bolero",
-      "trackId": "bolero",
-      "title": "波萊羅舞曲（主題選段）",
-      "events": 10,
-      "voices": [
-        2,
-        2,
-        6
-      ],
-      "peak": 0.0021449674386531115,
-      "playing": true,
-      "tempo": 72,
-      "rate": 1
-    },
-    {
-      "slug": "flower-choir",
-      "score": "william",
-      "trackId": "william",
-      "title": "威廉泰爾序曲・終曲快板（選段）",
-      "events": 13,
-      "voices": [
-        6,
-        7
-      ],
-      "peak": 0.00902590248733759,
-      "playing": true,
-      "tempo": 144,
-      "rate": 1
-    },
-    {
-      "slug": "canon-ripples",
-      "score": "canon",
-      "trackId": "canon",
-      "title": "D 大調卡農",
-      "events": 2,
-      "voices": [
-        0,
-        0,
-        0,
-        2
-      ],
-      "peak": 0.0037614910397678614,
-      "playing": true,
-      "tempo": 96,
-      "rate": 1
-    },
-    {
-      "slug": "canon-ripples",
       "score": "turkish",
       "trackId": "turkish",
       "title": "土耳其進行曲",
@@ -880,23 +786,23 @@
       "rate": 1
     },
     {
-      "slug": "canon-ripples",
+      "slug": "flower-choir",
       "score": "hungarian",
       "trackId": "hungarian",
       "title": "匈牙利舞曲第 5 號",
-      "events": 8,
+      "events": 10,
       "voices": [
-        2,
+        3,
         4,
-        2
+        3
       ],
-      "peak": 0.01518923044204712,
+      "peak": 0.014391029253602028,
       "playing": true,
       "tempo": 126,
       "rate": 1
     },
     {
-      "slug": "canon-ripples",
+      "slug": "flower-choir",
       "score": "cancan",
       "trackId": "cancan",
       "title": "天堂與地獄序曲・康康舞段（選段）",
@@ -905,13 +811,13 @@
         3,
         5
       ],
-      "peak": 0.008732671849429607,
+      "peak": 0.009855919517576694,
       "playing": true,
       "tempo": 144,
       "rate": 1
     },
     {
-      "slug": "canon-ripples",
+      "slug": "flower-choir",
       "score": "bolero",
       "trackId": "bolero",
       "title": "波萊羅舞曲（主題選段）",
@@ -927,6 +833,100 @@
       "rate": 1
     },
     {
+      "slug": "flower-choir",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.008604712784290314,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "canon-ripples",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.0034618827048689127,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "canon-ripples",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.02317839488387108,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "canon-ripples",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 10,
+      "voices": [
+        3,
+        4,
+        3
+      ],
+      "peak": 0.014300948940217495,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "canon-ripples",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.009855919517576694,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "canon-ripples",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 10,
+      "voices": [
+        2,
+        2,
+        6
+      ],
+      "peak": 0.0018925881013274193,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
       "slug": "canon-ripples",
       "score": "william",
       "trackId": "william",
@@ -936,7 +936,7 @@
         6,
         7
       ],
-      "peak": 0.010811645537614822,
+      "peak": 0.00902590248733759,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -953,7 +953,7 @@
         0,
         2
       ],
-      "peak": 0.0037614910397678614,
+      "peak": 0.003758332459256053,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -963,12 +963,12 @@
       "score": "turkish",
       "trackId": "turkish",
       "title": "土耳其進行曲",
-      "events": 8,
+      "events": 11,
       "voices": [
-        5,
-        3
+        6,
+        5
       ],
-      "peak": 0.021333279088139534,
+      "peak": 0.022461742162704468,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -978,13 +978,13 @@
       "score": "hungarian",
       "trackId": "hungarian",
       "title": "匈牙利舞曲第 5 號",
-      "events": 8,
+      "events": 10,
       "voices": [
-        2,
+        3,
         4,
-        2
+        3
       ],
-      "peak": 0.014112742617726326,
+      "peak": 0.013986880891025066,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -999,7 +999,7 @@
         3,
         5
       ],
-      "peak": 0.008665934205055237,
+      "peak": 0.010791161097586155,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1015,7 +1015,7 @@
         2,
         6
       ],
-      "peak": 0.0018594692228361964,
+      "peak": 0.002101411810144782,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -1047,7 +1047,7 @@
         0,
         2
       ],
-      "peak": 0.003758332459256053,
+      "peak": 0.0034592212177813053,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -1057,10 +1057,10 @@
       "score": "turkish",
       "trackId": "turkish",
       "title": "土耳其進行曲",
-      "events": 8,
+      "events": 11,
       "voices": [
-        5,
-        3
+        6,
+        5
       ],
       "peak": 0.021333279088139534,
       "playing": true,
@@ -1093,7 +1093,7 @@
         3,
         5
       ],
-      "peak": 0.009603944607079029,
+      "peak": 0.009474367834627628,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1109,7 +1109,7 @@
         2,
         6
       ],
-      "peak": 0.0018594692228361964,
+      "peak": 0.0021259791683405638,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -1124,7 +1124,7 @@
         6,
         7
       ],
-      "peak": 0.008944208733737469,
+      "peak": 0.011937186121940613,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1141,7 +1141,7 @@
         0,
         2
       ],
-      "peak": 0.00835185032337904,
+      "peak": 0.0037614910397678614,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -1156,7 +1156,7 @@
         6,
         5
       ],
-      "peak": 0.030154863372445107,
+      "peak": 0.013588828966021538,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -1166,13 +1166,13 @@
       "score": "hungarian",
       "trackId": "hungarian",
       "title": "匈牙利舞曲第 5 號",
-      "events": 10,
+      "events": 8,
       "voices": [
-        3,
+        2,
         4,
-        3
+        2
       ],
-      "peak": 0.025027666240930557,
+      "peak": 0.010358245112001896,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -1187,7 +1187,7 @@
         3,
         5
       ],
-      "peak": 0.012980139814317226,
+      "peak": 0.005841062869876623,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1197,13 +1197,13 @@
       "score": "bolero",
       "trackId": "bolero",
       "title": "波萊羅舞曲（主題選段）",
-      "events": 10,
+      "events": 8,
       "voices": [
+        1,
         2,
-        2,
-        6
+        5
       ],
-      "peak": 0.0030014619696885347,
+      "peak": 0.0012447674525901675,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -1218,7 +1218,7 @@
         6,
         7
       ],
-      "peak": 0.01569485291838646,
+      "peak": 0.007062683813273907,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1235,7 +1235,7 @@
         0,
         2
       ],
-      "peak": 0.003759243758395314,
+      "peak": 0.0034592212177813053,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -1250,7 +1250,7 @@
         6,
         5
       ],
-      "peak": 0.01100471243262291,
+      "peak": 0.013117142021656036,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -1266,7 +1266,7 @@
         4,
         3
       ],
-      "peak": 0.011177942156791687,
+      "peak": 0.011178071610629559,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -1297,7 +1297,7 @@
         2,
         6
       ],
-      "peak": 0.0011851679300889373,
+      "peak": 0.00134220439940691,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -1312,7 +1312,7 @@
         6,
         7
       ],
-      "peak": 0.00784529559314251,
+      "peak": 0.006481473334133625,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1329,7 +1329,7 @@
         0,
         2
       ],
-      "peak": 0.0034592212177813053,
+      "peak": 0.0037614910397678614,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -1344,7 +1344,7 @@
         6,
         5
       ],
-      "peak": 0.021333279088139534,
+      "peak": 0.022151874378323555,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -1360,7 +1360,7 @@
         4,
         3
       ],
-      "peak": 0.012882072478532791,
+      "peak": 0.012497088871896267,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -1375,7 +1375,7 @@
         3,
         5
       ],
-      "peak": 0.009447697550058365,
+      "peak": 0.009314299561083317,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1423,7 +1423,7 @@
         0,
         2
       ],
-      "peak": 0.003292483976110816,
+      "peak": 0.0032748179510235786,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -1438,7 +1438,7 @@
         6,
         5
       ],
-      "peak": 0.022100502625107765,
+      "peak": 0.020816756412386894,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -1454,7 +1454,7 @@
         4,
         3
       ],
-      "peak": 0.01243866141885519,
+      "peak": 0.01282623503357172,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -1469,7 +1469,7 @@
         3,
         5
       ],
-      "peak": 0.00917909201234579,
+      "peak": 0.009507748298346996,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1479,13 +1479,13 @@
       "score": "bolero",
       "trackId": "bolero",
       "title": "波萊羅舞曲（主題選段）",
-      "events": 10,
+      "events": 8,
       "voices": [
+        1,
         2,
-        2,
-        6
+        5
       ],
-      "peak": 0.0021259791683405638,
+      "peak": 0.0018594692228361964,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -1500,7 +1500,7 @@
         6,
         7
       ],
-      "peak": 0.009418804198503494,
+      "peak": 0.01345529779791832,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1509,7 +1509,7 @@
   "errors": [],
   "tempoChanges": true,
   "boleroCrescendo": {
-    "low": 0.18035590277777777,
+    "low": 0.18037567515432099,
     "high": 0.903827160493827
   },
   "loops": [

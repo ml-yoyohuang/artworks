@@ -1,0 +1,125 @@
+{
+  "date": "2026-10-10T09:16:49.521Z",
+  "checks": [
+    {
+      "slug": "pendulum-swing",
+      "device": "desktop",
+      "checks": {
+        "bobHit": true,
+        "neighborResponse": true,
+        "leftRightWind": true,
+        "pitchOrder": true,
+        "calmButton": true
+      },
+      "peak": 0.13627561926841736,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "square-blocks",
+      "device": "desktop",
+      "checks": {
+        "dragSetsActualFloors": true,
+        "otherHousesUnchanged": true,
+        "heightPitchOrder": true,
+        "roofPlanIndependent": true,
+        "fourDistinctRoofImages": true,
+        "emptyIgnored": true
+      },
+      "peak": 0.0902550220489502,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "beat-candy",
+      "device": "desktop",
+      "checks": {
+        "oneTapOneCandy": true,
+        "longPressContinuous": true,
+        "moveChangesDropAndPitch": true,
+        "releaseStops": true,
+        "bounded72": true,
+        "clearButton": true
+      },
+      "peak": 0.07949406653642654,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "jelly-wave",
+      "device": "desktop",
+      "checks": {
+        "actualGrab": true,
+        "leftRightBoundaries": true,
+        "outwardDragReboundsInward": true,
+        "pitchOrder": true,
+        "releaseInertia": true,
+        "emptyIgnored": true
+      },
+      "peak": 0.10672235488891602,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "pendulum-swing",
+      "device": "mobile",
+      "checks": {
+        "bobHit": true,
+        "neighborResponse": true,
+        "leftRightWind": true,
+        "pitchOrder": true,
+        "calmButton": true
+      },
+      "peak": 0.137295663356781,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "square-blocks",
+      "device": "mobile",
+      "checks": {
+        "dragSetsActualFloors": true,
+        "otherHousesUnchanged": true,
+        "heightPitchOrder": true,
+        "roofPlanIndependent": true,
+        "fourDistinctRoofImages": true,
+        "emptyIgnored": true
+      },
+      "peak": 0.0902550220489502,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "beat-candy",
+      "device": "mobile",
+      "checks": {
+        "oneTapOneCandy": true,
+        "longPressContinuous": true,
+        "moveChangesDropAndPitch": true,
+        "releaseStops": true,
+        "bounded72": true,
+        "clearButton": true
+      },
+      "peak": 0.12247976660728455,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "jelly-wave",
+      "device": "mobile",
+      "checks": {
+        "actualGrab": true,
+        "leftRightBoundaries": true,
+        "outwardDragReboundsInward": true,
+        "pitchOrder": true,
+        "releaseInertia": true,
+        "emptyIgnored": true
+      },
+      "peak": 0.10674377530813217,
+      "reducedMotion": true,
+      "noOverflow": true
+    }
+  ],
+  "errors": [],
+  "resources": []
+}
