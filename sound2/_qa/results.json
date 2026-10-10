@@ -1,0 +1,1834 @@
+{
+ "date": "2026-10-10T08:04:41.222Z",
+ "browser": "141.0.7390.37",
+ "base": "http://127.0.0.1:8765/sound2/",
+ "works": [
+  {
+   "id": "01-wave-relay",
+   "device": "desktop",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "94 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.32"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "8 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0548"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "visualDispatchWithinFrame": {
+     "pass": true,
+     "note": "mean 7.2 ms, max 23.0 ms after the audio-clock beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.56"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 2017"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "formation, __tempo · 2/2 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-01-wave-relay-seed2017-beat15.png 1440×900 807 KB, 85 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "10-swing-waves.html | ./ | 02-color-surfers.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 8,
+    "peak": 0.05478985235095024,
+    "drift": 8.881784197001252e-15,
+    "lagMax": 0.022999999964237215,
+    "lagMean": 0.007187878778125198,
+    "transport": {
+     "state": "started",
+     "ticks": 1629,
+     "bpm": 100
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "02-color-surfers",
+   "device": "desktop",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "87 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.22"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "4 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0461"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "visualDispatchWithinFrame": {
+     "pass": true,
+     "note": "mean 15.7 ms, max 26.1 ms after the audio-clock beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.52"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 1618"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "height, formation, __tempo · 3/3 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-02-color-surfers-seed1618-beat15.png 1440×900 850 KB, 82 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "01-wave-relay.html | ./ | 03-elastic-ensemble.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 4,
+    "peak": 0.04610424116253853,
+    "drift": 8.881784197001252e-16,
+    "lagMax": 0.026099999976158146,
+    "lagMean": 0.015674327111935428,
+    "transport": {
+     "state": "started",
+     "ticks": 1479,
+     "bpm": 92
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "03-elastic-ensemble",
+   "device": "desktop",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "163 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.28"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "7 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0553"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "visualDispatchWithinFrame": {
+     "pass": true,
+     "note": "mean 11.9 ms, max 33.9 ms after the audio-clock beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.61"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 5086"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "elastic, stretch, __tempo · 3/3 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-03-elastic-ensemble-seed5086-beat17.png 1440×900 1795 KB, 131 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "02-color-surfers.html | ./ | 04-occasional-unison.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 7,
+    "peak": 0.055275775492191315,
+    "drift": 1.865174681370263e-14,
+    "lagMax": 0.03390000003576279,
+    "lagMean": 0.011862500004469683,
+    "transport": {
+     "state": "started",
+     "ticks": 1628,
+     "bpm": 95.99999999999999
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "04-occasional-unison",
+   "device": "desktop",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "50 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.48"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "17 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0898"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "visualDispatchWithinFrame": {
+     "pass": true,
+     "note": "mean 10.0 ms, max 28.6 ms after the audio-clock beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.62"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 7685"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "periods, __tempo · 2/2 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-04-occasional-unison-seed7685-beat17.png 1440×900 906 KB, 44 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "03-elastic-ensemble.html | ./ | 05-phrase-bows.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 17,
+    "peak": 0.08978119492530823,
+    "drift": 1.3322676295501878e-14,
+    "lagMax": 0.028600000000000004,
+    "lagMean": 0.009952142857142323,
+    "transport": {
+     "state": "started",
+     "ticks": 1784,
+     "bpm": 111.99999999999999
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "05-phrase-bows",
+   "device": "desktop",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "98 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.11"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "9 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0538"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.46"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 3419"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "width, shape, __tempo · 3/3 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-05-phrase-bows-seed3419-beat14.png 1440×900 877 KB, 95 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "04-occasional-unison.html | ./ | 06-beat-pages.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 9,
+    "peak": 0.05378982052206993,
+    "drift": 7.993605777301127e-15,
+    "lagMax": null,
+    "lagMean": null,
+    "transport": {
+     "state": "started",
+     "ticks": 1376,
+     "bpm": 84.00000000000001
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "06-beat-pages",
+   "device": "desktop",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "109 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.39"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "8 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0368"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.58"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 394"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "dir, span, form, __tempo · 4/4 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-06-beat-pages-seed394-beat19.png 1440×900 1149 KB, 74 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "05-phrase-bows.html | ./ | 07-wave-dialogue.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 8,
+    "peak": 0.0367748886346817,
+    "drift": 1.1546319456101628e-14,
+    "lagMax": null,
+    "lagMean": null,
+    "transport": {
+     "state": "started",
+     "ticks": 1686,
+     "bpm": 104
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "07-wave-dialogue",
+   "device": "desktop",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "46 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.28"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "5 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0106"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.54"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 7923"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "swell, __tempo · 2/2 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-07-wave-dialogue-seed7923-beat15.png 1440×900 1662 KB, 41 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "06-beat-pages.html | ./ | 08-late-wave.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 5,
+    "peak": 0.010629919357597828,
+    "drift": 2.6645352591003757e-15,
+    "lagMax": null,
+    "lagMean": null,
+    "transport": {
+     "state": "started",
+     "ticks": 1581,
+     "bpm": 95.99999999999999
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "08-late-wave",
+   "device": "desktop",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "107 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.44"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "11 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0554"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.60"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 8364"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "count, often, __tempo · 3/3 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-08-late-wave-seed8364-beat18.png 1440×900 886 KB, 71 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "07-wave-dialogue.html | ./ | 09-rhythm-rosette.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 11,
+    "peak": 0.05542512983083725,
+    "drift": 4.440892098500626e-15,
+    "lagMax": null,
+    "lagMean": null,
+    "transport": {
+     "state": "started",
+     "ticks": 1729,
+     "bpm": 107.99999999999999
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "09-rhythm-rosette",
+   "device": "desktop",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "203 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.33"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "11 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0659"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.64"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 6678"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "rings, shape, open, __tempo · 4/4 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-09-rhythm-rosette-seed6678-beat19.png 1440×900 1821 KB, 50 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "08-late-wave.html | ./ | 10-swing-waves.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 11,
+    "peak": 0.06586696952581406,
+    "drift": 1.7763568394002505e-15,
+    "lagMax": null,
+    "lagMean": null,
+    "transport": {
+     "state": "started",
+     "ticks": 1713,
+     "bpm": 100
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "10-swing-waves",
+   "device": "desktop",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "97 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.47"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "32 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0819"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.63"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 1297"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "swing, stride, form, __tempo · 4/4 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-10-swing-waves-seed1297-beat20.png 1440×900 793 KB, 75 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "09-rhythm-rosette.html | ./ | 01-wave-relay.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 32,
+    "peak": 0.08189187943935394,
+    "drift": 2.042810365310288e-14,
+    "lagMax": null,
+    "lagMean": null,
+    "transport": {
+     "state": "started",
+     "ticks": 1781,
+     "bpm": 111.99999999999999
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "01-wave-relay",
+   "device": "mobile",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "59 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.33"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "9 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0603"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "visualDispatchWithinFrame": {
+     "pass": true,
+     "note": "mean 17.0 ms, max 30.7 ms after the audio-clock beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.64"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 5587"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "formation, __tempo · 2/2 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-01-wave-relay-seed5587-beat16.png 780×1688 734 KB, 84 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "10-swing-waves.html | ./ | 02-color-surfers.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 9,
+    "peak": 0.06031685322523117,
+    "drift": 1.5987211554602254e-14,
+    "lagMax": 0.030700000035762783,
+    "lagMean": 0.017005555564496375,
+    "transport": {
+     "state": "started",
+     "ticks": 1669,
+     "bpm": 100
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "02-color-surfers",
+   "device": "mobile",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "66 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.23"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "4 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0464"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "visualDispatchWithinFrame": {
+     "pass": true,
+     "note": "mean 19.2 ms, max 32.5 ms after the audio-clock beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.61"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 6704"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "height, formation, __tempo · 3/3 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-02-color-surfers-seed6704-beat16.png 780×1688 885 KB, 66 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "01-wave-relay.html | ./ | 03-elastic-ensemble.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 4,
+    "peak": 0.04644184187054634,
+    "drift": 2.220446049250313e-15,
+    "lagMax": 0.03249999995231629,
+    "lagMean": 0.019179089006479463,
+    "transport": {
+     "state": "started",
+     "ticks": 1530,
+     "bpm": 92
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "03-elastic-ensemble",
+   "device": "mobile",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "146 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.28"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "7 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0538"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "visualDispatchWithinFrame": {
+     "pass": true,
+     "note": "mean 11.9 ms, max 31.8 ms after the audio-clock beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.64"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 3911"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "elastic, stretch, __tempo · 3/3 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-03-elastic-ensemble-seed3911-beat17.png 780×1688 1576 KB, 93 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "02-color-surfers.html | ./ | 04-occasional-unison.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 7,
+    "peak": 0.0537741594016552,
+    "drift": 1.3322676295501878e-14,
+    "lagMax": 0.031799999999999995,
+    "lagMean": 0.011943749999999365,
+    "transport": {
+     "state": "started",
+     "ticks": 1645,
+     "bpm": 95.99999999999999
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "04-occasional-unison",
+   "device": "mobile",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "62 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.49"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "17 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0722"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "visualDispatchWithinFrame": {
+     "pass": true,
+     "note": "mean 12.1 ms, max 30.8 ms after the audio-clock beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.75"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 1849"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "periods, __tempo · 2/2 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-04-occasional-unison-seed1849-beat18.png 780×1688 645 KB, 71 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "03-elastic-ensemble.html | ./ | 05-phrase-bows.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 17,
+    "peak": 0.07222247868776321,
+    "drift": 1.021405182655144e-14,
+    "lagMax": 0.030799999964237212,
+    "lagMean": 0.012121428566063458,
+    "transport": {
+     "state": "started",
+     "ticks": 1907,
+     "bpm": 111.99999999999999
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "05-phrase-bows",
+   "device": "mobile",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "75 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.12"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "9 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.1010"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.56"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 4885"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "width, shape, __tempo · 3/3 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-05-phrase-bows-seed4885-beat14.png 780×1688 505 KB, 84 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "04-occasional-unison.html | ./ | 06-beat-pages.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 9,
+    "peak": 0.10102436691522598,
+    "drift": 1.687538997430238e-14,
+    "lagMax": null,
+    "lagMean": null,
+    "transport": {
+     "state": "started",
+     "ticks": 1419,
+     "bpm": 84.00000000000001
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "06-beat-pages",
+   "device": "mobile",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "96 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.38"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "8 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0278"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.69"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 6759"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "dir, span, form, __tempo · 4/4 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-06-beat-pages-seed6759-beat20.png 780×1688 1079 KB, 57 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "05-phrase-bows.html | ./ | 07-wave-dialogue.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 8,
+    "peak": 0.027812641113996506,
+    "drift": 1.3322676295501878e-15,
+    "lagMax": null,
+    "lagMean": null,
+    "transport": {
+     "state": "started",
+     "ticks": 1795,
+     "bpm": 104
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "07-wave-dialogue",
+   "device": "mobile",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "48 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.28"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "5 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0939"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.64"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 9672"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "swell, __tempo · 2/2 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-07-wave-dialogue-seed9672-beat15.png 780×1688 1093 KB, 39 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "06-beat-pages.html | ./ | 08-late-wave.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 5,
+    "peak": 0.09388206154108047,
+    "drift": 1.1546319456101628e-14,
+    "lagMax": null,
+    "lagMean": null,
+    "transport": {
+     "state": "started",
+     "ticks": 1633,
+     "bpm": 95.99999999999999
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "08-late-wave",
+   "device": "mobile",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "73 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.42"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "12 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0534"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.69"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 2577"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "count, often, __tempo · 3/3 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-08-late-wave-seed2577-beat18.png 780×1688 535 KB, 59 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "07-wave-dialogue.html | ./ | 09-rhythm-rosette.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 12,
+    "peak": 0.05344642698764801,
+    "drift": 1.5987211554602254e-14,
+    "lagMax": null,
+    "lagMean": null,
+    "transport": {
+     "state": "started",
+     "ticks": 1781,
+     "bpm": 107.99999999999999
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  },
+  {
+   "id": "09-rhythm-rosette",
+   "device": "mobile",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "211 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.35"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "10 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.0805"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.76"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 123"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "rings, shape, open, __tempo · 4/4 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-09-rhythm-rosette-seed123-beat22.png 780×1688 1610 KB, 58 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "08-late-wave.html | ./ | 10-swing-waves.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 10,
+    "peak": 0.0805056020617485,
+    "drift": 4.440892098500626e-15,
+    "lagMax": null,
+    "lagMean": null,
+    "transport": {
+     "state": "started",
+     "ticks": 1799,
+     "bpm": 100
+    },
+    "repeats": 1
+   },
+   "fps": 59,
+   "errors": []
+  },
+  {
+   "id": "10-swing-waves",
+   "device": "mobile",
+   "checks": {
+    "silentOnLoad": true,
+    "initialFrameDrawn": {
+     "pass": true,
+     "note": "60 colour bins"
+    },
+    "previewMoving": {
+     "pass": true,
+     "note": "beat 1.50"
+    },
+    "audioStarts": {
+     "pass": true,
+     "note": "running"
+    },
+    "notesScheduled": {
+     "pass": true,
+     "note": "35 notes"
+    },
+    "nonZeroSignal": {
+     "pass": true,
+     "note": "peak 0.1159"
+    },
+    "scheduledOnScoreBeat": {
+     "pass": true,
+     "note": "max |transport beat at note time − score beat| = 0.00000 beat"
+    },
+    "singleScheduler": {
+     "pass": true,
+     "note": "repeats 1"
+    },
+    "muteSilencesKeepsTime": {
+     "pass": true,
+     "note": "peak 0.00000, beat +0.75"
+    },
+    "volume": true,
+    "pauseStopsTime": {
+     "pass": true,
+     "note": "paused"
+    },
+    "resume": true,
+    "reseed": {
+     "pass": true,
+     "note": "4242 → 986"
+    },
+    "paramsApplyAndReset": {
+     "pass": true,
+     "note": "swing, stride, form, __tempo · 4/4 changed the frame"
+    },
+    "pngExport": {
+     "pass": true,
+     "note": "sound2-10-swing-waves-seed986-beat21.png 780×1688 722 KB, 45 colour bins"
+    },
+    "hideUi": true,
+    "visibilityPauseResume": true,
+    "noHorizontalOverflow": true,
+    "navigation": {
+     "pass": true,
+     "note": "09-rhythm-rosette.html | ./ | 01-wave-relay.html"
+    },
+    "noErrors": {
+     "pass": true,
+     "note": ""
+    }
+   },
+   "audio": {
+    "audio": "on",
+    "ctx": "running",
+    "notes": 35,
+    "peak": 0.11592621356248856,
+    "drift": 1.4210854715202004e-14,
+    "lagMax": null,
+    "lagMean": null,
+    "transport": {
+     "state": "started",
+     "ticks": 1899,
+     "bpm": 111.99999999999999
+    },
+    "repeats": 1
+   },
+   "fps": 60,
+   "errors": []
+  }
+ ],
+ "index": [
+  {
+   "device": "desktop",
+   "links": 10,
+   "allLinks200": true,
+   "images": 10,
+   "imagesDecoded": true,
+   "audioOnIndex": false,
+   "overflow": false,
+   "errors": []
+  },
+  {
+   "device": "mobile",
+   "links": 10,
+   "allLinks200": true,
+   "images": 10,
+   "imagesDecoded": true,
+   "audioOnIndex": false,
+   "overflow": false,
+   "errors": []
+  }
+ ],
+ "extra": {
+  "restarts": [
+   {
+    "repeats": 1,
+    "peak": 0.0798,
+    "notesPerSec": 2.5
+   },
+   {
+    "repeats": 1,
+    "peak": 0.0476,
+    "notesPerSec": 2.5
+   },
+   {
+    "repeats": 1,
+    "peak": 0.0527,
+    "notesPerSec": 2.5
+   }
+  ],
+  "track": {
+   "source": "track",
+   "info": {
+    "title": "Carefree",
+    "artist": "Kevin MacLeod",
+    "bpm": 96,
+    "offset": 0.029333333333333333,
+    "estBpm": 97,
+    "duration": 205.13958333333332
+   },
+   "advanced": 2.6884888888888874,
+   "peak": 0.09525502473115921,
+   "transport": {
+    "state": "paused",
+    "ticks": 879,
+    "bpm": 100
+   },
+   "notesScored": 5
+  },
+  "track2": {
+   "source": "track",
+   "info": {
+    "title": "Electrodoodle",
+    "artist": "Kevin MacLeod",
+    "bpm": 120,
+    "offset": 0.4026666666666667,
+    "estBpm": 119.7,
+    "duration": 166.06039583333333
+   },
+   "peak": 0.0064453198574483395
+  },
+  "backToScore": {
+   "source": "score",
+   "repeats": 1,
+   "transport": {
+    "state": "started",
+    "ticks": 469,
+    "bpm": 100
+   }
+  },
+  "trackErrors": [],
+  "noAudio": {
+   "audio": "failed",
+   "status": "聲音元件沒有載入；作品以純視覺繼續。",
+   "beat": 1.2854800000166886,
+   "playing": true
+  },
+  "noAudioErrors": [
+   "console: Failed to load resource: net::ERR_FAILED"
+  ],
+  "reducedMotion": {
+   "playing": false,
+   "motion": 0.45
+  }
+ }
+}
