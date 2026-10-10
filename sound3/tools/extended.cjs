@@ -1,0 +1,19 @@
+const fs=require('node:fs'),path=require('node:path');const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');const ROOT=path.resolve(__dirname,'..'),BASE=process.env.SOUND3_URL||'http://127.0.0.1:8766/sound3/';const wait=ms=>new Promise(r=>setTimeout(r,ms));
+(async()=>{const b=await chromium.launch({args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']}),result={date:new Date().toISOString(),long:[],mic:[],extra:{}};
+try{
+ const contexts=[];
+ for(const id of ['02-chord-loom','07-echo-labyrinth','08-stored-energy']){const context=await b.newContext({viewport:{width:420,height:600},reducedMotion:'reduce'}),p=await context.newPage();await p.goto(BASE+id+'.html');await p.locator('#play').click();contexts.push({id,context,p});}
+ await wait(45000);for(const o of contexts)o.mid=await o.p.evaluate(()=>({...Sound3.debug.snapshot(),heap:performance.memory?.usedJSHeapSize}));console.log('long-running midpoint sampled');
+ await wait(45000);console.log('long-running 90s');await wait(31000);
+ for(const o of contexts){const end=await o.p.evaluate(()=>({...Sound3.debug.snapshot(),heap:performance.memory?.usedJSHeapSize}));result.long.push({id:o.id,mid:o.mid,end,pass:end.time>=120&&end.activeNodes<90&&end.rows<=96&&end.paths<=24&&end.energy<=1.8});await o.p.evaluate(()=>Sound3.debug.cleanup());await o.context.close();}
+ // Synthetic microphone injected through MediaStreamDestination. Tests gate
+ // behavior without claiming that a human or a hardware microphone was tested.
+ for(const type of ['sustained','short-pause']){
+ const c=await b.newContext(),p=await c.newPage();await p.addInitScript(type=>{
+  navigator.mediaDevices.getUserMedia=async()=>{const ac=new AudioContext(),dest=ac.createMediaStreamDestination(),osc=ac.createOscillator(),gain=ac.createGain();osc.frequency.value=220;gain.gain.value=.15;osc.connect(gain).connect(dest);osc.start();await ac.resume();if(type==='short-pause'){gain.gain.setValueAtTime(.15,ac.currentTime);gain.gain.setValueAtTime(0,ac.currentTime+2);gain.gain.setValueAtTime(.15,ac.currentTime+2.18)}window.__fakeMic={ac,osc,gain};return dest.stream;};
+ },type);await p.goto(BASE+'06-breath-portrait.html');await p.locator('#microphone').click();await wait(4000);const mid=await p.evaluate(()=>({mode:Sound3.state.mode,samples:Sound3.model.state.breath.length,active:Sound3.model.state.active}));await wait(10800);const end=await p.evaluate(()=>({mode:Sound3.state.mode,complete:Sound3.model.state.complete,samples:Sound3.model.state.breath.length,time:Sound3.state.time,playing:Sound3.state.playing}));result.mic.push({type,mid,end,pass:mid.mode==='mic'&&end.complete&&!end.playing&&end.mode==='demo'&&end.samples<=140});await p.evaluate(()=>window.__fakeMic?.ac.close());await c.close();}
+ const c=await b.newContext({viewport:{width:1440,height:900}}),p=await c.newPage();await p.goto(BASE+'01-resonant-architecture.html');await p.locator('#play').click();await wait(450);await p.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'))});await wait(250);result.extra.hiddenPause=await p.evaluate(()=>!Sound3.state.playing&&Sound3.audio.ctx.state==='suspended');await p.reload();result.extra.reloadSilent=await p.evaluate(()=>!Sound3.state.started&&!Sound3.state.playing);await p.setViewportSize({width:390,height:844});await wait(200);result.extra.resize=await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth&&document.querySelector('canvas').width>0);await c.close();
+ console.log(JSON.stringify(result,null,2));
+}finally{fs.writeFileSync(path.join(ROOT,'_qa','extended.json'),JSON.stringify(result,null,2));await b.close()}
+if(result.long.some(r=>!r.pass)||result.mic.some(r=>!r.pass)||Object.values(result.extra).some(v=>!v))process.exitCode=1;
+})();

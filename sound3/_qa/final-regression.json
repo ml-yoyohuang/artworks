@@ -1,0 +1,1093 @@
+{
+  "date": "2026-10-10T12:10:50.946Z",
+  "browser": "151.0.7922.34",
+  "base": "http://127.0.0.1:8766/sound3/",
+  "works": [
+    {
+      "id": "03-silence-cuts",
+      "device": "desktop",
+      "checks": {
+        "silentInitial": {
+          "pass": true
+        },
+        "initialCanvas": {
+          "pass": true
+        },
+        "noOverflow": {
+          "pass": true
+        },
+        "audioStarts": {
+          "pass": true
+        },
+        "signal": {
+          "pass": true,
+          "detail": {
+            "peak": 0.029501980170607567
+          }
+        },
+        "muteKeepsTime": {
+          "pass": true
+        },
+        "volume": {
+          "pass": true
+        },
+        "pauseFreezes": {
+          "pass": true
+        },
+        "resumeContinuous": {
+          "pass": true
+        },
+        "evolved": {
+          "pass": true
+        },
+        "fixedStepFollowsClock": {
+          "pass": true,
+          "detail": {
+            "maxLag": 0.01600000000002222
+          }
+        },
+        "silenceDepthControl": {
+          "pass": true
+        },
+        "pngExport": {
+          "pass": true
+        },
+        "replay": {
+          "pass": true
+        },
+        "keyboard": {
+          "pass": true
+        },
+        "navigation": {
+          "pass": true
+        },
+        "scheduleOnAudioClock": {
+          "pass": true,
+          "detail": {
+            "maxLate": 0
+          }
+        },
+        "cleanup": {
+          "pass": true
+        },
+        "noErrors": {
+          "pass": true,
+          "detail": []
+        }
+      },
+      "representative": {
+        "time": 13.005333333333335,
+        "playing": true,
+        "complete": false,
+        "energy": 0,
+        "releases": 0,
+        "rows": 0,
+        "layers": 0,
+        "breath": 0,
+        "walls": 0,
+        "paths": 0,
+        "activeNodes": 0,
+        "maxNodes": 3,
+        "notes": 3,
+        "peak": 0,
+        "ctx": "running",
+        "maxLag": 0.01600000000002222
+      },
+      "scheduling": {
+        "nodes": 3,
+        "maxNodes": 3,
+        "logs": [
+          {
+            "score": 0.1,
+            "when": 0.18,
+            "late": 0,
+            "voice": "dark"
+          },
+          {
+            "score": 4,
+            "when": 4.08,
+            "late": 0,
+            "voice": "dark"
+          },
+          {
+            "score": 8.1,
+            "when": 8.18,
+            "late": 0,
+            "voice": "dark"
+          },
+          {
+            "score": 0.1,
+            "when": 13.315999999999999,
+            "late": 0,
+            "voice": "dark"
+          }
+        ],
+        "maxLate": 0
+      },
+      "errors": []
+    },
+    {
+      "id": "04-sound-fossil",
+      "device": "desktop",
+      "checks": {
+        "silentInitial": {
+          "pass": true
+        },
+        "initialCanvas": {
+          "pass": true
+        },
+        "noOverflow": {
+          "pass": true
+        },
+        "audioStarts": {
+          "pass": true
+        },
+        "signal": {
+          "pass": true,
+          "detail": {
+            "peak": 0.047409266233444214
+          }
+        },
+        "muteKeepsTime": {
+          "pass": true
+        },
+        "volume": {
+          "pass": true
+        },
+        "pauseFreezes": {
+          "pass": true
+        },
+        "resumeContinuous": {
+          "pass": true
+        },
+        "evolved": {
+          "pass": true
+        },
+        "fixedStepFollowsClock": {
+          "pass": true,
+          "detail": {
+            "maxLag": 0.016000000000531145
+          }
+        },
+        "newSpecimen": {
+          "pass": true
+        },
+        "pngExport": {
+          "pass": true
+        },
+        "replay": {
+          "pass": true
+        },
+        "keyboard": {
+          "pass": true
+        },
+        "navigation": {
+          "pass": true
+        },
+        "scheduleOnAudioClock": {
+          "pass": true,
+          "detail": {
+            "maxLate": 0
+          }
+        },
+        "cleanup": {
+          "pass": true
+        },
+        "noErrors": {
+          "pass": true,
+          "detail": []
+        }
+      },
+      "representative": {
+        "time": 32,
+        "playing": false,
+        "complete": true,
+        "energy": 0,
+        "releases": 0,
+        "rows": 0,
+        "layers": 72,
+        "breath": 0,
+        "walls": 0,
+        "paths": 0,
+        "activeNodes": 0,
+        "maxNodes": 4,
+        "notes": 72,
+        "peak": 0,
+        "ctx": "suspended",
+        "maxLag": 0.016000000000531145
+      },
+      "scheduling": {
+        "nodes": 3,
+        "maxNodes": 4,
+        "logs": [
+          {
+            "score": 30,
+            "when": 30.085333333333335,
+            "late": 0,
+            "voice": "mineral"
+          },
+          {
+            "score": 30.5,
+            "when": 30.585333333333335,
+            "late": 0,
+            "voice": "mineral"
+          },
+          {
+            "score": 31,
+            "when": 31.085333333333335,
+            "late": 0,
+            "voice": "mineral"
+          },
+          {
+            "score": 31.5,
+            "when": 31.585333333333335,
+            "late": 0,
+            "voice": "mineral"
+          },
+          {
+            "score": 0,
+            "when": 32.202666666666666,
+            "late": 0,
+            "voice": "mineral"
+          },
+          {
+            "score": 0,
+            "when": 32.202666666666666,
+            "late": 0,
+            "voice": "bass"
+          },
+          {
+            "score": 0,
+            "when": 32.272,
+            "late": 0,
+            "voice": "mineral"
+          },
+          {
+            "score": 0,
+            "when": 32.272,
+            "late": 0,
+            "voice": "bass"
+          }
+        ],
+        "maxLate": 0
+      },
+      "errors": []
+    },
+    {
+      "id": "06-breath-portrait",
+      "device": "desktop",
+      "checks": {
+        "silentInitial": {
+          "pass": true
+        },
+        "initialCanvas": {
+          "pass": true
+        },
+        "noOverflow": {
+          "pass": true
+        },
+        "audioStarts": {
+          "pass": true
+        },
+        "signal": {
+          "pass": true,
+          "detail": {
+            "peak": 0.027102021500468254
+          }
+        },
+        "muteKeepsTime": {
+          "pass": true
+        },
+        "volume": {
+          "pass": true
+        },
+        "pauseFreezes": {
+          "pass": true
+        },
+        "resumeContinuous": {
+          "pass": true
+        },
+        "evolved": {
+          "pass": true
+        },
+        "fixedStepFollowsClock": {
+          "pass": true,
+          "detail": {
+            "maxLag": 0.016000000000023107
+          }
+        },
+        "demoAndGallery": {
+          "pass": true
+        },
+        "pngExport": {
+          "pass": true
+        },
+        "replay": {
+          "pass": true
+        },
+        "keyboard": {
+          "pass": true
+        },
+        "navigation": {
+          "pass": true
+        },
+        "scheduleOnAudioClock": {
+          "pass": true,
+          "detail": {
+            "maxLate": 0
+          }
+        },
+        "cleanup": {
+          "pass": true
+        },
+        "noErrors": {
+          "pass": true,
+          "detail": []
+        }
+      },
+      "representative": {
+        "time": 14,
+        "playing": false,
+        "complete": true,
+        "energy": 0,
+        "releases": 0,
+        "rows": 0,
+        "layers": 0,
+        "breath": 127,
+        "walls": 0,
+        "paths": 0,
+        "activeNodes": 0,
+        "maxNodes": 1,
+        "notes": 3,
+        "peak": 0,
+        "ctx": "suspended",
+        "maxLag": 0.016000000000023107
+      },
+      "scheduling": {
+        "nodes": 1,
+        "maxNodes": 1,
+        "logs": [
+          {
+            "score": 0.2,
+            "when": 0.2853333333333333,
+            "late": 0,
+            "voice": "voice"
+          },
+          {
+            "score": 5,
+            "when": 5.085333333333334,
+            "late": 0,
+            "voice": "voice"
+          },
+          {
+            "score": 8.8,
+            "when": 8.885333333333334,
+            "late": 0,
+            "voice": "breath"
+          },
+          {
+            "score": 0.2,
+            "when": 14.397333333333332,
+            "late": 0,
+            "voice": "voice"
+          }
+        ],
+        "maxLate": 0
+      },
+      "errors": []
+    },
+    {
+      "id": "07-echo-labyrinth",
+      "device": "desktop",
+      "checks": {
+        "silentInitial": {
+          "pass": true
+        },
+        "initialCanvas": {
+          "pass": true
+        },
+        "noOverflow": {
+          "pass": true
+        },
+        "audioStarts": {
+          "pass": true
+        },
+        "signal": {
+          "pass": true,
+          "detail": {
+            "peak": 0.046017032116651535
+          }
+        },
+        "muteKeepsTime": {
+          "pass": true
+        },
+        "volume": {
+          "pass": true
+        },
+        "pauseFreezes": {
+          "pass": true
+        },
+        "resumeContinuous": {
+          "pass": true
+        },
+        "evolved": {
+          "pass": true
+        },
+        "fixedStepFollowsClock": {
+          "pass": true,
+          "detail": {
+            "maxLag": 0.016000000000357062
+          }
+        },
+        "originChangesEcho": {
+          "pass": true
+        },
+        "manualPing": {
+          "pass": true
+        },
+        "pngExport": {
+          "pass": true
+        },
+        "replay": {
+          "pass": true
+        },
+        "keyboard": {
+          "pass": true
+        },
+        "navigation": {
+          "pass": true
+        },
+        "scheduleOnAudioClock": {
+          "pass": true,
+          "detail": {
+            "maxLate": 0
+          }
+        },
+        "cleanup": {
+          "pass": true
+        },
+        "noErrors": {
+          "pass": true,
+          "detail": []
+        }
+      },
+      "representative": {
+        "time": 29.005333333333333,
+        "playing": true,
+        "complete": false,
+        "energy": 0,
+        "releases": 0,
+        "rows": 0,
+        "layers": 0,
+        "breath": 0,
+        "walls": 10,
+        "paths": 22,
+        "activeNodes": 2,
+        "maxNodes": 3,
+        "notes": 32,
+        "peak": 0.008427164517343044,
+        "ctx": "running",
+        "maxLag": 0.016000000000357062
+      },
+      "scheduling": {
+        "nodes": 1,
+        "maxNodes": 3,
+        "logs": [
+          {
+            "score": 28.455185701283355,
+            "when": 28.54051903461669,
+            "late": 0,
+            "voice": "echo"
+          },
+          {
+            "score": 29.005420420771845,
+            "when": 29.09075375410518,
+            "late": 0,
+            "voice": "echo"
+          },
+          {
+            "score": 29.01346101999364,
+            "when": 29.098794353326973,
+            "late": 0,
+            "voice": "echo"
+          },
+          {
+            "score": 0.12,
+            "when": 29.352,
+            "late": 0,
+            "voice": "bell"
+          },
+          {
+            "score": 0.25,
+            "when": 29.482,
+            "late": 0,
+            "voice": "bell"
+          },
+          {
+            "score": 0.6863231747795915,
+            "when": 29.91832317477959,
+            "late": 0,
+            "voice": "echo"
+          },
+          {
+            "score": 0.7744885000915641,
+            "when": 30.006488500091564,
+            "late": 0,
+            "voice": "echo"
+          },
+          {
+            "score": 0.25,
+            "when": 30.596666666666664,
+            "late": 0,
+            "voice": "bell"
+          }
+        ],
+        "maxLate": 0
+      },
+      "errors": []
+    },
+    {
+      "id": "03-silence-cuts",
+      "device": "mobile",
+      "checks": {
+        "silentInitial": {
+          "pass": true
+        },
+        "initialCanvas": {
+          "pass": true
+        },
+        "noOverflow": {
+          "pass": true
+        },
+        "audioStarts": {
+          "pass": true
+        },
+        "signal": {
+          "pass": true,
+          "detail": {
+            "peak": 0.028419220820069313
+          }
+        },
+        "muteKeepsTime": {
+          "pass": true
+        },
+        "volume": {
+          "pass": true
+        },
+        "pauseFreezes": {
+          "pass": true
+        },
+        "resumeContinuous": {
+          "pass": true
+        },
+        "evolved": {
+          "pass": true
+        },
+        "fixedStepFollowsClock": {
+          "pass": true,
+          "detail": {
+            "maxLag": 0.016000000000003123
+          }
+        },
+        "silenceDepthControl": {
+          "pass": true
+        },
+        "pngExport": {
+          "pass": true
+        },
+        "replay": {
+          "pass": true
+        },
+        "keyboard": {
+          "pass": true
+        },
+        "navigation": {
+          "pass": true
+        },
+        "scheduleOnAudioClock": {
+          "pass": true,
+          "detail": {
+            "maxLate": 0
+          }
+        },
+        "cleanup": {
+          "pass": true
+        },
+        "noErrors": {
+          "pass": true,
+          "detail": []
+        }
+      },
+      "representative": {
+        "time": 13,
+        "playing": false,
+        "complete": false,
+        "energy": 0,
+        "releases": 0,
+        "rows": 0,
+        "layers": 0,
+        "breath": 0,
+        "walls": 0,
+        "paths": 0,
+        "activeNodes": 3,
+        "maxNodes": 3,
+        "notes": 1,
+        "peak": 0.00016048926045186818,
+        "ctx": "suspended",
+        "maxLag": 0.016000000000003123
+      },
+      "scheduling": {
+        "nodes": 3,
+        "maxNodes": 3,
+        "logs": [
+          {
+            "score": 0.1,
+            "when": 0.18533333333333335,
+            "late": 0,
+            "voice": "dark"
+          },
+          {
+            "score": 0.1,
+            "when": 2.8840000000000003,
+            "late": 0,
+            "voice": "dark"
+          }
+        ],
+        "maxLate": 0
+      },
+      "errors": []
+    },
+    {
+      "id": "04-sound-fossil",
+      "device": "mobile",
+      "checks": {
+        "silentInitial": {
+          "pass": true
+        },
+        "initialCanvas": {
+          "pass": true
+        },
+        "noOverflow": {
+          "pass": true
+        },
+        "audioStarts": {
+          "pass": true
+        },
+        "signal": {
+          "pass": true,
+          "detail": {
+            "peak": 0.049204081296920776
+          }
+        },
+        "muteKeepsTime": {
+          "pass": true
+        },
+        "volume": {
+          "pass": true
+        },
+        "pauseFreezes": {
+          "pass": true
+        },
+        "resumeContinuous": {
+          "pass": true
+        },
+        "evolved": {
+          "pass": true
+        },
+        "fixedStepFollowsClock": {
+          "pass": true,
+          "detail": {
+            "maxLag": 0.016000000000004455
+          }
+        },
+        "newSpecimen": {
+          "pass": true
+        },
+        "pngExport": {
+          "pass": true
+        },
+        "replay": {
+          "pass": true
+        },
+        "keyboard": {
+          "pass": true
+        },
+        "navigation": {
+          "pass": true
+        },
+        "scheduleOnAudioClock": {
+          "pass": true,
+          "detail": {
+            "maxLate": 0
+          }
+        },
+        "cleanup": {
+          "pass": true
+        },
+        "noErrors": {
+          "pass": true,
+          "detail": []
+        }
+      },
+      "representative": {
+        "time": 32,
+        "playing": false,
+        "complete": true,
+        "energy": 0,
+        "releases": 0,
+        "rows": 0,
+        "layers": 72,
+        "breath": 0,
+        "walls": 0,
+        "paths": 0,
+        "activeNodes": 3,
+        "maxNodes": 4,
+        "notes": 7,
+        "peak": 0.04144306853413582,
+        "ctx": "suspended",
+        "maxLag": 0.016000000000004455
+      },
+      "scheduling": {
+        "nodes": 3,
+        "maxNodes": 4,
+        "logs": [
+          {
+            "score": 1,
+            "when": 1.0853333333333333,
+            "late": 0,
+            "voice": "mineral"
+          },
+          {
+            "score": 1.5,
+            "when": 1.5853333333333333,
+            "late": 0,
+            "voice": "mineral"
+          },
+          {
+            "score": 2,
+            "when": 2.0853333333333333,
+            "late": 0,
+            "voice": "mineral"
+          },
+          {
+            "score": 2.5,
+            "when": 2.5853333333333333,
+            "late": 0,
+            "voice": "mineral"
+          },
+          {
+            "score": 0,
+            "when": 2.8106666666666666,
+            "late": 0,
+            "voice": "mineral"
+          },
+          {
+            "score": 0,
+            "when": 2.8106666666666666,
+            "late": 0,
+            "voice": "bass"
+          },
+          {
+            "score": 0,
+            "when": 2.8586666666666667,
+            "late": 0,
+            "voice": "mineral"
+          },
+          {
+            "score": 0,
+            "when": 2.8586666666666667,
+            "late": 0,
+            "voice": "bass"
+          }
+        ],
+        "maxLate": 0
+      },
+      "errors": []
+    },
+    {
+      "id": "06-breath-portrait",
+      "device": "mobile",
+      "checks": {
+        "silentInitial": {
+          "pass": true
+        },
+        "initialCanvas": {
+          "pass": true
+        },
+        "noOverflow": {
+          "pass": true
+        },
+        "audioStarts": {
+          "pass": true
+        },
+        "signal": {
+          "pass": true,
+          "detail": {
+            "peak": 0.027101989835500717
+          }
+        },
+        "muteKeepsTime": {
+          "pass": true
+        },
+        "volume": {
+          "pass": true
+        },
+        "pauseFreezes": {
+          "pass": true
+        },
+        "resumeContinuous": {
+          "pass": true
+        },
+        "evolved": {
+          "pass": true
+        },
+        "fixedStepFollowsClock": {
+          "pass": true,
+          "detail": {
+            "maxLag": 0.016000000000004455
+          }
+        },
+        "demoAndGallery": {
+          "pass": true
+        },
+        "pngExport": {
+          "pass": true
+        },
+        "replay": {
+          "pass": true
+        },
+        "keyboard": {
+          "pass": true
+        },
+        "navigation": {
+          "pass": true
+        },
+        "scheduleOnAudioClock": {
+          "pass": true,
+          "detail": {
+            "maxLate": 0
+          }
+        },
+        "cleanup": {
+          "pass": true
+        },
+        "noErrors": {
+          "pass": true,
+          "detail": []
+        }
+      },
+      "representative": {
+        "time": 14,
+        "playing": false,
+        "complete": true,
+        "energy": 0,
+        "releases": 0,
+        "rows": 0,
+        "layers": 0,
+        "breath": 127,
+        "walls": 0,
+        "paths": 0,
+        "activeNodes": 1,
+        "maxNodes": 1,
+        "notes": 1,
+        "peak": 0.002905552973970771,
+        "ctx": "suspended",
+        "maxLag": 0.016000000000004455
+      },
+      "scheduling": {
+        "nodes": 1,
+        "maxNodes": 1,
+        "logs": [
+          {
+            "score": 0.2,
+            "when": 0.2853333333333333,
+            "late": 0,
+            "voice": "voice"
+          },
+          {
+            "score": 0.2,
+            "when": 3.112,
+            "late": 0,
+            "voice": "voice"
+          }
+        ],
+        "maxLate": 0
+      },
+      "errors": []
+    },
+    {
+      "id": "07-echo-labyrinth",
+      "device": "mobile",
+      "checks": {
+        "silentInitial": {
+          "pass": true
+        },
+        "initialCanvas": {
+          "pass": true
+        },
+        "noOverflow": {
+          "pass": true
+        },
+        "audioStarts": {
+          "pass": true
+        },
+        "signal": {
+          "pass": true,
+          "detail": {
+            "peak": 0.046017032116651535
+          }
+        },
+        "muteKeepsTime": {
+          "pass": true
+        },
+        "volume": {
+          "pass": true
+        },
+        "pauseFreezes": {
+          "pass": true
+        },
+        "resumeContinuous": {
+          "pass": true
+        },
+        "evolved": {
+          "pass": true
+        },
+        "fixedStepFollowsClock": {
+          "pass": true,
+          "detail": {
+            "maxLag": 0.01600000000000401
+          }
+        },
+        "originChangesEcho": {
+          "pass": true
+        },
+        "manualPing": {
+          "pass": true
+        },
+        "pngExport": {
+          "pass": true
+        },
+        "replay": {
+          "pass": true
+        },
+        "keyboard": {
+          "pass": true
+        },
+        "navigation": {
+          "pass": true
+        },
+        "scheduleOnAudioClock": {
+          "pass": true,
+          "detail": {
+            "maxLate": 0
+          }
+        },
+        "cleanup": {
+          "pass": true
+        },
+        "noErrors": {
+          "pass": true,
+          "detail": []
+        }
+      },
+      "representative": {
+        "time": 25,
+        "playing": false,
+        "complete": false,
+        "energy": 0,
+        "releases": 0,
+        "rows": 0,
+        "layers": 0,
+        "breath": 0,
+        "walls": 10,
+        "paths": 21,
+        "activeNodes": 0,
+        "maxNodes": 1,
+        "notes": 4,
+        "peak": 0,
+        "ctx": "suspended",
+        "maxLag": 0.01600000000000401
+      },
+      "scheduling": {
+        "nodes": 1,
+        "maxNodes": 2,
+        "logs": [
+          {
+            "score": 0.7310049459336434,
+            "when": 0.8163382792669768,
+            "late": 0,
+            "voice": "echo"
+          },
+          {
+            "score": 1.5073862237220146,
+            "when": 1.5927195570553478,
+            "late": 0,
+            "voice": "echo"
+          },
+          {
+            "score": 2.1855265528494114,
+            "when": 2.2708598861827447,
+            "late": 0,
+            "voice": "echo"
+          },
+          {
+            "score": 0.12,
+            "when": 2.9146666666666667,
+            "late": 0,
+            "voice": "bell"
+          },
+          {
+            "score": 0.25,
+            "when": 3.0446666666666666,
+            "late": 0,
+            "voice": "bell"
+          },
+          {
+            "score": 0.6863231747795915,
+            "when": 3.480989841446258,
+            "late": 0,
+            "voice": "echo"
+          },
+          {
+            "score": 0.7744885000915641,
+            "when": 3.5691551667582306,
+            "late": 0,
+            "voice": "echo"
+          },
+          {
+            "score": 0.25,
+            "when": 4.164666666666667,
+            "late": 0,
+            "voice": "bell"
+          }
+        ],
+        "maxLate": 0
+      },
+      "errors": []
+    }
+  ],
+  "index": [
+    {
+      "device": "desktop",
+      "links": 8,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "device": "mobile",
+      "links": 8,
+      "overflow": false,
+      "errors": []
+    }
+  ],
+  "extra": {
+    "noAudio": {
+      "fallback": true,
+      "notice": "此瀏覽器無法啟動聲音，已切換為無聲展演。"
+    },
+    "microphoneDenied": {
+      "fallback": true,
+      "notice": "麥克風不可用，正播放合成示範。"
+    }
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-10T12:04:12.900Z",
+  "long": [
+    {
+      "id": "02-chord-loom",
+      "mid": {
+        "time": 45.064,
+        "playing": true,
+        "complete": false,
+        "energy": 0,
+        "releases": 0,
+        "rows": 91,
+        "layers": 0,
+        "breath": 0,
+        "walls": 0,
+        "paths": 0,
+        "activeNodes": 2,
+        "maxNodes": 4,
+        "notes": 151,
+        "peak": 0.03203288093209267,
+        "ctx": "running",
+        "maxLag": 0.016000000001184844,
+        "heap": 10000000
+      },
+      "end": {
+        "time": 121.06933333333333,
+        "playing": true,
+        "complete": false,
+        "energy": 0,
+        "releases": 0,
+        "rows": 96,
+        "layers": 0,
+        "breath": 0,
+        "walls": 0,
+        "paths": 0,
+        "activeNodes": 2,
+        "maxNodes": 4,
+        "notes": 400,
+        "peak": 0.03203288093209267,
+        "ctx": "running",
+        "maxLag": 0.016000000005391257,
+        "heap": 10000000
+      },
+      "pass": true
+    },
+    {
+      "id": "07-echo-labyrinth",
+      "mid": {
+        "time": 44.973333333333336,
+        "playing": true,
+        "complete": false,
+        "energy": 0,
+        "releases": 0,
+        "rows": 0,
+        "layers": 0,
+        "breath": 0,
+        "walls": 7,
+        "paths": 11,
+        "activeNodes": 2,
+        "maxNodes": 4,
+        "notes": 47,
+        "peak": 0.0038591420743614435,
+        "ctx": "running",
+        "maxLag": 0.0160000000012559,
+        "heap": 10000000
+      },
+      "end": {
+        "time": 120.98933333333333,
+        "playing": true,
+        "complete": false,
+        "energy": 0,
+        "releases": 0,
+        "rows": 0,
+        "layers": 0,
+        "breath": 0,
+        "walls": 10,
+        "paths": 21,
+        "activeNodes": 0,
+        "maxNodes": 4,
+        "notes": 124,
+        "peak": 0,
+        "ctx": "running",
+        "maxLag": 0.016000000005490733,
+        "heap": 10000000
+      },
+      "pass": true
+    },
+    {
+      "id": "08-stored-energy",
+      "mid": {
+        "time": 44.904,
+        "playing": true,
+        "complete": false,
+        "energy": 0.09624999999999859,
+        "releases": 2,
+        "rows": 0,
+        "layers": 0,
+        "breath": 0,
+        "walls": 0,
+        "paths": 0,
+        "activeNodes": 3,
+        "maxNodes": 4,
+        "notes": 87,
+        "peak": 0,
+        "ctx": "running",
+        "maxLag": 0.016000000001263004,
+        "heap": 10000000
+      },
+      "end": {
+        "time": 120.91466666666666,
+        "playing": true,
+        "complete": false,
+        "energy": 0.8708897891570138,
+        "releases": 5,
+        "rows": 0,
+        "layers": 0,
+        "breath": 0,
+        "walls": 0,
+        "paths": 0,
+        "activeNodes": 1,
+        "maxNodes": 4,
+        "notes": 229,
+        "peak": 0.012575703673064709,
+        "ctx": "running",
+        "maxLag": 0.016000000005576,
+        "heap": 10000000
+      },
+      "pass": true
+    }
+  ],
+  "mic": [
+    {
+      "type": "sustained",
+      "mid": {
+        "mode": "mic",
+        "samples": 40,
+        "active": 0.10663176874165413
+      },
+      "end": {
+        "mode": "demo",
+        "complete": true,
+        "samples": 139,
+        "time": 14.002666666666668,
+        "playing": false
+      },
+      "pass": true
+    },
+    {
+      "type": "short-pause",
+      "mid": {
+        "mode": "mic",
+        "samples": 40,
+        "active": 0.10606112008487166
+      },
+      "end": {
+        "mode": "demo",
+        "complete": true,
+        "samples": 139,
+        "time": 14.002666666666668,
+        "playing": false
+      },
+      "pass": true
+    }
+  ],
+  "extra": {
+    "hiddenPause": true,
+    "reloadSilent": true,
+    "resize": true
+  }
+}

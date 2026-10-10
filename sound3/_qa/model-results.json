@@ -1,0 +1,15 @@
+{
+  "pass": true,
+  "tests": 47,
+  "firstRelease": 13.400000000000245,
+  "bounded600s": {
+    "rows": 96,
+    "echoPaths": 18,
+    "energy": 0.31574194181129445,
+    "releases": 28
+  },
+  "fossilMaterialRange": [
+    0.12479572862055355,
+    0.3106602514337371
+  ]
+}
