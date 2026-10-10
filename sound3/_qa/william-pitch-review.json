@@ -1,0 +1,269 @@
+{
+  "pass": true,
+  "verifiedMelodyEvents": 43,
+  "score": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+  "midi": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.mid",
+  "midiThemeStartBeat": 52,
+  "transposeSemitones": -26,
+  "sourceOnsetsAndDurationsUnchanged": true,
+  "results": [
+    {
+      "beat": 0,
+      "seconds": 0.12,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 0.5,
+      "seconds": 1.0760606060606062,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 0.75,
+      "seconds": 1.5540909090909092,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 1,
+      "seconds": 2.032121212121212,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 1.5,
+      "seconds": 2.9881818181818183,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 2,
+      "seconds": 3.9442424242424243,
+      "midi": 62,
+      "pass": true
+    },
+    {
+      "beat": 2.5,
+      "seconds": 4.90030303030303,
+      "midi": 64,
+      "pass": true
+    },
+    {
+      "beat": 3,
+      "seconds": 5.856363636363636,
+      "midi": 66,
+      "pass": true
+    },
+    {
+      "beat": 3.5,
+      "seconds": 6.8124242424242425,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 3.75,
+      "seconds": 7.290454545454545,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 4,
+      "seconds": 7.7684848484848485,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 4.5,
+      "seconds": 8.724545454545455,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 4.75,
+      "seconds": 9.202575757575756,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 5,
+      "seconds": 9.68060606060606,
+      "midi": 62,
+      "pass": true
+    },
+    {
+      "beat": 5.5,
+      "seconds": 10.636666666666665,
+      "midi": 66,
+      "pass": true
+    },
+    {
+      "beat": 5.75,
+      "seconds": 11.114696969696968,
+      "midi": 66,
+      "pass": true
+    },
+    {
+      "beat": 6,
+      "seconds": 11.592727272727272,
+      "midi": 64,
+      "pass": true
+    },
+    {
+      "beat": 6.5,
+      "seconds": 12.548787878787879,
+      "midi": 61,
+      "pass": true
+    },
+    {
+      "beat": 7,
+      "seconds": 13.504848484848484,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 7.5,
+      "seconds": 14.46090909090909,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 7.75,
+      "seconds": 14.938939393939393,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 8,
+      "seconds": 15.416969696969696,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 8.5,
+      "seconds": 16.373030303030305,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 8.75,
+      "seconds": 16.851060606060607,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 9,
+      "seconds": 17.32909090909091,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 9.5,
+      "seconds": 18.285151515151515,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 9.75,
+      "seconds": 18.76318181818182,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 10,
+      "seconds": 19.241212121212122,
+      "midi": 62,
+      "pass": true
+    },
+    {
+      "beat": 10.5,
+      "seconds": 20.19727272727273,
+      "midi": 64,
+      "pass": true
+    },
+    {
+      "beat": 11,
+      "seconds": 21.153333333333332,
+      "midi": 66,
+      "pass": true
+    },
+    {
+      "beat": 11.5,
+      "seconds": 22.10939393939394,
+      "midi": 50,
+      "pass": true
+    },
+    {
+      "beat": 11.75,
+      "seconds": 22.587424242424245,
+      "midi": 54,
+      "pass": true
+    },
+    {
+      "beat": 12,
+      "seconds": 23.065454545454546,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 13,
+      "seconds": 24.97757575757576,
+      "midi": 57,
+      "pass": true
+    },
+    {
+      "beat": 13.25,
+      "seconds": 25.455606060606062,
+      "midi": 55,
+      "pass": true
+    },
+    {
+      "beat": 13.5,
+      "seconds": 25.933636363636364,
+      "midi": 54,
+      "pass": true
+    },
+    {
+      "beat": 13.75,
+      "seconds": 26.41166666666667,
+      "midi": 52,
+      "pass": true
+    },
+    {
+      "beat": 14,
+      "seconds": 26.88969696969697,
+      "midi": 50,
+      "pass": true
+    },
+    {
+      "beat": 14.5,
+      "seconds": 27.845757575757577,
+      "midi": 54,
+      "pass": true
+    },
+    {
+      "beat": 15,
+      "seconds": 28.80181818181818,
+      "midi": 50,
+      "pass": true
+    },
+    {
+      "beat": 15.5,
+      "seconds": 29.757878787878788,
+      "midi": 54,
+      "pass": true
+    },
+    {
+      "beat": 15.75,
+      "seconds": 30.235909090909093,
+      "midi": 54,
+      "pass": true
+    },
+    {
+      "beat": 16,
+      "seconds": 30.713939393939395,
+      "midi": 54,
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "pass": true,
+  "verifiedCorrections": 27,
+  "tracks": 8,
+  "noteChecks": 3580,
+  "correctedReferencePitchOnsetDurationParity": true,
+  "existingTempoConversionPreserved": true,
+  "existingVoicesAndLevelsPreserved": true
+}

@@ -1,0 +1,683 @@
+{
+  "pass": true,
+  "artworks": 8,
+  "tracks": 8,
+  "combinations": 64,
+  "correctedNotesInEveryArtwork": true,
+  "playbackInEveryArtwork": true,
+  "errors": [],
+  "results": [
+    {
+      "work": "01-resonant-architecture",
+      "track": "canon",
+      "matches": true,
+      "expected": 72,
+      "actual": 72,
+      "corrected": null,
+      "selected": "canon",
+      "pass": true
+    },
+    {
+      "work": "01-resonant-architecture",
+      "track": "prayer",
+      "matches": true,
+      "expected": 44,
+      "actual": 44,
+      "corrected": null,
+      "selected": "prayer",
+      "pass": true
+    },
+    {
+      "work": "01-resonant-architecture",
+      "track": "elise",
+      "matches": true,
+      "expected": 118,
+      "actual": 118,
+      "corrected": null,
+      "selected": "elise",
+      "pass": true
+    },
+    {
+      "work": "01-resonant-architecture",
+      "track": "bolero",
+      "matches": true,
+      "expected": 117,
+      "actual": 117,
+      "corrected": null,
+      "selected": "bolero",
+      "pass": true
+    },
+    {
+      "work": "01-resonant-architecture",
+      "track": "can-can",
+      "matches": true,
+      "expected": 66,
+      "actual": 66,
+      "corrected": [
+        69
+      ],
+      "selected": "can-can",
+      "pass": true
+    },
+    {
+      "work": "01-resonant-architecture",
+      "track": "turkish",
+      "matches": true,
+      "expected": 74,
+      "actual": 74,
+      "corrected": null,
+      "selected": "turkish",
+      "pass": true
+    },
+    {
+      "work": "01-resonant-architecture",
+      "track": "tell",
+      "matches": true,
+      "expected": 60,
+      "actual": 60,
+      "corrected": [
+        61
+      ],
+      "selected": "tell",
+      "pass": true
+    },
+    {
+      "work": "01-resonant-architecture",
+      "track": "hungarian",
+      "matches": true,
+      "expected": 77,
+      "actual": 77,
+      "corrected": null,
+      "selected": "hungarian",
+      "pass": true
+    },
+    {
+      "work": "02-chord-loom",
+      "track": "canon",
+      "matches": true,
+      "expected": 72,
+      "actual": 72,
+      "corrected": null,
+      "selected": "canon",
+      "pass": true
+    },
+    {
+      "work": "02-chord-loom",
+      "track": "prayer",
+      "matches": true,
+      "expected": 44,
+      "actual": 44,
+      "corrected": null,
+      "selected": "prayer",
+      "pass": true
+    },
+    {
+      "work": "02-chord-loom",
+      "track": "elise",
+      "matches": true,
+      "expected": 118,
+      "actual": 118,
+      "corrected": null,
+      "selected": "elise",
+      "pass": true
+    },
+    {
+      "work": "02-chord-loom",
+      "track": "bolero",
+      "matches": true,
+      "expected": 117,
+      "actual": 117,
+      "corrected": null,
+      "selected": "bolero",
+      "pass": true
+    },
+    {
+      "work": "02-chord-loom",
+      "track": "can-can",
+      "matches": true,
+      "expected": 66,
+      "actual": 66,
+      "corrected": [
+        69
+      ],
+      "selected": "can-can",
+      "pass": true
+    },
+    {
+      "work": "02-chord-loom",
+      "track": "turkish",
+      "matches": true,
+      "expected": 74,
+      "actual": 74,
+      "corrected": null,
+      "selected": "turkish",
+      "pass": true
+    },
+    {
+      "work": "02-chord-loom",
+      "track": "tell",
+      "matches": true,
+      "expected": 60,
+      "actual": 60,
+      "corrected": [
+        61
+      ],
+      "selected": "tell",
+      "pass": true
+    },
+    {
+      "work": "02-chord-loom",
+      "track": "hungarian",
+      "matches": true,
+      "expected": 77,
+      "actual": 77,
+      "corrected": null,
+      "selected": "hungarian",
+      "pass": true
+    },
+    {
+      "work": "03-silence-cuts",
+      "track": "canon",
+      "matches": true,
+      "expected": 73,
+      "actual": 73,
+      "corrected": null,
+      "selected": "canon",
+      "pass": true
+    },
+    {
+      "work": "03-silence-cuts",
+      "track": "prayer",
+      "matches": true,
+      "expected": 45,
+      "actual": 45,
+      "corrected": null,
+      "selected": "prayer",
+      "pass": true
+    },
+    {
+      "work": "03-silence-cuts",
+      "track": "elise",
+      "matches": true,
+      "expected": 120,
+      "actual": 120,
+      "corrected": null,
+      "selected": "elise",
+      "pass": true
+    },
+    {
+      "work": "03-silence-cuts",
+      "track": "bolero",
+      "matches": true,
+      "expected": 117,
+      "actual": 117,
+      "corrected": null,
+      "selected": "bolero",
+      "pass": true
+    },
+    {
+      "work": "03-silence-cuts",
+      "track": "can-can",
+      "matches": true,
+      "expected": 66,
+      "actual": 66,
+      "corrected": [
+        69
+      ],
+      "selected": "can-can",
+      "pass": true
+    },
+    {
+      "work": "03-silence-cuts",
+      "track": "turkish",
+      "matches": true,
+      "expected": 76,
+      "actual": 76,
+      "corrected": null,
+      "selected": "turkish",
+      "pass": true
+    },
+    {
+      "work": "03-silence-cuts",
+      "track": "tell",
+      "matches": true,
+      "expected": 60,
+      "actual": 60,
+      "corrected": [
+        61
+      ],
+      "selected": "tell",
+      "pass": true
+    },
+    {
+      "work": "03-silence-cuts",
+      "track": "hungarian",
+      "matches": true,
+      "expected": 78,
+      "actual": 78,
+      "corrected": null,
+      "selected": "hungarian",
+      "pass": true
+    },
+    {
+      "work": "04-sound-fossil",
+      "track": "canon",
+      "matches": true,
+      "expected": 72,
+      "actual": 72,
+      "corrected": null,
+      "selected": "canon",
+      "pass": true
+    },
+    {
+      "work": "04-sound-fossil",
+      "track": "prayer",
+      "matches": true,
+      "expected": 44,
+      "actual": 44,
+      "corrected": null,
+      "selected": "prayer",
+      "pass": true
+    },
+    {
+      "work": "04-sound-fossil",
+      "track": "elise",
+      "matches": true,
+      "expected": 118,
+      "actual": 118,
+      "corrected": null,
+      "selected": "elise",
+      "pass": true
+    },
+    {
+      "work": "04-sound-fossil",
+      "track": "bolero",
+      "matches": true,
+      "expected": 117,
+      "actual": 117,
+      "corrected": null,
+      "selected": "bolero",
+      "pass": true
+    },
+    {
+      "work": "04-sound-fossil",
+      "track": "can-can",
+      "matches": true,
+      "expected": 66,
+      "actual": 66,
+      "corrected": [
+        69
+      ],
+      "selected": "can-can",
+      "pass": true
+    },
+    {
+      "work": "04-sound-fossil",
+      "track": "turkish",
+      "matches": true,
+      "expected": 74,
+      "actual": 74,
+      "corrected": null,
+      "selected": "turkish",
+      "pass": true
+    },
+    {
+      "work": "04-sound-fossil",
+      "track": "tell",
+      "matches": true,
+      "expected": 60,
+      "actual": 60,
+      "corrected": [
+        61
+      ],
+      "selected": "tell",
+      "pass": true
+    },
+    {
+      "work": "04-sound-fossil",
+      "track": "hungarian",
+      "matches": true,
+      "expected": 77,
+      "actual": 77,
+      "corrected": null,
+      "selected": "hungarian",
+      "pass": true
+    },
+    {
+      "work": "05-phase-tides",
+      "track": "canon",
+      "matches": true,
+      "expected": 40,
+      "actual": 40,
+      "corrected": null,
+      "selected": "canon",
+      "pass": true
+    },
+    {
+      "work": "05-phase-tides",
+      "track": "prayer",
+      "matches": true,
+      "expected": 26,
+      "actual": 26,
+      "corrected": null,
+      "selected": "prayer",
+      "pass": true
+    },
+    {
+      "work": "05-phase-tides",
+      "track": "elise",
+      "matches": true,
+      "expected": 73,
+      "actual": 73,
+      "corrected": null,
+      "selected": "elise",
+      "pass": true
+    },
+    {
+      "work": "05-phase-tides",
+      "track": "bolero",
+      "matches": true,
+      "expected": 39,
+      "actual": 39,
+      "corrected": null,
+      "selected": "bolero",
+      "pass": true
+    },
+    {
+      "work": "05-phase-tides",
+      "track": "can-can",
+      "matches": true,
+      "expected": 40,
+      "actual": 40,
+      "corrected": [
+        69
+      ],
+      "selected": "can-can",
+      "pass": true
+    },
+    {
+      "work": "05-phase-tides",
+      "track": "turkish",
+      "matches": true,
+      "expected": 45,
+      "actual": 45,
+      "corrected": null,
+      "selected": "turkish",
+      "pass": true
+    },
+    {
+      "work": "05-phase-tides",
+      "track": "tell",
+      "matches": true,
+      "expected": 43,
+      "actual": 43,
+      "corrected": [
+        61
+      ],
+      "selected": "tell",
+      "pass": true
+    },
+    {
+      "work": "05-phase-tides",
+      "track": "hungarian",
+      "matches": true,
+      "expected": 27,
+      "actual": 27,
+      "corrected": null,
+      "selected": "hungarian",
+      "pass": true
+    },
+    {
+      "work": "06-breath-portrait",
+      "track": "canon",
+      "matches": true,
+      "expected": 40,
+      "actual": 40,
+      "corrected": null,
+      "selected": "canon",
+      "pass": true
+    },
+    {
+      "work": "06-breath-portrait",
+      "track": "prayer",
+      "matches": true,
+      "expected": 26,
+      "actual": 26,
+      "corrected": null,
+      "selected": "prayer",
+      "pass": true
+    },
+    {
+      "work": "06-breath-portrait",
+      "track": "elise",
+      "matches": true,
+      "expected": 73,
+      "actual": 73,
+      "corrected": null,
+      "selected": "elise",
+      "pass": true
+    },
+    {
+      "work": "06-breath-portrait",
+      "track": "bolero",
+      "matches": true,
+      "expected": 39,
+      "actual": 39,
+      "corrected": null,
+      "selected": "bolero",
+      "pass": true
+    },
+    {
+      "work": "06-breath-portrait",
+      "track": "can-can",
+      "matches": true,
+      "expected": 40,
+      "actual": 40,
+      "corrected": [
+        69
+      ],
+      "selected": "can-can",
+      "pass": true
+    },
+    {
+      "work": "06-breath-portrait",
+      "track": "turkish",
+      "matches": true,
+      "expected": 45,
+      "actual": 45,
+      "corrected": null,
+      "selected": "turkish",
+      "pass": true
+    },
+    {
+      "work": "06-breath-portrait",
+      "track": "tell",
+      "matches": true,
+      "expected": 43,
+      "actual": 43,
+      "corrected": [
+        61
+      ],
+      "selected": "tell",
+      "pass": true
+    },
+    {
+      "work": "06-breath-portrait",
+      "track": "hungarian",
+      "matches": true,
+      "expected": 27,
+      "actual": 27,
+      "corrected": null,
+      "selected": "hungarian",
+      "pass": true
+    },
+    {
+      "work": "07-echo-labyrinth",
+      "track": "canon",
+      "matches": true,
+      "expected": 40,
+      "actual": 40,
+      "corrected": null,
+      "selected": "canon",
+      "pass": true
+    },
+    {
+      "work": "07-echo-labyrinth",
+      "track": "prayer",
+      "matches": true,
+      "expected": 26,
+      "actual": 26,
+      "corrected": null,
+      "selected": "prayer",
+      "pass": true
+    },
+    {
+      "work": "07-echo-labyrinth",
+      "track": "elise",
+      "matches": true,
+      "expected": 73,
+      "actual": 73,
+      "corrected": null,
+      "selected": "elise",
+      "pass": true
+    },
+    {
+      "work": "07-echo-labyrinth",
+      "track": "bolero",
+      "matches": true,
+      "expected": 39,
+      "actual": 39,
+      "corrected": null,
+      "selected": "bolero",
+      "pass": true
+    },
+    {
+      "work": "07-echo-labyrinth",
+      "track": "can-can",
+      "matches": true,
+      "expected": 40,
+      "actual": 40,
+      "corrected": [
+        69
+      ],
+      "selected": "can-can",
+      "pass": true
+    },
+    {
+      "work": "07-echo-labyrinth",
+      "track": "turkish",
+      "matches": true,
+      "expected": 45,
+      "actual": 45,
+      "corrected": null,
+      "selected": "turkish",
+      "pass": true
+    },
+    {
+      "work": "07-echo-labyrinth",
+      "track": "tell",
+      "matches": true,
+      "expected": 43,
+      "actual": 43,
+      "corrected": [
+        61
+      ],
+      "selected": "tell",
+      "pass": true
+    },
+    {
+      "work": "07-echo-labyrinth",
+      "track": "hungarian",
+      "matches": true,
+      "expected": 27,
+      "actual": 27,
+      "corrected": null,
+      "selected": "hungarian",
+      "pass": true
+    },
+    {
+      "work": "08-stored-energy",
+      "track": "canon",
+      "matches": true,
+      "expected": 72,
+      "actual": 72,
+      "corrected": null,
+      "selected": "canon",
+      "pass": true
+    },
+    {
+      "work": "08-stored-energy",
+      "track": "prayer",
+      "matches": true,
+      "expected": 44,
+      "actual": 44,
+      "corrected": null,
+      "selected": "prayer",
+      "pass": true
+    },
+    {
+      "work": "08-stored-energy",
+      "track": "elise",
+      "matches": true,
+      "expected": 118,
+      "actual": 118,
+      "corrected": null,
+      "selected": "elise",
+      "pass": true
+    },
+    {
+      "work": "08-stored-energy",
+      "track": "bolero",
+      "matches": true,
+      "expected": 117,
+      "actual": 117,
+      "corrected": null,
+      "selected": "bolero",
+      "pass": true
+    },
+    {
+      "work": "08-stored-energy",
+      "track": "can-can",
+      "matches": true,
+      "expected": 66,
+      "actual": 66,
+      "corrected": [
+        69
+      ],
+      "selected": "can-can",
+      "pass": true
+    },
+    {
+      "work": "08-stored-energy",
+      "track": "turkish",
+      "matches": true,
+      "expected": 74,
+      "actual": 74,
+      "corrected": null,
+      "selected": "turkish",
+      "pass": true
+    },
+    {
+      "work": "08-stored-energy",
+      "track": "tell",
+      "matches": true,
+      "expected": 60,
+      "actual": 60,
+      "corrected": [
+        61
+      ],
+      "selected": "tell",
+      "pass": true
+    },
+    {
+      "work": "08-stored-energy",
+      "track": "hungarian",
+      "matches": true,
+      "expected": 77,
+      "actual": 77,
+      "corrected": null,
+      "selected": "hungarian",
+      "pass": true
+    }
+  ]
+}

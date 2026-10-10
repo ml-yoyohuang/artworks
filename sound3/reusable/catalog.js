@@ -87,7 +87,7 @@ export const tracks = [
     "duration": 32,
     "loop": false,
     "composer": "Tekla Bądarzewska-Baranowska",
-    "section": "Op.4 · 主題（省略裝飾音）"
+    "section": "Op.4 · 開頭選段"
   },
   {
     "id": "elise",
@@ -141,6 +141,6 @@ export const tracks = [
     "duration": 32,
     "loop": false,
     "composer": "Johannes Brahms",
-    "section": "WoO 1, No.5 · 開頭主題（移調至 G 小調）"
+    "section": "WoO 1, No.5 · 開頭主題"
   }
 ];

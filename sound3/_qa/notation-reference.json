@@ -1,0 +1,393 @@
+{
+  "source": "User-supplied sound/reusable/tracks",
+  "policy": "Note pitches, onsets, durations and chords only; keep existing melody/bass/rhythm parts, synths, levels and duration-to-beat timing. Opening excerpts; not entire source tracks.",
+  "tracks": [
+    {
+      "id": "canon",
+      "reference": "canon.json",
+      "sha256": "5da832feca532a73dc245b902c4532540a4d3e6b088456d1aa798f2ffe95498f",
+      "ppq": 192,
+      "excerptBeats": 32,
+      "events": 72,
+      "referenceTempoImported": false,
+      "referenceVelocityImported": false,
+      "verifiedCorrections": []
+    },
+    {
+      "id": "prayer",
+      "reference": "prayer.json",
+      "sha256": "d0b086067543b32ff6564f9b69a2469486ebfc891cd987e03e0ab7611bedcdae",
+      "ppq": 192,
+      "excerptBeats": 20,
+      "events": 44,
+      "referenceTempoImported": false,
+      "referenceVelocityImported": false,
+      "verifiedCorrections": []
+    },
+    {
+      "id": "elise",
+      "reference": "elise.json",
+      "sha256": "99c6f90d23cc0b528bc8183be7e2b7219212b887b37ba87d69b4225b3801e378",
+      "ppq": 192,
+      "excerptBeats": 26.5,
+      "events": 118,
+      "referenceTempoImported": false,
+      "referenceVelocityImported": false,
+      "verifiedCorrections": []
+    },
+    {
+      "id": "bolero",
+      "reference": "bolero.json",
+      "sha256": "cf576c1328328c8171924ee18444e0bf0b2981563ad12ef0e2408db09f0eca57",
+      "ppq": 192,
+      "excerptBeats": 17.5,
+      "events": 57,
+      "referenceTempoImported": false,
+      "referenceVelocityImported": false,
+      "verifiedCorrections": []
+    },
+    {
+      "id": "can-can",
+      "reference": "cancan.json",
+      "sha256": "abcf4eadd72bd129b9cb57e0a8a5ea2abb9daa3edf134e6cb59512593a9b2771",
+      "ppq": 192,
+      "excerptBeats": 25.5,
+      "events": 66,
+      "referenceTempoImported": false,
+      "referenceVelocityImported": false,
+      "verifiedCorrections": [
+        {
+          "id": "can-can",
+          "referenceVoice": 0,
+          "tick": 2592,
+          "from": 67,
+          "to": 69,
+          "reason": "Opening descending phrase in C: C5 B4 A4 G4 F4 E4 D4. Supplied JSON repeats G4 instead of A4.",
+          "verificationScore": "https://sheetmusic.trala.com/pdf/CanCan.pdf",
+          "verificationLocation": "System 1, fourth bar; D-major notation transposed down two semitones to retain current C-major arrangement.",
+          "secondsAt32": 16.82294117647059
+        }
+      ]
+    },
+    {
+      "id": "turkish",
+      "reference": "turkish.json",
+      "sha256": "2b8114bf9c068a62c804fc4e4066b451959b4d720d359900b0899a15507b03a1",
+      "ppq": 192,
+      "excerptBeats": 16.5,
+      "events": 74,
+      "referenceTempoImported": false,
+      "referenceVelocityImported": false,
+      "verifiedCorrections": []
+    },
+    {
+      "id": "tell",
+      "reference": "william.json",
+      "sha256": "13c22ca283cb3f67d723932f93ab6e1a9e89b98a255ed06ebc92991681a7a415",
+      "ppq": 192,
+      "excerptBeats": 16.5,
+      "events": 60,
+      "referenceTempoImported": false,
+      "referenceVelocityImported": false,
+      "verifiedCorrections": [
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 1248,
+          "from": 59,
+          "to": 61,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 12.548787878787879
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 1344,
+          "from": 55,
+          "to": 57,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 13.504848484848484
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 1440,
+          "from": 55,
+          "to": 57,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 14.46090909090909
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 1488,
+          "from": 55,
+          "to": 57,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 14.938939393939393
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 1536,
+          "from": 55,
+          "to": 57,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 15.416969696969696
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 1632,
+          "from": 55,
+          "to": 57,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 16.373030303030305
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 1680,
+          "from": 55,
+          "to": 57,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 16.851060606060607
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 1728,
+          "from": 55,
+          "to": 57,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 17.32909090909091
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 1824,
+          "from": 55,
+          "to": 57,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 18.285151515151515
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 1872,
+          "from": 55,
+          "to": 57,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 18.76318181818182
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 1920,
+          "from": 61,
+          "to": 62,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 19.241212121212122
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 2016,
+          "from": 62,
+          "to": 64,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 20.19727272727273
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 2112,
+          "from": 64,
+          "to": 66,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 21.153333333333332
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 2208,
+          "from": 61,
+          "to": 50,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 22.10939393939394
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 2256,
+          "from": 64,
+          "to": 54,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 22.587424242424245
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 2304,
+          "from": 67,
+          "to": 57,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 23.065454545454546
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 2496,
+          "from": 67,
+          "to": 57,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 24.97757575757576
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 2544,
+          "from": 66,
+          "to": 55,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 25.455606060606062
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 2592,
+          "from": 64,
+          "to": 54,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 25.933636363636364
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 2640,
+          "from": 62,
+          "to": 52,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 26.41166666666667
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 2688,
+          "from": 61,
+          "to": 50,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 26.88969696969697
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 2784,
+          "from": 64,
+          "to": 54,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 27.845757575757577
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 2880,
+          "from": 61,
+          "to": 50,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 28.80181818181818
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 2976,
+          "from": 67,
+          "to": 54,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 29.757878787878788
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 3024,
+          "from": 67,
+          "to": 54,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 30.235909090909093
+        },
+        {
+          "id": "tell",
+          "referenceVoice": 0,
+          "tick": 3072,
+          "from": 69,
+          "to": 54,
+          "reason": "Published finale melody, bars 27\u201335, transposed down 26 semitones to retain the current opening A3 and D-major key. Keep supplied onsets, note lengths and articulation.",
+          "verificationScore": "https://www.flutetunes.com/tunes/rossini-william-tell-overture.pdf",
+          "verificationLocation": "Page 1, bars 27\u201335; cross-checked with the publisher MIDI theme from beat 52. At excerpt beat 13 the source reattack falls within a tied note; retain its A3 pitch.",
+          "secondsAt32": 30.713939393939395
+        }
+      ]
+    },
+    {
+      "id": "hungarian",
+      "reference": "hungarian.json",
+      "sha256": "b3a2032590490cce5e2a8a2e4285ba210583f4c4b926c58f41b459cf949314bb",
+      "ppq": 192,
+      "excerptBeats": 25,
+      "events": 77,
+      "referenceTempoImported": false,
+      "referenceVelocityImported": false,
+      "verifiedCorrections": []
+    }
+  ]
+}
