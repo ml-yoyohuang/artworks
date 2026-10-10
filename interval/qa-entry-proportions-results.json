@@ -1,0 +1,36 @@
+{
+  "browser": "151.0.7922.34",
+  "checks": [
+    {
+      "mobile": false,
+      "ratios": {
+        "inner": 1.0859300726095469,
+        "outer": 4.600000163845841,
+        "ratio": 0.6180469053919769
+      },
+      "split": {
+        "x": 0.06,
+        "y": 0.09,
+        "animations": 0
+      },
+      "reduced": true,
+      "enterAndReturn": true
+    },
+    {
+      "mobile": true,
+      "ratios": {
+        "inner": 1.0859300726095469,
+        "outer": 4.600000163845841,
+        "ratio": 0.6180469053919769
+      },
+      "split": {
+        "x": 0.060000000000000005,
+        "y": 0.09,
+        "animations": 0
+      },
+      "reduced": true,
+      "enterAndReturn": true
+    }
+  ],
+  "errors": []
+}

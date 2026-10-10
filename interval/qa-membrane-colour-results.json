@@ -1,0 +1,35 @@
+{
+  "browser": "151.0.7922.34",
+  "devices": [
+    {
+      "mobile": false,
+      "variants": true,
+      "viewShift": true,
+      "keyboard": true,
+      "animation": true,
+      "backgroundPause": true,
+      "reduced": true,
+      "stableResources": {
+        "geometries": 12,
+        "textures": 2,
+        "programs": 5
+      }
+    },
+    {
+      "mobile": true,
+      "variants": true,
+      "viewShift": true,
+      "keyboard": true,
+      "animation": true,
+      "backgroundPause": true,
+      "reduced": true,
+      "stableResources": {
+        "geometries": 12,
+        "textures": 2,
+        "programs": 5
+      }
+    }
+  ],
+  "errors": [],
+  "fallback": true
+}

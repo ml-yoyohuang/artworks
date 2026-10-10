@@ -91,7 +91,7 @@ node interval/tools/capture-views.cjs
 
 引導文字存於 `exhibition.json` 各展區的 `exitText`；門內建築片段由 `js/world.js` 的 `threshold()` 維護。它是建築預示，完整展廳仍在換區時載入。出口不載入鄰區作品停格，也不啟動鄰區作品或新增 WebGL context。黑色薄膜是獨立的程序建築意象，由 `blackMembrane()` 與 `disturbMembrane()` 控制；只在靠近出口時以最多 30 fps 擾動，背景分頁、原作模式與減少動態時停止更新。
 
-第四出口薄膜採用已確認的 B 版「風格化油膜光澤」：平整表面以域扭曲噪聲與局部變向迴旋產生圓潤灰藍色帶。色票、亮帶及速度由 `js/oil-material.js` 維護，與對照頁共用。材質不受展間光照或色調映射染色，保留 sRGB 輸出；原函式名稱保留。
+第四出口薄膜採用色光研究的 03 版「風格化虹彩光澤」：平整表面以域扭曲噪聲與局部變向迴旋產生窄虹彩光帶，青藍、青紫為主，少量洋紅與金色。`js/oil-material.js` 維護基礎流動，`js/iridescent-material.js` 維護色光映射，與三版對照頁共用。虹彩依觀看朝向相對出口站位的角度柔和偏移，角度映射有界，暫停動態仍可拖曳比較；這是藝術化視角反應，並非物理 CD 繞射模型。材質不受展間光照或色調映射染色，保留 sRGB 輸出；原函式名稱保留。
 
 ### 作品卡與按鈕動效
 
@@ -105,13 +105,13 @@ node interval/tools/capture-views.cjs
 
 ### 極簡入口與虹彩膜
 
-入口由霧白步道銜接四片向斜上方遞進的懸浮階梯薄板，虹彩碟片位於最高處。沒有棚架支柱；手機採獨立取景，使碟片完整留在標題上方。
+入口由霧白步道銜接四片向斜上方遞進的懸浮階梯薄板，虹彩碟片位於最高處。碟片參數化外半徑 4.6，孔洞半徑為 4.6／(1＋2×1.618)（約1.086）；孔洞直徑：環帶徑向厚度＝1：1.618。此處厚度指正面環帶寬度，並非模型的前後厚度；橢圓伸縮保持同一比例。沒有棚架支柱；手機採獨立取景，使碟片完整留在標題上方。
 
 `entry()` 建立空間；`disturbEntryFilm()` 控制膜的局部形變、明亮冷色螺旋色帶與物理材質光澤。內圈固定，外緣輕微伸縮；膜面起伏較明顯，沒有整體旋轉或搖晃。最多 30 fps，背景與減少動態時停止；換區釋放資源，無新增畫布、影片或 WebGL context。重跑驗證：`node interval/tools/verify-entry.cjs`。
 
 ### 展覽標準字 C
 
-首頁標題先完整出現，「尚未」下移，再由「齊」上下兩段打開細縫。動畫約 760 ms，每次頁面載入只播放一次；返回入口不重播。其餘字與英文保持穩定，鏡頭不加入自動移動。`js/title.js` 管理動效，`css/museum.css` 管理完成狀態；標題保留可讀取的 HTML heading。減少動態、進入展廳或背景分頁時直接完成並取消動畫。
+首頁標題先完整出現，「尚未」下移，再由「齊」上下兩段打開可辨認的間隙。上下各分離 .045em、左右各錯位 .03em，動畫約 980 ms（含延遲），每次頁面載入只播放一次；返回入口不重播。其餘字與英文保持穩定，鏡頭不加入自動移動。`js/title.js` 管理動效，`css/museum.css` 管理完成狀態；標題保留可讀取的 HTML heading。減少動態、進入展廳或背景分頁時直接完成並取消動畫。
 
 ### 入口按鈕的鏡頭回應
 
@@ -154,3 +154,15 @@ architecturalMaterial() 使用現有Lambert shader擴充：依面與主光方向
 第四區重疊透明展板使用淡冷色Basic材質，色彩不隨光照變暗；第三區有角度反光的出口薄板仍為Physical。contact()按展區使用灰青／深藍陰影，上限0.20，第二區門腳仍為0.13。
 
 固定截圖對照：`http://localhost:8000/interval/studies/shading/`。重跑 `tools/compare-shading.cjs`（預設由git讀取860dd0b原版，可用INTERVAL_BASELINE指定舊world.js）；`tools/verify-shading.cjs`檢查代表作品和入口像素、shader錯誤、關閉陰影及反覆換區資源。QA route注入與B版光照模式僅供本地測試，正式介面不提供切換。
+
+### 入口 B／C／F／G／H 隨機版本
+
+首頁每次載入以瀏覽器亂數等機率選 B 冷光螺旋虹彩、C 中性霧白、F 鈷藍洋紫、G 玫瑰蜜橘或 H 藍莓乳霜（各 20%），返回入口保留原選擇。優先使用 crypto.getRandomValues，無此 API 時回退 Math.random；不使用訪客識別、儲存或後端。
+
+五版共用確認的孔洞比例與外緣形變。`js/disc-outline.js` 維護輪廓，`js/disc-palette.js` 維護螺旋色票，`js/disc-neutral.js` 維護霧白材質。研究頁可透過 constructor 的 entryVariant 明確指定 a/b/c/f/g/h；正式介面沒有版本控制。
+
+`studies/disc-colour/` 保留 A～H；A 原始配色、D 檸金嫩綠、E 翡翠冰藍僅供研究。驗證工具：`tools/verify-entry-random.cjs` 與 `tools/verify-disc-colour.cjs`。
+
+### 分享預覽圖
+
+`assets/og-image.jpg` 是 1200×630 JPEG，以真實入口 B 場景與展名製作；首頁設定完整 OG、Twitter Card 與 canonical。重建：設定 PLAYWRIGHT_MODULE 後執行 `node interval/tools/build-og.cjs`，預設連到本地 8000，可用 INTERVAL_URL 指定預覽網址。圖中介面排版為分享用途，原首頁介面不受影響。
