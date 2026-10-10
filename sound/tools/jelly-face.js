@@ -1,5 +1,5 @@
 // Eye anchors retain their original centres; size changes around those anchors.
-function drawJellyCollisionFace(ctx,{eyeScale=.85,eyeGap=30,eyeY=0,mouthY=-4,mouthWidth=14,strokeWidth=3}={}){
+function drawJellyCollisionFace(ctx,{eyeScale=.80,eyeGap=30,eyeY=0,mouthY=-6,mouthWidth=14,strokeWidth=3}={}){
  ctx.save();ctx.strokeStyle='#303d36';ctx.lineWidth=strokeWidth;ctx.lineCap='round';ctx.lineJoin='round';
  const left=104.5-eyeGap/2,right=104.5+eyeGap/2;
  for(const [cx,direction] of [[left,1],[right,-1]]){

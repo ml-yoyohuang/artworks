@@ -1,25 +1,6 @@
 {
-  "date": "2026-10-10T09:48:14.813Z",
+  "date": "2026-10-10T09:53:35.973Z",
   "checks": [
-    {
-      "slug": "jelly-wave",
-      "device": "desktop",
-      "pixels": 246,
-      "audio": {
-        "peak": 0.01551844272762537,
-        "fps": 120.6980916723479,
-        "notes": 8,
-        "context": "running",
-        "version": "15.0.4"
-      },
-      "touchOrDrag": true,
-      "keyboard": true,
-      "tempo": true,
-      "mute": true,
-      "pauseAndResume": true,
-      "reducedMotion": true,
-      "noOverflow": true
-    },
     {
       "slug": "pendulum-swing",
       "device": "desktop",
@@ -306,33 +287,6 @@
       "noOverflow": true
     },
     {
-      "slug": "index",
-      "device": "desktop",
-      "links": 16,
-      "images": 16,
-      "allLinks200": true,
-      "noOverflow": true
-    },
-    {
-      "slug": "jelly-wave",
-      "device": "mobile",
-      "pixels": 107,
-      "audio": {
-        "peak": 0.01551844272762537,
-        "fps": 121.31147540983606,
-        "notes": 8,
-        "context": "running",
-        "version": "15.0.4"
-      },
-      "touchOrDrag": true,
-      "keyboard": true,
-      "tempo": true,
-      "mute": true,
-      "pauseAndResume": true,
-      "reducedMotion": true,
-      "noOverflow": true
-    },
-    {
       "slug": "pendulum-swing",
       "device": "mobile",
       "pixels": 137,
@@ -606,6 +560,52 @@
         "peak": 0.016533920541405678,
         "fps": 120.8755308746177,
         "notes": 9,
+        "context": "running",
+        "version": "15.0.4"
+      },
+      "touchOrDrag": true,
+      "keyboard": true,
+      "tempo": true,
+      "mute": true,
+      "pauseAndResume": true,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "jelly-wave",
+      "device": "desktop",
+      "pixels": 246,
+      "audio": {
+        "peak": 0.015676476061344147,
+        "fps": 119.47626841243863,
+        "notes": 8,
+        "context": "running",
+        "version": "15.0.4"
+      },
+      "touchOrDrag": true,
+      "keyboard": true,
+      "tempo": true,
+      "mute": true,
+      "pauseAndResume": true,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "index",
+      "device": "desktop",
+      "links": 16,
+      "images": 16,
+      "allLinks200": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "jelly-wave",
+      "device": "mobile",
+      "pixels": 106,
+      "audio": {
+        "peak": 0.01355191320180893,
+        "fps": 119.69175273933348,
+        "notes": 8,
         "context": "running",
         "version": "15.0.4"
       },
