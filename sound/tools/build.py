@@ -35,16 +35,34 @@ DIRECT={
  'square-blocks':('抓每棟最上層的白框上下拖曳；上方加高、下方降低，放開落定並奏音。','每棟 1–5 層，越高唱越高；屋形按鈕獨立切換，樓層保留。'),
  'canon-ripples':('抓住三個圓點拖曳聲源；點空白水面，立即奏一滴水，左低右高。','聲源跟著指尖；舊漣漪留在出發的位置。'),
  'signal-band':('直接點紅、黃、綠燈奏低、中、高音；按住滑過燈號也能連奏。','白圈是你點亮的燈；用下方按鈕切換燈光編排。'),
- 'ribbon-dance':('抓住白圈端點牽引緞帶，放開回彈；點一下或按翻一圈，立即奏音。','拖曳左低右高；短點翻圈，長拖牽引。'),
- 'popcorn-rhythm':('點粒子立即爆跳；按住蓄力、放開跳更高，彩色圈標出自己的粒子。','可點盤裡或空中的粒子；自己的爆花短暫避開自動群跳。'),
+ 'ribbon-dance':('抓白圈端點拖曳，左低右高，放開回彈；短點畫布或按翻一圈，翻圈並奏一個單音。','拖曳左低右高；短點翻圈附加單音，長拖牽引；古典伴奏不改變。'),
+ 'popcorn-rhythm':('點粒子後放開爆跳；按住約 1.2 秒蓄滿力、放開跳更高，彩色圈標出自己的粒子。','可點盤裡或空中的粒子；自己的爆花短暫避開自動群跳。'),
  'tap-floor':('指向亮框的菱形格子，點哪格就敲哪格；按住拖曳連續踢踏。','三種鼓聲：低鼓、小鼓、沙鈴；白圈指出自己的腳步。'),
  'hopscotch':('點有號碼的格子，小球會完成這次跳躍；落地時奏出那格的音。','紅框是你的目標；落地後才交回自動路線。'),
- 'flower-choir':('點花瓣，立即奏音並獨唱八拍；之後回合唱，也可按全員合唱。','每朵花有固定音名；圈線指出正在獨唱的花。'),
+ 'flower-choir':('點花瓣試奏單音，讓這朵花聚焦綻放八拍；伴奏繼續，可恢復全員動態。','每朵花有固定音名；圈線標出聚焦的花，這不是聲音上的獨唱。'),
  'metronome-party':('點一台節拍器，邀它先跳散；動態運行二十秒後同步，音樂繼續。','全隊散開可重新開始派對；進度不受速度倍率影響。'),
 'bubble-scale':('點一下奏音，按住拖曳連吹泡泡；左低右高，大泡泡唱低音。','左右八個音階位置；新泡泡顯示實際音名。'),
 'saw-hills':('上下拖曳：上方山高、音高，下方山低、音低；點一下讓小人跳起來。','拖曳時立即奏音，古典伴奏維持原調。'),
 'crayon-wave':('按住畫線：上高下低；放開後，光點沿著這一筆重播。','每筆最多 8 秒，可重播這一筆或清空紙面。'),
-'spring-dancer':('抓住舞者的頭或身體往下壓，放開讓它彈起來；壓得越深，跳得越高。','移到舞者身上會亮框；每位舞者有自己的音。')
+'spring-dancer':('抓住舞者的頭或身體往下壓，放開讓它彈起來；壓得越深，跳得越高、奏音越強且稍長。','移到舞者身上會亮框；每位舞者有自己的音；力度也影響音長。')
+}
+MATERIALS={
+ 'jelly-wave':'互動：果凍位置奏單音；拖曳不改伴奏調性。',
+ 'pendulum-swing':'互動：點擺錘奏固定音；風力位置選音。',
+ 'ribbon-dance':'互動：拖曳選音；翻圈另奏一個單音，不改伴奏。',
+ 'bubble-scale':'互動：八音階單音；低音大泡泡、高音小泡泡。',
+ 'beat-candy':'互動：落點選音；長按連續撒糖與奏音。',
+ 'tap-floor':'互動：低鼓、小鼓、沙鈴，皆為即時合成聲。',
+ 'popcorn-rhythm':'互動：合成噪音啪聲；蓄力改跳高與聲音力度。',
+ 'hopscotch':'互動：手動落地奏所選格的固定音。',
+ 'flower-choir':'互動：點花奏固定單音；八拍聚焦只調整花朵動態。',
+ 'canon-ripples':'互動：聲源固定音、水面依左右選音；伴奏完整播放。',
+ 'metronome-party':'互動：點台奏音、重設視覺相位；伴奏不重啟。',
+ 'signal-band':'互動：紅／黃／綠奏低／中／高音；編排只改燈光。',
+ 'square-blocks':'互動：放開時樓高選音；目前沒有自動重播房子旋律。',
+ 'saw-hills':'互動：山高選音、點按跳躍；不即時轉調伴奏。',
+ 'crayon-wave':'互動：高度選音、記錄與重播這筆奏音；每筆最多八秒。',
+ 'spring-dancer':'互動：舞者固定音；壓縮越深，奏音越強且稍長。'
 }
 head=lambda title,desc:f'''<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="{desc}"><meta name="theme-color" content="#f6f1e7"><link rel="icon" href="data:,"><title>{title} — 小小聲音遊樂場</title><style>{css}</style></head>'''
 for i,w in enumerate(WORKS):
@@ -60,12 +78,12 @@ for i,w in enumerate(WORKS):
  if slug=='canon-ripples':extras='<div class="gesture-tools"><button id="reset-water">聲源回到原位</button></div>'
  if slug=='signal-band':extras='<div class="gesture-tools"><button id="pattern">燈光編排：接力</button></div>'
  if slug=='ribbon-dance':extras='<div class="gesture-tools"><button id="flip-ribbon">翻一圈</button></div>'
- if slug=='flower-choir':extras='<div class="gesture-tools"><button id="all-flowers" disabled>全員合唱</button></div>'
+ if slug=='flower-choir':extras='<div class="gesture-tools"><button id="all-flowers" disabled>恢復全員動態</button></div>'
  if slug=='metronome-party':extras='<div class="gesture-tools"><button id="scatter">全隊散開</button></div>'
  balance=('<div class="backing-control"><label for="backing">伴奏音量 <output id="backing-value">45%</output></label><input id="backing" type="range" min="0" max="100" value="45" aria-label="古典伴奏音量"><span>自己的奏音會更清楚</span></div>' if slug in DIRECT else '')
- keys=('方向鍵選位置，Enter 試奏；空白鍵切換聲音。' if slug in DIRECT else '方向鍵改變位置，Enter 加入一拍；空白鍵切換聲音。')
+ keys=('方向鍵移動操作位置，Enter 模擬點按；拖曳請用滑鼠／觸控。空白鍵播放／暫停。' if slug in DIRECT else '方向鍵改變位置，Enter 加入一拍；空白鍵切換聲音。')
  options=''.join(f'<option value="{key}"{" selected" if key==recommended else ""}>{v["title"]}{" · 策展推薦" if key==recommended else ""}</option>' for key,v in library.items())
- page=head(title,short)+f'''<body style="--stage:{bg};--accent:{palette[0]}"><div class="shell"><header class="mast"><a href="index.html">← 小小聲音遊樂場</a><span>SOFT SCORES / {i+1:02d}—16</span></header><main class="exhibit"><section class="art-column" aria-label="{title}互動作品"><div class="stage"><div class="stage-label"><span>{GROUPS[group][1]}</span><span class="live-label">SILENT REHEARSAL</span></div><canvas id="art" tabindex="0" aria-label="{title}。{hint}"></canvas><div class="stage-bottom"><span class="dots" aria-hidden="true">● ● ● ●</span><span>{en.upper()}</span></div></div>{play_ui}{extras}<div class="music-picker"><div class="picker-label"><label for="track">今天，讓它跟著哪首歌？</label><button id="recommend">回到推薦曲</button></div><select id="track" aria-describedby="pairing">{options}</select><p id="pairing">策展推薦｜{pairings[i]}</p></div><div class="toolbar"><button id="start" class="primary">開始聆聽 <span>↗</span></button><button id="mute" disabled aria-pressed="false">靜音</button><button id="motion" aria-pressed="false">暫停動態</button><div class="tempo"><label for="tempo">速度 <output id="bpm">×1.00</output></label><input id="tempo" type="range" min="0.6" max="1.4" step="0.01" value="1" aria-label="演奏速度倍率"></div></div>{balance}<p id="status" role="status">聲音等待你的邀請。畫面已開始輕輕呼吸。</p></section><aside class="label"><div class="work-no">{i+1:02d}<span> / {GROUPS[group][0]}</span></div><h1>{title}</h1><div class="english">{en}</div><p class="lede">{short}</p><p class="statement">{desc}</p><div class="hint"><span>一起玩 / PLAY</span><p>{hint}</p><small>畫布聚焦後：{keys}</small></div><div class="material">CANVAS 2D · LIVE SYNTHESIS<br><span id="track-material">{chosen["title"]}・{chosen["composer"]}<br>{chosen["detail"]}</span><br>樂譜合成演奏 / 不需要音檔<br><a id="score-credit" href="CREDITS.md#{recommended}">排譜來源與授權 ↗</a></div></aside></main><nav class="neighbors" aria-label="前後作品"><a href="{WORKS[(i-1)%16][0]}.html">← {WORKS[(i-1)%16][1]}</a><a href="{WORKS[(i+1)%16][0]}.html">{WORKS[(i+1)%16][1]} →</a></nav><footer><span>聲音・波形・節奏 / 2026</span><a href="CREDITS.md">製作與聲音來源 ↗</a></footer></div><script src="https://cdn.jsdelivr.net/npm/tone@15.0.4/build/Tone.js"></script><script>(()=>{{'use strict';const CONFIG={json.dumps(cfg,ensure_ascii=False)};const SCORES={score};{runtime}\n{scenes[slug]}\nboot(scene);}})();</script></body></html>'''
+ page=head(title,short)+f'''<body style="--stage:{bg};--accent:{palette[0]}"><div class="shell"><header class="mast"><a href="index.html">← 小小聲音遊樂場</a><span>SOFT SCORES / {i+1:02d}—16</span></header><main class="exhibit"><section class="art-column" aria-label="{title}互動作品"><div class="stage"><div class="stage-label"><span>{GROUPS[group][1]}</span><span class="live-label">SILENT REHEARSAL</span></div><canvas id="art" tabindex="0" aria-label="{title}。{hint}"></canvas><div class="stage-bottom"><span class="dots" aria-hidden="true">● ● ● ●</span><span>{en.upper()}</span></div></div>{play_ui}{extras}<div class="music-picker"><div class="picker-label"><label for="track">今天，讓它跟著哪首歌？</label><button id="recommend">回到推薦曲</button></div><select id="track" aria-describedby="pairing">{options}</select><p id="pairing">策展推薦｜{pairings[i]}</p></div><div class="toolbar"><button id="start" class="primary">開始聆聽 <span>↗</span></button><button id="mute" disabled aria-pressed="false">靜音</button><button id="motion" aria-pressed="false">暫停動態</button><div class="tempo"><label for="tempo">速度 <output id="bpm">×1.00</output></label><input id="tempo" type="range" min="0.6" max="1.4" step="0.01" value="1" aria-label="演奏速度倍率"></div></div>{balance}<p id="status" role="status">聲音等待你的邀請。畫面已開始輕輕呼吸。</p></section><aside class="label"><div class="work-no">{i+1:02d}<span> / {GROUPS[group][0]}</span></div><h1>{title}</h1><div class="english">{en}</div><p class="lede">{short}</p><p class="statement">{desc}</p><div class="hint"><span>一起玩 / PLAY</span><p>{hint}</p><small>畫布聚焦後：{keys}</small></div><div class="material">CANVAS 2D · LIVE SYNTHESIS<br><span id="track-material">{chosen["title"]}・{chosen["composer"]}<br>{chosen["detail"]}</span><br>古典樂譜伴奏＋獨立互動合成聲<br>{MATERIALS[slug]}<br>不需要音檔<br><a id="score-credit" href="CREDITS.md#{recommended}">排譜來源與授權 ↗</a></div></aside></main><nav class="neighbors" aria-label="前後作品"><a href="{WORKS[(i-1)%16][0]}.html">← {WORKS[(i-1)%16][1]}</a><a href="{WORKS[(i+1)%16][0]}.html">{WORKS[(i+1)%16][1]} →</a></nav><footer><span>聲音・波形・節奏 / 2026</span><a href="CREDITS.md">製作與聲音來源 ↗</a></footer></div><script src="https://cdn.jsdelivr.net/npm/tone@15.0.4/build/Tone.js"></script><script>(()=>{{'use strict';const CONFIG={json.dumps(cfg,ensure_ascii=False)};const SCORES={score};{runtime}\n{scenes[slug]}\nboot(scene);}})();</script></body></html>'''
  (ROOT/(slug+'.html')).write_text(page)
 index=head('聲音・波形・節奏','十六件愉快的生成式藝術，邀請你觸碰、聆聽與合奏。')+'''<body class="catalog"><div class="shell"><header class="mast"><span>一場可以用手指聆聽的展覽</span><span>COLLECTION / 2026</span></header><main><section class="hero"><div class="hero-copy"><div class="eyebrow">SOUND, SHAPE & A LITTLE JOY</div><h1>小小聲音<br>遊樂場<span class="asterisk">✳</span></h1><div class="hero-sub">聲音・波形・節奏</div></div><div class="hero-side"><div class="hero-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><p>如果聲音有身體，它會怎麼跳舞？<br>十六件小作品，把看不見的旋律變成果凍、花朵與會彈跳的日常。請留一點時間，邀請它們一起玩。</p><span class="ticket">16 WORKS / 04 ROOMS / YOUR TEMPO</span></div></section><nav class="room-nav" aria-label="展覽分區">'''
 for j,g in enumerate(GROUPS):index+=f'<a href="#room-{j+1}">{j+1:02d} {g[0]} ↘</a>'

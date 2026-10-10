@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10T09:13:42.332Z",
+  "date": "2026-10-10T09:25:53.923Z",
   "checks": [
     {
       "device": "desktop",
@@ -9,7 +9,7 @@
         "dragDrums": true,
         "emptySpaceIgnored": true
       },
-      "peak": 0.0062053692527115345,
+      "peak": 0.006602423265576363,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -34,7 +34,7 @@
         "eightBeatReturn": true,
         "manualEnsemble": true
       },
-      "peak": 0.044716328382492065,
+      "peak": 0.04094941169023514,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -47,7 +47,7 @@
         "twentySecondsAt1_4": true,
         "completeSynchrony": true
       },
-      "peak": 0.052671417593955994,
+      "peak": 0.05271274968981743,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -59,7 +59,7 @@
         "dragDrums": true,
         "emptySpaceIgnored": true
       },
-      "peak": 0.007765665650367737,
+      "peak": 0.005645800847560167,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -72,7 +72,7 @@
         "returnsToRoute": true,
         "pausedLanding": true
       },
-      "peak": 0.0880013033747673,
+      "peak": 0.113258957862854,
       "reducedMotion": true,
       "noOverflow": true
     },
