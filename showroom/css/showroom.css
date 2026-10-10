@@ -165,6 +165,10 @@ body.dark #card { background: rgba(18, 18, 18, 0.92); color: #e7e3da; --line: rg
 .list-intro { max-width: 620px; padding: 36px 0 12px; }
 .list-intro h3 { font-weight: 300; font-size: 30px; letter-spacing: .2em; margin: 0 0 6px; }
 .list-intro p { font-size: 13px; line-height: 2; letter-spacing: .05em; }
+.list-magazine { margin: 30px 0 0; font-size: 12.5px; letter-spacing: .08em; display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; }
+.list-magazine .k { font-size: 10px; letter-spacing: .3em; color: var(--soft); }
+.list-magazine a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 3px; transition: border-color .3s; }
+.list-magazine a:hover { border-color: var(--ink); }
 .list-hall { margin-top: 46px; }
 .list-hall > h3 { margin: 0; font-size: 12px; font-weight: 400; letter-spacing: .3em; color: var(--soft); }
 .list-hall > h4 { margin: 6px 0 10px; font-size: 22px; font-weight: 300; letter-spacing: .2em; }

@@ -39,6 +39,7 @@ GitHub Pages 發布整個 repo 時，網址為 `…/artworks/showroom/`。
 
 ## 修改展覽內容
 
+- 雜誌連結：作品列表開頭的「另見《對頁》」連結文字與網址在 `exhibition.json` 的 `magazine` 欄位。
 - 文字：直接編輯 `exhibition.json`。藝術家名稱目前為佔位文字「（藝術家名稱）」，修改 `artist` 欄位即可同步到大廳、牆面標籤、說明卡與作品列表。
 - 作品順序：調整 `works` 陣列的順序；同一廳內的懸掛位置由 `js/plan.js` 的 `hang()` 依順序自動計算。`finale: true` 的作品陳列在暗房最深處。
 - 替換作品短片：以相同檔名放入 `media/<id>.webm`、`media/<id>.mp4`、`media/<id>.webp`。p5 作品的畫面比例寫在 `aspect` 欄位。

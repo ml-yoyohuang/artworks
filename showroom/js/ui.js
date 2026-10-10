@@ -134,6 +134,12 @@ export function renderList(ex, { onEnter, onGoTo, standalone }) {
     body.append(el('div', { class: 'list-intro' },
       el('h3', { text: ex.title }), el('p', { class: 'en', text: ex.titleEn }), el('p', { text: ex.statement })));
   }
+  // the companion publication: the same works, read as a magazine (opens in a new tab)
+  if (ex.magazine) {
+    body.append(el('p', { class: 'list-magazine' },
+      el('span', { class: 'k', text: ex.magazine.label }),
+      el('a', { href: ex.magazine.url, target: '_blank', rel: 'noopener', text: `${ex.magazine.title} ↗` })));
+  }
   const halls = ex.halls.filter((h) => ex.works.some((w) => w.hall === h.id));
   for (const h of halls) {
     const sec = el('section', { class: 'list-hall', 'aria-label': `${h.label} ${h.name}` },
