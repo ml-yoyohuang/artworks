@@ -1,0 +1,205 @@
+{
+  "checks": [
+    {
+      "device": "desktop",
+      "track": "canon",
+      "pitches": [
+        62,
+        64,
+        66,
+        67,
+        69,
+        71,
+        73,
+        74
+      ],
+      "stableAcrossTime": true,
+      "peak": 0.03445165604352951
+    },
+    {
+      "device": "desktop",
+      "track": "turkish",
+      "pitches": [
+        57,
+        59,
+        60,
+        62,
+        64,
+        65,
+        67,
+        69
+      ],
+      "stableAcrossTime": true,
+      "peak": 0.036269526928663254
+    },
+    {
+      "device": "desktop",
+      "track": "hungarian",
+      "pitches": [
+        55,
+        57,
+        58,
+        60,
+        62,
+        63,
+        65,
+        67
+      ],
+      "stableAcrossTime": true,
+      "peak": 0.03560780733823776
+    },
+    {
+      "device": "desktop",
+      "track": "bolero",
+      "pitches": [
+        60,
+        62,
+        64,
+        65,
+        67,
+        69,
+        71,
+        72
+      ],
+      "stableAcrossTime": true,
+      "peak": 0.03657127544283867
+    },
+    {
+      "device": "desktop",
+      "track": "cancan",
+      "pitches": [
+        60,
+        62,
+        64,
+        65,
+        67,
+        69,
+        71,
+        72
+      ],
+      "stableAcrossTime": true,
+      "peak": 0.03653717786073685
+    },
+    {
+      "device": "desktop",
+      "track": "william",
+      "pitches": [
+        62,
+        64,
+        66,
+        67,
+        69,
+        71,
+        73,
+        74
+      ],
+      "stableAcrossTime": true,
+      "peak": 0.03666781261563301
+    },
+    {
+      "device": "desktop",
+      "inkRemapsAndReplays": true
+    },
+    {
+      "device": "mobile",
+      "track": "canon",
+      "pitches": [
+        62,
+        64,
+        66,
+        67,
+        69,
+        71,
+        73,
+        74
+      ],
+      "stableAcrossTime": true,
+      "peak": 0.03509408235549927
+    },
+    {
+      "device": "mobile",
+      "track": "turkish",
+      "pitches": [
+        57,
+        59,
+        60,
+        62,
+        64,
+        65,
+        67,
+        69
+      ],
+      "stableAcrossTime": true,
+      "peak": 0.03409693390130997
+    },
+    {
+      "device": "mobile",
+      "track": "hungarian",
+      "pitches": [
+        55,
+        57,
+        58,
+        60,
+        62,
+        63,
+        65,
+        67
+      ],
+      "stableAcrossTime": true,
+      "peak": 0.035135481506586075
+    },
+    {
+      "device": "mobile",
+      "track": "bolero",
+      "pitches": [
+        60,
+        62,
+        64,
+        65,
+        67,
+        69,
+        71,
+        72
+      ],
+      "stableAcrossTime": true,
+      "peak": 0.0358482263982296
+    },
+    {
+      "device": "mobile",
+      "track": "cancan",
+      "pitches": [
+        60,
+        62,
+        64,
+        65,
+        67,
+        69,
+        71,
+        72
+      ],
+      "stableAcrossTime": true,
+      "peak": 0.03648553043603897
+    },
+    {
+      "device": "mobile",
+      "track": "william",
+      "pitches": [
+        62,
+        64,
+        66,
+        67,
+        69,
+        71,
+        73,
+        74
+      ],
+      "stableAcrossTime": true,
+      "peak": 0.035774730145931244
+    },
+    {
+      "device": "mobile",
+      "inkRemapsAndReplays": true
+    }
+  ],
+  "errors": []
+}

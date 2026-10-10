@@ -52,7 +52,7 @@ function prepareScore(){const g=generation;master.gain.cancelScheduledValues(0);
 }
 function playbackLabel(){startButton.innerHTML=state.playing?'暫停聲音 <span>Ⅱ</span>':state.started?'繼續聆聽 <span>↗</span>':'開始聆聽 <span>↗</span>';document.querySelector('.live-label').textContent=state.playing?'LIVE / YOUR TEMPO':'SILENT REHEARSAL';}
 function musicStatus(){status.textContent=state.playing?`${state.muted?'靜音演奏':'正在演奏'}《${SCORE.title}》・${SCORE.detail}。`:state.started?'聲音休息中。畫面繼續安靜排練。':'聲音等待你的邀請。畫面已開始輕輕呼吸。';}
-function selectTrack(id){if(!SCORES[id])return;disposeScore();SCORE=SCORES[id];state.trackId=id;state.scoreTitle=SCORE.title;state.scoreEvents=0;state.scoreVoices=SCORE.voices.map(()=>0);state.notes=0;state.beat=0;state.pulse=0;state.pulses.fill(0);state.phrasePulse=0;state.musicalTick=0;state.lastNote=null;state.baseTempo=SCORE.bpm;state.tempo=SCORE.bpm*state.rate;state.energyTarget=id==='bolero'?.18:.5;state.epoch=state.time;sceneRef?.audioStop?.();sceneRef?.reset?.();
+function selectTrack(id){if(!SCORES[id])return;disposeScore();SCORE=SCORES[id];state.trackId=id;state.scoreTitle=SCORE.title;state.scoreEvents=0;state.scoreVoices=SCORE.voices.map(()=>0);state.notes=0;state.beat=0;state.pulse=0;state.pulses.fill(0);state.phrasePulse=0;state.musicalTick=0;state.lastNote=null;state.baseTempo=SCORE.bpm;state.tempo=SCORE.bpm*state.rate;state.energyTarget=id==='bolero'?.18:.5;state.epoch=state.time;sceneRef?.audioStop?.();sceneRef?.reset?.();updateScaleMaterial();
  document.querySelector('#track').value=id;const material=document.querySelector('#track-material');material.replaceChildren(document.createTextNode(`${SCORE.title}・${SCORE.composer}`),document.createElement('br'),document.createTextNode(SCORE.detail));document.querySelector('#score-credit').setAttribute('href',`CREDITS.md#${id}`);document.querySelector('#recommend').disabled=id===CONFIG.recommended;
  if(state.started){prepareScore();if(state.playing)Tone.Transport.start('+0.1');}musicStatus();playbackLabel();requestDraw();
 }
@@ -67,7 +67,18 @@ async function togglePlayback(){if(startButton.disabled)return;startButton.disab
 }
 function mute(){if(!state.started)return;state.muted=!state.muted;master.gain.rampTo(state.muted?0:.42,.08);muteButton.textContent=state.muted?'播放聲音':'靜音';muteButton.setAttribute('aria-pressed',String(state.muted));status.textContent=state.muted?'靜音中，節奏與畫面仍然繼續。':'聲音已恢復。';}
 // Direct gestures use a separate instrument; the selected classical score keeps its key.
-function scaleNotes(){return ({canon:[62,64,66,67,69,71,73,74],turkish:[60,62,64,65,67,69,71,72],hungarian:[55,57,58,60,62,63,65,67],bolero:[60,62,64,65,67,69,71,72],cancan:[60,62,64,65,67,69,71,72],william:[62,64,66,67,69,71,73,74]})[state.trackId];}
+// One fixed, ascending octave per song. Changes only when the listener selects a track.
+const INTERACTION_SCALES={
+ canon:{name:'D 大調',notes:[62,64,66,67,69,71,73,74]},
+ turkish:{name:'A 自然小調',notes:[57,59,60,62,64,65,67,69]},
+ hungarian:{name:'G 自然小調',notes:[55,57,58,60,62,63,65,67]},
+ bolero:{name:'C 大調',notes:[60,62,64,65,67,69,71,72]},
+ cancan:{name:'C 大調',notes:[60,62,64,65,67,69,71,72]},
+ william:{name:'D 大調',notes:[62,64,66,67,69,71,73,74]}
+};
+function scaleNotes(){return INTERACTION_SCALES[state.trackId].notes;}
+function updateScaleMaterial(){const el=document.querySelector('#interaction-scale');if(el)el.textContent=`互動音階：${INTERACTION_SCALES[state.trackId].name} · ${scaleNotes().map(noteName).join('、')}`;}
+
 function scaleIndex(position){return clamp(Math.floor(clamp(position,0,1)*8),0,7);}
 function noteName(midi){return ['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'][midi%12]+(Math.floor(midi/12)-1);}
 function feedback(message){state.feedback=message;const el=document.querySelector('#play-feedback');if(!el)return;clearTimeout(feedbackTimer);feedbackTimer=setTimeout(()=>{el.textContent=state.feedback;},100);}
@@ -100,4 +111,4 @@ function render(ts){raf=0;if(document.hidden)return;const dt=last?Math.min((ts-l
 function requestDraw(){if(!raf&&!document.hidden)raf=requestAnimationFrame(render);}
 document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(raf);raf=0;last=0;if(document.hidden&&state.playing){cancelPhrase();Tone.Transport.pause();interactionSynth.releaseAll();sceneRef?.audioStop?.();state.playing=false;startButton.innerHTML='繼續聆聽 <span>↗</span>';status.textContent='已離開頁面，聲音自動休息。';}if(!document.hidden)requestDraw();});
 addEventListener('pagehide',()=>{cancelAnimationFrame(raf);clearTimeout(feedbackTimer);cancelPhrase();sceneRef?.audioStop?.();if(state.started){Tone.Transport.stop();Tone.Transport.clear(loop);[scorePart,tempoPart,synth,bassSynth,tapSynth,kick,hat,interactionSynth,userKick,userSnare,userShaker,popSynth,musicBus,master,analyser,limiter].forEach(n=>n?.dispose());}});
-function boot(scene){sceneRef=scene;window.soundScene=scene;sceneRef.init?.();if(state.reduced)status.textContent='已依照減少動態偏好呈現停格；觸碰仍可改變畫面。';new ResizeObserver(resize).observe(canvas);resize();requestDraw();}
+function boot(scene){updateScaleMaterial();sceneRef=scene;window.soundScene=scene;sceneRef.init?.();if(state.reduced)status.textContent='已依照減少動態偏好呈現停格；觸碰仍可改變畫面。';new ResizeObserver(resize).observe(canvas);resize();requestDraw();}
