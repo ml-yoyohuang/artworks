@@ -34,7 +34,7 @@ https://creativecommons.org/licenses/by/4.0/
 | 檔案 | 位元組 | SHA-256 | 實測格式 |
 |---|---|---|---|
 | carefree-kevin-macleod.mp3 | 6,566,713 | 8433b770a630d9b1594fd484442c677907ece899a4d149954cd2e74fd733e311 | MPEG layer III, 256 kbps, 44.1 kHz stereo, 205.1 s（`file`、`afinfo`；Chromium `decodeAudioData` 解碼成功） |
-| electrodoodle-kevin-macleod.mp3 | 5,005,207 | 75227ad153780ee0c57ae529caa7f8a891877a46596ff8800a16c90b34b6d18c | MPEG layer III, 320 kbps, 44.1 kHz stereo, 166.1 s（同上） |
+| electrodoodle-kevin-macleod.mp3 | 6,644,624 | 75227ad153780ee0c57ae529caa7f8a891877a46596ff8800a16c90b34b6d18c | MPEG layer III, 320 kbps, 44.1 kHz stereo, 166.1 s（同上） |
 
 ### 節拍資料（實際核對，非憑空填寫）
 

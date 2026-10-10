@@ -77,4 +77,10 @@ PLAYWRIGHT_MODULE=…/node_modules/playwright node sound2/tools/verify.cjs   # 2
 - 未經人耳聆聽（見上）。
 - 頁面隱藏是以覆寫 `document.hidden` 並派送 `visibilitychange` 模擬，沒有實際切換分頁或鎖定螢幕。
 - 外部曲目的節拍估測只在這兩首曲目上核對；自選本地檔案的估測準確度依曲風而定，畫面會如實依估測結果運動。
-- 部署後的線上驗證結果另記於最終交付說明。
+
+## 線上部署驗證
+
+commit `145af74` 推送至 `main` 後，GitHub Pages「pages build and deployment」成功。對 https://ml-yoyohuang.github.io/artworks/sound2/ 實測：
+
+- 目錄與十個作品頁、core.js、Tone.js、CSS、預覽圖、兩個 MP3 全部 HTTP 200，大小與本地檔案一致。
+- headless Chromium 逐頁點擊「開啟聲音」：十頁 audio = on、有排程音符、非零訊號、零錯誤；第 03 頁切換 Electrodoodle 成功（估測 119.7 BPM）。
