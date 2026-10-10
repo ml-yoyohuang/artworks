@@ -1,6 +1,37 @@
 {
-  "status": "pending",
+  "status": "deployed-and-verified",
+  "date": "2026-10-10T12:36:51.303883+00:00",
+  "branch": "main",
+  "remote": "https://github.com/ml-yoyohuang/artworks.git",
+  "verifiedContentCommit": "5d921316be114a59e0559bc1b417d40f4846933e",
   "source": "main:/",
   "url": "https://ml-yoyohuang.github.io/artworks/sound3/",
-  "note": "Local QA complete; Git push and production checks follow this content commit."
+  "pagesBuild": {
+    "commit": "5d921316be114a59e0559bc1b417d40f4846933e",
+    "created_at": "2026-10-10T12:33:45Z",
+    "duration": 41556,
+    "error": {
+      "message": null
+    },
+    "status": "built",
+    "updated_at": "2026-10-10T12:34:26Z"
+  },
+  "ci": {
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/ml-yoyohuang/artworks/actions/runs/38052411791"
+  },
+  "production": {
+    "htmlEntries": 9,
+    "byteVerifiedFiles": 25,
+    "defaultAudioPagesPassed": 8,
+    "documentationHTTP200": [
+      "README.md",
+      "MUSIC_CREDITS.md",
+      "QA_REPORT.md"
+    ],
+    "assetsEvidence": "production-assets.json",
+    "browserEvidence": "production-smoke.json"
+  },
+  "note": "Post-deployment evidence for the final runtime content commit. The subsequent evidence-only commit changes no exhibit HTML, CSS, JavaScript or previews."
 }

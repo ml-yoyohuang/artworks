@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10T12:27:37.305Z",
+  "date": "2026-10-10T12:34:46.388Z",
   "base": "https://ml-yoyohuang.github.io/artworks/sound3/",
   "pages": [
     {
@@ -7,7 +7,7 @@
       "playing": true,
       "ctx": "running",
       "notes": 1,
-      "peak": 0.030626997351646423,
+      "peak": 0.032660193741321564,
       "errors": [],
       "pass": true
     },
@@ -16,7 +16,7 @@
       "playing": true,
       "ctx": "running",
       "notes": 5,
-      "peak": 0.05491270124912262,
+      "peak": 0.054346539080142975,
       "errors": [],
       "pass": true
     },
@@ -34,7 +34,7 @@
       "playing": true,
       "ctx": "running",
       "notes": 4,
-      "peak": 0.0462467335164547,
+      "peak": 0.04427763819694519,
       "errors": [],
       "pass": true
     },
@@ -52,7 +52,7 @@
       "playing": true,
       "ctx": "running",
       "notes": 1,
-      "peak": 0.02710198424756527,
+      "peak": 0.02710193395614624,
       "errors": [],
       "pass": true
     },

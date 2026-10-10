@@ -44,7 +44,7 @@
 
 ## 發布紀錄
 
-沿用 GitHub Pages legacy 部署；已確認來源為 main 根目錄。Git 提交、推送、Pages 建置 SHA 與正式網址檢查將在完成後記錄於 [_qa/deployment.json](_qa/deployment.json)。此份驗收不以成功推送推論部署成功。
+沿用 GitHub Pages legacy 部署；已確認來源為 main 根目錄。最終內容 commit `5d921316be114a59e0559bc1b417d40f4846933e` 已正常推送 main；[Pages CI](https://github.com/ml-yoyohuang/artworks/actions/runs/38052411791) completed / success，Pages builds API 同一 SHA 為 built。正式目錄：https://ml-yoyohuang.github.io/artworks/sound3/ 。九個 HTML 與全部 25 個入口／素材逐一下載至記憶體比對，皆與該 commit 的本機位元內容一致；三份 Markdown 文件 HTTP 200。正式站八頁另以瀏覽器逐一啟動音訊、取得非零訊號並操作旋轉，全部通過。見 [部署紀錄](_qa/deployment.json)、[位元比對](_qa/production-assets.json)、[正式站瀏覽器](_qa/production-smoke.json)。隨後的驗收紀錄提交僅補入這些證據，不變更已驗證的展演程式或預覽圖。
 
 ## 環境限制與已知問題
 
