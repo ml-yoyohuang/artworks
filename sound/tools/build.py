@@ -14,7 +14,7 @@ WORKS=[
 ('flower-choir','合唱的花','A garden in tune','輪到自己的那一拍，就開一朵花。','五朵花把同一段旋律分成五個小小的角色。花瓣輪流張開，枝葉接住鄰居的搖擺，花園於是學會彼此聆聽。','點擊花朵邀它獨唱；移動指尖帶起枝葉的風。','#e9edda',['#d66753','#e4b337','#7a84bb','#dd9fba'],92,'sine','choir',2),
 ('canon-ripples','輪唱漣漪','After you, again','同一句旋律，從三處不同的時間出發。','三個聲部依次投下同一段旋律，水面把時間差攤成一圈圈色彩。漣漪追上彼此時，交會的地方便有了新的風景。','點擊移動最近的聲源；三個聲部會繼續錯開輪唱。','#e2e9df',['#427b79','#e07951','#a78ca6','#ccac44'],100,'sine','canon',2),
 ('metronome-party','節拍器派對','Finding the together','先各跳各的，再慢慢找到彼此。','六個節拍器帶著各自的脾氣走進派對。共同的脈搏逐漸拉近它們，整齊並非命令，而是一種越來越舒服的靠近。','點擊重新打散節拍；觀察它們在二十秒內逐漸同步。','#f0e1d5',['#c86448','#daae3f','#728cab','#9c7da0'],96,'triangle','metro',2),
-('signal-band','交通號誌樂團','The crossing sings','城市暫停的地方，偷偷排練一首歌。','紅燈唱低音，黃燈留一個短短的停頓，綠燈把下一句送出去。路口的秩序變成一組輕快的和聲，等待也能成為跳舞的理由。','點擊更換燈光編排；左右移動改變旋律音域。','#e4e9e6',['#d6624c','#e7b43d','#4d896c','#7589b1'],110,'triangle','signal',2),
+('signal-band','交通號誌樂團','The crossing sings','城市暫停的地方，偷偷排練一首歌。','紅燈唱低音，黃燈輕敲中間的台階，綠燈把高音送出去。路口的秩序變成一組輕快的和聲，等待也能成為跳舞的理由。','點擊更換燈光編排；左右移動改變旋律音域。','#e4e9e6',['#d6624c','#e7b43d','#4d896c','#7589b1'],110,'triangle','signal',2),
 ('square-blocks','方波積木','A place for a pulse','把硬硬的波，蓋成小小的家。','方波的轉角離開座標軸，成為一塊塊有重量的積木。門窗在節拍之間出現，聲音原來也能住進一座溫暖的房子。','點擊換一張建築樂譜；移動指尖改變積木的高度。','#eee5d5',['#d96d4d','#536f9d','#e2b642','#7f936d'],98,'square','soft',3),
 ('saw-hills','鋸齒山丘','Downhill, uphill','一條鋸齒，是一片可以滑行的風景。','陡峭的波峰變成奶油色天空下的山丘，小人順著旋律向下滑。抵達谷底的那一瞬間，又有一座新的山把它接起來。','移動指尖改變山勢；點擊讓滑行者輕輕躍起。','#f4e9ce',['#e17a50','#688d76','#dcb94a','#6f8cac'],106,'sawtooth','soft',3),
 ('crayon-wave','波形塗鴉','Please colour the sound','畫歪一點，聲音就更像你的字跡。','三支蠟筆在紙上練習同一條波形，卻怎麼也畫不成完全一致的線。抖動與留白讓旋律保留手的溫度，每一道偏差都是新的簽名。','拖曳畫下自己的蠟筆線；垂直位置改變旋律音域。','#f5ecde',['#d3664b','#4c8093','#c6a63e','#b17c9d'],90,'triangle','soft',3),
@@ -29,6 +29,10 @@ library=json.loads(score)
 recommendations=['hungarian','canon','hungarian','turkish','bolero','cancan','cancan','william','canon','canon','bolero','bolero','turkish','william','hungarian','cancan']
 pairings=['急緩交替，讓果凍收縮與彈回。','錯開的聲部，陪鞦韆散開再相遇。','旋律轉折，讓緞帶縮起再舒展。','輕巧裝飾音，像檸檬汽水裡的小泡泡。','固定節奏逐漸長大，糖果也越落越熱鬧。','鮮明重音，邀請整片地板一起踢踏。','快板帶動一群種子的爆跳。','奔馳的節奏，陪小球跨過下一格。','輪流進場的聲部，像花朵互相接唱。','原本的輪唱結構，在水面留下時間差。','穩定小鼓與漸強，讓派對逐步聚攏。','反覆節奏漸強，路口逐層亮起。','俐落音符與方波轉角，搭出輕快的小房子。','奔馳主題，讓滑行更有向前的動力。','忽快忽慢，讓蠟筆留下有呼吸的字跡。','強拍一起蓄力，彈簧跳成小小的舞隊。']
 DIRECT={
+ 'canon-ripples':('抓住三個圓點拖曳聲源；點空白水面，立即奏一滴水，左低右高。','聲源跟著指尖；舊漣漪留在出發的位置。'),
+ 'signal-band':('直接點紅、黃、綠燈奏低、中、高音；按住滑過燈號也能連奏。','白圈是你點亮的燈；用下方按鈕切換燈光編排。'),
+ 'ribbon-dance':('抓住白圈端點牽引緞帶，放開回彈；點一下或按翻一圈，立即奏音。','拖曳左低右高；短點翻圈，長拖牽引。'),
+ 'popcorn-rhythm':('點粒子立即爆跳；按住蓄力、放開跳更高，彩色圈標出自己的粒子。','可點盤裡或空中的粒子；自己的爆花短暫避開自動群跳。'),
  'tap-floor':('指向亮框的菱形格子，點哪格就敲哪格；按住拖曳連續踢踏。','三種鼓聲：低鼓、小鼓、沙鈴；白圈指出自己的腳步。'),
  'hopscotch':('點有號碼的格子，小球會完成這次跳躍；落地時奏出那格的音。','紅框是你的目標；落地後才交回自動路線。'),
  'flower-choir':('點花瓣，立即奏音並獨唱八拍；之後回合唱，也可按全員合唱。','每朵花有固定音名；圈線指出正在獨唱的花。'),
@@ -46,6 +50,9 @@ for i,w in enumerate(WORKS):
  if slug in DIRECT:hint=DIRECT[slug][0]
  play_ui=(f'<div class="play-guide"><p>{DIRECT[slug][0]}</p><output id="play-feedback" aria-live="polite">{DIRECT[slug][1]} 先按「開始聆聽」即可奏音。</output></div>' if slug in DIRECT else '')
  extras=('<div class="gesture-tools"><button id="replay" disabled>重播這一筆</button><button id="clear-ink">清空紙面</button></div>' if slug=='crayon-wave' else '')
+ if slug=='canon-ripples':extras='<div class="gesture-tools"><button id="reset-water">聲源回到原位</button></div>'
+ if slug=='signal-band':extras='<div class="gesture-tools"><button id="pattern">燈光編排：接力</button></div>'
+ if slug=='ribbon-dance':extras='<div class="gesture-tools"><button id="flip-ribbon">翻一圈</button></div>'
  if slug=='flower-choir':extras='<div class="gesture-tools"><button id="all-flowers" disabled>全員合唱</button></div>'
  if slug=='metronome-party':extras='<div class="gesture-tools"><button id="scatter">全隊散開</button></div>'
  balance=('<div class="backing-control"><label for="backing">伴奏音量 <output id="backing-value">45%</output></label><input id="backing" type="range" min="0" max="100" value="45" aria-label="古典伴奏音量"><span>自己的奏音會更清楚</span></div>' if slug in DIRECT else '')

@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-10T09:01:54.456Z",
+  "checks": [
+    {
+      "slug": "canon-ripples",
+      "device": "desktop",
+      "checks": {
+        "sourceFollowsPointer": true,
+        "otherSourcesUnchanged": true,
+        "oldWavesStayPut": true,
+        "waterDropPitch": true,
+        "reset": true
+      },
+      "peak": 0.15993818640708923,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "signal-band",
+      "device": "desktop",
+      "checks": {
+        "all15LightHits": true,
+        "threeFixedPitches": true,
+        "ownLightPersists": true,
+        "fourNamedPatterns": true,
+        "slidePlays": true,
+        "musicContinues": true
+      },
+      "peak": 0.1006886214017868,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "ribbon-dance",
+      "device": "desktop",
+      "checks": {
+        "realEndpointDrag": true,
+        "releaseInertia": true,
+        "shortTapFlips": true,
+        "flipButton": true,
+        "easedRotation": true
+      },
+      "peak": 0.11286873370409012,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "device": "desktop",
+      "checks": {
+        "tapPops": true,
+        "longHoldMorePower": true,
+        "ownColourBursts": true,
+        "protectedFromAutoBeat": true
+      },
+      "peak": 0.00020879969815723598,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "canon-ripples",
+      "device": "mobile",
+      "checks": {
+        "sourceFollowsPointer": true,
+        "otherSourcesUnchanged": true,
+        "oldWavesStayPut": true,
+        "waterDropPitch": true,
+        "reset": true
+      },
+      "peak": 0.1629686951637268,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "signal-band",
+      "device": "mobile",
+      "checks": {
+        "all15LightHits": true,
+        "threeFixedPitches": true,
+        "ownLightPersists": true,
+        "fourNamedPatterns": true,
+        "slidePlays": true,
+        "musicContinues": true
+      },
+      "peak": 0.08866479247808456,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "ribbon-dance",
+      "device": "mobile",
+      "checks": {
+        "realEndpointDrag": true,
+        "releaseInertia": true,
+        "shortTapFlips": true,
+        "flipButton": true,
+        "easedRotation": true
+      },
+      "peak": 0.1473444402217865,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "device": "mobile",
+      "checks": {
+        "tapPops": true,
+        "longHoldMorePower": true,
+        "ownColourBursts": true,
+        "protectedFromAutoBeat": true
+      },
+      "peak": 0.012505768798291683,
+      "reducedMotion": true,
+      "noOverflow": true
+    }
+  ],
+  "errors": [],
+  "resources": []
+}

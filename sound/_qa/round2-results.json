@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10T08:39:16.693Z",
+  "date": "2026-10-10T09:00:49.564Z",
   "checks": [
     {
       "device": "desktop",
@@ -9,7 +9,7 @@
         "dragDrums": true,
         "emptySpaceIgnored": true
       },
-      "peak": 0.006535958964377642,
+      "peak": 0.006838963832706213,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -22,7 +22,7 @@
         "returnsToRoute": true,
         "pausedLanding": true
       },
-      "peak": 0.05047346651554108,
+      "peak": 0.05875521898269653,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -34,7 +34,7 @@
         "eightBeatReturn": true,
         "manualEnsemble": true
       },
-      "peak": 0.04084005951881409,
+      "peak": 0.04097985848784447,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -59,7 +59,7 @@
         "dragDrums": true,
         "emptySpaceIgnored": true
       },
-      "peak": 0.006151929497718811,
+      "peak": 0.006471508182585239,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -72,7 +72,7 @@
         "returnsToRoute": true,
         "pausedLanding": true
       },
-      "peak": 0.07058314979076385,
+      "peak": 0.05875521898269653,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -84,7 +84,7 @@
         "eightBeatReturn": true,
         "manualEnsemble": true
       },
-      "peak": 0.036495450884103775,
+      "peak": 0.10726934671401978,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -97,7 +97,7 @@
         "twentySecondsAt1_4": true,
         "completeSynchrony": true
       },
-      "peak": 0.04371950775384903,
+      "peak": 0.04716034606099129,
       "reducedMotion": true,
       "noOverflow": true
     }

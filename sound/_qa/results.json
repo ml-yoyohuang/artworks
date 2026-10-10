@@ -1,13 +1,13 @@
 {
-  "date": "2026-10-10T08:40:27.832Z",
+  "date": "2026-10-10T09:03:54.745Z",
   "checks": [
     {
       "slug": "jelly-wave",
       "device": "desktop",
-      "pixels": 209,
+      "pixels": 208,
       "audio": {
-        "peak": 0.03448542580008507,
-        "fps": 119.22260329671526,
+        "peak": 0.0229989942163229,
+        "fps": 120.26653664645914,
         "notes": 8,
         "context": "running",
         "version": "15.0.4"
@@ -25,28 +25,9 @@
       "device": "desktop",
       "pixels": 260,
       "audio": {
-        "peak": 0.009350375272333622,
-        "fps": 119.3200392261811,
+        "peak": 0.009352543391287327,
+        "fps": 120.59973923912105,
         "notes": 6,
-        "context": "running",
-        "version": "15.0.4"
-      },
-      "touchOrDrag": true,
-      "keyboard": true,
-      "tempo": true,
-      "mute": true,
-      "pauseAndResume": true,
-      "reducedMotion": true,
-      "noOverflow": true
-    },
-    {
-      "slug": "ribbon-dance",
-      "device": "desktop",
-      "pixels": 526,
-      "audio": {
-        "peak": 0.029774898663163185,
-        "fps": 120.58008799321725,
-        "notes": 8,
         "context": "running",
         "version": "15.0.4"
       },
@@ -61,10 +42,10 @@
     {
       "slug": "bubble-scale",
       "device": "desktop",
-      "pixels": 427,
+      "pixels": 415,
       "audio": {
-        "peak": 0.020644115284085274,
-        "fps": 120.81632653061224,
+        "peak": 0.023791112005710602,
+        "fps": 120.32520325203252,
         "notes": 8,
         "context": "running",
         "version": "15.0.4"
@@ -82,8 +63,8 @@
       "device": "desktop",
       "pixels": 349,
       "audio": {
-        "peak": 0.009381548501551151,
-        "fps": 120.67840835198727,
+        "peak": 0.009214631281793118,
+        "fps": 119.28104575163398,
         "notes": 5,
         "context": "running",
         "version": "15.0.4"
@@ -97,12 +78,12 @@
       "noOverflow": true
     },
     {
-      "slug": "popcorn-rhythm",
+      "slug": "tap-floor",
       "device": "desktop",
-      "pixels": 330,
+      "pixels": 403,
       "audio": {
-        "peak": 0.03418448567390442,
-        "fps": 120.67840835198727,
+        "peak": 0.012435585260391235,
+        "fps": 120.42310821806346,
         "notes": 9,
         "context": "running",
         "version": "15.0.4"
@@ -116,12 +97,31 @@
       "noOverflow": true
     },
     {
-      "slug": "canon-ripples",
+      "slug": "hopscotch",
       "device": "desktop",
-      "pixels": 731,
+      "pixels": 184,
       "audio": {
-        "peak": 0.008508102968335152,
-        "fps": 120.83605485904404,
+        "peak": 0.01817452907562256,
+        "fps": 120.59973925083602,
+        "notes": 9,
+        "context": "running",
+        "version": "15.0.4"
+      },
+      "touchOrDrag": true,
+      "keyboard": true,
+      "tempo": true,
+      "mute": true,
+      "pauseAndResume": true,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "flower-choir",
+      "device": "desktop",
+      "pixels": 262,
+      "audio": {
+        "peak": 0.004207668825984001,
+        "fps": 120.65873145045106,
         "notes": 6,
         "context": "running",
         "version": "15.0.4"
@@ -135,12 +135,12 @@
       "noOverflow": true
     },
     {
-      "slug": "signal-band",
+      "slug": "metronome-party",
       "device": "desktop",
-      "pixels": 250,
+      "pixels": 288,
       "audio": {
-        "peak": 0.0093738604336977,
-        "fps": 119.3005393084562,
+        "peak": 0.0045655337162315845,
+        "fps": 119.3200392261811,
         "notes": 5,
         "context": "running",
         "version": "15.0.4"
@@ -158,8 +158,8 @@
       "device": "desktop",
       "pixels": 241,
       "audio": {
-        "peak": 0.03638588264584541,
-        "fps": 119.47626841243863,
+        "peak": 0.0367068313062191,
+        "fps": 119.6525159880005,
         "notes": 8,
         "context": "running",
         "version": "15.0.4"
@@ -175,10 +175,10 @@
     {
       "slug": "saw-hills",
       "device": "desktop",
-      "pixels": 230,
+      "pixels": 233,
       "audio": {
-        "peak": 0.012072074227035046,
-        "fps": 119.37857726901063,
+        "peak": 0.009865659289062023,
+        "fps": 117.87819253208052,
         "notes": 9,
         "context": "running",
         "version": "15.0.4"
@@ -194,10 +194,10 @@
     {
       "slug": "crayon-wave",
       "device": "desktop",
-      "pixels": 400,
+      "pixels": 397,
       "audio": {
-        "peak": 0.013398703187704086,
-        "fps": 120.52117263843648,
+        "peak": 0.01525556854903698,
+        "fps": 120.93479325980559,
         "notes": 8,
         "context": "running",
         "version": "15.0.4"
@@ -213,10 +213,10 @@
     {
       "slug": "spring-dancer",
       "device": "desktop",
-      "pixels": 370,
+      "pixels": 374,
       "audio": {
         "peak": 0.020469043403863907,
-        "fps": 120.30564135446544,
+        "fps": 120.63906097632257,
         "notes": 9,
         "context": "running",
         "version": "15.0.4"
@@ -232,10 +232,10 @@
     {
       "slug": "jelly-wave",
       "device": "mobile",
-      "pixels": 101,
+      "pixels": 100,
       "audio": {
         "peak": 0.03448542580008507,
-        "fps": 120.50154698633686,
+        "fps": 120.52117263843648,
         "notes": 8,
         "context": "running",
         "version": "15.0.4"
@@ -251,30 +251,11 @@
     {
       "slug": "pendulum-swing",
       "device": "mobile",
-      "pixels": 118,
+      "pixels": 115,
       "audio": {
-        "peak": 0.011517857201397419,
-        "fps": 119.22260329671526,
+        "peak": 0.008744142018258572,
+        "fps": 119.43717276555104,
         "notes": 6,
-        "context": "running",
-        "version": "15.0.4"
-      },
-      "touchOrDrag": true,
-      "keyboard": true,
-      "tempo": true,
-      "mute": true,
-      "pauseAndResume": true,
-      "reducedMotion": true,
-      "noOverflow": true
-    },
-    {
-      "slug": "ribbon-dance",
-      "device": "mobile",
-      "pixels": 221,
-      "audio": {
-        "peak": 0.029774898663163185,
-        "fps": 120.246993829813,
-        "notes": 8,
         "context": "running",
         "version": "15.0.4"
       },
@@ -289,10 +270,10 @@
     {
       "slug": "bubble-scale",
       "device": "mobile",
-      "pixels": 152,
+      "pixels": 154,
       "audio": {
-        "peak": 0.02403859607875347,
-        "fps": 119.69175273933348,
+        "peak": 0.02378237061202526,
+        "fps": 121.01390024529844,
         "notes": 8,
         "context": "running",
         "version": "15.0.4"
@@ -308,10 +289,10 @@
     {
       "slug": "beat-candy",
       "device": "mobile",
-      "pixels": 137,
+      "pixels": 144,
       "audio": {
-        "peak": 0.009314356371760368,
-        "fps": 119.26155857582931,
+        "peak": 0.010688109323382378,
+        "fps": 121.15258676908276,
         "notes": 5,
         "context": "running",
         "version": "15.0.4"
@@ -325,12 +306,12 @@
       "noOverflow": true
     },
     {
-      "slug": "popcorn-rhythm",
+      "slug": "tap-floor",
       "device": "mobile",
-      "pixels": 138,
+      "pixels": 188,
       "audio": {
-        "peak": 0.022970188409090042,
-        "fps": 119.00880339556144,
+        "peak": 0.010487361811101437,
+        "fps": 120.99411379515251,
         "notes": 9,
         "context": "running",
         "version": "15.0.4"
@@ -344,12 +325,31 @@
       "noOverflow": true
     },
     {
-      "slug": "canon-ripples",
+      "slug": "hopscotch",
       "device": "mobile",
-      "pixels": 338,
+      "pixels": 78,
       "audio": {
-        "peak": 0.011517857201397419,
-        "fps": 119.5153896622445,
+        "peak": 0.020122049376368523,
+        "fps": 119.24207774308084,
+        "notes": 9,
+        "context": "running",
+        "version": "15.0.4"
+      },
+      "touchOrDrag": true,
+      "keyboard": true,
+      "tempo": true,
+      "mute": true,
+      "pauseAndResume": true,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "flower-choir",
+      "device": "mobile",
+      "pixels": 123,
+      "audio": {
+        "peak": 0.005183035042136908,
+        "fps": 119.22260329671526,
         "notes": 6,
         "context": "running",
         "version": "15.0.4"
@@ -363,12 +363,12 @@
       "noOverflow": true
     },
     {
-      "slug": "signal-band",
+      "slug": "metronome-party",
       "device": "mobile",
-      "pixels": 98,
+      "pixels": 103,
       "audio": {
-        "peak": 0.008675914257764816,
-        "fps": 119.77030352748154,
+        "peak": 0.004047939088195562,
+        "fps": 120.38392712125442,
         "notes": 5,
         "context": "running",
         "version": "15.0.4"
@@ -386,8 +386,8 @@
       "device": "mobile",
       "pixels": 115,
       "audio": {
-        "peak": 0.024207528680562973,
-        "fps": 120.95456031147124,
+        "peak": 0.03570215031504631,
+        "fps": 119.28104575163398,
         "notes": 8,
         "context": "running",
         "version": "15.0.4"
@@ -405,8 +405,8 @@
       "device": "mobile",
       "pixels": 94,
       "audio": {
-        "peak": 0.012070540338754654,
-        "fps": 120.14483212168453,
+        "peak": 0.01355945784598589,
+        "fps": 119.0476190499334,
         "notes": 9,
         "context": "running",
         "version": "15.0.4"
@@ -422,10 +422,10 @@
     {
       "slug": "crayon-wave",
       "device": "mobile",
-      "pixels": 112,
+      "pixels": 119,
       "audio": {
-        "peak": 0.015545375645160675,
-        "fps": 120.89527855632014,
+        "peak": 0.017813576385378838,
+        "fps": 121.29159154947996,
         "notes": 8,
         "context": "running",
         "version": "15.0.4"
@@ -443,8 +443,8 @@
       "device": "mobile",
       "pixels": 147,
       "audio": {
-        "peak": 0.018201367929577827,
-        "fps": 119.55453651678611,
+        "peak": 0.01658015325665474,
+        "fps": 119.08646003262643,
         "notes": 9,
         "context": "running",
         "version": "15.0.4"
@@ -458,12 +458,31 @@
       "noOverflow": true
     },
     {
-      "slug": "tap-floor",
+      "slug": "ribbon-dance",
       "device": "desktop",
-      "pixels": 398,
+      "pixels": 607,
       "audio": {
-        "peak": 0.01251133531332016,
-        "fps": 120.61939690301548,
+        "peak": 0.010273299179971218,
+        "fps": 120.28608582807854,
+        "notes": 8,
+        "context": "running",
+        "version": "15.0.4"
+      },
+      "touchOrDrag": true,
+      "keyboard": true,
+      "tempo": true,
+      "mute": true,
+      "pauseAndResume": true,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "device": "desktop",
+      "pixels": 344,
+      "audio": {
+        "peak": 0.01821342296898365,
+        "fps": 120.44270833800712,
         "notes": 9,
         "context": "running",
         "version": "15.0.4"
@@ -477,31 +496,12 @@
       "noOverflow": true
     },
     {
-      "slug": "hopscotch",
+      "slug": "canon-ripples",
       "device": "desktop",
-      "pixels": 191,
+      "pixels": 744,
       "audio": {
-        "peak": 0.020273776724934578,
-        "fps": 119.59370904792159,
-        "notes": 9,
-        "context": "running",
-        "version": "15.0.4"
-      },
-      "touchOrDrag": true,
-      "keyboard": true,
-      "tempo": true,
-      "mute": true,
-      "pauseAndResume": true,
-      "reducedMotion": true,
-      "noOverflow": true
-    },
-    {
-      "slug": "flower-choir",
-      "device": "desktop",
-      "pixels": 263,
-      "audio": {
-        "peak": 0.005182971246540546,
-        "fps": 120.83605487080496,
+        "peak": 0.004210017621517181,
+        "fps": 120.246993829813,
         "notes": 6,
         "context": "running",
         "version": "15.0.4"
@@ -515,12 +515,69 @@
       "noOverflow": true
     },
     {
-      "slug": "metronome-party",
-      "device": "desktop",
-      "pixels": 291,
+      "slug": "ribbon-dance",
+      "device": "mobile",
+      "pixels": 252,
       "audio": {
-        "peak": 0.00421792222186923,
-        "fps": 120.83605485904404,
+        "peak": 0.014496346935629845,
+        "fps": 120.44270832632265,
+        "notes": 8,
+        "context": "running",
+        "version": "15.0.4"
+      },
+      "touchOrDrag": true,
+      "keyboard": true,
+      "tempo": true,
+      "mute": true,
+      "pauseAndResume": true,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "device": "mobile",
+      "pixels": 146,
+      "audio": {
+        "peak": 0.015403286553919315,
+        "fps": 119.41763454699236,
+        "notes": 9,
+        "context": "running",
+        "version": "15.0.4"
+      },
+      "touchOrDrag": true,
+      "keyboard": true,
+      "tempo": true,
+      "mute": true,
+      "pauseAndResume": true,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "canon-ripples",
+      "device": "mobile",
+      "pixels": 336,
+      "audio": {
+        "peak": 0.005177710205316544,
+        "fps": 120.95456031147124,
+        "notes": 6,
+        "context": "running",
+        "version": "15.0.4"
+      },
+      "touchOrDrag": true,
+      "keyboard": true,
+      "tempo": true,
+      "mute": true,
+      "pauseAndResume": true,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "signal-band",
+      "device": "desktop",
+      "pixels": 228,
+      "audio": {
+        "peak": 0.00421823700889945,
+        "fps": 119.32003923780586,
         "notes": 5,
         "context": "running",
         "version": "15.0.4"
@@ -542,69 +599,12 @@
       "noOverflow": true
     },
     {
-      "slug": "tap-floor",
+      "slug": "signal-band",
       "device": "mobile",
-      "pixels": 188,
+      "pixels": 91,
       "audio": {
-        "peak": 0.014489078894257545,
-        "fps": 120.4819277014897,
-        "notes": 9,
-        "context": "running",
-        "version": "15.0.4"
-      },
-      "touchOrDrag": true,
-      "keyboard": true,
-      "tempo": true,
-      "mute": true,
-      "pauseAndResume": true,
-      "reducedMotion": true,
-      "noOverflow": true
-    },
-    {
-      "slug": "hopscotch",
-      "device": "mobile",
-      "pixels": 78,
-      "audio": {
-        "peak": 0.020122049376368523,
-        "fps": 119.18367346938776,
-        "notes": 9,
-        "context": "running",
-        "version": "15.0.4"
-      },
-      "touchOrDrag": true,
-      "keyboard": true,
-      "tempo": true,
-      "mute": true,
-      "pauseAndResume": true,
-      "reducedMotion": true,
-      "noOverflow": true
-    },
-    {
-      "slug": "flower-choir",
-      "device": "mobile",
-      "pixels": 122,
-      "audio": {
-        "peak": 0.005177710205316544,
-        "fps": 119.53495988443584,
-        "notes": 6,
-        "context": "running",
-        "version": "15.0.4"
-      },
-      "touchOrDrag": true,
-      "keyboard": true,
-      "tempo": true,
-      "mute": true,
-      "pauseAndResume": true,
-      "reducedMotion": true,
-      "noOverflow": true
-    },
-    {
-      "slug": "metronome-party",
-      "device": "mobile",
-      "pixels": 106,
-      "audio": {
-        "peak": 0.004204327706247568,
-        "fps": 119.12532636843981,
+        "peak": 0.004221696872264147,
+        "fps": 119.57411957411958,
         "notes": 5,
         "context": "running",
         "version": "15.0.4"
