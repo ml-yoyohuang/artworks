@@ -1,0 +1,89 @@
+{
+  "pass": true,
+  "tracks": 16,
+  "independentRequests": true,
+  "downloadJSON": true,
+  "errors": [],
+  "results": [
+    {
+      "id": "original-01-resonant-architecture",
+      "peak": 0.0304162185639143,
+      "pass": true
+    },
+    {
+      "id": "original-02-chord-loom",
+      "peak": 0.05479089170694351,
+      "pass": true
+    },
+    {
+      "id": "original-03-silence-cuts",
+      "peak": 0.027802690863609314,
+      "pass": true
+    },
+    {
+      "id": "original-04-sound-fossil",
+      "peak": 0.04047952592372894,
+      "pass": true
+    },
+    {
+      "id": "original-05-phase-tides",
+      "peak": 0.03225993365049362,
+      "pass": true
+    },
+    {
+      "id": "original-06-breath-portrait",
+      "peak": 0.027101704850792885,
+      "pass": true
+    },
+    {
+      "id": "original-07-echo-labyrinth",
+      "peak": 0.015541971661150455,
+      "pass": true
+    },
+    {
+      "id": "original-08-stored-energy",
+      "peak": 0.03077298402786255,
+      "pass": true
+    },
+    {
+      "id": "canon",
+      "peak": 0.06766274571418762,
+      "pass": true
+    },
+    {
+      "id": "prayer",
+      "peak": 0.06391802430152893,
+      "pass": true
+    },
+    {
+      "id": "elise",
+      "peak": 0.061957456171512604,
+      "pass": true
+    },
+    {
+      "id": "bolero",
+      "peak": 0.05840068683028221,
+      "pass": true
+    },
+    {
+      "id": "can-can",
+      "peak": 0.06319843232631683,
+      "pass": true
+    },
+    {
+      "id": "turkish",
+      "peak": 0.02712658792734146,
+      "pass": true
+    },
+    {
+      "id": "tell",
+      "peak": 0.05838003754615784,
+      "pass": true
+    },
+    {
+      "id": "hungarian",
+      "peak": 0.06834784895181656,
+      "pass": true
+    }
+  ]
+}

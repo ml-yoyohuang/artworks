@@ -1,0 +1,146 @@
+[
+  {
+    "id": "original-01-resonant-architecture",
+    "name": "共振建築 · 原創音源",
+    "kind": "original",
+    "index": 0,
+    "duration": 32,
+    "loop": true,
+    "composer": "SOUND / 3 — Codex for ml-yoyohuang, 2026"
+  },
+  {
+    "id": "original-02-chord-loom",
+    "name": "和弦織機 · 原創音源",
+    "kind": "original",
+    "index": 1,
+    "duration": 32,
+    "loop": true,
+    "composer": "SOUND / 3 — Codex for ml-yoyohuang, 2026"
+  },
+  {
+    "id": "original-03-silence-cuts",
+    "name": "休止符 · 原創音源",
+    "kind": "original",
+    "index": 2,
+    "duration": 24,
+    "loop": true,
+    "composer": "SOUND / 3 — Codex for ml-yoyohuang, 2026"
+  },
+  {
+    "id": "original-04-sound-fossil",
+    "name": "聲音化石 · 原創音源",
+    "kind": "original",
+    "index": 3,
+    "duration": 16,
+    "loop": false,
+    "composer": "SOUND / 3 — Codex for ml-yoyohuang, 2026"
+  },
+  {
+    "id": "original-05-phase-tides",
+    "name": "相位潮汐 · 原創音源",
+    "kind": "original",
+    "index": 4,
+    "duration": 240,
+    "loop": true,
+    "composer": "SOUND / 3 — Codex for ml-yoyohuang, 2026"
+  },
+  {
+    "id": "original-06-breath-portrait",
+    "name": "呼吸雕塑 · 原創音源",
+    "kind": "original",
+    "index": 5,
+    "duration": 14,
+    "loop": false,
+    "composer": "SOUND / 3 — Codex for ml-yoyohuang, 2026"
+  },
+  {
+    "id": "original-07-echo-labyrinth",
+    "name": "回聲迷宮 · 原創音源",
+    "kind": "original",
+    "index": 6,
+    "duration": 32,
+    "loop": true,
+    "composer": "SOUND / 3 — Codex for ml-yoyohuang, 2026"
+  },
+  {
+    "id": "original-08-stored-energy",
+    "name": "能量蓄積 · 原創音源",
+    "kind": "original",
+    "index": 7,
+    "duration": 32,
+    "loop": true,
+    "composer": "SOUND / 3 — Codex for ml-yoyohuang, 2026"
+  },
+  {
+    "id": "canon",
+    "name": "卡農",
+    "kind": "classical-arrangement",
+    "duration": 32,
+    "loop": false,
+    "composer": "Johann Pachelbel",
+    "section": "D 大調卡農 · 旋律與固定低音"
+  },
+  {
+    "id": "prayer",
+    "name": "少女的祈禱",
+    "kind": "classical-arrangement",
+    "duration": 32,
+    "loop": false,
+    "composer": "Tekla Bądarzewska-Baranowska",
+    "section": "Op.4 · 主題（省略裝飾音）"
+  },
+  {
+    "id": "elise",
+    "name": "給愛麗絲",
+    "kind": "classical-arrangement",
+    "duration": 32,
+    "loop": false,
+    "composer": "Ludwig van Beethoven",
+    "section": "WoO 59 · 開頭迴旋主題"
+  },
+  {
+    "id": "bolero",
+    "name": "波萊羅舞曲",
+    "kind": "classical-arrangement",
+    "duration": 32,
+    "loop": false,
+    "composer": "Maurice Ravel",
+    "section": "M.81 · 第一主題與三拍節奏"
+  },
+  {
+    "id": "can-can",
+    "name": "天堂與地獄序曲",
+    "kind": "classical-arrangement",
+    "duration": 32,
+    "loop": false,
+    "composer": "Jacques Offenbach",
+    "section": "《地獄中的奧菲歐》· 地獄加洛普"
+  },
+  {
+    "id": "turkish",
+    "name": "莫札特—土耳其進行曲",
+    "kind": "classical-arrangement",
+    "duration": 32,
+    "loop": false,
+    "composer": "Wolfgang Amadeus Mozart",
+    "section": "K.331 · 第三樂章 Alla turca"
+  },
+  {
+    "id": "tell",
+    "name": "威廉泰爾序曲",
+    "kind": "classical-arrangement",
+    "duration": 32,
+    "loop": false,
+    "composer": "Gioachino Rossini",
+    "section": "《Guillaume Tell》序曲 · 終曲快板"
+  },
+  {
+    "id": "hungarian",
+    "name": "匈牙利舞曲第 5 號",
+    "kind": "classical-arrangement",
+    "duration": 32,
+    "loop": false,
+    "composer": "Johannes Brahms",
+    "section": "WoO 1, No.5 · 開頭主題（移調至 G 小調）"
+  }
+]

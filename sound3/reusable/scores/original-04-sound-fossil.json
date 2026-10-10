@@ -1,0 +1,887 @@
+{
+  "schemaVersion": 1,
+  "id": "original-04-sound-fossil",
+  "name": "聲音化石 · 原創音源",
+  "kind": "original",
+  "composer": "SOUND / 3 — Codex for ml-yoyohuang, 2026",
+  "section": null,
+  "duration": 16,
+  "seed": 4172,
+  "transpose": 0,
+  "events": [
+    {
+      "t": 0,
+      "d": 0.18,
+      "notes": [
+        48
+      ],
+      "v": 0.3051087911386276,
+      "voice": "mineral",
+      "kind": "ridge",
+      "sector": 0,
+      "phrase": 0
+    },
+    {
+      "t": 0,
+      "d": 1.45,
+      "notes": [
+        36,
+        43
+      ],
+      "v": 0.19,
+      "voice": "bass",
+      "kind": "sustain",
+      "sector": 0,
+      "phrase": 0
+    },
+    {
+      "t": 0.25,
+      "d": 0.18,
+      "notes": [
+        55
+      ],
+      "v": 0.21903202279936523,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 1,
+      "phrase": 0
+    },
+    {
+      "t": 0.5,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.20176610476482892,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 2,
+      "phrase": 0
+    },
+    {
+      "t": 0.75,
+      "d": 0.18,
+      "notes": [
+        62
+      ],
+      "v": 0.36527756224459157,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 3,
+      "phrase": 0
+    },
+    {
+      "t": 1,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.35661649912799476,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 4,
+      "phrase": 0
+    },
+    {
+      "t": 1.25,
+      "d": 0.18,
+      "notes": [
+        55
+      ],
+      "v": 0.37783961701425145,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 5,
+      "phrase": 0
+    },
+    {
+      "t": 1.5,
+      "d": 0.18,
+      "notes": [
+        52
+      ],
+      "v": 0.3915215449073003,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 6,
+      "phrase": 0
+    },
+    {
+      "t": 1.75,
+      "d": 0.18,
+      "notes": [
+        55
+      ],
+      "v": 0.3424532863878994,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 7,
+      "phrase": 0
+    },
+    {
+      "t": 2,
+      "d": 0.18,
+      "notes": [
+        48
+      ],
+      "v": 0.38504853706544967,
+      "voice": "mineral",
+      "kind": "ridge",
+      "sector": 8,
+      "phrase": 0
+    },
+    {
+      "t": 2,
+      "d": 1.45,
+      "notes": [
+        36,
+        43
+      ],
+      "v": 0.19,
+      "voice": "bass",
+      "kind": "sustain",
+      "sector": 8,
+      "phrase": 0
+    },
+    {
+      "t": 2.25,
+      "d": 0.18,
+      "notes": [
+        55
+      ],
+      "v": 0.2027583624061663,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 9,
+      "phrase": 0
+    },
+    {
+      "t": 2.5,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.23555855437371065,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 10,
+      "phrase": 0
+    },
+    {
+      "t": 2.75,
+      "d": 0.18,
+      "notes": [
+        62
+      ],
+      "v": 0.3185304338840069,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 11,
+      "phrase": 0
+    },
+    {
+      "t": 3,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.3111579852175055,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 12,
+      "phrase": 0
+    },
+    {
+      "t": 3.25,
+      "d": 0.18,
+      "notes": [
+        55
+      ],
+      "v": 0.2487321889624582,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 13,
+      "phrase": 0
+    },
+    {
+      "t": 3.5,
+      "d": 0.18,
+      "notes": [
+        52
+      ],
+      "v": 0.37235252315986145,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 14,
+      "phrase": 0
+    },
+    {
+      "t": 3.75,
+      "d": 0.18,
+      "notes": [
+        55
+      ],
+      "v": 0.37577719544642607,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 15,
+      "phrase": 0
+    },
+    {
+      "t": 4,
+      "d": 0.18,
+      "notes": [
+        48
+      ],
+      "v": 0.2413998598305625,
+      "voice": "mineral",
+      "kind": "ridge",
+      "sector": 0,
+      "phrase": 1
+    },
+    {
+      "t": 4,
+      "d": 1.45,
+      "notes": [
+        36,
+        43
+      ],
+      "v": 0.19,
+      "voice": "bass",
+      "kind": "sustain",
+      "sector": 0,
+      "phrase": 1
+    },
+    {
+      "t": 4.25,
+      "d": 0.18,
+      "notes": [
+        55
+      ],
+      "v": 0.3211942014633678,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 1,
+      "phrase": 1
+    },
+    {
+      "t": 4.5,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.3011705568744219,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 2,
+      "phrase": 1
+    },
+    {
+      "t": 4.75,
+      "d": 0.18,
+      "notes": [
+        62
+      ],
+      "v": 0.3177290425221145,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 3,
+      "phrase": 1
+    },
+    {
+      "t": 5,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.32233596968289935,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 4,
+      "phrase": 1
+    },
+    {
+      "t": 5.25,
+      "d": 0.18,
+      "notes": [
+        55
+      ],
+      "v": 0.2072273739253433,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 5,
+      "phrase": 1
+    },
+    {
+      "t": 5.5,
+      "d": 0.18,
+      "notes": [
+        52
+      ],
+      "v": 0.389540858269902,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 6,
+      "phrase": 1
+    },
+    {
+      "t": 5.75,
+      "d": 0.18,
+      "notes": [
+        55
+      ],
+      "v": 0.33294391760482545,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 7,
+      "phrase": 1
+    },
+    {
+      "t": 6,
+      "d": 0.18,
+      "notes": [
+        48
+      ],
+      "v": 0.32846918236027706,
+      "voice": "mineral",
+      "kind": "ridge",
+      "sector": 8,
+      "phrase": 1
+    },
+    {
+      "t": 6,
+      "d": 1.45,
+      "notes": [
+        36,
+        43
+      ],
+      "v": 0.19,
+      "voice": "bass",
+      "kind": "sustain",
+      "sector": 8,
+      "phrase": 1
+    },
+    {
+      "t": 6.25,
+      "d": 0.18,
+      "notes": [
+        55
+      ],
+      "v": 0.2722475542843313,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 9,
+      "phrase": 1
+    },
+    {
+      "t": 6.5,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.24239476990042022,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 10,
+      "phrase": 1
+    },
+    {
+      "t": 6.75,
+      "d": 0.18,
+      "notes": [
+        62
+      ],
+      "v": 0.3112245682961657,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 11,
+      "phrase": 1
+    },
+    {
+      "t": 7,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.3583615766197909,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 12,
+      "phrase": 1
+    },
+    {
+      "t": 7.25,
+      "d": 0.18,
+      "notes": [
+        55
+      ],
+      "v": 0.3637764275306836,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 13,
+      "phrase": 1
+    },
+    {
+      "t": 7.5,
+      "d": 0.18,
+      "notes": [
+        52
+      ],
+      "v": 0.32795876003947344,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 14,
+      "phrase": 1
+    },
+    {
+      "t": 7.75,
+      "d": 0.18,
+      "notes": [
+        55
+      ],
+      "v": 0.3705887828138657,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 15,
+      "phrase": 1
+    },
+    {
+      "t": 8,
+      "d": 0.18,
+      "notes": [
+        53
+      ],
+      "v": 0.25187252668474686,
+      "voice": "mineral",
+      "kind": "ridge",
+      "sector": 0,
+      "phrase": 2
+    },
+    {
+      "t": 8,
+      "d": 1.45,
+      "notes": [
+        36,
+        43
+      ],
+      "v": 0.19,
+      "voice": "bass",
+      "kind": "sustain",
+      "sector": 0,
+      "phrase": 2
+    },
+    {
+      "t": 8.25,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.39741917285573436,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 1,
+      "phrase": 2
+    },
+    {
+      "t": 8.5,
+      "d": 0.18,
+      "notes": [
+        65
+      ],
+      "v": 0.20292624435260223,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 2,
+      "phrase": 2
+    },
+    {
+      "t": 8.75,
+      "d": 0.18,
+      "notes": [
+        67
+      ],
+      "v": 0.25753760593652264,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 3,
+      "phrase": 2
+    },
+    {
+      "t": 9,
+      "d": 0.18,
+      "notes": [
+        65
+      ],
+      "v": 0.2760250417986754,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 4,
+      "phrase": 2
+    },
+    {
+      "t": 9.25,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.30772784657747254,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 5,
+      "phrase": 2
+    },
+    {
+      "t": 9.5,
+      "d": 0.18,
+      "notes": [
+        57
+      ],
+      "v": 0.3183679097950517,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 6,
+      "phrase": 2
+    },
+    {
+      "t": 9.75,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.3367458383610938,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 7,
+      "phrase": 2
+    },
+    {
+      "t": 10,
+      "d": 0.18,
+      "notes": [
+        53
+      ],
+      "v": 0.37333981358533497,
+      "voice": "mineral",
+      "kind": "ridge",
+      "sector": 8,
+      "phrase": 2
+    },
+    {
+      "t": 10,
+      "d": 1.45,
+      "notes": [
+        36,
+        43
+      ],
+      "v": 0.19,
+      "voice": "bass",
+      "kind": "sustain",
+      "sector": 8,
+      "phrase": 2
+    },
+    {
+      "t": 10.25,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.3206808861192258,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 9,
+      "phrase": 2
+    },
+    {
+      "t": 10.5,
+      "d": 0.18,
+      "notes": [
+        65
+      ],
+      "v": 0.2675608453748282,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 10,
+      "phrase": 2
+    },
+    {
+      "t": 10.75,
+      "d": 0.18,
+      "notes": [
+        67
+      ],
+      "v": 0.3261123628741188,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 11,
+      "phrase": 2
+    },
+    {
+      "t": 11,
+      "d": 0.18,
+      "notes": [
+        65
+      ],
+      "v": 0.2923218532945612,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 12,
+      "phrase": 2
+    },
+    {
+      "t": 11.25,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.31015208981152687,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 13,
+      "phrase": 2
+    },
+    {
+      "t": 11.5,
+      "d": 0.18,
+      "notes": [
+        57
+      ],
+      "v": 0.39935569607187066,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 14,
+      "phrase": 2
+    },
+    {
+      "t": 11.75,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.2628250969763031,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 15,
+      "phrase": 2
+    },
+    {
+      "t": 12,
+      "d": 0.18,
+      "notes": [
+        53
+      ],
+      "v": 0.21911680331395475,
+      "voice": "mineral",
+      "kind": "ridge",
+      "sector": 0,
+      "phrase": 3
+    },
+    {
+      "t": 12,
+      "d": 1.45,
+      "notes": [
+        36,
+        43
+      ],
+      "v": 0.19,
+      "voice": "bass",
+      "kind": "sustain",
+      "sector": 0,
+      "phrase": 3
+    },
+    {
+      "t": 12.25,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.211938307856326,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 1,
+      "phrase": 3
+    },
+    {
+      "t": 12.5,
+      "d": 0.18,
+      "notes": [
+        65
+      ],
+      "v": 0.34186486157122997,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 2,
+      "phrase": 3
+    },
+    {
+      "t": 12.75,
+      "d": 0.18,
+      "notes": [
+        67
+      ],
+      "v": 0.35066080616088585,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 3,
+      "phrase": 3
+    },
+    {
+      "t": 13,
+      "d": 0.18,
+      "notes": [
+        65
+      ],
+      "v": 0.2639423090586206,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 4,
+      "phrase": 3
+    },
+    {
+      "t": 13.25,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.33964220997149824,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 5,
+      "phrase": 3
+    },
+    {
+      "t": 13.5,
+      "d": 0.18,
+      "notes": [
+        57
+      ],
+      "v": 0.2904061602675938,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 6,
+      "phrase": 3
+    },
+    {
+      "t": 13.75,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.3824482212265139,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 7,
+      "phrase": 3
+    },
+    {
+      "t": 14,
+      "d": 0.18,
+      "notes": [
+        53
+      ],
+      "v": 0.37089670127570573,
+      "voice": "mineral",
+      "kind": "ridge",
+      "sector": 8,
+      "phrase": 3
+    },
+    {
+      "t": 14,
+      "d": 1.45,
+      "notes": [
+        36,
+        43
+      ],
+      "v": 0.19,
+      "voice": "bass",
+      "kind": "sustain",
+      "sector": 8,
+      "phrase": 3
+    },
+    {
+      "t": 14.25,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.3011071629603976,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 9,
+      "phrase": 3
+    },
+    {
+      "t": 14.5,
+      "d": 0.18,
+      "notes": [
+        65
+      ],
+      "v": 0.3218339862430639,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 10,
+      "phrase": 3
+    },
+    {
+      "t": 14.75,
+      "d": 0.18,
+      "notes": [
+        67
+      ],
+      "v": 0.3497507589039742,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 11,
+      "phrase": 3
+    },
+    {
+      "t": 15,
+      "d": 0.18,
+      "notes": [
+        65
+      ],
+      "v": 0.30900892298595867,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 12,
+      "phrase": 3
+    },
+    {
+      "t": 15.25,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.3733113890979439,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 13,
+      "phrase": 3
+    },
+    {
+      "t": 15.5,
+      "d": 0.18,
+      "notes": [
+        57
+      ],
+      "v": 0.38613199281389826,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 14,
+      "phrase": 3
+    },
+    {
+      "t": 15.75,
+      "d": 0.18,
+      "notes": [
+        60
+      ],
+      "v": 0.3779740603044047,
+      "voice": "mineral",
+      "kind": "grain",
+      "sector": 15,
+      "phrase": 3
+    }
+  ],
+  "walls": null,
+  "source": null
+}

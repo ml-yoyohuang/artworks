@@ -1,0 +1,1491 @@
+{
+  "schemaVersion": 1,
+  "id": "original-05-phase-tides",
+  "name": "相位潮汐 · 原創音源",
+  "kind": "original",
+  "composer": "SOUND / 3 — Codex for ml-yoyohuang, 2026",
+  "section": null,
+  "duration": 240,
+  "seed": 4172,
+  "transpose": 0,
+  "events": [
+    {
+      "t": 0,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 0
+    },
+    {
+      "t": 0.22857142857142856,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 0
+    },
+    {
+      "t": 4,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 1
+    },
+    {
+      "t": 4.038095238095238,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 1
+    },
+    {
+      "t": 7.847619047619047,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 2
+    },
+    {
+      "t": 8,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 2
+    },
+    {
+      "t": 11.657142857142857,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 3
+    },
+    {
+      "t": 12,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 3
+    },
+    {
+      "t": 15.466666666666665,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 4
+    },
+    {
+      "t": 16,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 4
+    },
+    {
+      "t": 19.276190476190475,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 5
+    },
+    {
+      "t": 20,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 5
+    },
+    {
+      "t": 23.085714285714282,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 6
+    },
+    {
+      "t": 24,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 6
+    },
+    {
+      "t": 26.895238095238092,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 7
+    },
+    {
+      "t": 28,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 7
+    },
+    {
+      "t": 30.704761904761906,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 8
+    },
+    {
+      "t": 32,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 8
+    },
+    {
+      "t": 34.51428571428571,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 9
+    },
+    {
+      "t": 36,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 9
+    },
+    {
+      "t": 38.32380952380952,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 10
+    },
+    {
+      "t": 40,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 10
+    },
+    {
+      "t": 42.13333333333333,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 11
+    },
+    {
+      "t": 44,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 11
+    },
+    {
+      "t": 45.94285714285714,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 12
+    },
+    {
+      "t": 48,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 12
+    },
+    {
+      "t": 49.75238095238095,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 13
+    },
+    {
+      "t": 52,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 13
+    },
+    {
+      "t": 53.56190476190476,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 14
+    },
+    {
+      "t": 56,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 14
+    },
+    {
+      "t": 57.371428571428574,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 15
+    },
+    {
+      "t": 60,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 15
+    },
+    {
+      "t": 61.18095238095238,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 16
+    },
+    {
+      "t": 64,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 16
+    },
+    {
+      "t": 64.99047619047619,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 17
+    },
+    {
+      "t": 68,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 17
+    },
+    {
+      "t": 68.8,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 18
+    },
+    {
+      "t": 72,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 18
+    },
+    {
+      "t": 72.60952380952381,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 19
+    },
+    {
+      "t": 76,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 19
+    },
+    {
+      "t": 76.41904761904762,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 20
+    },
+    {
+      "t": 80,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 20
+    },
+    {
+      "t": 80.22857142857141,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 21
+    },
+    {
+      "t": 84,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 21
+    },
+    {
+      "t": 84.03809523809522,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 22
+    },
+    {
+      "t": 87.84761904761903,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 23
+    },
+    {
+      "t": 88,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 22
+    },
+    {
+      "t": 91.65714285714284,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 24
+    },
+    {
+      "t": 92,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 23
+    },
+    {
+      "t": 95.46666666666665,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 25
+    },
+    {
+      "t": 96,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 24
+    },
+    {
+      "t": 99.27619047619046,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 26
+    },
+    {
+      "t": 100,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 25
+    },
+    {
+      "t": 103.08571428571427,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 27
+    },
+    {
+      "t": 104,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 26
+    },
+    {
+      "t": 106.89523809523808,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 28
+    },
+    {
+      "t": 108,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 27
+    },
+    {
+      "t": 110.7047619047619,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 29
+    },
+    {
+      "t": 112,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 28
+    },
+    {
+      "t": 114.5142857142857,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 30
+    },
+    {
+      "t": 116,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 29
+    },
+    {
+      "t": 118.32380952380952,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 31
+    },
+    {
+      "t": 120,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 30
+    },
+    {
+      "t": 122.13333333333334,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 32
+    },
+    {
+      "t": 124,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 31
+    },
+    {
+      "t": 125.94285714285715,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 33
+    },
+    {
+      "t": 128,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 32
+    },
+    {
+      "t": 129.75238095238095,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 34
+    },
+    {
+      "t": 132,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 33
+    },
+    {
+      "t": 133.56190476190477,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 35
+    },
+    {
+      "t": 136,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 34
+    },
+    {
+      "t": 137.37142857142857,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 36
+    },
+    {
+      "t": 140,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 35
+    },
+    {
+      "t": 141.1809523809524,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 37
+    },
+    {
+      "t": 144,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 36
+    },
+    {
+      "t": 144.9904761904762,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 38
+    },
+    {
+      "t": 148,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 37
+    },
+    {
+      "t": 148.8,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 39
+    },
+    {
+      "t": 152,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 38
+    },
+    {
+      "t": 152.6095238095238,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 40
+    },
+    {
+      "t": 156,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 39
+    },
+    {
+      "t": 156.41904761904763,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 41
+    },
+    {
+      "t": 160,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 40
+    },
+    {
+      "t": 160.22857142857143,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 42
+    },
+    {
+      "t": 164,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 41
+    },
+    {
+      "t": 164.03809523809525,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 43
+    },
+    {
+      "t": 167.84761904761905,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 44
+    },
+    {
+      "t": 168,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 42
+    },
+    {
+      "t": 171.65714285714287,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 45
+    },
+    {
+      "t": 172,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 43
+    },
+    {
+      "t": 175.46666666666667,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 46
+    },
+    {
+      "t": 176,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 44
+    },
+    {
+      "t": 179.27619047619046,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 47
+    },
+    {
+      "t": 180,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 45
+    },
+    {
+      "t": 183.0857142857143,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 48
+    },
+    {
+      "t": 184,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 46
+    },
+    {
+      "t": 186.89523809523808,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 49
+    },
+    {
+      "t": 188,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 47
+    },
+    {
+      "t": 190.7047619047619,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 50
+    },
+    {
+      "t": 192,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 48
+    },
+    {
+      "t": 194.5142857142857,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 51
+    },
+    {
+      "t": 196,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 49
+    },
+    {
+      "t": 198.32380952380953,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 52
+    },
+    {
+      "t": 200,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 50
+    },
+    {
+      "t": 202.13333333333333,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 53
+    },
+    {
+      "t": 204,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 51
+    },
+    {
+      "t": 205.94285714285715,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 54
+    },
+    {
+      "t": 208,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 52
+    },
+    {
+      "t": 209.75238095238095,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 55
+    },
+    {
+      "t": 212,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 53
+    },
+    {
+      "t": 213.56190476190477,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 56
+    },
+    {
+      "t": 216,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 54
+    },
+    {
+      "t": 217.37142857142857,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 57
+    },
+    {
+      "t": 220,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 55
+    },
+    {
+      "t": 221.1809523809524,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 58
+    },
+    {
+      "t": 224,
+      "d": 1.2,
+      "notes": [
+        48
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 56
+    },
+    {
+      "t": 224.9904761904762,
+      "d": 1.2,
+      "notes": [
+        74
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 59
+    },
+    {
+      "t": 228,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 57
+    },
+    {
+      "t": 228.8,
+      "d": 1.2,
+      "notes": [
+        55
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 60
+    },
+    {
+      "t": 232,
+      "d": 1.2,
+      "notes": [
+        60
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 58
+    },
+    {
+      "t": 232.6095238095238,
+      "d": 1.2,
+      "notes": [
+        62
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 61
+    },
+    {
+      "t": 236,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideA",
+      "kind": "tide",
+      "layer": 0,
+      "phase": 59
+    },
+    {
+      "t": 236.41904761904763,
+      "d": 1.2,
+      "notes": [
+        67
+      ],
+      "v": 0.22,
+      "voice": "tideB",
+      "kind": "tide",
+      "layer": 1,
+      "phase": 62
+    }
+  ],
+  "walls": null,
+  "source": null
+}

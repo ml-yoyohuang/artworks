@@ -1,0 +1,1391 @@
+{
+  "schemaVersion": 1,
+  "id": "original-02-chord-loom",
+  "name": "和弦織機 · 原創音源",
+  "kind": "original",
+  "composer": "SOUND / 3 — Codex for ml-yoyohuang, 2026",
+  "section": null,
+  "duration": 32,
+  "seed": 4172,
+  "transpose": 0,
+  "events": [
+    {
+      "t": 0,
+      "d": 0.3,
+      "notes": [
+        60
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 0,
+      "phrase": 0,
+      "pos": 0,
+      "voiceIndex": 1
+    },
+    {
+      "t": 0,
+      "d": 1.75,
+      "notes": [
+        36
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 0,
+      "voiceIndex": 0
+    },
+    {
+      "t": 0.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 0,
+      "voiceIndex": 2
+    },
+    {
+      "t": 0.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 1,
+      "phrase": 0,
+      "pos": 1,
+      "voiceIndex": 1
+    },
+    {
+      "t": 1,
+      "d": 0.3,
+      "notes": [
+        67
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 2,
+      "phrase": 0,
+      "pos": 2,
+      "voiceIndex": 1
+    },
+    {
+      "t": 1.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 2,
+      "voiceIndex": 2
+    },
+    {
+      "t": 1.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 3,
+      "phrase": 0,
+      "pos": 3,
+      "voiceIndex": 1
+    },
+    {
+      "t": 2,
+      "d": 0.3,
+      "notes": [
+        62
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 4,
+      "phrase": 0,
+      "pos": 4,
+      "voiceIndex": 1
+    },
+    {
+      "t": 2,
+      "d": 1.75,
+      "notes": [
+        36
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 4,
+      "voiceIndex": 0
+    },
+    {
+      "t": 2.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 4,
+      "voiceIndex": 2
+    },
+    {
+      "t": 2.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 5,
+      "phrase": 0,
+      "pos": 5,
+      "voiceIndex": 1
+    },
+    {
+      "t": 3,
+      "d": 0.3,
+      "notes": [
+        69
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 6,
+      "phrase": 0,
+      "pos": 6,
+      "voiceIndex": 1
+    },
+    {
+      "t": 3.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 6,
+      "voiceIndex": 2
+    },
+    {
+      "t": 3.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 7,
+      "phrase": 0,
+      "pos": 7,
+      "voiceIndex": 1
+    },
+    {
+      "t": 4,
+      "d": 0.3,
+      "notes": [
+        60
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 8,
+      "phrase": 0,
+      "pos": 8,
+      "voiceIndex": 1
+    },
+    {
+      "t": 4,
+      "d": 1.75,
+      "notes": [
+        36
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 8,
+      "voiceIndex": 0
+    },
+    {
+      "t": 4.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 8,
+      "voiceIndex": 2
+    },
+    {
+      "t": 4.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 9,
+      "phrase": 0,
+      "pos": 9,
+      "voiceIndex": 1
+    },
+    {
+      "t": 5,
+      "d": 0.3,
+      "notes": [
+        67
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 10,
+      "phrase": 0,
+      "pos": 10,
+      "voiceIndex": 1
+    },
+    {
+      "t": 5.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 10,
+      "voiceIndex": 2
+    },
+    {
+      "t": 5.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 11,
+      "phrase": 0,
+      "pos": 11,
+      "voiceIndex": 1
+    },
+    {
+      "t": 6,
+      "d": 0.3,
+      "notes": [
+        62
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 12,
+      "phrase": 0,
+      "pos": 12,
+      "voiceIndex": 1
+    },
+    {
+      "t": 6,
+      "d": 1.75,
+      "notes": [
+        36
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 12,
+      "voiceIndex": 0
+    },
+    {
+      "t": 6.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 12,
+      "voiceIndex": 2
+    },
+    {
+      "t": 6.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 13,
+      "phrase": 0,
+      "pos": 13,
+      "voiceIndex": 1
+    },
+    {
+      "t": 7,
+      "d": 0.3,
+      "notes": [
+        69
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 14,
+      "phrase": 0,
+      "pos": 14,
+      "voiceIndex": 1
+    },
+    {
+      "t": 7.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 14,
+      "voiceIndex": 2
+    },
+    {
+      "t": 7.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 15,
+      "phrase": 0,
+      "pos": 15,
+      "voiceIndex": 1
+    },
+    {
+      "t": 8,
+      "d": 0.3,
+      "notes": [
+        60
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 16,
+      "phrase": 1,
+      "pos": 0,
+      "voiceIndex": 1
+    },
+    {
+      "t": 8,
+      "d": 1.75,
+      "notes": [
+        41
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 16,
+      "voiceIndex": 0
+    },
+    {
+      "t": 8.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 16,
+      "voiceIndex": 2
+    },
+    {
+      "t": 8.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 17,
+      "phrase": 1,
+      "pos": 1,
+      "voiceIndex": 1
+    },
+    {
+      "t": 9,
+      "d": 0.3,
+      "notes": [
+        67
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 18,
+      "phrase": 1,
+      "pos": 2,
+      "voiceIndex": 1
+    },
+    {
+      "t": 9.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 18,
+      "voiceIndex": 2
+    },
+    {
+      "t": 9.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 19,
+      "phrase": 1,
+      "pos": 3,
+      "voiceIndex": 1
+    },
+    {
+      "t": 10,
+      "d": 0.3,
+      "notes": [
+        62
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 20,
+      "phrase": 1,
+      "pos": 4,
+      "voiceIndex": 1
+    },
+    {
+      "t": 10,
+      "d": 1.75,
+      "notes": [
+        41
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 20,
+      "voiceIndex": 0
+    },
+    {
+      "t": 10.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 20,
+      "voiceIndex": 2
+    },
+    {
+      "t": 10.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 21,
+      "phrase": 1,
+      "pos": 5,
+      "voiceIndex": 1
+    },
+    {
+      "t": 11,
+      "d": 0.3,
+      "notes": [
+        69
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 22,
+      "phrase": 1,
+      "pos": 6,
+      "voiceIndex": 1
+    },
+    {
+      "t": 11.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 22,
+      "voiceIndex": 2
+    },
+    {
+      "t": 11.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 23,
+      "phrase": 1,
+      "pos": 7,
+      "voiceIndex": 1
+    },
+    {
+      "t": 12,
+      "d": 0.3,
+      "notes": [
+        60
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 24,
+      "phrase": 1,
+      "pos": 8,
+      "voiceIndex": 1
+    },
+    {
+      "t": 12,
+      "d": 1.75,
+      "notes": [
+        41
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 24,
+      "voiceIndex": 0
+    },
+    {
+      "t": 12.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 24,
+      "voiceIndex": 2
+    },
+    {
+      "t": 12.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 25,
+      "phrase": 1,
+      "pos": 9,
+      "voiceIndex": 1
+    },
+    {
+      "t": 13,
+      "d": 0.3,
+      "notes": [
+        67
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 26,
+      "phrase": 1,
+      "pos": 10,
+      "voiceIndex": 1
+    },
+    {
+      "t": 13.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 26,
+      "voiceIndex": 2
+    },
+    {
+      "t": 13.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 27,
+      "phrase": 1,
+      "pos": 11,
+      "voiceIndex": 1
+    },
+    {
+      "t": 14,
+      "d": 0.3,
+      "notes": [
+        62
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 28,
+      "phrase": 1,
+      "pos": 12,
+      "voiceIndex": 1
+    },
+    {
+      "t": 14,
+      "d": 1.75,
+      "notes": [
+        41
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 28,
+      "voiceIndex": 0
+    },
+    {
+      "t": 14.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 28,
+      "voiceIndex": 2
+    },
+    {
+      "t": 14.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 29,
+      "phrase": 1,
+      "pos": 13,
+      "voiceIndex": 1
+    },
+    {
+      "t": 15,
+      "d": 0.3,
+      "notes": [
+        69
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 30,
+      "phrase": 1,
+      "pos": 14,
+      "voiceIndex": 1
+    },
+    {
+      "t": 15.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 30,
+      "voiceIndex": 2
+    },
+    {
+      "t": 15.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 31,
+      "phrase": 1,
+      "pos": 15,
+      "voiceIndex": 1
+    },
+    {
+      "t": 16,
+      "d": 0.3,
+      "notes": [
+        67
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 32,
+      "phrase": 2,
+      "pos": 0,
+      "voiceIndex": 1
+    },
+    {
+      "t": 16,
+      "d": 1.75,
+      "notes": [
+        43
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 32,
+      "voiceIndex": 0
+    },
+    {
+      "t": 16.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 32,
+      "voiceIndex": 2
+    },
+    {
+      "t": 16.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 33,
+      "phrase": 2,
+      "pos": 1,
+      "voiceIndex": 1
+    },
+    {
+      "t": 17,
+      "d": 0.3,
+      "notes": [
+        62
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 34,
+      "phrase": 2,
+      "pos": 2,
+      "voiceIndex": 1
+    },
+    {
+      "t": 17.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 34,
+      "voiceIndex": 2
+    },
+    {
+      "t": 17.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 35,
+      "phrase": 2,
+      "pos": 3,
+      "voiceIndex": 1
+    },
+    {
+      "t": 18,
+      "d": 0.3,
+      "notes": [
+        69
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 36,
+      "phrase": 2,
+      "pos": 4,
+      "voiceIndex": 1
+    },
+    {
+      "t": 18,
+      "d": 1.75,
+      "notes": [
+        43
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 36,
+      "voiceIndex": 0
+    },
+    {
+      "t": 18.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 36,
+      "voiceIndex": 2
+    },
+    {
+      "t": 18.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 37,
+      "phrase": 2,
+      "pos": 5,
+      "voiceIndex": 1
+    },
+    {
+      "t": 19,
+      "d": 0.3,
+      "notes": [
+        60
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 38,
+      "phrase": 2,
+      "pos": 6,
+      "voiceIndex": 1
+    },
+    {
+      "t": 19.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 38,
+      "voiceIndex": 2
+    },
+    {
+      "t": 19.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 39,
+      "phrase": 2,
+      "pos": 7,
+      "voiceIndex": 1
+    },
+    {
+      "t": 20,
+      "d": 0.3,
+      "notes": [
+        67
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 40,
+      "phrase": 2,
+      "pos": 8,
+      "voiceIndex": 1
+    },
+    {
+      "t": 20,
+      "d": 1.75,
+      "notes": [
+        43
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 40,
+      "voiceIndex": 0
+    },
+    {
+      "t": 20.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 40,
+      "voiceIndex": 2
+    },
+    {
+      "t": 20.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 41,
+      "phrase": 2,
+      "pos": 9,
+      "voiceIndex": 1
+    },
+    {
+      "t": 21,
+      "d": 0.3,
+      "notes": [
+        62
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 42,
+      "phrase": 2,
+      "pos": 10,
+      "voiceIndex": 1
+    },
+    {
+      "t": 21.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 42,
+      "voiceIndex": 2
+    },
+    {
+      "t": 21.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 43,
+      "phrase": 2,
+      "pos": 11,
+      "voiceIndex": 1
+    },
+    {
+      "t": 22,
+      "d": 0.3,
+      "notes": [
+        69
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 44,
+      "phrase": 2,
+      "pos": 12,
+      "voiceIndex": 1
+    },
+    {
+      "t": 22,
+      "d": 1.75,
+      "notes": [
+        43
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 44,
+      "voiceIndex": 0
+    },
+    {
+      "t": 22.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 44,
+      "voiceIndex": 2
+    },
+    {
+      "t": 22.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 45,
+      "phrase": 2,
+      "pos": 13,
+      "voiceIndex": 1
+    },
+    {
+      "t": 23,
+      "d": 0.3,
+      "notes": [
+        60
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 46,
+      "phrase": 2,
+      "pos": 14,
+      "voiceIndex": 1
+    },
+    {
+      "t": 23.25,
+      "d": 0.13,
+      "notes": [
+        84
+      ],
+      "v": 0.23,
+      "voice": "drum",
+      "kind": "knot",
+      "row": 46,
+      "voiceIndex": 2
+    },
+    {
+      "t": 23.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 47,
+      "phrase": 2,
+      "pos": 15,
+      "voiceIndex": 1
+    },
+    {
+      "t": 24,
+      "d": 0.3,
+      "notes": [
+        60
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 48,
+      "phrase": 3,
+      "pos": 0,
+      "voiceIndex": 1
+    },
+    {
+      "t": 24,
+      "d": 1.75,
+      "notes": [
+        41
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 48,
+      "voiceIndex": 0
+    },
+    {
+      "t": 24.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 49,
+      "phrase": 3,
+      "pos": 1,
+      "voiceIndex": 1
+    },
+    {
+      "t": 25,
+      "d": 0.3,
+      "notes": [
+        67
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 50,
+      "phrase": 3,
+      "pos": 2,
+      "voiceIndex": 1
+    },
+    {
+      "t": 25.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 51,
+      "phrase": 3,
+      "pos": 3,
+      "voiceIndex": 1
+    },
+    {
+      "t": 26,
+      "d": 0.3,
+      "notes": [
+        62
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 52,
+      "phrase": 3,
+      "pos": 4,
+      "voiceIndex": 1
+    },
+    {
+      "t": 26,
+      "d": 1.75,
+      "notes": [
+        41
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 52,
+      "voiceIndex": 0
+    },
+    {
+      "t": 26.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 53,
+      "phrase": 3,
+      "pos": 5,
+      "voiceIndex": 1
+    },
+    {
+      "t": 27,
+      "d": 0.3,
+      "notes": [
+        69
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 54,
+      "phrase": 3,
+      "pos": 6,
+      "voiceIndex": 1
+    },
+    {
+      "t": 27.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 55,
+      "phrase": 3,
+      "pos": 7,
+      "voiceIndex": 1
+    },
+    {
+      "t": 28,
+      "d": 0.3,
+      "notes": [
+        60
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 56,
+      "phrase": 3,
+      "pos": 8,
+      "voiceIndex": 1
+    },
+    {
+      "t": 28,
+      "d": 1.75,
+      "notes": [
+        41
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 56,
+      "voiceIndex": 0
+    },
+    {
+      "t": 28.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 57,
+      "phrase": 3,
+      "pos": 9,
+      "voiceIndex": 1
+    },
+    {
+      "t": 29,
+      "d": 0.3,
+      "notes": [
+        67
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 58,
+      "phrase": 3,
+      "pos": 10,
+      "voiceIndex": 1
+    },
+    {
+      "t": 29.5,
+      "d": 0.3,
+      "notes": [
+        64
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 59,
+      "phrase": 3,
+      "pos": 11,
+      "voiceIndex": 1
+    },
+    {
+      "t": 30,
+      "d": 0.3,
+      "notes": [
+        62
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 60,
+      "phrase": 3,
+      "pos": 12,
+      "voiceIndex": 1
+    },
+    {
+      "t": 30,
+      "d": 1.75,
+      "notes": [
+        41
+      ],
+      "v": 0.34,
+      "voice": "bass",
+      "kind": "warp",
+      "row": 60,
+      "voiceIndex": 0
+    },
+    {
+      "t": 30.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 61,
+      "phrase": 3,
+      "pos": 13,
+      "voiceIndex": 1
+    },
+    {
+      "t": 31,
+      "d": 0.3,
+      "notes": [
+        69
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 62,
+      "phrase": 3,
+      "pos": 14,
+      "voiceIndex": 1
+    },
+    {
+      "t": 31.5,
+      "d": 0.3,
+      "notes": [
+        65
+      ],
+      "v": 0.27,
+      "voice": "fiber",
+      "kind": "weft",
+      "row": 63,
+      "phrase": 3,
+      "pos": 15,
+      "voiceIndex": 1
+    }
+  ],
+  "walls": null,
+  "source": null
+}

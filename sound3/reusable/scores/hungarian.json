@@ -1,0 +1,587 @@
+{
+  "schemaVersion": 1,
+  "id": "hungarian",
+  "name": "匈牙利舞曲第 5 號",
+  "kind": "classical-arrangement",
+  "composer": "Johannes Brahms",
+  "section": "WoO 1, No.5 · 開頭主題（移調至 G 小調）",
+  "duration": 32,
+  "seed": 4172,
+  "transpose": 0,
+  "events": [
+    {
+      "t": 0.12,
+      "d": 0.55528,
+      "notes": [
+        74
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 0,
+      "beat": 0
+    },
+    {
+      "t": 0.12,
+      "d": 2.1454,
+      "notes": [
+        43,
+        50
+      ],
+      "v": 0.16,
+      "voice": "piano",
+      "part": "bass",
+      "beat": 0
+    },
+    {
+      "t": 0.751,
+      "d": 1.11056,
+      "notes": [
+        79
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 1,
+      "beat": 0.5
+    },
+    {
+      "t": 2.013,
+      "d": 0.55528,
+      "notes": [
+        82
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 2,
+      "beat": 1.5
+    },
+    {
+      "t": 2.644,
+      "d": 0.55528,
+      "notes": [
+        81
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 3,
+      "beat": 2
+    },
+    {
+      "t": 2.644,
+      "d": 2.1454,
+      "notes": [
+        50,
+        57
+      ],
+      "v": 0.16,
+      "voice": "piano",
+      "part": "bass",
+      "beat": 2
+    },
+    {
+      "t": 3.2750000000000004,
+      "d": 0.55528,
+      "notes": [
+        79
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 4,
+      "beat": 2.5
+    },
+    {
+      "t": 3.906,
+      "d": 0.55528,
+      "notes": [
+        78
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 5,
+      "beat": 3
+    },
+    {
+      "t": 4.537,
+      "d": 0.55528,
+      "notes": [
+        79
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 6,
+      "beat": 3.5
+    },
+    {
+      "t": 5.168,
+      "d": 1.11056,
+      "notes": [
+        81
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 7,
+      "beat": 4
+    },
+    {
+      "t": 5.168,
+      "d": 2.1454,
+      "notes": [
+        43,
+        50
+      ],
+      "v": 0.16,
+      "voice": "piano",
+      "part": "bass",
+      "beat": 4
+    },
+    {
+      "t": 6.430000000000001,
+      "d": 1.11056,
+      "notes": [
+        74
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 8,
+      "beat": 5
+    },
+    {
+      "t": 7.692,
+      "d": 0.55528,
+      "notes": [
+        74
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 9,
+      "beat": 6
+    },
+    {
+      "t": 7.692,
+      "d": 2.1454,
+      "notes": [
+        50,
+        57
+      ],
+      "v": 0.16,
+      "voice": "piano",
+      "part": "bass",
+      "beat": 6
+    },
+    {
+      "t": 8.322999999999999,
+      "d": 1.11056,
+      "notes": [
+        79
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 10,
+      "beat": 6.5
+    },
+    {
+      "t": 9.584999999999999,
+      "d": 0.55528,
+      "notes": [
+        82
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 11,
+      "beat": 7.5
+    },
+    {
+      "t": 10.216,
+      "d": 0.55528,
+      "notes": [
+        81
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 12,
+      "beat": 8
+    },
+    {
+      "t": 10.216,
+      "d": 2.1454,
+      "notes": [
+        46,
+        53
+      ],
+      "v": 0.16,
+      "voice": "piano",
+      "part": "bass",
+      "beat": 8
+    },
+    {
+      "t": 10.847,
+      "d": 0.55528,
+      "notes": [
+        79
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 13,
+      "beat": 8.5
+    },
+    {
+      "t": 11.478,
+      "d": 0.55528,
+      "notes": [
+        78
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 14,
+      "beat": 9
+    },
+    {
+      "t": 12.109,
+      "d": 0.55528,
+      "notes": [
+        79
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 15,
+      "beat": 9.5
+    },
+    {
+      "t": 12.74,
+      "d": 1.11056,
+      "notes": [
+        81
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 16,
+      "beat": 10
+    },
+    {
+      "t": 12.74,
+      "d": 2.1454,
+      "notes": [
+        41,
+        48
+      ],
+      "v": 0.16,
+      "voice": "piano",
+      "part": "bass",
+      "beat": 10
+    },
+    {
+      "t": 14.001999999999999,
+      "d": 1.11056,
+      "notes": [
+        74
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 17,
+      "beat": 11
+    },
+    {
+      "t": 15.264,
+      "d": 0.55528,
+      "notes": [
+        82
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 18,
+      "beat": 12
+    },
+    {
+      "t": 15.264,
+      "d": 2.1454,
+      "notes": [
+        50,
+        57
+      ],
+      "v": 0.16,
+      "voice": "piano",
+      "part": "bass",
+      "beat": 12
+    },
+    {
+      "t": 15.895,
+      "d": 0.55528,
+      "notes": [
+        84
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 19,
+      "beat": 12.5
+    },
+    {
+      "t": 16.526,
+      "d": 1.11056,
+      "notes": [
+        86
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 20,
+      "beat": 13
+    },
+    {
+      "t": 17.788,
+      "d": 0.55528,
+      "notes": [
+        84
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 21,
+      "beat": 14
+    },
+    {
+      "t": 17.788,
+      "d": 2.1454,
+      "notes": [
+        43,
+        50
+      ],
+      "v": 0.16,
+      "voice": "piano",
+      "part": "bass",
+      "beat": 14
+    },
+    {
+      "t": 18.419,
+      "d": 0.55528,
+      "notes": [
+        82
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 22,
+      "beat": 14.5
+    },
+    {
+      "t": 19.05,
+      "d": 0.55528,
+      "notes": [
+        81
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 23,
+      "beat": 15
+    },
+    {
+      "t": 19.681,
+      "d": 0.55528,
+      "notes": [
+        82
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 24,
+      "beat": 15.5
+    },
+    {
+      "t": 20.312,
+      "d": 1.11056,
+      "notes": [
+        84
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 25,
+      "beat": 16
+    },
+    {
+      "t": 20.312,
+      "d": 2.1454,
+      "notes": [
+        43,
+        50
+      ],
+      "v": 0.16,
+      "voice": "piano",
+      "part": "bass",
+      "beat": 16
+    },
+    {
+      "t": 21.574,
+      "d": 0.55528,
+      "notes": [
+        82
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 26,
+      "beat": 17
+    },
+    {
+      "t": 22.205000000000002,
+      "d": 0.55528,
+      "notes": [
+        81
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 27,
+      "beat": 17.5
+    },
+    {
+      "t": 22.836000000000002,
+      "d": 1.11056,
+      "notes": [
+        79
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 28,
+      "beat": 18
+    },
+    {
+      "t": 22.836000000000002,
+      "d": 2.1454,
+      "notes": [
+        50,
+        57
+      ],
+      "v": 0.16,
+      "voice": "piano",
+      "part": "bass",
+      "beat": 18
+    },
+    {
+      "t": 24.098000000000003,
+      "d": 0.55528,
+      "notes": [
+        78
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 29,
+      "beat": 19
+    },
+    {
+      "t": 24.729000000000003,
+      "d": 0.55528,
+      "notes": [
+        79
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 30,
+      "beat": 19.5
+    },
+    {
+      "t": 25.360000000000003,
+      "d": 1.11056,
+      "notes": [
+        81
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 31,
+      "beat": 20
+    },
+    {
+      "t": 25.360000000000003,
+      "d": 2.1454,
+      "notes": [
+        43,
+        50
+      ],
+      "v": 0.16,
+      "voice": "piano",
+      "part": "bass",
+      "beat": 20
+    },
+    {
+      "t": 26.622,
+      "d": 1.11056,
+      "notes": [
+        74
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 32,
+      "beat": 21
+    },
+    {
+      "t": 27.884,
+      "d": 2.22112,
+      "notes": [
+        79
+      ],
+      "v": 0.34,
+      "voice": "piano",
+      "part": "melody",
+      "row": 33,
+      "beat": 22
+    },
+    {
+      "t": 27.884,
+      "d": 2.1454,
+      "notes": [
+        50,
+        57
+      ],
+      "v": 0.16,
+      "voice": "piano",
+      "part": "bass",
+      "beat": 22
+    },
+    {
+      "t": 30.408,
+      "d": 1.262,
+      "notes": [],
+      "v": 0,
+      "part": "rest",
+      "beat": 24
+    },
+    {
+      "t": 30.408,
+      "d": 1.4919999999999987,
+      "notes": [
+        46,
+        53
+      ],
+      "v": 0.16,
+      "voice": "piano",
+      "part": "bass",
+      "beat": 24
+    }
+  ],
+  "walls": null,
+  "source": null
+}

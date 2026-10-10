@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "id": "original-01-resonant-architecture",
+  "name": "共振建築 · 原創音源",
+  "kind": "original",
+  "composer": "SOUND / 3 — Codex for ml-yoyohuang, 2026",
+  "section": null,
+  "duration": 32,
+  "seed": 4172,
+  "transpose": 0,
+  "events": [
+    {
+      "t": 0.15,
+      "d": 6.8,
+      "notes": [
+        48,
+        55,
+        60,
+        64
+      ],
+      "v": 0.24,
+      "voice": "organ",
+      "kind": "chord",
+      "chord": 0
+    },
+    {
+      "t": 4.4,
+      "d": 1.5,
+      "notes": [
+        72
+      ],
+      "v": 0.12,
+      "voice": "bell"
+    },
+    {
+      "t": 8.15,
+      "d": 6.8,
+      "notes": [
+        45,
+        52,
+        59,
+        64
+      ],
+      "v": 0.24,
+      "voice": "organ",
+      "kind": "chord",
+      "chord": 1
+    },
+    {
+      "t": 12.4,
+      "d": 1.5,
+      "notes": [
+        71
+      ],
+      "v": 0.12,
+      "voice": "bell"
+    },
+    {
+      "t": 16.15,
+      "d": 6.8,
+      "notes": [
+        41,
+        53,
+        57,
+        60
+      ],
+      "v": 0.24,
+      "voice": "organ",
+      "kind": "chord",
+      "chord": 2
+    },
+    {
+      "t": 20.4,
+      "d": 1.5,
+      "notes": [
+        69
+      ],
+      "v": 0.12,
+      "voice": "bell"
+    },
+    {
+      "t": 24.15,
+      "d": 6.8,
+      "notes": [
+        43,
+        50,
+        57,
+        62
+      ],
+      "v": 0.24,
+      "voice": "organ",
+      "kind": "chord",
+      "chord": 3
+    },
+    {
+      "t": 28.4,
+      "d": 1.5,
+      "notes": [
+        69
+      ],
+      "v": 0.12,
+      "voice": "bell"
+    }
+  ],
+  "walls": null,
+  "source": null
+}

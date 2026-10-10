@@ -1,0 +1,6 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+import {tracks,getScore} from '../reusable/library.js';import {score} from '../assets/js/model.js';import {classicalScore} from '../assets/js/classical.js';
+let checks=0;
+for(const t of tracks){const s=getScore(t.id),expected=t.kind==='original'?score(t.index,4172,{fossilDuration:16}).events:classicalScore(t.id);assert.deepEqual(s.events,expected);assert.deepEqual(JSON.parse(fs.readFileSync(new URL('../reusable/scores/'+t.id+'.json',import.meta.url))).events,expected);const changed=getScore(t.id,{duration:s.duration*2,transpose:2}),timed=t.kind==='original'?expected.map(e=>({...e,t:e.t*2,d:e.d*2})):classicalScore(t.id,s.duration*2);assert.equal(changed.events.length,timed.length);assert.deepEqual(changed.events.map(e=>[e.t,e.d,e.notes]),timed.map(e=>[e.t,e.d,e.notes.map(n=>n+2)]));assert(changed.events.every(e=>Number.isFinite(e.t)&&e.d>0&&e.notes.every(Number.isFinite)));checks+=5}
+assert.throws(()=>getScore('missing'));assert.throws(()=>getScore('canon',{duration:0}));assert.throws(()=>getScore('canon',{transpose:NaN}));checks+=3;
+fs.writeFileSync(new URL('../reusable/VERIFICATION.json',import.meta.url),JSON.stringify({pass:true,tracks:16,checks,sourceParity:true,jsonParity:true},null,2)+'\n');console.log(JSON.stringify({pass:true,tracks:16,checks}));

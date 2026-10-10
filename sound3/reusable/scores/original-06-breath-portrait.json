@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "original-06-breath-portrait",
+  "name": "呼吸雕塑 · 原創音源",
+  "kind": "original",
+  "composer": "SOUND / 3 — Codex for ml-yoyohuang, 2026",
+  "section": null,
+  "duration": 14,
+  "seed": 4172,
+  "transpose": 0,
+  "events": [
+    {
+      "t": 0.2,
+      "d": 4.2,
+      "notes": [
+        53
+      ],
+      "v": 0.25,
+      "voice": "voice",
+      "kind": "breath",
+      "pitch": 53,
+      "airy": 0.22
+    },
+    {
+      "t": 5,
+      "d": 3.1,
+      "notes": [
+        57
+      ],
+      "v": 0.36,
+      "voice": "voice",
+      "kind": "breath",
+      "pitch": 57,
+      "airy": 0.22
+    },
+    {
+      "t": 8.8,
+      "d": 3.6,
+      "notes": [],
+      "v": 0.3,
+      "voice": "breath",
+      "kind": "breath",
+      "pitch": null,
+      "airy": 0.95
+    }
+  ],
+  "walls": null,
+  "source": null
+}
