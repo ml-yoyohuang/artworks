@@ -1,0 +1,1523 @@
+{
+  "date": "2026-10-10T08:02:26.346Z",
+  "checks": [
+    {
+      "slug": "jelly-wave",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.008358868770301342,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "jelly-wave",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.04796948656439781,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "jelly-wave",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 10,
+      "voices": [
+        3,
+        4,
+        3
+      ],
+      "peak": 0.03177988529205322,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "jelly-wave",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.021902043372392654,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "jelly-wave",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 10,
+      "voices": [
+        2,
+        2,
+        6
+      ],
+      "peak": 0.004206463228911161,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "jelly-wave",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.02005756087601185,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "pendulum-swing",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.008362244814634323,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "pendulum-swing",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 8,
+      "voices": [
+        5,
+        3
+      ],
+      "peak": 0.049230244010686874,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "pendulum-swing",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 10,
+      "voices": [
+        3,
+        4,
+        3
+      ],
+      "peak": 0.028750108554959297,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "pendulum-swing",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.021342098712921143,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "pendulum-swing",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 10,
+      "voices": [
+        2,
+        2,
+        6
+      ],
+      "peak": 0.004724398255348206,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "pendulum-swing",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.026527080684900284,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "ribbon-dance",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.007687158416956663,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "ribbon-dance",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.04740728437900543,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "ribbon-dance",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 8,
+      "voices": [
+        2,
+        4,
+        2
+      ],
+      "peak": 0.03108060359954834,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "ribbon-dance",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.023980358615517616,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "ribbon-dance",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 10,
+      "voices": [
+        2,
+        2,
+        6
+      ],
+      "peak": 0.004558810032904148,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "ribbon-dance",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.02394527941942215,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "bubble-scale",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.00835185032337904,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "bubble-scale",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.04909416660666466,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "bubble-scale",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 10,
+      "voices": [
+        3,
+        4,
+        3
+      ],
+      "peak": 0.03177988529205322,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "bubble-scale",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.023199301213026047,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "bubble-scale",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 10,
+      "voices": [
+        2,
+        2,
+        6
+      ],
+      "peak": 0.004205751232802868,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "bubble-scale",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.02005756087601185,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "beat-candy",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.007655655033886433,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "beat-candy",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.05009167641401291,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "beat-candy",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 8,
+      "voices": [
+        2,
+        4,
+        2
+      ],
+      "peak": 0.03017919696867466,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "beat-candy",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.022282879799604416,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "beat-candy",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 8,
+      "voices": [
+        1,
+        2,
+        5
+      ],
+      "peak": 0.004958813078701496,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "beat-candy",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.02018684521317482,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "tap-floor",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.007338689174503088,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "tap-floor",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 8,
+      "voices": [
+        5,
+        3
+      ],
+      "peak": 0.027426429092884064,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "tap-floor",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 10,
+      "voices": [
+        3,
+        4,
+        3
+      ],
+      "peak": 0.02479008585214615,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "tap-floor",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.012922823429107666,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "tap-floor",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 10,
+      "voices": [
+        2,
+        2,
+        6
+      ],
+      "peak": 0.002766149817034602,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "tap-floor",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.01240939274430275,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.007338689174503088,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.046155139803886414,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 10,
+      "voices": [
+        3,
+        4,
+        3
+      ],
+      "peak": 0.03136520832777023,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.022282879799604416,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 10,
+      "voices": [
+        2,
+        2,
+        6
+      ],
+      "peak": 0.004132153932005167,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.019433436915278435,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "hopscotch",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.007331737317144871,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "hopscotch",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 8,
+      "voices": [
+        5,
+        3
+      ],
+      "peak": 0.0503636933863163,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "hopscotch",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 8,
+      "voices": [
+        2,
+        4,
+        2
+      ],
+      "peak": 0.03206471726298332,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "hopscotch",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.02435692958533764,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "hopscotch",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 10,
+      "voices": [
+        2,
+        2,
+        6
+      ],
+      "peak": 0.004766594618558884,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "hopscotch",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.021101363003253937,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "flower-choir",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.00835185032337904,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "flower-choir",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.05150754749774933,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "flower-choir",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 10,
+      "voices": [
+        3,
+        4,
+        3
+      ],
+      "peak": 0.03177988529205322,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "flower-choir",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.02115473710000515,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "flower-choir",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 8,
+      "voices": [
+        1,
+        2,
+        5
+      ],
+      "peak": 0.004206463228911161,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "flower-choir",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.02005756087601185,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "canon-ripples",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.00835185032337904,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "canon-ripples",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.05150754749774933,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "canon-ripples",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 10,
+      "voices": [
+        3,
+        4,
+        3
+      ],
+      "peak": 0.04256651923060417,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "canon-ripples",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.02117336355149746,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "canon-ripples",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 10,
+      "voices": [
+        2,
+        2,
+        6
+      ],
+      "peak": 0.004703968297690153,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "canon-ripples",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.020081033930182457,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "metronome-party",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.007693072780966759,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "metronome-party",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.049230244010686874,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "metronome-party",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 10,
+      "voices": [
+        3,
+        4,
+        3
+      ],
+      "peak": 0.03108195774257183,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "metronome-party",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.02105415239930153,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "metronome-party",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 10,
+      "voices": [
+        2,
+        2,
+        6
+      ],
+      "peak": 0.004724398255348206,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "metronome-party",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.019876020029187202,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "signal-band",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.008358868770301342,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "signal-band",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.04941505938768387,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "signal-band",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 10,
+      "voices": [
+        3,
+        4,
+        3
+      ],
+      "peak": 0.03344201669096947,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "signal-band",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.023980358615517616,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "signal-band",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 10,
+      "voices": [
+        2,
+        2,
+        6
+      ],
+      "peak": 0.004670674912631512,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "signal-band",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.02394527941942215,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "square-blocks",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.007687158416956663,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "square-blocks",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 8,
+      "voices": [
+        5,
+        3
+      ],
+      "peak": 0.026464026421308517,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "square-blocks",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 8,
+      "voices": [
+        2,
+        4,
+        2
+      ],
+      "peak": 0.025160061195492744,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "square-blocks",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.011974192224442959,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "square-blocks",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 10,
+      "voices": [
+        2,
+        2,
+        6
+      ],
+      "peak": 0.0030014619696885347,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "square-blocks",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.01569485291838646,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "saw-hills",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.00835185032337904,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "saw-hills",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 8,
+      "voices": [
+        5,
+        3
+      ],
+      "peak": 0.02914920635521412,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "saw-hills",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 10,
+      "voices": [
+        3,
+        4,
+        3
+      ],
+      "peak": 0.019511286169290543,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "saw-hills",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.011098960414528847,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "saw-hills",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 8,
+      "voices": [
+        1,
+        2,
+        5
+      ],
+      "peak": 0.0028123247902840376,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "saw-hills",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.015356210060417652,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "crayon-wave",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.007693072780966759,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "crayon-wave",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.04991498589515686,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "crayon-wave",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 10,
+      "voices": [
+        3,
+        4,
+        3
+      ],
+      "peak": 0.04235037788748741,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "crayon-wave",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.021845007315278053,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "crayon-wave",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 10,
+      "voices": [
+        2,
+        2,
+        6
+      ],
+      "peak": 0.004558810032904148,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "crayon-wave",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.028597388416528702,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "spring-dancer",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.0071748364716768265,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "spring-dancer",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.047620002180337906,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "spring-dancer",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 10,
+      "voices": [
+        3,
+        4,
+        3
+      ],
+      "peak": 0.03164762631058693,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "spring-dancer",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.020397983491420746,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "spring-dancer",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 8,
+      "voices": [
+        1,
+        2,
+        5
+      ],
+      "peak": 0.004669804126024246,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "spring-dancer",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.02093067578971386,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    }
+  ],
+  "errors": [],
+  "tempoChanges": true,
+  "boleroCrescendo": {
+    "low": 0.18037567515432099,
+    "high": 0.903827160493827
+  },
+  "loops": [
+    "canon",
+    "turkish",
+    "hungarian",
+    "cancan",
+    "bolero",
+    "william"
+  ]
+}

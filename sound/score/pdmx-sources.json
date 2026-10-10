@@ -1,0 +1,24 @@
+[
+  {
+    "path": "./data/1/27/QmbJa5HqbaFuEtEwdk1os8vzKmJnx1APtawGNE15ZWbfnj.json",
+    "mid": "./mid/1/27/QmbJa5HqbaFuEtEwdk1os8vzKmJnx1APtawGNE15ZWbfnj.mid",
+    "license": "cc-zero",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "license_conflict": "False",
+    "title": "Hungarian Dances No. 5 YG",
+    "composer_name": "Brahms",
+    "n_notes": "3084",
+    "subset:no_license_conflict": "True"
+  },
+  {
+    "path": "./data/1/57/QmbZXPGEUdTSXBqe53jb8yeT8TnKAJSUp5NCSAc8czDZUm.json",
+    "mid": "./mid/1/57/QmbZXPGEUdTSXBqe53jb8yeT8TnKAJSUp5NCSAc8czDZUm.mid",
+    "license": "cc-zero",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "license_conflict": "False",
+    "title": "Can can",
+    "composer_name": "Jacques Offenbach",
+    "n_notes": "110",
+    "subset:no_license_conflict": "True"
+  }
+]

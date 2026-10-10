@@ -1,6 +1,6 @@
 # 聲音・波形・節奏 / 製作與來源
 
-展覽名稱：**小小聲音遊樂場 / Soft Scores**。16 件作品的圖形、互動與繁體中文策展文字為本專案製作；全系列以瀏覽器即時合成演奏《D 大調卡農》，沒有外部圖片、錄音或取樣音源。
+展覽名稱：**小小聲音遊樂場 / Soft Scores**。16 件作品的圖形、互動與繁體中文策展文字為本專案製作；全系列以瀏覽器即時合成演奏六首古典樂譜，沒有外部圖片、錄音或取樣音源。
 
 <a id="canon"></a>
 
@@ -13,6 +13,55 @@
 - 本專案改編：將完整 MIDI 樂譜轉為內嵌音高／起音／時值事件，以正弦、三角、方波或鋸齒合成器代替弦樂；可調速度、互動八度與短音包絡，節奏作品另加輕量合成鼓點。保留原樂譜的音高、節奏、四聲部與進場關係；這是互動合成演奏，不是原版錄音。
 
 完整樂譜含三個旋律聲部與反覆低音，共 **1,956 個音符事件**；循環長度為 **57 小節 / 228 個四分音符拍**（含結尾休止）。`score/canon-original.mid` 僅是可重製的樂譜資料；`score/canon.json` 由 `tools/import-canon.py` 產生，再由製作工具內嵌到每個 HTML。播放時不讀取 MIDI、JSON 或音檔。
+
+<a id="turkish"></a>
+
+## 土耳其進行曲
+
+- 作曲：Wolfgang Amadeus Mozart，KV 331 第三樂章 *Rondo alla Turca*。
+- 排譜：Rune Zedeler、Chris Sawer；**Mutopia-2015/08/13-108**，來源標示 Public Domain。
+- [Mutopia 樂譜頁](https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=108)、[MIDI 樂譜](https://www.mutopiaproject.org/ftp/MozartWA/KV331/KV331_3_RondoAllaTurca/KV331_3_RondoAllaTurca.mid)。
+- 保留完整左右手 1,614 個音符事件；合成改編採四分音符 126 BPM，短包絡取代鋼琴延音。原始 MIDI 在 `score/turkish-original.mid`。
+
+<a id="hungarian"></a>
+
+## 匈牙利舞曲第 5 號
+
+- 作曲：Johannes Brahms。資料集中的編排名稱：*Hungarian Dances No.5 YG*。
+- 來源：[PDMX 官方資料集 v1](https://zenodo.org/records/15571083)、[PDMX 專案](https://github.com/pnlong/PDMX)。排譜授權為 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)，`license_conflict=False`，屬 `no_license_conflict` 子集。
+- 資料 ID：`QmbJa5HqbaFuEtEwdk1os8vzKmJnx1APtawGNE15ZWbfnj`。原始 MIDI 在 `score/hungarian-original.mid`；保留全曲時間軸，選取旋律、鋼琴和弦與低音三軌，共 1,332 個音符事件，省略同音重複配器。
+- 保留來源 69／126／160 BPM 的段落速度變化；介面倍率乘在這些原速上，不會將全曲壓成固定速度。
+
+<a id="cancan"></a>
+
+## 天堂與地獄序曲・康康舞段（選段）
+
+- 作曲：Jacques Offenbach，*Orphée aux enfers*。
+- 來源同為 PDMX v1，排譜名稱 *Can can*，ID `QmbZXPGEUdTSXBqe53jb8yeT8TnKAJSUp5NCSAc8czDZUm`，授權 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)，`license_conflict=False`，屬 `no_license_conflict` 子集。
+- 110 個長笛旋律音符、31 個 2/4 小節；本專案另編 124 個伴奏音，使用 144 BPM。頁面明確標示主題選段，不宣稱演奏完整序曲。原始 MIDI 在 `score/cancan-original.mid`。
+- 兩筆 PDMX 來源記錄在 `score/pdmx-sources.json`。資料集研究：[Long et al., PDMX](https://arxiv.org/abs/2409.10831)。
+
+<a id="bolero"></a>
+
+## 波萊羅舞曲（主題選段・漸強改編）
+
+- 作曲：Maurice Ravel。
+- 排譜：Nicolas Sceaux，[Ravel_Bolero 原始排譜](https://github.com/nsceaux/Ravel_Bolero/tree/e46e0da5b2518ac9c2521308351ce02c30a4b0da)，固定 commit `e46e0da5b2518ac9c2521308351ce02c30a4b0da`；排譜作者以 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) 釋出。
+- `score/bolero-source/` 保留 `common.ily`（A、B 主題）、`tambour.ily`（兩小節小鼓固定節奏）與原始 LICENSE。
+- 本專案轉錄 A／A／B／B 四次主題，18 小節一段，補休止銜接；添加簡約低音，將原曲漫長的配器漸強濃縮到這個 72 小節循環。共 1,456 個音符／小鼓事件，72 BPM；不是完整管弦樂曲或錄音。
+
+<a id="william"></a>
+
+## 威廉泰爾序曲・終曲快板（選段）
+
+- 作曲：Gioachino Rossini。
+- 校對來源：Charles Arthur Rawlings 鋼琴編排，London: W. Paxton and Co., **1899**，Plate W.P.C 1,330。IMSLP 標示 Public Domain。
+- [IMSLP 作品與版本頁](https://imslp.org/wiki/Guillaume_Tell_(Rossini,_Gioachino)#For_Piano_.28Rawlings.29)、[來源譜版本 #594963](https://imslp.org/wiki/Special:ReverseLookup/594963)。掃描譜保留在 `score/william-source.pdf`。
+- 參照第 4–5 頁快板的奔馳主題，選取並整理為 D 大調 16 小節旋律，另編簡約伴奏，共 163 個音符事件。144 BPM；保留奔馳的附點／十六分音符語彙，省略原鋼琴版的和弦加倍與部分連線，結尾整理為可循環樂句，不宣稱原譜逐音完整再現。
+
+## 可重製的改編資料
+
+`tools/build-scores.py` 與 `tools/score_import.py` 將上述樂譜編成 `score/library.json`；`tools/build.py` 再將整個六曲庫內嵌到每件作品。瀏覽器不讀取這些來源檔。以上新增伴奏、速度、音色、漸強與選段整理均為本專案的合成改編；來源樂譜與改編範圍分開標示。
 
 ## 聲音引擎
 

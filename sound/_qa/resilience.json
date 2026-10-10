@@ -11,13 +11,13 @@
       "identicalCanvasPixels": true
     },
     {
-      "name": "160 BPM candy stress + hidden tab",
+      "name": "1.4× Bolero candy stress + hidden tab",
       "durationSeconds": 20,
       "stopsAudioWhenHidden": true,
       "stopsFramesWhenHidden": true,
-      "fps": 119.88011987833531,
-      "frames": 2201,
-      "notes": 98,
+      "fps": 120.58212058212058,
+      "frames": 2207,
+      "notes": 61,
       "canvases": 1
     }
   ]

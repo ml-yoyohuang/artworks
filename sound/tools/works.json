@@ -3,128 +3,144 @@
     "slug": "jelly-wave",
     "title": "果凍波",
     "en": "Jelly, gently",
-    "bpm": 94,
+    "bpm": 126,
     "osc": "sine",
-    "mode": "soft"
+    "mode": "soft",
+    "recommended": "hungarian"
   },
   {
     "slug": "pendulum-swing",
     "title": "彩虹鞦韆",
     "en": "A chorus of arcs",
-    "bpm": 88,
+    "bpm": 96,
     "osc": "triangle",
-    "mode": "soft"
+    "mode": "soft",
+    "recommended": "canon"
   },
   {
     "slug": "ribbon-dance",
     "title": "緞帶體操",
     "en": "A little flourish",
-    "bpm": 108,
+    "bpm": 126,
     "osc": "triangle",
-    "mode": "soft"
+    "mode": "soft",
+    "recommended": "hungarian"
   },
   {
     "slug": "bubble-scale",
     "title": "泡泡音階",
     "en": "Notes in the air",
-    "bpm": 102,
+    "bpm": 126,
     "osc": "sine",
-    "mode": "soft"
+    "mode": "soft",
+    "recommended": "turkish"
   },
   {
     "slug": "beat-candy",
     "title": "節拍糖果",
     "en": "Sweet accumulation",
-    "bpm": 116,
+    "bpm": 72,
     "osc": "triangle",
-    "mode": "drum"
+    "mode": "drum",
+    "recommended": "bolero"
   },
   {
     "slug": "tap-floor",
     "title": "踢踏地板",
     "en": "A floor that listens",
-    "bpm": 112,
+    "bpm": 144,
     "osc": "square",
-    "mode": "drum"
+    "mode": "drum",
+    "recommended": "cancan"
   },
   {
     "slug": "popcorn-rhythm",
     "title": "爆米花節奏",
     "en": "Small explosions",
-    "bpm": 128,
+    "bpm": 144,
     "osc": "triangle",
-    "mode": "drum"
+    "mode": "drum",
+    "recommended": "cancan"
   },
   {
     "slug": "hopscotch",
     "title": "跳房子",
     "en": "One more square",
-    "bpm": 104,
+    "bpm": 144,
     "osc": "sine",
-    "mode": "drum"
+    "mode": "drum",
+    "recommended": "william"
   },
   {
     "slug": "flower-choir",
     "title": "合唱的花",
     "en": "A garden in tune",
-    "bpm": 92,
+    "bpm": 96,
     "osc": "sine",
-    "mode": "choir"
+    "mode": "choir",
+    "recommended": "canon"
   },
   {
     "slug": "canon-ripples",
     "title": "輪唱漣漪",
     "en": "After you, again",
-    "bpm": 100,
+    "bpm": 96,
     "osc": "sine",
-    "mode": "canon"
+    "mode": "canon",
+    "recommended": "canon"
   },
   {
     "slug": "metronome-party",
     "title": "節拍器派對",
     "en": "Finding the together",
-    "bpm": 96,
+    "bpm": 72,
     "osc": "triangle",
-    "mode": "metro"
+    "mode": "metro",
+    "recommended": "bolero"
   },
   {
     "slug": "signal-band",
     "title": "交通號誌樂團",
     "en": "The crossing sings",
-    "bpm": 110,
+    "bpm": 72,
     "osc": "triangle",
-    "mode": "signal"
+    "mode": "signal",
+    "recommended": "bolero"
   },
   {
     "slug": "square-blocks",
     "title": "方波積木",
     "en": "A place for a pulse",
-    "bpm": 98,
+    "bpm": 126,
     "osc": "square",
-    "mode": "soft"
+    "mode": "soft",
+    "recommended": "turkish"
   },
   {
     "slug": "saw-hills",
     "title": "鋸齒山丘",
     "en": "Downhill, uphill",
-    "bpm": 106,
+    "bpm": 144,
     "osc": "sawtooth",
-    "mode": "soft"
+    "mode": "soft",
+    "recommended": "william"
   },
   {
     "slug": "crayon-wave",
     "title": "波形塗鴉",
     "en": "Please colour the sound",
-    "bpm": 90,
+    "bpm": 126,
     "osc": "triangle",
-    "mode": "soft"
+    "mode": "soft",
+    "recommended": "hungarian"
   },
   {
     "slug": "spring-dancer",
     "title": "彈簧舞者",
     "en": "Stretch, then smile",
-    "bpm": 118,
+    "bpm": 144,
     "osc": "triangle",
-    "mode": "drum"
+    "mode": "drum",
+    "recommended": "cancan"
   }
 ]
