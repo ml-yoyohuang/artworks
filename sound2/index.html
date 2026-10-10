@@ -101,8 +101,35 @@
   </main>
   <footer class="ix-foot">
     <span>聲音與畫面皆為即時生成；預設配樂是為每件作品寫的原創樂譜（Tone.js 15.0.4）。<br>每頁另可選擇原樣播放 Kevin MacLeod 的〈Carefree〉〈Electrodoodle〉（CC BY 4.0）。</span>
-    <span><a href="https://github.com/ml-yoyohuang/artworks/blob/main/sound2/README.md">製作說明 ↗</a><a href="https://github.com/ml-yoyohuang/artworks/blob/main/sound2/MUSIC_CREDITS.md">音樂署名 ↗</a><a href="https://github.com/ml-yoyohuang/artworks/blob/main/sound2/QA_REPORT.md">驗收報告 ↗</a></span>
+    <button type="button" class="ix-credits-toggle" aria-expanded="false" aria-controls="ix-credits">音樂署名 <span aria-hidden="true">＋</span></button>
   </footer>
+  <section class="ix-credits" id="ix-credits" hidden aria-label="音樂署名">
+    <div>
+      <h2>原創生成配樂</h2>
+      <p>十件作品的預設聲音，都是為各件作品寫的原創樂譜程式，在瀏覽器裡即時合成；沒有使用取樣音檔。合成函式庫為 Tone.js 15.0.4（MIT License，© Yotam Mann）。</p>
+    </div>
+    <div>
+      <h2>外部曲目（可選音源）</h2>
+      <p>每件作品的「關於 → 音源」可以切換到以下曲目，原樣播放（播放速率 1，不剪輯、不變調）。</p>
+      <p class="ix-cite">Carefree Kevin MacLeod (incompetech.com)<br>Licensed under Creative Commons: By Attribution 4.0<br><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">https://creativecommons.org/licenses/by/4.0/</a></p>
+      <p class="ix-cite">Electrodoodle Kevin MacLeod (incompetech.com)<br>Licensed under Creative Commons: By Attribution 4.0<br><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">https://creativecommons.org/licenses/by/4.0/</a></p>
+    </div>
+    <div>
+      <h2>字體與圖像</h2>
+      <p>介面只使用系統字體；目錄預覽圖都是作品本身的即時畫面。</p>
+    </div>
+  </section>
 </div>
+<script>
+  (function () {
+    var btn = document.querySelector('.ix-credits-toggle'), box = document.getElementById('ix-credits');
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', String(open)); box.hidden = !open;
+      btn.querySelector('span').textContent = open ? '－' : '＋';
+      if (open) box.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+    });
+  })();
+</script>
 </body>
 </html>

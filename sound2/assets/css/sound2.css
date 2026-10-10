@@ -135,7 +135,13 @@ body.s2-index { --bg: #eeeae2; --fg: #1b1b19; --accent: #d9482b; background: var
 .ix-card:nth-child(8) figure { aspect-ratio: 16 / 11; }
 .ix-card:nth-child(9) figure { aspect-ratio: 1 / 1; }
 .ix-foot { display: flex; justify-content: space-between; gap: 30px; border-top: 1px solid #1b1b1924; margin-top: 40px; padding-top: 22px; font-size: 11px; line-height: 1.9; letter-spacing: .04em; opacity: .75; }
-.ix-foot a { margin-left: 18px; }
+.ix-credits-toggle { flex: none; align-self: flex-start; border: 1px solid #1b1b1933; background: transparent; border-radius: 30px; min-height: 36px; padding: 6px 14px; font-size: 11px; letter-spacing: .06em; cursor: pointer; color: inherit; }
+.ix-credits-toggle:hover, .ix-credits-toggle[aria-expanded="true"] { background: #1b1b19; color: #eeeae2; }
+.ix-credits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; padding: 26px 0 10px; font-size: 12px; line-height: 1.9; letter-spacing: .03em; }
+.ix-credits[hidden] { display: none; }
+.ix-credits h2 { font-family: var(--serif); font-weight: 500; font-size: 15px; letter-spacing: .08em; margin: 0 0 8px; }
+.ix-credits p { margin: 0 0 12px; opacity: .82; }
+.ix-cite { font-family: var(--mono); font-size: 11px; line-height: 1.75; overflow-wrap: anywhere; }
 @media (max-width: 960px) {
   .ix { padding: 24px 28px 34px; }
   .ix-hero { grid-template-columns: 1fr; gap: 34px; padding: 50px 0 44px; }
@@ -152,5 +158,6 @@ body.s2-index { --bg: #eeeae2; --fg: #1b1b19; --accent: #d9482b; background: var
   .ix-card:nth-child(n) { grid-column: 1; }
   .ix-card:nth-child(2) figure { aspect-ratio: 4 / 4.4; }
   .ix-foot { display: block; }
-  .ix-foot a { margin: 10px 18px 0 0; display: inline-block; }
+  .ix-credits-toggle { display: block; margin-top: 14px; }
+  .ix-credits { grid-template-columns: 1fr; gap: 8px; }
 }
