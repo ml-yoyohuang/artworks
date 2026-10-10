@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10T09:13:18.615Z",
+  "date": "2026-10-10T09:35:32.985Z",
   "checks": [
     {
       "slug": "canon-ripples",
@@ -11,7 +11,7 @@
         "waterDropPitch": true,
         "reset": true
       },
-      "peak": 0.18181408941745758,
+      "peak": 0.11132797598838806,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -26,7 +26,7 @@
         "slidePlays": true,
         "musicContinues": true
       },
-      "peak": 0.15711206197738647,
+      "peak": 0.12694360315799713,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -40,7 +40,7 @@
         "flipButton": true,
         "easedRotation": true
       },
-      "peak": 0.07436856627464294,
+      "peak": 0.1354050189256668,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -53,7 +53,7 @@
         "ownColourBursts": true,
         "protectedFromAutoBeat": true
       },
-      "peak": 0.023112311959266663,
+      "peak": 0.00031091502751223743,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -67,7 +67,7 @@
         "waterDropPitch": true,
         "reset": true
       },
-      "peak": 0.15748929977416992,
+      "peak": 0.11805054545402527,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -82,7 +82,7 @@
         "slidePlays": true,
         "musicContinues": true
       },
-      "peak": 0.11145620048046112,
+      "peak": 0.11256875097751617,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -96,7 +96,7 @@
         "flipButton": true,
         "easedRotation": true
       },
-      "peak": 0.14150457084178925,
+      "peak": 0.12777112424373627,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -109,7 +109,7 @@
         "ownColourBursts": true,
         "protectedFromAutoBeat": true
       },
-      "peak": 0.011235536076128483,
+      "peak": 0.01171882078051567,
       "reducedMotion": true,
       "noOverflow": true
     }

@@ -29,40 +29,40 @@ library=json.loads(score)
 recommendations=['hungarian','canon','hungarian','turkish','bolero','cancan','cancan','william','canon','canon','bolero','bolero','turkish','william','hungarian','cancan']
 pairings=['急緩交替，讓果凍收縮與彈回。','錯開的聲部，陪鞦韆散開再相遇。','旋律轉折，讓緞帶縮起再舒展。','輕巧裝飾音，像檸檬汽水裡的小泡泡。','固定節奏逐漸長大，糖果也越落越熱鬧。','鮮明重音，邀請整片地板一起踢踏。','快板帶動一群種子的爆跳。','奔馳的節奏，陪小球跨過下一格。','輪流進場的聲部，像花朵互相接唱。','原本的輪唱結構，在水面留下時間差。','穩定小鼓與漸強，讓派對逐步聚攏。','反覆節奏漸強，路口逐層亮起。','俐落音符與方波轉角，搭出輕快的小房子。','奔馳主題，讓滑行更有向前的動力。','忽快忽慢，讓蠟筆留下有呼吸的字跡。','強拍一起蓄力，彈簧跳成小小的舞隊。']
 DIRECT={
- 'jelly-wave':('抓住果凍或白圈拖曳，左低右高；碰到邊界擠扁，放開帶著慣性彈回。','白圈是抓取點；自己的奏音立即回應，伴奏維持原調。'),
+ 'jelly-wave':('抓住果凍或白圈拖曳，左低右高；碰到邊界擠扁，放開帶著慣性彈回；抓住張嘴，碰撞皺眉。','白圈是抓取點；抓住時 o 嘴，碰撞時皺眉；伴奏維持原調。'),
  'pendulum-swing':('點彩色擺錘推一下，鄰座會回應；拖下方白圈控制向左、向右的風。','箭頭標出風向；離中心越遠，風力越強，放開保留風力。'),
  'beat-candy':('按住連續撒糖果，左右移動換落點與音高；放開就停，白邊是你的糖果。','下方清盤可重新堆疊；最多保留 72 顆，自動糖果隨音樂繼續。'),
- 'square-blocks':('抓每棟最上層的白框上下拖曳；上方加高、下方降低，放開落定並奏音。','每棟 1–5 層，越高唱越高；屋形按鈕獨立切換，樓層保留。'),
+ 'square-blocks':('抓每棟最上層的白框上下拖曳；上方加高、下方降低，放開落定並奏音；按播放房子旋律，循環三音與休止。','每棟 1–5 層，越高唱越高；按播放房子旋律，依 BPM 播放三棟與一拍休止。'),
  'canon-ripples':('抓住三個圓點拖曳聲源；點空白水面，立即奏一滴水，左低右高。','聲源跟著指尖；舊漣漪留在出發的位置。'),
  'signal-band':('直接點紅、黃、綠燈奏低、中、高音；按住滑過燈號也能連奏。','白圈是你點亮的燈；用下方按鈕切換燈光編排。'),
- 'ribbon-dance':('抓白圈端點拖曳，左低右高，放開回彈；短點畫布或按翻一圈，翻圈並奏一個單音。','拖曳左低右高；短點翻圈附加單音，長拖牽引；古典伴奏不改變。'),
- 'popcorn-rhythm':('點粒子後放開爆跳；按住約 1.2 秒蓄滿力、放開跳更高，彩色圈標出自己的粒子。','可點盤裡或空中的粒子；自己的爆花短暫避開自動群跳。'),
+ 'ribbon-dance':('抓白圈端點拖曳，左低右高，放開回彈；短點畫布或按翻一圈，奏四音琶音，上行與下行交替。','拖曳左低右高；每圈四音短句；新一圈取代上一句，長拖牽引緞帶。'),
+ 'popcorn-rhythm':('點粒子後放開爆跳；按住約 1.2 秒蓄滿力、放開跳更高；滿力飛出畫布再落回，彩色圈標出自己的粒子。','可點盤裡或空中的粒子；自己的爆花短暫避開自動群跳。'),
  'tap-floor':('指向亮框的菱形格子，點哪格就敲哪格；按住拖曳連續踢踏。','三種鼓聲：低鼓、小鼓、沙鈴；白圈指出自己的腳步。'),
  'hopscotch':('點有號碼的格子，小球會完成這次跳躍；落地時奏出那格的音。','紅框是你的目標；落地後才交回自動路線。'),
- 'flower-choir':('點花瓣試奏單音，讓這朵花聚焦綻放八拍；伴奏繼續，可恢復全員動態。','每朵花有固定音名；圈線標出聚焦的花，這不是聲音上的獨唱。'),
+ 'flower-choir':('點花瓣獨唱八拍短句，伴奏自動降低；八拍後恢復，或按全員合奏。','每朵花唱不同音域的短句；圈線與倒數標出正在獨唱的花。'),
  'metronome-party':('點一台節拍器，邀它先跳散；動態運行二十秒後同步，音樂繼續。','全隊散開可重新開始派對；進度不受速度倍率影響。'),
 'bubble-scale':('點一下奏音，按住拖曳連吹泡泡；左低右高，大泡泡唱低音。','左右八個音階位置；新泡泡顯示實際音名。'),
 'saw-hills':('上下拖曳：上方山高、音高，下方山低、音低；點一下讓小人跳起來。','拖曳時立即奏音，古典伴奏維持原調。'),
 'crayon-wave':('按住畫線：上高下低；放開後，光點沿著這一筆重播。','每筆最多 8 秒，可重播這一筆或清空紙面。'),
-'spring-dancer':('抓住舞者的頭或身體往下壓，放開讓它彈起來；壓得越深，跳得越高、奏音越強且稍長。','移到舞者身上會亮框；每位舞者有自己的音；力度也影響音長。')
+'spring-dancer':('抓住舞者的頭或身體往下壓，放開讓它彈起來；壓得越深，跳得越高、聲音越長；滿力有八度尾音。','移到舞者身上會亮框；每位舞者有固定主音；音長約 0.15–1 秒，滿力再唱高八度。')
 }
 MATERIALS={
- 'jelly-wave':'互動：果凍位置奏單音；拖曳不改伴奏調性。',
+ 'jelly-wave':'互動：果凍位置奏單音；抓取／碰撞切換表情，不改伴奏調性。',
  'pendulum-swing':'互動：點擺錘奏固定音；風力位置選音。',
- 'ribbon-dance':'互動：拖曳選音；翻圈另奏一個單音，不改伴奏。',
+ 'ribbon-dance':'互動：拖曳選音；翻圈奏四音琶音，與 BPM 同步，不改伴奏。',
  'bubble-scale':'互動：八音階單音；低音大泡泡、高音小泡泡。',
  'beat-candy':'互動：落點選音；長按連續撒糖與奏音。',
  'tap-floor':'互動：低鼓、小鼓、沙鈴，皆為即時合成聲。',
- 'popcorn-rhythm':'互動：合成噪音啪聲；蓄力改跳高與聲音力度。',
+ 'popcorn-rhythm':'互動：合成噪音啪聲；蓄力控制力度，滿力越過畫布上緣再回盤。',
  'hopscotch':'互動：手動落地奏所選格的固定音。',
- 'flower-choir':'互動：點花奏固定單音；八拍聚焦只調整花朵動態。',
+ 'flower-choir':'互動：花朵唱八拍原創短句，獨唱時降低伴奏，結束恢復。',
  'canon-ripples':'互動：聲源固定音、水面依左右選音；伴奏完整播放。',
  'metronome-party':'互動：點台奏音、重設視覺相位；伴奏不重啟。',
  'signal-band':'互動：紅／黃／綠奏低／中／高音；編排只改燈光。',
- 'square-blocks':'互動：放開時樓高選音；目前沒有自動重播房子旋律。',
+ 'square-blocks':'互動：樓高選音；可依 BPM 循環三音＋休止，並切換只聽房子。',
  'saw-hills':'互動：山高選音、點按跳躍；不即時轉調伴奏。',
  'crayon-wave':'互動：高度選音、記錄與重播這筆奏音；每筆最多八秒。',
- 'spring-dancer':'互動：舞者固定音；壓縮越深，奏音越強且稍長。'
+ 'spring-dancer':'互動：舞者固定主音；壓縮決定力度與 0.15–1 秒音長，滿力加八度尾音。'
 }
 head=lambda title,desc:f'''<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="{desc}"><meta name="theme-color" content="#f6f1e7"><link rel="icon" href="data:,"><title>{title} — 小小聲音遊樂場</title><style>{css}</style></head>'''
 for i,w in enumerate(WORKS):
@@ -74,11 +74,11 @@ for i,w in enumerate(WORKS):
  extras=('<div class="gesture-tools"><button id="replay" disabled>重播這一筆</button><button id="clear-ink">清空紙面</button></div>' if slug=='crayon-wave' else '')
  if slug=='pendulum-swing':extras='<div class="gesture-tools"><button id="calm-wind">讓風停下</button></div>'
  if slug=='beat-candy':extras='<div class="gesture-tools"><button id="clear-candy">清空糖果盤</button></div>'
- if slug=='square-blocks':extras='<div class="gesture-tools"><button id="building-plan">建築方案：1 / 4</button></div>'
+ if slug=='square-blocks':extras='<div class="gesture-tools"><button id="building-plan">建築方案：1 / 4</button><button id="house-play">播放房子旋律</button><button id="house-only">只聽房子</button></div>'
  if slug=='canon-ripples':extras='<div class="gesture-tools"><button id="reset-water">聲源回到原位</button></div>'
  if slug=='signal-band':extras='<div class="gesture-tools"><button id="pattern">燈光編排：接力</button></div>'
  if slug=='ribbon-dance':extras='<div class="gesture-tools"><button id="flip-ribbon">翻一圈</button></div>'
- if slug=='flower-choir':extras='<div class="gesture-tools"><button id="all-flowers" disabled>恢復全員動態</button></div>'
+ if slug=='flower-choir':extras='<div class="gesture-tools"><button id="all-flowers" disabled>全員合奏</button></div>'
  if slug=='metronome-party':extras='<div class="gesture-tools"><button id="scatter">全隊散開</button></div>'
  balance=('<div class="backing-control"><label for="backing">伴奏音量 <output id="backing-value">45%</output></label><input id="backing" type="range" min="0" max="100" value="45" aria-label="古典伴奏音量"><span>自己的奏音會更清楚</span></div>' if slug in DIRECT else '')
  keys=('方向鍵移動操作位置，Enter 模擬點按；拖曳請用滑鼠／觸控。空白鍵播放／暫停。' if slug in DIRECT else '方向鍵改變位置，Enter 加入一拍；空白鍵切換聲音。')

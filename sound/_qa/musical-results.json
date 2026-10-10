@@ -1,0 +1,151 @@
+{
+  "date": "2026-10-10T09:42:41.551Z",
+  "checks": [
+    {
+      "slug": "ribbon-dance",
+      "device": "desktop",
+      "checks": {
+        "fourScheduledNotes": true,
+        "ascendingDescending": true,
+        "pauseCancelsPhrase": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "spring-dancer",
+      "device": "desktop",
+      "checks": {
+        "durationRange": true,
+        "fullPowerOctaveTail": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "square-blocks",
+      "device": "desktop",
+      "checks": {
+        "threeNotesAndRest": true,
+        "liveHeightUpdates": true,
+        "onlyHousesToggle": true,
+        "stop": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "jelly-wave",
+      "device": "desktop",
+      "checks": {
+        "grabOMouth": true,
+        "collisionSquint": true,
+        "smileReturns": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "ribbon-dance",
+      "device": "mobile",
+      "checks": {
+        "fourScheduledNotes": true,
+        "ascendingDescending": true,
+        "pauseCancelsPhrase": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "spring-dancer",
+      "device": "mobile",
+      "checks": {
+        "durationRange": true,
+        "fullPowerOctaveTail": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "square-blocks",
+      "device": "mobile",
+      "checks": {
+        "threeNotesAndRest": true,
+        "liveHeightUpdates": true,
+        "onlyHousesToggle": true,
+        "stop": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "jelly-wave",
+      "device": "mobile",
+      "checks": {
+        "grabOMouth": true,
+        "collisionSquint": true,
+        "smileReturns": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "device": "desktop",
+      "checks": {
+        "fullChargeLeavesCanvas": true,
+        "autoBeatCannotInterrupt": true,
+        "landsBack": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "device": "mobile",
+      "checks": {
+        "fullChargeLeavesCanvas": true,
+        "autoBeatCannotInterrupt": true,
+        "landsBack": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "flower-choir",
+      "device": "desktop",
+      "checks": {
+        "eightBeatPhrase": true,
+        "duckAndRestore": true,
+        "manualReturn": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    },
+    {
+      "slug": "flower-choir",
+      "device": "mobile",
+      "checks": {
+        "eightBeatPhrase": true,
+        "duckAndRestore": true,
+        "manualReturn": true
+      },
+      "reducedMotion": true,
+      "updatedMaterials": true,
+      "noOverflow": true
+    }
+  ],
+  "errors": [],
+  "resources": []
+}

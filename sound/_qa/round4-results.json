@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10T09:16:49.521Z",
+  "date": "2026-10-10T09:36:27.942Z",
   "checks": [
     {
       "slug": "pendulum-swing",
@@ -11,7 +11,7 @@
         "pitchOrder": true,
         "calmButton": true
       },
-      "peak": 0.13627561926841736,
+      "peak": 0.11652947217226028,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -26,7 +26,7 @@
         "fourDistinctRoofImages": true,
         "emptyIgnored": true
       },
-      "peak": 0.0902550220489502,
+      "peak": 0.11762625724077225,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -41,7 +41,7 @@
         "bounded72": true,
         "clearButton": true
       },
-      "peak": 0.07949406653642654,
+      "peak": 0.10714951157569885,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -56,7 +56,7 @@
         "releaseInertia": true,
         "emptyIgnored": true
       },
-      "peak": 0.10672235488891602,
+      "peak": 0.08668451011180878,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -70,7 +70,7 @@
         "pitchOrder": true,
         "calmButton": true
       },
-      "peak": 0.137295663356781,
+      "peak": 0.1222243458032608,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -85,7 +85,7 @@
         "fourDistinctRoofImages": true,
         "emptyIgnored": true
       },
-      "peak": 0.0902550220489502,
+      "peak": 0.13617834448814392,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -100,7 +100,7 @@
         "bounded72": true,
         "clearButton": true
       },
-      "peak": 0.12247976660728455,
+      "peak": 0.07949406653642654,
       "reducedMotion": true,
       "noOverflow": true
     },

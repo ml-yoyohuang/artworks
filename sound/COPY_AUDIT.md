@@ -1,5 +1,7 @@
 # 玩法提示與素材說明核對（2026-10-10）
 
+**後續狀態：下方六項提案已依觀眾要求實作。** 最新玩法與 hint／material 已更新，詳見 [PLAY_REVIEW.md](PLAY_REVIEW.md) 的「六件提案已實作」及 [REPORT.md](REPORT.md)。以下保留實作前的核對紀錄供對照。
+
 先執行 `git push origin main`，結果 `Everything up-to-date`，最新作品提交為 `e4f1fb7`。本次依「推完版後回答我」先核對現況、修正文案並提出下一步；沒有把六項新玩法宣稱為已實作。
 
 ## 十六件逐件核對

@@ -12,7 +12,7 @@ const rnd=(i)=>{const n=Math.sin(i*127.1+CONFIG.id*311.7)*43758.5453;return n-Ma
 let SCORE=SCORES[CONFIG.recommended],generation=0,tempoPart;
 const state={time:0,dt:0,beat:0,pulse:0,pulses:Array(24).fill(0),x:.5,y:.5,force:0,held:false,paused:false,reduced:matchMedia('(prefers-reduced-motion: reduce)').matches,playing:false,started:false,muted:false,frames:0,notes:0,interaction:0,lastNote:null,tempo:CONFIG.bpm,epoch:0,trackId:CONFIG.recommended,rate:1,baseTempo:SCORE.bpm,energy:.25,energyTarget:.25,phrasePulse:0,strong:false,musicalTick:0,scoreTitle:SCORE.title,scoreEvents:0,scoreVoices:SCORE.voices.map(()=>0),interactiveNotes:0,interactiveMidi:null,feedback:"",hover:false};
 window.soundState=state;
-let sceneRef,raf=0,last=0,previewBeat=-1,loop,synth,tapSynth,kick,hat,master,analyser,limiter,lastTapTime=0,scorePart,bassSynth,musicBus,interactionSynth,userKick,userSnare,userShaker,popSynth,lastPopAudio=0,lastDrumAudio=0,lastUserAudio=0,feedbackTimer=0;
+let sceneRef,raf=0,last=0,previewBeat=-1,loop,synth,tapSynth,kick,hat,master,analyser,limiter,lastTapTime=0,scorePart,bassSynth,musicBus,interactionSynth,userKick,userSnare,userShaker,popSynth,lastPopAudio=0,lastDrumAudio=0,lastUserAudio=0,feedbackTimer=0,backingScale=1,phraseEvents=[],phraseGeneration=0;
 const startButton=document.querySelector('#start'),muteButton=document.querySelector('#mute'),motionButton=document.querySelector('#motion'),status=document.querySelector('#status');
 function circle(x,y,r,fill,stroke){ctx.beginPath();ctx.arc(x,y,Math.max(.1,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.stroke();}}
 function line(points,color,width=2){ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke();}
@@ -24,7 +24,7 @@ function seedTexture(){ctx.fillStyle=INK+'09';for(let i=0;i<440;i++)ctx.fillRect
 function fire(index=state.beat){state.beat=index;sceneRef?.clock?.();if(state.reduced||state.paused)return;state.pulse=1;state.pulses[index%24]=1;sceneRef?.beat?.(index);requestDraw();}
 // Musical time remains in ticks, so every track keeps its notation and tempo changes.
 function energyAt(tick){return state.trackId==='bolero'?.18+.82*clamp(tick/SCORE.totalTicks,0,1):.5;}
-function music(time){const n=state.notes++,g=generation;
+function music(time){const n=state.notes++,g=generation;sceneRef?.audioBeat?.(time,n);
  if(CONFIG.mode==='drum'&&state.trackId!=='bolero'){if(n%2===0)kick.triggerAttackRelease('C2','32n',time,.18);else hat.triggerAttackRelease('32n',time,.08);}
  Tone.Draw.schedule(()=>{if(g!==generation||!state.playing)return;state.musicalTick=Math.round(Tone.Transport.ticks)%SCORE.totalTicks;state.strong=n%(SCORE.meter*2)===0;state.energyTarget=energyAt(state.musicalTick);if(state.strong)state.phrasePulse=1;fire(n);},time);
 }
@@ -40,7 +40,7 @@ function scoreNote(time,event){const [midi,duration,voice,velocity,at,g]=event;i
   if(role==='lead'){state.pulse=Math.max(state.pulse,.25+strength*.65);if(CONFIG.mode==='canon')sceneRef?.voice?.(voice%3);if(CONFIG.mode==='choir')sceneRef?.beat?.([0,1,2,3,4,3,2,1][midi%8]);sceneRef?.note?.(midi,strength,at);}
   requestDraw();},time);
 }
-function disposeScore(){generation++;if(!state.started)return;Tone.Transport.stop();Tone.Transport.clear(loop);scorePart?.dispose();tempoPart?.dispose();[synth,bassSynth,tapSynth,kick,hat,interactionSynth,userKick,userSnare,userShaker,popSynth].forEach(n=>n?.dispose());}
+function disposeScore(){cancelPhrase();generation++;if(!state.started)return;Tone.Transport.stop();Tone.Transport.clear(loop);scorePart?.dispose();tempoPart?.dispose();[synth,bassSynth,tapSynth,kick,hat,interactionSynth,userKick,userSnare,userShaker,popSynth].forEach(n=>n?.dispose());interactionSynth=null;}
 function prepareScore(){const g=generation;master.gain.cancelScheduledValues(0);master.gain.setValueAtTime(state.muted?0:.42,Tone.immediate());
  synth=new Tone.PolySynth(Tone.Synth,{oscillator:{type:CONFIG.osc},envelope:{attack:.012,decay:.15,sustain:.28,release:.18},volume:CONFIG.osc==='square'||CONFIG.osc==='sawtooth'?-22:-14}).connect(musicBus);synth.maxPolyphony=32;
  bassSynth=new Tone.PolySynth(Tone.Synth,{oscillator:{type:'sine'},envelope:{attack:.02,decay:.15,sustain:.3,release:.18},volume:-17}).connect(musicBus);bassSynth.maxPolyphony=32;
@@ -65,8 +65,8 @@ function selectTrack(id){if(!SCORES[id])return;disposeScore();SCORE=SCORES[id];s
 async function togglePlayback(){if(startButton.disabled)return;startButton.disabled=true;
  try{
   if(!window.Tone)throw new Error('CDN unavailable');await Tone.start();
-  if(!state.started){limiter=new Tone.Limiter(-3).toDestination();master=new Tone.Gain(.42).connect(limiter);analyser=new Tone.Analyser('waveform',256);master.connect(analyser);musicBus=new Tone.Gain(CONFIG.directInteraction?+document.querySelector('#backing').value/100:1).connect(master);window.soundAudio={analyser,master};prepareScore();state.started=true;}
-  state.playing=!state.playing;if(state.playing)Tone.Transport.start('+0.1');else{Tone.Transport.pause();synth.releaseAll();bassSynth.releaseAll();tapSynth.triggerRelease();interactionSynth.releaseAll();sceneRef?.audioStop?.();}
+  if(!state.started){limiter=new Tone.Limiter(-3).toDestination();master=new Tone.Gain(.42).connect(limiter);analyser=new Tone.Analyser('waveform',256);master.connect(analyser);musicBus=new Tone.Gain(CONFIG.directInteraction?+document.querySelector('#backing').value/100*backingScale:1).connect(master);window.soundAudio={analyser,master};prepareScore();state.started=true;}
+  state.playing=!state.playing;if(state.playing)Tone.Transport.start('+0.1');else{cancelPhrase();Tone.Transport.pause();synth.releaseAll();bassSynth.releaseAll();tapSynth.triggerRelease();interactionSynth.releaseAll();sceneRef?.audioStop?.();}
   musicStatus();playbackLabel();muteButton.disabled=false;state.audioContext=Tone.getContext().state;
  }catch(error){status.textContent='聲音暫時無法啟用，請確認網路後重試；仍可觸碰畫面。';state.audioError=error.message;}
  finally{startButton.disabled=false;requestDraw();}
@@ -78,6 +78,10 @@ function scaleIndex(position){return clamp(Math.floor(clamp(position,0,1)*8),0,7
 function noteName(midi){return ['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'][midi%12]+(Math.floor(midi/12)-1);}
 function feedback(message){state.feedback=message;const el=document.querySelector('#play-feedback');if(!el)return;clearTimeout(feedbackTimer);feedbackTimer=setTimeout(()=>{el.textContent=state.feedback;},100);}
 function userNote(midi,velocity=.65,duration=.16){state.interactiveMidi=midi;if(!state.started||!state.playing)return false;const now=Tone.immediate();if(now-lastUserAudio<.035)return false;lastUserAudio=now;interactionSynth.triggerAttackRelease(Tone.Frequency(midi,'midi').toNote(),duration,now,clamp(velocity,.1,.95));state.interactiveNotes++;return true;}
+function setBackingScale(value){backingScale=value;if(musicBus)musicBus.gain.rampTo(+document.querySelector('#backing').value/100*value,.12);state.backingScale=value;}
+function scheduledNote(midi,time,duration=.2,velocity=.75){if(!state.started||!state.playing)return;interactionSynth.triggerAttackRelease(Tone.Frequency(midi,'midi').toNote(),duration,time,velocity);const g=generation;Tone.Draw.schedule(()=>{if(g!==generation||!state.playing)return;state.interactiveMidi=midi;state.interactiveNotes++;requestDraw();},time);}
+function cancelPhrase(){phraseGeneration++;if(window.Tone)phraseEvents.forEach(id=>Tone.Transport.clear(id));phraseEvents=[];}
+function playPhrase(midis,spacing=.5,duration=.2,velocity=.8){cancelPhrase();if(!state.started||!state.playing)return;interactionSynth.releaseAll();const gen=phraseGeneration,tick=Tone.Transport.ticks;userNote(midis[0],velocity,duration);midis.slice(1).forEach((midi,i)=>{const id=Tone.Transport.scheduleOnce(time=>{if(gen===phraseGeneration&&state.playing)scheduledNote(midi,time,duration,velocity);},`${Math.round(tick+(i+1)*Tone.Transport.PPQ*spacing)}i`);phraseEvents.push(id);});state.phraseMidi=midis.slice();}
 function userPop(power){if(!state.started||!state.playing)return;const now=Tone.immediate();if(now-lastPopAudio<.05)return;lastPopAudio=now;popSynth.triggerAttackRelease(.07,now,.35+clamp(power,0,1)*.6);state.interactiveNotes++;}
 function userDrum(kind){if(!state.started||!state.playing)return;const now=Tone.immediate();if(now-lastDrumAudio<.05)return;lastDrumAudio=now;if(kind===0)userKick.triggerAttackRelease('C2',.12,now,.8);else (kind===1?userSnare:userShaker).triggerAttackRelease(.1,now,.8);state.interactiveNotes++;}
 function interact(){state.force=1;state.interaction++;sceneRef?.tap?.();if(!CONFIG.directInteraction&&state.started&&state.playing){const voice=SCORE.voices.find(v=>v.role==='lead'),tick=Tone.Transport.ticks%SCORE.totalTicks;let event=voice.events[0];for(const e of voice.events){if(e[0]>tick)break;event=e;}lastTapTime=Math.max(Tone.now(),lastTapTime+.015);const octave=Math.round((state.x-.5)*2)*12;tapSynth.triggerAttackRelease(Tone.Frequency(event[1]+octave+(state.shift||0),'midi').toNote(),'16n',lastTapTime,.35);}requestDraw();}
@@ -90,7 +94,7 @@ startButton.addEventListener('click',togglePlayback);muteButton.addEventListener
 document.querySelector('#track').addEventListener('change',e=>selectTrack(e.target.value));
 document.querySelector('#recommend').addEventListener('click',()=>selectTrack(CONFIG.recommended));document.querySelector('#recommend').disabled=true;
 document.querySelector('#tempo').addEventListener('input',e=>{state.rate=+e.target.value;document.querySelector('#bpm').value='×'+state.rate.toFixed(2);state.tempo=state.baseTempo*state.rate;if(state.started)Tone.Transport.bpm.value=state.tempo;requestDraw();});
-document.querySelector('#backing')?.addEventListener('input',e=>{const amount=+e.target.value;document.querySelector('#backing-value').value=amount+'%';if(musicBus)musicBus.gain.rampTo(amount/100,.08);});
+document.querySelector('#backing')?.addEventListener('input',e=>{const amount=+e.target.value;document.querySelector('#backing-value').value=amount+'%';if(musicBus)musicBus.gain.rampTo(amount/100*backingScale,.08);});
 motionButton.addEventListener('click',()=>{state.paused=!state.paused;motionButton.textContent=state.paused?'繼續動態':'暫停動態';motionButton.setAttribute('aria-pressed',String(state.paused));if(state.paused){cancelAnimationFrame(raf);raf=0;}requestDraw();});
 const media=matchMedia('(prefers-reduced-motion: reduce)');media.addEventListener('change',()=>{state.reduced=media.matches;cancelAnimationFrame(raf);raf=0;last=0;requestDraw();});
 function resize(){const box=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(box.width*d);canvas.height=Math.round(box.height*d);requestDraw();}
@@ -100,8 +104,8 @@ function render(ts){raf=0;if(document.hidden)return;const dt=last?Math.min((ts-l
  if(moving&&!raf)raf=requestAnimationFrame(render);
 }
 function requestDraw(){if(!raf&&!document.hidden)raf=requestAnimationFrame(render);}
-document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(raf);raf=0;last=0;if(document.hidden&&state.playing){Tone.Transport.pause();interactionSynth.releaseAll();sceneRef?.audioStop?.();state.playing=false;startButton.innerHTML='繼續聆聽 <span>↗</span>';status.textContent='已離開頁面，聲音自動休息。';}if(!document.hidden)requestDraw();});
-addEventListener('pagehide',()=>{cancelAnimationFrame(raf);clearTimeout(feedbackTimer);sceneRef?.audioStop?.();if(state.started){Tone.Transport.stop();Tone.Transport.clear(loop);[scorePart,tempoPart,synth,bassSynth,tapSynth,kick,hat,interactionSynth,userKick,userSnare,userShaker,popSynth,musicBus,master,analyser,limiter].forEach(n=>n?.dispose());}});
+document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(raf);raf=0;last=0;if(document.hidden&&state.playing){cancelPhrase();Tone.Transport.pause();interactionSynth.releaseAll();sceneRef?.audioStop?.();state.playing=false;startButton.innerHTML='繼續聆聽 <span>↗</span>';status.textContent='已離開頁面，聲音自動休息。';}if(!document.hidden)requestDraw();});
+addEventListener('pagehide',()=>{cancelAnimationFrame(raf);clearTimeout(feedbackTimer);cancelPhrase();sceneRef?.audioStop?.();if(state.started){Tone.Transport.stop();Tone.Transport.clear(loop);[scorePart,tempoPart,synth,bassSynth,tapSynth,kick,hat,interactionSynth,userKick,userSnare,userShaker,popSynth,musicBus,master,analyser,limiter].forEach(n=>n?.dispose());}});
 function boot(scene){sceneRef=scene;window.soundScene=scene;sceneRef.init?.();if(state.reduced)status.textContent='已依照減少動態偏好呈現停格；觸碰仍可改變畫面。';new ResizeObserver(resize).observe(canvas);resize();requestDraw();}
 
 const patterns=['接力','齊步','對話','倒走'],manualLights=Array(15).fill(0);let phrase=0,hovered=-1,lastLight=-1;
