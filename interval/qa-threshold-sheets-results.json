@@ -1,0 +1,29 @@
+{
+  "browser": "151.0.7922.34",
+  "devices": [
+    {
+      "mobile": false,
+      "animation": true,
+      "fixedPosition": true,
+      "fixedOpacity": true,
+      "fixedCamera": true,
+      "reducedMotion": true,
+      "backgroundPause": true,
+      "distantPause": true,
+      "stableResources": true,
+      "errors": []
+    },
+    {
+      "mobile": true,
+      "animation": true,
+      "fixedPosition": true,
+      "fixedOpacity": true,
+      "fixedCamera": true,
+      "reducedMotion": true,
+      "backgroundPause": true,
+      "distantPause": true,
+      "stableResources": true,
+      "errors": []
+    }
+  ]
+}
