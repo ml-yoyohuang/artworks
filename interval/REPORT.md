@@ -440,3 +440,7 @@ Chromium 151／macOS／SwiftShader：桌機 1440×900 及手機觸控模擬 390�
 ## 進站作品圖閃現修正
 
 loading-preview 原先在 JavaScript 啟動前預設顯示；改為 HTML hidden，正常與延遲模組載入皆不顯示，僅明確啟動失敗後由 fallback 顯示。停用 JavaScript 時由 noscript 專用圖片及完整目錄提供備援。實測桌機、390px 手機模擬首屏，阻擋 app 模組載入時沒有作品圖，繪圖完成後仍隱藏；停用 JavaScript 顯示預覽、35 件靜態目錄正常，WebGL 失敗時預覽可用。
+
+## 雜誌延伸閱讀入口
+
+展覽敘事面板底部新增「延伸閱讀」與《間物 BETWEEN MATTER》連結；第五展區終章新增「閱讀藝術誌」。皆使用公開絕對網址、target=_blank 與 rel=noopener。Chromium 桌機 1440×900、390×844 手機模擬實際檢視面板與終章，連結可讀、另開雜誌分頁，關閉分頁後展區／站位／朝向保持原樣。
