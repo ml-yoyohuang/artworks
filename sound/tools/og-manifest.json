@@ -1,0 +1,172 @@
+[
+  {
+    "slug": "jelly-wave",
+    "title": "果凍波",
+    "en": "Jelly, gently",
+    "description": "把一條旋律，盛進會晃動的軟糖。",
+    "bg": "#f6e7dc",
+    "accent": "#e76946",
+    "group": "會跳舞的波形",
+    "number": 1
+  },
+  {
+    "slug": "pendulum-swing",
+    "title": "彩虹鞦韆",
+    "en": "A chorus of arcs",
+    "description": "各自的擺長，偶爾成為共同的風。",
+    "bg": "#e7eddf",
+    "accent": "#dd6148",
+    "group": "會跳舞的波形",
+    "number": 2
+  },
+  {
+    "slug": "ribbon-dance",
+    "title": "緞帶體操",
+    "en": "A little flourish",
+    "description": "旋律摺起、翻身，再散成一條緞帶。",
+    "bg": "#f4eacc",
+    "accent": "#d35157",
+    "group": "會跳舞的波形",
+    "number": 3
+  },
+  {
+    "slug": "bubble-scale",
+    "title": "泡泡音階",
+    "en": "Notes in the air",
+    "description": "把音符吹大，讓它們互相打招呼。",
+    "bg": "#F4F0DE",
+    "accent": "#397B9B",
+    "group": "會跳舞的波形",
+    "number": 4
+  },
+  {
+    "slug": "beat-candy",
+    "title": "節拍糖果",
+    "en": "Sweet accumulation",
+    "description": "一拍一顆，把時間堆成甜甜的小山。",
+    "bg": "#f0e1df",
+    "accent": "#d85d4f",
+    "group": "節奏的遊戲感",
+    "number": 5
+  },
+  {
+    "slug": "tap-floor",
+    "title": "踢踏地板",
+    "en": "A floor that listens",
+    "description": "腳步一亮，地板便記得你的節奏。",
+    "bg": "#e9e7d3",
+    "accent": "#477864",
+    "group": "節奏的遊戲感",
+    "number": 6
+  },
+  {
+    "slug": "popcorn-rhythm",
+    "title": "爆米花節奏",
+    "en": "Small explosions",
+    "description": "安靜的種子，也有突然起舞的時候。",
+    "bg": "#f2e8cb",
+    "accent": "#e4663d",
+    "group": "節奏的遊戲感",
+    "number": 7
+  },
+  {
+    "slug": "hopscotch",
+    "title": "跳房子",
+    "en": "One more square",
+    "description": "球把每一拍，都當成下一個家。",
+    "bg": "#e7e6ed",
+    "accent": "#d96250",
+    "group": "節奏的遊戲感",
+    "number": 8
+  },
+  {
+    "slug": "flower-choir",
+    "title": "合唱的花",
+    "en": "A garden in tune",
+    "description": "輪到自己的那一拍，就開一朵花。",
+    "bg": "#e9edda",
+    "accent": "#d66753",
+    "group": "愉快的合奏",
+    "number": 9
+  },
+  {
+    "slug": "canon-ripples",
+    "title": "輪唱漣漪",
+    "en": "After you, again",
+    "description": "同一句旋律，從三處不同的時間出發。",
+    "bg": "#e2e9df",
+    "accent": "#427b79",
+    "group": "愉快的合奏",
+    "number": 10
+  },
+  {
+    "slug": "metronome-party",
+    "title": "節拍器派對",
+    "en": "Finding the together",
+    "description": "先各跳各的，再慢慢找到彼此。",
+    "bg": "#f0e1d5",
+    "accent": "#c86448",
+    "group": "愉快的合奏",
+    "number": 11
+  },
+  {
+    "slug": "signal-band",
+    "title": "交通號誌樂團",
+    "en": "The crossing sings",
+    "description": "城市暫停的地方，偷偷排練一首歌。",
+    "bg": "#e4e9e6",
+    "accent": "#d6624c",
+    "group": "愉快的合奏",
+    "number": 12
+  },
+  {
+    "slug": "square-blocks",
+    "title": "方波積木",
+    "en": "A place for a pulse",
+    "description": "把硬硬的波，蓋成小小的家。",
+    "bg": "#eee5d5",
+    "accent": "#d96d4d",
+    "group": "波形的變身",
+    "number": 13
+  },
+  {
+    "slug": "saw-hills",
+    "title": "鋸齒山丘",
+    "en": "Downhill, uphill",
+    "description": "一條鋸齒，是一片可以滑行的風景。",
+    "bg": "#f4e9ce",
+    "accent": "#e17a50",
+    "group": "波形的變身",
+    "number": 14
+  },
+  {
+    "slug": "crayon-wave",
+    "title": "波形塗鴉",
+    "en": "Please colour the sound",
+    "description": "畫歪一點，聲音就更像你的字跡。",
+    "bg": "#f5ecde",
+    "accent": "#d3664b",
+    "group": "波形的變身",
+    "number": 15
+  },
+  {
+    "slug": "spring-dancer",
+    "title": "彈簧舞者",
+    "en": "Stretch, then smile",
+    "description": "伸長的等待，縮成一次開心的跳躍。",
+    "bg": "#e8e5ee",
+    "accent": "#d96950",
+    "group": "波形的變身",
+    "number": 16
+  },
+  {
+    "slug": "index",
+    "title": "小小聲音遊樂場",
+    "description": "十六件愉快的生成式藝術，邀請你觸碰、聆聽與合奏。"
+  },
+  {
+    "slug": "jelly-face-lab",
+    "title": "果凍表情工作室",
+    "description": "一點點，更可愛。拖動參數，細緻調整果凍的碰撞表情。"
+  }
+]

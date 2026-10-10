@@ -1,0 +1,296 @@
+{
+  "checks": [
+    {
+      "page": "beat-candy.html",
+      "image": "assets/og/beat-candy.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "bubble-scale.html",
+      "image": "assets/og/bubble-scale.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "canon-ripples.html",
+      "image": "assets/og/canon-ripples.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "crayon-wave.html",
+      "image": "assets/og/crayon-wave.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "flower-choir.html",
+      "image": "assets/og/flower-choir.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "hopscotch.html",
+      "image": "assets/og/hopscotch.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "index.html",
+      "image": "assets/og/index.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "jelly-face-lab.html",
+      "image": "assets/og/jelly-face-lab.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "jelly-wave.html",
+      "image": "assets/og/jelly-wave.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "metronome-party.html",
+      "image": "assets/og/metronome-party.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "pendulum-swing.html",
+      "image": "assets/og/pendulum-swing.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "popcorn-rhythm.html",
+      "image": "assets/og/popcorn-rhythm.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "ribbon-dance.html",
+      "image": "assets/og/ribbon-dance.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "saw-hills.html",
+      "image": "assets/og/saw-hills.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "signal-band.html",
+      "image": "assets/og/signal-band.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "spring-dancer.html",
+      "image": "assets/og/spring-dancer.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "square-blocks.html",
+      "image": "assets/og/square-blocks.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    },
+    {
+      "page": "tap-floor.html",
+      "image": "assets/og/tap-floor.jpg",
+      "uniqueCover": true,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "ogAndTwitter": true,
+      "absoluteURLs": true
+    }
+  ],
+  "missingResources": [],
+  "duplicateMetadata": [],
+  "localHTTP": [
+    {
+      "slug": "jelly-wave",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "pendulum-swing",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "ribbon-dance",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "bubble-scale",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "beat-candy",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "tap-floor",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "hopscotch",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "flower-choir",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "canon-ripples",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "metronome-party",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "signal-band",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "square-blocks",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "saw-hills",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "crayon-wave",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "spring-dancer",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "index",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "slug": "jelly-face-lab",
+      "status": 200,
+      "type": "image/jpeg"
+    }
+  ]
+}

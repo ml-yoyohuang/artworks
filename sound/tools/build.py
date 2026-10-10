@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+from html import escape
 ROOT=Path(__file__).resolve().parents[1]
 # Each emitted page embeds its own stylesheet, runtime and scene; no shared local dependency.
 WORKS=[
@@ -64,7 +65,16 @@ MATERIALS={
  'crayon-wave':'互動：高度選音、記錄與重播這筆奏音；每筆最多八秒。',
  'spring-dancer':'互動：舞者固定主音；壓縮決定力度與 0.15–1 秒音長，滿力加八度尾音。'
 }
-head=lambda title,desc:f'''<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="{desc}"><meta name="theme-color" content="#f6f1e7"><link rel="icon" href="data:,"><title>{title} — 小小聲音遊樂場</title><style>{css}</style></head>'''
+BASE_URL='https://ml-yoyohuang.github.io/artworks/sound/'
+def social_meta(title,desc,slug='index'):
+ url=BASE_URL+('' if slug=='index' else slug+'.html')
+ image=BASE_URL+'assets/og/'+slug+'.jpg'
+ full_title=title+' — 小小聲音遊樂場' if slug!='index' else '小小聲音遊樂場 — 聲音・波形・節奏'
+ alt=title+'：聲音・波形・節奏生成藝術分享封面'
+ tags={'og:type':'website','og:locale':'zh_TW','og:site_name':'小小聲音遊樂場','og:title':full_title,'og:description':desc,'og:url':url,'og:image':image,'og:image:type':'image/jpeg','og:image:width':'1200','og:image:height':'630','og:image:alt':alt}
+ twitter={'twitter:card':'summary_large_image','twitter:title':full_title,'twitter:description':desc,'twitter:image':image,'twitter:image:alt':alt}
+ return f'<link rel="canonical" href="{url}">'+''.join(f'<meta property="{key}" content="{escape(value,quote=True)}">' for key,value in tags.items())+''.join(f'<meta name="{key}" content="{escape(value,quote=True)}">' for key,value in twitter.items())
+head=lambda title,desc,slug='index':f'''<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="{desc}"><meta name="theme-color" content="#f6f1e7"><link rel="icon" href="data:,"><title>{title} — 小小聲音遊樂場</title>{social_meta(title,desc,slug)}<style>{css}</style></head>'''
 for i,w in enumerate(WORKS):
  slug,title,en,short,desc,hint,bg,palette,bpm,osc,mode,group=w
  recommended=recommendations[i]; chosen=library[recommended]; bpm=chosen['bpm']
@@ -72,7 +82,6 @@ for i,w in enumerate(WORKS):
  if slug in DIRECT:hint=DIRECT[slug][0]
  play_ui=(f'<div class="play-guide"><p>{DIRECT[slug][0]}</p><output id="play-feedback" aria-live="polite">{DIRECT[slug][1]} 先按「開始聆聽」即可奏音。</output></div>' if slug in DIRECT else '')
  extras=('<div class="gesture-tools"><button id="replay" disabled>重播這一筆</button><button id="clear-ink">清空紙面</button></div>' if slug=='crayon-wave' else '')
- if slug=='jelly-wave':extras='<div class="gesture-tools"><a class="face-lab-link" href="jelly-face-lab.html">調整碰撞表情 ↗</a></div>'
  if slug=='pendulum-swing':extras='<div class="gesture-tools"><button id="calm-wind">讓風停下</button></div>'
  if slug=='beat-candy':extras='<div class="gesture-tools"><button id="clear-candy">清空糖果盤</button></div>'
  if slug=='square-blocks':extras='<div class="gesture-tools"><button id="building-plan">建築方案：1 / 4</button><button id="house-play">播放房子旋律</button><button id="house-only">只聽房子</button></div>'
@@ -84,7 +93,7 @@ for i,w in enumerate(WORKS):
  balance=('<div class="backing-control"><label for="backing">伴奏音量 <output id="backing-value">45%</output></label><input id="backing" type="range" min="0" max="100" value="45" aria-label="古典伴奏音量"><span>自己的奏音會更清楚</span></div>' if slug in DIRECT else '')
  keys=('方向鍵移動操作位置，Enter 模擬點按；拖曳請用滑鼠／觸控。空白鍵播放／暫停。' if slug in DIRECT else '方向鍵改變位置，Enter 加入一拍；空白鍵切換聲音。')
  options=''.join(f'<option value="{key}"{" selected" if key==recommended else ""}>{v["title"]}{" · 策展推薦" if key==recommended else ""}</option>' for key,v in library.items())
- page=head(title,short)+f'''<body style="--stage:{bg};--accent:{palette[0]}"><div class="shell"><header class="mast"><a href="index.html">← 小小聲音遊樂場</a><span>SOFT SCORES / {i+1:02d}—16</span></header><main class="exhibit"><section class="art-column" aria-label="{title}互動作品"><div class="stage"><div class="stage-label"><span>{GROUPS[group][1]}</span><span class="live-label">SILENT REHEARSAL</span></div><canvas id="art" tabindex="0" aria-label="{title}。{hint}"></canvas><div class="stage-bottom"><span class="dots" aria-hidden="true">● ● ● ●</span><span>{en.upper()}</span></div></div>{play_ui}{extras}<div class="music-picker"><div class="picker-label"><label for="track">今天，讓它跟著哪首歌？</label><button id="recommend">回到推薦曲</button></div><select id="track" aria-describedby="pairing">{options}</select><p id="pairing">策展推薦｜{pairings[i]}</p></div><div class="toolbar"><button id="start" class="primary">開始聆聽 <span>↗</span></button><button id="mute" disabled aria-pressed="false">靜音</button><button id="motion" aria-pressed="false">暫停動態</button><div class="tempo"><label for="tempo">速度 <output id="bpm">×1.00</output></label><input id="tempo" type="range" min="0.6" max="1.4" step="0.01" value="1" aria-label="演奏速度倍率"></div></div>{balance}<p id="status" role="status">聲音等待你的邀請。畫面已開始輕輕呼吸。</p></section><aside class="label"><div class="work-no">{i+1:02d}<span> / {GROUPS[group][0]}</span></div><h1>{title}</h1><div class="english">{en}</div><p class="lede">{short}</p><p class="statement">{desc}</p><div class="hint"><span>一起玩 / PLAY</span><p>{hint}</p><small>畫布聚焦後：{keys}</small></div><div class="material">CANVAS 2D · LIVE SYNTHESIS<br><span id="track-material">{chosen["title"]}・{chosen["composer"]}<br>{chosen["detail"]}</span><br>古典樂譜伴奏＋獨立互動合成聲<br>{MATERIALS[slug]}<br>不需要音檔<br><a id="score-credit" href="CREDITS.md#{recommended}">排譜來源與授權 ↗</a></div></aside></main><nav class="neighbors" aria-label="前後作品"><a href="{WORKS[(i-1)%16][0]}.html">← {WORKS[(i-1)%16][1]}</a><a href="{WORKS[(i+1)%16][0]}.html">{WORKS[(i+1)%16][1]} →</a></nav><footer><span>聲音・波形・節奏 / 2026</span><a href="CREDITS.md">製作與聲音來源 ↗</a></footer></div><script src="https://cdn.jsdelivr.net/npm/tone@15.0.4/build/Tone.js"></script><script>(()=>{{'use strict';const CONFIG={json.dumps(cfg,ensure_ascii=False)};const SCORES={score};{runtime}\n{scenes[slug]}\nboot(scene);}})();</script></body></html>'''
+ page=head(title,short,slug)+f'''<body style="--stage:{bg};--accent:{palette[0]}"><div class="shell"><header class="mast"><a href="index.html">← 小小聲音遊樂場</a><span>SOFT SCORES / {i+1:02d}—16</span></header><main class="exhibit"><section class="art-column" aria-label="{title}互動作品"><div class="stage"><div class="stage-label"><span>{GROUPS[group][1]}</span><span class="live-label">SILENT REHEARSAL</span></div><canvas id="art" tabindex="0" aria-label="{title}。{hint}"></canvas><div class="stage-bottom"><span class="dots" aria-hidden="true">● ● ● ●</span><span>{en.upper()}</span></div></div>{play_ui}{extras}<div class="music-picker"><div class="picker-label"><label for="track">今天，讓它跟著哪首歌？</label><button id="recommend">回到推薦曲</button></div><select id="track" aria-describedby="pairing">{options}</select><p id="pairing">策展推薦｜{pairings[i]}</p></div><div class="toolbar"><button id="start" class="primary">開始聆聽 <span>↗</span></button><button id="mute" disabled aria-pressed="false">靜音</button><button id="motion" aria-pressed="false">暫停動態</button><div class="tempo"><label for="tempo">速度 <output id="bpm">×1.00</output></label><input id="tempo" type="range" min="0.6" max="1.4" step="0.01" value="1" aria-label="演奏速度倍率"></div></div>{balance}<p id="status" role="status">聲音等待你的邀請。畫面已開始輕輕呼吸。</p></section><aside class="label"><div class="work-no">{i+1:02d}<span> / {GROUPS[group][0]}</span></div><h1>{title}</h1><div class="english">{en}</div><p class="lede">{short}</p><p class="statement">{desc}</p><div class="hint"><span>一起玩 / PLAY</span><p>{hint}</p><small>畫布聚焦後：{keys}</small></div><div class="material">CANVAS 2D · LIVE SYNTHESIS<br><span id="track-material">{chosen["title"]}・{chosen["composer"]}<br>{chosen["detail"]}</span><br>古典樂譜伴奏＋獨立互動合成聲<br>{MATERIALS[slug]}<br>不需要音檔<br><a id="score-credit" href="CREDITS.md#{recommended}">排譜來源與授權 ↗</a></div></aside></main><nav class="neighbors" aria-label="前後作品"><a href="{WORKS[(i-1)%16][0]}.html">← {WORKS[(i-1)%16][1]}</a><a href="{WORKS[(i+1)%16][0]}.html">{WORKS[(i+1)%16][1]} →</a></nav><footer><span>聲音・波形・節奏 / 2026</span><a href="CREDITS.md">製作與聲音來源 ↗</a></footer></div><script src="https://cdn.jsdelivr.net/npm/tone@15.0.4/build/Tone.js"></script><script>(()=>{{'use strict';const CONFIG={json.dumps(cfg,ensure_ascii=False)};const SCORES={score};{runtime}\n{scenes[slug]}\nboot(scene);}})();</script></body></html>'''
  (ROOT/(slug+'.html')).write_text(page)
 index=head('聲音・波形・節奏','十六件愉快的生成式藝術，邀請你觸碰、聆聽與合奏。')+'''<body class="catalog"><div class="shell"><header class="mast"><span>一場可以用手指聆聽的展覽</span><span>COLLECTION / 2026</span></header><main><section class="hero"><div class="hero-copy"><div class="eyebrow">SOUND, SHAPE & A LITTLE JOY</div><h1>小小聲音<br>遊樂場<span class="asterisk">✳</span></h1><div class="hero-sub">聲音・波形・節奏</div></div><div class="hero-side"><div class="hero-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><p>如果聲音有身體，它會怎麼跳舞？<br>十六件小作品，把看不見的旋律變成果凍、花朵與會彈跳的日常。請留一點時間，邀請它們一起玩。</p><span class="ticket">16 WORKS / 04 ROOMS / YOUR TEMPO</span></div></section><nav class="room-nav" aria-label="展覽分區">'''
 for j,g in enumerate(GROUPS):index+=f'<a href="#room-{j+1}">{j+1:02d} {g[0]} ↘</a>'
@@ -101,5 +110,9 @@ index+='''</main><footer><span>不必懂樂理。你已經在節奏裡。<br>原
 (ROOT/'tools/works.json').write_text(json.dumps([dict(slug=w[0],title=w[1],en=w[2],bpm=library[recommendations[i]]['bpm'],osc=w[9],mode=w[10],recommended=recommendations[i]) for i,w in enumerate(WORKS)],ensure_ascii=False,indent=2))
 print('Built 16 standalone artworks + index.')
 
-face_lab=(ROOT/'tools/jelly-face-lab.template.html').read_text().replace('__BASE_CSS__',css).replace('__FACE_RENDERER__',(ROOT/'tools/jelly-face.js').read_text())
+face_lab=(ROOT/'tools/jelly-face-lab.template.html').read_text().replace('__SOCIAL_META__',social_meta('果凍表情工作室','拖動參數，並排比較原版與調整版，細緻調整果凍的碰撞表情。','jelly-face-lab')).replace('__BASE_CSS__',css).replace('__FACE_RENDERER__',(ROOT/'tools/jelly-face.js').read_text())
 (ROOT/'jelly-face-lab.html').write_text(face_lab)
+
+og_manifest=[dict(slug=w[0],title=w[1],en=w[2],description=w[3],bg=w[6],accent=w[7][0],group=GROUPS[w[-1]][0],number=i+1) for i,w in enumerate(WORKS)]
+og_manifest += [dict(slug='index',title='小小聲音遊樂場',description='十六件愉快的生成式藝術，邀請你觸碰、聆聽與合奏。'),dict(slug='jelly-face-lab',title='果凍表情工作室',description='一點點，更可愛。拖動參數，細緻調整果凍的碰撞表情。')]
+(ROOT/'tools/og-manifest.json').write_text(json.dumps(og_manifest,ensure_ascii=False,indent=2))
