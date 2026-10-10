@@ -88,4 +88,4 @@ python3 sound/tools/contact.py
 
 ## 提交與推送
 
-只暫存 `/sound`。作品提交訊息：`feat(sound): add 16 rhythm & waveform generative art pieces`。採一般非強制推送；目標 `origin/main`，如被拒絕則依任務改推 `sound-gallery`，不改寫歷史。最終結果於交付前填入。
+只暫存 `/sound`。作品提交訊息：`feat(sound): add 16 rhythm & waveform generative art pieces`。採一般非強制推送；目標 `origin/main`，如被拒絕則依任務改推 `sound-gallery`，不改寫歷史。**推送成功：作品提交 `7f5f100` 已一般推送至 `origin/main`。** 無需使用備援分支。此報告的交付紀錄另以 `docs(sound): record successful main delivery` 提交。沒有強制推送或改寫歷史；作品提交的 106 個檔案全在 `/sound`。
