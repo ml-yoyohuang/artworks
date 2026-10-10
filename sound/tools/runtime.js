@@ -29,7 +29,7 @@ function scoreNote(time,event){const [midi,duration,voice,velocity,at,g]=event;i
  const length=Tone.Ticks(Math.max(12,duration*.88)).toSeconds(),energy=energyAt(at);
  const strength=clamp(velocity/127,.1,1)*(state.trackId==='bolero'?.3+.7*energy:1);
  if(role==='percussion')hat.triggerAttackRelease(Math.min(.12,length),time,strength*.5);
- else (role==='bass'?bassSynth:synth).triggerAttackRelease(pitch,length,time,strength*(role==='bass'?.42:.65));
+ else (role==='bass'?bassSynth:synth).triggerAttackRelease(pitch,length,time,strength*(role==='bass'?(state.trackId==='canon'?.55:.42):.65));
  Tone.Draw.schedule(()=>{if(g!==generation||!state.playing)return;state.scoreEvents++;state.scoreVoices[voice]++;state.lastNote=pitch;state.musicalTick=at;state.energyTarget=state.trackId==='bolero'?energy:clamp(.25+velocity/170,.25,1);if(state.reduced||state.paused)return;state.pulses[voice]=1;
   if(role==='lead'){state.pulse=Math.max(state.pulse,.25+strength*.65);if(CONFIG.mode==='canon')sceneRef?.voice?.(voice%3);if(CONFIG.mode==='choir')sceneRef?.beat?.([0,1,2,3,4,3,2,1][midi%8]);sceneRef?.note?.(midi,strength,at);}
   requestDraw();},time);
@@ -37,7 +37,8 @@ function scoreNote(time,event){const [midi,duration,voice,velocity,at,g]=event;i
 function disposeScore(){cancelPhrase();generation++;if(!state.started)return;Tone.Transport.stop();Tone.Transport.clear(loop);scorePart?.dispose();tempoPart?.dispose();[synth,bassSynth,tapSynth,kick,hat,interactionSynth,userKick,userSnare,userShaker,popSynth].forEach(n=>n?.dispose());interactionSynth=null;}
 function prepareScore(){const g=generation;master.gain.cancelScheduledValues(0);master.gain.setValueAtTime(state.muted?0:.42,Tone.immediate());
  synth=new Tone.PolySynth(Tone.Synth,{oscillator:{type:CONFIG.osc},envelope:{attack:.012,decay:.15,sustain:.28,release:.18},volume:CONFIG.osc==='square'||CONFIG.osc==='sawtooth'?-22:-14}).connect(musicBus);synth.maxPolyphony=32;
- bassSynth=new Tone.PolySynth(Tone.Synth,{oscillator:{type:'sine'},envelope:{attack:.02,decay:.15,sustain:.3,release:.18},volume:-17}).connect(musicBus);bassSynth.maxPolyphony=32;
+ const canonBass=state.trackId==='canon';
+ bassSynth=new Tone.PolySynth(Tone.Synth,{oscillator:{type:canonBass?'triangle':'sine'},envelope:{attack:canonBass?.012:.02,decay:.15,sustain:canonBass?.42:.3,release:canonBass?.28:.18},volume:canonBass?-14:-17}).connect(musicBus);bassSynth.maxPolyphony=32;
  tapSynth=new Tone.Synth({oscillator:{type:'sine'},envelope:{attack:.005,decay:.16,sustain:0,release:.25},volume:-15}).connect(musicBus);
  kick=new Tone.MembraneSynth({pitchDecay:.025,octaves:3,volume:-28}).connect(musicBus);
  hat=new Tone.NoiseSynth({noise:{type:'pink'},envelope:{attack:.002,decay:.04,sustain:0},volume:-29}).connect(musicBus);

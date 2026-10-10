@@ -1,0 +1,54 @@
+{
+  "checks": [
+    {
+      "id": "piano",
+      "peaks": [
+        0.02307305298745632,
+        0.09449242055416107
+      ]
+    },
+    {
+      "id": "architecture",
+      "peaks": [
+        0.022425798699259758,
+        0.08033915609121323
+      ]
+    },
+    {
+      "id": "tides",
+      "peaks": [
+        0.02307305298745632,
+        0.09546836465597153
+      ]
+    },
+    {
+      "id": "breath",
+      "peaks": [
+        0.023111023008823395,
+        0.07865456491708755
+      ]
+    },
+    {
+      "id": "pluck",
+      "peaks": [
+        0.023199189454317093,
+        0.11413025856018066
+      ]
+    },
+    {
+      "id": "original",
+      "peaks": [
+        0.032774701714515686,
+        0.12508703768253326
+      ]
+    }
+  ],
+  "all1956NotesPreserved": true,
+  "loop": true,
+  "pauseResume": true,
+  "switchKeepsPosition": true,
+  "mobileOverflow": false,
+  "reducedMotion": true,
+  "dispose": true,
+  "errors": []
+}

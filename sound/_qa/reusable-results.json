@@ -1,0 +1,47 @@
+{
+  "checks": [
+    {
+      "id": "canon",
+      "peak": 0.024549460038542747
+    },
+    {
+      "id": "turkish",
+      "peak": 0.07031767815351486
+    },
+    {
+      "id": "hungarian",
+      "peak": 0.06277544051408768
+    },
+    {
+      "id": "cancan",
+      "peak": 0.09772425144910812
+    },
+    {
+      "id": "bolero",
+      "peak": 0.017185235396027565
+    },
+    {
+      "id": "william",
+      "peak": 0.1013355404138565
+    },
+    {
+      "id": "elise",
+      "peak": 0.04658496007323265
+    },
+    {
+      "id": "prayer",
+      "peak": 0.18232446908950806
+    }
+  ],
+  "loops": [
+    "elise",
+    "prayer"
+  ],
+  "dataIdentical": true,
+  "pauseResume": true,
+  "rate": true,
+  "stop": true,
+  "dispose": true,
+  "mobileOverflow": false,
+  "errors": []
+}

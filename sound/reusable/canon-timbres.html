@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>卡農・音色試聽室 — Soft Scores</title>
+<meta name="description" content="用完整 D 大調卡農，比較泛音鋼琴、持續三角波、左右潮汐、氣息與微下滑撥音。Tone.js 即時合成，無音檔。">
+<style>
+:root{color-scheme:light;--ink:#344c47;--paper:#f7f3e8;--green:#dce8c8;--orange:#c96842}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Avenir Next","PingFang TC","Noto Sans TC",sans-serif;line-height:1.7}main{max-width:1060px;margin:auto;padding:42px 32px 26px}a{color:inherit;text-underline-offset:5px}header{display:flex;justify-content:space-between;gap:20px;font-size:13px;letter-spacing:.06em}.eyebrow{margin:46px 0 10px;color:var(--orange);letter-spacing:.18em;font-size:12px}h1{font-size:clamp(32px,5vw,58px);letter-spacing:-.04em;line-height:1.2;margin:0 0 18px;font-weight:600}.intro{max-width:650px;font-size:16px;margin-bottom:30px}.room{background:#ececda;border-radius:28px;padding:30px}.topline{display:flex;justify-content:space-between;gap:20px;font-size:12px;letter-spacing:.08em}.voices{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:24px 0 28px}.voice{height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:70px;background:#e2dac2;transition:background .3s,transform .3s}.voice:nth-child(2){background:#d1dfc5}.voice:nth-child(3){background:#ebcdb4}.voice:nth-child(4){background:#c9d9d8}.voice.active{transform:translateY(-8px);box-shadow:inset 0 0 0 2px #344c4740}.voice b{font-size:25px;font-weight:500}.voice small{font-size:12px}.timeline{height:4px;background:#344c471b;border-radius:9px;overflow:hidden}.timeline span{display:block;height:100%;width:0;background:var(--orange)}.time{display:flex;justify-content:space-between;margin-top:7px;font-variant-numeric:tabular-nums;font-size:12px}.controls{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0}button,select,input{font:inherit}button{border:1px solid #344c4750;border-radius:30px;padding:11px 22px;background:transparent;color:var(--ink);cursor:pointer}button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}button:hover{box-shadow:0 3px 0 #344c471a}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--orange);outline-offset:4px}button:disabled{opacity:.5;cursor:wait}.selection{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:30px}label{display:block;font-size:13px}select{margin-top:10px;width:100%;padding:12px 15px;color:var(--ink);background:#fffaf0;border:1px solid #344c4740;border-radius:12px}#description{min-height:58px;font-size:14px;margin:12px 0}input[type=range]{width:100%;accent-color:var(--ink);margin:20px 0 12px}.note{font-size:12px;opacity:.8}#status{display:block;min-height:25px;margin-top:15px;font-size:13px}footer{margin-top:24px;font-size:12px}.volume-head{display:flex;justify-content:space-between}@media(max-width:600px){main{padding:24px 18px}header{font-size:11px}.eyebrow{margin-top:32px}.room{padding:22px 18px;border-radius:22px}.voices{gap:8px}.voice{height:100px}.voice b{font-size:19px}.voice small{font-size:10px}.selection{grid-template-columns:1fr;gap:16px}.controls{gap:8px}button{padding:10px 16px}}@media(prefers-reduced-motion:reduce){.voice{transition:none}.voice.active{transform:none}}
+</style>
+</head>
+<body><main>
+<header><a href="demo.html">← 可重用樂譜</a><span>SOFT SCORES / LISTENING ROOM</span></header>
+<p class="eyebrow">一首曲子，五種新的質地</p><h1>卡農・音色試聽室</h1>
+<p class="intro">同一份完整的 D 大調卡農，讓四個聲部換上不同的聲音。從泛音鋼琴開始，隨時切換音色，聽聽同一段旋律會如何改變。</p>
+<section class="room" aria-label="卡農播放器">
+<div class="topline"><span>PACHELBEL · CANON IN D</span><span>完整四聲部 · 循環演奏</span></div>
+<div class="voices" aria-label="聲部音符"><div class="voice"><small>旋律一</small><b>—</b></div><div class="voice"><small>旋律二</small><b>—</b></div><div class="voice"><small>旋律三</small><b>—</b></div><div class="voice"><small>低音</small><b>—</b></div></div>
+<div class="timeline" role="progressbar" aria-label="樂譜播放進度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progress"></span></div><div class="time"><span id="position">0:00</span><span id="length">—</span></div>
+<div class="controls"><button class="primary" id="play">▶ 開始聆聽</button><button id="pause">暫停</button><button id="stop">回到開頭</button></div>
+<output id="status" role="status">尚未播放聲音。</output>
+</section>
+<div class="selection"><div><label for="timbre">選擇音色</label><select id="timbre"><option value="piano">01 泛音鋼琴 · 推薦先聽</option><option value="architecture">02 建築・持續三角波</option><option value="tides">03 左右潮汐</option><option value="breath">04 氣息・有音高的風</option><option value="pluck">05 微下滑撥音</option><option value="original">比較：目前 reusable 的音色</option></select><p id="description"></p></div><div><div class="volume-head"><label for="volume">聆聽音量</label><span id="volume-value">60%</span></div><input id="volume" type="range" min="0" max="100" value="60"><p class="note">切換音色保留播放位置；「回到開頭」可重聽低音開場。潮汐版建議戴耳機。這裡只試聽，不會改動展覽作品。</p></div></div>
+<footer>Tone.js 15.0.4 即時合成 · 無外部音檔 · <a href="CREDITS.md">樂譜來源與授權</a> · <a href="README.md">帶去其他作品</a></footer>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/tone@15.0.4/build/Tone.js"></script><script src="library.js"></script><script src="player.js"></script><script src="timbres.js"></script>
+<script>
+const $=s=>document.querySelector(s),score=SoftScores.canon,select=$('#timbre'),status=$('#status');let player,starting=false;
+const totalSeconds=score.totalTicks/score.ppq*60/score.bpm;
+function clock(seconds){seconds=Math.max(0,Math.floor(seconds));return Math.floor(seconds/60)+':'+String(seconds%60).padStart(2,'0');}
+$('#length').textContent=clock(totalSeconds);
+function explain(){ $('#description').textContent=select.value==='original'?'目前 reusable 的三角波旋律與較清楚的三角波低音，作為比較基準。':SoftScoreTimbres.presets[select.value].description;}
+function load(tick=0){
+ if(!window.Tone)throw Error('Tone.js 尚未載入，請確認網路後重新整理。');
+ if(!player)player=new SoftScoresPlayer(Tone,SoftScores);
+ player.load('canon',{instrumentFactory:select.value==='original'?null:SoftScoreTimbres.factory(select.value),onNote:n=>{
+  const v=document.querySelectorAll('.voice')[n.voice];v.querySelector('b').textContent=Tone.Frequency(n.midi,'midi').toNote();v.classList.add('active');clearTimeout(v.timer);v.timer=setTimeout(()=>v.classList.remove('active'),250);
+ }});
+ player.output.gain.value=Number($('#volume').value)/100;Tone.Transport.ticks=tick;
+}
+async function play(){if(starting)return;starting=true;$('#play').disabled=true;try{if(!window.Tone)throw Error('Tone.js 尚未載入，請確認網路後重新整理。');await Tone.start();if(!player)load();await player.play();$('#play').textContent='▶ 播放中';status.textContent='正在演奏 · '+select.selectedOptions[0].textContent;}catch(e){status.textContent=e.message;}finally{starting=false;$('#play').disabled=false;}}
+select.onchange=()=>{explain();try{if(player){const running=player.playing,tick=Tone.Transport.ticks%score.totalTicks;load(tick);if(running)play();else status.textContent='音色已切換 · 按播放繼續';}else status.textContent='已選擇音色 · 按開始聆聽';}catch(e){status.textContent=e.message;}};
+$('#play').onclick=play;$('#pause').onclick=()=>{player?.pause();$('#play').textContent='▶ 繼續播放';status.textContent='已暫停 · 再按播放接續';};$('#stop').onclick=()=>{player?.stop();$('#play').textContent='▶ 開始聆聽';document.querySelectorAll('.voice').forEach(v=>{clearTimeout(v.timer);v.classList.remove('active');});document.querySelectorAll('.voice b').forEach(e=>e.textContent='—');status.textContent='已回到開頭';};
+$('#volume').oninput=()=>{const value=Number($('#volume').value)/100;$('#volume-value').textContent=Math.round(value*100)+'%';player?.output.gain.rampTo(value,.06);};
+const progressTimer=setInterval(()=>{const tick=player?Tone.Transport.ticks%score.totalTicks:0,pct=tick/score.totalTicks*100;$('#progress').style.width=pct+'%';$('.timeline').setAttribute('aria-valuenow',Math.round(pct));$('#position').textContent=clock(tick/score.ppq*60/score.bpm);},150);
+document.addEventListener('visibilitychange',()=>{if(document.hidden){player?.pause();$('#play').textContent='▶ 繼續播放';status.textContent='離開頁面，聲音休息中';}});addEventListener('pagehide',()=>{clearInterval(progressTimer);document.querySelectorAll('.voice').forEach(v=>clearTimeout(v.timer));player?.dispose();});explain();
+</script></body></html>
