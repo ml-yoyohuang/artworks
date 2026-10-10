@@ -29,6 +29,10 @@ library=json.loads(score)
 recommendations=['hungarian','canon','hungarian','turkish','bolero','cancan','cancan','william','canon','canon','bolero','bolero','turkish','william','hungarian','cancan']
 pairings=['急緩交替，讓果凍收縮與彈回。','錯開的聲部，陪鞦韆散開再相遇。','旋律轉折，讓緞帶縮起再舒展。','輕巧裝飾音，像檸檬汽水裡的小泡泡。','固定節奏逐漸長大，糖果也越落越熱鬧。','鮮明重音，邀請整片地板一起踢踏。','快板帶動一群種子的爆跳。','奔馳的節奏，陪小球跨過下一格。','輪流進場的聲部，像花朵互相接唱。','原本的輪唱結構，在水面留下時間差。','穩定小鼓與漸強，讓派對逐步聚攏。','反覆節奏漸強，路口逐層亮起。','俐落音符與方波轉角，搭出輕快的小房子。','奔馳主題，讓滑行更有向前的動力。','忽快忽慢，讓蠟筆留下有呼吸的字跡。','強拍一起蓄力，彈簧跳成小小的舞隊。']
 DIRECT={
+ 'tap-floor':('指向亮框的菱形格子，點哪格就敲哪格；按住拖曳連續踢踏。','三種鼓聲：低鼓、小鼓、沙鈴；白圈指出自己的腳步。'),
+ 'hopscotch':('點有號碼的格子，小球會完成這次跳躍；落地時奏出那格的音。','紅框是你的目標；落地後才交回自動路線。'),
+ 'flower-choir':('點花瓣，立即奏音並獨唱八拍；之後回合唱，也可按全員合唱。','每朵花有固定音名；圈線指出正在獨唱的花。'),
+ 'metronome-party':('點一台節拍器，邀它先跳散；動態運行二十秒後同步，音樂繼續。','全隊散開可重新開始派對；進度不受速度倍率影響。'),
 'bubble-scale':('點一下奏音，按住拖曳連吹泡泡；左低右高，大泡泡唱低音。','左右八個音階位置；新泡泡顯示實際音名。'),
 'saw-hills':('上下拖曳：上方山高、音高，下方山低、音低；點一下讓小人跳起來。','拖曳時立即奏音，古典伴奏維持原調。'),
 'crayon-wave':('按住畫線：上高下低；放開後，光點沿著這一筆重播。','每筆最多 8 秒，可重播這一筆或清空紙面。'),
@@ -42,6 +46,8 @@ for i,w in enumerate(WORKS):
  if slug in DIRECT:hint=DIRECT[slug][0]
  play_ui=(f'<div class="play-guide"><p>{DIRECT[slug][0]}</p><output id="play-feedback" aria-live="polite">{DIRECT[slug][1]} 先按「開始聆聽」即可奏音。</output></div>' if slug in DIRECT else '')
  extras=('<div class="gesture-tools"><button id="replay" disabled>重播這一筆</button><button id="clear-ink">清空紙面</button></div>' if slug=='crayon-wave' else '')
+ if slug=='flower-choir':extras='<div class="gesture-tools"><button id="all-flowers" disabled>全員合唱</button></div>'
+ if slug=='metronome-party':extras='<div class="gesture-tools"><button id="scatter">全隊散開</button></div>'
  balance=('<div class="backing-control"><label for="backing">伴奏音量 <output id="backing-value">45%</output></label><input id="backing" type="range" min="0" max="100" value="45" aria-label="古典伴奏音量"><span>自己的奏音會更清楚</span></div>' if slug in DIRECT else '')
  keys=('方向鍵選位置，Enter 試奏；空白鍵切換聲音。' if slug in DIRECT else '方向鍵改變位置，Enter 加入一拍；空白鍵切換聲音。')
  options=''.join(f'<option value="{key}"{" selected" if key==recommended else ""}>{v["title"]}{" · 策展推薦" if key==recommended else ""}</option>' for key,v in library.items())

@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-10T08:39:16.693Z",
+  "checks": [
+    {
+      "device": "desktop",
+      "slug": "tap-floor",
+      "checks": {
+        "all30Correct": true,
+        "dragDrums": true,
+        "emptySpaceIgnored": true
+      },
+      "peak": 0.006535958964377642,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "device": "desktop",
+      "slug": "hopscotch",
+      "checks": {
+        "survivesAutoBeats": true,
+        "landingSounds": true,
+        "returnsToRoute": true,
+        "pausedLanding": true
+      },
+      "peak": 0.05047346651554108,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "device": "desktop",
+      "slug": "flower-choir",
+      "checks": {
+        "fixedFlowerPitch": true,
+        "eightBeatReturn": true,
+        "manualEnsemble": true
+      },
+      "peak": 0.04084005951881409,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "device": "desktop",
+      "slug": "metronome-party",
+      "checks": {
+        "musicNeverRestarts": true,
+        "correctSelectedMachine": true,
+        "twentySecondsAt1_4": true,
+        "completeSynchrony": true
+      },
+      "peak": 0.05271274968981743,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "device": "mobile",
+      "slug": "tap-floor",
+      "checks": {
+        "all30Correct": true,
+        "dragDrums": true,
+        "emptySpaceIgnored": true
+      },
+      "peak": 0.006151929497718811,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "device": "mobile",
+      "slug": "hopscotch",
+      "checks": {
+        "survivesAutoBeats": true,
+        "landingSounds": true,
+        "returnsToRoute": true,
+        "pausedLanding": true
+      },
+      "peak": 0.07058314979076385,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "device": "mobile",
+      "slug": "flower-choir",
+      "checks": {
+        "fixedFlowerPitch": true,
+        "eightBeatReturn": true,
+        "manualEnsemble": true
+      },
+      "peak": 0.036495450884103775,
+      "reducedMotion": true,
+      "noOverflow": true
+    },
+    {
+      "device": "mobile",
+      "slug": "metronome-party",
+      "checks": {
+        "musicNeverRestarts": true,
+        "correctSelectedMachine": true,
+        "twentySecondsAt1_4": true,
+        "completeSynchrony": true
+      },
+      "peak": 0.04371950775384903,
+      "reducedMotion": true,
+      "noOverflow": true
+    }
+  ],
+  "errors": [],
+  "resources": []
+}

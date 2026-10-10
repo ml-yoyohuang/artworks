@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10T08:24:21.716Z",
+  "date": "2026-10-10T08:36:34.574Z",
   "checks": [
     {
       "slug": "bubble-scale",
@@ -19,7 +19,7 @@
         },
         "dragBlows": true
       },
-      "peak": 0.08751686662435532,
+      "peak": 0.10639561712741852,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -28,20 +28,20 @@
       "device": "desktop",
       "checks": {
         "high": {
-          "height": 234.48739508308097,
+          "height": 234.37227557725035,
           "target": 246.00000156736806,
-          "jump": 49.514634399999984,
+          "jump": 49.52696780000001,
           "pitch": 73
         },
         "low": {
-          "height": 152.77529662149612,
+          "height": 152.95800698846983,
           "target": 144.00000626947224,
-          "jump": 90.98624899999999,
+          "jump": 91.04885319999998,
           "pitch": 64
         },
         "immediateJump": true
       },
-      "peak": 0.03727257251739502,
+      "peak": 0.03735589236021042,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -66,7 +66,7 @@
         "correctDancer4": true,
         "releaseBounces": true
       },
-      "peak": 0.134912371635437,
+      "peak": 0.13494344055652618,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -88,7 +88,7 @@
         },
         "dragBlows": true
       },
-      "peak": 0.11612175405025482,
+      "peak": 0.11773276329040527,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -97,20 +97,20 @@
       "device": "mobile",
       "checks": {
         "high": {
-          "height": 234.3770782099269,
+          "height": 234.261575870616,
           "target": 246,
-          "jump": 49.68298859999997,
+          "jump": 49.6279438,
           "pitch": 73
         },
         "low": {
-          "height": 153.21962185172112,
+          "height": 153.21252192756134,
           "target": 144,
-          "jump": 91.19457059999999,
+          "jump": 91.0493058,
           "pitch": 64
         },
         "immediateJump": true
       },
-      "peak": 0.029956093057990074,
+      "peak": 0.037339504808187485,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -123,7 +123,7 @@
         "replay": true,
         "clear": true
       },
-      "peak": 0.11498193442821503,
+      "peak": 0.10063115507364273,
       "reducedMotion": true,
       "noOverflow": true
     },
@@ -135,7 +135,7 @@
         "correctDancer4": true,
         "releaseBounces": true
       },
-      "peak": 0.13494344055652618,
+      "peak": 0.13492165505886078,
       "reducedMotion": true,
       "noOverflow": true
     }
