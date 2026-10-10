@@ -1,0 +1,10 @@
+{
+  "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:8765/sound/bubble-scale.html\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:8765/sound/bubble-scale.html\", waiting until \"networkidle\"\u001b[22m\n\n    at /Users/yoyohuang/dev/artworks/sound/tools/verify.cjs:13:15",
+  "result": {
+    "date": "2026-10-10T08:26:57.472Z",
+    "checks": [],
+    "errors": [],
+    "resources": [],
+    "browser": "151.0.7922.34"
+  }
+}

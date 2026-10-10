@@ -1,0 +1,703 @@
+{
+  "date": "2026-10-10T08:20:25.051Z",
+  "walkthroughs": [
+    {
+      "slug": "jelly-wave",
+      "device": "desktop",
+      "gestures": [
+        [
+          500,
+          355
+        ],
+        [
+          650,
+          410
+        ],
+        [
+          350,
+          260
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 4,
+        "events": 5,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 3,
+        "notes": 9,
+        "events": 18,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "G2",
+        "playing": true
+      }
+    },
+    {
+      "slug": "pendulum-swing",
+      "device": "desktop",
+      "gestures": [
+        [
+          250,
+          350
+        ],
+        [
+          750,
+          350
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 3,
+        "events": 1,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 6,
+        "events": 3,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "B2",
+        "playing": true
+      }
+    },
+    {
+      "slug": "ribbon-dance",
+      "device": "desktop",
+      "gestures": [
+        [
+          500,
+          180
+        ],
+        [
+          500,
+          520
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 3,
+        "events": 5,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 8,
+        "events": 13,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "D2",
+        "playing": true
+      }
+    },
+    {
+      "slug": "beat-candy",
+      "device": "desktop",
+      "gestures": [
+        [
+          300,
+          300
+        ],
+        [
+          700,
+          300
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 2,
+        "events": 5,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 4,
+        "events": 13,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "D2",
+        "playing": true
+      }
+    },
+    {
+      "slug": "tap-floor",
+      "device": "desktop",
+      "gestures": [
+        [
+          500,
+          321
+        ],
+        [
+          634,
+          321
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 4,
+        "events": 6,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 9,
+        "events": 14,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "D4",
+        "playing": true
+      }
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "device": "desktop",
+      "gestures": [
+        [
+          500,
+          520
+        ],
+        [
+          650,
+          520
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 4,
+        "events": 6,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 9,
+        "events": 14,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "D4",
+        "playing": true
+      }
+    },
+    {
+      "slug": "hopscotch",
+      "device": "desktop",
+      "gestures": [
+        [
+          340,
+          530
+        ],
+        [
+          500,
+          190
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 4,
+        "events": 9,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 9,
+        "events": 20,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "A3",
+        "playing": true
+      }
+    },
+    {
+      "slug": "flower-choir",
+      "device": "desktop",
+      "gestures": [
+        [
+          215,
+          310
+        ],
+        [
+          775,
+          310
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 3,
+        "events": 1,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 6,
+        "events": 3,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "B2",
+        "playing": true
+      }
+    },
+    {
+      "slug": "canon-ripples",
+      "device": "desktop",
+      "gestures": [
+        [
+          280,
+          325
+        ],
+        [
+          710,
+          425
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 3,
+        "events": 2,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 6,
+        "events": 3,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "B2",
+        "playing": true
+      }
+    },
+    {
+      "slug": "metronome-party",
+      "device": "desktop",
+      "gestures": [
+        [
+          500,
+          430
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 2,
+        "events": 5,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 1,
+        "notes": 2,
+        "events": 5,
+        "epoch": 1.1746833333333335,
+        "shift": 0,
+        "lastNote": "D2",
+        "playing": true
+      }
+    },
+    {
+      "slug": "signal-band",
+      "device": "desktop",
+      "gestures": [
+        [
+          500,
+          300
+        ],
+        [
+          500,
+          300
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 2,
+        "events": 5,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 4,
+        "events": 13,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "D2",
+        "playing": true
+      }
+    },
+    {
+      "slug": "square-blocks",
+      "device": "desktop",
+      "gestures": [
+        [
+          500,
+          350
+        ],
+        [
+          500,
+          200
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 3,
+        "events": 6,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 7,
+        "events": 18,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "A3",
+        "playing": true
+      }
+    },
+    {
+      "slug": "jelly-wave",
+      "device": "mobile",
+      "gestures": [
+        [
+          500,
+          355
+        ],
+        [
+          650,
+          410
+        ],
+        [
+          350,
+          260
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 3,
+        "events": 5,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 3,
+        "notes": 8,
+        "events": 16,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "A#3",
+        "playing": true
+      }
+    },
+    {
+      "slug": "pendulum-swing",
+      "device": "mobile",
+      "gestures": [
+        [
+          250,
+          350
+        ],
+        [
+          750,
+          350
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 3,
+        "events": 1,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 6,
+        "events": 3,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "B2",
+        "playing": true
+      }
+    },
+    {
+      "slug": "ribbon-dance",
+      "device": "mobile",
+      "gestures": [
+        [
+          500,
+          180
+        ],
+        [
+          500,
+          520
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 3,
+        "events": 5,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 7,
+        "events": 13,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "D2",
+        "playing": true
+      }
+    },
+    {
+      "slug": "beat-candy",
+      "device": "mobile",
+      "gestures": [
+        [
+          300,
+          300
+        ],
+        [
+          700,
+          300
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 2,
+        "events": 5,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 4,
+        "events": 12,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "C5",
+        "playing": true
+      }
+    },
+    {
+      "slug": "tap-floor",
+      "device": "mobile",
+      "gestures": [
+        [
+          500,
+          321
+        ],
+        [
+          634,
+          321
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 4,
+        "events": 6,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 8,
+        "events": 14,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "D4",
+        "playing": true
+      }
+    },
+    {
+      "slug": "popcorn-rhythm",
+      "device": "mobile",
+      "gestures": [
+        [
+          500,
+          520
+        ],
+        [
+          650,
+          520
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 4,
+        "events": 6,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 8,
+        "events": 14,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "D4",
+        "playing": true
+      }
+    },
+    {
+      "slug": "hopscotch",
+      "device": "mobile",
+      "gestures": [
+        [
+          340,
+          530
+        ],
+        [
+          500,
+          190
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 4,
+        "events": 9,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 8,
+        "events": 19,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "A3",
+        "playing": true
+      }
+    },
+    {
+      "slug": "flower-choir",
+      "device": "mobile",
+      "gestures": [
+        [
+          215,
+          310
+        ],
+        [
+          775,
+          310
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 3,
+        "events": 1,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 6,
+        "events": 3,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "B2",
+        "playing": true
+      }
+    },
+    {
+      "slug": "canon-ripples",
+      "device": "mobile",
+      "gestures": [
+        [
+          280,
+          325
+        ],
+        [
+          710,
+          425
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 3,
+        "events": 1,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 6,
+        "events": 3,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "B2",
+        "playing": true
+      }
+    },
+    {
+      "slug": "metronome-party",
+      "device": "mobile",
+      "gestures": [
+        [
+          500,
+          430
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 2,
+        "events": 5,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 1,
+        "notes": 2,
+        "events": 5,
+        "epoch": 1.1824783333333333,
+        "shift": 0,
+        "lastNote": "D2",
+        "playing": true
+      }
+    },
+    {
+      "slug": "signal-band",
+      "device": "mobile",
+      "gestures": [
+        [
+          500,
+          300
+        ],
+        [
+          500,
+          300
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 2,
+        "events": 5,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 4,
+        "events": 12,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "C5",
+        "playing": true
+      }
+    },
+    {
+      "slug": "square-blocks",
+      "device": "mobile",
+      "gestures": [
+        [
+          500,
+          350
+        ],
+        [
+          500,
+          200
+        ]
+      ],
+      "before": {
+        "interaction": 0,
+        "notes": 3,
+        "events": 6,
+        "epoch": 0
+      },
+      "after": {
+        "interaction": 2,
+        "notes": 7,
+        "events": 18,
+        "epoch": 0,
+        "shift": 0,
+        "lastNote": "A3",
+        "playing": true
+      }
+    }
+  ],
+  "errors": [],
+  "resources": []
+}

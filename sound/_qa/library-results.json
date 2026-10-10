@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-10T08:02:26.346Z",
+  "date": "2026-10-10T08:20:33.703Z",
   "checks": [
     {
       "slug": "jelly-wave",
@@ -28,7 +28,7 @@
         6,
         5
       ],
-      "peak": 0.04796948656439781,
+      "peak": 0.05082648992538452,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -44,7 +44,7 @@
         4,
         3
       ],
-      "peak": 0.03177988529205322,
+      "peak": 0.029161177575588226,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -59,7 +59,7 @@
         3,
         5
       ],
-      "peak": 0.021902043372392654,
+      "peak": 0.020884808152914047,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -75,7 +75,7 @@
         2,
         6
       ],
-      "peak": 0.004206463228911161,
+      "peak": 0.004205751232802868,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -107,7 +107,7 @@
         0,
         2
       ],
-      "peak": 0.008362244814634323,
+      "peak": 0.007687158416956663,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -122,7 +122,7 @@
         5,
         3
       ],
-      "peak": 0.049230244010686874,
+      "peak": 0.04724283143877983,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -138,7 +138,7 @@
         4,
         3
       ],
-      "peak": 0.028750108554959297,
+      "peak": 0.03108060359954834,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -153,7 +153,7 @@
         3,
         5
       ],
-      "peak": 0.021342098712921143,
+      "peak": 0.023269178345799446,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -169,7 +169,7 @@
         2,
         6
       ],
-      "peak": 0.004724398255348206,
+      "peak": 0.004132153932005167,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -216,7 +216,7 @@
         6,
         5
       ],
-      "peak": 0.04740728437900543,
+      "peak": 0.04724283143877983,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -226,13 +226,13 @@
       "score": "hungarian",
       "trackId": "hungarian",
       "title": "匈牙利舞曲第 5 號",
-      "events": 8,
+      "events": 10,
       "voices": [
-        2,
+        3,
         4,
-        2
+        3
       ],
-      "peak": 0.03108060359954834,
+      "peak": 0.028626829385757446,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -247,7 +247,7 @@
         3,
         5
       ],
-      "peak": 0.023980358615517616,
+      "peak": 0.021342098712921143,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -263,7 +263,7 @@
         2,
         6
       ],
-      "peak": 0.004558810032904148,
+      "peak": 0.005136238876730204,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -278,7 +278,7 @@
         6,
         7
       ],
-      "peak": 0.02394527941942215,
+      "peak": 0.026527080684900284,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -295,7 +295,7 @@
         0,
         2
       ],
-      "peak": 0.00835185032337904,
+      "peak": 0.003758332459256053,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -310,7 +310,7 @@
         6,
         5
       ],
-      "peak": 0.04909416660666466,
+      "peak": 0.02317957393825054,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -326,7 +326,7 @@
         4,
         3
       ],
-      "peak": 0.03177988529205322,
+      "peak": 0.013124879449605942,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -341,7 +341,7 @@
         3,
         5
       ],
-      "peak": 0.023199301213026047,
+      "peak": 0.008732671849429607,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -357,7 +357,7 @@
         2,
         6
       ],
-      "peak": 0.004205751232802868,
+      "peak": 0.0021167858503758907,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -372,7 +372,7 @@
         6,
         7
       ],
-      "peak": 0.02005756087601185,
+      "peak": 0.011184885166585445,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -389,7 +389,7 @@
         0,
         2
       ],
-      "peak": 0.007655655033886433,
+      "peak": 0.007336696609854698,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -399,12 +399,12 @@
       "score": "turkish",
       "trackId": "turkish",
       "title": "土耳其進行曲",
-      "events": 11,
+      "events": 8,
       "voices": [
-        6,
-        5
+        5,
+        3
       ],
-      "peak": 0.05009167641401291,
+      "peak": 0.046251147985458374,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -414,13 +414,13 @@
       "score": "hungarian",
       "trackId": "hungarian",
       "title": "匈牙利舞曲第 5 號",
-      "events": 8,
+      "events": 10,
       "voices": [
-        2,
+        3,
         4,
-        2
+        3
       ],
-      "peak": 0.03017919696867466,
+      "peak": 0.02862471342086792,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -435,7 +435,7 @@
         3,
         5
       ],
-      "peak": 0.022282879799604416,
+      "peak": 0.02038716711103916,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -451,7 +451,7 @@
         2,
         5
       ],
-      "peak": 0.004958813078701496,
+      "peak": 0.0041328235529363155,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -466,7 +466,7 @@
         6,
         7
       ],
-      "peak": 0.02018684521317482,
+      "peak": 0.023421993479132652,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -483,7 +483,7 @@
         0,
         2
       ],
-      "peak": 0.007338689174503088,
+      "peak": 0.007323582656681538,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -493,12 +493,12 @@
       "score": "turkish",
       "trackId": "turkish",
       "title": "土耳其進行曲",
-      "events": 8,
+      "events": 11,
       "voices": [
-        5,
-        3
+        6,
+        5
       ],
-      "peak": 0.027426429092884064,
+      "peak": 0.02828984335064888,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -508,13 +508,13 @@
       "score": "hungarian",
       "trackId": "hungarian",
       "title": "匈牙利舞曲第 5 號",
-      "events": 10,
+      "events": 8,
       "voices": [
-        3,
+        2,
         4,
-        3
+        2
       ],
-      "peak": 0.02479008585214615,
+      "peak": 0.02492259256541729,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -529,7 +529,7 @@
         3,
         5
       ],
-      "peak": 0.012922823429107666,
+      "peak": 0.012208003550767899,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -539,11 +539,11 @@
       "score": "bolero",
       "trackId": "bolero",
       "title": "波萊羅舞曲（主題選段）",
-      "events": 10,
+      "events": 8,
       "voices": [
+        1,
         2,
-        2,
-        6
+        5
       ],
       "peak": 0.002766149817034602,
       "playing": true,
@@ -560,7 +560,7 @@
         6,
         7
       ],
-      "peak": 0.01240939274430275,
+      "peak": 0.015606995671987534,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -592,7 +592,7 @@
         6,
         5
       ],
-      "peak": 0.046155139803886414,
+      "peak": 0.046155136078596115,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -608,7 +608,7 @@
         4,
         3
       ],
-      "peak": 0.03136520832777023,
+      "peak": 0.027567053213715553,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -623,7 +623,7 @@
         3,
         5
       ],
-      "peak": 0.022282879799604416,
+      "peak": 0.024242457002401352,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -639,7 +639,7 @@
         2,
         6
       ],
-      "peak": 0.004132153932005167,
+      "peak": 0.004724398255348206,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -654,7 +654,7 @@
         6,
         7
       ],
-      "peak": 0.019433436915278435,
+      "peak": 0.027114231139421463,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -671,7 +671,7 @@
         0,
         2
       ],
-      "peak": 0.007331737317144871,
+      "peak": 0.007316631264984608,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -686,7 +686,7 @@
         5,
         3
       ],
-      "peak": 0.0503636933863163,
+      "peak": 0.050400253385305405,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -696,11 +696,11 @@
       "score": "hungarian",
       "trackId": "hungarian",
       "title": "匈牙利舞曲第 5 號",
-      "events": 8,
+      "events": 10,
       "voices": [
-        2,
+        3,
         4,
-        2
+        3
       ],
       "peak": 0.03206471726298332,
       "playing": true,
@@ -717,7 +717,7 @@
         3,
         5
       ],
-      "peak": 0.02435692958533764,
+      "peak": 0.024201327934861183,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -733,7 +733,7 @@
         2,
         6
       ],
-      "peak": 0.004766594618558884,
+      "peak": 0.004703968297690153,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -748,7 +748,7 @@
         6,
         7
       ],
-      "peak": 0.021101363003253937,
+      "peak": 0.02804884873330593,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -765,7 +765,7 @@
         0,
         2
       ],
-      "peak": 0.00835185032337904,
+      "peak": 0.007687158416956663,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -775,12 +775,12 @@
       "score": "turkish",
       "trackId": "turkish",
       "title": "土耳其進行曲",
-      "events": 11,
+      "events": 8,
       "voices": [
-        6,
-        5
+        5,
+        3
       ],
-      "peak": 0.05150754749774933,
+      "peak": 0.04796783998608589,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -796,7 +796,7 @@
         4,
         3
       ],
-      "peak": 0.03177988529205322,
+      "peak": 0.03375384584069252,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -811,7 +811,7 @@
         3,
         5
       ],
-      "peak": 0.02115473710000515,
+      "peak": 0.021155696362257004,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -827,7 +827,7 @@
         2,
         5
       ],
-      "peak": 0.004206463228911161,
+      "peak": 0.004205751232802868,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -874,7 +874,7 @@
         6,
         5
       ],
-      "peak": 0.05150754749774933,
+      "peak": 0.04928424954414368,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -884,13 +884,13 @@
       "score": "hungarian",
       "trackId": "hungarian",
       "title": "匈牙利舞曲第 5 號",
-      "events": 10,
+      "events": 8,
       "voices": [
-        3,
+        2,
         4,
-        3
+        2
       ],
-      "peak": 0.04256651923060417,
+      "peak": 0.03177988529205322,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -905,7 +905,7 @@
         3,
         5
       ],
-      "peak": 0.02117336355149746,
+      "peak": 0.0241102185100317,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -915,11 +915,11 @@
       "score": "bolero",
       "trackId": "bolero",
       "title": "波萊羅舞曲（主題選段）",
-      "events": 10,
+      "events": 8,
       "voices": [
+        1,
         2,
-        2,
-        6
+        5
       ],
       "peak": 0.004703968297690153,
       "playing": true,
@@ -936,7 +936,7 @@
         6,
         7
       ],
-      "peak": 0.020081033930182457,
+      "peak": 0.02687523514032364,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -953,7 +953,7 @@
         0,
         2
       ],
-      "peak": 0.007693072780966759,
+      "peak": 0.00835185032337904,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -963,12 +963,12 @@
       "score": "turkish",
       "trackId": "turkish",
       "title": "土耳其進行曲",
-      "events": 11,
+      "events": 8,
       "voices": [
-        6,
-        5
+        5,
+        3
       ],
-      "peak": 0.049230244010686874,
+      "peak": 0.0465780533850193,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -984,7 +984,7 @@
         4,
         3
       ],
-      "peak": 0.03108195774257183,
+      "peak": 0.03108060359954834,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -999,7 +999,7 @@
         3,
         5
       ],
-      "peak": 0.02105415239930153,
+      "peak": 0.022788967937231064,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1015,7 +1015,7 @@
         2,
         6
       ],
-      "peak": 0.004724398255348206,
+      "peak": 0.004713195376098156,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -1030,7 +1030,7 @@
         6,
         7
       ],
-      "peak": 0.019876020029187202,
+      "peak": 0.021097010001540184,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1062,294 +1062,294 @@
         6,
         5
       ],
-      "peak": 0.04941505938768387,
-      "playing": true,
-      "tempo": 126,
-      "rate": 1
-    },
-    {
-      "slug": "signal-band",
-      "score": "hungarian",
-      "trackId": "hungarian",
-      "title": "匈牙利舞曲第 5 號",
-      "events": 10,
-      "voices": [
-        3,
-        4,
-        3
-      ],
-      "peak": 0.03344201669096947,
-      "playing": true,
-      "tempo": 126,
-      "rate": 1
-    },
-    {
-      "slug": "signal-band",
-      "score": "cancan",
-      "trackId": "cancan",
-      "title": "天堂與地獄序曲・康康舞段（選段）",
-      "events": 8,
-      "voices": [
-        3,
-        5
-      ],
-      "peak": 0.023980358615517616,
-      "playing": true,
-      "tempo": 144,
-      "rate": 1
-    },
-    {
-      "slug": "signal-band",
-      "score": "bolero",
-      "trackId": "bolero",
-      "title": "波萊羅舞曲（主題選段）",
-      "events": 10,
-      "voices": [
-        2,
-        2,
-        6
-      ],
-      "peak": 0.004670674912631512,
-      "playing": true,
-      "tempo": 72,
-      "rate": 1
-    },
-    {
-      "slug": "signal-band",
-      "score": "william",
-      "trackId": "william",
-      "title": "威廉泰爾序曲・終曲快板（選段）",
-      "events": 13,
-      "voices": [
-        6,
-        7
-      ],
-      "peak": 0.02394527941942215,
-      "playing": true,
-      "tempo": 144,
-      "rate": 1
-    },
-    {
-      "slug": "square-blocks",
-      "score": "canon",
-      "trackId": "canon",
-      "title": "D 大調卡農",
-      "events": 2,
-      "voices": [
-        0,
-        0,
-        0,
-        2
-      ],
-      "peak": 0.007687158416956663,
-      "playing": true,
-      "tempo": 96,
-      "rate": 1
-    },
-    {
-      "slug": "square-blocks",
-      "score": "turkish",
-      "trackId": "turkish",
-      "title": "土耳其進行曲",
-      "events": 8,
-      "voices": [
-        5,
-        3
-      ],
-      "peak": 0.026464026421308517,
-      "playing": true,
-      "tempo": 126,
-      "rate": 1
-    },
-    {
-      "slug": "square-blocks",
-      "score": "hungarian",
-      "trackId": "hungarian",
-      "title": "匈牙利舞曲第 5 號",
-      "events": 8,
-      "voices": [
-        2,
-        4,
-        2
-      ],
-      "peak": 0.025160061195492744,
-      "playing": true,
-      "tempo": 126,
-      "rate": 1
-    },
-    {
-      "slug": "square-blocks",
-      "score": "cancan",
-      "trackId": "cancan",
-      "title": "天堂與地獄序曲・康康舞段（選段）",
-      "events": 8,
-      "voices": [
-        3,
-        5
-      ],
-      "peak": 0.011974192224442959,
-      "playing": true,
-      "tempo": 144,
-      "rate": 1
-    },
-    {
-      "slug": "square-blocks",
-      "score": "bolero",
-      "trackId": "bolero",
-      "title": "波萊羅舞曲（主題選段）",
-      "events": 10,
-      "voices": [
-        2,
-        2,
-        6
-      ],
-      "peak": 0.0030014619696885347,
-      "playing": true,
-      "tempo": 72,
-      "rate": 1
-    },
-    {
-      "slug": "square-blocks",
-      "score": "william",
-      "trackId": "william",
-      "title": "威廉泰爾序曲・終曲快板（選段）",
-      "events": 13,
-      "voices": [
-        6,
-        7
-      ],
-      "peak": 0.01569485291838646,
-      "playing": true,
-      "tempo": 144,
-      "rate": 1
-    },
-    {
-      "slug": "saw-hills",
-      "score": "canon",
-      "trackId": "canon",
-      "title": "D 大調卡農",
-      "events": 2,
-      "voices": [
-        0,
-        0,
-        0,
-        2
-      ],
-      "peak": 0.00835185032337904,
-      "playing": true,
-      "tempo": 96,
-      "rate": 1
-    },
-    {
-      "slug": "saw-hills",
-      "score": "turkish",
-      "trackId": "turkish",
-      "title": "土耳其進行曲",
-      "events": 8,
-      "voices": [
-        5,
-        3
-      ],
-      "peak": 0.02914920635521412,
-      "playing": true,
-      "tempo": 126,
-      "rate": 1
-    },
-    {
-      "slug": "saw-hills",
-      "score": "hungarian",
-      "trackId": "hungarian",
-      "title": "匈牙利舞曲第 5 號",
-      "events": 10,
-      "voices": [
-        3,
-        4,
-        3
-      ],
-      "peak": 0.019511286169290543,
-      "playing": true,
-      "tempo": 126,
-      "rate": 1
-    },
-    {
-      "slug": "saw-hills",
-      "score": "cancan",
-      "trackId": "cancan",
-      "title": "天堂與地獄序曲・康康舞段（選段）",
-      "events": 8,
-      "voices": [
-        3,
-        5
-      ],
-      "peak": 0.011098960414528847,
-      "playing": true,
-      "tempo": 144,
-      "rate": 1
-    },
-    {
-      "slug": "saw-hills",
-      "score": "bolero",
-      "trackId": "bolero",
-      "title": "波萊羅舞曲（主題選段）",
-      "events": 8,
-      "voices": [
-        1,
-        2,
-        5
-      ],
-      "peak": 0.0028123247902840376,
-      "playing": true,
-      "tempo": 72,
-      "rate": 1
-    },
-    {
-      "slug": "saw-hills",
-      "score": "william",
-      "trackId": "william",
-      "title": "威廉泰爾序曲・終曲快板（選段）",
-      "events": 13,
-      "voices": [
-        6,
-        7
-      ],
-      "peak": 0.015356210060417652,
-      "playing": true,
-      "tempo": 144,
-      "rate": 1
-    },
-    {
-      "slug": "crayon-wave",
-      "score": "canon",
-      "trackId": "canon",
-      "title": "D 大調卡農",
-      "events": 2,
-      "voices": [
-        0,
-        0,
-        0,
-        2
-      ],
-      "peak": 0.007693072780966759,
-      "playing": true,
-      "tempo": 96,
-      "rate": 1
-    },
-    {
-      "slug": "crayon-wave",
-      "score": "turkish",
-      "trackId": "turkish",
-      "title": "土耳其進行曲",
-      "events": 11,
-      "voices": [
-        6,
-        5
-      ],
       "peak": 0.04991498589515686,
       "playing": true,
       "tempo": 126,
       "rate": 1
     },
     {
+      "slug": "signal-band",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 8,
+      "voices": [
+        2,
+        4,
+        2
+      ],
+      "peak": 0.0334433913230896,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "signal-band",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.02105415239930153,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "signal-band",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 8,
+      "voices": [
+        1,
+        2,
+        5
+      ],
+      "peak": 0.004132153932005167,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "signal-band",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.019899383187294006,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "square-blocks",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.00829613208770752,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "square-blocks",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.030154863372445107,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "square-blocks",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 8,
+      "voices": [
+        2,
+        4,
+        2
+      ],
+      "peak": 0.0230332612991333,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "square-blocks",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.012988561764359474,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "square-blocks",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 8,
+      "voices": [
+        1,
+        2,
+        5
+      ],
+      "peak": 0.002766149817034602,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "square-blocks",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.016739744693040848,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "saw-hills",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.003758332459256053,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "saw-hills",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.013245209120213985,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "saw-hills",
+      "score": "hungarian",
+      "trackId": "hungarian",
+      "title": "匈牙利舞曲第 5 號",
+      "events": 10,
+      "voices": [
+        3,
+        4,
+        3
+      ],
+      "peak": 0.007209163624793291,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
+      "slug": "saw-hills",
+      "score": "cancan",
+      "trackId": "cancan",
+      "title": "天堂與地獄序曲・康康舞段（選段）",
+      "events": 8,
+      "voices": [
+        3,
+        5
+      ],
+      "peak": 0.004994532093405724,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "saw-hills",
+      "score": "bolero",
+      "trackId": "bolero",
+      "title": "波萊羅舞曲（主題選段）",
+      "events": 10,
+      "voices": [
+        2,
+        2,
+        6
+      ],
+      "peak": 0.00134220439940691,
+      "playing": true,
+      "tempo": 72,
+      "rate": 1
+    },
+    {
+      "slug": "saw-hills",
+      "score": "william",
+      "trackId": "william",
+      "title": "威廉泰爾序曲・終曲快板（選段）",
+      "events": 13,
+      "voices": [
+        6,
+        7
+      ],
+      "peak": 0.005192529875785112,
+      "playing": true,
+      "tempo": 144,
+      "rate": 1
+    },
+    {
+      "slug": "crayon-wave",
+      "score": "canon",
+      "trackId": "canon",
+      "title": "D 大調卡農",
+      "events": 2,
+      "voices": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "peak": 0.0034618827048689127,
+      "playing": true,
+      "tempo": 96,
+      "rate": 1
+    },
+    {
+      "slug": "crayon-wave",
+      "score": "turkish",
+      "trackId": "turkish",
+      "title": "土耳其進行曲",
+      "events": 11,
+      "voices": [
+        6,
+        5
+      ],
+      "peak": 0.022153610363602638,
+      "playing": true,
+      "tempo": 126,
+      "rate": 1
+    },
+    {
       "slug": "crayon-wave",
       "score": "hungarian",
       "trackId": "hungarian",
@@ -1360,7 +1360,7 @@
         4,
         3
       ],
-      "peak": 0.04235037788748741,
+      "peak": 0.013986272737383842,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -1375,7 +1375,7 @@
         3,
         5
       ],
-      "peak": 0.021845007315278053,
+      "peak": 0.010779441334307194,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1385,13 +1385,13 @@
       "score": "bolero",
       "trackId": "bolero",
       "title": "波萊羅舞曲（主題選段）",
-      "events": 10,
+      "events": 8,
       "voices": [
+        1,
         2,
-        2,
-        6
+        5
       ],
-      "peak": 0.004558810032904148,
+      "peak": 0.0021018036641180515,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -1406,7 +1406,7 @@
         6,
         7
       ],
-      "peak": 0.028597388416528702,
+      "peak": 0.009616767056286335,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1423,7 +1423,7 @@
         0,
         2
       ],
-      "peak": 0.0071748364716768265,
+      "peak": 0.00353135890327394,
       "playing": true,
       "tempo": 96,
       "rate": 1
@@ -1433,12 +1433,12 @@
       "score": "turkish",
       "trackId": "turkish",
       "title": "土耳其進行曲",
-      "events": 11,
+      "events": 8,
       "voices": [
-        6,
-        5
+        5,
+        3
       ],
-      "peak": 0.047620002180337906,
+      "peak": 0.021372394636273384,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -1454,7 +1454,7 @@
         4,
         3
       ],
-      "peak": 0.03164762631058693,
+      "peak": 0.013455777429044247,
       "playing": true,
       "tempo": 126,
       "rate": 1
@@ -1469,7 +1469,7 @@
         3,
         5
       ],
-      "peak": 0.020397983491420746,
+      "peak": 0.008108820766210556,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1479,13 +1479,13 @@
       "score": "bolero",
       "trackId": "bolero",
       "title": "波萊羅舞曲（主題選段）",
-      "events": 8,
+      "events": 10,
       "voices": [
-        1,
         2,
-        5
+        2,
+        6
       ],
-      "peak": 0.004669804126024246,
+      "peak": 0.002101411810144782,
       "playing": true,
       "tempo": 72,
       "rate": 1
@@ -1500,7 +1500,7 @@
         6,
         7
       ],
-      "peak": 0.02093067578971386,
+      "peak": 0.01247226819396019,
       "playing": true,
       "tempo": 144,
       "rate": 1
@@ -1509,7 +1509,7 @@
   "errors": [],
   "tempoChanges": true,
   "boleroCrescendo": {
-    "low": 0.18037567515432099,
+    "low": 0.18035590277777777,
     "high": 0.903827160493827
   },
   "loops": [
