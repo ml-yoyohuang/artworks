@@ -177,3 +177,5 @@ Tone.Part 以 192 PPQ 的 tick 排程完整樂譜，Tone.Transport 的八分音�
 維護新增 `tools/scenes/` 四個獨立場景來源，仍由製作工具內嵌成自足 HTML。新增檢查指令：`node sound/tools/verify-gestures.cjs`、`node sound/tools/audit-feedback.cjs`、`python3 sound/tools/contact-audit.py`。使用方式與 `PLAYWRIGHT_MODULE`／Pillow 要求同前。
 
 本次提交訊息：`feat(sound): make four artworks respond directly to gestures`。只暫存 `/sound`，一般推送 `origin/main`，不強制推送或改寫歷史。
+
+交付紀錄：作品提交 **`bdf520e`** 已成功一般推送至 `origin/main`，無需備援分支。驗證期間一次本機靜態伺服器中止造成連線拒絕，重啟後頁面、穩定性與卡農檢查均重新通過；已移除該次過期的失敗暫存紀錄，保留最新成功結果與全部檢視證據。
