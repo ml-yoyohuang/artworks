@@ -39,13 +39,13 @@ function loom(g,s,v){
   if(!dense)continue;
   const palette=['#ac4f3a','#cf9a68','#e5cbae','#667d7a','#f0e5d1'],color=palette[Math.floor((r.pos+offset)/3)%5];
   for(let col=0;col<cols;col++){
-   const x=x0+col*dx,over=Number(s.params.weave??0)===0?(col+row)%2===0:Number(s.params.weave)===1?(col+row)%4<2:(col+Math.floor(row/2))%3!==0;
+   const x=x0+col*dx,over=Number(s.params.weave??0)===0?(col+r.key)%2===0:Number(s.params.weave)===1?(col+r.key)%4<2:(col+Math.floor(r.key/2))%3!==0;
    const gap=over?.5:3;const thickness=dy*.67;
-   line(g,[[x+gap,y],[x+dx-gap,y+Math.sin(col*.3+row)*.35]],'rgba(59,39,28,.2)',thickness+2.3);
+   line(g,[[x+gap,y],[x+dx-gap,y+Math.sin(col*.3+r.key)*.35]],'rgba(59,39,28,.2)',thickness+2.3);
    line(g,[[x+gap,y-1],[x+dx-gap,y-.8]],color,thickness);
    for(let f=0;f<3;f++)line(g,[[x+gap,y-thickness*.4+f*thickness*.26],[x+dx-gap,y-thickness*.4+f*thickness*.26]],f%2?'rgba(255,247,226,.3)':'rgba(47,39,33,.11)',.6);
    if(!over&&r.voices?.[0]!==false&&col%8===0){line(g,[[x+dx/2,y-dy/2],[x+dx/2,y+dy/2]],'#334757',3.4);line(g,[[x+dx/2+1,y-dy/2],[x+dx/2+1,y+dy/2]],'#78928f',.7)}
-   if(r.voices?.[2]!==false&&row%2===0&&col%12===r.pos%12){ellipse(g,x+dx/2,y,3.4,2.5,'#b56843');ellipse(g,x+dx/2-1,y-.8,1.4,.8,'#f4d4aa')}
+   if(r.voices?.[2]!==false&&s.knots.includes(r.key)&&r.row%2===0&&col%12===r.pos%12){ellipse(g,x+dx/2,y,3.4,2.5,'#b56843');ellipse(g,x+dx/2-1,y-.8,1.4,.8,'#f4d4aa')}
   }
  }
  for(let k=0;k<180;k++){const y=y0+noise(k,s.seed)*H;line(g,[[x0-5,y],[x0-15-noise(k+200,s.seed)*22,y+noise(k+15,s.seed)*10-5]],'#e5dcc8',.7);line(g,[[x0+W,y],[x0+W+10+noise(k+5,s.seed)*16,y-4]],'#c9bfa8',.7)}

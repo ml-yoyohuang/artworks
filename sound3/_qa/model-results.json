@@ -1,6 +1,6 @@
 {
   "pass": true,
-  "tests": 47,
+  "tests": 53,
   "firstRelease": 13.400000000000245,
   "bounded600s": {
     "rows": 96,

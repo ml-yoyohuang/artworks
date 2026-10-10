@@ -18,7 +18,7 @@
 |07 回聲迷宮|實際觀看至 29 秒；牆面／起點改變往返時間與路徑|通過 / 通過|啟動、訊號、暫停、恢復、靜音、音量、重播、匯出、專屬操作皆通過|[桌面](_qa/shots/desktop-07-echo-labyrinth-representative.png) / [手機模擬](_qa/shots/mobile-07-echo-labyrinth-representative.png)|
 |08 能量蓄積|約 13.4 秒翻開；歷史能量、流失、臨界與恢復期|通過 / 通過|啟動、訊號、暫停、恢復、靜音、音量、重播、匯出、專屬操作皆通過|[桌面](_qa/shots/desktop-08-stored-energy-representative.png) / [手機模擬](_qa/shots/mobile-08-stored-energy-representative.png)|
 
-16 個裝置／作品組合的最終有效檢查合計 **308 項通過**。完整第二輪結果在 [_qa/results.json](_qa/results.json)；建築與織物的最後回歸覆蓋在 [focused.json](_qa/focused.json)；休止、化石、呼吸與回聲的最後回歸覆蓋在 [final-regression.json](_qa/final-regression.json)。這些記錄按作品／裝置合併後沒有失敗項。
+16 個裝置／作品組合的最終有效檢查合計 **308 項通過**。完整第二輪結果在 [_qa/results.json](_qa/results.json)；建築與織物的最後回歸覆蓋在 [focused.json](_qa/focused.json)；休止、化石、呼吸與回聲的最後回歸覆蓋在 [final-regression.json](_qa/final-regression.json)。這些記錄按作品／裝置合併後沒有失敗項。最後同步稽核另外修正了織物節點：以真正的打擊事件到達時才留下節點，並以跨循環唯一的行 key 保留歷史；新增 0.2／0.3 秒與跨循環邊界檢查（[瀏覽器證據](_qa/knot-timing.json)），避免提前 250 ms 顯示。
 
 已打開並檢視全部八件桌面與手機代表圖，以及目錄圖。聯絡表：[桌面](_qa/desktop-contact.webp)、[手機模擬](_qa/mobile-contact.webp)。各作品均做過一次材質／構圖修正：建築補切邊反光；織物改成真正逐行保存、保留未織經線；休止增加紙面陰影與實際前段能量記憶；化石加強細層與不規則脊；潮汐加強薄邊與速度差下的連續排程；呼吸平滑頸部、降低不透明度並增加扭轉截面與高光；迷宮加強牆頂反光並使用往返回程距離；懸線改為連到折殼頂點、釋放後平滑恢復。
 
@@ -34,7 +34,7 @@
 
 ## 邏輯、效能與錯誤處理
 
-- [model-results.json](_qa/model-results.json)：47 次原生 assert 通過。相同 seed 化石、不同 seed 差異、1/30 與 1/60 材料一致；樂句重複與變奏、聲部退出、短／長休止及強弱記憶、三種呼吸、回聲距離與衰減、能量臨界與恢復、600 秒固定步長有界狀態。
+- [model-results.json](_qa/model-results.json)：53 次原生 assert 通過。相同 seed 化石、不同 seed 差異、1/30 與 1/60 材料一致；樂句重複與變奏、聲部退出、短／長休止及強弱記憶、三種呼吸、回聲距離與衰減、能量臨界與恢復、600 秒固定步長有界狀態。
 - [static-results.json](_qa/static-results.json)：九個 HTML、95 個本地連結與所有 JS/MJS/CJS 語法通過。專案為純靜態，沒有適用的 build／lint pipeline，不將其寫成已執行的 npm build。
 - [extended.json](_qa/extended.json)：織物、回聲、蓄能 **實際運行約 121 秒**，不是快轉。織物最多 96 行、回聲最多 24 路徑、能量保持 0–1.8；每件觀察到最高 4 個存活聲部，測試後節點清理通過。另有 600 秒純模型檢查。Chromium heap 數值為粗粒度估計，不據此宣稱完成長期記憶體分析。
 - 合成麥克風持續 220 Hz 與 180 ms 短停頓：兩者皆在約 14 秒定型，最多 139 筆輪廓，回到示範並關閉串流。這是 MediaStream 合成測試，**不是人體發聲或硬體麥克風實測**。

@@ -1,0 +1,98 @@
+{
+  "date": "2026-10-10T12:27:37.305Z",
+  "base": "https://ml-yoyohuang.github.io/artworks/sound3/",
+  "pages": [
+    {
+      "file": "01-resonant-architecture.html",
+      "playing": true,
+      "ctx": "running",
+      "notes": 1,
+      "peak": 0.030626997351646423,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "file": "02-chord-loom.html",
+      "playing": true,
+      "ctx": "running",
+      "notes": 5,
+      "peak": 0.05491270124912262,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "file": "03-silence-cuts.html",
+      "playing": true,
+      "ctx": "running",
+      "notes": 1,
+      "peak": 0.030721325427293777,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "file": "04-sound-fossil.html",
+      "playing": true,
+      "ctx": "running",
+      "notes": 4,
+      "peak": 0.0462467335164547,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "file": "05-phase-tides.html",
+      "playing": true,
+      "ctx": "running",
+      "notes": 2,
+      "peak": 0.03991754353046417,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "file": "06-breath-portrait.html",
+      "playing": true,
+      "ctx": "running",
+      "notes": 1,
+      "peak": 0.02710198424756527,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "file": "07-echo-labyrinth.html",
+      "playing": true,
+      "ctx": "running",
+      "notes": 2,
+      "peak": 0.04601709544658661,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "file": "08-stored-energy.html",
+      "playing": true,
+      "ctx": "running",
+      "notes": 3,
+      "peak": 0.030751436948776245,
+      "errors": [],
+      "pass": true
+    }
+  ],
+  "rotation": [
+    {
+      "file": "04-sound-fossil.html",
+      "before": 0.3,
+      "after": 0.44999999999999996,
+      "drag": 1.035,
+      "pass": true
+    },
+    {
+      "file": "06-breath-portrait.html",
+      "before": 0.3,
+      "after": 0.44999999999999996,
+      "drag": 1.035,
+      "pass": true
+    }
+  ],
+  "index": {
+    "links": 8,
+    "images": true
+  }
+}
