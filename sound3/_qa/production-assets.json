@@ -1,174 +1,202 @@
 {
-  "date": "2026-10-10T12:34:42.867106+00:00",
-  "contentCommit": "5d921316be114a59e0559bc1b417d40f4846933e",
+  "date": "2026-10-10T14:08:29.270697+00:00",
+  "contentCommit": "3823a660c5400e1d2766c28949f4cb43d41b7a2e",
   "base": "https://ml-yoyohuang.github.io/artworks/sound3/",
   "files": [
     {
       "file": "08-stored-energy.html",
       "status": 200,
-      "bytes": 2424,
-      "sha256": "a15a7d58855f8028ada28fe98313d745403a6ebc14a6d70145fc2bb89e3eadc9",
+      "bytes": 4527,
+      "sha256": "5a8d4d08a854f7ec770e0cbbca07ceeb3547a692ae4f145659be060526ce6016",
       "matchesLocal": true
     },
     {
       "file": "06-breath-portrait.html",
       "status": 200,
-      "bytes": 2527,
-      "sha256": "4ca9863e87988ad08a34c38d08fdc51a6b207c163a3f2ba65328248c5bf40e17",
+      "bytes": 5012,
+      "sha256": "d1d6da891186d599f2602e6a029e014ebaf60ca5a166916d53009986b9d87d9c",
       "matchesLocal": true
     },
     {
       "file": "index.html",
       "status": 200,
-      "bytes": 5575,
-      "sha256": "f5bdba74a33c20aaf882d59a6846d3b9c036e036297b01654a43d8490d14fb15",
+      "bytes": 5551,
+      "sha256": "555ab7febf501fe1255b3cb0ac64d138812fe6be7e236750ff2501488703f947",
       "matchesLocal": true
     },
     {
       "file": "04-sound-fossil.html",
       "status": 200,
-      "bytes": 2324,
-      "sha256": "fb9ef2278655154595bef5314a3be9e08252aec38b14cc004df66948bded2f07",
+      "bytes": 4900,
+      "sha256": "275e893182c95be356a7e8781045caa6072276929676028ef154f334e7bd707d",
       "matchesLocal": true
     },
     {
       "file": "07-echo-labyrinth.html",
       "status": 200,
-      "bytes": 2467,
-      "sha256": "c82fbfcc8ca098af521a2690c0c4c609d4b79f815890d143a57cc712c35ec210",
+      "bytes": 4807,
+      "sha256": "0cb21055b39bda3774f28b7614f237e0a5dba101c8198859b747302451ea6d63",
       "matchesLocal": true
     },
     {
       "file": "02-chord-loom.html",
       "status": 200,
-      "bytes": 2652,
-      "sha256": "4fc2f3ba5fef96ac389b13b0a11fb4176d2e740c905370da178b24fa6397df55",
+      "bytes": 4725,
+      "sha256": "774e435364a5aee526b1134ac74b5ee19e2de2ef8e3d7fbe79cddad62681aba7",
       "matchesLocal": true
     },
     {
       "file": "01-resonant-architecture.html",
       "status": 200,
-      "bytes": 2777,
-      "sha256": "05a1474fcd68b4c472372d83613e851223f9f85220302325ccde55d5262bef2c",
+      "bytes": 5129,
+      "sha256": "5f50c578b6fef2dc70beed8fbdde69871118dd76797f754b3c019784c5dbfff0",
       "matchesLocal": true
     },
     {
       "file": "03-silence-cuts.html",
       "status": 200,
-      "bytes": 2378,
-      "sha256": "948870b338f1337e88332449f6c3c8a7cb81604aaa38efcb999165239a0aaf3c",
+      "bytes": 4498,
+      "sha256": "84eb31a363ab7005269574c91655c50ce3ec1e16856754b3ab49c95bc177b3ab",
       "matchesLocal": true
     },
     {
       "file": "05-phase-tides.html",
       "status": 200,
-      "bytes": 2471,
-      "sha256": "33c7107a6d5b7e0963881574c81bd3059c5c9afa9d46f1b11af775c189df78bb",
+      "bytes": 4678,
+      "sha256": "60258b854cdfe1f938829540093a789c05a4cb1d3b7e05c8b835e086b5f4620b",
       "matchesLocal": true
     },
     {
       "file": "assets/js/works.js",
       "status": 200,
-      "bytes": 16149,
-      "sha256": "4267ab8a844b99b6f05206e52e5456568609656bf8ba6787383465e22788a458",
+      "bytes": 18581,
+      "sha256": "36fb2630b88d9d9a73ca8d4f053856b145f3342d8598ccb65ecf4d85fb09254c",
       "matchesLocal": true
     },
     {
       "file": "assets/js/core.js",
       "status": 200,
-      "bytes": 13489,
-      "sha256": "431ca9c02b71b72dcefc3915068c842e13f10e5c182c6b537803e91ec582cd3f",
+      "bytes": 17504,
+      "sha256": "6ac2efbe3ebe076cbe14c76fe2f7a96713dd6649eb0c5739c962fc7eb2760373",
+      "matchesLocal": true
+    },
+    {
+      "file": "assets/js/echo-geometry.js",
+      "status": 200,
+      "bytes": 1135,
+      "sha256": "51d775fe3f89540300960abbc96d073dd7439c2b50865560905495a9c8d2fa4f",
       "matchesLocal": true
     },
     {
       "file": "assets/js/catalog.js",
       "status": 200,
-      "bytes": 2649,
-      "sha256": "5035cf3c8860395ba3e59ab193a20d8a441bed8d6ba52b9a8411aa954d614f42",
+      "bytes": 7660,
+      "sha256": "7af3bc97935c776fa07ad186f3a8703af7e87a46caf329e74ea2351c5770b390",
       "matchesLocal": true
     },
     {
       "file": "assets/js/audio.js",
       "status": 200,
-      "bytes": 4956,
-      "sha256": "7824c44fd8a7e47ca93a0ee4958cd4f44620dd6dec703f37b409d2a42dcd2b80",
+      "bytes": 6891,
+      "sha256": "3a8bf69b8dd88879caa3715242c96f1f9efc331071d09b9b5f735743bec17a12",
+      "matchesLocal": true
+    },
+    {
+      "file": "assets/js/interactions.js",
+      "status": 200,
+      "bytes": 14923,
+      "sha256": "25d4ed021373bca069ce08d991b6211c5c61a5d2d29311bcd73be0d2a38ad759",
       "matchesLocal": true
     },
     {
       "file": "assets/js/draw.js",
       "status": 200,
-      "bytes": 3261,
-      "sha256": "5bb73f9e5c23e4ad9c608aca7b5ebd7a71966511cd3f4f72b592dd665152f63a",
+      "bytes": 3580,
+      "sha256": "d23269372fe2deeb65f3914365fe92a1c484b2c4ea0fa73eccbb33057f22fe0d",
+      "matchesLocal": true
+    },
+    {
+      "file": "assets/js/classical.js",
+      "status": 200,
+      "bytes": 7499,
+      "sha256": "75d7cafb25a8e4350fda72dbe128e69fc4b4f3fd78a274b92f35bdc98619f692",
       "matchesLocal": true
     },
     {
       "file": "assets/js/model.js",
       "status": 200,
-      "bytes": 8800,
-      "sha256": "3e9387fa3f55ba348d1d7d2aa99cfa9ccdf9ffc39676fb15ace101bf34b5ca3e",
+      "bytes": 9693,
+      "sha256": "254671c06ac3d13d117b3f4bc6c279cf72971345ab01fb1876bcef9db964b699",
+      "matchesLocal": true
+    },
+    {
+      "file": "assets/js/interaction-model.js",
+      "status": 200,
+      "bytes": 3119,
+      "sha256": "a5849972a49990c2f0557f92a80c76e9eccc0ac0a578dbf3ce7320e23b4c7577",
       "matchesLocal": true
     },
     {
       "file": "assets/css/exhibition.css",
       "status": 200,
-      "bytes": 5707,
-      "sha256": "8cd22b1cc2a1fdc81e3e2ffb97edbf96d1137d80e8576ea5e4f88c4465218585",
+      "bytes": 9094,
+      "sha256": "40fd7cf0acbfea149c06586c8ff4e6896de9b05542147536dbea502d344af244",
       "matchesLocal": true
     },
     {
       "file": "assets/previews/06-breath-portrait.webp",
       "status": 200,
-      "bytes": 15684,
-      "sha256": "9debecee29e441d7ae4d8098b862445d2789dceb4c97aa764321fc0fabeceee9",
+      "bytes": 17450,
+      "sha256": "8cde61b870951810023d6abe6c842fd69690a22a3edc6e80e0dd49a02121dd66",
       "matchesLocal": true
     },
     {
       "file": "assets/previews/08-stored-energy.webp",
       "status": 200,
-      "bytes": 16404,
-      "sha256": "d87478eb798d544a7ea3fbc6de2c72b9b974cc951cb64c96eb229db2be33a077",
+      "bytes": 18528,
+      "sha256": "936f7a4a2c0ce6969c3db5e2609d46b2c2942b6baa57d5a0d9ec290fa0d747c0",
       "matchesLocal": true
     },
     {
       "file": "assets/previews/07-echo-labyrinth.webp",
       "status": 200,
-      "bytes": 17112,
-      "sha256": "b042a2bb7afd921177bc185e04f1e24b05412da610af60d5e91967d6ae765d65",
+      "bytes": 11308,
+      "sha256": "9ac22d2812d813b5ab621c2e94bbd8666efe896cd8ed32ff08a0706fa697daf8",
       "matchesLocal": true
     },
     {
       "file": "assets/previews/04-sound-fossil.webp",
       "status": 200,
-      "bytes": 30672,
-      "sha256": "1079e2ac0c0339551785c92e6c13633979beddea22a1edb4a693db5b536e646c",
+      "bytes": 36490,
+      "sha256": "380c8de2035fabeae79df03484dfc062100a0215eb8ad32687656d4f6aace5eb",
       "matchesLocal": true
     },
     {
       "file": "assets/previews/01-resonant-architecture.webp",
       "status": 200,
-      "bytes": 10936,
-      "sha256": "a4162a46f72e56ce29ae261cedc7fcf7a8a08ce7834883a673f6126a68f2a52c",
+      "bytes": 10346,
+      "sha256": "da587fb034197b4ced781b60c37029158a3c91753d941d1661a5573da3ccc59b",
       "matchesLocal": true
     },
     {
       "file": "assets/previews/02-chord-loom.webp",
       "status": 200,
-      "bytes": 74672,
-      "sha256": "77d45993bf96227e7d2d7b3b91ffc3a8ba308e9bbe5b77623eaf96d3355c8d77",
+      "bytes": 131050,
+      "sha256": "7cf0a76144b5b8b685da41f009169bdbddec0b7845a6155ce65f2a979735816e",
       "matchesLocal": true
     },
     {
       "file": "assets/previews/03-silence-cuts.webp",
       "status": 200,
-      "bytes": 10260,
-      "sha256": "cc4d0ed4ed4fa48517f6c0fdc8d53d215c4bbf0ac81455fae6b0f2133cf4a5ea",
+      "bytes": 7178,
+      "sha256": "afe3d114b34e0853f106e786e781f9b53b0d02582b62c0fad160f8ef607bf317",
       "matchesLocal": true
     },
     {
       "file": "assets/previews/05-phase-tides.webp",
       "status": 200,
-      "bytes": 75814,
-      "sha256": "13d9d88aa2c4ced149e55d5c39cf02699ccce4a26afb23d70ad3cff7d410ce26",
+      "bytes": 84346,
+      "sha256": "6ecc2cb77eede90e5dd59bdd35a9ca9fc62d5dac71eb33e51668c381408a590e",
       "matchesLocal": true
     },
     {
@@ -192,6 +220,11 @@
     },
     {
       "file": "QA_REPORT.md",
+      "status": 200,
+      "contentType": "text/markdown; charset=utf-8"
+    },
+    {
+      "file": "INTERACTION_REVIEW.md",
       "status": 200,
       "contentType": "text/markdown; charset=utf-8"
     }

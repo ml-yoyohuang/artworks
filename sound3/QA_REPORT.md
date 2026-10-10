@@ -92,3 +92,5 @@
 - 既有 53 項模型、44 項手動互動模型、九入口／94 本地連結／全部程式語法均通過。原生 Canvas 預覽圖同步更新；實際檢視按住與定型截圖後修正選曲、技術說明的手機留白。
 
 古典曲目是手動編寫、簡化裝飾音與伴奏的主題節選，沒有使用現代演奏錄音；來源與署名見 MUSIC_CREDITS.md。音訊驗收為程式訊號與排程檢查，未做主觀聆聽或專業演奏校訂。手機仍為 Chromium 模擬，沒有新增實機、Safari／Firefox或真人麥克風測試。
+
+最新內容 commit `3823a660c5400e1d2766c28949f4cb43d41b7a2e` 已正常 push main；[Pages 部署](https://github.com/ml-yoyohuang/artworks/actions/runs/38058350719) success。正式網址 https://ml-yoyohuang.github.io/artworks/sound3/ 的 [68 組線上操作／選曲](_qa/request-production.json) 全部通過、無 pageerror；[全部 29 個入口／資產](_qa/production-assets.json) 與該提交位元內容一致，四個說明文件與麥克風評估頁均 HTTP 200。已檢視正式網站 [按住切口手機畫面](_qa/hold-mobile.png) 及 [定型進度桌面畫面](_qa/fossil-desktop.png)。後續驗收文件提交僅保存這些結果，不再改動已驗證的展演程式。
