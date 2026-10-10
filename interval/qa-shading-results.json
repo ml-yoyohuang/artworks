@@ -1,0 +1,58 @@
+{
+  "browser": "151.0.7922.34",
+  "errors": [],
+  "devices": [
+    {
+      "mobile": false,
+      "stableResources": [
+        {
+          "textures": 5,
+          "geometries": 20,
+          "programs": 7,
+          "canvas": 1
+        },
+        {
+          "textures": 5,
+          "geometries": 20,
+          "programs": 7,
+          "canvas": 1
+        },
+        {
+          "textures": 5,
+          "geometries": 20,
+          "programs": 7,
+          "canvas": 1
+        }
+      ],
+      "shadowDisabled": true,
+      "entryPixelsUnchanged": true,
+      "artworkPixelsUnchanged": true
+    },
+    {
+      "mobile": true,
+      "stableResources": [
+        {
+          "textures": 2,
+          "geometries": 8,
+          "programs": 6,
+          "canvas": 1
+        },
+        {
+          "textures": 2,
+          "geometries": 8,
+          "programs": 6,
+          "canvas": 1
+        },
+        {
+          "textures": 2,
+          "geometries": 8,
+          "programs": 6,
+          "canvas": 1
+        }
+      ],
+      "shadowDisabled": true,
+      "entryPixelsUnchanged": true,
+      "artworkPixelsUnchanged": true
+    }
+  ]
+}

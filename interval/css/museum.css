@@ -23,6 +23,7 @@ button{transition:color 180ms ease,background-color 180ms ease,border-color 180m
 
 #intro-tour{padding-left:12px;padding-right:12px}
 #home:hover:not(:disabled){background-color:transparent}
+.entered .masthead{background:linear-gradient(180deg,#162531b8,#16253170 65%,transparent)}
 dialog[data-state=closing]{pointer-events:none}
 dialog[data-state=opening]::backdrop{animation:dialog-backdrop-in 260ms ease both}
 dialog[data-state=closing]::backdrop{animation:dialog-backdrop-out 180ms ease both}

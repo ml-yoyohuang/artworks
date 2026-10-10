@@ -1,0 +1,33 @@
+{
+  "browser": "151.0.7922.34",
+  "devices": [
+    {
+      "mobile": false,
+      "animation": true,
+      "reduced": true,
+      "backgroundPause": true,
+      "fixedCamera": true,
+      "stableResources": {
+        "geometries": 12,
+        "textures": 3,
+        "programs": 6
+      },
+      "oneCanvas": true
+    },
+    {
+      "mobile": true,
+      "animation": true,
+      "reduced": true,
+      "backgroundPause": true,
+      "fixedCamera": true,
+      "stableResources": {
+        "geometries": 12,
+        "textures": 3,
+        "programs": 6
+      },
+      "oneCanvas": true
+    }
+  ],
+  "errors": [],
+  "fallback": true
+}

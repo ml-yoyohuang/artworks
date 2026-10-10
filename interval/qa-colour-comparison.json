@@ -1,0 +1,294 @@
+{
+  "browser": "151.0.7922.34",
+  "results": [
+    {
+      "mobile": false,
+      "variant": "A",
+      "station": 0,
+      "file": "desktop-colour-A-0.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          10
+        ],
+        "yaw": 0,
+        "pitch": 0
+      }
+    },
+    {
+      "mobile": false,
+      "variant": "A",
+      "station": 9,
+      "file": "desktop-colour-A-9.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          -73
+        ],
+        "yaw": 0.22923193327699534,
+        "pitch": 0.20483893182199078
+      }
+    },
+    {
+      "mobile": false,
+      "variant": "A",
+      "station": 12,
+      "file": "desktop-colour-A-12.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          -114
+        ],
+        "yaw": 0,
+        "pitch": 0.021871511825000703
+      }
+    },
+    {
+      "mobile": false,
+      "variant": "B",
+      "station": 0,
+      "file": "desktop-colour-B-0.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          10
+        ],
+        "yaw": 0,
+        "pitch": 0
+      }
+    },
+    {
+      "mobile": false,
+      "variant": "B",
+      "station": 9,
+      "file": "desktop-colour-B-9.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          -73
+        ],
+        "yaw": 0.22923193327699534,
+        "pitch": 0.20483893182199078
+      }
+    },
+    {
+      "mobile": false,
+      "variant": "B",
+      "station": 12,
+      "file": "desktop-colour-B-12.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          -114
+        ],
+        "yaw": 0,
+        "pitch": 0.021871511825000703
+      }
+    },
+    {
+      "mobile": false,
+      "variant": "C",
+      "station": 0,
+      "file": "desktop-colour-C-0.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          10
+        ],
+        "yaw": 0,
+        "pitch": 0
+      }
+    },
+    {
+      "mobile": false,
+      "variant": "C",
+      "station": 9,
+      "file": "desktop-colour-C-9.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          -73
+        ],
+        "yaw": 0.22923193327699534,
+        "pitch": 0.20483893182199078
+      }
+    },
+    {
+      "mobile": false,
+      "variant": "C",
+      "station": 12,
+      "file": "desktop-colour-C-12.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          -114
+        ],
+        "yaw": 0,
+        "pitch": 0.021871511825000703
+      }
+    },
+    {
+      "mobile": true,
+      "variant": "A",
+      "station": 0,
+      "file": "mobile-colour-A-0.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          10
+        ],
+        "yaw": 0.3537031460811218,
+        "pitch": 0.04687047119448614
+      }
+    },
+    {
+      "mobile": true,
+      "variant": "A",
+      "station": 9,
+      "file": "mobile-colour-A-9.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          -73
+        ],
+        "yaw": 0.22923193327699534,
+        "pitch": 0.20483893182199078
+      }
+    },
+    {
+      "mobile": true,
+      "variant": "A",
+      "station": 12,
+      "file": "mobile-colour-A-12.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          -111
+        ],
+        "yaw": 0,
+        "pitch": 0.018418969418636452
+      }
+    },
+    {
+      "mobile": true,
+      "variant": "B",
+      "station": 0,
+      "file": "mobile-colour-B-0.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          10
+        ],
+        "yaw": 0.3537031460811218,
+        "pitch": 0.04687047119448614
+      }
+    },
+    {
+      "mobile": true,
+      "variant": "B",
+      "station": 9,
+      "file": "mobile-colour-B-9.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          -73
+        ],
+        "yaw": 0.22923193327699534,
+        "pitch": 0.20483893182199078
+      }
+    },
+    {
+      "mobile": true,
+      "variant": "B",
+      "station": 12,
+      "file": "mobile-colour-B-12.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          -111
+        ],
+        "yaw": 0,
+        "pitch": 0.018418969418636452
+      }
+    },
+    {
+      "mobile": true,
+      "variant": "C",
+      "station": 0,
+      "file": "mobile-colour-C-0.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          10
+        ],
+        "yaw": 0.3537031460811218,
+        "pitch": 0.04687047119448614
+      }
+    },
+    {
+      "mobile": true,
+      "variant": "C",
+      "station": 9,
+      "file": "mobile-colour-C-9.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          -73
+        ],
+        "yaw": 0.22923193327699534,
+        "pitch": 0.20483893182199078
+      }
+    },
+    {
+      "mobile": true,
+      "variant": "C",
+      "station": 12,
+      "file": "mobile-colour-C-12.png",
+      "camera": {
+        "section": 2,
+        "position": [
+          0,
+          2,
+          -111
+        ],
+        "yaw": 0,
+        "pitch": 0.018418969418636452
+      }
+    }
+  ],
+  "errors": []
+}

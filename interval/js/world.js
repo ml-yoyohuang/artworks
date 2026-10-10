@@ -1,8 +1,10 @@
 import * as T from '../../showroom/vendor/three/build/three.module.js';
+import {architecturalMaterial,GALLERY_LIGHT} from './shading.js?v=colour-1';
+import {oilMaterial} from './oil-material.js?v=1';
 const clamp=T.MathUtils.clamp;
 export class MuseumWorld {
  constructor(host,ex,{onWork,onStation,onPortal,onReady,onFailure,onFrame,reduced}){
-  Object.assign(this,{host,ex,onWork,onStation,onPortal,onReady,onFailure,onFrame,reduced});this.section=0;this.pendingTextures=0;this.resources=[];this.labels=[];this.targets=[];this.generation=0;this.yaw=0;this.pitch=0;this.position=new T.Vector3(0,2,13);this.suspended=false;this.dirty=true;this.lowFrames=0;this.lastMotionFrame=0;this.closed=false;this.entryOffset=0;this.entryTilt=0;this.entryApproach=null;this.drag=null;this.animation=null;
+  Object.assign(this,{host,ex,onWork,onStation,onPortal,onReady,onFailure,onFrame,reduced});this.shadingMode='clean';this.section=0;this.pendingTextures=0;this.resources=[];this.labels=[];this.targets=[];this.generation=0;this.yaw=0;this.pitch=0;this.position=new T.Vector3(0,2,13);this.suspended=false;this.dirty=true;this.lowFrames=0;this.lastMotionFrame=0;this.closed=false;this.entryOffset=0;this.entryTilt=0;this.entryApproach=null;this.drag=null;this.animation=null;
   this.renderer=new T.WebGLRenderer({antialias:true,alpha:false,powerPreference:'low-power'});this.renderer.setPixelRatio(Math.min(devicePixelRatio,innerWidth<700?1.5:1.8));this.renderer.outputColorSpace=T.SRGBColorSpace;this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.15;this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=T.PCFSoftShadowMap;this.renderer.shadowMap.autoUpdate=false;
   this.host.append(this.renderer.domElement);this.camera=new T.PerspectiveCamera(54,1,.1,220);this.scene=new T.Scene();this.group=new T.Group();this.scene.add(this.group);this.ray=new T.Raycaster();this.pointer=new T.Vector2();this.clock=0;this.tick=this.tick.bind(this);
   this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();if(this.closed)return;this.pause(true);onFailure('繪圖環境已中斷，請使用完整作品目錄。');});
@@ -13,17 +15,25 @@ export class MuseumWorld {
   this.host.addEventListener('keydown',e=>{if(!this.section)return;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','w','s','a','d','W','S','A','D','Enter'].includes(e.key)){e.preventDefault();this.animation=null;if(e.key==='ArrowLeft')this.yaw+=.1;if(e.key==='ArrowRight')this.yaw-=.1;if(e.key==='ArrowUp')this.pitch=clamp(this.pitch+.06,-.45,.42);if(e.key==='ArrowDown')this.pitch=clamp(this.pitch-.06,-.45,.42);if(/[ws]/i.test(e.key)){let idx=this.nearestStation();idx+=e.key.toLowerCase()==='w'?1:-1;this.onStation(clamp(idx,0,this.stations.length-1));}if(/[ad]/i.test(e.key)){this.position.x=clamp(this.position.x+(e.key.toLowerCase()==='a'?-.6:.6),-2,2);}if(e.key==='Enter'&&this.nearestStation()===this.stations.length-1&&this.section<5)this.onStation(this.stations.length);else if(e.key==='Enter'){const nearest=this.ex.works.filter(w=>w.section===this.section).sort((a,b)=>Math.abs(a.placement.z-this.position.z)-Math.abs(b.placement.z-this.position.z))[0];this.onWork(nearest);}this.invalidate();}});
   this.build(0);this.tick=this.tick.bind(this);this.invalidate();onReady();
  }
- material(color,extra={}){const m=new T.MeshStandardMaterial({color,roughness:.89,metalness:0,...extra});this.resources.push(m);return m;}
+ material(color,extra={}){let m;
+  // Preserve the approved entrance and genuinely reflective special materials.
+  if(!this.section||extra.metalness>0)m=new T.MeshStandardMaterial({color,roughness:.89,metalness:0,...extra});
+  else if(extra.transparent)m=new T.MeshBasicMaterial({color:'#b8d1dc',...extra,toneMapped:false});
+  else if(this.shadingMode==='light')m=new T.MeshStandardMaterial({color,roughness:.89,metalness:0,...extra});
+  else m=architecturalMaterial(color,extra);
+  this.resources.push(m);return m;
+ }
  mesh(geo,mat,pos,rot){this.resources.push(geo);const m=new T.Mesh(geo,mat);if(pos)m.position.set(...pos);if(rot)m.rotation.set(...rot);m.castShadow=true;m.receiveShadow=true;this.group.add(m);return m;}
  box(size,pos,color,extra){return this.mesh(new T.BoxGeometry(...size),this.material(color,extra),pos);}
  softBox(size,pos,color,r=.025,extra={}){const [w,h,d]=size,b=Math.min(r,w/4,h/4,d/4),shape=new T.Shape();shape.moveTo(-w/2+b,-h/2+b);shape.lineTo(w/2-b,-h/2+b);shape.lineTo(w/2-b,h/2-b);shape.lineTo(-w/2+b,h/2-b);shape.closePath();const g=new T.ExtrudeGeometry(shape,{depth:d-2*b,bevelEnabled:true,bevelThickness:b,bevelSize:b,bevelSegments:2,steps:1,curveSegments:1});g.translate(0,0,-d/2+b);return this.mesh(g,this.material(color,extra),pos);}
  solidSection(outline,depth,pos,color,rot){const shape=new T.Shape();outline.forEach(([x,y],i)=>i?shape.lineTo(x,y):shape.moveTo(x,y));shape.closePath();const geometry=new T.ExtrudeGeometry(shape,{depth,bevelEnabled:false,steps:1,curveSegments:1});geometry.translate(0,0,-depth/2);const mesh=this.mesh(geometry,this.material(color),pos,rot);mesh.receiveShadow=false;return mesh;}
  insetFloor(end){const shape=new T.Shape();shape.moveTo(-11.5,end-13);shape.lineTo(11.5,end-13);shape.lineTo(11.5,22);shape.lineTo(-11.5,22);shape.closePath();const hole=new T.Path();hole.moveTo(-4,1);hole.lineTo(-4,5);hole.lineTo(4,5);hole.lineTo(4,1);hole.closePath();shape.holes.push(hole);this.mesh(new T.ShapeGeometry(shape),this.material(this.groundColor,{side:T.DoubleSide}),[0,-.05,0],[Math.PI/2,0,0]).castShadow=false;this.mesh(new T.PlaneGeometry(8,4),this.material('#818b89'),[0,-.05,3],[-Math.PI/2,0,0]).castShadow=false;}
  line(points,color='#b8b9ad',opacity=.4){const g=new T.BufferGeometry().setFromPoints(points.map(p=>new T.Vector3(...p)));const m=new T.LineBasicMaterial({color,transparent:true,opacity});this.resources.push(g,m);const l=new T.Line(g,m);this.group.add(l);return l;}
- contact(x,z,w,d,opacity=.32,y=.012){const c=document.createElement('canvas');c.width=c.height=64;const ctx=c.getContext('2d');const grad=ctx.createRadialGradient(32,32,2,32,32,31);grad.addColorStop(0,`rgba(0,0,0,${opacity})`);grad.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=grad;ctx.fillRect(0,0,64,64);const tex=new T.CanvasTexture(c);this.resources.push(tex);const m=new T.MeshBasicMaterial({map:tex,transparent:true,depthWrite:false,toneMapped:false});this.resources.push(m);this.mesh(new T.PlaneGeometry(w,d),m,[x,y,z],[-Math.PI/2,0,0]).castShadow=false;}
+ contact(x,z,w,d,opacity=.32,y=.012){const c=document.createElement('canvas');c.width=c.height=64;const ctx=c.getContext('2d');const grad=ctx.createRadialGradient(32,32,2,32,32,31);const tint=this.section>=3?'37,67,87':'89,117,121',alpha=this.section?Math.min(opacity,.2):opacity;grad.addColorStop(0,`rgba(${tint},${alpha})`);grad.addColorStop(1,`rgba(${tint},0)`);ctx.fillStyle=grad;ctx.fillRect(0,0,64,64);const tex=new T.CanvasTexture(c);this.resources.push(tex);const m=new T.MeshBasicMaterial({map:tex,transparent:true,depthWrite:false,toneMapped:false});this.resources.push(m);this.mesh(new T.PlaneGeometry(w,d),m,[x,y,z],[-Math.PI/2,0,0]).castShadow=false;}
  clear(){this.resetEntryApproach();this.entryFilm=null;this.membrane=null;this.floatingAperture=null;this.thresholdSheets=null;this.generation++;this.pendingTextures=0;this.labels.forEach(l=>l.button.remove());this.labels=[];this.targets=[];this.group.clear();this.resources.forEach(r=>r.dispose?.());this.resources=[];this.scene.children.filter(c=>c!==this.group).forEach(c=>{if(c.dispose)c.dispose();else c.shadow?.dispose();this.scene.remove(c);});}
  build(section){this.clear();this.renderer.shadowMap.needsUpdate=true;this.section=section;this.animation=null;const dark=section>=3;const bg=section===0?'#263542':section===1?'#77818a':section===2?'#676e76':section===3?'#0b191e':section===4?'#181f2a':'#101a25';this.scene.background=new T.Color(bg);this.scene.fog=new T.Fog(bg,section===0?24:22,section===0?110:section===1?72:80);
-  const hemi=new T.HemisphereLight(dark?'#b9c8d9':'#e5e8e8',dark?'#475563':'#74695d',dark?1.3:2.8);this.scene.add(hemi);const sun=new T.DirectionalLight('#fff1d9',dark?2:3.2);sun.position.set(-9,19,9);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-18,right:18,top:20,bottom:-48});sun.shadow.radius=4;sun.shadow.bias=-.0005;sun.shadow.normalBias=.04;this.scene.add(sun,sun.target);sun.target.position.set(0,0,-10);
+  const lighting=GALLERY_LIGHT[section];if(lighting)this.scene.fog=new T.Fog(bg,...lighting.fog);
+  const hemi=new T.HemisphereLight(lighting?.sky||(dark?'#b9c8d9':'#e5e8e8'),lighting?.ground||(dark?'#475563':'#74695d'),dark?1.3:2.8);this.scene.add(hemi);const sun=new T.DirectionalLight(lighting?.sun||'#fff1d9',dark?2:3.2);sun.position.set(-9,19,9);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-18,right:18,top:20,bottom:-48});sun.shadow.radius=4;sun.shadow.bias=-.0005;sun.shadow.normalBias=.04;this.scene.add(sun,sun.target);sun.target.position.set(0,0,-10);
   this.groundColor=section===0?'#d8d8cc':section===1?'#d7d5cc':section===2?'#c7bfac':section===3?'#2b393a':section===4?'#4a4d51':'#6b7071';
   if(!section){this.entry();this.stations=[];this.position.set(0,3,13);this.lookAt(innerWidth<900?[.7,-.6,-26]:[-8,4,-23]);return;}
   const works=this.ex.works.filter(w=>w.section===section);const end=Math.min(...works.map(w=>w.placement.z))-8;this.end=end;
@@ -31,7 +41,7 @@ export class MuseumWorld {
   if(section===2)this.stations.splice(9,0,{name:'懸浮的門 · 留白之間',pos:[0,2,-73],look:[-3.5,5.2,-88]});
   if(section===5)this.insetFloor(end);
   else if(section!==2)this.box([16,.26,Math.abs(end)+35],[0,-.18,(end+9)/2],this.groundColor);
-  else {for(const [front,back] of [[14,-29.6],[-30.4,-77.6],[-78.4,end-13]])this.box([15,.22,front-back],[0,-.16,(front+back)/2],this.groundColor);}
+  else {for(const [front,back] of [[14,-29.35],[-30.65,-77.35],[-78.65,end-13]])this.box([15,.22,front-back],[0,-.16,(front+back)/2],this.groundColor);}
   this.architecture(section,works,end);
   for(const [i,w] of works.entries())this.artwork(w,i);
   const markerRadius=.22,goldenRatio=(1+Math.sqrt(5))/2;
@@ -42,7 +52,7 @@ export class MuseumWorld {
  }
  threshold(next,end){
   const z=end-2, wall=['','#77818a','#676e76','#102128','#242b36','#161b25'][next];
-  const light=new T.PointLight(next===2?'#fff0dd':'#cad9df',32,20,2);light.position.set(0,4.7,z-5);this.group.add(light);
+  const light=new T.PointLight('#d9edf4',20,20,2);light.position.set(0,4.7,z-5);this.group.add(light);
   // The frame and corridor share one opening and one extrusion: no second outline behind the frame.
   const outline=[[-3.33,-.05],[-3.33,6.26],[3.33,6.26],[3.33,-.05],[3.07,-.05],[3.07,6],[-3.07,6],[-3.07,-.05]];
   const shape=new T.Shape();outline.forEach(([x,y],i)=>i?shape.lineTo(x,y):shape.moveTo(x,y));shape.closePath();
@@ -58,14 +68,17 @@ export class MuseumWorld {
  }
  blackMembrane(position){
   // An architectural membrane, independent of the exhibition artworks.
-  const geometry=new T.PlaneGeometry(6,6.24,64,64),points=geometry.attributes.position;
-  const mesh=this.mesh(geometry,this.material('#06080a',{roughness:.35,metalness:.18,side:T.DoubleSide}),position);mesh.castShadow=false;mesh.receiveShadow=false;
-  this.membrane={mesh,base:Float32Array.from(points.array),elapsed:0,last:0};this.disturbMembrane(0);
+  const relief=this.membraneStyle==='relief';
+  const geometry=new T.PlaneGeometry(6,6.24,relief?64:1,relief?64:1),points=geometry.attributes.position;
+  const material=relief?this.material('#303843',{roughness:.35,metalness:.18,emissive:'#292f39',emissiveIntensity:.18,side:T.DoubleSide}):oilMaterial();
+  if(!relief){material.side=T.DoubleSide;this.resources.push(material);}
+  const mesh=this.mesh(geometry,material,position);mesh.castShadow=false;mesh.receiveShadow=false;
+  this.membrane={mesh,relief,base:relief?Float32Array.from(points.array):null,elapsed:0,last:0};this.disturbMembrane(0);
  }
  ambientActive(){return !this.reduced&&(!!this.floatingAperture&&this.section===2||!!this.entryFilm&&this.section===0||!!this.membrane&&this.section===4&&this.position.z<=this.end+11.05||!!this.thresholdSheets&&this.section===3&&this.position.z<=this.end+18);}
  swayThresholdSheets(time){for(const {mesh,amplitude,period,phase} of this.thresholdSheets.sheets)mesh.rotation.y=amplitude*Math.sin(time*Math.PI*2/period+phase);}
  floatAperture(time){const m=this.floatingAperture.mesh;m.position.set(-4.7+.14*Math.sin(time*.25),7.4+.35*Math.sin(time*.48),-88+.22*(Math.cos(time*.3)-1));m.rotation.set(.015*Math.sin(time*.3),.16+.03*Math.sin(time*.29),-.08+.018*Math.sin(time*.37));}
- disturbMembrane(time){const {mesh,base}=this.membrane,points=mesh.geometry.attributes.position;for(let i=0;i<points.count;i++){const x=base[i*3],y=base[i*3+1];const edge=Math.max(0,(1-(x/3)**2)*(1-(y/3.12)**2));points.setZ(i,edge*(.44+.26*Math.sin(x*1.4+y*1.2+time*.47)+.12*Math.sin(y*2.3-x*.8-time*.31)+.05*Math.cos(x*3.1-y*2+time*.23)));}points.needsUpdate=true;mesh.geometry.computeVertexNormals();}
+ disturbMembrane(time){const {mesh,base,relief}=this.membrane;if(!relief){mesh.material.uniforms.uTime.value=time;return;}const points=mesh.geometry.attributes.position;for(let i=0;i<points.count;i++){const x=base[i*3],y=base[i*3+1];const edge=Math.max(0,(1-(x/3)**2)*(1-(y/3.12)**2));points.setZ(i,edge*(.44+.26*Math.sin(x*1.4+y*1.2+time*.47)+.12*Math.sin(y*2.3-x*.8-time*.31)+.05*Math.cos(x*3.1-y*2+time*.23)));}points.needsUpdate=true;mesh.geometry.computeVertexNormals();}
  entry(){
   // A clear path rises through four suspended stair plates toward the membrane.
   this.box([5.5,.2,30],[0,-.12,7],this.groundColor);

@@ -9,17 +9,17 @@
       "memory": [
         {
           "textures": 20,
-          "geometries": 85,
+          "geometries": 70,
           "canvases": 1
         },
         {
           "textures": 20,
-          "geometries": 85,
+          "geometries": 70,
           "canvases": 1
         },
         {
           "textures": 20,
-          "geometries": 85,
+          "geometries": 70,
           "canvases": 1
         }
       ]
@@ -32,18 +32,18 @@
       "elsewhere": "stopped away from the threshold, released after changing room",
       "memory": [
         {
-          "textures": 13,
-          "geometries": 67,
+          "textures": 11,
+          "geometries": 38,
           "canvases": 1
         },
         {
-          "textures": 13,
-          "geometries": 67,
+          "textures": 11,
+          "geometries": 38,
           "canvases": 1
         },
         {
-          "textures": 13,
-          "geometries": 67,
+          "textures": 11,
+          "geometries": 38,
           "canvases": 1
         }
       ]
