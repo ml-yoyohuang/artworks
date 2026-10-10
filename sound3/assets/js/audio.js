@@ -15,10 +15,17 @@ export class SoundEngine{
    filter.type=noiseVoice?'bandpass':'lowpass';filter.frequency.setValueAtTime(e.voice==='drum'?2100:e.voice==='breath'?1300:e.voice==='bass'?800:e.voice==='voice'?1900:4000,when);filter.Q.value=noiseVoice?.8:.55;
    pan.pan.value=e.voice==='tideA'?-.55:e.voice==='tideB'?.55:(i-(notes.length-1)/2)*.14;
    if(noiseVoice){source=ctx.createBufferSource();source.buffer=this.noiseBuffer;source.loop=true}else{source=ctx.createOscillator();source.type=['bass','organ','voice','dark'].includes(e.voice)?'triangle':'sine';source.frequency.setValueAtTime(440*2**((notes[i]-69)/12),when);if(e.voice==='pluck')source.frequency.exponentialRampToValueAtTime(440*2**((notes[i]-69)/12)*.995,when+e.d)}
-   source.connect(filter);filter.connect(gain);gain.connect(pan);pan.connect(this.master);const entry={source,filter,gain,pan};this.nodes.add(entry);this.maxNodes=Math.max(this.maxNodes,this.nodes.size);source.onended=()=>{source.disconnect();filter.disconnect();gain.disconnect();pan.disconnect();this.nodes.delete(entry)};source.start(when);source.stop(when+e.d+.04);
+   source.connect(filter);filter.connect(gain);gain.connect(pan);pan.connect(this.master);const entry={source,filter,gain,pan,when};this.nodes.add(entry);this.maxNodes=Math.max(this.maxNodes,this.nodes.size);source.onended=()=>{source.disconnect();filter.disconnect();gain.disconnect();pan.disconnect();this.nodes.delete(entry)};source.start(when);source.stop(when+e.d+.04);
   }
   this.notes++;this.log.push({score:e.t,when,late:Math.max(0,this.ctx.currentTime-when),voice:e.voice});if(this.log.length>128)this.log.shift();
  }
+ startTone(notes,{level=.18,cutoff=1800,pan=0,airy=false}={}){
+  if(!this.ctx||this.nodes.size+notes.length>90)return null;const ctx=this.ctx,entries=[];
+  for(const pitch of notes){const source=airy?ctx.createBufferSource():ctx.createOscillator(),gain=ctx.createGain(),filter=ctx.createBiquadFilter(),panner=ctx.createStereoPanner();if(airy){source.buffer=this.noiseBuffer;source.loop=true}else{source.type='triangle';source.frequency.value=440*2**((pitch-69)/12)}filter.type=airy?'bandpass':'lowpass';filter.frequency.value=cutoff;panner.pan.value=pan;gain.gain.value=0;gain.gain.setTargetAtTime(level/Math.sqrt(notes.length),ctx.currentTime,.04);source.connect(filter);filter.connect(gain);gain.connect(panner);panner.connect(this.master);const entry={source,filter,gain,pan:panner};this.nodes.add(entry);entries.push(entry);source.onended=()=>{source.disconnect();filter.disconnect();gain.disconnect();panner.disconnect();this.nodes.delete(entry)};source.start();}
+  this.maxNodes=Math.max(this.maxNodes,this.nodes.size);this.notes++;
+  return {set:(pitches,tone=cutoff,position=pan)=>entries.forEach((e,i)=>{if(!this.nodes.has(e))return;if(!airy)e.source.frequency.setTargetAtTime(440*2**((pitches[i]-69)/12),ctx.currentTime,.07);e.filter.frequency.setTargetAtTime(tone,ctx.currentTime,.08);e.pan.pan.setTargetAtTime(position,ctx.currentTime,.08)}),stop:()=>entries.forEach(e=>{if(!this.nodes.has(e))return;e.gain.gain.setTargetAtTime(0,ctx.currentTime,.025);try{e.source.stop(ctx.currentTime+.16)}catch{}})};
+ }
+ stopFuture(){if(!this.ctx)return;for(const n of this.nodes){if(n.when>this.ctx.currentTime+.005){try{n.source.stop()}catch{}n.source.disconnect();n.filter.disconnect();n.gain.disconnect();n.pan.disconnect();this.nodes.delete(n)}}}
  stopNodes(){for(const n of this.nodes){try{n.source.stop()}catch{}n.source.disconnect();n.filter.disconnect();n.gain.disconnect();n.pan.disconnect()}this.nodes.clear()}
  async close(){this.stopNodes();if(this.ctx&&this.ctx.state!=='closed')await this.ctx.close()}
 }

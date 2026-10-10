@@ -52,12 +52,12 @@ export function score(index,seed,p={}){
 }
 export function createModel(index,seed=4172,params={}){
  const data=score(index,seed,params);
- const s={index,seed,params,time:0,eventCursor:0,eventsSeen:0,cycles:0,chord:0,arch:[0,0,0,0],stability:0,rows:[],knots:[],cuts:[],priorEnergy:0,priorDuration:0,material:Array(96).fill(0),layers:[],breath:[],gallery:[],reveal:Array(data.walls?.length||0).fill(0),paths:[],energy:0,releases:0,releaseTime:-100,locked:false,echoDistances:[],complete:false};
- function resetCycle(){s.eventCursor=0;s.cycles++;if(index===6){s.reveal.fill(0);s.paths=[];s.echoDistances=[]}}
+ const s={index,seed,params,manualRows:0,excavation:Array(192).fill(0),selectedLayer:null,holding:false,holdStart:0,cutSerial:0,taps:0,gateAngle:0,time:0,eventCursor:0,eventsSeen:0,cycles:0,chord:Number(params.chord||0),arch:[0,0,0,0],stability:0,rows:[],knots:[],cuts:[],priorEnergy:0,priorDuration:0,material:Array(96).fill(0),layers:[],breath:[],gallery:[],reveal:Array(data.walls?.length||0).fill(0),paths:[],energy:0,releases:0,releaseTime:-100,locked:false,echoDistances:[],complete:false};
+ function resetCycle(){s.eventCursor=0;s.cycles++;if(index===6&&!params.manual&&!params.echoLive){s.reveal.fill(0);s.paths=[];s.echoDistances=[]}}
  function onEvent(e,absolute){s.eventsSeen++;
   if(e.kind==='chord')s.chord=e.chord;
-  if(index===1){if(e.kind==='weft'){s.rows.push({notes:e.notes,pos:e.pos,phrase:e.phrase,row:e.row,key:e.row+s.cycles*64,voices:(params.voices||[true,true,true]).map((v,i)=>i===2?false:v),variant:e.phrase===2});if(s.rows.length>96)s.rows.shift()}if(e.kind==='knot'&&params.voices?.[2]!==false){const key=e.row+s.cycles*64;s.knots.push(key);const row=s.rows.find(r=>r.key===key);if(row)row.voices[2]=true;if(s.knots.length>96)s.knots.shift()}}
-  if(e.kind==='rest'){const prior=s.priorDuration>.01?s.priorEnergy/s.priorDuration:e.prior,depth=clamp(.3+prior+Math.min(.3,s.priorDuration*.075),.25,1.2);s.cuts.push({start:absolute,d:e.d,prior,axis:e.axis+prior*.3,depth});if(s.cuts.length>8)s.cuts.shift();s.priorEnergy=0;s.priorDuration=0}
+  if(index===1){if(e.kind==='weft'){s.rows.push({notes:e.notes,pos:e.pos,phrase:e.phrase,row:e.row,key:e.row+s.cycles*64,voices:(params.voices||[true,true,true]).map((v,i)=>i===2?false:v),variant:e.phrase===2,weave:Number(params.weave||0),spacing:.5});if(s.rows.length>96)s.rows.shift()}if(e.kind==='knot'&&params.voices?.[2]!==false){const key=e.row+s.cycles*64;s.knots.push(key);const row=s.rows.find(r=>r.key===key);if(row)row.voices[2]=true;if(s.knots.length>96)s.knots.shift()}}
+  if(e.kind==='rest'){const prior=s.priorDuration>.01?s.priorEnergy/s.priorDuration:e.prior,depth=clamp(.3+prior+Math.min(.3,s.priorDuration*.075),.25,1.2);s.cuts.push({start:absolute,d:e.d,prior,axis:e.axis+prior*.3,depth});if(s.cuts.length>4)s.cuts.shift();s.priorEnergy=0;s.priorDuration=0}
   if(index===3){const center=(e.sector*6+Math.floor(noise(e.phrase,seed)*4))%96;for(let k=0;k<96;k++){const dist=Math.min((k-center+96)%96,(center-k+96)%96),width=e.kind==='sustain'?15:e.kind==='ridge'?8:3;const amount=Math.exp(-dist*dist/(width*width))*e.v*.11; // Read existing material; the same phrase deepens prior ridges.
     s.material[k]=clamp(s.material[k]+amount*(1+s.material[k]*.2),0,1.6)}s.layers.push({t:absolute,kind:e.kind,pitch:e.notes[0],v:e.v});if(s.layers.length>96)s.layers.shift()}
   if(e.kind==='echo'){s.reveal[e.wall]=Math.max(s.reveal[e.wall],.75);s.paths.push({start:absolute,path:e.path,pulse:e.pulse});if(s.paths.length>24)s.paths.shift();s.echoDistances.push(e.distance);if(s.echoDistances.length>24)s.echoDistances.shift()}
@@ -66,12 +66,12 @@ export function createModel(index,seed=4172,params={}){
  function step(dt,time,duration=32,loop=true){
   const cycle=Math.floor(Math.max(0,time-1e-8)/duration),local=loop?time-cycle*duration:time;
   if(loop&&cycle>s.cycles)resetCycle();
-  while(s.eventCursor<data.events.length&&data.events[s.eventCursor].t<=local+1e-7){const e=data.events[s.eventCursor++];onEvent(e,e.t+(loop?cycle*duration:0))}
-  let active=0;const live=[];for(const e of data.events){const amp=envelope(e,local);if(amp>0){active+=amp;live.push({e,amp})}}
+  while(s.eventCursor<data.events.length&&data.events[s.eventCursor].t<=local+1e-7){const e=data.events[s.eventCursor++];if((!params.manual||index===3)&&!(index===6&&params.echoLive))onEvent(e,e.t+(loop?cycle*duration:0))}
+  let active=0;const live=[];for(const e of data.events){const amp=params.manual?0:envelope(e,local);if(amp>0){active+=amp;live.push({e,amp})}}
   if(index===2&&active>.015){s.priorEnergy+=active*dt;s.priorDuration+=dt}
-  if(index===0){s.stability=mix(s.stability,clamp(active*1.8),1-Math.exp(-dt*1.8));const c=CHORDS[s.chord];for(let k=0;k<4;k++)s.arch[k]=mix(s.arch[k],(c[k]-48)/12,1-Math.exp(-dt*.85));}
-  if(index===5&&!s.complete&&local<12.8){if(Math.floor(time*10)>Math.floor(s.time*10)){const l=live.find(x=>x.e.kind==='breath');const prev=s.breath.at(-1);s.breath.push({y:local/12.8,r:l?.amp||.018,twist:l?.e.pitch==null?(prev?.twist||0):((l.e.pitch-48)/12),airy:l?.e.airy??.7});if(s.breath.length>140)s.breath.shift()}}
-  if(index===7){const threshold=Number(params.mode??0)===0?.95:1.5;if(s.locked&&time-s.releaseTime>5){s.locked=false;s.energy=.12}if(!s.locked){s.energy=clamp(s.energy+dt*(clamp(active)*.46-.055),0,1.8);if(s.energy>=threshold){s.locked=true;s.releaseTime=time;s.releases++;s.energy=.2}}else s.energy=clamp(s.energy-dt*.025,0,1.8)}
+  if(index===0){if(params.manual)active=params.short?(Math.floor(time*2)%2===0?.34:0):.34;s.stability=mix(s.stability,clamp(active*1.8),1-Math.exp(-dt*1.8));const c=CHORDS[s.chord];for(let k=0;k<4;k++)s.arch[k]=mix(s.arch[k],(c[k]-48)/12+(params.manual?(params.tuning||0)*(k/3-.25)*.9:0),1-Math.exp(-dt*1.8));}
+  if(index===5&&!s.complete&&local<14){if(Math.floor(time*10)>Math.floor(s.time*10)){const l=params.manual?({amp:params.breathMode==='pause'?.018:params.breathMode==='airy'?.23:.32,e:{pitch:params.breathMode==='voice'?57:null,airy:params.breathMode==='airy'?.95:params.breathMode==='pause'?.1:.18}}):live.find(x=>x.e.kind==='breath');const prev=s.breath.at(-1);s.breath.push({y:local/14,r:l?.amp||.018,twist:l?.e.pitch==null?(prev?.twist||0):((l.e.pitch-48)/12),airy:l?.e.airy??.7});if(s.breath.length>140)s.breath.shift()}}
+  if(index===7){const threshold=Number(params.mode??0)===0?.95:1.5;if(s.locked&&time-s.releaseTime>5){s.locked=false;s.energy=.12}if(!s.locked){s.energy=clamp(s.energy+dt*(params.manual?-.09:clamp(active)*.46-.055),0,1.8);if(s.energy>=threshold){s.locked=true;s.releaseTime=time;s.releases++;s.energy=.2}}else s.energy=clamp(s.energy-dt*.025,0,1.8)}
   if(!loop&&time+1e-7>=duration){s.complete=true}
   s.time=time;s.local=local;s.active=active;
  }

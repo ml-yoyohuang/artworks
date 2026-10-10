@@ -1,5 +1,7 @@
 # SOUND / 3 實際驗收報告
 
+本文件保留先前驗收紀錄；目前八件互動改造的結果見末節「八件互動改造最終驗收」與 [_qa/interactive-acceptance.json](_qa/interactive-acceptance.json)。
+
 驗收日期：2026-10-10，Asia/Taipei。瀏覽器：Playwright Chromium 151.0.7922.34。HTTP：http://127.0.0.1:8766/sound3/ 。沒有以 file:// 或檔案存在取代運行驗收。
 
 ## 九個入口
@@ -59,3 +61,20 @@
 本次 [收合操作結果](_qa/disclosure.json) 檢查八件 × 桌面 1440×900／手機模擬 390×844，16 組全部通過：滑鼠點擊、Enter／空白鍵展開收合、不誤啟 AudioContext、播放中不重置或暫停、暫停中不改時間、畫布聚焦時原空白鍵播放仍有效、無水平溢出、作品導覽保留；目錄移除指定連結且保留授權連結。console／pageerror 無錯誤。已實際開圖檢視 [桌面](_qa/shots/desktop-how-to-play.png) 與 [手機模擬](_qa/shots/mobile-how-to-play.png) 展開版面。
 
 靜態檢查九個入口、94 個本地連結與全部程式語法通過；53 項模型檢查通過。本次沒有修改材料模型或作曲，也沒有重做先前完整時長的八件展演驗收。互動品質評估依目前程式與操作因果，見 [互動檢查與提案](INTERACTION_REVIEW.md)；所列改造尚未實作，尚需後續實際觀眾試玩與主觀聆聽。
+
+## 八件互動改造最終驗收（2026-10-10）
+
+八件專屬互動全部實作：建築連續調音與三視點；織物完整穿梭織行；休止按住發聲／放開留白；化石局部挖掘與原樂句回聽；潮汐雙場偏移與連續相位；呼吸分段創作與明確定型；迷宮移動聲源與幾何反射門；懸線敲擊蓄能。所有 How to play 已更新，原創自動展演保留。休止符以四個留白區域、曲面切口與單一內折面取代交錯碎線，色盤改暖炭灰／陶土／暖砂。
+
+- [主操作](_qa/interactive-results.json)：八件 × 桌面 1440×900／手機觸控瀏覽器模擬 390×844，16 組通過。驗證專屬輸入確實造成聲音、材料、相位、路徑或能量變更；參數切換保留歷史、keyboard、收合說明不誤播放、無水平溢出、暫停凍結。化石桌面真實等待 32 秒；手機則明確以暫停後固定步長重算定型。
+- [完整展演回歸](_qa/full-interactive-regression.json) 與 [最後建築回歸](_qa/architecture-clock-regression.json) 依作品／裝置合併後 **16 組、308 項皆通過**，見 [彙總](_qa/interactive-acceptance.json)。桌面全部正常速度等待代表事件，潮汐超過 82 秒；音訊啟動與訊號、靜音、音量、暫停、續播、重播、PNG、導覽、生命週期與無 console／pageerror 皆通過。
+- 首輪完整回歸有一項手機建築失敗：開發用 `debug.stepTo()` 重算材料後沒有對齊音訊 origin，續播回到重算前的時刻，使換和弦在等待窗內不演化。已修正重算時鐘與排程，最後建築桌面／手機所有檢查通過。保留首輪失敗記錄，不以刪除結果掩蓋；此功能沒有提供給觀眾。
+- [模型原生 assert](_qa/model-results.json) 53 項與 [互動 assert](_qa/interaction-model-results.json) 44 項，**97 項皆通過**。涵蓋手動不偷灌入自動材料、舊行織法與聲部保留、有界歷史、切口位置和張力、局部挖掘不改原沉積、相位連續、轉門／移源確實改距離、節奏蓄能／流失／恢復、氣音與停頓。
+- [邊界案例](_qa/interaction-edge.json) 八類通過：實際 dispatch touch 梭子穿越、按住中暫停不造切口、手動轉門後回自動仍使用當下幾何、挖掘改畫面且回聽不改主時間、合成麥克風保留 850 ms 停頓、明確定型停止串流、14 秒上限停止串流、拒絕麥克風從手動創作回有聲示範、無 AudioContext／減少動態仍可改材料（相關檢查依工具分組）。
+- [手機點按／滑動](_qa/interaction-touch.json)：迷宮與蓄能畫布經過滑動不啟動音訊，完成 touch 點按才移動聲源或注入一次能量。
+- [八件自動聲音](_qa/interaction-smoke.json)：全部 AudioContext running、非零訊號，化石／呼吸旋轉仍正常。沒有主觀聆聽。
+- [靜態檢查](_qa/static-results.json)：九個 HTML、94 個本地連結與全部 JS／MJS／CJS 語法通過。沒有適用的 npm build／lint pipeline。
+
+已檢視 [八件原生渲染聯絡表](_qa/interactive-contact.webp)、[休止符桌面](_qa/shots/desktop-silence-new.png)、[手機](_qa/shots/mobile-silence-new.png) 與 [挖掘表面](_qa/shots/fossil-excavated.png)。目錄八張 1100×650 縮圖使用相同模型與 Canvas 渲染器產生代表狀態，不以縮圖生成冒稱完成實時操作。自動與手動材料歷史皆有上限，詳見 INTERACTION_REVIEW.md。
+
+本次限制：手機為 Chromium 模擬與實際 touch 事件，未做手機實機、Safari／Firefox、人體麥克風或主觀聆聽；麥克風驗收為 MediaStream 合成訊號。互動樂趣的主觀評價留待真人試玩。

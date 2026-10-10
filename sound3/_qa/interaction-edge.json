@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-10T13:17:42.171Z",
+  "checks": [
+    "Real touch event shuttle traversal",
+    "Pause during hold stops sound without inventing a cut",
+    "Automatic echo after manual gate retains and traces current geometry",
+    "Excavation changes rendered surface; audition leaves main time frozen; replay restores original",
+    "Synthetic microphone: 850 ms pause retained; explicit finish stops tracks",
+    "Synthetic microphone automatically finishes at 14 second maximum",
+    "Denied microphone returns from manual composition to audible demo",
+    "No AudioContext: interaction still updates reduced-motion visual model"
+  ],
+  "pass": true
+}

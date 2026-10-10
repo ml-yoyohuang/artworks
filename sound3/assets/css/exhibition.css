@@ -11,3 +11,10 @@
 .play-guide{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;padding:0 0 20px;font-size:13px;line-height:1.9}
 .play-guide ol{margin:0;padding-left:22px}.play-guide li+li{margin-top:8px}.guide-notes p{margin:0}.guide-notes p+p{margin-top:12px}.guide-notes{color:var(--muted)}.common-guide{font-size:12px}
 @media(max-width:700px){.how-to-play{margin:0 5vw 18px}.play-guide{grid-template-columns:1fr;gap:18px;font-size:12px}.how-to-play summary{min-height:48px}}
+.interaction{margin:14px 4vw 0;padding:15px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;flex-wrap:wrap;gap:9px 12px;font-size:12px}
+.interaction p{width:100%;margin:0 0 3px;color:var(--muted);line-height:1.8}
+.interaction label{display:flex;align-items:center;gap:9px;font-size:12px}.interaction input[type=range]{width:150px;accent-color:var(--red)}.interaction .blue-phase input{accent-color:#355d8a}.interaction .red-phase input{accent-color:#b4644d}
+.interaction button[aria-pressed=true]{background:#e3ded1;border-color:#9e978b}.interaction-status{margin-left:auto;color:var(--muted);line-height:1.7;max-width:400px}.input-cue{color:#586662;font-size:12px}.passages{display:flex;gap:5px}
+body[data-work] canvas{touch-action:pan-y}body[data-work="0"] canvas,body[data-work="1"] canvas,body[data-work="2"] canvas,body[data-work="3"] canvas,body[data-work="4"] canvas,body[data-work="5"] canvas{touch-action:none}
+#hold-sound{user-select:none;-webkit-user-select:none}#hold-sound[aria-pressed=true]{background:#b58c78;color:#211e1b}
+@media(max-width:700px){.interaction{margin:12px 5vw 0;padding:13px 0;gap:8px}.interaction button{font-size:12px;padding:10px 11px}.interaction-status{margin-left:0;width:100%;font-size:11px}.interaction input[type=range]{width:130px}.interaction label{flex-wrap:wrap}.passages{flex-wrap:wrap}}

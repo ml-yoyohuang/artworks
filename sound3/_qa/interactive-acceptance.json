@@ -1,0 +1,18 @@
+{
+  "pass": true,
+  "baselineDeviceWorkPairs": 16,
+  "baselineChecks": 308,
+  "failures": [],
+  "mainInteractions": true,
+  "edgeCases": true,
+  "touch": true,
+  "modelAssertions": 97,
+  "sources": [
+    "full-interactive-regression.json",
+    "architecture-clock-regression.json",
+    "interactive-results.json",
+    "interaction-edge.json",
+    "interaction-touch.json"
+  ],
+  "resolvedIssue": "Architecture focused regression supersedes the initial mobile test failure after aligning debug recomputation with the audio clock"
+}

@@ -14,7 +14,7 @@ for p in files:
   item={'file':rel,'status':status,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'matchesLocal':data==p.read_bytes()}
  except Exception as ex:item={'file':rel,'error':str(ex),'matchesLocal':False}
  result['files'].append(item)
-for rel in ['README.md','MUSIC_CREDITS.md','QA_REPORT.md']:
+for rel in ['README.md','MUSIC_CREDITS.md','QA_REPORT.md','INTERACTION_REVIEW.md']:
  try:
   with urllib.request.urlopen(base+rel,timeout=20) as response:item={'file':rel,'status':response.status,'contentType':response.headers.get('content-type')}
  except urllib.error.HTTPError as ex:item={'file':rel,'status':ex.code}

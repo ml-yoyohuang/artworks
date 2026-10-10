@@ -11,10 +11,10 @@ export function box(g,x,y,z,wx,hy,wz,colors,angle=.64,scale=70,cy=75){panel(g,[[
 export function plinth(g,angle,scale,cy=75){panel(g,[[-3.9,-.3,-3],[3.9,-.3,-3],[3.9,-.3,3],[-3.9,-.3,3]],'#12191f',angle,scale,cy);panel(g,[[-3.9,-.3,3],[3.9,-.3,3],[3.9,-.55,3],[-3.9,-.55,3]],'#111419',angle,scale,cy);panel(g,[[3.9,-.3,-3],[3.9,-.3,3],[3.9,-.55,3],[3.9,-.55,-3]],'#1c242b',angle,scale,cy)}
 // Lathe surfaces are sorted front-to-back. Seeded roughness makes each ring
 // a material surface rather than an instantaneous waveform.
-export function lathe(g,{profile,x=0,y=40,scale=1,angle=0,color=[182,172,151],glass=false,seed=4172,twist=0}){
+export function lathe(g,{profile,x=0,y=40,scale=1,angle=0,color=[182,172,151],glass=false,seed=4172,twist=0,excavation=null}){
  const rings=profile.length,segments=44,faces=[];if(rings<2)return;
- const pt=(i,j)=>{const p=profile[i],a=j/segments*TAU+angle+(p.twist||0)*twist,r=p.r*(glass?(1+.16*Math.cos(a*2+(p.twist||0)*1.4)):1);const rough=glass?1:(.98+noise(i*101+j,seed)*.04);return [x+Math.cos(a)*r*rough*scale,y-p.y*scale+Math.sin(a)*r*.27*scale,Math.sin(a),a]};
+ const pt=(i,j)=>{const p=profile[i],a=j/segments*TAU+angle+(p.twist||0)*twist,r=p.r*(glass?(1+.16*Math.cos(a*2+(p.twist||0)*1.4)):1);const depth=excavation?.[Math.min(23,Math.floor(i/rings*24))*8+Math.min(7,Math.floor((Math.cos(a)+1)*4))]||0;const rough=(1-depth*.12)*(glass?1:(.98+noise(i*101+j,seed)*.04));return [x+Math.cos(a)*r*rough*scale,y-p.y*scale+Math.sin(a)*r*.27*scale,Math.sin(a),a]};
  for(let i=0;i<rings-1;i++)for(let j=0;j<segments;j++){const a=pt(i,j),b=pt(i,j+1),c=pt(i+1,j+1),d=pt(i+1,j),z=(a[2]+b[2])/2;faces.push({pts:[a.slice(0,2),b.slice(0,2),c.slice(0,2),d.slice(0,2)],z,i,j,a:a[3]})}
  faces.sort((a,b)=>a.z-b.z);
- for(const f of faces){const light=.48+.42*clamp(Math.cos(f.a+2.1)*.5+.5)+.16*noise(f.i*4+f.j,seed),c=color.map(v=>Math.round(v*light));const alpha=glass?.10+.29*clamp(f.z*.5+.5):1;polygon(g,f.pts,`rgba(${c.join(',')},${alpha})`,glass?'rgba(224,238,234,.05)':null);if(glass&&f.j%11===0)line(g,[f.pts[0],f.pts[3]],'rgba(247,255,246,.23)',1.1);if(!glass&&f.i%4===0)line(g,[f.pts[2],f.pts[3]],'rgba(235,218,186,.22)',.55)}
+ for(const f of faces){const light=.48+.42*clamp(Math.cos(f.a+2.1)*.5+.5)+.16*noise(f.i*4+f.j,seed),depth=excavation?.[Math.min(23,Math.floor(f.i/rings*24))*8+Math.min(7,Math.floor((Math.cos(f.a)+1)*4))]||0,c=color.map((v,k)=>Math.round((depth>.1?[182,125,69][k]*clamp(depth*2.5)+v*(1-clamp(depth*2.5)):v)*light));const alpha=glass?.10+.29*clamp(f.z*.5+.5):1;polygon(g,f.pts,`rgba(${c.join(',')},${alpha})`,glass?'rgba(224,238,234,.05)':null);if(glass&&f.j%11===0)line(g,[f.pts[0],f.pts[3]],'rgba(247,255,246,.23)',1.1);if(!glass&&f.i%4===0)line(g,[f.pts[2],f.pts[3]],'rgba(235,218,186,.22)',.55)}
 }

@@ -1,0 +1,277 @@
+{
+  "date": "2026-10-10T13:26:10.688Z",
+  "browser": "151.0.7922.34",
+  "base": "http://127.0.0.1:8766/sound3/",
+  "works": [
+    {
+      "id": "01-resonant-architecture",
+      "device": "desktop",
+      "checks": {
+        "silentInitial": {
+          "pass": true
+        },
+        "initialCanvas": {
+          "pass": true
+        },
+        "noOverflow": {
+          "pass": true
+        },
+        "audioStarts": {
+          "pass": true
+        },
+        "signal": {
+          "pass": true,
+          "detail": {
+            "peak": 0.03342118486762047
+          }
+        },
+        "muteKeepsTime": {
+          "pass": true
+        },
+        "volume": {
+          "pass": true
+        },
+        "pauseFreezes": {
+          "pass": true
+        },
+        "resumeContinuous": {
+          "pass": true
+        },
+        "evolved": {
+          "pass": true
+        },
+        "fixedStepFollowsClock": {
+          "pass": true,
+          "detail": {
+            "maxLag": 0.01600000000002222
+          }
+        },
+        "chordChangesArchitecture": {
+          "pass": true
+        },
+        "pngExport": {
+          "pass": true
+        },
+        "replay": {
+          "pass": true
+        },
+        "keyboard": {
+          "pass": true
+        },
+        "navigation": {
+          "pass": true
+        },
+        "scheduleOnAudioClock": {
+          "pass": true,
+          "detail": {
+            "maxLate": 0
+          }
+        },
+        "cleanup": {
+          "pass": true
+        },
+        "noErrors": {
+          "pass": true,
+          "detail": []
+        }
+      },
+      "representative": {
+        "time": 12.008000000000001,
+        "playing": true,
+        "complete": false,
+        "energy": 0,
+        "releases": 0,
+        "rows": 0,
+        "layers": 0,
+        "breath": 0,
+        "walls": 0,
+        "paths": 0,
+        "activeNodes": 4,
+        "maxNodes": 5,
+        "notes": 3,
+        "peak": 0.0055228061974048615,
+        "ctx": "running",
+        "maxLag": 0.01600000000002222
+      },
+      "scheduling": {
+        "nodes": 4,
+        "maxNodes": 5,
+        "logs": [
+          {
+            "score": 0.15,
+            "when": 0.22999999999999998,
+            "late": 0,
+            "voice": "organ"
+          },
+          {
+            "score": 4.4,
+            "when": 4.48,
+            "late": 0,
+            "voice": "bell"
+          },
+          {
+            "score": 8.15,
+            "when": 8.23,
+            "late": 0,
+            "voice": "organ"
+          },
+          {
+            "score": 12.4,
+            "when": 12.48,
+            "late": 0,
+            "voice": "bell"
+          },
+          {
+            "score": 0.15,
+            "when": 13.984666666666667,
+            "late": 0,
+            "voice": "organ"
+          }
+        ],
+        "maxLate": 0
+      },
+      "errors": []
+    },
+    {
+      "id": "01-resonant-architecture",
+      "device": "mobile",
+      "checks": {
+        "silentInitial": {
+          "pass": true
+        },
+        "initialCanvas": {
+          "pass": true
+        },
+        "noOverflow": {
+          "pass": true
+        },
+        "audioStarts": {
+          "pass": true
+        },
+        "signal": {
+          "pass": true,
+          "detail": {
+            "peak": 0.03447917848825455
+          }
+        },
+        "muteKeepsTime": {
+          "pass": true
+        },
+        "volume": {
+          "pass": true
+        },
+        "pauseFreezes": {
+          "pass": true
+        },
+        "resumeContinuous": {
+          "pass": true
+        },
+        "evolved": {
+          "pass": true
+        },
+        "fixedStepFollowsClock": {
+          "pass": true,
+          "detail": {
+            "maxLag": 0.01600000000000268
+          }
+        },
+        "chordChangesArchitecture": {
+          "pass": true
+        },
+        "pngExport": {
+          "pass": true
+        },
+        "replay": {
+          "pass": true
+        },
+        "keyboard": {
+          "pass": true
+        },
+        "navigation": {
+          "pass": true
+        },
+        "scheduleOnAudioClock": {
+          "pass": true,
+          "detail": {
+            "maxLate": 0
+          }
+        },
+        "cleanup": {
+          "pass": true
+        },
+        "noErrors": {
+          "pass": true,
+          "detail": []
+        }
+      },
+      "representative": {
+        "time": 12,
+        "playing": false,
+        "complete": false,
+        "energy": 0,
+        "releases": 0,
+        "rows": 0,
+        "layers": 0,
+        "breath": 0,
+        "walls": 0,
+        "paths": 0,
+        "activeNodes": 0,
+        "maxNodes": 4,
+        "notes": 1,
+        "peak": 0.0331452302634716,
+        "ctx": "suspended",
+        "maxLag": 0.01600000000000268
+      },
+      "scheduling": {
+        "nodes": 4,
+        "maxNodes": 4,
+        "logs": [
+          {
+            "score": 0.15,
+            "when": 0.23533333333333334,
+            "late": 0,
+            "voice": "organ"
+          },
+          {
+            "score": 12.4,
+            "when": 3.1013333333333346,
+            "late": 0,
+            "voice": "bell"
+          },
+          {
+            "score": 0.15,
+            "when": 4.576666666666667,
+            "late": 0,
+            "voice": "organ"
+          }
+        ],
+        "maxLate": 0
+      },
+      "errors": []
+    }
+  ],
+  "index": [
+    {
+      "device": "desktop",
+      "links": 8,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "device": "mobile",
+      "links": 8,
+      "overflow": false,
+      "errors": []
+    }
+  ],
+  "extra": {
+    "noAudio": {
+      "fallback": true,
+      "notice": "此瀏覽器無法啟動聲音，已切換為無聲展演。"
+    },
+    "microphoneDenied": {
+      "fallback": true,
+      "notice": "麥克風不可用，正播放合成示範。"
+    }
+  }
+}
