@@ -63,3 +63,15 @@
 - 07 在手機上牆面仍偏暗，需要靠回聲閃光辨認走道；這是作品的黑暗設定，但小螢幕上辨識度較低。
 - 01 的「穩定度」差異（長音 vs 短音）在縮圖上不明顯，需要實際觀看第 3、7 個和弦時最高聲部提早結束的那幾秒。
 - three.js 透射材質（06）在低階 GPU 上可能較慢；自動品質只降低解析度，不切換材質。
+
+## 發布與正式站驗證
+
+| 項目 | 結果 |
+|---|---|
+| 作品 commit | `eab51b2`（fast-forward 整合至 main 並正常 push，無 force） |
+| GitHub Pages 建置 | `pages build and deployment` run 38144295219：completed／success；Pages API 狀態 `built`、commit `eab51b2` |
+| 正式網址 | https://ml-yoyohuang.github.io/artworks/sound4/ （HTTP 200） |
+| 資產逐位元比對 | 50 個部署檔（9 HTML、CSS、JS、three.js、預覽、文件）全部 HTTP 200 且與 repository 內容逐位元相同 |
+| 正式站瀏覽器驗收 | 以 `SOUND4_URL` 指向正式網址執行 `tools/qa.cjs`：**31/31 通過**（`_qa/production-qa.json`） |
+
+此段落與 `_qa/production-qa.json` 於部署確認後以僅含文件與證據的 commit 加入，不改動任何展演用的 HTML、CSS、JavaScript 或預覽圖。

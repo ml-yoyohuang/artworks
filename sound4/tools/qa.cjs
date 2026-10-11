@@ -279,7 +279,7 @@ const specific = {
     await ctx.close(); return 'ok';
   }));
   await Promise.all(jobs);
-  fs.writeFileSync(path.join(root, '_qa/qa-results.json'), JSON.stringify({ date: new Date().toISOString(), base, browser: b.version(), results }, null, 2) + '\n');
+  fs.writeFileSync(path.join(root, process.env.QA_OUT || '_qa/qa-results.json'), JSON.stringify({ date: new Date().toISOString(), base, browser: b.version(), results }, null, 2) + '\n');
   console.log(`${results.filter(r => r.pass).length}/${results.length} passed`);
   await b.close();
 })();
