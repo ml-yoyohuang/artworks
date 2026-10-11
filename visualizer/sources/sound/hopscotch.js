@@ -1,0 +1,26 @@
+export function createScene(canvas,state) {
+const document = {createElement: (...a) => globalThis.document.createElement(...a), body: globalThis.document.createElement('div'), head: globalThis.document.createElement('div'), querySelectorAll: () => [], getElementById: () => globalThis.document.createElement('button'), querySelector: () => globalThis.document.createElement('button')};
+const CONFIG={"id": 7, "slug": "hopscotch", "title": "跳房子", "en": "One more square", "bg": "#e7e6ed", "palette": ["#d96250", "#5c809f", "#b194be", "#dbb645"], "bpm": 144, "osc": "sine", "mode": "drum", "recommended": "william", "directInteraction": true};
+const ctx=canvas.getContext("2d"),C=CONFIG.palette,INK="#303d36",TAU=Math.PI*2;
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),mix=(a,b,p)=>a+(b-a)*p,ease=p=>1-Math.pow(1-clamp(p,0,1),3);
+const rnd=i=>{const n=Math.sin(i*127.1+CONFIG.id*311.7)*43758.5453;return n-Math.floor(n);};
+const interactionSynth=null,musicBus=null;
+const setBackingScale=()=>{};
+const feedback=()=>{},userNote=()=>{},userPop=()=>{},userDrum=()=>{},requestDraw=()=>{},cancelPhrase=()=>{},playPhrase=()=>{},scaleNotes=()=>[48,50,52,55,57,60,62,64],scaleIndex=v=>Math.round(clamp(v,0,1)*7),noteName=m=>String(m),sceneRef=null;
+function circle(x,y,r,fill,stroke){ctx.beginPath();ctx.arc(x,y,Math.max(.1,r),0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.stroke();}}
+function line(points,color,width=2){ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke();}
+function rect(x,y,w,h,color,r=0){ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill();}
+function ellipse(x,y,rx,ry,color,rotation=0){ctx.beginPath();ctx.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),rotation,0,TAU);ctx.fillStyle=color;ctx.fill();}
+function text(str,x,y,size=12,color=INK,align='center'){ctx.fillStyle=color;ctx.font=`400 ${size}px DM, "Avenir Next", sans-serif`;ctx.textAlign=align;ctx.fillText(str,x,y);}
+function dashed(points,color=INK+'35'){ctx.setLineDash([4,8]);line(points,color,1);ctx.setLineDash([]);}
+function seedTexture(){ctx.fillStyle=INK+'09';for(let i=0;i<440;i++)ctx.fillRect(rnd(i+77)*1000,rnd(i+547)*700,1.5,1.5);}
+
+const pads=[[340,530],[500,530],[660,530],[500,414],[420,300],[580,300],[500,190]],route=[0,1,2,3,4,5,6,5,4,3,2,1];let progress=1,to=0,fromPos=pads[0].slice(),trails=[],manual=false,hovered=-1,landings=0;
+function padAt(){return pads.findIndex(([x,y])=>Math.abs(x-state.x*1000)<=63&&Math.abs(y-state.y*700)<=43);}
+function position(){const q=ease(progress);return[mix(fromPos[0],pads[to][0],q),mix(fromPos[1],pads[to][1],q)];}
+function launch(target,byUser){fromPos=position();to=target;progress=0;manual=byUser;trails.push({x:fromPos[0],y:fromPos[1],life:1,c:to%4});if(trails.length>15)trails.shift();if((state.reduced||state.paused)&&byUser){progress=1;land();}}
+function land(){landings++;if(manual){const midi=scaleNotes()[to];userNote(midi,.8,.22);feedback(`第 ${to+1} 格 · ${noteName(midi)} · 已落地，下一拍回到自動路線`);}}
+const scene={reset(){trails=[];progress=1;manual=false;},beat(i){if(manual&&progress<1)return;if(manual){manual=false;}if(progress<1)return;launch(route[i%route.length],false);},tap(){hovered=padAt();if(hovered<0){feedback('點有號碼的格子，小球會跳到你指定的位置');return;}launch(hovered,true);if(progress<1)feedback(`跳往第 ${to+1} 格 · 這次跳躍由你決定`);},move(){hovered=padAt();},leave(){hovered=-1;},update(dt){const old=progress;progress=Math.min(1,progress+dt*Math.max(.8,state.tempo/60));if(old<1&&progress===1)land();trails.forEach(p=>p.life-=dt*.25);trails=trails.filter(p=>p.life>0);},inspect(){return{to,progress,manual,landings,hovered,position:position()};},draw(){dashed([[500,135],[500,580]]);pads.forEach(([x,y],i)=>{rect(x-63,y-43,126,86,i===to?C[i%4]+'66':'#f7f1e5',8);ctx.strokeStyle=i===hovered||manual&&i===to?C[0]:C[i%4];ctx.lineWidth=i===hovered||manual&&i===to?4:2;ctx.strokeRect(x-55,y-35,110,70);text(String(i+1).padStart(2,'0'),x,y+7,22,C[i%4]);});trails.forEach(p=>{ctx.lineWidth=2;circle(p.x,p.y,30+(1-p.life)*35,null,C[p.c]+Math.round(p.life*160).toString(16).padStart(2,'0'));});const [x,ground]=position(),h=Math.sin(progress*Math.PI)*105;ellipse(x,ground+25,25-h*.09,7,INK+'20');circle(x,ground-h-28,28,C[0]);circle(x-8,ground-h-36,7,'#fff4e6b0');}};
+
+return {scene,config:CONFIG};
+}

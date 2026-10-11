@@ -1,0 +1,232 @@
+{
+  "tracks": [
+    {
+      "title": "01_byakkoya-no-musume",
+      "first60Seconds": {
+        "oldNearSilence": 1,
+        "relativeDips": 5,
+        "openingTimes": [
+          4.4,
+          12.65,
+          39.9,
+          44.05,
+          47.9
+        ]
+      }
+    },
+    {
+      "title": "Disfigure - Blank [NCS Release]",
+      "first60Seconds": {
+        "oldNearSilence": 0,
+        "relativeDips": 5,
+        "openingTimes": [
+          13.35,
+          16.45,
+          29.85,
+          43.5,
+          57.2
+        ]
+      }
+    },
+    {
+      "title": "Haldyn_Hotel",
+      "first60Seconds": {
+        "oldNearSilence": 0,
+        "relativeDips": 18,
+        "openingTimes": [
+          2.45,
+          5.5,
+          8.6,
+          11.9,
+          15.3,
+          18.55,
+          21.95,
+          25.25,
+          28.55,
+          31.95,
+          35.25,
+          38.6,
+          42.1,
+          45.9,
+          49.25,
+          52.75,
+          56.1,
+          59.3
+        ]
+      }
+    },
+    {
+      "title": "Mrs．Pumpkinの滑稽な夢_yakari_202610120143",
+      "first60Seconds": {
+        "oldNearSilence": 1,
+        "relativeDips": 13,
+        "openingTimes": [
+          2.1,
+          5.3,
+          9.55,
+          18.5,
+          22.2,
+          26.45,
+          31.2,
+          35.45,
+          39.15,
+          43.4,
+          46.6,
+          49.8,
+          59.8
+        ]
+      }
+    },
+    {
+      "title": "ドーナツホール オケ_yakari_202610120143",
+      "first60Seconds": {
+        "oldNearSilence": 1,
+        "relativeDips": 3,
+        "openingTimes": [
+          17.45,
+          32.35,
+          47.5
+        ]
+      }
+    },
+    {
+      "title": "トリノコシティ_pianica_202610120141",
+      "first60Seconds": {
+        "oldNearSilence": 1,
+        "relativeDips": 13,
+        "openingTimes": [
+          3.95,
+          7.5,
+          12.95,
+          16.5,
+          21.15,
+          24.7,
+          31.85,
+          35.4,
+          38.95,
+          42.9,
+          47.75,
+          53.05,
+          57.65
+        ]
+      }
+    },
+    {
+      "title": "パンダヒーローオケ_yakari_202610120143",
+      "first60Seconds": {
+        "oldNearSilence": 1,
+        "relativeDips": 9,
+        "openingTimes": [
+          16.8,
+          21.15,
+          26.25,
+          30.7,
+          33.8,
+          47.1,
+          50.9,
+          55.3,
+          59.1
+        ]
+      }
+    },
+    {
+      "title": "マトリョシカ オケ_yakari_202610120143",
+      "first60Seconds": {
+        "oldNearSilence": 1,
+        "relativeDips": 5,
+        "openingTimes": [
+          2.15,
+          15.55,
+          30.15,
+          40.5,
+          45.2
+        ]
+      }
+    },
+    {
+      "title": "リンネ カラオケ(未マスタリング)_yakari_202610120143",
+      "first60Seconds": {
+        "oldNearSilence": 1,
+        "relativeDips": 7,
+        "openingTimes": [
+          2.3,
+          21.75,
+          40.15,
+          44.35,
+          47.55,
+          50.6,
+          55.5
+        ]
+      }
+    },
+    {
+      "title": "裏表ラバーズ_wowaka_202610120148",
+      "first60Seconds": {
+        "oldNearSilence": 1,
+        "relativeDips": 2,
+        "openingTimes": [
+          3.6,
+          44.6
+        ]
+      }
+    }
+  ],
+  "live": [
+    {
+      "preset": "s3-cuts",
+      "time": 33.99873,
+      "playing": true,
+      "energy": 0.9516654052879854,
+      "bands": [
+        0.9666934609413147,
+        0.6251755952835083,
+        0.3789346516132355,
+        0.7379823923110962,
+        0.6654276251792908,
+        0.658478856086731,
+        0.5099961757659912,
+        0.7057425379753113
+      ],
+      "onsetId": 448,
+      "frames": 563,
+      "materials": {
+        "cuts": 2,
+        "cutTriggers": 2,
+        "cutRest": false,
+        "rows": 0,
+        "layers": 0,
+        "breath": 0,
+        "paths": 0,
+        "energy": 0
+      },
+      "errors": []
+    },
+    {
+      "preset": "s4-cuts",
+      "time": 34.014873,
+      "playing": true,
+      "energy": 0.953267152822584,
+      "bands": [
+        0.9691860675811768,
+        0.6616320013999939,
+        0.36953794956207275,
+        0.7270479798316956,
+        0.678324818611145,
+        0.6651026606559753,
+        0.5160121917724609,
+        0.7080385088920593
+      ],
+      "onsetId": 440,
+      "frames": 1125,
+      "materials": {
+        "time": 13.995874999999998,
+        "cuts": 5,
+        "cutTriggers": 2,
+        "cutRest": false,
+        "queue": 0
+      },
+      "errors": []
+    }
+  ],
+  "errors": []
+}
