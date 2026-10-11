@@ -451,7 +451,7 @@ export const presets = [
     "en": "SOUND FOSSIL",
     "module": "../sources/sound4/works/04-fossil.js",
     "renderer": "Three.js",
-    "mapping": "頻段 · 能量 · 有界材料歷史",
+    "mapping": "聲音長出螺旋 · 持續沉積",
     "bg": "#11100e",
     "preview": "./previews/s4-fossil.jpg"
   },
