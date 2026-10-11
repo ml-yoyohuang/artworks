@@ -85,7 +85,7 @@
 
 依觀看回饋放大效果：小圖水平 ±14px、垂直 ±12px；桌機主圖停留後飽和度 1.42、對比 1.12、亮度 1.035，並在原圖框內放大 2.5%。手機顯影從較低彩度（0.35）恢復原圖，讓變化容易辨認。文字與格線仍固定，減少動態仍完全停用。
 
-全部 26 件作品加入獨立於繪圖程式的來源判斷；magazine2 的 33 個作品入口帶上 `from=magazine2`，p5.js 種子參數保留。作品頁收到此參數，或確認同站 referrer 為 magazine2 時，`a.back` 改為「← 間物 · 作品索引」，返回 `../magazine2/index.html#index`。繪圖失敗提示中的返回連結同時更新。原列表入口或直接開啟作品仍回到原列表；不使用 sessionStorage，避免其他分頁受到影響。
+全部 26 件作品加入獨立於繪圖程式的來源判斷；magazine2 的 33 個作品入口帶上 `from=magazine2`，p5.js 種子參數保留。作品頁收到此參數，或確認同站 referrer 為 magazine2 時，`a.back` 改為「← 間物 · 作品索引」，返回 `index.html#index`。繪圖失敗提示中的返回連結同時更新。原列表入口或直接開啟作品仍回到原列表；不使用 sessionStorage，避免其他分頁受到影響。
 
 全 26 頁的參數入口、原入口、referrer 入口及錯誤備援返回皆通過瀏覽器驗證；另確認外站 referrer 不觸發、全部 33 個入口有來源標記、10 個原始種子保留，以及手機實際點進作品後返回間物的往返流程。紀錄：[back-navigation-verification.json](process/back-navigation-verification.json)。
 
