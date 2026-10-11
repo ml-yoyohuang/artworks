@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-11T13:26:59.347Z",
+  "base": "http://127.0.0.1:8777/sound4/",
+  "results": [
+    {
+      "dev": "desktop",
+      "file": "03-silence-cuts",
+      "at": 8.7,
+      "time": 9.137333333333332,
+      "silent": false,
+      "level": 0,
+      "overflow": false,
+      "readout": "休止・前一段 4.0 秒，力度 84",
+      "errors": []
+    }
+  ]
+}

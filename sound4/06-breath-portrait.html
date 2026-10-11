@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>06 呼吸雕塑｜一口氣的肖像 — SOUND / 4</title>
+<meta name="description" content="呼吸雕塑《一口氣的肖像》：同一句話，慢慢說與急著說，留下兩件不同的雕塑。">
+<meta name="theme-color" content="#111213">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/sound4.css">
+<meta property="og:image" content="assets/previews/06-breath-portrait.jpg">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
+</head>
+<body class="work-page" data-work="06" style="--accent:#9fb3a8">
+<a class="skip" href="#controls">跳到播放控制</a>
+<header class="topbar">
+  <a class="brand" href="index.html"><b>SOUND / 4</b><span>聲音的居所</span></a>
+  <nav class="worknav" aria-label="作品導覽"><a href="05-phase-tides.html" rel="prev" aria-label="上一件：相位潮汐">← 上一件</a><span aria-label="第 6 件，共 8 件">06 / 08</span><a href="07-echo-labyrinth.html" rel="next" aria-label="下一件：回聲迷宮">下一件 →</a></nav>
+</header>
+<main>
+  <section id="stage" class="stage dark" aria-label="作品展演場域">
+    <canvas id="art" tabindex="0" role="img" aria-label="每一次發聲長成一件玻璃、陶瓷或石膏的物件，定型後排列在展台上。"></canvas>
+    <img id="poster" class="poster" src="assets/previews/06-breath-portrait.jpg" alt="呼吸雕塑實際運行時擷取的畫面" hidden>
+    <div class="title-block"><p class="no">06 · BREATH PORTRAIT</p><h1>呼吸雕塑</h1><p class="sub">《一口氣的肖像》</p></div>
+    <p id="readout" class="readout"></p>
+    <div id="start-overlay" class="start-overlay"><button id="start" class="start">開始聆聽</button><p>按下後才會發出聲音・建議音量適中</p></div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </section>
+  <section id="controls" class="controls" aria-label="播放控制">
+    <div class="transport">
+      <button id="play" class="primary" aria-pressed="false">開始</button>
+      <button id="replay">重播</button>
+      <button id="mute" aria-pressed="false">靜音</button>
+      <label class="volume">音量 <input id="volume" type="range" min="0" max="100" value="60"></label>
+      <span id="time" class="time" aria-label="播放時間">00:00</span>
+    </div>
+    <div class="special" aria-label="作品操作"><span class="group-label" id="g-demo">示範</span><div class="seg" role="group" aria-labelledby="g-demo"><button data-demo data-value="soft">短句・輕緩</button><button data-demo data-value="urgent">短句・急促</button><button data-demo data-value="long">長吟</button><button data-demo data-value="air">氣音</button></div><button id="mic" aria-pressed="false">用我的聲音</button><button id="export">匯出 PNG</button></div>
+  </section>
+  <article class="notes">
+    <div>
+      <p class="eyebrow">06 · BREATH PORTRAIT</p>
+      <h2>呼吸雕塑《一口氣的肖像》</h2>
+      <p class="statement">每一次發聲或吐氣長成一件物件。聲音開始時它從底座長出，持續時拉伸、扭轉，停下時定型。音高決定扭轉，力度決定厚度，氣息的成分決定表面的孔隙；中途的停頓收成細頸，較長的停頓讓它分成兩個部件。完成的物件留在展台上，像一口氣的標本。</p>
+    </div>
+    <div class="cols">
+      <section><h3>代表時刻</h3><p class="moment">第一件（短句・輕緩）約在第 6 秒定型；第二件用同一句話、更快更強地說出，約第 11 秒定型——兩件並排，可以直接比較。之後是長吟與氣音。</p></section>
+      <section><h3>如何觀看</h3><ul><li>看扭轉：有音高的聲音才會扭轉，純氣音不會。</li><li>按示範按鈕再做一件；展台最多留下五件，最舊的會被收走。</li><li>「用我的聲音」會在你按下之後才請求麥克風。</li></ul></section>
+      <section><h3>生成規則</h3><ul><li>示範聲音以樂譜已知的音高與氣息參數驅動（不是猜測）；麥克風模式以自相關法估計音高，信度不足就不產生扭轉。</li><li>氣息感來自頻譜平坦度與能量；無聲的氣流只改變孔隙。</li><li>起止偵測有開／關門檻、0.45 秒停頓容忍與 12 秒上限，避免雜訊抖動或無限生長。</li><li>麥克風只在本機分析：不錄音、不上傳、不保存；拒絕或無裝置時回到示範。</li><li>作品不從聲音推斷個性、情緒、健康或身份。</li></ul></section>
+      <section><h3>聲音與技術</h3><p>three.js r180：MeshPhysicalMaterial 透射玻璃與半透明陶瓷、程序化石膏孔隙；原生 Web Audio 共振峰合成人聲。</p><p class="small">聲音：原創程式作曲，作者 SOUND / 4，以 CC0 釋出；不使用外部錄音。詳見 <a href="MUSIC_CREDITS.md">MUSIC_CREDITS.md</a>。</p><p class="small">鍵盤：空白鍵播放／暫停，M 靜音。</p></section>
+    </div>
+  </article>
+</main>
+<footer class="pager">
+  <nav aria-label="作品間導覽"><a href="05-phase-tides.html">← 05 相位潮汐</a><a href="index.html">展覽目錄</a><a href="07-echo-labyrinth.html">07 回聲迷宮 →</a></nav>
+  <p>SOUND / 4 · 聲音的居所</p>
+</footer>
+<script type="module" src="assets/js/works/06-breath.js"></script>
+</body>
+</html>

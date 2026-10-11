@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>08 能量蓄積｜尚未發生的爆發 — SOUND / 4</title>
+<meta name="description" content="能量蓄積《尚未發生的爆發》：形體快撐不住了，但你不知道是哪一個音會讓它翻開。">
+<meta name="theme-color" content="#111213">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/sound4.css">
+<meta property="og:image" content="assets/previews/08-stored-energy.jpg">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
+</head>
+<body class="work-page" data-work="08" style="--accent:#c2306f">
+<a class="skip" href="#controls">跳到播放控制</a>
+<header class="topbar">
+  <a class="brand" href="index.html"><b>SOUND / 4</b><span>聲音的居所</span></a>
+  <nav class="worknav" aria-label="作品導覽"><a href="07-echo-labyrinth.html" rel="prev" aria-label="上一件：回聲迷宮">← 上一件</a><span aria-label="第 8 件，共 8 件">08 / 08</span><a href="01-resonant-architecture.html" rel="next" aria-label="下一件：共振建築">下一件 →</a></nav>
+</header>
+<main>
+  <section id="stage" class="stage light" aria-label="作品展演場域">
+    <canvas id="art" tabindex="0" role="img" aria-label="一個由細線懸吊的白色瓣狀形體逐漸繃緊、膨脹，越過臨界點時翻開，露出內側鮮豔的顏色。"></canvas>
+    <img id="poster" class="poster" src="assets/previews/08-stored-energy.jpg" alt="能量蓄積實際運行時擷取的畫面" hidden>
+    <div class="title-block"><p class="no">08 · STORED ENERGY</p><h1>能量蓄積</h1><p class="sub">《尚未發生的爆發》</p></div>
+    <p id="readout" class="readout"></p>
+    <div id="start-overlay" class="start-overlay"><button id="start" class="start">開始聆聽</button><p>按下後才會發出聲音・建議音量適中</p></div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </section>
+  <section id="controls" class="controls" aria-label="播放控制">
+    <div class="transport">
+      <button id="play" class="primary" aria-pressed="false">開始</button>
+      <button id="replay">重播</button>
+      <button id="mute" aria-pressed="false">靜音</button>
+      <label class="volume">音量 <input id="volume" type="range" min="0" max="100" value="60"></label>
+      <span id="time" class="time" aria-label="播放時間">00:00</span>
+    </div>
+    <div class="special" aria-label="作品操作"><span class="group-label" id="g-mode">模式</span><div class="seg" role="group" aria-labelledby="g-mode"><button data-mode data-value="fragile" aria-pressed="false">脆弱</button><button data-mode data-value="balanced" aria-pressed="true">平衡</button><button data-mode data-value="stable" aria-pressed="false">穩定</button></div><button id="inject">注入一次</button></div>
+  </section>
+  <article class="notes">
+    <div>
+      <p class="eyebrow">08 · STORED ENERGY</p>
+      <h2>能量蓄積《尚未發生的爆發》</h2>
+      <p class="statement">中央的形體被細線懸在半空。每一個音都把一點力量注入它：線逐漸繃直，瓣片鼓起，縫隙裡透出內側的顏色。能量會累積，也會在安靜時慢慢流失；越過臨界點的那一刻，形體整個翻開，露出一直藏在背面的鮮豔色彩，停留一段時間，再以不同的排列重新闔上。</p>
+    </div>
+    <div class="cols">
+      <section><h3>代表時刻</h3><p class="moment">預設「平衡」模式約在第 21 秒第一次翻開；之前有兩段刻意的停頓，能量會在安靜中退回去。之後每一輪的翻開時間取決於累積歷史，而不是固定拍點。</p></section>
+      <section><h3>如何觀看</h3><ul><li>注意停頓：安靜時線會鬆一點、內側顏色會退去。</li><li>「注入一次」加入一個音；同樣的音在不同的蓄能狀態下得到不同的反應。</li><li>「脆弱／平衡／穩定」改變臨界點與流失速度。</li></ul></section>
+      <section><h3>生成規則</h3><ul><li>能量以固定步長積分：每個音依力度注入，並以指數速率自然流失；數值有上下界、與幀率無關。</li><li>蓄能控制線的張力、瓣片鼓起、縫隙與內側發光；當下的音只造成局部擾動，不直接決定形體大小。</li><li>越過臨界點觸發翻開並鎖定：翻開 2.8 秒、停留 6 秒、重組 3.5 秒後才重新蓄能，不會在門檻附近連續觸發。</li><li>翻開時的和聲在算出的臨界時刻發聲，音量受包絡與壓縮器限制，不突然變大。</li><li>暫停時能量不再變化。</li></ul></section>
+      <section><h3>聲音與技術</h3><p>three.js r180：MeshPhysicalMaterial 虹彩內側、即時懸線張力；原生 Web Audio 原創蓄能曲。</p><p class="small">聲音：原創程式作曲，作者 SOUND / 4，以 CC0 釋出；不使用外部錄音。詳見 <a href="MUSIC_CREDITS.md">MUSIC_CREDITS.md</a>。</p><p class="small">鍵盤：空白鍵播放／暫停，M 靜音。</p></section>
+    </div>
+  </article>
+</main>
+<footer class="pager">
+  <nav aria-label="作品間導覽"><a href="07-echo-labyrinth.html">← 07 回聲迷宮</a><a href="index.html">展覽目錄</a><a href="01-resonant-architecture.html">01 共振建築 →</a></nav>
+  <p>SOUND / 4 · 聲音的居所</p>
+</footer>
+<script type="module" src="assets/js/works/08-energy.js"></script>
+</body>
+</html>

@@ -21,6 +21,12 @@
 | [`p5-demos2/`](p5-demos2/p5-demo-list.html) | 規則之後 — p5.js 生成作品集（第二輯）：十件生長式作品＋八件幾何互動作品「平面的八種禮節」 | Claude |
 | [`magazine2/`](magazine2/index.html) | 間物 BETWEEN MATTER — 介紹 `shader-demos2` 與 `p5-demos2` 作品的雜誌頁 | 排版：Codex |
 
+## 聲音
+
+| 資料夾 | 內容 | 創作工具 |
+| --- | --- | --- |
+| [`sound4/`](sound4/) | 聲音的居所 SOUND / 4 — 八件聲音、空間與能量的生成藝術作品（Web Audio 原創作曲、three.js／GLSL／Canvas） | Claude |
+
 ## 觀看方式
 
 作品頁與雜誌頁都是獨立的 HTML，可直接以瀏覽器開啟（`file://`）。

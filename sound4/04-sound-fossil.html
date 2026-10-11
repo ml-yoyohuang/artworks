@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>04 聲音化石｜這首歌曾經存在 — SOUND / 4</title>
+<meta name="description" content="聲音化石《這首歌曾經存在》：最後一個音消失，生長停止，燈光轉成看標本的光。">
+<meta name="theme-color" content="#111213">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/sound4.css">
+<meta property="og:image" content="assets/previews/04-sound-fossil.jpg">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
+</head>
+<body class="work-page" data-work="04" style="--accent:#c7a26b">
+<a class="skip" href="#controls">跳到播放控制</a>
+<header class="topbar">
+  <a class="brand" href="index.html"><b>SOUND / 4</b><span>聲音的居所</span></a>
+  <nav class="worknav" aria-label="作品導覽"><a href="03-silence-cuts.html" rel="prev" aria-label="上一件：休止符">← 上一件</a><span aria-label="第 4 件，共 8 件">04 / 08</span><a href="05-phase-tides.html" rel="next" aria-label="下一件：相位潮汐">下一件 →</a></nav>
+</header>
+<main>
+  <section id="stage" class="stage dark" aria-label="作品展演場域">
+    <canvas id="art" tabindex="0" role="img" aria-label="一枚沿對數螺旋生長的石灰質標本，表面有節奏留下的細肋、長音留下的脊線與礦物沉積。"></canvas>
+    <img id="poster" class="poster" src="assets/previews/04-sound-fossil.jpg" alt="聲音化石實際運行時擷取的畫面" hidden>
+    <div class="title-block"><p class="no">04 · SOUND FOSSIL</p><h1>聲音化石</h1><p class="sub">《這首歌曾經存在》</p></div>
+    <p id="readout" class="readout"></p>
+    <div id="start-overlay" class="start-overlay"><button id="start" class="start">開始聆聽</button><p>按下後才會發出聲音・建議音量適中</p></div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </section>
+  <section id="controls" class="controls" aria-label="播放控制">
+    <div class="transport">
+      <button id="play" class="primary" aria-pressed="false">開始</button>
+      <button id="replay">重播</button>
+      <button id="mute" aria-pressed="false">靜音</button>
+      <label class="volume">音量 <input id="volume" type="range" min="0" max="100" value="60"></label>
+      <span id="time" class="time" aria-label="播放時間">00:00</span>
+    </div>
+    <div class="special" aria-label="作品操作"><button id="regen">重新生成</button><button id="export">匯出 PNG</button><span class="group-label">拖曳畫面可旋轉</span></div>
+  </section>
+  <article class="notes">
+    <div>
+      <p class="eyebrow">04 · SOUND FOSSIL</p>
+      <h2>聲音化石《這首歌曾經存在》</h2>
+      <p class="statement">聲音沿著一條對數螺旋沉積成殼。密集的節奏留下細碎的肋紋，長音拉出一條連續的脊線；休止在殼上刻下縫合線。後來的聲音會讀取已經存在的表面：重複的樂句沿著舊脊線再長一次，把它加厚、礦化成金屬色的脈。曲子結束時，留下的是這首歌的完整標本。</p>
+    </div>
+    <div class="cols">
+      <section><h3>代表時刻</h3><p class="moment">約 47 秒曲終：生長停止，燈光從工作燈轉為斜側的展示光，標本開始緩慢自轉。第 26 秒起主題重複，可看到舊脊線被加厚並出現金屬光澤。</p></section>
+      <section><h3>如何觀看</h3><ul><li>拖曳或用左右方向鍵旋轉標本，靠近看肋紋與脊線。</li><li>「重播」以同一個 seed 重新長出完全相同的標本；「重新生成」換 seed，得到另一枚。</li><li>曲終不會自動清空，也不會循環覆寫。</li></ul></section>
+      <section><h3>生成規則</h3><ul><li>材料狀態逐環累積，每一環讀取上一環的表面高度再沉積或刻蝕。</li><li>短音（節奏）→ 環向細肋與色層；長音 → 依音高落在固定角位的連續脊線；休止 → 縫合線與收縮。</li><li>重複樂句的沉積量依既有脊線的高度分配，沿舊痕跡再生長並礦化。</li><li>以 1/120 秒固定步長模擬整首樂譜，同一 seed 與設定得到逐位元相同的標本；播放時依實際音訊時間顯露。沒有跳轉功能，以確保時間與材料歷史一致。</li><li>幾何預算固定：最多 420 環 × 48 角位。</li></ul></section>
+      <section><h3>聲音與技術</h3><p>three.js r180：自訂頂點屬性控制礦化金屬度、程序化石灰岩凹凸；原生 Web Audio 木琴與擦弦原創曲。</p><p class="small">聲音：原創程式作曲，作者 SOUND / 4，以 CC0 釋出；不使用外部錄音。詳見 <a href="MUSIC_CREDITS.md">MUSIC_CREDITS.md</a>。</p><p class="small">鍵盤：空白鍵播放／暫停，M 靜音。</p></section>
+    </div>
+  </article>
+</main>
+<footer class="pager">
+  <nav aria-label="作品間導覽"><a href="03-silence-cuts.html">← 03 休止符</a><a href="index.html">展覽目錄</a><a href="05-phase-tides.html">05 相位潮汐 →</a></nav>
+  <p>SOUND / 4 · 聲音的居所</p>
+</footer>
+<script type="module" src="assets/js/works/04-fossil.js"></script>
+</body>
+</html>

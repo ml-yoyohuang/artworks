@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>01 共振建築｜空氣有自己的骨架 — SOUND / 4</title>
+<meta name="description" content="共振建築《空氣有自己的骨架》：每八秒換一個和弦，整座建築在三秒內慢慢挪成另一種空間。">
+<meta name="theme-color" content="#111213">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/sound4.css">
+<meta property="og:image" content="assets/previews/01-resonant-architecture.jpg">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
+</head>
+<body class="work-page" data-work="01" style="--accent:#7d93b5">
+<a class="skip" href="#controls">跳到播放控制</a>
+<header class="topbar">
+  <a class="brand" href="index.html"><b>SOUND / 4</b><span>聲音的居所</span></a>
+  <nav class="worknav" aria-label="作品導覽"><a href="08-stored-energy.html" rel="prev" aria-label="上一件：能量蓄積">← 上一件</a><span aria-label="第 1 件，共 8 件">01 / 08</span><a href="02-chord-loom.html" rel="next" aria-label="下一件：和弦織機">下一件 →</a></nav>
+</header>
+<main>
+  <section id="stage" class="stage light" aria-label="作品展演場域">
+    <canvas id="art" tabindex="0" role="img" aria-label="霧白空間中，由和弦決定位置的牆、拱門與懸浮隔板，隨音樂緩慢重組。"></canvas>
+    <img id="poster" class="poster" src="assets/previews/01-resonant-architecture.jpg" alt="共振建築實際運行時擷取的畫面" hidden>
+    <div class="title-block"><p class="no">01 · RESONANT ARCHITECTURE</p><h1>共振建築</h1><p class="sub">《空氣有自己的骨架》</p></div>
+    <p id="readout" class="readout"></p>
+    <div id="start-overlay" class="start-overlay"><button id="start" class="start">開始聆聽</button><p>按下後才會發出聲音・建議音量適中</p></div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </section>
+  <section id="controls" class="controls" aria-label="播放控制">
+    <div class="transport">
+      <button id="play" class="primary" aria-pressed="false">開始</button>
+      <button id="replay">重播</button>
+      <button id="mute" aria-pressed="false">靜音</button>
+      <label class="volume">音量 <input id="volume" type="range" min="0" max="100" value="60"></label>
+      <span id="time" class="time" aria-label="播放時間">00:00</span>
+    </div>
+    <div class="special" aria-label="作品操作"><span class="group-label" id="g-set">和弦組</span><div class="seg" role="group" aria-labelledby="g-set"><button data-set data-value="0" aria-pressed="true">中殿</button><button data-set data-value="1" aria-pressed="false">迴廊</button><button data-set data-value="2" aria-pressed="false">高塔</button></div><span class="group-label" id="g-mode">空間</span><div class="seg" role="group" aria-labelledby="g-mode"><button data-mode data-value="nave" aria-pressed="true">縱向廊道</button><button data-mode data-value="court" aria-pressed="false">環形中庭</button></div></div>
+  </section>
+  <article class="notes">
+    <div>
+      <p class="eyebrow">01 · RESONANT ARCHITECTURE</p>
+      <h2>共振建築《空氣有自己的骨架》</h2>
+      <p class="statement">在霧白的空間裡，牆、拱門與懸浮的隔板原本看不見。持續的聲音讓它們凝聚、站穩；和弦一換，空間不會重建，而是沿著聲部的移動被推開、折合、重新分隔。共同音留下的牆不動，級進的聲部讓牆滑過一小段距離——你看見的是和聲進行本身的平面圖。</p>
+    </div>
+    <div class="cols">
+      <section><h3>代表時刻</h3><p class="moment">開始後第 8 秒第一次換和弦：低音移動，最前方的長牆與它的陰影一起滑向新位置，拱門的跨度隨音程改變。之後每 8 秒一次；第 4 與第 8 個和弦會讓整座空間明顯轉向。</p></section>
+      <section><h3>如何觀看</h3><ul><li>等待長音出現：牆從地面升起、半透明的輪廓逐漸變實。</li><li>注意短促的鐘音：它們只留下細薄、晃動的懸掛片，很快散去。</li><li>拖曳畫面可稍微轉動視角；左右方向鍵也可以。</li></ul></section>
+      <section><h3>生成規則</h3><ul><li>四個聲部各自對應一道牆，音高決定牆在平面上的位置；音程寬度成為兩牆之間的通道與拱門跨度。</li><li>持續音讓構件的「穩定度」上升；只有短音時構件會變輕、搖晃並逐漸下沉。</li><li>和弦的緊張度（半音、三全音）讓牆體偏轉，形成收束或斜向的空間；七和弦加入夾層。</li><li>所有構件保持身分與連續性，以臨界阻尼彈簧移動到新位置，不會因單一瞬間音量而跳動。</li></ul></section>
+      <section><h3>聲音與技術</h3><p>three.js r180（WebGL）即時陰影與霧；原生 Web Audio 程式作曲。這是聲學啟發的造形系統，並未求解真實聲場，不是聲學模態模擬。</p><p class="small">聲音：原創程式作曲，作者 SOUND / 4，以 CC0 釋出；不使用外部錄音。詳見 <a href="MUSIC_CREDITS.md">MUSIC_CREDITS.md</a>。</p><p class="small">鍵盤：空白鍵播放／暫停，M 靜音。</p></section>
+    </div>
+  </article>
+</main>
+<footer class="pager">
+  <nav aria-label="作品間導覽"><a href="08-stored-energy.html">← 08 能量蓄積</a><a href="index.html">展覽目錄</a><a href="02-chord-loom.html">02 和弦織機 →</a></nav>
+  <p>SOUND / 4 · 聲音的居所</p>
+</footer>
+<script type="module" src="assets/js/works/01-architecture.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>03 休止符｜沉默把空間切開 — SOUND / 4</title>
+<meta name="description" content="休止符《沉默把空間切開》：一段有張力的聲音突然停下，表面安靜地打開。">
+<meta name="theme-color" content="#111213">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/sound4.css">
+<meta property="og:image" content="assets/previews/03-silence-cuts.jpg">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
+</head>
+<body class="work-page" data-work="03" style="--accent:#d0413a">
+<a class="skip" href="#controls">跳到播放控制</a>
+<header class="topbar">
+  <a class="brand" href="index.html"><b>SOUND / 4</b><span>聲音的居所</span></a>
+  <nav class="worknav" aria-label="作品導覽"><a href="02-chord-loom.html" rel="prev" aria-label="上一件：和弦織機">← 上一件</a><span aria-label="第 3 件，共 8 件">03 / 08</span><a href="04-sound-fossil.html" rel="next" aria-label="下一件：聲音化石">下一件 →</a></nav>
+</header>
+<main>
+  <section id="stage" class="stage dark" aria-label="作品展演場域">
+    <canvas id="art" tabindex="0" role="img" aria-label="墨黑的表面在聲音持續時繃緊；聲音停止時出現切口，露出白色紙芯與深處的紅。"></canvas>
+    <img id="poster" class="poster" src="assets/previews/03-silence-cuts.jpg" alt="休止符實際運行時擷取的畫面" hidden>
+    <div class="title-block"><p class="no">03 · SILENCE CUTS</p><h1>休止符</h1><p class="sub">《沉默把空間切開》</p></div>
+    <p id="readout" class="readout"></p>
+    <div id="start-overlay" class="start-overlay"><button id="start" class="start">開始聆聽</button><p>按下後才會發出聲音・建議音量適中</p></div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </section>
+  <section id="controls" class="controls" aria-label="播放控制">
+    <div class="transport">
+      <button id="play" class="primary" aria-pressed="false">開始</button>
+      <button id="replay">重播</button>
+      <button id="mute" aria-pressed="false">靜音</button>
+      <label class="volume">音量 <input id="volume" type="range" min="0" max="100" value="60"></label>
+      <span id="time" class="time" aria-label="播放時間">00:00</span>
+    </div>
+    <div class="special" aria-label="作品操作"><span class="group-label" id="g-space">留白</span><div class="seg" role="group" aria-labelledby="g-space"><button data-space data-value="0.6" aria-pressed="false">少</button><button data-space data-value="1" aria-pressed="true">中</button><button data-space data-value="1.6" aria-pressed="false">多</button></div><button id="mic" aria-pressed="false">用我的聲音</button></div>
+  </section>
+  <article class="notes">
+    <div>
+      <p class="eyebrow">03 · SILENCE CUTS</p>
+      <h2>休止符《沉默把空間切開》</h2>
+      <p class="statement">濃密的墨黑表面在聲音持續時一直繃著。只有聲音停下來，它才會被切開：短的停頓留下細線，長的沉默讓縫真正打開，露出紙的白色斷面與深處的一抹紅。切口的方向、長度與深度，由前一段聲音的力度、長度與音域決定——沉默記得它之前的聲音。</p>
+    </div>
+    <div class="cols">
+      <section><h3>代表時刻</h3><p class="moment">第 7 秒，一段強而密的弦樂突然停住 3.5 秒，表面打開第一道深縫；第 22 秒一段漸強後的 5 秒長休止，開出最大的切口。</p></section>
+      <section><h3>如何觀看</h3><ul><li>比較短休止（細線）與長休止（打開的縫）。</li><li>聲音恢復時，切口以固定速度收合，留下一道疤；很深的切口會保持微微張開。</li><li>暫停、靜音或聲音被瀏覽器擋下都不會切開表面——只有樂曲裡的休止會。</li></ul></section>
+      <section><h3>生成規則</h3><ul><li>樂譜中寫入不同長度的休止與不同力度的樂句。</li><li>每段聲音記錄平均力度、長度與音域，休止開始時決定切口方向、尺度與深度。</li><li>開口寬度隨休止已經持續的時間成長（不預先偷看休止長度）。</li><li>「用我的聲音」使用麥克風音量的開／關雙門檻、遲滯與最短持續時間判斷休止，避免背景雜訊快速開合；分析只在本機進行，不錄音、不上傳。</li><li>最多保留 9 道切口與疤痕，舊的逐漸癒合。</li></ul></section>
+      <section><h3>聲音與技術</h3><p>自寫 GLSL 片段著色器（WebGL）以距離場繪製切口厚度、陰影與內部；原生 Web Audio 原創弦樂質地。</p><p class="small">聲音：原創程式作曲，作者 SOUND / 4，以 CC0 釋出；不使用外部錄音。詳見 <a href="MUSIC_CREDITS.md">MUSIC_CREDITS.md</a>。</p><p class="small">鍵盤：空白鍵播放／暫停，M 靜音。</p></section>
+    </div>
+  </article>
+</main>
+<footer class="pager">
+  <nav aria-label="作品間導覽"><a href="02-chord-loom.html">← 02 和弦織機</a><a href="index.html">展覽目錄</a><a href="04-sound-fossil.html">04 聲音化石 →</a></nav>
+  <p>SOUND / 4 · 聲音的居所</p>
+</footer>
+<script type="module" src="assets/js/works/03-cuts.js"></script>
+</body>
+</html>

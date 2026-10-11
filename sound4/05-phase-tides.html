@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>05 相位潮汐｜兩個幾乎同步的世界 — SOUND / 4</title>
+<meta name="description" content="相位潮汐《兩個幾乎同步的世界》：兩層幾乎同步的節奏慢慢錯開，再安靜地重新聚合。">
+<meta name="theme-color" content="#111213">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/sound4.css">
+<meta property="og:image" content="assets/previews/05-phase-tides.jpg">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three/three.module.min.js"}}</script>
+</head>
+<body class="work-page" data-work="05" style="--accent:#5d7fd0">
+<a class="skip" href="#controls">跳到播放控制</a>
+<header class="topbar">
+  <a class="brand" href="index.html"><b>SOUND / 4</b><span>聲音的居所</span></a>
+  <nav class="worknav" aria-label="作品導覽"><a href="04-sound-fossil.html" rel="prev" aria-label="上一件：聲音化石">← 上一件</a><span aria-label="第 5 件，共 8 件">05 / 08</span><a href="06-breath-portrait.html" rel="next" aria-label="下一件：呼吸雕塑">下一件 →</a></nav>
+</header>
+<main>
+  <section id="stage" class="stage dark" aria-label="作品展演場域">
+    <canvas id="art" tabindex="0" role="img" aria-label="鈷藍與朱紅兩層波場以略不同的速度互相穿過，形成緩慢移動的巨大色帶。"></canvas>
+    <img id="poster" class="poster" src="assets/previews/05-phase-tides.jpg" alt="相位潮汐實際運行時擷取的畫面" hidden>
+    <div class="title-block"><p class="no">05 · PHASE TIDES</p><h1>相位潮汐</h1><p class="sub">《兩個幾乎同步的世界》</p></div>
+    <p id="readout" class="readout"></p>
+    <div id="start-overlay" class="start-overlay"><button id="start" class="start">開始聆聽</button><p>按下後才會發出聲音・建議音量適中</p></div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </section>
+  <section id="controls" class="controls" aria-label="播放控制">
+    <div class="transport">
+      <button id="play" class="primary" aria-pressed="false">開始</button>
+      <button id="replay">重播</button>
+      <button id="mute" aria-pressed="false">靜音</button>
+      <label class="volume">音量 <input id="volume" type="range" min="0" max="100" value="60"></label>
+      <span id="time" class="time" aria-label="播放時間">00:00</span>
+    </div>
+    <div class="special" aria-label="作品操作"><span class="group-label" id="g-speed">速度差</span><div class="seg" role="group" aria-labelledby="g-speed"><button data-cycle data-value="150" aria-pressed="false">慢</button><button data-cycle data-value="90" aria-pressed="true">中</button><button data-cycle data-value="45" aria-pressed="false">快</button></div><div class="seg" role="group" aria-label="相位方向"><button data-dir data-value="1" aria-pressed="true">靠近</button><button data-dir data-value="-1" aria-pressed="false">離開</button></div></div>
+  </section>
+  <article class="notes">
+    <div>
+      <p class="eyebrow">05 · PHASE TIDES</p>
+      <h2>相位潮汐《兩個幾乎同步的世界》</h2>
+      <p class="statement">兩組節奏用幾乎相同的速度演奏同一個音型：鈷藍的木琴每 6 秒一輪，朱紅的玻璃鐘稍快一點。每一個音都在各自的波場推出一道浪；兩層之間的相位差慢慢累積，在畫面上變成巨大的色帶——起初幾乎重合，逐漸錯開成兩個不同的世界，然後再一次明亮而安靜地聚合。</p>
+    </div>
+    <div class="cols">
+      <section><h3>代表時刻</h3><p class="moment">約第 14 秒第一次聚合：兩層的浪前緣重疊，交會處出現少量的亮色。約第 59 秒到達最大分離——兩層錯開成互補的構圖——第 104 秒再次聚合（預設速度差）。</p></section>
+      <section><h3>如何觀看</h3><ul><li>聽：兩層節奏的錯位就是畫面上色帶的位置。</li><li>「速度差」改變整個潮汐的週期（150／90／45 秒）；改變時兩層相位保持連續。</li><li>「靠近／離開」改變朱紅層追趕的方向。</li></ul></section>
+      <section><h3>生成規則</h3><ul><li>兩組節奏都由同一個 AudioContext 時鐘推導相位，沒有兩個會漂移的計時器。</li><li>畫面的波場相位就是聲音的相位：每個音在自己的波場推出一道浪。</li><li>相位差 Δ 決定大尺度的干涉帶位置與兩層浪前緣的夾角；Δ=0 時兩層對齊，Δ=π 時完全互補。</li><li>暫停只凍結音訊時鐘，恢復後相位關係不變。</li></ul></section>
+      <section><h3>聲音與技術</h3><p>自寫 GLSL 片段著色器（WebGL）；兩組原創音型（Steve Reich 式相位手法），原生 Web Audio。</p><p class="small">聲音：原創程式作曲，作者 SOUND / 4，以 CC0 釋出；不使用外部錄音。詳見 <a href="MUSIC_CREDITS.md">MUSIC_CREDITS.md</a>。</p><p class="small">鍵盤：空白鍵播放／暫停，M 靜音。</p></section>
+    </div>
+  </article>
+</main>
+<footer class="pager">
+  <nav aria-label="作品間導覽"><a href="04-sound-fossil.html">← 04 聲音化石</a><a href="index.html">展覽目錄</a><a href="06-breath-portrait.html">06 呼吸雕塑 →</a></nav>
+  <p>SOUND / 4 · 聲音的居所</p>
+</footer>
+<script type="module" src="assets/js/works/05-tides.js"></script>
+</body>
+</html>
