@@ -25,7 +25,12 @@
 
 | 資料夾 | 內容 | 創作工具 |
 | --- | --- | --- |
-| [`sound4/`](sound4/) | 聲音的居所 SOUND / 4 — 八件聲音、空間與能量的生成藝術作品（Web Audio 原創作曲、three.js／GLSL／Canvas） | Claude |
+| [`rhythm/vol1/`](rhythm/vol1/) | 小小聲音遊樂場 — 十六件聲音、波形與節奏作品 | Codex |
+| [`rhythm/vol2/`](rhythm/vol2/) | 接得剛剛好 Caught on the Beat — 十件節奏與波形作品 | Codex |
+| [`sound/test1/`](sound/test1/) | 聲音成為物質 — 八件聲音、空間與能量作品（Canvas） | Codex |
+| [`sound/test2/`](sound/test2/) | 聲音的居所 SOUND / 4 — 八件聲音、空間與能量的生成藝術作品（Web Audio 原創作曲、three.js／GLSL／Canvas） | Claude |
+
+四組作品已搬至上列新路徑；詳細對照與驗證見 [路徑遷移紀錄](PATH_MIGRATION.md)。
 
 ## 觀看方式
 

@@ -4,7 +4,7 @@
 
 ## 範圍與結論
 
-使用者所稱 `/sound1` 在這份 repository 中實際為 `/sound/`。正式展覽共 42 件：sound 16 件、sound2 10 件、sound3 8 件、sound4 8 件。sound3 與 sound4 有八組相同主題，但模型、畫法與部分互動不同，應保留為 16 個獨立視覺預設。sound 的 jelly-face-lab 與 reusable 試聽頁不是正式目錄作品，未列入這 42 件；若也要納入，可以另外增加實驗預設。
+第一組作品現位於 `/rhythm/vol1/`，其餘三組依序位於 `/rhythm/vol2/`、`/sound/test1/`、`/sound/test2/`。正式展覽共 42 件：sound 16 件、sound2 10 件、sound3 8 件、sound4 8 件。sound3 與 sound4 有八組相同主題，但模型、畫法與部分互動不同，應保留為 16 個獨立視覺預設。sound 的 jelly-face-lab 與 reusable 試聽頁不是正式目錄作品，未列入這 42 件；若也要納入，可以另外增加實驗預設。
 
 全部作品都可改造成會回應 MP3 的視覺。建議做成「一個持續播放的音樂播放器＋42 個可切換預設」，保留各作品的配色、材質、構圖與動作語言。不必全部換成 WebGL，不必先辨認出完整樂譜，也不必依賴伺服器。
 
@@ -198,8 +198,8 @@ visualizer/
 
 ## 原始碼依據
 
-- [sound 目錄](sound/index.html)、[sound runtime](sound/tools/runtime.js)、[scene 來源](sound/tools/scenes/)
-- [sound2 核心](sound2/assets/js/core.js)、[sound2 作品來源](sound2/assets/js/works/)
-- [sound3 核心](sound3/assets/js/core.js)、[sound3 模型](sound3/assets/js/model.js)、[sound3 繪圖](sound3/assets/js/works.js)
-- [sound4 外殼](sound4/assets/js/core/shell.js)、[sound4 麥克風分析](sound4/assets/js/core/mic.js)、[化石模型](sound4/assets/js/models/fossil.js)、[雕塑生長](sound4/assets/js/models/breath.js)、[相位時鐘](sound4/assets/js/models/tides.js)
+- [sound 目錄](rhythm/vol1/index.html)、[sound runtime](rhythm/vol1/tools/runtime.js)、[scene 來源](rhythm/vol1/tools/scenes/)
+- [sound2 核心](rhythm/vol2/assets/js/core.js)、[sound2 作品來源](rhythm/vol2/assets/js/works/)
+- [sound3 核心](sound/test1/assets/js/core.js)、[sound3 模型](sound/test1/assets/js/model.js)、[sound3 繪圖](sound/test1/assets/js/works.js)
+- [sound4 外殼](sound/test2/assets/js/core/shell.js)、[sound4 麥克風分析](sound/test2/assets/js/core/mic.js)、[化石模型](sound/test2/assets/js/models/fossil.js)、[雕塑生長](sound/test2/assets/js/models/breath.js)、[相位時鐘](sound/test2/assets/js/models/tides.js)
 - 瀏覽器音訊架構參考：[W3C Web Audio](https://www.w3.org/TR/webaudio/)。使用既有穩定核心 API，實際瀏覽器支持仍須驗收。

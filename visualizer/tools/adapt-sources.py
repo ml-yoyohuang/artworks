@@ -54,11 +54,11 @@ import json,shutil
 registry=BASE/'presets/registry.js';data=json.loads(registry.read_text().split(' = ',1)[1].rstrip(';\n'))
 for entry in data:
     series=entry['series'];slug=entry['id'].split('-',1)[1]
-    if series==1:src=BASE.parent/f'sound/thumbs/{slug}.webp'
-    elif series==2:src=BASE.parent/f'sound2/assets/previews/{slug}.webp'
+    if series==1:src=BASE.parent/f'rhythm/vol1/thumbs/{slug}.webp'
+    elif series==2:src=BASE.parent/f'rhythm/vol2/assets/previews/{slug}.webp'
     else:
         names=['resonant-architecture','chord-loom','silence-cuts','sound-fossil','phase-tides','breath-portrait','echo-labyrinth','stored-energy']
-        src=BASE.parent/f'sound{series}/assets/previews/{entry["index"]+1:02d}-{names[entry["index"]]}.{ "webp" if series==3 else "jpg"}'
+        src=BASE.parent/f'sound/test{series-2}/assets/previews/{entry["index"]+1:02d}-{names[entry["index"]]}.{ "webp" if series==3 else "jpg"}'
     if not src.exists():
         matches=list(src.parent.glob(src.stem+'.*'));src=matches[0] if matches else None
     if src:

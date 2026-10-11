@@ -1,6 +1,6 @@
 # 聲音放映室 · Music in Motion
 
-四组原作共 42 個 MP3 視覺預設的第一個可播放版本。新增內容全部位於 `visualizer/`；`sound/`、`sound2/`、`sound3/`、`sound4/` 與 `_incoming-assets/` 不需修改。
+四组原作共 42 個 MP3 視覺預設的第一個可播放版本。新增內容全部位於 `visualizer/`；`rhythm/vol1/`、`rhythm/vol2/`、`sound/test1/`、`sound/test2/` 與 `_incoming-assets/` 不需修改。
 
 ## 本機執行
 
