@@ -7,9 +7,28 @@
 <meta name="theme-color" content="#f4f1e9">
 <link rel="icon" href="assets/test2/favicon.svg" type="image/svg+xml">
 
-<meta property="og:image" content="assets/test2/previews/02-chord-loom.jpg">
+
 <script type="importmap">{"imports":{"three":"./assets/test2/vendor/three/three.module.min.js"}}</script>
-<link rel="stylesheet" href="assets/css/volume.css"><link rel="stylesheet" href="assets/css/work.css"></head>
+<link rel="stylesheet" href="assets/css/volume.css"><link rel="stylesheet" href="assets/css/work.css">
+<link rel="canonical" href="https://ml-yoyohuang.github.io/artworks/sound/vol1/02-chord-loom.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="SOUND / VOL. 1 聲音選集">
+<meta property="og:title" content="和弦織機｜SOUND / VOL. 1">
+<meta property="og:description" content="低音成為經線，旋律成為纖維。熟悉的樂句回來時，布面上的紋樣也跟著回來。">
+<meta property="og:url" content="https://ml-yoyohuang.github.io/artworks/sound/vol1/02-chord-loom.html">
+<meta property="og:image" content="https://ml-yoyohuang.github.io/artworks/sound/vol1/assets/og/02.jpg">
+<meta property="og:image:secure_url" content="https://ml-yoyohuang.github.io/artworks/sound/vol1/assets/og/02.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="和弦織機 — 一首歌，被織成一匹布">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="和弦織機｜SOUND / VOL. 1">
+<meta name="twitter:description" content="低音成為經線，旋律成為纖維。熟悉的樂句回來時，布面上的紋樣也跟著回來。">
+<meta name="twitter:image" content="https://ml-yoyohuang.github.io/artworks/sound/vol1/assets/og/02.jpg">
+<meta name="twitter:image:alt" content="和弦織機 — 一首歌，被織成一匹布">
+</head>
 <body class="volume-work" data-work="02">
 <a class="skip-link" href="#controls">跳到播放控制</a>
 <header class="masthead"><a class="brand" href="index.html">SOUND / VOL. 1 <span>聲音選集</span></a><nav aria-label="作品導覽"><a href="index.html">作品目錄</a><a href="03-silence-cuts.html">下一件 →</a></nav></header>
@@ -19,7 +38,7 @@
   <section id="stage" class="stage dark" aria-label="作品展演場域">
     <canvas id="art" tabindex="0" role="img" aria-label="布面由下往上持續織出：低音是粗經線，旋律是細緯線，打擊是結點。"></canvas>
     <img id="poster" class="poster" src="assets/test2/previews/02-chord-loom.jpg" alt="和弦織機實際運行時擷取的畫面" hidden>
-    
+
     <p id="readout" class="readout"></p>
     <div id="start-overlay" class="start-overlay"><button id="start" class="start">開始聆聽</button><p>按下後才會發出聲音・建議音量適中</p></div>
     <p id="status" class="status" role="status" aria-live="polite"></p>
@@ -32,8 +51,8 @@
       <span id="time" class="time" aria-label="播放時間">00:00</span>
     <button id="export">匯出 PNG</button></div></section>
     <div class="creation-controls"><div class="special" aria-label="作品操作"><span class="group-label" id="g-weave">織法</span><div class="seg" role="group" aria-labelledby="g-weave"><button data-weave data-value="0" aria-pressed="false">平織</button><button data-weave data-value="1" aria-pressed="true">斜紋</button><button data-weave data-value="2" aria-pressed="false">緞紋</button></div><span class="group-label" id="g-voice">聲部</span><div class="seg" role="group" aria-labelledby="g-voice"><button class="voice-toggle" data-voice="bass" aria-pressed="true">低音</button><button class="voice-toggle" data-voice="melody" aria-pressed="true">旋律</button><button class="voice-toggle" data-voice="drums" aria-pressed="true">打擊</button></div></div></div>
-    
-    
+
+
   </section>
   <section class="work-notes" aria-label="作品說明"><div class="work-essay"><p class="section-label" lang="en">ABOUT THIS MOVEMENT</p><h2>一首歌，被織成一匹布</h2><p class="statement">低音、旋律與打擊樂是三種不同的線。音樂往前走，布就在織口一列一列長出來：低音是粗而深的經線，旋律是帶顏色的細緯，打擊樂打成短促的結。重複的樂句在同一條規則下織出同一塊紋樣；變奏讓紋樣錯位；聲部退場，布就變得鬆、薄、透光。</p></div><div class="work-guides"><details class="how-to-play"><summary>玩法與觀看<span lang="en">HOW TO PLAY</span></summary><div class="play-guide"><ul><li>看織口（亮線）附近：每一列就是一個八分音符。</li><li>關掉一個聲部，聽見它消失，也看見它的線不再進入布面。</li><li>換織法會改變經緯上下穿越的規律，已織好的布保留原樣。暫停時可以慢慢看布，或匯出整匹布的 PNG。</li></ul></div></details><details class="technical-notes"><summary>生成與聲音 <span lang="en">SOUND &amp; MATERIAL</span></summary><div class="technical-content"><section><h3>代表時刻</h3><p class="moment">第 10 秒左右，第一個樂句原樣重複，你會在織口看見剛剛那塊紋樣再次出現；第 21 秒變奏把紋樣往右推偏，第 31 秒旋律退場留下一段透光的薄紗。</p></section><section><h3>生成規則</h3><ul><li>樂譜直接記錄三個聲部何時發聲；不使用混音分析或 FFT 推測聲部。</li><li>低音音高決定粗經線落在哪一個區帶，持續期間每列交替上下穿越緯線。</li><li>旋律音高決定緯線顏色與提綜位移，形成斜紋走向；同一音型產生同一紋樣。</li><li>打擊：低鼓打出大結、軍鼓是一段亮色短緯、沙鈴是細小的結點。</li><li>布面最多保留 360 列歷史；畫面以快取影像捲動，長時間播放不會增加幾何量。</li></ul></section><section><h3>聲音與技術</h3><p>Canvas 2D 逐列繪製圓柱光影與纖維；原生 Web Audio 三聲部原創曲（92 BPM，16 小節循環）。</p><p class="small">聲音：原創程式作曲，作者 SOUND / 4，以 CC0 釋出；不使用外部錄音。詳見 <a href="MUSIC_CREDITS-test2.md">MUSIC_CREDITS.md</a>。</p><p class="small">鍵盤：空白鍵播放／暫停，M 靜音。</p></section></div></details><p class="credit-links"><a href="MUSIC_CREDITS-test2.md">音源與授權</a></p></div></section>
 </main>

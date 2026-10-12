@@ -7,6 +7,7 @@ import shutil
 from hybrid import build_hybrid, hybrid_page
 from magazine import magazine
 from work_pages import unify_page
+from social import cards, add_social
 
 OUT = Path(__file__).resolve().parent
 SOUND = OUT.parent
@@ -25,6 +26,7 @@ def build():
     if source_hashes() != baseline:
         raise SystemExit('來源檔案與建立紀錄時不同；請先確認來源變動。未執行生成。')
     works = json.loads((OUT / 'selections.json').read_text())['works']
+    social_cards = cards(works)
     expected = [
         '01-resonant-architecture.html', '02-chord-loom.html',
         '03-silence-cuts.html', '04-sound-fossil.html', '05-phase-tides.html',
@@ -71,10 +73,11 @@ def build():
         else:
             content = document(f'{title} · 待選',
                                f'<h1>{w["id"]} {title}</h1><p>尚未指定收錄版本。</p><p><a href="index.html">返回選集目錄</a></p>')
-        (OUT / page).write_text(content)
+        (OUT / page).write_text(add_social(content, social_cards[position+1]))
         records.append(f'| {w["id"]} {w["title"]} | {label} |')
     count = sum(bool(w['source']) for w in works)
-    (OUT / 'index.html').write_text(magazine(works))
+    (OUT / 'index.html').write_text(add_social(magazine(works), social_cards[0]))
+    (OUT / 'og-data.json').write_text(json.dumps(social_cards,ensure_ascii=False,indent=2)+'\n')
     (OUT / 'SELECTIONS.md').write_text('\n'.join(records) + '\n')
     if source_hashes() != baseline:
         raise SystemExit('來源完整性檢查失敗。')

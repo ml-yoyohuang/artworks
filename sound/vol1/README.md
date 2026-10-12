@@ -30,6 +30,12 @@ python3 -m http.server 8766 --bind 127.0.0.1
 
 瀏覽 `http://127.0.0.1:8766/sound/vol1/`。目錄中的比較連結會開啟原作；正式收錄作品本身使用本輯內的複製素材。
 
+正式網址：`https://ml-yoyohuang.github.io/artworks/sound/vol1/`。首頁與八件作品皆附獨立的 1200 × 630 JPEG 分享圖片，位於 `assets/og/`；Open Graph、Twitter 大圖與 canonical 使用正式網站絕對網址，由 `social.py` 隨生成器更新。啟動本機 HTTP 並執行生成器後，可重新製作分享圖片：
+
+```sh
+PLAYWRIGHT_MODULE=/absolute/path/to/playwright node sound/vol1/generate-og.cjs
+```
+
 ## 驗證
 
 已在 Chromium 驗證八件作品的載入、播放與資源路徑。混合版另檢查實際第 8 秒的和弦變換、暫停、重播、指定和弦、手動／自動切換、古典選曲、靜音與手機版面。64 秒循環以固定步長模型驗證；不是實際等待完整 64 秒的播放驗證。

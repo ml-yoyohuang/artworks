@@ -7,9 +7,28 @@
 <meta name="theme-color" content="#f4f1e9">
 <link rel="icon" href="assets/test2/favicon.svg" type="image/svg+xml">
 
-<meta property="og:image" content="assets/test2/previews/05-phase-tides.jpg">
+
 <script type="importmap">{"imports":{"three":"./assets/test2/vendor/three/three.module.min.js"}}</script>
-<link rel="stylesheet" href="assets/css/volume.css"><link rel="stylesheet" href="assets/css/work.css"></head>
+<link rel="stylesheet" href="assets/css/volume.css"><link rel="stylesheet" href="assets/css/work.css">
+<link rel="canonical" href="https://ml-yoyohuang.github.io/artworks/sound/vol1/05-phase-tides.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="SOUND / VOL. 1 聲音選集">
+<meta property="og:title" content="相位潮汐｜SOUND / VOL. 1">
+<meta property="og:description" content="微小的速度差，逐漸成為一整片潮汐。兩層節奏慢慢錯開，再安靜地重新聚合。">
+<meta property="og:url" content="https://ml-yoyohuang.github.io/artworks/sound/vol1/05-phase-tides.html">
+<meta property="og:image" content="https://ml-yoyohuang.github.io/artworks/sound/vol1/assets/og/05.jpg">
+<meta property="og:image:secure_url" content="https://ml-yoyohuang.github.io/artworks/sound/vol1/assets/og/05.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="相位潮汐 — 兩個幾乎同步的世界">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="相位潮汐｜SOUND / VOL. 1">
+<meta name="twitter:description" content="微小的速度差，逐漸成為一整片潮汐。兩層節奏慢慢錯開，再安靜地重新聚合。">
+<meta name="twitter:image" content="https://ml-yoyohuang.github.io/artworks/sound/vol1/assets/og/05.jpg">
+<meta name="twitter:image:alt" content="相位潮汐 — 兩個幾乎同步的世界">
+</head>
 <body class="volume-work" data-work="05">
 <a class="skip-link" href="#controls">跳到播放控制</a>
 <header class="masthead"><a class="brand" href="index.html">SOUND / VOL. 1 <span>聲音選集</span></a><nav aria-label="作品導覽"><a href="index.html">作品目錄</a><a href="06-breath-portrait.html">下一件 →</a></nav></header>
@@ -19,7 +38,7 @@
   <section id="stage" class="stage dark" aria-label="作品展演場域">
     <canvas id="art" tabindex="0" role="img" aria-label="鈷藍與朱紅兩層波場以略不同的速度互相穿過，形成緩慢移動的巨大色帶。"></canvas>
     <img id="poster" class="poster" src="assets/test2/previews/05-phase-tides.jpg" alt="相位潮汐實際運行時擷取的畫面" hidden>
-    
+
     <p id="readout" class="readout"></p>
     <div id="start-overlay" class="start-overlay"><button id="start" class="start">開始聆聽</button><p>按下後才會發出聲音・建議音量適中</p></div>
     <p id="status" class="status" role="status" aria-live="polite"></p>
@@ -32,8 +51,8 @@
       <span id="time" class="time" aria-label="播放時間">00:00</span>
     </div></section>
     <div class="creation-controls"><div class="special" aria-label="作品操作"><span class="group-label" id="g-speed">速度差</span><div class="seg" role="group" aria-labelledby="g-speed"><button data-cycle data-value="150" aria-pressed="false">慢</button><button data-cycle data-value="90" aria-pressed="true">中</button><button data-cycle data-value="45" aria-pressed="false">快</button></div><div class="seg" role="group" aria-label="相位方向"><button data-dir data-value="1" aria-pressed="true">靠近</button><button data-dir data-value="-1" aria-pressed="false">離開</button></div></div></div>
-    
-    
+
+
   </section>
   <section class="work-notes" aria-label="作品說明"><div class="work-essay"><p class="section-label" lang="en">ABOUT THIS MOVEMENT</p><h2>兩個幾乎同步的世界</h2><p class="statement">兩組節奏用幾乎相同的速度演奏同一個音型：鈷藍的木琴每 6 秒一輪，朱紅的玻璃鐘稍快一點。每一個音都在各自的波場推出一道浪；兩層之間的相位差慢慢累積，在畫面上變成巨大的色帶——起初幾乎重合，逐漸錯開成兩個不同的世界，然後再一次明亮而安靜地聚合。</p></div><div class="work-guides"><details class="how-to-play"><summary>玩法與觀看<span lang="en">HOW TO PLAY</span></summary><div class="play-guide"><ul><li>聽：兩層節奏的錯位就是畫面上色帶的位置。</li><li>「速度差」改變整個潮汐的週期（150／90／45 秒）；改變時兩層相位保持連續。</li><li>「靠近／離開」改變朱紅層追趕的方向。</li></ul></div></details><details class="technical-notes"><summary>生成與聲音 <span lang="en">SOUND &amp; MATERIAL</span></summary><div class="technical-content"><section><h3>代表時刻</h3><p class="moment">約第 14 秒第一次聚合：兩層的浪前緣重疊，交會處出現少量的亮色。約第 59 秒到達最大分離——兩層錯開成互補的構圖——第 104 秒再次聚合（預設速度差）。</p></section><section><h3>生成規則</h3><ul><li>兩組節奏都由同一個 AudioContext 時鐘推導相位，沒有兩個會漂移的計時器。</li><li>畫面的波場相位就是聲音的相位：每個音在自己的波場推出一道浪。</li><li>相位差 Δ 決定大尺度的干涉帶位置與兩層浪前緣的夾角；Δ=0 時兩層對齊，Δ=π 時完全互補。</li><li>暫停只凍結音訊時鐘，恢復後相位關係不變。</li></ul></section><section><h3>聲音與技術</h3><p>自寫 GLSL 片段著色器（WebGL）；兩組原創音型（Steve Reich 式相位手法），原生 Web Audio。</p><p class="small">聲音：原創程式作曲，作者 SOUND / 4，以 CC0 釋出；不使用外部錄音。詳見 <a href="MUSIC_CREDITS-test2.md">MUSIC_CREDITS.md</a>。</p><p class="small">鍵盤：空白鍵播放／暫停，M 靜音。</p></section></div></details><p class="credit-links"><a href="MUSIC_CREDITS-test2.md">音源與授權</a></p></div></section>
 </main>

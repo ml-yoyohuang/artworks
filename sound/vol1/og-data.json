@@ -1,0 +1,83 @@
+[
+  {
+    "id": "index",
+    "page": "index.html",
+    "title": "聲音成為物質",
+    "subtitle": "聽見之後，留下什麼？",
+    "en": "AN EXHIBITION IN EIGHT MOVEMENTS",
+    "description": "八個房間，八種時間。讓聲音形成建築、纖維、切口與記憶的生成藝術選集。",
+    "preview": "assets/hybrid1/previews/01-resonant-architecture.webp"
+  },
+  {
+    "id": "01",
+    "page": "01-resonant-architecture.html",
+    "title": "共振建築",
+    "subtitle": "空氣有自己的骨架",
+    "en": "RESONANT ARCHITECTURE",
+    "description": "長音使薄壁凝聚，和弦改寫通道。走進一座由耳朵看見的建築。",
+    "preview": "assets/hybrid1/previews/01-resonant-architecture.webp"
+  },
+  {
+    "id": "02",
+    "page": "02-chord-loom.html",
+    "title": "和弦織機",
+    "subtitle": "一首歌，被織成一匹布",
+    "en": "CHORD LOOM",
+    "description": "低音成為經線，旋律成為纖維。熟悉的樂句回來時，布面上的紋樣也跟著回來。",
+    "preview": "assets/test2/previews/02-chord-loom.jpg"
+  },
+  {
+    "id": "03",
+    "page": "03-silence-cuts.html",
+    "title": "休止符",
+    "subtitle": "沉默把空間切開",
+    "en": "SILENCE CUTS",
+    "description": "聲音繃緊紙面，劃開細縫；停下之後，沉默慢慢打開藏在深處的暖色。",
+    "preview": "assets/test1/previews/03-silence-cuts.webp"
+  },
+  {
+    "id": "04",
+    "page": "04-sound-fossil.html",
+    "title": "聲音化石",
+    "subtitle": "這首歌曾經存在",
+    "en": "SOUND FOSSIL",
+    "description": "一段旋律沉積成可被端詳的物件。最後一個音消失，生長停止，材料仍然記得。",
+    "preview": "assets/test2/previews/04-sound-fossil.jpg"
+  },
+  {
+    "id": "05",
+    "page": "05-phase-tides.html",
+    "title": "相位潮汐",
+    "subtitle": "兩個幾乎同步的世界",
+    "en": "PHASE TIDES",
+    "description": "微小的速度差，逐漸成為一整片潮汐。兩層節奏慢慢錯開，再安靜地重新聚合。",
+    "preview": "assets/test2/previews/05-phase-tides.jpg"
+  },
+  {
+    "id": "06",
+    "page": "06-breath-portrait.html",
+    "title": "呼吸雕塑",
+    "subtitle": "一口氣的肖像",
+    "en": "BREATH PORTRAIT",
+    "description": "聲音開始，物件長出；聲音停下，留下氣息的輪廓。每一次停頓，都有自己的形狀。",
+    "preview": "assets/test1/previews/06-breath-portrait.webp"
+  },
+  {
+    "id": "07",
+    "page": "07-echo-labyrinth.html",
+    "title": "回聲迷宮",
+    "subtitle": "房間是聲音走過的路",
+    "en": "ECHO LABYRINTH",
+    "description": "每次回聲揭露一道牆。新出現的轉角，又讓下一個聲音走進原本看不見的通道。",
+    "preview": "assets/test2/previews/07-echo-labyrinth.jpg"
+  },
+  {
+    "id": "08",
+    "page": "08-stored-energy.html",
+    "title": "能量蓄積",
+    "subtitle": "尚未發生的爆發",
+    "en": "STORED ENERGY",
+    "description": "細線繃緊，力量留下。越過臨界的那一個音，讓藏起來的顏色終於翻開。",
+    "preview": "assets/test2/previews/08-stored-energy.jpg"
+  }
+]
