@@ -53,3 +53,7 @@
 ## 主題擇一收錄驗收（2026-10-12）
 
 按 `presets/selections.json` 保留八版，總預設 34 個，主題收藏恰為八個。Chromium 逐一播放 34 件，八個淘汰版舊連結及 API 選擇轉到保留版；直接載入淘汰 ID 被拒絕。前後循環、30 秒自動輪播、手機清單與無 WebGL 替代都只使用保留清單。結果見 `_qa/selection-check.json`。本次獨立工作目錄修改只在 visualizer；原始 test1/test2 的 298 個檔案以本輪開始的指紋再比對，結果見 `_qa/selection-originals.json`。
+
+## 拍點開花與迷宮前進（2026-10-12）
+
+beat gate 測試確認蓄滿後不在非拍點釋放，三拍與四拍的单拍输入均在下一拍啟動。100 個迷宮 seed 的路線通過合法相鄰通道與不重複格子檢查。Chromium 實際 MP3 播放確認兩件可運作；45 秒特徵模擬每次釋放均由拍點觸發，90 秒迷宮模擬會到達終點並進入下一座，沒有同座路線回訪。暫停與重設通過。結果見 `_qa/beat-route.json`、`_qa/energy-echo-browser.json`，可用 `tools/beat-route.mjs` 與 `tools/energy-echo.cjs` 重跑。只修改 visualizer 副本，test1/test2 無差異。

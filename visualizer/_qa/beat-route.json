@@ -1,0 +1,15 @@
+{
+  "releaseTimes": [
+    {
+      "meter": 3,
+      "time": 0.5
+    },
+    {
+      "meter": 4,
+      "time": 0.5
+    }
+  ],
+  "mazes": 100,
+  "legalPaths": true,
+  "noRevisits": true
+}

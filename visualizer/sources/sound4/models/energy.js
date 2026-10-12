@@ -9,21 +9,29 @@ export const STEP = 1 / 120, EMAX = 1.6;
 export const EIGHTH = 60 / 84 / 2;
 
 export class EnergyModel {
-  constructor(mode = 'balanced') {
+  constructor(mode = 'balanced', {beatGated = false} = {}) {
+    this.beatGated = beatGated; this.ready = false; this.lastReleaseBeat = null;
     this.mode = mode; this.E = 0; this.phase = 'charging'; this.phaseStart = 0; this.chargeStart = 0;
     this.t = 0; this.releases = 0; this.samples = []; this.lastSample = -1;
   }
   get p() { return MODES[this.mode]; }
   locked() { return this.phase !== 'charging'; }
   // 注入：鎖定期間無效
-  inject(v) { if (this.locked()) return 0; const d = v * this.p.inject; this.E = Math.min(EMAX, this.E + d); return d; }
+  inject(v) { if (this.locked()) return 0; const d = v * this.p.inject; this.E = Math.min(EMAX, this.E + d); if(this.beatGated&&this.E>=this.p.threshold)this.ready=true; return d; }
+  releaseOnBeat(t) {
+    if(!this.beatGated||!this.ready||this.locked())return false;
+    this.phase='release';this.phaseStart=t;this.lastReleaseBeat=t;this.ready=false;this.releases++;
+    this.samples.push({t,E:this.E,phase:this.phase,pt:0,n:this.releases});
+    if(this.samples.length>900)this.samples.shift();
+    return true;
+  }
   // 推進到時間 t；跨越臨界時回呼 onRelease(tc)
   advance(t, onRelease) {
     while (this.t + STEP <= t + 1e-9) {
       this.t += STEP;
-      const leak = this.locked() ? 0.9 : this.p.leak;
+      const leak = this.locked() ? 0.9 : this.ready ? 0 : this.p.leak;
       this.E = Math.max(0, this.E - leak * this.E * STEP);
-      if (this.phase === 'charging' && this.E >= this.p.threshold) {
+      if (!this.beatGated && this.phase === 'charging' && this.E >= this.p.threshold) {
         this.phase = 'release'; this.phaseStart = this.t; this.releases++;
         onRelease && onRelease(this.t);
       } else if (this.phase === 'release' && this.t - this.phaseStart >= PHASES.release) { this.phase = 'open'; this.phaseStart = this.t; }
