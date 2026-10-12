@@ -29,6 +29,8 @@
 | [`rhythm/vol2/`](rhythm/vol2/) | 接得剛剛好 Caught on the Beat — 十件節奏與波形作品 | Codex |
 | [`sound/test1/`](sound/test1/) | 聲音成為物質 — 八件聲音、空間與能量作品（Canvas） | Codex |
 | [`sound/test2/`](sound/test2/) | 聲音的居所 SOUND / 4 — 八件聲音、空間與能量的生成藝術作品（Web Audio 原創作曲、three.js／GLSL／Canvas） | Claude |
+| [`sound/vol1/`](sound/vol1/) | 聲音選集 — 八個主題擇一收錄，共振建築含混合版 | 整合：Codex |
+| [`visualizer/`](visualizer/) | 聲音放映室 — 34 個隨 MP3 律動的視覺預設 | 整合：Codex |
 
 四組作品已搬至上列新路徑；詳細對照與驗證見 [路徑遷移紀錄](PATH_MIGRATION.md)。
 
@@ -43,6 +45,8 @@ python3 -m http.server 8000
 ```
 
 然後開啟 `http://localhost:8000/showroom/`。詳見 [`showroom/README.md`](showroom/README.md)。
+
+`sound/vol1/` 與 `visualizer/` 也需要 HTTP。播放器可開啟自己的 MP3；本機 `_incoming-assets/` 測試音檔不包含在 GitHub 版本。選擇紀錄見 [`visualizer/SELECTIONS.md`](visualizer/SELECTIONS.md)。
 
 ## 製作報告
 
