@@ -1,0 +1,91 @@
+{
+  "pass": true,
+  "results": [
+    {
+      "id": "01",
+      "source": "hybrid",
+      "playing": {
+        "time": 9.021333333333335,
+        "context": "running",
+        "level": 0.28847581148147583
+      },
+      "model": {
+        "duration": 64,
+        "pads": 40,
+        "bells": 32,
+        "last": "Gsus4",
+        "loop": "Cmaj7",
+        "arch": [
+          0.40697769963114855,
+          0.5833333962307952,
+          1.1007745579763255,
+          1.3934094850109429
+        ]
+      },
+      "exactScore": true
+    },
+    {
+      "id": "02",
+      "source": "test2",
+      "playing": {
+        "time": 0.4173333333333333,
+        "context": "running",
+        "level": 0.17951839328891642
+      }
+    },
+    {
+      "id": "03",
+      "source": "test1",
+      "playing": {
+        "time": 0.408,
+        "context": "running",
+        "level": 0.026154400780797005
+      }
+    },
+    {
+      "id": "04",
+      "source": "test2",
+      "playing": {
+        "time": 0.556,
+        "context": "running",
+        "level": 0.12733931479074434
+      }
+    },
+    {
+      "id": "05",
+      "source": "test2",
+      "playing": {
+        "time": 0.508,
+        "context": "running",
+        "level": 0.04719054736287371
+      }
+    },
+    {
+      "id": "06",
+      "source": "test1",
+      "playing": {
+        "time": 0.38666666666666666,
+        "context": "running",
+        "level": 0.0253894105553627
+      }
+    },
+    {
+      "id": "07",
+      "source": "test2",
+      "playing": {
+        "time": 0.4653333333333333,
+        "context": "running",
+        "level": 0.05890658834798268
+      }
+    },
+    {
+      "id": "08",
+      "source": "test2",
+      "playing": {
+        "time": 0.62,
+        "context": "running",
+        "level": 0.0005048840193796096
+      }
+    }
+  ]
+}

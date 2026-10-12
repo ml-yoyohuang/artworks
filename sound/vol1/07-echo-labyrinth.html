@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-Hant"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>07 回聲迷宮｜房間是聲音走過的路 — SOUND / VOL. 1</title>
+<meta name="description" content="回聲迷宮《房間是聲音走過的路》：一個新轉角被回聲照亮，下一次回聲就繞進了原本看不見的通道。">
+<meta name="theme-color" content="#f4f1e9">
+<link rel="icon" href="assets/test2/favicon.svg" type="image/svg+xml">
+
+<meta property="og:image" content="assets/test2/previews/07-echo-labyrinth.jpg">
+<script type="importmap">{"imports":{"three":"./assets/test2/vendor/three/three.module.min.js"}}</script>
+<link rel="stylesheet" href="assets/css/volume.css"><link rel="stylesheet" href="assets/css/work.css"></head>
+<body class="volume-work" data-work="07">
+<a class="skip-link" href="#controls">跳到播放控制</a>
+<header class="masthead"><a class="brand" href="index.html">SOUND / VOL. 1 <span>聲音選集</span></a><nav aria-label="作品導覽"><a href="index.html">作品目錄</a><a href="08-stored-energy.html">下一件 →</a></nav></header>
+<main>
+  <section class="volume-heading"><div><p class="section-label">07 / 08 <span lang="en">ECHO LABYRINTH</span></p><h1>回聲迷宮</h1><p class="volume-subtitle">《房間是聲音走過的路》</p></div><p class="heading-description">每次回聲揭露一道牆。新出現的轉角，又讓下一個聲音走進原本看不見的通道。</p></section>
+  <div class="stage-rule"><span>黑暗 / 轉角 / 回聲</span><span lang="en">SOUND IN MOTION</span></div>
+  <section id="stage" class="stage dark" aria-label="作品展演場域">
+    <canvas id="art" tabindex="0" role="img" aria-label="黑暗中一個聲源發出聲音，回聲返回時照亮一段牆；已照亮的牆會反射之後的聲音。"></canvas>
+    <img id="poster" class="poster" src="assets/test2/previews/07-echo-labyrinth.jpg" alt="回聲迷宮實際運行時擷取的畫面" hidden>
+    
+    <p id="readout" class="readout"></p>
+    <div id="start-overlay" class="start-overlay"><button id="start" class="start">開始聆聽</button><p>按下後才會發出聲音・建議音量適中</p></div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </section>
+  <section class="control-panel" aria-label="聆聽與創作"><div class="control-heading"><span>聆聽與創作</span><span lang="en">LISTEN &amp; EXPLORE</span></div><section id="controls" class="controls" aria-label="播放控制"><div class="transport">
+      <button id="play" class="primary" aria-pressed="false">開始</button>
+      <button id="replay">重播</button>
+      <button id="mute" aria-pressed="false">靜音</button>
+      <label class="volume">音量 <input id="volume" type="range" min="0" max="100" value="60"></label>
+      <span id="time" class="time" aria-label="播放時間">00:00</span>
+    </div></section>
+    <div class="creation-controls"><div class="special" aria-label="作品操作"><button id="ping">發出一個聲音</button><button id="relocate">換一個起點</button><span class="group-label">點擊地面或用方向鍵移動</span></div></div>
+    
+    
+  </section>
+  <section class="work-notes" aria-label="作品說明"><div class="work-essay"><p class="section-label" lang="en">ABOUT THIS MOVEMENT</p><h2>房間是聲音走過的路</h2><p class="statement">起初只有黑暗和一個聲音。聲音向四周傳出，碰到牆再回來；回聲抵達的那一刻，那一小段牆才被照亮。已經被照亮的牆會反射之後的聲音，讓下一次回聲繞過轉角、走得更遠、照亮更多的房間。聲音揭露空間，空間又改寫聲音。</p></div><div class="work-guides"><details class="how-to-play"><summary>玩法與觀看<span lang="en">HOW TO PLAY</span></summary><div class="play-guide"><ul><li>每一個亮起的牆段，都對應一個你聽見的回聲：越遠越晚、越暗、越低。</li><li>「發出一個聲音」立即從聲源發聲；點擊地面或用方向鍵移動聲源。</li><li>「換一個起點」把聲源移到另一個房間，已揭露的牆保留。</li></ul></div></details><details class="technical-notes"><summary>生成與聲音 <span lang="en">SOUND &amp; MATERIAL</span></summary><div class="technical-content"><section><h3>代表時刻</h3><p class="moment">第一聲（0.4 秒）之後不到一秒，最近的牆就被回聲照亮。聲源每 2.4 秒往未知的方向走一格；走到轉角後，回聲開始沿著已揭露的牆反射，照亮原本看不見的走道。一輪完整的探索約 1.5–2 分鐘，完成後換一座新的迷宮。</p></section><section><h3>生成規則</h3><ul><li>二維路徑模型：聲線從聲源出發，與牆相交得到距離；回聲延遲 = 路徑長 ÷ 傳播速度（縮尺世界每秒 9 單位）。</li><li>未揭露的牆吸收聲線並在回聲抵達時被照亮；已揭露的牆以鏡面反射延續聲線，最多 3 次反射，每次衰減。</li><li>回聲的音量、濾波與聲像由距離、反射次數與方向決定；畫面與聲音都在計算出的抵達時間發生。</li><li>距離下限 0.6、每次發聲最多 18 個回聲、事件數與聲部有上限，不會形成零延遲循環或音訊回授。</li><li>這是創作性的回聲模型，不是測量真實房間的聲學求解器。</li></ul></section><section><h3>聲音與技術</h3><p>three.js r180：暗室、局部點光源與牆緣反光；原生 Web Audio 立體聲像與濾波。</p><p class="small">聲音：原創程式作曲，作者 SOUND / 4，以 CC0 釋出；不使用外部錄音。詳見 <a href="MUSIC_CREDITS-test2.md">MUSIC_CREDITS.md</a>。</p><p class="small">鍵盤：空白鍵播放／暫停，M 靜音。</p></section></div></details><p class="credit-links"><a href="MUSIC_CREDITS-test2.md">音源與授權</a></p></div></section>
+</main>
+<footer class="work-footer"><nav class="work-pagination" aria-label="作品間導覽"><a href="06-breath-portrait.html" rel="prev"><span>← 上一件 / 06</span><strong>呼吸雕塑</strong></a><a class="directory-link" href="index.html">返回作品目錄</a><a href="08-stored-energy.html" rel="next"><span>下一件 / 08 →</span><strong>能量蓄積</strong></a></nav><div class="work-colophon"><span class="brand">SOUND / VOL. 1</span><span>聲音成為物質 / 2026</span></div></footer>
+<script type="module" src="assets/test2/js/works/07-echo.js"></script>
+</body>
+</html>

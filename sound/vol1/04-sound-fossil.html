@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-Hant"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>04 聲音化石｜這首歌曾經存在 — SOUND / VOL. 1</title>
+<meta name="description" content="聲音化石《這首歌曾經存在》：最後一個音消失，生長停止，燈光轉成看標本的光。">
+<meta name="theme-color" content="#f4f1e9">
+<link rel="icon" href="assets/test2/favicon.svg" type="image/svg+xml">
+
+<meta property="og:image" content="assets/test2/previews/04-sound-fossil.jpg">
+<script type="importmap">{"imports":{"three":"./assets/test2/vendor/three/three.module.min.js"}}</script>
+<link rel="stylesheet" href="assets/css/volume.css"><link rel="stylesheet" href="assets/css/work.css"></head>
+<body class="volume-work" data-work="04">
+<a class="skip-link" href="#controls">跳到播放控制</a>
+<header class="masthead"><a class="brand" href="index.html">SOUND / VOL. 1 <span>聲音選集</span></a><nav aria-label="作品導覽"><a href="index.html">作品目錄</a><a href="05-phase-tides.html">下一件 →</a></nav></header>
+<main>
+  <section class="volume-heading"><div><p class="section-label">04 / 08 <span lang="en">SOUND FOSSIL</span></p><h1>聲音化石</h1><p class="volume-subtitle">《這首歌曾經存在》</p></div><p class="heading-description">一段旋律沉積成可被端詳的物件。最後一個音消失，生長停止，材料仍然記得。</p></section>
+  <div class="stage-rule"><span>石灰 / 礦脈 / 記憶</span><span lang="en">SOUND IN MOTION</span></div>
+  <section id="stage" class="stage dark" aria-label="作品展演場域">
+    <canvas id="art" tabindex="0" role="img" aria-label="一枚沿對數螺旋生長的石灰質標本，表面有節奏留下的細肋、長音留下的脊線與礦物沉積。"></canvas>
+    <img id="poster" class="poster" src="assets/test2/previews/04-sound-fossil.jpg" alt="聲音化石實際運行時擷取的畫面" hidden>
+    
+    <p id="readout" class="readout"></p>
+    <div id="start-overlay" class="start-overlay"><button id="start" class="start">開始聆聽</button><p>按下後才會發出聲音・建議音量適中</p></div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </section>
+  <section class="control-panel" aria-label="聆聽與創作"><div class="control-heading"><span>聆聽與創作</span><span lang="en">LISTEN &amp; EXPLORE</span></div><section id="controls" class="controls" aria-label="播放控制"><div class="transport">
+      <button id="play" class="primary" aria-pressed="false">開始</button>
+      <button id="replay">重播</button>
+      <button id="mute" aria-pressed="false">靜音</button>
+      <label class="volume">音量 <input id="volume" type="range" min="0" max="100" value="60"></label>
+      <span id="time" class="time" aria-label="播放時間">00:00</span>
+    <button id="export">匯出 PNG</button></div></section>
+    <div class="creation-controls"><div class="special" aria-label="作品操作"><button id="regen">重新生成</button><span class="group-label">拖曳畫面可旋轉</span></div></div>
+    
+    
+  </section>
+  <section class="work-notes" aria-label="作品說明"><div class="work-essay"><p class="section-label" lang="en">ABOUT THIS MOVEMENT</p><h2>這首歌曾經存在</h2><p class="statement">聲音沿著一條對數螺旋沉積成殼。密集的節奏留下細碎的肋紋，長音拉出一條連續的脊線；休止在殼上刻下縫合線。後來的聲音會讀取已經存在的表面：重複的樂句沿著舊脊線再長一次，把它加厚、礦化成金屬色的脈。曲子結束時，留下的是這首歌的完整標本。</p></div><div class="work-guides"><details class="how-to-play"><summary>玩法與觀看<span lang="en">HOW TO PLAY</span></summary><div class="play-guide"><ul><li>拖曳或用左右方向鍵旋轉標本，靠近看肋紋與脊線。</li><li>「重播」以同一個 seed 重新長出完全相同的標本；「重新生成」換 seed，得到另一枚。</li><li>曲終不會自動清空，也不會循環覆寫。</li></ul></div></details><details class="technical-notes"><summary>生成與聲音 <span lang="en">SOUND &amp; MATERIAL</span></summary><div class="technical-content"><section><h3>代表時刻</h3><p class="moment">約 47 秒曲終：生長停止，燈光從工作燈轉為斜側的展示光，標本開始緩慢自轉。第 26 秒起主題重複，可看到舊脊線被加厚並出現金屬光澤。</p></section><section><h3>生成規則</h3><ul><li>材料狀態逐環累積，每一環讀取上一環的表面高度再沉積或刻蝕。</li><li>短音（節奏）→ 環向細肋與色層；長音 → 依音高落在固定角位的連續脊線；休止 → 縫合線與收縮。</li><li>重複樂句的沉積量依既有脊線的高度分配，沿舊痕跡再生長並礦化。</li><li>以 1/120 秒固定步長模擬整首樂譜，同一 seed 與設定得到逐位元相同的標本；播放時依實際音訊時間顯露。沒有跳轉功能，以確保時間與材料歷史一致。</li><li>幾何預算固定：最多 420 環 × 48 角位。</li></ul></section><section><h3>聲音與技術</h3><p>three.js r180：自訂頂點屬性控制礦化金屬度、程序化石灰岩凹凸；原生 Web Audio 木琴與擦弦原創曲。</p><p class="small">聲音：原創程式作曲，作者 SOUND / 4，以 CC0 釋出；不使用外部錄音。詳見 <a href="MUSIC_CREDITS-test2.md">MUSIC_CREDITS.md</a>。</p><p class="small">鍵盤：空白鍵播放／暫停，M 靜音。</p></section></div></details><p class="credit-links"><a href="MUSIC_CREDITS-test2.md">音源與授權</a></p></div></section>
+</main>
+<footer class="work-footer"><nav class="work-pagination" aria-label="作品間導覽"><a href="03-silence-cuts.html" rel="prev"><span>← 上一件 / 03</span><strong>休止符</strong></a><a class="directory-link" href="index.html">返回作品目錄</a><a href="05-phase-tides.html" rel="next"><span>下一件 / 05 →</span><strong>相位潮汐</strong></a></nav><div class="work-colophon"><span class="brand">SOUND / VOL. 1</span><span>聲音成為物質 / 2026</span></div></footer>
+<script type="module" src="assets/test2/js/works/04-fossil.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{
+  "collection": "SOUND / VOL. 1",
+  "works": [
+    {
+      "id": "01",
+      "title": "共振建築",
+      "page": "01-resonant-architecture.html",
+      "source": "test1",
+      "variant": "hybrid",
+      "audio_source": "test2",
+      "note": "作者指定：保留 test1 建築與互動，移植 test2 音樂並保持音畫同步。"
+    },
+    {
+      "id": "02",
+      "title": "和弦織機",
+      "page": "02-chord-loom.html",
+      "source": "test2"
+    },
+    {
+      "id": "03",
+      "title": "休止符",
+      "page": "03-silence-cuts.html",
+      "source": "test1"
+    },
+    {
+      "id": "04",
+      "title": "聲音化石",
+      "page": "04-sound-fossil.html",
+      "source": "test2"
+    },
+    {
+      "id": "05",
+      "title": "相位潮汐",
+      "page": "05-phase-tides.html",
+      "source": "test2"
+    },
+    {
+      "id": "06",
+      "title": "呼吸雕塑",
+      "page": "06-breath-portrait.html",
+      "source": "test1"
+    },
+    {
+      "id": "07",
+      "title": "回聲迷宮",
+      "page": "07-echo-labyrinth.html",
+      "source": "test2"
+    },
+    {
+      "id": "08",
+      "title": "能量蓄積",
+      "page": "08-stored-energy.html",
+      "source": "test2"
+    }
+  ]
+}
