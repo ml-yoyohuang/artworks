@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "themes": [
+    {
+      "theme": 1,
+      "name": "共振建築",
+      "source": "sound/test1/",
+      "previousSource": "sound3/",
+      "presetId": "s3-architecture",
+      "retiredPresetId": "s4-architecture"
+    },
+    {
+      "theme": 2,
+      "name": "和弦織機",
+      "source": "sound/test2/",
+      "previousSource": "sound4/",
+      "presetId": "s4-loom",
+      "retiredPresetId": "s3-loom"
+    },
+    {
+      "theme": 3,
+      "name": "休止符",
+      "source": "sound/test1/",
+      "previousSource": "sound3/",
+      "presetId": "s3-cuts",
+      "retiredPresetId": "s4-cuts"
+    },
+    {
+      "theme": 4,
+      "name": "聲音化石",
+      "source": "sound/test2/",
+      "previousSource": "sound4/",
+      "presetId": "s4-fossil",
+      "retiredPresetId": "s3-fossil"
+    },
+    {
+      "theme": 5,
+      "name": "相位潮汐",
+      "source": "sound/test2/",
+      "previousSource": "sound4/",
+      "presetId": "s4-tides",
+      "retiredPresetId": "s3-tides"
+    },
+    {
+      "theme": 6,
+      "name": "呼吸雕塑",
+      "source": "sound/test1/",
+      "previousSource": "sound3/",
+      "presetId": "s3-breath",
+      "retiredPresetId": "s4-breath"
+    },
+    {
+      "theme": 7,
+      "name": "回聲迷宮",
+      "source": "sound/test2/",
+      "previousSource": "sound4/",
+      "presetId": "s4-echo",
+      "retiredPresetId": "s3-echo"
+    },
+    {
+      "theme": 8,
+      "name": "能量蓄積",
+      "source": "sound/test2/",
+      "previousSource": "sound4/",
+      "presetId": "s4-energy",
+      "retiredPresetId": "s3-energy"
+    }
+  ]
+}

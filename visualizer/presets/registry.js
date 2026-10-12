@@ -321,103 +321,9 @@ export const presets = [
     "renderer": "Canvas 2D · 2.5D",
     "mapping": "頻段 · 能量 · 有界材料歷史",
     "bg": "#e5e8eb",
-    "preview": "./previews/s3-architecture.png"
-  },
-  {
-    "id": "s3-loom",
-    "series": 3,
-    "index": 1,
-    "name": "和弦織機",
-    "en": "CHORD LOOM",
-    "module": "",
-    "renderer": "Canvas 2D · 2.5D",
-    "mapping": "頻段 · 能量 · 有界材料歷史",
-    "bg": "#eae4d7",
-    "preview": "./previews/s3-loom.png"
-  },
-  {
-    "id": "s3-cuts",
-    "series": 3,
-    "index": 2,
-    "name": "休止符",
-    "en": "SILENCE CUTS",
-    "module": "",
-    "renderer": "Canvas 2D · 2.5D",
-    "mapping": "相對音量回落 · 切口展開",
-    "bg": "#272825",
-    "preview": "./previews/s3-cuts.webp"
-  },
-  {
-    "id": "s3-fossil",
-    "series": 3,
-    "index": 3,
-    "name": "聲音化石",
-    "en": "SOUND FOSSIL",
-    "module": "",
-    "renderer": "Canvas 2D · 2.5D",
-    "mapping": "頻段 · 能量 · 有界材料歷史",
-    "bg": "#11100e",
-    "preview": "./previews/s3-fossil.webp"
-  },
-  {
-    "id": "s3-tides",
-    "series": 3,
-    "index": 4,
-    "name": "相位潮汐",
-    "en": "PHASE TIDES",
-    "module": "",
-    "renderer": "Canvas 2D · 2.5D",
-    "mapping": "頻段 · 能量 · 有界材料歷史",
-    "bg": "#101e27",
-    "preview": "./previews/s3-tides.png"
-  },
-  {
-    "id": "s3-breath",
-    "series": 3,
-    "index": 5,
-    "name": "呼吸雕塑",
-    "en": "BREATH PORTRAIT",
-    "module": "",
-    "renderer": "Canvas 2D · 2.5D",
-    "mapping": "頻段 · 能量 · 有界材料歷史",
-    "bg": "#182621",
-    "preview": "./previews/s3-breath.webp"
-  },
-  {
-    "id": "s3-echo",
-    "series": 3,
-    "index": 6,
-    "name": "回聲迷宮",
-    "en": "ECHO LABYRINTH",
-    "module": "",
-    "renderer": "Canvas 2D · 2.5D",
-    "mapping": "頻段 · 能量 · 有界材料歷史",
-    "bg": "#101920",
-    "preview": "./previews/s3-echo.webp"
-  },
-  {
-    "id": "s3-energy",
-    "series": 3,
-    "index": 7,
-    "name": "能量蓄積",
-    "en": "STORED ENERGY",
-    "module": "",
-    "renderer": "Canvas 2D · 2.5D",
-    "mapping": "頻段 · 能量 · 有界材料歷史",
-    "bg": "#cec7bb",
-    "preview": "./previews/s3-energy.webp"
-  },
-  {
-    "id": "s4-architecture",
-    "series": 4,
-    "index": 0,
-    "name": "共振建築",
-    "en": "RESONANT ARCHITECTURE",
-    "module": "../sources/sound4/works/01-architecture.js",
-    "renderer": "Three.js",
-    "mapping": "頻段 · 能量 · 有界材料歷史",
-    "bg": "#e5e8eb",
-    "preview": "./previews/s4-architecture.jpg"
+    "preview": "./previews/s3-architecture.png",
+    "sourceChoice": "sound/test1/",
+    "theme": 1
   },
   {
     "id": "s4-loom",
@@ -429,19 +335,23 @@ export const presets = [
     "renderer": "Canvas 2D",
     "mapping": "頻段 · 能量 · 有界材料歷史",
     "bg": "#eae4d7",
-    "preview": "./previews/s4-loom.jpg"
+    "preview": "./previews/s4-loom.jpg",
+    "sourceChoice": "sound/test2/",
+    "theme": 2
   },
   {
-    "id": "s4-cuts",
-    "series": 4,
+    "id": "s3-cuts",
+    "series": 3,
     "index": 2,
     "name": "休止符",
     "en": "SILENCE CUTS",
-    "module": "../sources/sound4/works/03-cuts.js",
-    "renderer": "GLSL",
+    "module": "",
+    "renderer": "Canvas 2D · 2.5D",
     "mapping": "相對音量回落 · 切口展開",
     "bg": "#272825",
-    "preview": "./previews/s4-cuts.jpg"
+    "preview": "./previews/s3-cuts.webp",
+    "sourceChoice": "sound/test1/",
+    "theme": 3
   },
   {
     "id": "s4-fossil",
@@ -453,7 +363,9 @@ export const presets = [
     "renderer": "Three.js",
     "mapping": "聲音長出螺旋 · 持續沉積",
     "bg": "#11100e",
-    "preview": "./previews/s4-fossil.jpg"
+    "preview": "./previews/s4-fossil.jpg",
+    "sourceChoice": "sound/test2/",
+    "theme": 4
   },
   {
     "id": "s4-tides",
@@ -465,19 +377,23 @@ export const presets = [
     "renderer": "GLSL",
     "mapping": "頻段 · 能量 · 有界材料歷史",
     "bg": "#101e27",
-    "preview": "./previews/s4-tides.jpg"
+    "preview": "./previews/s4-tides.jpg",
+    "sourceChoice": "sound/test2/",
+    "theme": 5
   },
   {
-    "id": "s4-breath",
-    "series": 4,
+    "id": "s3-breath",
+    "series": 3,
     "index": 5,
     "name": "呼吸雕塑",
     "en": "BREATH PORTRAIT",
-    "module": "../sources/sound4/works/06-breath.js",
-    "renderer": "Three.js",
+    "module": "",
+    "renderer": "Canvas 2D · 2.5D",
     "mapping": "頻段 · 能量 · 有界材料歷史",
     "bg": "#182621",
-    "preview": "./previews/s4-breath.jpg"
+    "preview": "./previews/s3-breath.webp",
+    "sourceChoice": "sound/test1/",
+    "theme": 6
   },
   {
     "id": "s4-echo",
@@ -489,7 +405,9 @@ export const presets = [
     "renderer": "Three.js",
     "mapping": "頻段 · 能量 · 有界材料歷史",
     "bg": "#101920",
-    "preview": "./previews/s4-echo.jpg"
+    "preview": "./previews/s4-echo.jpg",
+    "sourceChoice": "sound/test2/",
+    "theme": 7
   },
   {
     "id": "s4-energy",
@@ -501,6 +419,18 @@ export const presets = [
     "renderer": "Three.js",
     "mapping": "頻段 · 能量 · 有界材料歷史",
     "bg": "#cec7bb",
-    "preview": "./previews/s4-energy.jpg"
+    "preview": "./previews/s4-energy.jpg",
+    "sourceChoice": "sound/test2/",
+    "theme": 8
   }
 ];
+export const retiredPresetRedirects = {
+  "s4-architecture": "s3-architecture",
+  "s3-loom": "s4-loom",
+  "s4-cuts": "s3-cuts",
+  "s3-fossil": "s4-fossil",
+  "s3-tides": "s4-tides",
+  "s4-breath": "s3-breath",
+  "s3-echo": "s4-echo",
+  "s3-energy": "s4-energy"
+};

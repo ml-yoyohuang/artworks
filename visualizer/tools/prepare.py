@@ -45,3 +45,7 @@ for series in [3,4]:
 tracks=[dict(title=p.stem,src='../'+str(p.relative_to(ROOT))) for p in sorted((ROOT/'_incoming-assets/free-mp3').glob('*.mp3'))]
 (OUT/'audio/tracks.js').write_text('export const tracks = '+json.dumps(tracks,ensure_ascii=False,indent=2)+';\n')
 print('Prepared',len(registry),'presets;',len(tracks),'local test tracks; hashed',len(old),'existing files.')
+
+# Respect the explicit theme selection after collecting original scene copies.
+import runpy
+runpy.run_path(str(OUT/"tools/select-presets.py"),run_name="__main__")

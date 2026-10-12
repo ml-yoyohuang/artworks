@@ -49,3 +49,7 @@
 ## 化石節奏速度驗收（2026-10-12）
 
 固定音量、40 秒測試中，60／120／180 BPM 起音訊號分別生長約 9.37／21.73／36.02 弧度；同樣節奏的高低能量生長差異小於 12%。靜音不生長，dt=0 不推進狀態。結果見 `_qa/growth-rhythm.json`；`tools/growth-rhythm.mjs` 可重跑。實際 MP3 播放與長時間幾何預算驗收另見 `_qa/fossil-growth.json`。
+
+## 主題擇一收錄驗收（2026-10-12）
+
+按 `presets/selections.json` 保留八版，總預設 34 個，主題收藏恰為八個。Chromium 逐一播放 34 件，八個淘汰版舊連結及 API 選擇轉到保留版；直接載入淘汰 ID 被拒絕。前後循環、30 秒自動輪播、手機清單與無 WebGL 替代都只使用保留清單。結果見 `_qa/selection-check.json`。本次獨立工作目錄修改只在 visualizer；原始 test1/test2 的 298 個檔案以本輪開始的指紋再比對，結果見 `_qa/selection-originals.json`。

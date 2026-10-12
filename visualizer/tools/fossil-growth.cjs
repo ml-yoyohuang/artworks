@@ -2,7 +2,7 @@ const {chromium}=require('/Users/yoyohuang/.cache/codex-runtimes/codex-primary-r
 const fs=require('node:fs'),assert=require('node:assert/strict');
 (async()=>{
  const b=await chromium.launch({headless:true});const p=await b.newPage({viewport:{width:1440,height:1060}}),errors=[];p.on('pageerror',e=>errors.push(e.message));
- await p.goto('http://127.0.0.1:8788/visualizer/?preset=s4-fossil');await p.waitForFunction(()=>window.Visualizer?.host.current);
+ await p.goto((process.env.VISUALIZER_URL||'http://127.0.0.1:8788/visualizer/')+'?preset=s4-fossil');await p.waitForFunction(()=>window.Visualizer?.host.current);
  const initial=await p.evaluate(()=>Visualizer.snapshot());assert.equal(initial.materials.totalRings,0);assert.equal(initial.materials.drawCount,0);
  await p.locator('#stage').screenshot({path:'visualizer/_qa/fossil-empty.png'});
  await p.locator('#play').click();await p.waitForTimeout(10500);
@@ -18,7 +18,7 @@ const fs=require('node:fs'),assert=require('node:assert/strict');
  assert(simulated.checkpoints.every((s,i,a)=>s.totalRings>(i?a[i-1].totalRings:0)&&s.rings<=s.budget));assert.equal(simulated.quiet.totalRings,simulated.checkpoints.at(-1).totalRings);assert.deepEqual(simulated.quiet,simulated.frozen);
  await p.locator('#stage').screenshot({path:'visualizer/_qa/fossil-15min-simulation.png'});
  await p.evaluate(()=>Visualizer.host.current.reset());assert.equal((await p.evaluate(()=>Visualizer.snapshot())).materials.totalRings,0);
- // Adapter refactor also preserves the other seven sound4 scenes.
- for(const id of ['s4-architecture','s4-loom','s4-cuts','s4-tides','s4-breath','s4-echo','s4-energy']){await p.evaluate(id=>Visualizer.select(id),id);await p.waitForTimeout(250);assert.equal((await p.evaluate(()=>Visualizer.snapshot())).errors.length,0);}
- assert.deepEqual(errors,[]);fs.writeFileSync('visualizer/_qa/fossil-growth.json',JSON.stringify({initial,live,simulated,errors},null,2));await b.close();console.log('PASS empty start, MP3 growth, pause, silence, reset, 15-minute bounded geometry, all sound4 scenes');
+ // Adapter refactor also preserves the other seven selected themes.
+ for(const id of ['s3-architecture','s4-loom','s3-cuts','s4-tides','s3-breath','s4-echo','s4-energy']){await p.evaluate(id=>Visualizer.select(id),id);await p.waitForTimeout(250);assert.equal((await p.evaluate(()=>Visualizer.snapshot())).errors.length,0);}
+ assert.deepEqual(errors,[]);fs.writeFileSync('visualizer/_qa/fossil-growth.json',JSON.stringify({initial,live,simulated,errors},null,2));await b.close();console.log('PASS empty start, MP3 growth, pause, silence, reset, 15-minute bounded geometry, all selected themes');
 })().catch(e=>{console.error(e);process.exit(1)});

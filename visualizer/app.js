@@ -1,12 +1,12 @@
 import {Player} from './audio/player.js';
 import {tracks} from './audio/tracks.js';
-import {presets} from './presets/registry.js';
+import {presets,retiredPresetRedirects} from './presets/registry.js';
 import {PresetHost} from './runtime/preset-host.js';
 const $=id=>document.getElementById(id),settings={sensitivity:1,smoothing:.45,tempo:0,auto:false};
 const player=new Player();let selected=18,busy=false,lastAuto=0,raf=0,lastUI=0,features=null,uploads=[];
 const host=new PresetHost($('canvas-host'),player,(preset,work,fallback)=>{
   selected=presets.findIndex(p=>p.id===preset.id);$('preset-name').textContent=preset.name;$('preset-en').textContent=preset.en;
-  $('series-label').textContent='SOUND / '+String(preset.series).padStart(2,'0')+' · '+String(preset.index+1).padStart(2,'0');
+  $('series-label').textContent=preset.sourceChoice?'主題 / '+String(preset.theme).padStart(2,'0')+' · TEST / '+(preset.series-2):'RHYTHM / '+preset.series+' · '+String(preset.index+1).padStart(2,'0');
   $('mapping').textContent=fallback||preset.mapping;$('stage').style.background=work.bg;
   $('stage').style.setProperty('--stage-fg',work.fg);$('stage-notice').hidden=true;status(player.playing?'歌曲繼續播放。已換成「'+preset.name+'」。':'選擇音樂後按播放。切換視覺，歌曲會繼續。');
   document.querySelectorAll('[data-preset]').forEach(el=>{el.classList.toggle('selected',el.dataset.preset===preset.id);el.setAttribute('aria-pressed',String(el.dataset.preset===preset.id));});
@@ -15,7 +15,7 @@ const host=new PresetHost($('canvas-host'),player,(preset,work,fallback)=>{
 const format=s=>Number.isFinite(s)?Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'):'—:—';
 function status(s){$('status').textContent=s;}
 async function select(index){index=(index+presets.length)%presets.length;busy=true;$('stage-notice').textContent='正在換一種形狀…';$('stage-notice').hidden=false;try{await host.select(presets[index]);lastAuto=player.audio.currentTime;}catch(e){$('stage-notice').textContent='這個視覺暫時無法啟動。可切換其他作品，音樂會繼續。';status(String(e.message||e));}finally{busy=false;}}
-function card(p){const b=document.createElement('button');b.className='preset-card';b.dataset.preset=p.id;b.setAttribute('aria-pressed',String(p.id===presets[selected].id));b.setAttribute('aria-label',p.name+'，SOUND '+p.series);const image=document.createElement('span');image.className='preset-image';if(p.preview){const img=document.createElement('img');img.src=p.preview;img.alt=p.name+'的靜態預覽';img.loading='lazy';image.append(img);}const no=document.createElement('span');no.className='card-no';no.textContent='SOUND / '+p.series+' · '+String(p.index+1).padStart(2,'0');image.append(no);const en=document.createElement('span');en.className='tiny-label';en.textContent=p.en;const h=document.createElement('h3');h.textContent=p.name;const meta=document.createElement('span');meta.className='card-renderer';meta.textContent=p.mapping;b.append(image,en,h,meta);b.onclick=()=>{void select(presets.indexOf(p));$('library').close();};return b;}
+function card(p){const b=document.createElement('button');b.className='preset-card';b.dataset.preset=p.id;b.setAttribute('aria-pressed',String(p.id===presets[selected].id));b.setAttribute('aria-label',p.name+'，'+(p.sourceChoice?'TEST '+(p.series-2):'RHYTHM '+p.series));const image=document.createElement('span');image.className='preset-image';if(p.preview){const img=document.createElement('img');img.src=p.preview;img.alt=p.name+'的靜態預覽';img.loading='lazy';image.append(img);}const no=document.createElement('span');no.className='card-no';no.textContent=p.sourceChoice?'主題 / '+String(p.theme).padStart(2,'0')+' · TEST / '+(p.series-2):'RHYTHM / '+p.series+' · '+String(p.index+1).padStart(2,'0');image.append(no);const en=document.createElement('span');en.className='tiny-label';en.textContent=p.en;const h=document.createElement('h3');h.textContent=p.name;const meta=document.createElement('span');meta.className='card-renderer';meta.textContent=p.mapping;b.append(image,en,h,meta);b.onclick=()=>{void select(presets.indexOf(p));$('library').close();};return b;}
 for(const p of presets)$('preset-grid').append(card(p));
 for(const id of ['s1-jelly-wave','s2-03-elastic-ensemble','s4-tides','s4-fossil']){const p=presets.find(p=>p.id===id);if(p)$('featured').append(card(p));}
 function open(id){$(id).showModal();}
@@ -24,7 +24,7 @@ for(const id of ['tracks-open','song-title'])$(id).onclick=()=>open('tracks');
 $('settings-open').onclick=()=>open('settings');
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$(b.dataset.close).close());
 document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();}}));
-$('filters').addEventListener('click',e=>{const b=e.target.closest('[data-series]');if(!b)return;const series=Number(b.dataset.series);document.querySelectorAll('[data-series]').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));document.querySelectorAll('#preset-grid [data-preset]').forEach(el=>el.hidden=!!series&&presets.find(p=>p.id===el.dataset.preset).series!==series);});
+$('filters').addEventListener('click',e=>{const b=e.target.closest('[data-series]');if(!b)return;const series=b.dataset.series;document.querySelectorAll('[data-series]').forEach(el=>el.setAttribute('aria-pressed',String(el===b)));document.querySelectorAll('#preset-grid [data-preset]').forEach(el=>el.hidden=series==='themes'?!presets.find(p=>p.id===el.dataset.preset).sourceChoice:series!=='0'&&presets.find(p=>p.id===el.dataset.preset).series!==Number(series));});
 function updateUI(){
   $('song-title').textContent=player.title;
   $('play').textContent=player.playing?'Ⅱ':'▶';$('play').setAttribute('aria-label',player.playing?'暫停音樂':'播放音樂');
@@ -59,7 +59,7 @@ function frame(now){raf=requestAnimationFrame(frame);if(document.hidden)return;t
   if(settings.auto&&player.playing&&!busy&&player.audio.currentTime-lastAuto>=30)void select(selected+1);
 }
 const defaultTrack=tracks.find(t=>t.title.includes('Blank'))||tracks[0];if(defaultTrack)player.load(encodeURI(defaultTrack.src),defaultTrack.title);
-const initialId=new URLSearchParams(location.search).get('preset');const initial=presets.findIndex(p=>p.id===initialId);await select(initial<0?18:initial);updateUI();raf=requestAnimationFrame(frame);
-window.Visualizer={player,host,presets,select:id=>select(typeof id==='number'?id:presets.findIndex(p=>p.id===id)),snapshot:()=>({preset:host.preset?.id,time:player.audio.currentTime,playing:player.playing,energy:features?.energy,bands:features?.bands,onsetId:player.features?.serial,frames:host.frames,materials:host.current?.inspect?.(),errors:host.errors})};
+const initialId=new URLSearchParams(location.search).get('preset');const initial=presets.findIndex(p=>p.id===(retiredPresetRedirects[initialId]||initialId));await select(initial<0?18:initial);updateUI();raf=requestAnimationFrame(frame);
+window.Visualizer={player,host,presets,select:id=>select(typeof id==='number'?id:presets.findIndex(p=>p.id===(retiredPresetRedirects[id]||id))),snapshot:()=>({preset:host.preset?.id,time:player.audio.currentTime,playing:player.playing,energy:features?.energy,bands:features?.bands,onsetId:player.features?.serial,frames:host.frames,materials:host.current?.inspect?.(),errors:host.errors})};
 window.addEventListener('pagehide',()=>{cancelAnimationFrame(raf);host.dispose();player.dispose();});
 window.addEventListener('pageshow',e=>{if(e.persisted)location.reload();});

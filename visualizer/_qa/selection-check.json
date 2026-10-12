@@ -1,0 +1,76 @@
+{
+  "presets": [
+    "s1-jelly-wave",
+    "s1-pendulum-swing",
+    "s1-ribbon-dance",
+    "s1-bubble-scale",
+    "s1-beat-candy",
+    "s1-tap-floor",
+    "s1-popcorn-rhythm",
+    "s1-hopscotch",
+    "s1-flower-choir",
+    "s1-canon-ripples",
+    "s1-metronome-party",
+    "s1-signal-band",
+    "s1-square-blocks",
+    "s1-saw-hills",
+    "s1-crayon-wave",
+    "s1-spring-dancer",
+    "s2-01-wave-relay",
+    "s2-02-color-surfers",
+    "s2-03-elastic-ensemble",
+    "s2-04-occasional-unison",
+    "s2-05-phrase-bows",
+    "s2-06-beat-pages",
+    "s2-07-wave-dialogue",
+    "s2-08-late-wave",
+    "s2-09-rhythm-rosette",
+    "s2-10-swing-waves",
+    "s3-architecture",
+    "s4-loom",
+    "s3-cuts",
+    "s4-fossil",
+    "s4-tides",
+    "s3-breath",
+    "s4-echo",
+    "s4-energy"
+  ],
+  "redirects": [
+    {
+      "from": "s4-architecture",
+      "to": "s3-architecture"
+    },
+    {
+      "from": "s3-loom",
+      "to": "s4-loom"
+    },
+    {
+      "from": "s4-cuts",
+      "to": "s3-cuts"
+    },
+    {
+      "from": "s3-fossil",
+      "to": "s4-fossil"
+    },
+    {
+      "from": "s3-tides",
+      "to": "s4-tides"
+    },
+    {
+      "from": "s4-breath",
+      "to": "s3-breath"
+    },
+    {
+      "from": "s3-echo",
+      "to": "s4-echo"
+    },
+    {
+      "from": "s3-energy",
+      "to": "s4-energy"
+    }
+  ],
+  "errors": [],
+  "missing": [],
+  "autoRotation": true,
+  "fallback": "s3-architecture"
+}

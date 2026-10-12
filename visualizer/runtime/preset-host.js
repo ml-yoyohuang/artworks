@@ -1,3 +1,4 @@
+import {presets} from '../presets/registry.js';
 import {emptyFeatures} from '../audio/features.js';
 export class PresetHost {
   constructor(container,player,onChange) {
@@ -9,6 +10,9 @@ export class PresetHost {
     this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(container);
   }
   async select(preset) {
+    const allowed=presets.find(p=>p.id===preset.id);
+    if(!allowed)throw new Error("這個視覺已從選集移除");
+    preset=allowed;
     const token=++this.token;
     try {this.current?.dispose();} catch(e) {console.warn("Scene cleanup",e);} this.current=null;this.container.replaceChildren();
     const canvas=document.createElement('canvas');canvas.setAttribute('aria-label',preset.name+'，依目前歌曲的頻段與起音變化');canvas.tabIndex=0;
@@ -28,9 +32,10 @@ export class PresetHost {
       // A labelled, live Canvas version keeps the music running on devices without WebGL.
       if(preset.series===4&&preset.index!==1) {
         const fallbackCanvas=document.createElement('canvas');this.container.appendChild(fallbackCanvas);
-        const mod=await import('../adapters/sound3.js');const work=await mod.create({...preset,series:3},fallbackCanvas,this);
+        const fallback=presets.find(p=>p.id==='s3-architecture');
+        const mod=await import('../adapters/sound3.js');const work=await mod.create(fallback,fallbackCanvas,this);
         if(token!==this.token){work.dispose();return;}
-        this.canvas=fallbackCanvas;this.current=work;this.preset=preset;this.resize();work.render();this.onChange(preset,work,'目前使用 Canvas 替代視覺');this.dirty=true;
+        this.canvas=fallbackCanvas;this.current=work;this.preset=fallback;this.resize();work.render();this.onChange(fallback,work,'此作品無法啟動，使用已選定的 Canvas 共振建築替代');this.dirty=true;
       } else throw error;
     }
   }
