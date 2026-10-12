@@ -1,0 +1,156 @@
+{
+  "initial": {
+    "preset": "s4-fossil",
+    "time": 0,
+    "playing": false,
+    "energy": 0,
+    "bands": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "frames": 1,
+    "materials": {
+      "time": 0,
+      "rings": 0,
+      "totalRings": 0,
+      "turns": 0,
+      "drawCount": 0,
+      "sceneMeshes": 1,
+      "budget": 2048,
+      "growthRate": 0.27,
+      "growthBpm": 70,
+      "cutTriggers": 0,
+      "cutRest": false,
+      "queue": 0
+    },
+    "errors": []
+  },
+  "live": {
+    "preset": "s4-fossil",
+    "time": 10.511855,
+    "playing": true,
+    "energy": 0.8696841549001882,
+    "bands": [
+      0.4803529977798462,
+      0.6927968859672546,
+      0.8911179900169373,
+      0.6470719575881958,
+      0.6516335606575012,
+      0.48892495036125183,
+      0.5749483108520508,
+      0.09919125586748123
+    ],
+    "onsetId": 218,
+    "frames": 417,
+    "materials": {
+      "time": 10.381837,
+      "rings": 111,
+      "totalRings": 111,
+      "turns": 0.7935990478999703,
+      "drawCount": 20928,
+      "sceneMeshes": 1,
+      "budget": 2048,
+      "growthRate": 0.684971774290641,
+      "growthBpm": 137.1683470541455,
+      "cutTriggers": 0,
+      "cutRest": false,
+      "queue": 0
+    },
+    "errors": []
+  },
+  "simulated": {
+    "checkpoints": [
+      {
+        "time": 30,
+        "rings": 143,
+        "totalRings": 143,
+        "turns": 1.0203287657465394,
+        "drawCount": 27264,
+        "sceneMeshes": 1,
+        "budget": 2048,
+        "growthRate": 0.2005082794749504,
+        "growthBpm": 55.00001601556015,
+        "cutTriggers": 0,
+        "cutRest": false,
+        "queue": 0
+      },
+      {
+        "time": 60,
+        "rings": 277,
+        "totalRings": 277,
+        "turns": 1.9776846158968775,
+        "drawCount": 52992,
+        "sceneMeshes": 1,
+        "budget": 2048,
+        "growthRate": 0.20050813109356724,
+        "growthBpm": 55.000000000004896,
+        "cutTriggers": 0,
+        "cutRest": false,
+        "queue": 0
+      },
+      {
+        "time": 300,
+        "rings": 1346,
+        "totalRings": 1346,
+        "turns": 9.636531062373539,
+        "drawCount": 258240,
+        "sceneMeshes": 1,
+        "budget": 2048,
+        "growthRate": 0.20050813109352209,
+        "growthBpm": 55.00000000000003,
+        "cutTriggers": 0,
+        "cutRest": false,
+        "queue": 0
+      },
+      {
+        "time": 900,
+        "rings": 1715,
+        "totalRings": 4019,
+        "turns": 28.783647178564955,
+        "drawCount": 329088,
+        "sceneMeshes": 1,
+        "budget": 2048,
+        "growthRate": 0.20050813109352209,
+        "growthBpm": 55.00000000000003,
+        "cutTriggers": 0,
+        "cutRest": false,
+        "queue": 0
+      }
+    ],
+    "quiet": {
+      "time": 901,
+      "rings": 1715,
+      "totalRings": 4019,
+      "turns": 28.783647178564955,
+      "drawCount": 329088,
+      "sceneMeshes": 1,
+      "budget": 2048,
+      "growthRate": 0.20050813109352197,
+      "growthBpm": 55.000000000000014,
+      "cutTriggers": 0,
+      "cutRest": false,
+      "queue": 0
+    },
+    "frozen": {
+      "time": 901,
+      "rings": 1715,
+      "totalRings": 4019,
+      "turns": 28.783647178564955,
+      "drawCount": 329088,
+      "sceneMeshes": 1,
+      "budget": 2048,
+      "growthRate": 0.20050813109352197,
+      "growthBpm": 55.000000000000014,
+      "cutTriggers": 0,
+      "cutRest": false,
+      "queue": 0
+    }
+  },
+  "errors": []
+}

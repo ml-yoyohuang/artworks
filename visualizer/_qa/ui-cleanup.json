@@ -1,0 +1,306 @@
+{
+  "presets": [
+    {
+      "id": "s1-jelly-wave",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s1-pendulum-swing",
+      "playing": true,
+      "labels": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12"
+      ]
+    },
+    {
+      "id": "s1-ribbon-dance",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s1-bubble-scale",
+      "playing": true,
+      "labels": [
+        "48",
+        "50",
+        "52",
+        "55",
+        "57",
+        "60",
+        "62",
+        "64",
+        "低音 · 大泡泡",
+        "高音 · 小泡泡"
+      ]
+    },
+    {
+      "id": "s1-beat-candy",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s1-tap-floor",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s1-popcorn-rhythm",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s1-hopscotch",
+      "playing": true,
+      "labels": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07"
+      ]
+    },
+    {
+      "id": "s1-flower-choir",
+      "playing": true,
+      "labels": [
+        "48",
+        "50",
+        "52",
+        "57",
+        "72"
+      ]
+    },
+    {
+      "id": "s1-canon-ripples",
+      "playing": true,
+      "labels": [
+        "1",
+        "I · 聲部一",
+        "2",
+        "II · 聲部二",
+        "3",
+        "III · 聲部三"
+      ]
+    },
+    {
+      "id": "s1-metronome-party",
+      "playing": true,
+      "labels": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06"
+      ]
+    },
+    {
+      "id": "s1-signal-band",
+      "playing": true,
+      "labels": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "紅：低音 · 黃：中音 · 綠：高音"
+      ]
+    },
+    {
+      "id": "s1-square-blocks",
+      "playing": true,
+      "labels": [
+        "1 號 · 3 層 · 52",
+        "2 號 · 4 層 · 55",
+        "3 號 · 5 層 · 57",
+        "1 號 · 4 層 · 55",
+        "3 號 · 2 層 · 50",
+        "2 號 · 5 層 · 57",
+        "3 號 · 3 層 · 52"
+      ]
+    },
+    {
+      "id": "s1-saw-hills",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s1-crayon-wave",
+      "playing": true,
+      "labels": [
+        "64",
+        "62",
+        "60",
+        "57",
+        "55",
+        "52",
+        "50",
+        "48"
+      ]
+    },
+    {
+      "id": "s1-spring-dancer",
+      "playing": true,
+      "labels": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05"
+      ]
+    },
+    {
+      "id": "s2-01-wave-relay",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s2-02-color-surfers",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s2-03-elastic-ensemble",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s2-04-occasional-unison",
+      "playing": true,
+      "labels": [
+        "01 / 12"
+      ]
+    },
+    {
+      "id": "s2-05-phrase-bows",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s2-06-beat-pages",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s2-07-wave-dialogue",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s2-08-late-wave",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s2-09-rhythm-rosette",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s2-10-swing-waves",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s3-architecture",
+      "playing": true,
+      "labels": [
+        "C · MAJOR"
+      ]
+    },
+    {
+      "id": "s3-loom",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s3-cuts",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s3-fossil",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s3-tides",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s3-breath",
+      "playing": true,
+      "labels": [
+        "未留下的氣息",
+        "這一口氣"
+      ]
+    },
+    {
+      "id": "s3-echo",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s3-energy",
+      "playing": true,
+      "labels": [
+        "每一個音，都留下一點力量。"
+      ]
+    },
+    {
+      "id": "s4-architecture",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s4-loom",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s4-cuts",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s4-fossil",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s4-tides",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s4-breath",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s4-echo",
+      "playing": true,
+      "labels": []
+    },
+    {
+      "id": "s4-energy",
+      "playing": true,
+      "labels": []
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,5 @@
+# Generated browser screenshots and synthetic audio fixtures stay local.
+_qa/*
+!_qa/*.json
+__pycache__/
+*.pyc
