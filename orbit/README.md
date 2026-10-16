@@ -20,7 +20,14 @@ npm run lint
 npm test
 npm run test:browser  # 需先啟動 5174 預覽，以及 Playwright Chromium
 npm run build
+npm run test:production # 以 /artworks/orbit/ 子路徑驗證正式輸出
 ```
+
+## GitHub Pages
+
+正式網址為 https://ml-yoyohuang.github.io/artworks/orbit/。儲存庫的 Pages 發布來源使用 **GitHub Actions**；根目錄的 `.github/workflows/pages.yml` 在推送 `main` 時先保留原作品集的 Jekyll 建置，再把 ORBIT 的 `dist/` 放入發布成品的 `orbit/`。請勿直接發布 `orbit/index.html` 原始碼：其中的 TypeScript 入口必須先由 Vite 編譯。
+
+部署前會驗證正式輸出在子目錄下的 JavaScript、樣式、字體與繪圖操作。也可用 `ORBIT_CHECK_URL` 指定已部署網址，執行相同檢查。這個流程與私人 Sites 網址分別部署。
 
 ## 操作
 
