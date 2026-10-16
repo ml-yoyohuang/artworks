@@ -8,6 +8,7 @@ import { INKS } from './catalog';
 import { createPNG, createSVG, download } from './export';
 import { instrumentButton } from './interaction';
 import { FocusView, contrastPreference } from './view';
+import { mountModes } from './modes';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = layout();
 const $ = <T extends Element = HTMLElement>(selector: string): T => document.querySelector<T>(selector)!;
@@ -144,6 +145,7 @@ mechanism.addEventListener('keydown', e => {
 });
 document.addEventListener('keydown', e => {
   const target = e.target as Element;
+  if (document.querySelector<HTMLElement>('#app')!.hidden) return;
   if (document.querySelector('dialog[open]') || target.matches('input,select,textarea')) return;
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); if (e.shiftKey) redo(); else undo(); }
   else if (e.code === 'Space' && (target === document.body || target === mechanism)) { e.preventDefault(); play(); }
@@ -164,3 +166,4 @@ for (const format of ['png', 'svg'] as const) {
   });
 }
 update();
+mountModes(pause, () => structuredClone(model.all));

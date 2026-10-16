@@ -1,5 +1,13 @@
 # ORBIT — A Spirograph Atelier
 
+## Phase 02 開發分支
+
+`feature/phase-02` 在同一份應用新增 **Studio**。Classic 的首頁右上可進入 Studio；Classic 頁尾的「帶入 Studio」保留原始筆跡、含未完成與反向段落。切換模式不清除工作紙。
+
+Studio 有 Geometry、Ink、Motion、Print、Compose、Discover 六個實驗室，以及 18 件可編輯的作品選集。提供本機收藏、Project JSON 匯入／匯出、PNG／SVG、圖層與復原／重做。所有動畫由使用者按播放啟動；重新整理前請保存或匯出 JSON。
+
+架構與格式見 [PHASE_02_ARCHITECTURE.md](PHASE_02_ARCHITECTURE.md)，交付與驗收見 [PHASE_02_REPORT.md](PHASE_02_REPORT.md)。本階段只提交開發分支，等待確認後才合併／部署。
+
 齒輪、墨水與幾何的數位文具工作室。Phase 01，獨立於作品集其他頁面的 TypeScript 專案。
 
 ## 啟動

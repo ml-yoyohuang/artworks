@@ -1,0 +1,50 @@
+{
+  "environment": "Local headless Chromium; viewport emulation, not physical mobile hardware",
+  "results": [
+    {
+      "width": 1440,
+      "height": 900,
+      "deviceScaleFactor": 1,
+      "artwork": 0,
+      "medianMs": 16.699999999999818,
+      "p95Ms": 16.700000000000273,
+      "framesOver33ms": 0,
+      "previewUpdates": 61,
+      "elapsedMs": 1999.8339999999998
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 3,
+      "artwork": 0,
+      "medianMs": 16.699999999999818,
+      "p95Ms": 16.700000000000273,
+      "framesOver33ms": 0,
+      "previewUpdates": 61,
+      "elapsedMs": 1999.934
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "deviceScaleFactor": 1,
+      "artwork": 16,
+      "medianMs": 16.699999999999818,
+      "p95Ms": 16.799999999999955,
+      "framesOver33ms": 0,
+      "previewUpdates": 53,
+      "elapsedMs": 2033.1999999999998
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 3,
+      "artwork": 16,
+      "medianMs": 16.699999999999818,
+      "p95Ms": 16.799999999999727,
+      "framesOver33ms": 0,
+      "previewUpdates": 36,
+      "elapsedMs": 2016.7
+    }
+  ],
+  "errors": []
+}

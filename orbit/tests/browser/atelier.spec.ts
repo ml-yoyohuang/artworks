@@ -1,5 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
+const qa = process.env.ORBIT_QA_DIR || 'qa';
 const fresh = async (page: Page) => {
   await page.locator('#new-paper').click(); await page.locator('#confirm-clear').click();
 };
@@ -11,7 +12,7 @@ test('six viewport layouts and initial composition have no overflow', async ({ p
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     const paper = await page.locator('#paper').boundingBox();
     expect(Math.abs(paper!.width - paper!.height)).toBeLessThan(1);
-    await page.screenshot({ path: `qa/viewport-${width}.png`, fullPage: true });
+    await page.screenshot({ path: `${qa}/viewport-${width}.png`, fullPage: true });
   }
 });
 test('auto draw pause resume speed completion and layered artwork', async ({ page }) => {
@@ -24,11 +25,11 @@ test('auto draw pause resume speed completion and layered artwork', async ({ pag
   const paused = await page.locator('#progress-text').textContent();
   await page.waitForTimeout(200); await expect(page.locator('#progress-text')).toHaveText(paused!);
   await expect(page.locator('#toast')).not.toHaveClass(/visible/);
-  await page.screenshot({ path: 'qa/desktop-drawing.png', fullPage: true });
+  await page.screenshot({ path: `${qa}/desktop-drawing.png`, fullPage: true });
   await page.locator('#draw-button').click();
   await expect(page.locator('#progress-text')).toHaveText('100%', { timeout: 10000 });
   await expect(page.locator('#toast')).not.toHaveClass(/visible/);
-  await page.screenshot({ path: 'qa/desktop-complete.png', fullPage: true });
+  await page.screenshot({ path: `${qa}/desktop-complete.png`, fullPage: true });
   await page.locator('[data-gear="52"]').click();
   await page.locator('[data-ink="1"]').click();
   await page.locator('[data-hole-choice="3"]').click();
@@ -37,7 +38,7 @@ test('auto draw pause resume speed completion and layered artwork', async ({ pag
   await expect(page.locator('#stroke-count')).toHaveText('02 STROKES');
   await page.locator('#tools-toggle').click();
   await expect(page.locator('#toast')).not.toHaveClass(/visible/);
-  await page.screenshot({ path: 'qa/desktop-layered.png', fullPage: true });
+  await page.screenshot({ path: `${qa}/desktop-layered.png`, fullPage: true });
 });
 test('manual drag forward/reverse and switching to auto retains position', async ({ page }) => {
   await fresh(page); await page.locator('[data-mode="manual"]').click();
@@ -112,11 +113,11 @@ test('touch drawing, mobile controls and reduced motion', async ({ browser }) =>
   await client.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
   await expect(page.locator('#stroke-count')).toHaveText('01 STROKES');
   await expect(page.locator('#toast')).not.toHaveClass(/visible/);
-  await page.screenshot({ path: 'qa/mobile-drawing.png', fullPage: true });
+  await page.screenshot({ path: `${qa}/mobile-drawing.png`, fullPage: true });
   await page.locator('[data-gear="63"]').tap(); await page.locator('[data-hole-choice="1"]').tap();
   await expect(page.locator('[data-gear="63"]')).toHaveAttribute('aria-pressed', 'true');
   await expect(page.locator('#toast')).not.toHaveClass(/visible/);
-  await page.screenshot({ path: 'qa/mobile-tools.png', fullPage: true });
+  await page.screenshot({ path: `${qa}/mobile-tools.png`, fullPage: true });
   expect(await page.locator('body').evaluate(el => getComputedStyle(el).touchAction)).not.toBe('none');
   await context.close();
 });

@@ -1,5 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
+const qa = process.env.ORBIT_QA_DIR || 'qa';
 
 async function fallback(page: Page): Promise<void> {
   await page.addInitScript(() => Object.defineProperty(document, 'fullscreenEnabled', { value: false }));
@@ -46,7 +47,7 @@ test('focus controls fit portrait, landscape, desktop and orientation changes', 
       expect(box.x + box.width, selector).toBeLessThanOrEqual(width + 1);
       expect(box.y + box.height, selector).toBeLessThanOrEqual(height + 1);
     }
-    await page.screenshot({ path: `qa/focus-${width}x${height}.png` });
+    await page.screenshot({ path: `${qa}/focus-${width}x${height}.png` });
   }
 });
 test('touch circles and swipes cannot move the fullscreen drawing surface', async ({ browser }) => {
@@ -78,7 +79,7 @@ test('contrast persists, strengthens rendered ink, and preserves export colors',
   expect(svg).toContain('stroke="#234f68"'); expect(svg).not.toContain('#103d5b');
   await page.reload(); await expect(page.locator('#contrast-toggle')).toHaveAttribute('aria-pressed', 'true');
   await page.locator('#focus-toggle').click();
-  await page.screenshot({ path: 'qa/focus-high-contrast.png' });
+  await page.screenshot({ path: `${qa}/focus-high-contrast.png` });
   await page.locator('#contrast-toggle').click(); await expect(page.locator('html')).not.toHaveClass(/high-contrast/);
 });
 test('10x and 20x close correctly, hide the spinning gear, and restore it on pause', async ({ page }) => {

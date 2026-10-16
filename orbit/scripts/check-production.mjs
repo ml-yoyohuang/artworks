@@ -52,8 +52,15 @@ try {
   assert.match(await page.locator('.atelier').getAttribute('class'), /is-focused/);
   assert.equal(await page.locator('body').evaluate(body => getComputedStyle(body).position), 'fixed');
   await page.locator('#focus-toggle').click();
+  await page.locator('#enter-studio').click();
+  await page.locator('#s-art svg').waitFor({ state: 'visible' });
+  assert.equal(await page.locator('.s-artworks article').count(), 18, 'Studio lazy chunk and collection load from the subpath');
+  await page.locator('[data-lab="geometry"]').click();
+  await page.locator('[data-action="family:epi"]').click();
+  await page.locator('#back-classic').click();
+  await page.locator('#paper').waitFor({ state: 'visible' });
   assert.deepEqual(errors, [], 'No runtime errors or failed resources');
-  console.log(`PASS: production page, fonts, artwork, drawing, contrast and fullscreen at ${url}`);
+  console.log(`PASS: Classic and Studio production chunks, fonts, artwork, drawing, contrast and fullscreen at ${url}`);
 } finally {
   await browser?.close();
   await new Promise(resolve => server.close(resolve));
