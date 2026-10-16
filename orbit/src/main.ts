@@ -1,4 +1,5 @@
 import './style.css';
+import './view.css';
 import { layout } from './ui';
 import { Atelier } from './state';
 import { Renderer } from './renderer';
@@ -6,6 +7,7 @@ import { angleDelta, TAU } from './geometry';
 import { INKS } from './catalog';
 import { createPNG, createSVG, download } from './export';
 import { instrumentButton } from './interaction';
+import { FocusView, contrastPreference } from './view';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = layout();
 const $ = <T extends Element = HTMLElement>(selector: string): T => document.querySelector<T>(selector)!;
@@ -15,12 +17,15 @@ const renderer = new Renderer($('#completed-canvas'), $('#active-canvas'), mecha
 let toastTimer: ReturnType<typeof setTimeout>;
 let dragging: { id: number; angle: number; travel: number } | null = null;
 let frame = 0;
+new FocusView($('.atelier'), $('#focus-toggle'), () => { dragging = null; });
+contrastPreference($('#contrast-toggle'), enabled => renderer.setContrast(enabled));
 function announce(text: string): void {
   $('#announcement').textContent = text; $('#toast').textContent = text;
   $('#toast').classList.add('visible'); clearTimeout(toastTimer);
   toastTimer = setTimeout(() => $('#toast').classList.remove('visible'), 2600);
 }
 function update(): void {
+  $('#paper').classList.toggle('fast-drawing', model.running && model.speed >= 10);
   const progress = Math.round(model.progress * 100);
   $('#play-label').textContent = model.running ? '暫停一下' : model.active ? '繼續繪製' : '開始繪製';
   $('#play-icon').textContent = model.running ? 'Ⅱ' : '▶';
@@ -58,7 +63,7 @@ function advance(delta: number): void {
 function play(): void {
   if (model.running) { pause(); announce('已暫停。美好的事，可以慢慢來。'); return; }
   model.mode = 'auto'; model.begin(); model.running = true;
-  $('#drawing-hint').textContent = '沿著齒圈慢慢滾動，每一筆都來自同一個軌跡。';
+  $('#drawing-hint').textContent = model.speed >= 10 ? '高速繪圖中，暫時收起滾動齒輪，專心看花綻放。' : '沿著齒圈慢慢滾動，每一筆都來自同一個軌跡。';
   let last = performance.now();
   const tick = (now: number) => {
     if (!model.running) return;
@@ -85,7 +90,10 @@ document.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach(b => b.addEv
   $('#drawing-hint').textContent = model.mode === 'manual' ? '沿著紙面轉圈拖曳；也可聚焦紙面，用 ← → 轉動。' : '按下開始，接續目前的軌跡。';
   announce(model.mode === 'manual' ? '手動模式。拖曳或使用左右方向鍵轉動。' : '自動模式。按開始即可接續。');
 }));
-$('#speed').addEventListener('change', e => { model.speed = Number((e.target as HTMLSelectElement).value); });
+$('#speed').addEventListener('change', e => {
+  model.speed = Number((e.target as HTMLSelectElement).value); update();
+  if (model.speed >= 10) announce(`${model.speed}× 高速繪圖；運轉時收起小齒輪，筆跡持續完整描繪。`);
+});
 function undo(): void { pause(); if (model.undo()) { renderer.redraw(); update(); announce('已復原一筆。可按重做恢復。'); } }
 function redo(): void { pause(); if (model.redo()) { renderer.redraw(); update(); announce('筆跡已恢復。未完成的部分可以接續。'); } }
 $('#undo').addEventListener('click', undo); $('#redo').addEventListener('click', redo);

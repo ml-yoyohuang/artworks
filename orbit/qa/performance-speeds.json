@@ -1,0 +1,59 @@
+{
+  "note": "Headless Chromium on this host; mobile viewport and DPR emulation, not physical-phone performance.",
+  "results": [
+    {
+      "viewport": "1440x900",
+      "dpr": 1,
+      "speed": 1,
+      "samples": 120,
+      "medianFrameMs": 16.69999999999999,
+      "p95FrameMs": 16.700000000000273,
+      "framesOver33ms": 0
+    },
+    {
+      "viewport": "1440x900",
+      "dpr": 1,
+      "speed": 10,
+      "samples": 120,
+      "medianFrameMs": 16.699999999999932,
+      "p95FrameMs": 16.799999999999955,
+      "framesOver33ms": 0
+    },
+    {
+      "viewport": "1440x900",
+      "dpr": 1,
+      "speed": 20,
+      "samples": 120,
+      "medianFrameMs": 16.699999999999932,
+      "p95FrameMs": 16.799999999999727,
+      "framesOver33ms": 0
+    },
+    {
+      "viewport": "390x844",
+      "dpr": 3,
+      "speed": 1,
+      "samples": 120,
+      "medianFrameMs": 16.699999999999932,
+      "p95FrameMs": 16.799999999999955,
+      "framesOver33ms": 0
+    },
+    {
+      "viewport": "390x844",
+      "dpr": 3,
+      "speed": 10,
+      "samples": 120,
+      "medianFrameMs": 16.699999999999932,
+      "p95FrameMs": 16.700000000000045,
+      "framesOver33ms": 0
+    },
+    {
+      "viewport": "390x844",
+      "dpr": 3,
+      "speed": 20,
+      "samples": 120,
+      "medianFrameMs": 16.699999999999932,
+      "p95FrameMs": 16.73399999999998,
+      "framesOver33ms": 0
+    }
+  ]
+}

@@ -2,11 +2,16 @@ import { gearPosition, pathData, penPosition, rotation, sampleSegment } from './
 import { GEARS, INKS } from './catalog';
 import { gearMarkup, ringMarkup } from './gears';
 import type { Atelier, Stroke } from './state';
+import { displayInk } from './contrast';
 export const PAPER_SIZE = 760;
 export class Renderer {
   private contexts: CanvasRenderingContext2D[];
   private cache = new Map<string, Path2D>();
   private signature = '';
+  private highContrast = false;
+  setContrast(enabled: boolean): void {
+    this.highContrast = enabled; this.signature = ''; this.redraw();
+  }
   constructor(private completed: HTMLCanvasElement, private active: HTMLCanvasElement,
     private svg: SVGSVGElement, private model: Atelier) {
     this.contexts = [completed.getContext('2d')!, active.getContext('2d')!];
@@ -27,7 +32,8 @@ export class Renderer {
   private drawStroke(c: CanvasRenderingContext2D, s: Stroke, cache: boolean): void {
     let path = cache ? this.cache.get(s.id) : undefined;
     if (!path) { path = new Path2D(pathData(s.geometry, s.stops)); if (cache) this.cache.set(s.id, path); }
-    c.strokeStyle = s.color; c.lineWidth = s.width; c.lineJoin = 'round'; c.lineCap = 'round'; c.stroke(path);
+    c.strokeStyle = displayInk(s.color, this.highContrast); c.lineWidth = this.highContrast ? Math.max(1.2, s.width) : s.width;
+    c.lineJoin = 'round'; c.lineCap = 'round'; c.stroke(path);
   }
   redraw(): void {
     const [done, active] = this.contexts;
@@ -41,7 +47,8 @@ export class Renderer {
   segment(s: Stroke, from: number, to: number): void {
     const c = this.contexts[1], points = sampleSegment(s.geometry, from, to);
     c.beginPath(); points.forEach((p, i) => i ? c.lineTo(p.x, p.y) : c.moveTo(p.x, p.y));
-    c.strokeStyle = s.color; c.lineWidth = s.width; c.lineJoin = 'round'; c.lineCap = 'round'; c.stroke();
+    c.strokeStyle = displayInk(s.color, this.highContrast); c.lineWidth = this.highContrast ? Math.max(1.2, s.width) : s.width;
+    c.lineJoin = 'round'; c.lineCap = 'round'; c.stroke();
     if (s.complete) this.redraw();
     else this.position();
   }
