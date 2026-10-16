@@ -34,6 +34,14 @@
 
 四組作品已搬至上列新路徑；詳細對照與驗證見 [路徑遷移紀錄](PATH_MIGRATION.md)。
 
+## 幾何文具
+
+| 資料夾 | 內容 | 創作工具 |
+| --- | --- | --- |
+| [`orbit/`](orbit/) | ORBIT — 可手動與自動繪製、疊圖及匯出 PNG／SVG 的數位萬花尺工作室 | Codex |
+
+ORBIT 的啟動與建置方式見 [`orbit/README.md`](orbit/README.md)。
+
 ## 觀看方式
 
 作品頁與雜誌頁都是獨立的 HTML，可直接以瀏覽器開啟（`file://`）。
