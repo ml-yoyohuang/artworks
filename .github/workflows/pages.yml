@@ -40,7 +40,8 @@ jobs:
           npm run test:production
         working-directory: orbit
       - name: Publish compiled ORBIT at its existing URL
-        run: rsync -a --delete orbit/dist/ _site/orbit/
+        # Jekyll's Docker action creates root-owned output on the runner.
+        run: sudo rsync -a --delete orbit/dist/ _site/orbit/
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
