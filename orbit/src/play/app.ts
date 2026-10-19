@@ -23,6 +23,7 @@ export class Play {
   private $ = <T extends Element = HTMLElement>(selector: string): T => this.root.querySelector<T>(selector)!;
   constructor(private root: HTMLElement, private back: () => void) {
     root.className = 'play-mode';
+    root.tabIndex = -1;
     root.innerHTML = `<header class="p-header"><a class="p-brand" href="#" aria-label="返回經典模式">ORBIT<span>THE PLAY ROOM</span></a><span class="p-edition">A LITTLE TURN. A LITTLE WONDER.</span><button id="p-back">經典模式 <span aria-hidden="true">↗</span></button></header>
       <section class="p-workspace" aria-label="簡易遊玩模式">
         <div class="p-intro"><span class="p-eyebrow">NO SETTINGS. JUST CURIOSITY.</span><h1>Just turn<br>&amp; <em>draw.</em><span class="p-punctuation" aria-hidden="true">✳</span></h1><p>一圈又一圈，<br>讓驚喜留在紙上。</p><div class="p-swatch" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><span class="p-side-note">YOUR HANDS. ENDLESS POSSIBILITIES.</span></div>
@@ -82,7 +83,7 @@ export class Play {
   show(): void {
     this.active = true; this.root.hidden = false; document.documentElement.classList.add('play-active');
     this.setPhase(this.model.drawing.progress >= 1 ? 'completed' : this.model.drawing.hasInk ? 'paused' : 'ready');
-    this.render(); this.svg.focus({ preventScroll: true });
+    this.render(); this.root.focus({ preventScroll: true });
   }
   hide(): void { this.pause(); this.active = false; this.root.hidden = true; document.documentElement.classList.remove('play-active'); }
   private get busy(): boolean { return this.phase === 'changingPaper' || this.phase === 'transitioning'; }

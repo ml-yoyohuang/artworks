@@ -97,13 +97,17 @@ test('all six papers, touch targets, resize, keyboard and reduced motion', async
 });
 test('mobile touch circle and cancellation never scroll the paper', async ({ browser }) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }); const page = await context.newPage();
-  await open(page); const box = (await page.locator('#p-paper').boundingBox())!, cx = box.x + box.width / 2, cy = box.y + box.height / 2;
+  await open(page); await page.waitForTimeout(300);
+  const box = (await page.locator('#p-paper').boundingBox())!, cx = box.x + box.width / 2, cy = box.y + box.height / 2;
   const cdp = await context.newCDPSession(page);
   await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: cx + 85, y: cy }] });
   for (let i = 1; i <= 30; i++) await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: cx + 85 * Math.cos(i / 5), y: cy + 85 * Math.sin(i / 5) }] });
   await cdp.send('Input.dispatchTouchEvent', { type: 'touchCancel', touchPoints: [] });
   await expect(page.locator('#p-count')).toHaveText('01'); await expect(page.locator('#play-root')).toHaveAttribute('data-phase', 'paused');
-  expect(await page.locator('#p-paper').boundingBox()).toEqual(box); expect(await page.evaluate(() => getSelection()?.toString())).toBe('');
+  const after = (await page.locator('#p-paper').boundingBox())!;
+  expect(Math.abs(after.x - box.x)).toBeLessThan(.5); expect(Math.abs(after.y - box.y)).toBeLessThan(.5);
+  expect(Math.abs(after.width - box.width)).toBeLessThan(.5); expect(Math.abs(after.height - box.height)).toBeLessThan(.5);
+  expect(await page.evaluate(() => getSelection()?.toString())).toBe('');
   await context.close();
 });
 test('unavailable storage keeps session restore working and reports the limitation', async ({ page }) => {

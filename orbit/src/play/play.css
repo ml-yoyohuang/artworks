@@ -9,6 +9,7 @@
   animation: p-enter 240ms var(--p-ease);
 }
 .play-mode[hidden] { display: none; }
+.play-mode:focus { outline: none; }
 .play-active, .play-active body { overflow: hidden; overscroll-behavior: none; }
 .play-active body { position: fixed; width: 100%; height: 100%; }
 .play-mode button { font: inherit; color: inherit; min-height: 44px; cursor: pointer; touch-action: manipulation; transition: background var(--p-fast), transform var(--p-fast); }

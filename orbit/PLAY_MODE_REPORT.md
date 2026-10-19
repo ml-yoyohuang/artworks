@@ -1,6 +1,6 @@
 # ORBIT — Play Mode（Phase 01.5）
 
-**狀態：功能已實作，程式檢查通過；瀏覽器與兩輪視覺驗收待執行，尚未完成全部交付條件。**
+**狀態：功能、Classic／Studio 回歸、正式子路徑與兩輪視覺驗收已完成；待使用者審閱功能分支。**
 
 本次从乾淨、已包含 Phase 02 的 `main`（`2a0564e`）建立 `feature/play-mode`。沒有複製 Phase 01、建立獨立網站、改動部署設定或合併 main。高對比配色依需求移除；原有全螢幕、10×／20×、手動／自動、復原／重做、匯出及 Studio 保留。
 
@@ -33,7 +33,7 @@ Vol.1 的 `#f6f1e7` 暖紙白與 `#303d36` 深灰綠構成基底，珊瑚 `#d969
 | 焦點 | `#305c78`，2px 外框 |
 | 短轉場／換紙 | 180ms / 420ms；reduced-motion 停用裝飾動態 |
 
-八種墨色使用較深的珊瑚、藍、綠、梅紫、赭黃、靛紫、莓紅、藍綠。每紙具 preferred 與 secondary 名單；不在名單或對比低於 4:1 的墨色不進候選池。曲線寬 1.15 世界單位，比 Classic 的預設更適合辨識。數值對比已測試；細線在實際手機螢幕上的辨識度仍需視覺驗收。
+八種墨色使用較深的珊瑚、藍、綠、梅紫、赭黃、靛紫、莓紅、藍綠。每紙具 preferred 與 secondary 名單；不在名單或對比低於 4:1 的墨色不進候選池。曲線寬 1.15 世界單位，比 Classic 的預設更適合辨識。數值對比與 Chromium 手機尺寸截圖已檢查；實體手機仍待測。
 
 ## 4. Randomization Engine
 
@@ -75,20 +75,26 @@ Classic 與 Play 擁有獨立 `Atelier` instance，共用類別、幾何、Canva
 | TypeScript strict | 通過 |
 | ESLint src/tests | 通過 |
 | Vite production build | 通過，41 modules |
-| Play chunk | 15.27kB JS / gzip 6.07kB；9.69kB CSS / gzip 2.97kB |
-| 瀏覽器功能與回歸 | **未執行成功**；新增 10 項 Play 案例、更新移除高對比的回歸預期，待執行 |
-| 正式子路徑驗收 | **待執行**；腳本已加入 Play 操作檢查 |
+| Play chunk | 15.28kB JS / gzip 6.09kB；9.72kB CSS / gzip 2.97kB |
+| 瀏覽器功能與回歸 | **38/38 通過**：Play 10、Classic 16、Studio 12；0 unexpected／flaky／skipped |
+| 正式子路徑驗收 | **通過**：正式建置掛在 `/artworks/orbit/`，Classic／Studio／Play chunks、字體、繪圖與全螢幕正常 |
 
-本機瀏覽器執行的自動權限審查兩次逾時；in-app 預覽檢視回報審查模型容量不足。這是審查服務未完成，不是測試 assertion failure。沒有繞過審查，也沒有把未執行的檢查算為通過。
+完整瀏覽器紀錄見 [browser-results.json](qa/play/browser-results.json)；Classic 本輪截圖另存於 `qa/play/classic-regression/`，原 Phase 01／02 紀錄未覆寫。初次執行 Play 手機觸控項目時，以精確像素比較紙張位置，撞上入場動畫剩餘不到 1px 的位移；等動畫完成後測試手機手勢取消、紙張不捲動與筆跡保留，整套重新跑 38 項成功。
+
+先前自動權限審查曾逾時，使用者明確允許重試後才完成上述瀏覽器驗收。正式子路徑 smoke test 一度因測試腳本假設 Play 進入時紙面取得焦點而失敗；修正腳本明確聚焦紙面後重新通過，產品本身無此操作問題。
 
 ## 10. 視覺審查
 
-**尚未完成要求的兩輪實際 Play 畫面審查。** 已實際檢視 rhythm 既有參考截圖，但不能把它當成 Play 驗收。已備妥 `scripts/review-play.ts`：使用 seed 42，透過實際 UI 自動旋轉，擷取 Classic、桌面 Play、繪圖中、完成提示、換組、四色疊圖、換紙、新紙、手機 Play／繪圖／疊圖，共 12 張。沒有製造假截圖或自評 9/10。
+已用實際 Chromium 與 seed 42 執行 [第一輪](qa/play/round-1/review.json)、[第二輪](qa/play/round-2/review.json)，每輪 11 張、無 runtime error。畫面包含 Classic、桌面 Play、繪圖中、完成提示、換組、四色疊圖、換紙、新紙、手機 Play／繪圖／疊圖。不是 mockup，也沒有自評 9/10。
+
+第一輪發現初次進入 Play 時，程式自動聚焦 SVG 紙面，產生一圈過重的邊框，讓半透明齒輪與柔和紙色失去平衡；第二輪改為聚焦模式容器，鍵盤仍可使用 Tab 進入紙面，初始畫面不再有黑框。第一輪完成提示截圖擷取於短轉場初始，字樣幾乎不見；第二輪等待 260ms 後清楚顯示。換紙畫面中舊紙淡出滑走，新檸檬紙就位；多色疊圖顏色協調，細線在 390px／DPR 2 的 Chromium 模擬可辨，桌面有足夠留白。左側標題未壓迫紙面，手機版紙與兩個主要按鈕皆在一屏內。未把手機尺寸模擬誤認為實體手機驗收。
+
+對照截圖：[第一輪桌面 Play](qa/play/round-1/desktop-play.png)／[第二輪桌面 Play](qa/play/round-2/desktop-play.png)、[完成提示](qa/play/round-2/desktop-complete.png)、[四色疊圖](qa/play/round-2/desktop-layered.png)、[手機疊圖](qa/play/round-2/mobile-layered.png)。
 
 ```sh
 ORBIT_QA_DIR=qa/play/classic-regression npm run test:browser
 npx tsx scripts/review-play.ts round-1
-# 檢視並修改後再擷取 round-2
+npx tsx scripts/review-play.ts round-2
 npm run test:production
 ```
 
@@ -96,12 +102,11 @@ Windows PowerShell 請改用 `$env:ORBIT_QA_DIR='qa/play/classic-regression'` �
 
 ## 11. 已知限制
 
-- 瀏覽器整合、Classic UI 回歸及視覺驗收仍待完成，目前不應視為可發布版本。
 - IndexedDB 在異常關閉分頁前未完成的非同步寫入可能遺失最後一小段；它不是雲端備份。紙張不保存到無限歷史。
 - Play 的紙色與進度 metadata 尚未在 Studio import 中轉換；沿用舊 importer 的 24 筆上限，不宣稱任意大張 Play 可直接帶入 Studio。
 - 未實作 Phase 03 圖庫、Secret Flowers、Evolution Garden。未驗證實體手機、Safari、Firefox、螢幕閱讀器或正式 WCAG。
-- 齒形沿用既有視覺近似，非製造級齒輪 CAD；細線的最終美感與手機辨識度仍需兩輪截圖檢查。
+- 齒形沿用既有視覺近似，非製造級齒輪 CAD。正式視覺驗收只涵蓋 Chromium 桌面與手機尺寸模擬。
 
 ## 12. Git 交付
 
-功能分支：`feature/play-mode`。提交編號見交付訊息或 `git log -1 feature/play-mode`。main 與遠端網站不變；瀏覽器驗收通過後才適合請使用者確認發布。
+功能分支：`feature/play-mode`。提交編號見交付訊息或 `git log -1 feature/play-mode`。依需求保留 main 與遠端網站的既有版本，等待使用者另行決定是否合併／發布。

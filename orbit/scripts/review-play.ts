@@ -28,7 +28,7 @@ try {
       await page.locator('#p-auto').click();
       if (i === 0) { await page.clock.runFor(1600); await shot('drawing'); await page.clock.runFor(duration - 1600 + 70); }
       else await page.clock.runFor(duration + 70);
-      if (i === 0 && !mobile) await shot('complete');
+      if (i === 0 && !mobile) { await page.waitForTimeout(260); await shot('complete'); }
       await page.clock.runFor(1250);
       if (i === 0 && !mobile) await shot('gear-change');
       await page.clock.runFor(250); model.next();
@@ -39,7 +39,7 @@ try {
     }
     await page.close();
   }
-  await writeFile(`${directory}/review.json`, JSON.stringify({ viewport: ['1440x900', '390x844@2x'], seed: 42, screenshots: 12, runtimeErrors: errors }, null, 2));
+  await writeFile(`${directory}/review.json`, JSON.stringify({ viewport: ['1440x900', '390x844@2x'], seed: 42, screenshots: 11, runtimeErrors: errors }, null, 2));
   if (errors.length) throw new Error(errors.join('\n'));
   console.log(`Play visual review saved to ${directory}; no browser errors`);
 } finally { await browser.close(); }

@@ -61,6 +61,7 @@ try {
   await page.locator('#paper').waitFor({ state: 'visible' });
   await page.locator('#enter-play').click();
   await page.locator('#p-mechanism').waitFor({ state: 'visible' });
+  await page.locator('#p-mechanism').focus();
   await page.keyboard.press('ArrowRight');
   assert.equal(await page.locator('#p-count').textContent(), '01');
   await page.locator('#p-next').click();
