@@ -7,7 +7,7 @@ import { angleDelta, TAU } from './geometry';
 import { INKS } from './catalog';
 import { createPNG, createSVG, download } from './export';
 import { instrumentButton } from './interaction';
-import { FocusView, contrastPreference } from './view';
+import { FocusView } from './view';
 import { mountModes } from './modes';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = layout();
@@ -18,8 +18,7 @@ const renderer = new Renderer($('#completed-canvas'), $('#active-canvas'), mecha
 let toastTimer: ReturnType<typeof setTimeout>;
 let dragging: { id: number; angle: number; travel: number } | null = null;
 let frame = 0;
-new FocusView($('.atelier'), $('#focus-toggle'), () => { dragging = null; });
-contrastPreference($('#contrast-toggle'), enabled => renderer.setContrast(enabled));
+const focusView = new FocusView($('.atelier'), $('#focus-toggle'), () => { dragging = null; });
 function announce(text: string): void {
   $('#announcement').textContent = text; $('#toast').textContent = text;
   $('#toast').classList.add('visible'); clearTimeout(toastTimer);
@@ -166,4 +165,4 @@ for (const format of ['png', 'svg'] as const) {
   });
 }
 update();
-mountModes(pause, () => structuredClone(model.all));
+mountModes(() => { pause(); dragging = null; focusView.exit(); }, () => structuredClone(model.all));

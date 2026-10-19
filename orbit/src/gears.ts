@@ -17,11 +17,11 @@ export function gearMarkup(teeth: number, color: string, id: string, interactive
     ${interactive ? `<circle cx="${r * hole}" r="13" fill="transparent"/><text x="${r * hole}" y="-14" text-anchor="middle" font-family="monospace" font-size="9" fill="#36565b">${i + 1}</text>` : ''}
   </g>`).join('')}`;
 }
-export function ringMarkup(g: Geometry): string {
+export function ringMarkup(g: Geometry, id = 'ring'): string {
   const { R } = radii(g), outer = R + 30;
   const outerPath = `M${outer},0 A${outer},${outer} 0 1 0 ${-outer},0 A${outer},${outer} 0 1 0 ${outer},0Z`;
-  return `<defs><linearGradient id="ring-plastic" x2="1" y2="1"><stop stop-color="#dce9db" stop-opacity=".42"/><stop offset=".45" stop-color="#edf4e7" stop-opacity=".1"/><stop offset="1" stop-color="#a6c4ac" stop-opacity=".30"/></linearGradient></defs>
-    <path d="${outerPath} ${toothPath(g.ring, R, true)}" fill-rule="evenodd" fill="url(#ring-plastic)" stroke="#94ad99" stroke-opacity=".72" stroke-width="1"/>
+  return `<defs><linearGradient id="ring-plastic-${id}" x2="1" y2="1"><stop stop-color="#dce9db" stop-opacity=".42"/><stop offset=".45" stop-color="#edf4e7" stop-opacity=".1"/><stop offset="1" stop-color="#a6c4ac" stop-opacity=".30"/></linearGradient></defs>
+    <path d="${outerPath} ${toothPath(g.ring, R, true)}" fill-rule="evenodd" fill="url(#ring-plastic-${id})" stroke="#94ad99" stroke-opacity=".72" stroke-width="1"/>
     <circle r="${outer - 3}" fill="none" stroke="white" stroke-width="2" stroke-opacity=".85"/>
     <circle r="${R + 8}" fill="none" stroke="#93a98f" stroke-width=".7" stroke-opacity=".7"/>
     ${Array.from({ length: 60 }, (_, i) => {

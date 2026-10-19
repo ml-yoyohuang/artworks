@@ -46,8 +46,8 @@ try {
   await page.locator('#draw-button').click();
   await page.waitForFunction(() => document.querySelector('.progress-track').getAttribute('aria-valuenow') !== '0');
   await page.locator('#draw-button').click();
-  await page.locator('#contrast-toggle').click();
-  assert.equal(await page.locator('#contrast-toggle').getAttribute('aria-pressed'), 'true');
+  assert.equal(await page.locator('#contrast-toggle').count(), 0);
+
   await page.locator('#focus-toggle').click();
   assert.match(await page.locator('.atelier').getAttribute('class'), /is-focused/);
   assert.equal(await page.locator('body').evaluate(body => getComputedStyle(body).position), 'fixed');
@@ -59,8 +59,15 @@ try {
   await page.locator('[data-action="family:epi"]').click();
   await page.locator('#back-classic').click();
   await page.locator('#paper').waitFor({ state: 'visible' });
+  await page.locator('#enter-play').click();
+  await page.locator('#p-mechanism').waitFor({ state: 'visible' });
+  await page.keyboard.press('ArrowRight');
+  assert.equal(await page.locator('#p-count').textContent(), '01');
+  await page.locator('#p-next').click();
+  await page.locator('#p-back').click();
+  await page.locator('#paper').waitFor({ state: 'visible' });
   assert.deepEqual(errors, [], 'No runtime errors or failed resources');
-  console.log(`PASS: Classic and Studio production chunks, fonts, artwork, drawing, contrast and fullscreen at ${url}`);
+  console.log(`PASS: Classic, Play and Studio production chunks, fonts, artwork, drawing and fullscreen at ${url}`);
 } finally {
   await browser?.close();
   await new Promise(resolve => server.close(resolve));

@@ -41,7 +41,7 @@ test('focus controls fit portrait, landscape, desktop and orientation changes', 
   await fallback(page); await page.locator('#focus-toggle').click();
   for (const [width, height] of [[360,800], [390,844], [844,390], [800,360], [768,1024], [1440,900]]) {
     await page.setViewportSize({ width, height });
-    for (const selector of ['#paper', '#focus-toggle', '#contrast-toggle', '#draw-button', '#speed', '#undo', '#export-button']) {
+    for (const selector of ['#paper', '#focus-toggle', '#enter-play', '#draw-button', '#speed', '#undo', '#export-button']) {
       const box = (await page.locator(selector).boundingBox())!;
       expect(box.x, selector).toBeGreaterThanOrEqual(0); expect(box.y, selector).toBeGreaterThanOrEqual(0);
       expect(box.x + box.width, selector).toBeLessThanOrEqual(width + 1);
@@ -67,20 +67,14 @@ test('touch circles and swipes cannot move the fullscreen drawing surface', asyn
   expect(await page.evaluate(() => getSelection()?.toString())).toBe('');
   await context.close();
 });
-test('contrast persists, strengthens rendered ink, and preserves export colors', async ({ page }) => {
-  await page.goto('/');
-  const before = await page.locator('#completed-canvas').evaluate((el: HTMLCanvasElement) => el.toDataURL());
-  await page.locator('#contrast-toggle').click();
-  await expect(page.locator('html')).toHaveClass(/high-contrast/);
-  expect(await page.locator('#completed-canvas').evaluate((el: HTMLCanvasElement) => el.toDataURL())).not.toBe(before);
+test('removed contrast preference has no effect and export keeps original inks', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('orbit.high-contrast', 'true'));
+  await page.goto('/'); await expect(page.locator('#contrast-toggle')).toHaveCount(0);
+  await expect(page.locator('html')).not.toHaveClass(/high-contrast/);
   await page.locator('#export-button').click();
   const pending = page.waitForEvent('download'); await page.locator('#save-svg').click();
   const saved = await pending, svg = await readFile((await saved.path())!, 'utf8');
   expect(svg).toContain('stroke="#234f68"'); expect(svg).not.toContain('#103d5b');
-  await page.reload(); await expect(page.locator('#contrast-toggle')).toHaveAttribute('aria-pressed', 'true');
-  await page.locator('#focus-toggle').click();
-  await page.screenshot({ path: `${qa}/focus-high-contrast.png` });
-  await page.locator('#contrast-toggle').click(); await expect(page.locator('html')).not.toHaveClass(/high-contrast/);
 });
 test('10x and 20x close correctly, hide the spinning gear, and restore it on pause', async ({ page }) => {
   await page.goto('/');

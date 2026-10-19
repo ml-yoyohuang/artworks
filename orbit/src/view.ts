@@ -64,25 +64,3 @@ export class FocusView {
     this.onChange();
   }
 }
-
-const CONTRAST_KEY = 'orbit.high-contrast';
-export function contrastPreference(button: HTMLButtonElement, onChange: (enabled: boolean) => void): void {
-  const media = matchMedia('(prefers-contrast: more)');
-  let saved: string | null = null;
-  try { saved = localStorage.getItem(CONTRAST_KEY); } catch { /* Storage can be unavailable in private / embedded contexts. */ }
-  let explicit = saved !== null, enabled = explicit ? saved === 'true' : media.matches;
-  const apply = () => {
-    document.documentElement.classList.toggle('high-contrast', enabled);
-    button.setAttribute('aria-pressed', String(enabled));
-    button.textContent = enabled ? '柔和配色 ◐' : '高對比配色 ◐';
-    button.setAttribute('aria-label', enabled ? '切換為柔和配色' : '切換為高對比配色');
-    onChange(enabled);
-  };
-  button.addEventListener('click', () => {
-    enabled = !enabled; explicit = true;
-    try { localStorage.setItem(CONTRAST_KEY, String(enabled)); } catch { /* The toggle still works without persistence. */ }
-    apply();
-  });
-  media.addEventListener('change', () => { if (!explicit) { enabled = media.matches; apply(); } });
-  apply();
-}

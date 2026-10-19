@@ -1,5 +1,6 @@
 import type { Stroke } from './state';
 import type { Studio } from './studio/app';
+import type { Play } from './play/app';
 
 export function mountModes(pauseClassic: () => void, strokes: () => Stroke[]): void {
   const classic = document.querySelector<HTMLElement>('#app')!;
@@ -19,4 +20,23 @@ export function mountModes(pauseClassic: () => void, strokes: () => Stroke[]): v
     finally { loading = false; button.disabled = false; }
   }
   button.addEventListener('click', () => void open(false)); transfer.addEventListener('click', () => void open(true));
+  const playButton = classic.querySelector<HTMLButtonElement>('#enter-play')!;
+  let play: Play | undefined;
+  playButton.addEventListener('click', async () => {
+    if (loading) return;
+    loading = true; playButton.disabled = true; pauseClassic(); const previousScroll = window.scrollY;
+    try {
+      if (!play) {
+        const { Play } = await import('./play/app');
+        const root = document.createElement('div'); root.id = 'play-root'; root.hidden = true; document.body.append(root);
+        play = new Play(root, () => {
+          classic.hidden = false; window.scrollTo({ top: scroll, behavior: 'instant' }); playButton.focus({ preventScroll: true });
+          if (!matchMedia('(prefers-reduced-motion: reduce)').matches) classic.animate([{ opacity: .5 }, { opacity: 1 }], { duration: 180 });
+        });
+        await play.init();
+      }
+      scroll = previousScroll; classic.hidden = true; play.show();
+    } catch (error) { console.error(error); playButton.textContent = '簡易模式載入失敗，重試 ↗'; }
+    finally { loading = false; playButton.disabled = false; }
+  });
 }

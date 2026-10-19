@@ -71,32 +71,6 @@
 .focus-active .toast { z-index: 25; bottom: calc(25px + env(safe-area-inset-bottom)); }
 .focus-active dialog { touch-action: pan-y; overscroll-behavior: contain; }
 
-.high-contrast {
-  --desk: #f4f4ec;
-  --paper: #fff;
-  --ink: #172319;
-  --muted: #384235;
-  --line: #656f60;
-  --accent: #902411;
-}
-.high-contrast body:before, .high-contrast .paper:before { opacity: 0; }
-.high-contrast .paper { outline: 1px solid var(--line); }
-.high-contrast .micro, .high-contrast legend, .high-contrast .text-button,
-.high-contrast .drawing-caption, .high-contrast .paper-bottom, .high-contrast .technical-line,
-.high-contrast .speed-label, .high-contrast .mode-switch button, .high-contrast .tool-note small,
-.high-contrast .ink-caption, .high-contrast .registration, .high-contrast footer,
-.high-contrast dialog p { color: var(--ink); }
-.high-contrast .gear-choice[aria-pressed=true], .high-contrast .mode-switch button[aria-pressed=true] {
-  background: #e0e5d9;
-  box-shadow: inset 0 -2px var(--accent);
-}
-.high-contrast .hole-dot { border-color: var(--ink); }
-.high-contrast .fixed-ring path, .high-contrast .fixed-ring circle { stroke: #456344; stroke-opacity: 1; }
-.high-contrast #moving-gear > path, .high-contrast .gear-hole circle { stroke: #315b61; }
-.high-contrast #mechanism text { fill: #1c3528; }
-.high-contrast .progress-track { background: #cad0c0; }
-.high-contrast button:disabled { opacity: .45; }
-
 @media (max-width: 760px) {
   .view-options { grid-row: 1; }
   .view-options .micro { font-size: 7px; }

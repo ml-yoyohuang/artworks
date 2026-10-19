@@ -1,0 +1,196 @@
+TAP version 13
+# Subtest: all 90 ring/gear/hole combinations close, with synchronized pen transforms
+ok 1 - all 90 ring/gear/hole combinations close, with synchronized pen transforms
+  ---
+  duration_ms: 4.5694
+  type: 'test'
+  ...
+# Subtest: closure uses whole gear orbits, not one turn
+ok 2 - closure uses whole gear orbits, not one turn
+  ---
+  duration_ms: 0.3958
+  type: 'test'
+  ...
+# Subtest: sampling is continuous and reversible even across a large dropped frame
+ok 3 - sampling is continuous and reversible even across a large dropped frame
+  ---
+  duration_ms: 7.4425
+  type: 'test'
+  ...
+# Subtest: pointer angles unwrap across ±pi in both directions
+ok 4 - pointer angles unwrap across ±pi in both directions
+  ---
+  duration_ms: 0.4014
+  type: 'test'
+  ...
+# Subtest: invalid parameters rejected and hole offsets affect actual geometry
+ok 5 - invalid parameters rejected and hole offsets affect actual geometry
+  ---
+  duration_ms: 2.8469
+  type: 'test'
+  ...
+# Subtest: curated pool closes inside paper in no more than eight revolutions
+ok 6 - curated pool closes inside paper in no more than eight revolutions
+  ---
+  duration_ms: 1.8301
+  type: 'test'
+  ...
+# Subtest: six paper palettes filter low contrast inks and retain at least five options
+ok 7 - six paper palettes filter low contrast inks and retain at least five options
+  ---
+  duration_ms: 0.7981
+  type: 'test'
+  ...
+# Subtest: seeded choices reproduce and recent history suppresses repeated ratios and colors
+ok 8 - seeded choices reproduce and recent history suppresses repeated ratios and colors
+  ---
+  duration_ms: 73.9036
+  type: 'test'
+  ...
+# Subtest: real closure, reverse drawing, and no drawing after completion
+ok 9 - real closure, reverse drawing, and no drawing after completion
+  ---
+  duration_ms: 1.0908
+  type: 'test'
+  ...
+# Subtest: next preserves partial ink and resets only the instrument
+ok 10 - next preserves partial ink and resets only the instrument
+  ---
+  duration_ms: 0.4628
+  type: 'test'
+  ...
+# Subtest: paper snapshots restore exact reversible progress, seed and pairing
+ok 11 - paper snapshots restore exact reversible progress, seed and pairing
+  ---
+  duration_ms: 1.6318
+  type: 'test'
+  ...
+# Subtest: malformed snapshots reject without replacing the current drawing
+ok 12 - malformed snapshots reject without replacing the current drawing
+  ---
+  duration_ms: 1.0452
+  type: 'test'
+  ...
+# Subtest: Play shares v1 strokes, Studio migration and export with actual paper color
+ok 13 - Play shares v1 strokes, Studio migration and export with actual paper color
+  ---
+  duration_ms: 0.8783
+  type: 'test'
+  ...
+# Subtest: incomplete stroke undo/redo restores geometry and progress
+ok 14 - incomplete stroke undo/redo restores geometry and progress
+  ---
+  duration_ms: 3.8532
+  type: 'test'
+  ...
+# Subtest: switching tools preserves ink and starts an independent stroke
+ok 15 - switching tools preserves ink and starts an independent stroke
+  ---
+  duration_ms: 0.3391
+  type: 'test'
+  ...
+# Subtest: closure clamps, pauses, and subsequent drawing starts a new stroke
+ok 16 - closure clamps, pauses, and subsequent drawing starts a new stroke
+  ---
+  duration_ms: 0.2723
+  type: 'test'
+  ...
+# Subtest: negative closure and branching after undo
+ok 17 - negative closure and branching after undo
+  ---
+  duration_ms: 0.2838
+  type: 'test'
+  ...
+# Subtest: 1x, 10x and 20x retain identical complete vector geometry
+ok 18 - 1x, 10x and 20x retain identical complete vector geometry
+  ---
+  duration_ms: 23.2739
+  type: 'test'
+  ...
+# Subtest: five geometry families close when rational and remain finite, deterministic and bounded
+ok 19 - five geometry families close when rational and remain finite, deterministic and bounded
+  ---
+  duration_ms: 21.4207
+  type: 'test'
+  ...
+# Subtest: hypotrochoid matches Phase 01 coordinates after explicit normalization
+ok 20 - hypotrochoid matches Phase 01 coordinates after explicit normalization
+  ---
+  duration_ms: 0.4676
+  type: 'test'
+  ...
+# Subtest: epitrochoid sign, rose odd/even periods, open and long-period domains are correct
+ok 21 - epitrochoid sign, rose odd/even periods, open and long-period domains are correct
+  ---
+  duration_ms: 0.8609
+  type: 'test'
+  ...
+# Subtest: invalid and extreme geometry is rejected before allocation
+ok 22 - invalid and extreme geometry is rejected before allocation
+  ---
+  duration_ms: 6.7428
+  type: 'test'
+  ...
+# Subtest: all artwork, geometry, ink, motion and six composition presets validate
+ok 23 - all artwork, geometry, ink, motion and six composition presets validate
+  ---
+  duration_ms: 3.7175
+  type: 'test'
+  ...
+# Subtest: materials are deterministic, finite, use distinct renderers and reject bad parameters
+ok 24 - materials are deterministic, finite, use distinct renderers and reject bad parameters
+  ---
+  duration_ms: 36.1009
+  type: 'test'
+  ...
+# Subtest: timeline is frame-rate independent and continuous motions repeat by period
+ok 25 - timeline is frame-rate independent and continuous motions repeat by period
+  ---
+  duration_ms: 8.9863
+  type: 'test'
+  ...
+# Subtest: non-destructive history covers transforms, order, duplication, alignment and undo branches
+ok 26 - non-destructive history covers transforms, order, duplication, alignment and undo branches
+  ---
+  duration_ms: 1.6429
+  type: 'test'
+  ...
+# Subtest: project roundtrip, corrupt data, oversized files and future schema fail safely
+ok 27 - project roundtrip, corrupt data, oversized files and future schema fail safely
+  ---
+  duration_ms: 4.2928
+  type: 'test'
+  ...
+# Subtest: local library CRUD validates without replacing corrupt storage
+ok 28 - local library CRUD validates without replacing corrupt storage
+  ---
+  duration_ms: 0.8044
+  type: 'test'
+  ...
+# Subtest: Classic migration preserves exact geometry, reversals, ink and exported path
+ok 29 - Classic migration preserves exact geometry, reversals, ink and exported path
+  ---
+  duration_ms: 1.0096
+  type: 'test'
+  ...
+# Subtest: variation boards repeat by seed, retain their source and avoid empty geometry
+ok 30 - variation boards repeat by seed, retain their source and avoid empty geometry
+  ---
+  duration_ms: 6.5316
+  type: 'test'
+  ...
+# Subtest: SVG output preserves size, transforms, layer appearance, paper and timeline
+ok 31 - SVG output preserves size, transforms, layer appearance, paper and timeline
+  ---
+  duration_ms: 38.139
+  type: 'test'
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 776.0445

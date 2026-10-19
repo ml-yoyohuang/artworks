@@ -18,7 +18,7 @@ export function layout(): string {
       <div class="title-row"><h1 id="title">A little turn.<br><em>Endless possibilities.</em></h1><div class="intro-note"><span class="vertical-rule"></span><p>齒輪、墨水，與幾何的詩。<br>讓一圈小小的轉動，<br>留下意想不到的花。</p><span class="micro">A SPIROGRAPH ATELIER</span></div></div>
     </section>
     <section class="atelier" aria-label="萬花尺工作桌">
-      <div class="view-options"><span class="micro">PAPER / VIEW</span><div><button id="contrast-toggle" aria-pressed="false" title="加深畫面文字與筆跡；匯出保留原墨色">高對比配色 ◐</button><button id="focus-toggle" aria-pressed="false">全螢幕繪圖 ⛶</button></div></div>
+      <div class="view-options"><span class="micro">PAPER / VIEW</span><div><button id="enter-play">切換為簡易模式 ↗</button><button id="focus-toggle" aria-pressed="false">全螢幕繪圖 ⛶</button></div></div>
       <div class="paper-column">
         <div class="paper-topline"><span class="micro">01 — THE DRAWING TABLE</span><div class="paper-actions"><button id="quick-draw" class="text-button">開始繪製 ↗</button><button id="tools-toggle" class="text-button" aria-pressed="true">隱藏齒輪 <span aria-hidden="true">◌</span></button></div></div>
         <div class="paper" id="paper">

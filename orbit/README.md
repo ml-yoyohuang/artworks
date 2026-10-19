@@ -1,12 +1,18 @@
 # ORBIT — A Spirograph Atelier
 
-## Phase 02 開發分支
+## Play Mode 開發分支
+
+`feature/play-mode` 新增簡易模式，並移除 Phase 01 高對比配色。從 Classic 紙面上方「切換為簡易模式」進入：拖曳畫圈，或按「幫我轉」。完成一朵會提示並備妥下一組，等待下一次操作。換一組保留原筆跡；換張紙更換紙色並保存上一張，可隨時按「找回上一張紙」。兩個模式各自保留作品及進度。
+
+Play 有六種紙色、經篩選的齒輪與紙墨配對；當前與上一張紙以向量資料儲存在 IndexedDB，空間不可用時仍有當次遊玩的記憶體復原。「留下這張畫」下載含紙色的 3200px PNG。主畫面不顯示幾何參數或進階工具。詳見 [PLAY_MODE_REPORT.md](PLAY_MODE_REPORT.md)。本次僅提交功能分支，不合併或部署。
+
+## Phase 02 Studio
 
 `feature/phase-02` 在同一份應用新增 **Studio**。Classic 的首頁右上可進入 Studio；Classic 頁尾的「帶入 Studio」保留原始筆跡、含未完成與反向段落。切換模式不清除工作紙。
 
 Studio 有 Geometry、Ink、Motion、Print、Compose、Discover 六個實驗室，以及 18 件可編輯的作品選集。提供本機收藏、Project JSON 匯入／匯出、PNG／SVG、圖層與復原／重做。所有動畫由使用者按播放啟動；重新整理前請保存或匯出 JSON。
 
-架構與格式見 [PHASE_02_ARCHITECTURE.md](PHASE_02_ARCHITECTURE.md)，交付與驗收見 [PHASE_02_REPORT.md](PHASE_02_REPORT.md)。本階段只提交開發分支，等待確認後才合併／部署。
+架構與格式見 [PHASE_02_ARCHITECTURE.md](PHASE_02_ARCHITECTURE.md)，交付與驗收見 [PHASE_02_REPORT.md](PHASE_02_REPORT.md)。Phase 02 已經使用者確認合併至 main。
 
 齒輪、墨水與幾何的數位文具工作室。Phase 01，獨立於作品集其他頁面的 TypeScript 專案。
 
@@ -42,7 +48,7 @@ npm run test:production # 以 /artworks/orbit/ 子路徑驗證正式輸出
 - 3 種齒圈、6 枚小齒輪、每枚 5 孔、6 色墨水。
 - 點開始自動繪製；速度 ½× / 1× / 2× / 4× / 10× / 20×；可暫停、接續、結束這一筆。10× 以上運轉時收起小齒輪與筆尖標記，避免高速旋轉干擾；曲線仍以相同精度完整取樣，暫停時恢復工具顯示。
 - 「全螢幕繪圖」固定紙面與控制列、鎖定背景捲動。支援原生全螢幕時一併使用；不支援或被嵌入頁面阻擋時使用滿版替代。離開按鈕或 Escape 可返回原捲動位置。手機橫向時，操作列移至紙面右方。要換齒輪或墨色時先離開全螢幕。
-- 「高對比配色」加深文字、界線與螢幕筆跡，保留墨色差異；屬於顯示輔助，PNG／SVG 仍保留原始墨色與線寬。偏好保存在本機，未自行選擇時跟隨系統的提高對比設定。
+- 高對比配色已移除，舊的本機配色偏好不再生效；Classic 使用原本的紙墨配色。
 - 紙面與工具區禁止文字誤選、圖片拖曳及觸控長按選取；介紹文字仍可正常選取。
 - 在紙上環繞中心拖曳，直接切換至手動。滑鼠與觸控皆支援，正反向皆可。
 - 聚焦紙面後，← / → 轉動；Shift 加大角度。空白鍵播放／暫停。
@@ -60,15 +66,16 @@ src/
   catalog.ts        齒圈、齒輪、筆孔與墨色規格
   state.ts          工具、筆跡、正反向分段、復原與重做
   interaction.ts    觸控按鈕啟用、捲動取消與 click 去重
-  view.ts           全螢幕／滿版、捲動鎖定與配色偏好
-  contrast.ts       保留作品原色的顯示配色對照
+  view.ts           全螢幕／滿版、捲動鎖定
+  random.ts         Studio 與 Play 共用的 seeded random
+  play/             簡易互動、智慧抽樣、紙張保存與獨立主題
   gears.ts          半透明齒輪與固定齒圈 SVG
   renderer.ts       完成筆跡快取、增量 Canvas、同步齒輪
   export.ts         向量 SVG、離線高解析 PNG
   ui.ts             語意化介面、工具組與對話框
   main.ts           Pointer Events、單一動畫時鐘、介面連接
   style.css         字體、設計變數、材質、響應式與減少動態
-  view.css          全螢幕、高對比與操作區防誤選
+  view.css          全螢幕與操作區防誤選
 public/fonts/       本機字體與 SIL OFL 授權
 tests/              幾何／狀態測試、瀏覽器整合測試
 qa/                 實際瀏覽器截圖與驗證結果
@@ -90,9 +97,9 @@ qa/                 實際瀏覽器截圖與驗證結果
 
 ## 邊界與後續
 
-- 筆跡目前保存在分頁記憶體；重新整理前請匯出。沒有帳號、後端或雲端圖庫。
+- Classic 筆跡保存在分頁記憶體；重新整理前請匯出。Play 在操作暫停、完成、換組、換紙、離開模式時保存向量快照；Studio 使用明確收藏。沒有帳號、後端或雲端圖庫。
 - 紙面材質僅用於工作桌呈現；含背景匯出採乾淨暖白色，方便印刷。
 - 本次驗證為 Chromium 桌面與觸控模擬，尚未以實體 iPhone／Android、Safari、螢幕閱讀器進行完整驗證；不宣稱正式 WCAG 認證。
-- Phase 02 優先可加 IndexedDB 作品保存、可重播的 stroke JSON，再擴充外旋輪線與可調齒數。維持 geometry/state/export 的分界。
+- Play 的 v1 strokes 與原有 Studio migration 相容；未新增 Phase 03 圖庫、雲端同步或祕密花朵功能。
 
 視覺與測試紀錄見 [REPORT.md](REPORT.md)。
