@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Twist Ring</title>
+<style>
+  :root { --bg: #f6f1ea; --ink: #6b6470; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #24212b; --ink: #b9b1c2; }
+  }
+  html, body {
+    margin: 0; height: 100%; overflow: hidden;
+    background: var(--bg);
+    touch-action: none;
+    -webkit-user-select: none; user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  canvas { display: block; width: 100vw; height: 100vh; height: 100dvh; touch-action: none; outline: none; }
+  #debug {
+    position: fixed; left: 10px; bottom: calc(10px + env(safe-area-inset-bottom));
+    font: 11px/1.4 ui-monospace, Menlo, monospace; color: var(--ink); opacity: 0.8;
+    pointer-events: none;
+  }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { SEGMENTS, ARC_RADIUS, TUBE_RADIUS, TwistSolver, forward, alignRigid, rotateByQuat } from './solver.js';
+
+const TWIST_PER_PX = 0.012; // rad per CSS pixel of pointer travel
+const ORBIT_PER_PX = 0.008;
+const QUARTER = Math.PI / 2;
+const DETENT_HYSTERESIS = 0.03;
+const PALETTE = ['#f2a0b6', '#ffc290', '#f3d77c', '#9fd8b4', '#92c6ec', '#b9a1ea'];
+
+const solver = new TwistSolver();
+const debugEl = new URLSearchParams(location.search).has('debug') ? document.body.appendChild(document.createElement('div')) : null;
+if (debugEl) debugEl.id = 'debug';
+
+// ---------- scene ----------
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x000000, 0);
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+scene.add(new THREE.HemisphereLight(0xffffff, 0xd9cfe0, 0.35));
+const key = new THREE.DirectionalLight(0xffffff, 1.2);
+key.position.set(3, 5, 6);
+scene.add(key);
+
+const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 200);
+const ring = new THREE.Group();
+scene.add(ring);
+
+class QuarterArc extends THREE.Curve {
+  getPoint(t, target = new THREE.Vector3()) {
+    const phi = t * QUARTER;
+    return target.set(ARC_RADIUS * Math.sin(phi), ARC_RADIUS * (1 - Math.cos(phi)), 0);
+  }
+}
+const geometry = new THREE.TubeGeometry(new QuarterArc(), 48, TUBE_RADIUS, 24, false);
+const materials = PALETTE.map((hex) => new THREE.MeshPhysicalMaterial({
+  color: hex, roughness: 0.8, metalness: 0, envMapIntensity: 0.5,
+  sheen: 1, sheenRoughness: 0.4, sheenColor: new THREE.Color(hex).lerp(new THREE.Color('#ffffff'), 0.6),
+}));
+const meshes = [];
+for (let i = 0; i < SEGMENTS; i++) {
+  const mesh = new THREE.Mesh(geometry, materials[i % materials.length]);
+  mesh.matrixAutoUpdate = false;
+  mesh.userData.index = i;
+  ring.add(mesh);
+  meshes.push(mesh);
+}
+
+// ---------- layout: chain frames → displayed matrices ----------
+// The chain is anchored at joint 0, so each new pose is rigidly re-aligned onto the
+// previous one (by arc midpoints) to keep the ring visually still while it twists.
+
+const fk = { joints: new Float64Array(SEGMENTS * 12), segments: new Float64Array(SEGMENTS * 12), end: new Float64Array(12) };
+const MID_U = ARC_RADIUS * Math.SQRT1_2, MID_V = ARC_RADIUS * (1 - Math.SQRT1_2);
+const mids = new Float64Array(SEGMENTS * 3);
+let shownMids = null;
+
+function layout() {
+  const S = forward(solver.angles, fk).segments;
+  for (let i = 0; i < SEGMENTS; i++) {
+    const o = i * 12;
+    for (let k = 0; k < 3; k++) mids[i * 3 + k] = S[o + 9 + k] + MID_U * S[o + k] + MID_V * S[o + 3 + k];
+  }
+  let fit;
+  if (shownMids) {
+    fit = alignRigid(mids, shownMids);
+  } else {
+    let cx = 0, cy = 0, cz = 0;
+    for (let i = 0; i < SEGMENTS; i++) { cx += mids[i * 3]; cy += mids[i * 3 + 1]; cz += mids[i * 3 + 2]; }
+    fit = { q: [1, 0, 0, 0], t: [-cx / SEGMENTS, -cy / SEGMENTS, -cz / SEGMENTS] };
+    shownMids = new Float64Array(SEGMENTS * 3);
+  }
+  const { q, t } = fit;
+  for (let i = 0; i < SEGMENTS; i++) {
+    const o = i * 12;
+    const c0 = rotateByQuat(q, S[o], S[o + 1], S[o + 2]);
+    const c1 = rotateByQuat(q, S[o + 3], S[o + 4], S[o + 5]);
+    const c2 = rotateByQuat(q, S[o + 6], S[o + 7], S[o + 8]);
+    const p = rotateByQuat(q, S[o + 9], S[o + 10], S[o + 11]);
+    p[0] += t[0]; p[1] += t[1]; p[2] += t[2];
+    const mesh = meshes[i];
+    mesh.matrix.set(
+      c0[0], c1[0], c2[0], p[0],
+      c0[1], c1[1], c2[1], p[1],
+      c0[2], c1[2], c2[2], p[2],
+      0, 0, 0, 1);
+    mesh.matrixWorldNeedsUpdate = true;
+    const m = rotateByQuat(q, mids[i * 3], mids[i * 3 + 1], mids[i * 3 + 2]);
+    shownMids[i * 3] = m[0] + t[0]; shownMids[i * 3 + 1] = m[1] + t[1]; shownMids[i * 3 + 2] = m[2] + t[2];
+  }
+  if (debugEl) debugEl.textContent = `closure ${solver.error.toExponential(2)}`;
+}
+layout();
+
+// Frame the ring by its initial extent.
+let ringExtent = 0;
+for (let i = 0; i < SEGMENTS; i++) ringExtent = Math.max(ringExtent, Math.hypot(shownMids[i * 3], shownMids[i * 3 + 1], shownMids[i * 3 + 2]));
+ringExtent += ARC_RADIUS * 0.3 + TUBE_RADIUS;
+
+function resize() {
+  const w = window.innerWidth, h = window.innerHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  const halfV = THREE.MathUtils.degToRad(camera.fov / 2);
+  const half = camera.aspect < 1 ? Math.atan(Math.tan(halfV) * camera.aspect) : halfV;
+  camera.position.set(0, 0, (ringExtent * 1.02) / Math.sin(half));
+  camera.lookAt(0, 0, 0);
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize);
+resize();
+
+// ---------- interaction ----------
+
+const raycaster = new THREE.Raycaster();
+const ndc = new THREE.Vector2();
+const tmpA = new THREE.Vector3(), tmpB = new THREE.Vector3(), tmpC = new THREE.Vector3();
+const spin = new THREE.Quaternion();
+const AXIS_X = new THREE.Vector3(1, 0, 0), AXIS_Y = new THREE.Vector3(0, 1, 0);
+
+let drag = null; // { id, mode, joint, x, y, sign, perp, grab }
+let pendingTwist = 0;
+
+function toScreen(v, out) {
+  tmpC.copy(v).project(camera);
+  out.x = (tmpC.x + 1) * 0.5 * window.innerWidth;
+  out.y = (1 - tmpC.y) * 0.5 * window.innerHeight;
+  return out;
+}
+
+/** Screen-space perpendicular to the dragged joint's tangent, signed so the surface follows the finger. */
+function twistDirection(joint, grabLocal) {
+  const m = meshes[joint].matrixWorld;
+  const origin = tmpA.setFromMatrixPosition(m);
+  const axis = tmpB.setFromMatrixColumn(m, 0).normalize();
+  const s0 = toScreen(origin, { x: 0, y: 0 });
+  const s1 = toScreen(origin.clone().addScaledVector(axis, 0.5), { x: 0, y: 0 });
+  let tx = s1.x - s0.x, ty = s1.y - s0.y;
+  const tl = Math.hypot(tx, ty);
+
+  // How the grabbed surface point moves on screen per radian of twist.
+  const grab = grabLocal.clone().applyMatrix4(m);
+  const vel = axis.clone().cross(grab.clone().sub(origin)).multiplyScalar(0.05).add(grab);
+  const g0 = toScreen(grab, { x: 0, y: 0 }), g1 = toScreen(vel, { x: 0, y: 0 });
+  const sx = g1.x - g0.x, sy = g1.y - g0.y;
+
+  if (tl < 6) {
+    const sl = Math.hypot(sx, sy) || 1;
+    return { x: sx / sl, y: sy / sl };
+  }
+  let px = -ty / tl, py = tx / tl;
+  if (px * sx + py * sy < 0) { px = -px; py = -py; }
+  return { x: px, y: py };
+}
+
+const canvas = renderer.domElement;
+canvas.addEventListener('pointerdown', (ev) => {
+  if (drag) return;
+  unlockAudio();
+  try { canvas.setPointerCapture(ev.pointerId); } catch {}
+  ndc.set((ev.clientX / window.innerWidth) * 2 - 1, -(ev.clientY / window.innerHeight) * 2 + 1);
+  scene.updateMatrixWorld();
+  raycaster.setFromCamera(ndc, camera);
+  const hit = raycaster.intersectObjects(meshes, false)[0];
+  drag = { id: ev.pointerId, x: ev.clientX, y: ev.clientY };
+  if (hit) {
+    const joint = hit.object.userData.index;
+    drag.mode = 'twist';
+    drag.joint = joint;
+    drag.grab = hit.point.clone().applyMatrix4(hit.object.matrixWorld.clone().invert());
+    drag.detent = Math.floor(solver.angles[joint] / QUARTER);
+  } else {
+    drag.mode = 'orbit';
+  }
+});
+
+canvas.addEventListener('pointermove', (ev) => {
+  if (!drag || ev.pointerId !== drag.id) return;
+  const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y;
+  drag.x = ev.clientX; drag.y = ev.clientY;
+  if (drag.mode === 'twist') {
+    scene.updateMatrixWorld();
+    const dir = twistDirection(drag.joint, drag.grab);
+    pendingTwist += (dx * dir.x + dy * dir.y) * TWIST_PER_PX;
+  } else {
+    spin.setFromAxisAngle(AXIS_Y, dx * ORBIT_PER_PX);
+    ring.quaternion.premultiply(spin);
+    spin.setFromAxisAngle(AXIS_X, dy * ORBIT_PER_PX);
+    ring.quaternion.premultiply(spin);
+  }
+});
+
+function endDrag(ev) {
+  if (!drag || ev.pointerId !== drag.id) return;
+  drag = null;
+  pendingTwist = 0;
+}
+canvas.addEventListener('pointerup', endDrag);
+canvas.addEventListener('pointercancel', endDrag);
+document.addEventListener('gesturestart', (ev) => ev.preventDefault());
+
+// ---------- feedback ----------
+
+let audio = null;
+let clickNoise = null;
+
+/** Creates and resumes the AudioContext inside the first user gesture (required on iOS). */
+function unlockAudio() {
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  if (!Ctx) return;
+  if (!audio) {
+    audio = new Ctx();
+    const len = Math.floor(audio.sampleRate * 0.03);
+    clickNoise = audio.createBuffer(1, len, audio.sampleRate);
+    const data = clickNoise.getChannelData(0);
+    for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (len * 0.12));
+    // A silent tick primes the output path on Safari.
+    const prime = audio.createBufferSource();
+    prime.buffer = audio.createBuffer(1, 1, audio.sampleRate);
+    prime.connect(audio.destination);
+    prime.start();
+  }
+  if (audio.state !== 'running') audio.resume();
+}
+
+/** A short synthesized click: a band-passed noise snap plus a falling blip. */
+function playClick() {
+  if (!audio || audio.state !== 'running') return;
+  const t = audio.currentTime;
+  const out = audio.createGain();
+  out.gain.value = 0.5;
+  out.connect(audio.destination);
+
+  const snap = audio.createBufferSource();
+  snap.buffer = clickNoise;
+  snap.playbackRate.value = 0.9 + Math.random() * 0.2;
+  const band = audio.createBiquadFilter();
+  band.type = 'bandpass';
+  band.frequency.value = 2600;
+  band.Q.value = 2.5;
+  snap.connect(band).connect(out);
+  snap.start(t);
+
+  const blip = audio.createOscillator();
+  blip.type = 'triangle';
+  blip.frequency.setValueAtTime(1500, t);
+  blip.frequency.exponentialRampToValueAtTime(700, t + 0.025);
+  const env = audio.createGain();
+  env.gain.setValueAtTime(0.0001, t);
+  env.gain.exponentialRampToValueAtTime(0.35, t + 0.002);
+  env.gain.exponentialRampToValueAtTime(0.0001, t + 0.035);
+  blip.connect(env).connect(out);
+  blip.start(t);
+  blip.stop(t + 0.04);
+}
+
+function detent() {
+  playClick();
+  if (navigator.vibrate) navigator.vibrate(8);
+}
+
+/** Fires feedback each time the dragged joint passes a multiple of 90°. */
+function checkDetent() {
+  const a = solver.angles[drag.joint];
+  while (a > (drag.detent + 1) * QUARTER + DETENT_HYSTERESIS) { drag.detent++; detent(); }
+  while (a < drag.detent * QUARTER - DETENT_HYSTERESIS) { drag.detent--; detent(); }
+}
+
+// ---------- loop ----------
+
+renderer.setAnimationLoop(() => {
+  if (drag && drag.mode === 'twist' && pendingTwist !== 0) {
+    const res = solver.drag(drag.joint, pendingTwist);
+    pendingTwist = 0;
+    if (res.applied !== 0) {
+      layout();
+      checkDetent();
+    }
+  }
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>
