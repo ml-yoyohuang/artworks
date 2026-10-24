@@ -58,9 +58,8 @@
     color: var(--ink); opacity: 0.62;
     pointer-events: none;
   }
-  #palette {
+  .corner {
     position: fixed;
-    right: calc(16px + env(safe-area-inset-right));
     bottom: calc(16px + env(safe-area-inset-bottom));
     width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%;
     display: grid; place-items: center;
@@ -69,10 +68,14 @@
     cursor: pointer; touch-action: manipulation;
     transition: opacity 0.15s, transform 0.1s;
   }
-  #palette:hover { opacity: 1; }
-  #palette:active { transform: scale(0.92); }
-  #palette:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-  #palette svg { width: 24px; height: 24px; fill: currentColor; }
+  .corner:hover { opacity: 1; }
+  .corner:active { transform: scale(0.92); }
+  .corner:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .corner svg { width: 24px; height: 24px; fill: currentColor; }
+  #palette { right: calc(16px + env(safe-area-inset-right)); }
+  #sound { right: calc(70px + env(safe-area-inset-right)); }
+  #sound .off, #sound[aria-pressed="true"] .on { display: none; }
+  #sound[aria-pressed="true"] .off { display: block; }
 </style>
 <script type="importmap">
 { "imports": {
@@ -83,7 +86,11 @@
 </head>
 <body>
 <ul id="help"></ul>
-<button id="palette" type="button" aria-label="切換色系">
+<button id="sound" class="corner" type="button" aria-label="靜音" aria-pressed="false">
+  <svg class="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/></svg>
+  <svg class="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z"/></svg>
+</button>
+<button id="palette" class="corner" type="button" aria-label="切換色系">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5,12A1.5,1.5 0 0,1 16,10.5A1.5,1.5 0 0,1 17.5,9A1.5,1.5 0 0,1 19,10.5A1.5,1.5 0 0,1 17.5,12M14.5,8A1.5,1.5 0 0,1 13,6.5A1.5,1.5 0 0,1 14.5,5A1.5,1.5 0 0,1 16,6.5A1.5,1.5 0 0,1 14.5,8M9.5,8A1.5,1.5 0 0,1 8,6.5A1.5,1.5 0 0,1 9.5,5A1.5,1.5 0 0,1 11,6.5A1.5,1.5 0 0,1 9.5,8M6.5,12A1.5,1.5 0 0,1 5,10.5A1.5,1.5 0 0,1 6.5,9A1.5,1.5 0 0,1 8,10.5A1.5,1.5 0 0,1 6.5,12M12,3A9,9 0 0,0 3,12A9,9 0 0,0 12,21A1.5,1.5 0 0,0 13.5,19.5C13.5,19.11 13.35,18.76 13.11,18.5C12.88,18.23 12.73,17.88 12.73,17.5A1.5,1.5 0 0,1 14.23,16H16A5,5 0 0,0 21,11C21,6.58 16.97,3 12,3Z"/></svg>
 </button>
 <script type="module">
@@ -384,7 +391,6 @@ function twistDirection(joint, grabLocal) {
 
 const canvas = renderer.domElement;
 canvas.addEventListener('pointerdown', (ev) => {
-  unlockAudio();
   const touch = ev.pointerType === 'touch';
   showHelp(touch);
   try { canvas.setPointerCapture(ev.pointerId); } catch {}
@@ -434,8 +440,8 @@ document.addEventListener('gesturestart', (ev) => ev.preventDefault());
 // ---------- help ----------
 
 const HELP = {
-  touch: ['按住任一節滑動：扭轉', '多指按住不同節：同時扭轉', '滑動空白處：旋轉視角', '右下按鈕：切換色系'],
-  mouse: ['拖曳任一節：扭轉', '拖曳空白處：旋轉視角', '右下按鈕：切換色系'],
+  touch: ['按住任一節滑動：扭轉', '多指按住不同節：同時扭轉', '滑動空白處：旋轉視角', '右下按鈕：聲音開關、切換色系'],
+  mouse: ['拖曳任一節：扭轉', '拖曳空白處：旋轉視角', '右下按鈕：聲音開關、切換色系'],
 };
 const helpEl = document.getElementById('help');
 let helpTouch = null;
@@ -452,14 +458,23 @@ showHelp(window.matchMedia('(hover: none) and (pointer: coarse)').matches);
 
 // ---------- feedback ----------
 
+const MUTE_KEY = 'twister-toy:muted';
 let audio = null;
 let clickNoise = null;
+let muted = false;
+try { muted = localStorage.getItem(MUTE_KEY) === '1'; } catch {}
 
-/** Creates and resumes the AudioContext inside the first user gesture (required on iOS). */
+/**
+ * Creates and resumes the AudioContext. Browsers only allow this inside a user
+ * activation — and a touch counts only when the finger lifts (pointerup / touchend),
+ * not on pointerdown — so it is retried on every gesture until audio is running.
+ */
 function unlockAudio() {
   const Ctx = window.AudioContext || window.webkitAudioContext;
-  if (!Ctx) return;
+  if (muted || !Ctx) return Promise.resolve();
   if (!audio) {
+    // Let clicks play even with the iPhone ring/silent switch on; the mute button is the off switch.
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch {}
     audio = new Ctx();
     const len = Math.floor(audio.sampleRate * 0.03);
     clickNoise = audio.createBuffer(1, len, audio.sampleRate);
@@ -471,12 +486,29 @@ function unlockAudio() {
     prime.connect(audio.destination);
     prime.start();
   }
-  if (audio.state !== 'running') audio.resume();
+  return audio.state === 'running' ? Promise.resolve() : audio.resume().catch(() => {});
 }
+for (const type of ['pointerdown', 'pointerup', 'touchend', 'keydown']) {
+  document.addEventListener(type, unlockAudio, { capture: true, passive: true });
+}
+
+const soundButton = document.getElementById('sound');
+function syncSoundButton() {
+  soundButton.setAttribute('aria-pressed', String(muted));
+  soundButton.setAttribute('aria-label', muted ? '開啟聲音' : '靜音');
+}
+syncSoundButton();
+soundButton.addEventListener('click', () => {
+  muted = !muted;
+  try { localStorage.setItem(MUTE_KEY, muted ? '1' : '0'); } catch {}
+  syncSoundButton();
+  if (muted) audio?.suspend();
+  else unlockAudio().then(playClick);
+});
 
 /** A short synthesized click: a band-passed noise snap plus a falling blip. */
 function playClick() {
-  if (!audio || audio.state !== 'running') return;
+  if (muted || !audio || audio.state !== 'running') return;
   const t = audio.currentTime;
   const out = audio.createGain();
   out.gain.value = 0.5;
