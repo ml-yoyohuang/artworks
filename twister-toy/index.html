@@ -4,7 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<title>Twist Ring</title>
+<title>扭扭環 Twist Ring</title>
+<meta name="description" content="十八節四分之一圓弧首尾相連的扭扭環：扭動任一節，其餘自動重新排列、始終閉合；每轉過 90° 一聲喀。">
+<meta name="theme-color" content="#f6f1ea">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="canonical" href="https://ml-yoyohuang.github.io/artworks/twister-toy/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="扭扭環 Twist Ring">
+<meta property="og:title" content="扭扭環｜扭一節，整圈都跟著動">
+<meta property="og:description" content="十八節四分之一圓弧首尾相連，扭動任一節，其餘自動重新排列、始終閉合；每轉過 90° 一聲喀。">
+<meta property="og:url" content="https://ml-yoyohuang.github.io/artworks/twister-toy/">
+<meta property="og:image" content="https://ml-yoyohuang.github.io/artworks/twister-toy/assets/og.jpg">
+<meta property="og:image:secure_url" content="https://ml-yoyohuang.github.io/artworks/twister-toy/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="粉彩色的十八節閉合扭扭環">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="扭扭環｜扭一節，整圈都跟著動">
+<meta name="twitter:description" content="十八節四分之一圓弧首尾相連，扭動任一節，其餘自動重新排列、始終閉合；每轉過 90° 一聲喀。">
+<meta name="twitter:image" content="https://ml-yoyohuang.github.io/artworks/twister-toy/assets/og.jpg">
+<meta name="twitter:image:alt" content="粉彩色的十八節閉合扭扭環">
 <style>
   /* --bg-light / --bg-dark / --ink-* are set per palette from the script. */
   :root {
@@ -164,7 +186,14 @@ function applyPalette(index) {
   root.setProperty('--bg-dark', palette.bg[1]);
   root.setProperty('--ink-light', inkFor(palette.bg[0]));
   root.setProperty('--ink-dark', inkFor(palette.bg[1]));
+  syncThemeColor();
 }
+
+const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+function syncThemeColor() {
+  document.querySelector('meta[name="theme-color"]').content = PALETTES[paletteIndex].bg[darkScheme.matches ? 1 : 0];
+}
+darkScheme.addEventListener('change', syncThemeColor);
 applyPalette(paletteIndex);
 
 document.getElementById('palette').addEventListener('click', () => {
