@@ -6,9 +6,13 @@
 <meta name="color-scheme" content="light dark">
 <title>Twist Ring</title>
 <style>
-  :root { --bg: #f6f1ea; --ink: #6b6470; }
+  /* --bg-light / --bg-dark / --ink-* are set per palette from the script. */
+  :root {
+    --bg-light: #f6f1ea; --bg-dark: #24212b; --ink-light: #4a4450; --ink-dark: #e6e0ec;
+    --bg: var(--bg-light); --ink: var(--ink-light);
+  }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #24212b; --ink: #b9b1c2; }
+    :root { --bg: var(--bg-dark); --ink: var(--ink-dark); }
   }
   html, body {
     margin: 0; height: 100%; overflow: hidden;
@@ -24,6 +28,21 @@
     font: 11px/1.4 ui-monospace, Menlo, monospace; color: var(--ink); opacity: 0.8;
     pointer-events: none;
   }
+  #palette {
+    position: fixed;
+    right: calc(16px + env(safe-area-inset-right));
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%;
+    display: grid; place-items: center;
+    background: color-mix(in srgb, var(--ink) 10%, transparent);
+    color: var(--ink); opacity: 0.75;
+    cursor: pointer; touch-action: manipulation;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  #palette:hover { opacity: 1; }
+  #palette:active { transform: scale(0.92); }
+  #palette:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  #palette svg { width: 24px; height: 24px; fill: currentColor; }
 </style>
 <script type="importmap">
 { "imports": {
@@ -33,6 +52,9 @@
 </script>
 </head>
 <body>
+<button id="palette" type="button" aria-label="切換色系">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5,12A1.5,1.5 0 0,1 16,10.5A1.5,1.5 0 0,1 17.5,9A1.5,1.5 0 0,1 19,10.5A1.5,1.5 0 0,1 17.5,12M14.5,8A1.5,1.5 0 0,1 13,6.5A1.5,1.5 0 0,1 14.5,5A1.5,1.5 0 0,1 16,6.5A1.5,1.5 0 0,1 14.5,8M9.5,8A1.5,1.5 0 0,1 8,6.5A1.5,1.5 0 0,1 9.5,5A1.5,1.5 0 0,1 11,6.5A1.5,1.5 0 0,1 9.5,8M6.5,12A1.5,1.5 0 0,1 5,10.5A1.5,1.5 0 0,1 6.5,9A1.5,1.5 0 0,1 8,10.5A1.5,1.5 0 0,1 6.5,12M12,3A9,9 0 0,0 3,12A9,9 0 0,0 12,21A1.5,1.5 0 0,0 13.5,19.5C13.5,19.11 13.35,18.76 13.11,18.5C12.88,18.23 12.73,17.88 12.73,17.5A1.5,1.5 0 0,1 14.23,16H16A5,5 0 0,0 21,11C21,6.58 16.97,3 12,3Z"/></svg>
+</button>
 <script type="module">
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
@@ -42,7 +64,25 @@ const TWIST_PER_PX = 0.012; // rad per CSS pixel of pointer travel
 const ORBIT_PER_PX = 0.008;
 const QUARTER = Math.PI / 2;
 const DETENT_HYSTERESIS = 0.03;
-const PALETTE = ['#f2a0b6', '#ffc290', '#f3d77c', '#9fd8b4', '#92c6ec', '#b9a1ea'];
+// Each palette carries its own backgrounds and fabric settings. Colours repeat around
+// the ring ('cycle'), or run out and back so a gradient closes without a seam ('mirror').
+const PALETTES = [
+  { name: 'unicorn', colors: ['#f2a0b6', '#ffc290', '#f3d77c', '#9fd8b4', '#92c6ec', '#b9a1ea'],
+    bg: ['#f6f1ea', '#24212b'] },
+  { name: 'sea-salt', colors: ['#8fd6dc', '#5fc2b0', '#3f8fb8', '#f3eee2', '#b9dcf0', '#2f7f9e'],
+    bg: ['#eef5f4', '#132630'] },
+  { name: 'maple', colors: ['#c8553d', '#e08e45', '#f0c27b', '#8a9a5b', '#6b4f3a', '#d9a07a'],
+    bg: ['#f4ebe0', '#2a201b'], sheenMix: 0.45 },
+  { name: 'neon', colors: ['#ff3d7f', '#ffd23f', '#3df5c8', '#3d8bff', '#b84dff', '#ff7a3d'],
+    bg: ['#2a2633', '#0f0d14'], sheenMix: 0.2, sheen: 0.5, glow: 0.25 },
+  { name: 'ink', colors: ['#1f2a44', '#2c3a5e', '#3d4f7c', '#52679a', '#6b81b6', '#8a9dcb', '#a8b7dc', '#c6d1ea', '#e2e8f5'],
+    order: 'mirror', bg: ['#eef1f7', '#3a4058'], sheenMix: 0.35 },
+  { name: 'matcha', colors: ['#8fae7a', '#c9d6a3', '#f2e8cf', '#e7b7a6', '#b07b6e', '#5e6b4a'],
+    bg: ['#f3efe4', '#23261f'], sheenMix: 0.45 },
+  { name: 'piano', colors: ['#f5f3ee', '#2b2a2e'],
+    bg: ['#d8d2c7', '#57534d'], sheenMix: 0.3 },
+];
+const PALETTE_KEY = 'twister-toy:palette';
 
 const solver = new TwistSolver();
 const debugEl = new URLSearchParams(location.search).has('debug') ? document.body.appendChild(document.createElement('div')) : null;
@@ -74,18 +114,66 @@ class QuarterArc extends THREE.Curve {
   }
 }
 const geometry = new THREE.TubeGeometry(new QuarterArc(), 48, TUBE_RADIUS, 24, false);
-const materials = PALETTE.map((hex) => new THREE.MeshPhysicalMaterial({
-  color: hex, roughness: 0.8, metalness: 0, envMapIntensity: 0.5,
-  sheen: 1, sheenRoughness: 0.4, sheenColor: new THREE.Color(hex).lerp(new THREE.Color('#ffffff'), 0.6),
-}));
 const meshes = [];
 for (let i = 0; i < SEGMENTS; i++) {
-  const mesh = new THREE.Mesh(geometry, materials[i % materials.length]);
+  const material = new THREE.MeshPhysicalMaterial({
+    roughness: 0.8, metalness: 0, envMapIntensity: 0.5, sheenRoughness: 0.4,
+  });
+  const mesh = new THREE.Mesh(geometry, material);
   mesh.matrixAutoUpdate = false;
   mesh.userData.index = i;
   ring.add(mesh);
   meshes.push(mesh);
 }
+
+// ---------- palettes ----------
+
+const WHITE = new THREE.Color('#ffffff');
+
+/** Text colour that reads on a background: dark ink on light, light ink on dark. */
+function inkFor(hex) {
+  const c = new THREE.Color(hex);
+  const luminance = 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b; // linear
+  return luminance > 0.18 ? '#3a3540' : '#ece6f0';
+}
+
+function segmentColor(palette, i) {
+  const n = palette.colors.length;
+  if (palette.order !== 'mirror') return palette.colors[i % n];
+  const k = i % (2 * n);
+  return palette.colors[k < n ? k : 2 * n - 1 - k];
+}
+
+let paletteIndex = 0;
+try {
+  const saved = PALETTES.findIndex((p) => p.name === localStorage.getItem(PALETTE_KEY));
+  if (saved >= 0) paletteIndex = saved;
+} catch {}
+
+function applyPalette(index) {
+  const palette = PALETTES[index];
+  for (let i = 0; i < SEGMENTS; i++) {
+    const m = meshes[i].material;
+    m.color.set(segmentColor(palette, i));
+    m.sheen = palette.sheen ?? 1;
+    m.sheenColor.copy(m.color).lerp(WHITE, palette.sheenMix ?? 0.6);
+    m.emissive.copy(m.color).multiplyScalar(palette.glow ?? 0);
+  }
+  const root = document.documentElement.style;
+  root.setProperty('--bg-light', palette.bg[0]);
+  root.setProperty('--bg-dark', palette.bg[1]);
+  root.setProperty('--ink-light', inkFor(palette.bg[0]));
+  root.setProperty('--ink-dark', inkFor(palette.bg[1]));
+}
+applyPalette(paletteIndex);
+
+document.getElementById('palette').addEventListener('click', () => {
+  unlockAudio();
+  paletteIndex = (paletteIndex + 1) % PALETTES.length;
+  applyPalette(paletteIndex);
+  try { localStorage.setItem(PALETTE_KEY, PALETTES[paletteIndex].name); } catch {}
+  detent();
+});
 
 // ---------- layout: chain frames → displayed matrices ----------
 // The chain is anchored at joint 0, so each new pose is rigidly re-aligned onto the
