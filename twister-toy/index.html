@@ -50,6 +50,14 @@
     font: 11px/1.4 ui-monospace, Menlo, monospace; color: var(--ink); opacity: 0.8;
     pointer-events: none;
   }
+  #help {
+    position: fixed; margin: 0; padding: 0; list-style: none;
+    left: calc(16px + env(safe-area-inset-left));
+    top: calc(14px + env(safe-area-inset-top));
+    font: 12px/1.75 -apple-system, "PingFang TC", "Noto Sans TC", system-ui, sans-serif;
+    color: var(--ink); opacity: 0.62;
+    pointer-events: none;
+  }
   #palette {
     position: fixed;
     right: calc(16px + env(safe-area-inset-right));
@@ -74,6 +82,7 @@
 </script>
 </head>
 <body>
+<ul id="help"></ul>
 <button id="palette" type="button" aria-label="切換色系">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5,12A1.5,1.5 0 0,1 16,10.5A1.5,1.5 0 0,1 17.5,9A1.5,1.5 0 0,1 19,10.5A1.5,1.5 0 0,1 17.5,12M14.5,8A1.5,1.5 0 0,1 13,6.5A1.5,1.5 0 0,1 14.5,5A1.5,1.5 0 0,1 16,6.5A1.5,1.5 0 0,1 14.5,8M9.5,8A1.5,1.5 0 0,1 8,6.5A1.5,1.5 0 0,1 9.5,5A1.5,1.5 0 0,1 11,6.5A1.5,1.5 0 0,1 9.5,8M6.5,12A1.5,1.5 0 0,1 5,10.5A1.5,1.5 0 0,1 6.5,9A1.5,1.5 0 0,1 8,10.5A1.5,1.5 0 0,1 6.5,12M12,3A9,9 0 0,0 3,12A9,9 0 0,0 12,21A1.5,1.5 0 0,0 13.5,19.5C13.5,19.11 13.35,18.76 13.11,18.5C12.88,18.23 12.73,17.88 12.73,17.5A1.5,1.5 0 0,1 14.23,16H16A5,5 0 0,0 21,11C21,6.58 16.97,3 12,3Z"/></svg>
 </button>
@@ -82,7 +91,8 @@ import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { SEGMENTS, ARC_RADIUS, TUBE_RADIUS, TwistSolver, forward, alignRigid, rotateByQuat } from './solver.js';
 
-const TWIST_PER_PX = 0.012; // rad per CSS pixel of pointer travel
+const TWIST_PER_PX = 0.012; // rad per CSS pixel of mouse travel
+const TOUCH_TWIST_PER_PX = 0.016; // a little livelier under a finger
 const ORBIT_PER_PX = 0.008;
 const QUARTER = Math.PI / 2;
 const DETENT_HYSTERESIS = 0.03;
@@ -250,34 +260,62 @@ function layout() {
 }
 layout();
 
-// Frame the ring by its initial extent.
-let ringExtent = 0;
-for (let i = 0; i < SEGMENTS; i++) ringExtent = Math.max(ringExtent, Math.hypot(shownMids[i * 3], shownMids[i * 3 + 1], shownMids[i * 3 + 2]));
-ringExtent += ARC_RADIUS * 0.3 + TUBE_RADIUS;
+// ---------- framing ----------
+// The camera looks straight down −z. While nobody is touching the ring it eases toward
+// the position that fits the ring's current silhouette, so it fills small phone screens.
+
+const ARC_SAMPLES = Array.from({ length: 7 }, (_, k) => new QuarterArc().getPoint(k / 6));
+const FIT_MARGIN = 0.84;
+const camTarget = new THREE.Vector3();
+const fitPts = new Float64Array(SEGMENTS * ARC_SAMPLES.length * 3);
+const tmpP = new THREE.Vector3();
+
+function fitTarget(out) {
+  scene.updateMatrixWorld();
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, n = 0;
+  for (const mesh of meshes) {
+    for (const s of ARC_SAMPLES) {
+      tmpP.copy(s).applyMatrix4(mesh.matrixWorld);
+      fitPts[n++] = tmpP.x; fitPts[n++] = tmpP.y; fitPts[n++] = tmpP.z;
+      minX = Math.min(minX, tmpP.x); maxX = Math.max(maxX, tmpP.x);
+      minY = Math.min(minY, tmpP.y); maxY = Math.max(maxY, tmpP.y);
+    }
+  }
+  const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
+  const tanV = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * FIT_MARGIN;
+  const tanH = tanV * camera.aspect;
+  let d = 0;
+  for (let i = 0; i < n; i += 3) {
+    const z = fitPts[i + 2];
+    d = Math.max(d, z + (Math.abs(fitPts[i] - cx) + TUBE_RADIUS) / tanH, z + (Math.abs(fitPts[i + 1] - cy) + TUBE_RADIUS) / tanV);
+  }
+  return out.set(cx, cy, d);
+}
 
 function resize() {
   const w = window.innerWidth, h = window.innerHeight;
   renderer.setSize(w, h, false);
   camera.aspect = w / h;
-  const halfV = THREE.MathUtils.degToRad(camera.fov / 2);
-  const half = camera.aspect < 1 ? Math.atan(Math.tan(halfV) * camera.aspect) : halfV;
-  camera.position.set(0, 0, (ringExtent * 1.02) / Math.sin(half));
-  camera.lookAt(0, 0, 0);
   camera.updateProjectionMatrix();
+  camera.position.copy(fitTarget(camTarget));
 }
 window.addEventListener('resize', resize);
 resize();
 
 // ---------- interaction ----------
+// Every pointer is tracked on its own: each finger on a segment twists that joint, so
+// several fingers twist together; the first pointer on empty space orbits the view.
 
 const raycaster = new THREE.Raycaster();
 const ndc = new THREE.Vector2();
 const tmpA = new THREE.Vector3(), tmpB = new THREE.Vector3(), tmpC = new THREE.Vector3();
 const spin = new THREE.Quaternion();
 const AXIS_X = new THREE.Vector3(1, 0, 0), AXIS_Y = new THREE.Vector3(0, 1, 0);
+const TOUCH_REACH = 34; // px beyond the tube's edge a finger may land and still grab it
+const MOUSE_REACH = 8;
 
-let drag = null; // { id, mode, joint, x, y, sign, perp, grab }
-let pendingTwist = 0;
+const pointers = new Map(); // pointerId → { mode, joint, grab, x, y, pending, touch }
+const detents = new Map(); // held joint → index of the 90° step it last passed
 
 function toScreen(v, out) {
   tmpC.copy(v).project(camera);
@@ -286,7 +324,40 @@ function toScreen(v, out) {
   return out;
 }
 
-/** Screen-space perpendicular to the dragged joint's tangent, signed so the surface follows the finger. */
+/** Finds the segment under (x, y): an exact hit first, else the nearest centre line within reach. */
+function pick(x, y, touch) {
+  ndc.set((x / window.innerWidth) * 2 - 1, -(y / window.innerHeight) * 2 + 1);
+  raycaster.setFromCamera(ndc, camera);
+  const hit = raycaster.intersectObjects(meshes, false)[0];
+  if (hit) {
+    return { joint: hit.object.userData.index, grab: hit.point.clone().applyMatrix4(hit.object.matrixWorld.clone().invert()) };
+  }
+  let best = null, bestDist = Infinity;
+  const a = { x: 0, y: 0 }, b = { x: 0, y: 0 };
+  for (const mesh of meshes) {
+    for (let k = 0; k < ARC_SAMPLES.length; k++) {
+      toScreen(tmpP.copy(ARC_SAMPLES[k]).applyMatrix4(mesh.matrixWorld), b);
+      if (k > 0) {
+        // distance from the pointer to the screen segment a→b
+        const ex = b.x - a.x, ey = b.y - a.y;
+        const t = Math.max(0, Math.min(1, ((x - a.x) * ex + (y - a.y) * ey) / (ex * ex + ey * ey || 1)));
+        const dist = Math.hypot(a.x + ex * t - x, a.y + ey * t - y);
+        if (dist < bestDist) { bestDist = dist; best = { mesh, k: t < 0.5 ? k - 1 : k }; }
+      }
+      a.x = b.x; a.y = b.y;
+    }
+  }
+  if (!best) return null;
+  // the tube's on-screen radius at that point
+  const centre = tmpP.copy(ARC_SAMPLES[best.k]).applyMatrix4(best.mesh.matrixWorld);
+  const c0 = toScreen(centre, { x: 0, y: 0 });
+  const edge = toScreen(tmpA.set(TUBE_RADIUS, 0, 0).applyQuaternion(camera.quaternion).add(centre), { x: 0, y: 0 });
+  const tubePx = Math.hypot(edge.x - c0.x, edge.y - c0.y);
+  if (bestDist > tubePx + (touch ? TOUCH_REACH : MOUSE_REACH)) return null;
+  return { joint: best.mesh.userData.index, grab: ARC_SAMPLES[best.k].clone() };
+}
+
+/** Screen-space perpendicular to the held joint's tangent, signed so the surface follows the finger. */
 function twistDirection(joint, grabLocal) {
   const m = meshes[joint].matrixWorld;
   const origin = tmpA.setFromMatrixPosition(m);
@@ -313,34 +384,34 @@ function twistDirection(joint, grabLocal) {
 
 const canvas = renderer.domElement;
 canvas.addEventListener('pointerdown', (ev) => {
-  if (drag) return;
   unlockAudio();
+  const touch = ev.pointerType === 'touch';
+  showHelp(touch);
   try { canvas.setPointerCapture(ev.pointerId); } catch {}
-  ndc.set((ev.clientX / window.innerWidth) * 2 - 1, -(ev.clientY / window.innerHeight) * 2 + 1);
   scene.updateMatrixWorld();
-  raycaster.setFromCamera(ndc, camera);
-  const hit = raycaster.intersectObjects(meshes, false)[0];
-  drag = { id: ev.pointerId, x: ev.clientX, y: ev.clientY };
-  if (hit) {
-    const joint = hit.object.userData.index;
-    drag.mode = 'twist';
-    drag.joint = joint;
-    drag.grab = hit.point.clone().applyMatrix4(hit.object.matrixWorld.clone().invert());
-    drag.detent = Math.floor(solver.angles[joint] / QUARTER);
-  } else {
-    drag.mode = 'orbit';
+  const state = { mode: 'idle', x: ev.clientX, y: ev.clientY, pending: 0, touch };
+  const target = pick(ev.clientX, ev.clientY, touch);
+  if (target) {
+    state.mode = 'twist';
+    state.joint = target.joint;
+    state.grab = target.grab;
+    if (!detents.has(target.joint)) detents.set(target.joint, Math.floor(solver.angles[target.joint] / QUARTER));
+  } else if (![...pointers.values()].some((p) => p.mode === 'orbit')) {
+    state.mode = 'orbit';
   }
+  pointers.set(ev.pointerId, state);
 });
 
 canvas.addEventListener('pointermove', (ev) => {
-  if (!drag || ev.pointerId !== drag.id) return;
-  const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y;
-  drag.x = ev.clientX; drag.y = ev.clientY;
-  if (drag.mode === 'twist') {
+  const state = pointers.get(ev.pointerId);
+  if (!state) return;
+  const dx = ev.clientX - state.x, dy = ev.clientY - state.y;
+  state.x = ev.clientX; state.y = ev.clientY;
+  if (state.mode === 'twist') {
     scene.updateMatrixWorld();
-    const dir = twistDirection(drag.joint, drag.grab);
-    pendingTwist += (dx * dir.x + dy * dir.y) * TWIST_PER_PX;
-  } else {
+    const dir = twistDirection(state.joint, state.grab);
+    state.pending += (dx * dir.x + dy * dir.y) * (state.touch ? TOUCH_TWIST_PER_PX : TWIST_PER_PX);
+  } else if (state.mode === 'orbit') {
     spin.setFromAxisAngle(AXIS_Y, dx * ORBIT_PER_PX);
     ring.quaternion.premultiply(spin);
     spin.setFromAxisAngle(AXIS_X, dy * ORBIT_PER_PX);
@@ -348,14 +419,36 @@ canvas.addEventListener('pointermove', (ev) => {
   }
 });
 
-function endDrag(ev) {
-  if (!drag || ev.pointerId !== drag.id) return;
-  drag = null;
-  pendingTwist = 0;
+function endPointer(ev) {
+  const state = pointers.get(ev.pointerId);
+  if (!state) return;
+  pointers.delete(ev.pointerId);
+  if (state.mode === 'twist' && ![...pointers.values()].some((p) => p.mode === 'twist' && p.joint === state.joint)) {
+    detents.delete(state.joint);
+  }
 }
-canvas.addEventListener('pointerup', endDrag);
-canvas.addEventListener('pointercancel', endDrag);
+canvas.addEventListener('pointerup', endPointer);
+canvas.addEventListener('pointercancel', endPointer);
 document.addEventListener('gesturestart', (ev) => ev.preventDefault());
+
+// ---------- help ----------
+
+const HELP = {
+  touch: ['按住任一節滑動：扭轉', '多指按住不同節：同時扭轉', '滑動空白處：旋轉視角', '右下按鈕：切換色系'],
+  mouse: ['拖曳任一節：扭轉', '拖曳空白處：旋轉視角', '右下按鈕：切換色系'],
+};
+const helpEl = document.getElementById('help');
+let helpTouch = null;
+function showHelp(touch) {
+  if (touch === helpTouch) return;
+  helpTouch = touch;
+  helpEl.replaceChildren(...HELP[touch ? 'touch' : 'mouse'].map((line) => {
+    const li = document.createElement('li');
+    li.textContent = line;
+    return li;
+  }));
+}
+showHelp(window.matchMedia('(hover: none) and (pointer: coarse)').matches);
 
 // ---------- feedback ----------
 
@@ -417,24 +510,38 @@ function detent() {
   if (navigator.vibrate) navigator.vibrate(8);
 }
 
-/** Fires feedback each time the dragged joint passes a multiple of 90°. */
-function checkDetent() {
-  const a = solver.angles[drag.joint];
-  while (a > (drag.detent + 1) * QUARTER + DETENT_HYSTERESIS) { drag.detent++; detent(); }
-  while (a < drag.detent * QUARTER - DETENT_HYSTERESIS) { drag.detent--; detent(); }
+/** Fires feedback each time a held joint passes a multiple of 90°. */
+function checkDetents() {
+  for (const [joint, step] of detents) {
+    const a = solver.angles[joint];
+    let k = step;
+    while (a > (k + 1) * QUARTER + DETENT_HYSTERESIS) { k++; detent(); }
+    while (a < k * QUARTER - DETENT_HYSTERESIS) { k--; detent(); }
+    detents.set(joint, k);
+  }
 }
 
 // ---------- loop ----------
 
+if (debugEl) window.twistDebug = { solver, pointers };
+
+const moves = [];
 renderer.setAnimationLoop(() => {
-  if (drag && drag.mode === 'twist' && pendingTwist !== 0) {
-    const res = solver.drag(drag.joint, pendingTwist);
-    pendingTwist = 0;
-    if (res.applied !== 0) {
-      layout();
-      checkDetent();
+  moves.length = 0;
+  for (const p of pointers.values()) {
+    if (p.mode === 'twist' && p.pending !== 0) {
+      moves.push({ joint: p.joint, delta: p.pending });
+      p.pending = 0;
     }
   }
+  if (moves.length) {
+    const res = solver.twist(moves);
+    if (res.applied.some((v) => v !== 0)) {
+      layout();
+      checkDetents();
+    }
+  }
+  if (pointers.size === 0) camera.position.lerp(fitTarget(camTarget), 0.06);
   renderer.render(scene, camera);
 });
 </script>

@@ -193,18 +193,18 @@ function solveSPD(A, b, n) {
 }
 
 /**
- * One damped-least-squares update of the free joints (all but `fixed`, which may be −1).
+ * One damped-least-squares update of the free joints (those not set in `held`, which may be null).
  * Minimises ‖J·dθ + e‖² + w²·Σ(gᵀdθ − gap)² + λ²‖dθ‖².
  * Returns the closure error measured before the update.
  */
-function dlsStep(angles, fixed, opts, work) {
+function dlsStep(angles, held, opts, work) {
   const { joints, end, segments } = forward(angles, work.fk);
   const e = closureResidual(end, work.e);
   const err = Math.hypot(e[0], e[1], e[2], e[3], e[4], e[5]);
 
   const free = work.free;
   let n = 0;
-  for (let i = 0; i < N; i++) if (i !== fixed) free[n++] = i;
+  for (let i = 0; i < N; i++) if (!held || !held[i]) free[n++] = i;
 
   // Jacobian columns: d(p_end)/dθ = a × (p_end − o), d(rot)/dθ = a
   const J = work.J; // n×6, row per free joint
@@ -307,39 +307,66 @@ export class TwistSolver {
 
   /**
    * Twists `joint` by `delta` radians while the rest of the ring compensates.
-   * The move is split into small substeps; the first substep that cannot be
-   * closed cleanly is rejected and the ring stays at its last valid pose.
    * Returns { applied, accepted, error }.
    */
   drag(joint, delta) {
-    if (!Number.isFinite(delta) || delta === 0) return { applied: 0, accepted: true, error: this.error };
-    const steps = Math.ceil(Math.abs(delta) / MAX_SUBSTEP);
-    const inc = delta / steps;
-    let applied = 0;
-    for (let s = 0; s < steps; s++) {
-      if (!this.substep(joint, inc)) return { applied, accepted: false, error: this.error };
-      applied += inc;
-    }
-    return { applied, accepted: true, error: this.error };
+    const res = this.twist([{ joint, delta }]);
+    return { applied: res.applied[0], accepted: res.accepted, error: res.error };
   }
 
-  substep(joint, inc) {
+  /**
+   * Twists several held joints at once (one per finger); every other joint compensates.
+   * Each move is split into small substeps. When a combined substep cannot be closed
+   * cleanly, each move is retried on its own so one blocked joint does not freeze the
+   * others; a joint that still fails stays at its last valid angle for the rest of the call.
+   * Returns { applied: per-move radians, accepted: no move was blocked, error }.
+   */
+  twist(moves) {
+    const count = moves.length;
+    const applied = new Array(count).fill(0);
+    const held = new Uint8Array(N);
+    for (const m of moves) held[m.joint] = 1;
+    const live = moves.map((m) => Number.isFinite(m.delta) && m.delta !== 0);
+    let steps = 0;
+    for (let k = 0; k < count; k++) if (live[k]) steps = Math.max(steps, Math.ceil(Math.abs(moves[k].delta) / MAX_SUBSTEP));
+    const inc = new Float64Array(N);
+    let blocked = false;
+    for (let s = 0; s < steps; s++) {
+      inc.fill(0);
+      for (let k = 0; k < count; k++) if (live[k]) inc[moves[k].joint] += moves[k].delta / steps;
+      if (this.substep(inc, held)) {
+        for (let k = 0; k < count; k++) if (live[k]) applied[k] += moves[k].delta / steps;
+        continue;
+      }
+      for (let k = 0; k < count; k++) {
+        if (!live[k]) continue;
+        inc.fill(0);
+        inc[moves[k].joint] = moves[k].delta / steps;
+        if (this.substep(inc, held)) applied[k] += moves[k].delta / steps;
+        else { live[k] = false; blocked = true; }
+      }
+      if (!live.some(Boolean)) break;
+    }
+    return { applied, accepted: !blocked, error: this.error };
+  }
+
+  /** Tries one small increment `inc` (per joint) with `held` joints fixed; keeps it only if clean. */
+  substep(inc, held) {
     const prev = this.angles;
     const q = this.trial;
-    q.set(prev);
-    q[joint] += inc;
+    for (let i = 0; i < N; i++) q[i] = prev[i] + inc[i];
     const work = this.work;
     const iterations = 8;
     for (let it = 0; it < iterations; it++) {
       // Push apart for most iterations, then finish on closure alone.
       const collision = it < iterations - 3;
-      const err = dlsStep(q, joint, { lambda: 0.02, collision, collisionWeight: 0.6, maxStep: 0.4 }, work);
+      const err = dlsStep(q, held, { lambda: 0.02, collision, collisionWeight: 0.6, maxStep: 0.4 }, work);
       if (!Number.isFinite(err)) return false;
       if (!collision && err < 1e-12) break;
     }
     for (let i = 0; i < N; i++) {
       if (!Number.isFinite(q[i])) return false;
-      if (i !== joint && Math.abs(q[i] - prev[i]) > MAX_JUMP) return false;
+      if (!held[i] && Math.abs(q[i] - prev[i]) > MAX_JUMP) return false;
     }
     const error = closureError(q);
     if (!(error < ACCEPT_ERROR)) return false;
@@ -372,7 +399,7 @@ export function findClosedPose(seed, attempts = 200) {
     for (let i = 0; i < N; i++) q[i] = (rand() * 2 - 1) * Math.PI;
     for (let it = 0; it < 600; it++) {
       const collision = it < 560;
-      const err = dlsStep(q, -1, { lambda: collision ? 0.1 : 1e-3, collision, collisionWeight: 1, maxStep: 0.3 }, work);
+      const err = dlsStep(q, null, { lambda: collision ? 0.1 : 1e-3, collision, collisionWeight: 1, maxStep: 0.3 }, work);
       if (!Number.isFinite(err)) break;
     }
     if (q.some((v) => !Number.isFinite(v))) continue;

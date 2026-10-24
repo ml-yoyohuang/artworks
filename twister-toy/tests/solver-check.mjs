@@ -60,6 +60,30 @@ check(worst < 1e-4, `worst closure error ${worst.toExponential(2)}`);
 check(minClear >= 2 * TUBE_RADIUS * 0.98, `smallest clearance during drags ${minClear.toFixed(4)}`);
 console.log(`     total twist applied ${turned.toFixed(1)} rad in ${ms} ms (${(ms / 1000).toFixed(2)} ms per drag)`);
 
+// 500 multi-finger twists: 2–3 joints held and turned together
+const m = new TwistSolver();
+let mBad = 0, mNan = 0, mWorst = 0, mFull = 0, mPartial = 0, mMinClear = Infinity;
+for (let step = 0; step < 500; step++) {
+  const fingers = 2 + Math.floor(rand() * 2);
+  const joints = new Set();
+  while (joints.size < fingers) joints.add(Math.floor(rand() * SEGMENTS));
+  const moves = [...joints].map((joint) => ({ joint, delta: (rand() * 2 - 1) * 0.5 }));
+  const before = Float64Array.from(m.angles);
+  const res = m.twist(moves);
+  const err = closureError(m.angles);
+  if (m.angles.some((v) => !Number.isFinite(v)) || !Number.isFinite(err)) mNan++;
+  mWorst = Math.max(mWorst, err);
+  mMinClear = Math.min(mMinClear, minClearance(m.angles));
+  // Every held joint moved by exactly what was reported as applied.
+  const movedOk = moves.every((mv, k) => Math.abs(m.angles[mv.joint] - before[mv.joint] - res.applied[k]) < 1e-9);
+  if (!(err < 1e-4) || !movedOk) mBad++;
+  if (res.accepted) mFull++; else mPartial++;
+}
+check(mNan === 0, `no NaN in 500 multi-finger twists`);
+check(mBad === 0, `every multi-finger twist closed with held joints exact — ${mFull} full, ${mPartial} partly blocked`);
+check(mWorst < 1e-4, `worst multi-finger closure error ${mWorst.toExponential(2)}`);
+check(mMinClear >= 2 * TUBE_RADIUS * 0.98, `smallest clearance during multi-finger twists ${mMinClear.toFixed(4)}`);
+
 // Display alignment
 const q = [Math.cos(0.4), Math.sin(0.4) * 0.6, Math.sin(0.4) * 0.8, 0];
 const src = [], dst = [];
