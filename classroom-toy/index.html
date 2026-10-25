@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f7f3e8">
+<title>上課偷玩</title>
+<meta name="description" content="學生時代上課偷偷玩的八個無聊小遊戲：按自動筆、轉筆、彈尺、翻頁動畫、紙團投籃、戳橡皮擦、點點連線、拆彈簧。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="stage"></main>
+<ul id="help"></ul>
+<button id="sound" class="round" type="button" aria-label="靜音" aria-pressed="false">
+  <svg class="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/></svg>
+  <svg class="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z"/></svg>
+</button>
+<nav id="games">
+  <button type="button" data-game="pencil-click" aria-label="按壓自動筆">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><g transform="rotate(-45 12 12)"><path d="M5 10h12v4H5zM5 10l-2.5 2L5 14M2.5 12H1M17 10.8h3v2.4h-3M12 10v-1.6h4V10"/></g></svg>
+  </button>
+  <button type="button" data-game="pen-spin" aria-label="轉筆">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18L18 6M4.2 9.5A8.5 8.5 0 0 1 14.5 3.9M14.5 3.9l-2.6-1.2M14.5 3.9l-1.4 2.4M19.8 14.5A8.5 8.5 0 0 1 9.5 20.1M9.5 20.1l2.6 1.2M9.5 20.1l1.4-2.4"/><circle cx="12" cy="12" r="1.2" class="dot"/></svg>
+  </button>
+  <button type="button" data-game="ruler-twang" aria-label="彈尺">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 15h9v6M2 12.5h20v-2.5H2zM6 10v1.4M10 10v1.4M14 10v1.4M18 10v1.4M19 7.5c1 0.4 1.8 0.4 2.6 0M19 5c1 0.4 1.8 0.4 2.6 0"/></svg>
+  </button>
+  <button type="button" data-game="flipbook" aria-label="課本翻頁動畫">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h9l5 5v13H5zM14 3v5h5M8 16l2-3 2 2 2-3 2 4"/></svg>
+  </button>
+  <button type="button" data-game="paper-ball" aria-label="紙團投籃">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 11h12M6.5 11l1 10h7l1-10M9.5 14v4.5M12.5 14v4.5"/><circle cx="16" cy="5" r="3"/><path d="M14.3 4.2l1.6 1.4 1.4-1.8"/></svg>
+  </button>
+  <button type="button" data-game="eraser-poke" aria-label="戳橡皮擦">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><g transform="rotate(-25 12 14)"><rect x="3" y="10" width="17" height="8" rx="2"/><path d="M10 10v8"/></g><path d="M17 3l-2.5 7"/><circle cx="14.2" cy="11" r="0.6" class="dot"/></svg>
+  </button>
+  <button type="button" data-game="dots-and-boxes" aria-label="點點連線">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h7v7H5zM12 12h7"/><g class="dot"><circle cx="5" cy="5" r="1.3"/><circle cx="12" cy="5" r="1.3"/><circle cx="19" cy="5" r="1.3"/><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/><circle cx="5" cy="19" r="1.3"/><circle cx="12" cy="19" r="1.3"/><circle cx="19" cy="19" r="1.3"/></g></svg>
+  </button>
+  <button type="button" data-game="pen-spring" aria-label="原子筆拆彈簧">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12l2-4 2 8 2-8 2 8 2-8 2 8 2-8 2 8 2-8 2 4"/></svg>
+  </button>
+</nav>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
