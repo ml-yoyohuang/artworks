@@ -22,6 +22,20 @@ export const INITIAL_ANGLES = [
   -1.978703037532123, 1.68065003771657, -2.9882015838352913,
 ];
 
+// The "factory" pose the reset button springs back to, as a Tangle comes out of the box:
+// arcs 0–14 wind a spring of stacked loops (joints 1–12 all share one small twist, so
+// every loop is identical), and arcs 15–17 run back down the outside from the top loop
+// to the bottom one. Built piece by piece offline, then joints 0 and 13–17 were solved
+// so the ring closes cleanly.
+export const FACTORY_ANGLES = [
+  -1.583922773211424, 0.2279557431888831, 0.2279557431888831,
+  0.2279557431888831, 0.2279557431888831, 0.2279557431888831,
+  0.2279557431888831, 0.2279557431888831, 0.2279557431888831,
+  0.2279557431888831, 0.2279557431888831, 0.2279557431888831,
+  0.2279557431888831, 0.5347774255776682, -1.4981491008540238,
+  1.4646699888905759, -2.585196291713242, 1.8522551415013255,
+];
+
 const N = SEGMENTS;
 const HALF_PI = Math.PI / 2;
 const CLEARANCE = 2 * TUBE_RADIUS;
@@ -376,6 +390,35 @@ export class TwistSolver {
     this.error = error;
     this.clearance = clearance;
     return true;
+  }
+
+  /**
+   * Moves every joint `fraction` of the way toward `target` (the short way round) and
+   * re-closes the ring. Collisions are ignored, so tubes may slip through each other on
+   * the way. A fraction of 1 lands exactly on `target`, which must itself be closed.
+   */
+  approach(target, fraction) {
+    const q = this.trial;
+    for (let i = 0; i < N; i++) {
+      const d = target[i] - this.angles[i];
+      q[i] = this.angles[i] + Math.atan2(Math.sin(d), Math.cos(d)) * fraction;
+    }
+    if (fraction < 1) {
+      for (let it = 0; it < 8; it++) {
+        const err = dlsStep(q, null, { lambda: 0.02, collision: false, collisionWeight: 0, maxStep: 0.4 }, this.work);
+        if (!Number.isFinite(err)) return false;
+        if (err < 1e-12) break;
+      }
+      if (q.some((v) => !Number.isFinite(v))) return false;
+    }
+    this.setAngles(q);
+    return true;
+  }
+
+  setAngles(angles) {
+    this.angles.set(angles);
+    this.error = closureError(this.angles);
+    this.clearance = minClearance(this.angles);
   }
 }
 

@@ -12,7 +12,7 @@ try {
   solver = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
 }
 const {
-  SEGMENTS, TUBE_RADIUS, INITIAL_ANGLES, TwistSolver,
+  SEGMENTS, TUBE_RADIUS, INITIAL_ANGLES, FACTORY_ANGLES, TwistSolver,
   closureError, minClearance, findClosedPose, alignRigid, rotateByQuat,
 } = solver;
 
@@ -83,6 +83,28 @@ check(mNan === 0, `no NaN in 500 multi-finger twists`);
 check(mBad === 0, `every multi-finger twist closed with held joints exact — ${mFull} full, ${mPartial} partly blocked`);
 check(mWorst < 1e-4, `worst multi-finger closure error ${mWorst.toExponential(2)}`);
 check(mMinClear >= 2 * TUBE_RADIUS * 0.98, `smallest clearance during multi-finger twists ${mMinClear.toFixed(4)}`);
+
+// Factory pose and the reset glide toward it
+check(FACTORY_ANGLES.length === SEGMENTS, `factory pose has ${FACTORY_ANGLES.length} joints`);
+check(closureError(FACTORY_ANGLES) < 1e-10, `factory closure error ${closureError(FACTORY_ANGLES).toExponential(2)}`);
+const factoryClear = minClearance(FACTORY_ANGLES);
+check(factoryClear >= 2 * TUBE_RADIUS, `factory clearance ${factoryClear.toFixed(4)} ≥ 2r`);
+const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
+const FRAMES = 66;
+let rWorst = 0, rLanded = 0, rFailed = 0;
+for (const start of [INITIAL_ANGLES, s.angles, m.angles]) {
+  const r = new TwistSolver(start);
+  for (let f = 1; f <= FRAMES; f++) {
+    const e0 = ease((f - 1) / FRAMES), e1 = ease(f / FRAMES);
+    if (!r.approach(FACTORY_ANGLES, f === FRAMES ? 1 : (e1 - e0) / (1 - e0))) rFailed++;
+    rWorst = Math.max(rWorst, r.error);
+  }
+  const off = Math.max(...FACTORY_ANGLES.map((v, i) => Math.abs(Math.atan2(Math.sin(r.angles[i] - v), Math.cos(r.angles[i] - v)))));
+  if (off < 1e-9) rLanded++;
+}
+check(rFailed === 0, `reset glide never failed to re-close`);
+check(rWorst < 1e-6, `worst closure error during reset glides ${rWorst.toExponential(2)}`);
+check(rLanded === 3, `all 3 reset glides land exactly on the factory pose`);
 
 // Display alignment
 const q = [Math.cos(0.4), Math.sin(0.4) * 0.6, Math.sin(0.4) * 0.8, 0];
