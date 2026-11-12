@@ -98,7 +98,7 @@ function outline(ctx: CanvasRenderingContext2D, pts: number[], polygon = false):
 }
 
 /** Paint a body (no nucleus) in local coordinates: +x = heading. */
-function paintBody(ctx: CanvasRenderingContext2D, o: Organism, sh: Shape, pxPerUnit: number): void {
+function paintBody(ctx: CanvasRenderingContext2D, o: Organism, sh: Shape, pxPerUnit: number, includeInternal=true): void {
   const { cool, warm } = coloursOf(o.ph.traits, o.type);
   const { a, b, pts } = sh;
   // pale membrane halo, as in the concept art
@@ -134,14 +134,24 @@ function paintBody(ctx: CanvasRenderingContext2D, o: Organism, sh: Shape, pxPerU
   ctx.fillStyle = rg;
   ctx.fillRect(-a * 1.2, -b * 1.2, a * 2.4, b * 2.4);
   ctx.restore();
-  // Internal structures are clipped to the membrane and cached with the inherited body.
+  if(includeInternal)paintInternal(ctx,o,sh,pxPerUnit,0);
+  outline(ctx, pts, sh.polygon);
+  ctx.lineWidth = Math.max(0.6 / pxPerUnit * 1.5, a * 0.06);
+  ctx.strokeStyle = 'rgba(255,255,255,.9)';
+  ctx.stroke();
+}
+
+function paintInternal(ctx:CanvasRenderingContext2D,o:Organism,sh:Shape,pxPerUnit:number,t:number):void {
+  const {a,b,pts}=sh,{cool}=coloursOf(o.ph.traits,o.type);
+  // Internal structures are clipped to the membrane and animated without changing inherited counts.
   if (o.type !== 0) {
     ctx.save(); outline(ctx, pts, sh.polygon); ctx.clip();
     if (o.type === 1) {
       ctx.beginPath();
       for (let i = 0; i < o.corners; i++) {
         ctx.moveTo(-a * .1, -b * .05);
-        ctx.lineTo(pts[i * 2] * .73, pts[i * 2 + 1] * .73);
+        const x=pts[i*2]*.73,y=pts[i*2+1]*.73,sway=Math.sin(t*1.25+o.id+i*1.8)*a*.12;
+        ctx.quadraticCurveTo(x*.45-y*.12+sway,y*.45+x*.12-sway,x,y);
       }
       ctx.lineWidth = Math.max(.5 / pxPerUnit, a * .035);
       ctx.strokeStyle = `hsla(${cool.h},45%,42%,.46)`; ctx.stroke();
@@ -160,7 +170,9 @@ function paintBody(ctx: CanvasRenderingContext2D, o: Organism, sh: Shape, pxPerU
         const angle = lobe / o.lobes * TAU, c = Math.cos(angle), s = Math.sin(angle);
         for (let j = 0; j < counts[lobe]; j++) {
           const radial = a * (.68 + (j % 2) * .16), side = a * (j === 0 ? 0 : j === 1 ? -.16 : .16);
-          const x = c * radial - s * side, y = s * radial + c * side, r = a * .055;
+          const phase=o.id+lobe*2.1+j*1.7;
+          const driftR=a*.055*Math.sin(t*.85+phase),driftS=a*.065*Math.sin(t*1.1+phase*1.3);
+          const x = c * (radial+driftR) - s * (side+driftS), y = s * (radial+driftR) + c * (side+driftS), r = a * .055;
           ctx.moveTo(x+r,y); ctx.arc(x,y,r,0,TAU);
         }
       }
@@ -168,19 +180,15 @@ function paintBody(ctx: CanvasRenderingContext2D, o: Organism, sh: Shape, pxPerU
     }
     ctx.restore();
   }
-  outline(ctx, pts, sh.polygon);
-  ctx.lineWidth = Math.max(0.6 / pxPerUnit * 1.5, a * 0.06);
-  ctx.strokeStyle = 'rgba(255,255,255,.9)';
-  ctx.stroke();
 }
 
-function buildSprite(o: Organism, sh: Shape, res: number): Sprite {
+function buildSprite(o: Organism, sh: Shape, res: number, includeInternal=true): Sprite {
   const c = document.createElement('canvas');
   const size = Math.max(4, Math.ceil(sh.ext * 2 * res));
   c.width = c.height = size;
   const ctx = c.getContext('2d')!;
   ctx.setTransform(res, 0, 0, res, size / 2, size / 2);
-  paintBody(ctx, o, sh, res);
+  paintBody(ctx, o, sh, res, includeInternal);
   return { c, res, key: res, ext: sh.ext };
 }
 
@@ -446,10 +454,11 @@ export function portrait(cv: HTMLCanvasElement, o: Organism, sensorAngle: number
   ctx.stroke();
   const res = Math.min(48, Math.pow(2, Math.ceil(Math.log2(Math.max(1, k)))));
   if (!cached.sprite || cached.sprite.key !== res) {
-    cached.sprite = buildSprite(o, sh, Math.min(res, 512 / (sh.ext * 2)));
+    cached.sprite = buildSprite(o, sh, Math.min(res, 512 / (sh.ext * 2)), false);
     cached.sprite.key = res;
   }
   ctx.drawImage(cached.sprite.c, -sh.ext, -sh.ext, sh.ext * 2, sh.ext * 2);
+  paintInternal(ctx,o,sh,k/dpr,t);
   ctx.beginPath();
   nucleus(ctx, 0, 0, 0, sh, o.energy / o.ph.capacity, 1);
   ctx.fillStyle = INK;

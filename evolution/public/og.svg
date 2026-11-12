@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs>
+ <radialGradient id="water"><stop stop-color="#d3e8df"/><stop offset="1" stop-color="#94cbd1"/></radialGradient>
+ <linearGradient id="swim"><stop stop-color="#f5ba8e"/><stop offset="1" stop-color="#a6cbdc"/></linearGradient>
+ <linearGradient id="rest"><stop stop-color="#b4d8d7"/><stop offset="1" stop-color="#b1cedf"/></linearGradient>
+ <linearGradient id="bloom"><stop stop-color="#f5c096"/><stop offset="1" stop-color="#e7b8ca"/></linearGradient>
+ <filter id="grain"><feTurbulence baseFrequency=".6" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".07"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+</defs>
+<rect width="1200" height="630" fill="url(#water)"/>
+<path d="M-80 570C140 130 330 680 680 470S950 50 1290 180" fill="none" stroke="#f6efe3" stroke-opacity=".68" stroke-width="170"/>
+<g fill="#dca278" opacity=".5"><circle cx="93" cy="105" r="3"/><circle cx="338" cy="491" r="4"/><circle cx="1045" cy="117" r="4"/><circle cx="1084" cy="468" r="3"/><circle cx="694" cy="74" r="3"/><circle cx="575" cy="564" r="3"/></g>
+<g stroke="#fffdf7" stroke-width="5" stroke-linejoin="round">
+ <g transform="translate(851 211) rotate(-26)"><path d="M-102 8C-117-72-5-97 72-48S99 61 11 68-86 57-102 8Z" fill="url(#swim)"/><ellipse cx="-8" cy="-2" rx="31" ry="22" fill="#35204b" stroke="none"/><g stroke="#608d9c" stroke-width="2" fill="none"><path d="M72-34Q110-61 132-45M91-2Q128 0 148-12M67 38Q105 66 129 48M-92 25Q-140 54-162 33"/></g><g fill="#e9a36f" stroke="none"><circle cx="132" cy="-45" r="5"/><circle cx="148" cy="-12" r="5"/><circle cx="129" cy="48" r="5"/></g></g>
+ <g transform="translate(981 429) rotate(14)"><path d="M-81-40-9-86 70-45 81 38 9 85-70 45Z" fill="url(#rest)"/><path d="M0 0Q-43-5-59-30M0 0Q-17-41-7-62M0 0Q45-10 52-32M0 0Q44 12 59 28M0 0Q-3 32 7 62M0 0Q-42 26-51 33" stroke="#719baa" stroke-width="2" fill="none"/><ellipse rx="24" ry="20" fill="#35204b" stroke="none"/></g>
+ <g transform="translate(724 457) rotate(-10)"><path d="M0-91C38-104 28-49 52-44S111-40 85-5 48 21 51 48 28 103 5 76-17 51-44 65-91 48-68 17-56-8-70-36-42-76-21-54-26-82 0-91Z" fill="url(#bloom)"/><ellipse rx="22" ry="20" fill="#35204b" stroke="none"/><g fill="#a66d89" stroke="none"><circle cx="0" cy="-60" r="5"/><circle cx="54" cy="-12" r="5"/><circle cx="37" cy="-21" r="4"/><circle cx="14" cy="55" r="5"/><circle cx="-48" cy="28" r="5"/><circle cx="-40" cy="-35" r="4"/></g></g>
+</g>
+<g fill="#2a1745"><text x="82" y="192" font-family="Georgia,serif" font-size="73" letter-spacing="-3">Evolution</text><text x="82" y="276" font-family="Georgia,serif" font-size="79" font-style="italic" letter-spacing="-3">Machine</text><text x="88" y="345" font-family="sans-serif" font-size="26" letter-spacing="7">小小世界，生命不停演化。</text><path d="M88 387H385" stroke="#2a1745" stroke-opacity=".3"/><text x="88" y="430" font-family="sans-serif" font-size="19" letter-spacing="3">觀察・相遇・等待下一個驚喜</text><text x="88" y="550" font-family="sans-serif" font-size="13" letter-spacing="4">A LIVING OBSERVATION CHAMBER</text></g>
+<rect width="1200" height="630" fill="transparent" filter="url(#grain)"/>
+</svg>
