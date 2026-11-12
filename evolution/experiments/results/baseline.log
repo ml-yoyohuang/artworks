@@ -1,0 +1,21 @@
+seed 1: pop 249-752 final 712 gen 96.2 genTime 1112 lineages 1 nodes<=1940 eErr 2.1e-11 finite true 783ns/os 40637ms
+seed 2: pop 199-639 final 639 gen 118.6 genTime 969 lineages 1 nodes<=1700 eErr 2.3e-10 finite true 807ns/os 33096ms
+seed 3: pop 359-757 final 627 gen 125.3 genTime 963 lineages 1 nodes<=1963 eErr 1.6e-12 finite true 816ns/os 44926ms
+seed 4: pop 350-699 final 690 gen 113.2 genTime 978 lineages 1 nodes<=1832 eErr 1.6e-10 finite true 768ns/os 40827ms
+seed 5: pop 270-703 final 672 gen 124.9 genTime 987 lineages 1 nodes<=1781 eErr 1.4e-10 finite true 772ns/os 40338ms
+seed 6: pop 427-744 final 741 gen 120.7 genTime 954 lineages 1 nodes<=1997 eErr 9.5e-12 finite true 772ns/os 46259ms
+seed 7: pop 205-619 final 619 gen 103.1 genTime 1016 lineages 1 nodes<=1584 eErr 1.7e-11 finite true 783ns/os 33461ms
+seed 8: pop 210-630 final 609 gen 108.4 genTime 1010 lineages 1 nodes<=1616 eErr 1.6e-10 finite true 785ns/os 32847ms
+seed 9: pop 405-759 final 759 gen 115.7 genTime 1002 lineages 1 nodes<=2049 eErr 9.7e-12 finite true 816ns/os 47447ms
+seed 10: pop 306-689 final 641 gen 117.3 genTime 1019 lineages 1 nodes<=1932 eErr 8.4e-11 finite true 900ns/os 48153ms
+
+trait change from tick 5000 to 100000 across 10 replicate seeds:
+  size             0.850 -> 0.507 (sd across seeds 0.031)  increased in 0/10  sign-test p=0.0020
+  maxSpeed         2.108 -> 1.670 (sd across seeds 0.483)  increased in 2/10  sign-test p=0.1094
+  senseRange       23.704 -> 11.655 (sd across seeds 1.047)  increased in 0/10  sign-test p=0.0020
+  reproThreshold   0.600 -> 0.595 (sd across seeds 0.076)  increased in 4/10  sign-test p=0.7539
+  offspringInvest  0.292 -> 0.330 (sd across seeds 0.046)  increased in 8/10  sign-test p=0.1094
+  markerA          0.524 -> 0.501 (sd across seeds 0.114)  increased in 3/10  sign-test p=0.3438  [neutral]
+  markerB          0.528 -> 0.479 (sd across seeds 0.133)  increased in 3/10  sign-test p=0.3438  [neutral]
+
+[baseline] done in 408 s

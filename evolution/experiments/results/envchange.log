@@ -1,0 +1,21 @@
+seed 21: pop before 516; after drop min 22, end 234; control end 649
+seed 22: pop before 552; after drop min 45, end 350; control end 685
+seed 23: pop before 553; after drop min 37, end 246; control end 629
+seed 24: pop before 689; after drop min 34, end 237; control end 760
+seed 25: pop before 648; after drop min 63, end 262; control end 713
+seed 26: pop before 542; after drop min 31, end 148; control end 646
+
+mean traits at end (rich control vs poor branch), 6 seeds:
+  size             rich 0.508  poor 0.524  poor>rich in 5/6  p=0.2188
+  maxSpeed         rich 1.601  poor 1.728  poor>rich in 4/6  p=0.6875
+  senseRange       rich 11.464  poor 13.264  poor>rich in 5/6  p=0.2188
+  reproThreshold   rich 0.614  poor 0.593  poor>rich in 3/6  p=1.0000
+  offspringInvest  rich 0.348  poor 0.347  poor>rich in 3/6  p=1.0000
+  markerA          rich 0.483  poor 0.432  poor>rich in 1/6  p=0.2188
+  markerB          rich 0.473  poor 0.469  poor>rich in 4/6  p=0.6875
+
+reciprocal transplant, frequency of the poor-evolved line after 10000 ticks (start 0.5):
+  poorLineInPoorEnv   : mean 0.243 sd 0.335 | >0.5 in 2/10 | sign-test p=0.1094 | [0.00 0.00 0.00 0.50 0.10 0.19 0.54 0.10 1.00 0.00]
+  poorLineInRichEnv   : mean 0.033 sd 0.060 | >0.5 in 0/12 | sign-test p=0.0005 | [0.00 0.00 0.07 0.01 0.01 0.00 0.00 0.00 0.18 0.11 0.01 0.00]
+
+[envchange] done in 678 s

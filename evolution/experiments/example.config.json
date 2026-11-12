@@ -1,0 +1,10 @@
+{
+  "seed": 42,
+  "ticks": 20000,
+  "width": 640,
+  "height": 480,
+  "patchiness": 0.8,
+  "founders": { "count": 150 },
+  "env": { "regrowthRate": 0.012, "influx": 0.004 },
+  "mutation": { "rate": 0.05 }
+}

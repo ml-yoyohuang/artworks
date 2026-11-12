@@ -1,0 +1,22 @@
+{
+  "name": "evolution-machine",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "exp": "vite-node experiments/run.ts --"
+  },
+  "devDependencies": {
+    "typescript": "~5.4.5",
+    "vite": "^4.5.3",
+    "vite-node": "^0.34.6",
+    "vitest": "^0.34.6"
+  },
+  "dependencies": {
+    "@types/node": "^16.18.126"
+  }
+}

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evolution Machine — observation chamber (diagnostic)</title>
+<style>
+  :root { --paper:#f8f2e7; --ink:#2e1a47; --soft:#7d7390; --line:#e3d8c6; --blue:#7cc6dc; --orange:#f0924a; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; background:var(--paper); color:var(--ink);
+    font: 13px/1.45 "Avenir Next", "Segoe UI", system-ui, sans-serif; }
+  #app { display:grid; grid-template-columns: 1fr 300px; height:100%; }
+  #stage { position:relative; min-width:0; min-height:0; display:flex; align-items:center; justify-content:center; padding:18px; }
+  #world { max-width:100%; max-height:100%; border-radius:22px; box-shadow:0 1px 0 #fff inset, 0 18px 50px -24px rgba(46,26,71,.45); cursor:crosshair; touch-action:none; }
+  aside { border-left:1px solid var(--line); padding:20px 18px; overflow:auto; }
+  h1 { font: 600 19px/1.1 Georgia, "Times New Roman", serif; letter-spacing:.02em; margin:0 0 2px; }
+  .sub { color:var(--soft); font-size:11px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:16px; }
+  h2 { font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--soft); margin:18px 0 6px; font-weight:600; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:4px 12px; }
+  .grid b { font: 600 17px Georgia, serif; display:block; }
+  .grid span { color:var(--soft); font-size:11px; }
+  canvas.chart { width:100%; height:74px; display:block; border-bottom:1px solid var(--line); }
+  .legend { display:flex; flex-wrap:wrap; gap:2px 10px; font-size:10.5px; color:var(--soft); margin-top:4px; }
+  .legend i { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:4px; }
+  .row { display:flex; gap:6px; flex-wrap:wrap; margin:6px 0; }
+  button { font:inherit; color:var(--ink); background:#fff; border:1px solid var(--line); border-radius:999px; padding:5px 12px; cursor:pointer; }
+  button:hover { border-color:var(--ink); }
+  button.on { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  label { display:block; color:var(--soft); font-size:11px; margin-top:8px; }
+  label output { float:right; color:var(--ink); }
+  input[type=range] { width:100%; accent-color:var(--ink); margin:2px 0 0; }
+  #inspect { font-size:12px; min-height:92px; }
+  #inspect table { border-collapse:collapse; width:100%; }
+  #inspect td { padding:1px 0; } #inspect td:last-child { text-align:right; font-variant-numeric:tabular-nums; }
+  .hint { color:var(--soft); font-size:11px; }
+  @media (max-width: 760px) { #app { grid-template-columns:1fr; grid-template-rows:56vh auto; } aside { border-left:0; border-top:1px solid var(--line); } }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="stage"><canvas id="world"></canvas></div>
+  <aside>
+    <h1>Evolution Machine</h1>
+    <div class="sub">Stage 1 · diagnostic chamber</div>
+    <div class="grid">
+      <div><b id="s-pop">–</b><span>organisms</span></div>
+      <div><b id="s-gen">–</b><span>mean generation</span></div>
+      <div><b id="s-tick">–</b><span>tick</span></div>
+      <div><b id="s-res">–</b><span>resource / capacity</span></div>
+    </div>
+    <h2>Population &amp; resource</h2>
+    <canvas class="chart" id="c-pop"></canvas>
+    <div class="legend"><span><i style="background:var(--ink)"></i>population</span><span><i style="background:var(--blue)"></i>resource</span></div>
+    <h2>Mean traits (scaled to gene range)</h2>
+    <canvas class="chart" id="c-traits"></canvas>
+    <div class="legend" id="trait-legend"></div>
+    <h2>Time</h2>
+    <div class="row" id="speeds"></div>
+    <h2>Environment</h2>
+    <label>Regrowth rate <output id="o-regrow"></output><input id="i-regrow" type="range" min="0" max="0.03" step="0.0005"></label>
+    <label>Cell capacity <output id="o-cap"></output><input id="i-cap" type="range" min="1" max="20" step="0.5"></label>
+    <h2>Specimen</h2>
+    <div id="inspect"><span class="hint">Click an organism to inspect it. Shift-click the chamber to introduce a copy of the inspected organism (or a random one).</span></div>
+    <h2>Experiment</h2>
+    <div class="row">
+      <button id="b-new">New seed</button><button id="b-save">Save</button><button id="b-load">Load</button>
+      <input id="f-load" type="file" accept="application/json" hidden>
+    </div>
+    <div class="hint" id="seed"></div>
+  </aside>
+</div>
+<script type="module" src="/src/viewer/main.ts"></script>
+</body>
+</html>
