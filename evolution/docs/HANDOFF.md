@@ -1,5 +1,9 @@
 # HANDOFF
 
+## Stage 4 最新交接
+
+本輪已實作觀看／探索／研究模式、本機收藏與兩代自動保存、個體暱稱、自願音訊、引導、手機面板與雙指縮放程式，以及暫停按需重繪。69個測試通過；實際瀏覽器驗證與尚未完成的真機／聽辨／30分鐘驗收見 [QUALITY_REPORT](QUALITY_REPORT.md)。操作與新檔案封裝見 [FINAL_HANDOFF](FINAL_HANDOFF.md)。此區優先於下列歷史紀錄，不將尚未驗證的項目宣告完成。
+
 ## 最新體驗更新
 
 最新發版包含 Stage 3 接手完成內容、模型3轉向、本次觀察員紀錄、未讀提示、沉浸式生物筆記與108種實況模板。完整台詞見 [OBSERVER_CONTENT](OBSERVER_CONTENT.md)；三類生物各色系原已具4色票，見 [PIGMENTS](PIGMENTS.md)。缺席巡查的族群名稱改為按當下數量帶入。既有長期實驗主要為模型2，下一步優先補模型3的多種子長期共存與平衡驗證，再進行 Stage 4 整體體驗打磨。
@@ -134,3 +138,7 @@ Renderer and shaders, UI panels and charts, histogram and lineage-tree views, We
 plumbing, snapshot compression, more unit tests, parameter-sweep scripts that reuse `compete()`,
 packaging. **Not** without review: anything in `stepOnce`, `genome.ts`, the energy rules, or the
 interpretation of experiment results.
+
+### 2026-11-12 已確認研究員造型
+
+研究員預設採用使用者回傳參數。鏡框依當地星期輪換三種形狀；配件每分鐘輪換燒瓶／咖啡杯／筆記本，詳見AVATAR_EDITOR.md。進站倍率統一為最小1×連按三次＋（3.375×），工具列即時顯示倍率，收藏按鈕改手刻SVG。75個測試、typecheck、build通過，桌機與390px手機介面已驗證。所有時間裝飾與生態模擬隨機序列無關。

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-Hant" class="avatar-editor-page">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6efe3"><title>研究員試衣間 · Evolution Machine</title>
+  <link rel="stylesheet" href="/src/app/style.css"><link rel="stylesheet" href="/src/app/avatar-editor.css">
+</head>
+<body class="avatar-editor">
+<main>
+  <header class="editor-header"><div><a href="./index.html" class="editor-back">← 回觀察箱</a><p class="kicker">Evolution Machine · Character study</p><h1>研究員<em>試衣間</em></h1><p>點選部位，拖曳位置，或用右側數值微調。選好後，把參數交給我。</p></div><button id="copy-parameters" class="pill dark">複製參數</button></header>
+  <div class="editor-layout">
+    <section class="editor-preview" aria-label="研究員預覽">
+      <div class="stage-toolbar"><span>即時預覽</span><label><input id="show-guides" type="checkbox" checked> 顯示選取框</label></div>
+      <div id="avatar-stage" class="avatar-stage" tabindex="0" role="img" aria-label="可拖曳的研究員預覽。選取部位後，可用方向鍵微調，Shift加方向鍵加大移動。"><div id="avatar-art"></div><div id="selection-box" aria-hidden="true" hidden></div></div>
+      <div class="stage-toolbar"><div class="row"><button id="undo" class="pill" disabled>復原</button><button id="redo" class="pill" disabled>重做</button></div><span class="hint">方向鍵移動 · Shift ×5</span></div>
+      <div class="actual-size"><div><span class="kicker">放回紀錄視窗</span><h2>觀察員紀錄</h2><p class="hint">正在觀察 · 只記錄本次瀏覽</p></div><div id="avatar-small" aria-hidden="true"></div></div>
+      <p id="draft-status" class="hint" role="status">只調整這份草稿，確認後再套用到觀察箱。</p>
+    </section>
+    <section class="editor-controls" aria-label="外觀參數">
+      <div id="part-buttons" class="part-buttons" role="group" aria-label="選擇調整部位"></div>
+      <div class="part-heading"><h2 id="part-title">捲捲頭</h2><button id="reset-part" class="link">還原這個部位</button></div>
+      <div id="field-controls"></div>
+      <p id="part-hint" class="hint"></p>
+      <details id="parameter-details"><summary>參數與匯出</summary><p class="hint">這份參數包含位置、比例、形狀與顏色。複製給我，就能精確套用你的版本。</p><textarea id="parameters" rows="8" readonly aria-label="研究員參數 JSON" spellcheck="false"></textarea><div class="row"><button id="copy-parameters-bottom" class="pill dark">複製參數</button><button id="download-parameters" class="pill">下載參數</button><button id="download-svg" class="pill">下載 SVG</button><button id="import-parameters" class="pill">匯入參數</button><input id="parameter-file" type="file" accept="application/json,.json" hidden></div></details>
+      <button id="reset-all" class="link reset-all">回到這次的新造型</button>
+    </section>
+  </div>
+</main>
+<script type="module" src="/src/app/avatar-editor.ts"></script>
+</body></html>

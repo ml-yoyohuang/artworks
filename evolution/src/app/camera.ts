@@ -1,3 +1,4 @@
+export const MIN_ZOOM=1, MAX_ZOOM=8, ZOOM_STEP=1.5, INITIAL_ZOOM=MIN_ZOOM*ZOOM_STEP**3;
 /** View transform: world units <-> CSS pixels. `x, y` is the world point at the screen centre. */
 export class Camera {
   x = 0;
@@ -31,7 +32,7 @@ export class Camera {
 
   zoomAt(sx: number, sy: number, zoom: number): void {
     const [wx, wy] = this.toWorld(sx, sy);
-    this.zoom = Math.min(8, Math.max(1, zoom));
+    this.zoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, zoom));
     this.x = wx - (sx - this.vw / 2) / this.s;
     this.y = wy - (sy - this.vh / 2) / this.s;
     this.clamp();
@@ -45,7 +46,7 @@ export class Camera {
 
   /** Start close enough to see individuals, as through a microscope. */
   reset(): void {
-    this.zoom = this.vw < 720 ? 2.6 : 2;
+    this.zoom = INITIAL_ZOOM;
     this.x = this.W / 2;
     this.y = this.H / 2;
   }

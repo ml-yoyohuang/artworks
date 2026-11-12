@@ -1,6 +1,8 @@
 import type { Simulation } from '../sim';
 import { ObservationJournal } from './observer';
 import { observe } from './observer-state';
+import {avatarStyleAt} from './avatar-time';
+import {renderResearcher} from './researcher-avatar';
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 export class ObserverPane {
@@ -12,6 +14,7 @@ export class ObserverPane {
   private sim?: Simulation;
   private sampledTick = 0;
   private readThrough = 0;
+  private avatarStyle = '';
   get isOpen() { return !$('observer-panel').hidden; }
   constructor(private getSim: () => Simulation, private closeOtherPanel: () => void) {
     $('observer-toggle').onclick = () => this.setOpen(!this.isOpen);
@@ -35,6 +38,12 @@ export class ObserverPane {
     this.journal.begin(observe(sim),this.seconds,reason,this.enabled); this.render();
   }
   frame(sim: Simulation, dt: number) {
+    const timeMs=Date.now(),style=JSON.stringify(avatarStyleAt(timeMs));
+    if(style!==this.avatarStyle){
+      const image=document.querySelector<HTMLImageElement>('.observer-avatar');
+      if(image){image.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(renderResearcher(undefined,{timeMs}));image.dataset.style=style;}
+      this.avatarStyle=style;
+    }
     if (!this.enabled) return;
     if (this.sim !== sim) this.worldChanged(sim);
     this.seconds += dt; this.sinceSample += dt;

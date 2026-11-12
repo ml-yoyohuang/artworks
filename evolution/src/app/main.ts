@@ -6,7 +6,7 @@ import {
   Simulation, makeConfig, Clock, randomGenome, Rng, traitHistogram, DEFAULT_CONFIG, TRAITS,
   T_SIZE, T_SPEED, T_SENSE, T_REPRO, T_INVEST, sampleNow, type Organism,
 } from '../sim';
-import { Camera } from './camera';
+import { Camera, MIN_ZOOM, MAX_ZOOM, ZOOM_STEP } from './camera';
 import { Field } from './field';
 import { Creatures, portrait } from './creatures';
 import { parseSeed, tickPosition, extinctionTick } from './observation';
@@ -15,6 +15,11 @@ import { Laboratory } from './laboratory';
 import { confirmAction, showNotice } from './dialog';
 import { ObserverPane } from './observer-ui';
 import { particleCounts } from './anatomy';
+import { ChamberArchive } from './archive';
+import { Experience } from './experience';
+import { openRecord } from './world-record';
+import { t, translateLabel, typeName, installLanguageControl } from './i18n';
+import { installSelectControls } from './select-control';
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 const fieldCv = $<HTMLCanvasElement>('field');
@@ -31,6 +36,8 @@ let laboratory: Laboratory;
 let researching = false;
 let dialogOpen = false;
 let observer: ObserverPane | undefined;
+let archive:ChamberArchive|undefined;
+let experience:Experience|undefined;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 let selected = -1, hover = -1, following = false;
@@ -104,7 +111,7 @@ function strip(cv: HTMLCanvasElement, trait: number, value: number) {
 // ---------------------------------------------------------------- notes panel
 const traitRows = $('trait-rows');
 traitRows.innerHTML = FUNCTIONAL.map((i) =>
-  `<div class="trow"><div class="name">${LABEL[i]}</div><canvas id="tr-${i}"></canvas><div class="val" id="tv-${i}"></div></div>`).join('');
+  `<div class="trow"><div class="name">${translateLabel(LABEL[i])}</div><canvas id="tr-${i}"></canvas><div class="val" id="tv-${i}"></div></div>`).join('');
 
 function updateNotes() {
   const h = sim.history, last = h[h.length - 1];
@@ -121,79 +128,84 @@ function updateNotes() {
     [Math.round((last.births / span) * 1000).toString(), 'births per 1000 ticks'],
     [Math.round((last.deaths / span) * 1000).toString(), 'deaths per 1000 ticks'],
   ];
-  $('stats').innerHTML = stats.map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join('');
+  $('stats').innerHTML = stats.map(([b, s]) => `<div><b>${b}</b><span>${translateLabel(s)}</span></div>`).join('');
   const t0 = h[0].tick, t1 = Math.max(t0 + 1, last.tick);
   const marks = sim.events.filter((e) => e.tick >= t0 && e.tick <= last.tick && e.type !== 'extinction').map((e) => tickPosition(e.tick, t0, t1));
   const pops = h.map((s) => s.population);
   const typeMax = Math.max(10, ...h.flatMap(s => s.typePop ?? []));
   line($<HTMLCanvasElement>('c-types'), [0,1,2].map(t => ({ v: h.map(s => s.typePop?.[t] ?? NaN), min: 0, max: typeMax, color: TYPE_COLOURS[t] })), [], ticks);
-  $('type-scale').textContent = `Population scale 0–${typeMax}; ticks ${t0}–${last.tick}. Orange: forager; teal: grazer; pink: generalist. Missing legacy data is not reconstructed.`;
+  $('type-scale').textContent = t(`人口尺度 0–${typeMax}；第 ${t0}–${last.tick} 步。橘：游動型，藍綠：節能型，粉：多瓣型。缺失的舊資料保留空白。`,`Population scale 0–${typeMax}; ticks ${t0}–${last.tick}. Orange: forager; teal: grazer; pink: generalist. Missing legacy data is not reconstructed.`);
   $('type-stats').replaceChildren();
-  for (let t = 0; t < 3; t++) {
-    const row = document.createElement('div'); row.className = 'type-stat'; row.style.borderColor = TYPE_COLOURS[t];
-    const rate = (a?: number[]) => a ? (a[t] / span).toFixed(3) : 'n/a';
-    row.textContent = `${sim.cfg.types[t].name}: ${current.typePop[t]} living · energy ${Number.isFinite(current.typeEnergyFrac[t]) ? (current.typeEnergyFrac[t]*100).toFixed(1)+'%' : 'n/a'} · births/deaths per 1000 ticks ${last.typeBirths ? Math.round(last.typeBirths[t]/span*1000) : 'n/a'} / ${last.typeDeaths ? Math.round(last.typeDeaths[t]/span*1000) : 'n/a'} · uptake A/B ${rate(last.typeUptakeA)} / ${rate(last.typeUptakeB)} · maintenance/movement ${rate(last.typeFixedCost)} / ${rate(last.typeMoveCost)}`;
+  for (let kind = 0; kind < 3; kind++) {
+    const row = document.createElement('div'); row.className = 'type-stat'; row.style.borderColor = TYPE_COLOURS[kind];
+    const rate = (a?: number[]) => a ? (a[kind] / span).toFixed(3) : t('未記錄','n/a');
+    const energy=Number.isFinite(current.typeEnergyFrac[kind])?(current.typeEnergyFrac[kind]*100).toFixed(1)+'%':t('無活體','n/a');
+    const births=last.typeBirths?Math.round(last.typeBirths[kind]/span*1000):t('未記錄','n/a'),deaths=last.typeDeaths?Math.round(last.typeDeaths[kind]/span*1000):t('未記錄','n/a');
+    row.textContent = t(`${typeName(kind)}：現存 ${current.typePop[kind]} · 能量 ${energy} · 每千步出生／死亡 ${births}／${deaths} · 取食 A／B ${rate(last.typeUptakeA)}／${rate(last.typeUptakeB)} · 維持／移動 ${rate(last.typeFixedCost)}／${rate(last.typeMoveCost)}`,`${sim.cfg.types[kind].name}: ${current.typePop[kind]} living · energy ${energy} · births/deaths per 1000 ticks ${births} / ${deaths} · uptake A/B ${rate(last.typeUptakeA)} / ${rate(last.typeUptakeB)} · maintenance/movement ${rate(last.typeFixedCost)} / ${rate(last.typeMoveCost)}`);
     $('type-stats').append(row);
   }
-  const distribution = (a: number[]) => a.map((n,i) => n ? `${i}: ${n}` : '').filter(Boolean).join(' · ') || 'no living organisms';
-  $('morph-stats').textContent = `Grazer corners (count: individuals)\n${distribution(current.cornerCounts)}\nGeneralist lobes (count: individuals)\n${distribution(current.lobeCounts)}\nBirth events ${Number.isFinite(sim.totalBirths) ? sim.totalBirths : 'not recorded in legacy world'}`;
+  const distribution = (a: number[]) => a.map((n,i) => n ? `${i}: ${n}` : '').filter(Boolean).join(' · ') || t('無現存個體','no living organisms');
+  $('morph-stats').textContent = t(`節能型角數（角數：個體數）\n${distribution(current.cornerCounts)}\n多瓣型瓣數（瓣數：個體數）\n${distribution(current.lobeCounts)}\n累積出生 ${Number.isFinite(sim.totalBirths)?sim.totalBirths:'舊紀錄未保留'}`,`Grazer corners (count: individuals)\n${distribution(current.cornerCounts)}\nGeneralist lobes (count: individuals)\n${distribution(current.lobeCounts)}\nBirth events ${Number.isFinite(sim.totalBirths)?sim.totalBirths:'not recorded in legacy world'}`);
   const countMean = (a?: number[]) => { const n = a?.reduce((sum,v) => sum+v,0) ?? 0; return n ? a!.reduce((sum,v,i) => sum+v*i,0)/n : NaN; };
   const countMax = Math.max(sim.cfg.morph.corners.max, sim.cfg.morph.lobes.max);
   line($<HTMLCanvasElement>('c-morph'), [{ v: h.map(s => countMean(s.cornerCounts)), min: 3, max: countMax, color: TYPE_COLOURS[1] },{ v: h.map(s => countMean(s.lobeCounts)), min: 3, max: countMax, color: TYPE_COLOURS[2] }], [], ticks);
-  $('morph-scale').textContent = `Recorded population means, scale 3–${countMax}; ticks ${t0}–${last.tick}. Teal: corners; pink: lobes. Gaps mean absent/unrecorded populations. Individual count frequencies are in exported samples.`;
+  $('morph-scale').textContent = t(`族群平均值，尺度 3–${countMax}；第 ${t0}–${last.tick} 步。藍綠：角數，粉：瓣數。空白表示該群缺席或未記錄，完整頻數見匯出樣本。`,`Recorded population means, scale 3–${countMax}; ticks ${t0}–${last.tick}. Teal: corners; pink: lobes. Gaps mean absent/unrecorded populations. Individual count frequencies are in exported samples.`);
   line($('c-pop') as HTMLCanvasElement, [
     { v: h.map((s) => s.resourceFrac), min: 0, max: 1, color: '#6fbfd6', fill: 'rgba(111,191,214,.16)' },
     { v: h.map((s) => s.resourceFracB ?? NaN), min: 0, max: 1, color: '#6baf92' },
     { v: pops, min: 0, max: Math.max(100, ...pops) * 1.1, color: '#2a1745', width: 1.6 },
   ], marks, ticks);
-  $('pop-scale').textContent = `Ticks ${t0.toLocaleString()}–${last.tick.toLocaleString()} · population 0–${Math.ceil(Math.max(100, ...pops) * 1.1)} · resources 0–100% (A blue, B green). Now A ${(current.resourceFrac*100).toFixed(1)}%, B ${(current.resourceFracB*100).toFixed(1)}%. Latest recorded sample: tick ${last.tick.toLocaleString()}.`;
+  $('pop-scale').textContent = t(`第 ${t0.toLocaleString()}–${last.tick.toLocaleString()} 步 · 人口 0–${Math.ceil(Math.max(100,...pops)*1.1)} · 食物 0–100%（A藍／B綠）。目前 A ${(current.resourceFrac*100).toFixed(1)}%、B ${(current.resourceFracB*100).toFixed(1)}%。最近樣本：第 ${last.tick.toLocaleString()} 步。`,`Ticks ${t0.toLocaleString()}–${last.tick.toLocaleString()} · population 0–${Math.ceil(Math.max(100, ...pops) * 1.1)} · resources 0–100% (A blue, B green). Now A ${(current.resourceFrac*100).toFixed(1)}%, B ${(current.resourceFracB*100).toFixed(1)}%. Latest recorded sample: tick ${last.tick.toLocaleString()}.`);
   for (const i of FUNCTIONAL) {
-    const t = TRAITS[i];
+    const trait = TRAITS[i];
     const v = h.map((s) => s.population ? s.traitMean[i] : NaN);
     const observed = v.filter(Number.isFinite);
     // auto-range, but never narrower than 15 % of the gene's range, so noise is not drawn as a trend
-    const lo = observed.length ? Math.min(...observed) : t.min, hi = observed.length ? Math.max(...observed) : t.max, mid = (lo + hi) / 2, half = Math.max((hi - lo) / 2 * 1.15, (t.max - t.min) * 0.075);
+    const lo = observed.length ? Math.min(...observed) : trait.min, hi = observed.length ? Math.max(...observed) : trait.max, mid = (lo + hi) / 2, half = Math.max((hi - lo) / 2 * 1.15, (trait.max - trait.min) * 0.075);
     const range = `${fmt(i, mid - half)}–${fmt(i, mid + half)}`;
     line($(`tr-${i}`) as HTMLCanvasElement, [{ v, min: mid - half, max: mid + half, color: '#2a1745' }], [], ticks);
-    $(`tv-${i}`).innerHTML = last.population ? `${fmt(i, last.traitMean[i])}<small>± ${fmt(i, last.traitSd[i])} SD</small><small>scale ${range}</small>` : '—';
+    $(`tv-${i}`).innerHTML = last.population ? `${fmt(i, last.traitMean[i])}<small>± ${fmt(i, last.traitSd[i])} ${t('標準差','SD')}</small><small>${t('尺度','scale')} ${range}</small>` : '—';
   }
   const tv = h.map((s) => s.traitGeneVar), bv = h.map((s) => s.brainGeneVar);
   line($('c-div') as HTMLCanvasElement, [
     { v: tv, min: 0, max: Math.max(0.05, ...tv), color: '#2a1745' },
     { v: bv, min: 0, max: Math.max(0.05, ...bv), color: '#ef8b45' },
   ], [], ticks);
-  $('div-scale').textContent = `Raw gene variance; body scale 0–${Math.max(0.05, ...tv).toFixed(3)}, controller scale 0–${Math.max(0.05, ...bv).toFixed(3)}. Latest: ${last.population ? `${last.traitGeneVar.toFixed(3)} / ${last.brainGeneVar.toFixed(3)}` : 'no living population'}.`;
+  $('div-scale').textContent = t(`基因變異數；身體尺度 0–${Math.max(.05,...tv).toFixed(3)}，行為尺度 0–${Math.max(.05,...bv).toFixed(3)}。最近：${last.population?`${last.traitGeneVar.toFixed(3)}／${last.brainGeneVar.toFixed(3)}`:'無現存個體'}。`,`Raw gene variance; body scale 0–${Math.max(0.05, ...tv).toFixed(3)}, controller scale 0–${Math.max(0.05, ...bv).toFixed(3)}. Latest: ${last.population ? `${last.traitGeneVar.toFixed(3)} / ${last.brainGeneVar.toFixed(3)}` : 'no living population'}.`);
   const ev = sim.events.slice(-7).reverse();
   $('events').replaceChildren();
   for (const e of ev.length ? ev : [null]) {
     const li = document.createElement('li'), tick = document.createElement('span');
     tick.textContent = e ? e.tick.toLocaleString() : '—';
-    li.append(tick, document.createTextNode(e ? describe(e.type, e.detail) : 'No interventions yet. The world is running on its own.'));
+    li.append(tick, document.createTextNode(e ? describe(e.type, e.detail) : t('還沒有介入紀錄，水域正自行運作。','No interventions yet. The world is running on its own.')));
     $('events').appendChild(li);
   }
 }
 function describe(type: string, detail: string): string {
-  if (type === 'extinction') return 'The last organism died.';
+  if (type === 'extinction') return t('最後一個生命已離開。','The last organism died.');
   if (type === 'introduction') {
-    try { const d = JSON.parse(detail); return `Released #${d.id}, type ${d.type}, corners ${d.corners || 'n/a'}, lobes ${d.lobes || 'n/a'} at (${Number(d.x).toFixed(1)}, ${Number(d.y).toFixed(1)}).`; }
-    catch { return `A newcomer was released (${detail}).`; }
+    try { const d = JSON.parse(detail); return t(`放入第 ${d.id} 號${typeName(d.type)}，角數 ${d.corners||'—'}、瓣數 ${d.lobes||'—'}，位置（${Number(d.x).toFixed(1)}，${Number(d.y).toFixed(1)}）。`,`Released #${d.id}, type ${d.type}, corners ${d.corners || 'n/a'}, lobes ${d.lobes || 'n/a'} at (${Number(d.x).toFixed(1)}, ${Number(d.y).toFixed(1)}).`); }
+    catch { return t(`放入一個新住客（${detail}）。`,`A newcomer was released (${detail}).`); }
   }
   try {
     const p = JSON.parse(detail);
     const parts: string[] = [];
-    if (p.regrowthRate !== undefined) parts.push(`productivity ×${(p.regrowthRate / DEFAULT_CONFIG.env.regrowthRate).toFixed(2)}`);
-    if (p.cellCapacity !== undefined) parts.push(`richness ${p.cellCapacity}`);
-    return `Resource ${p.resource ?? 'A'} changed: ${parts.join(', ')}.`;
+    if (p.regrowthRate !== undefined) parts.push(`${t('補充速率','productivity')} ×${(p.regrowthRate / DEFAULT_CONFIG.env.regrowthRate).toFixed(2)}`);
+    if (p.cellCapacity !== undefined) parts.push(`${t('容量','richness')} ${p.cellCapacity}`);
+    return t(`${p.resource??'A'}類食物已調整：${parts.join('、')}。`,`Resource ${p.resource ?? 'A'} changed: ${parts.join(', ')}.`);
   } catch { return detail; }
 }
 
 // ---------------------------------------------------------------- specimen card
 const specTraits = $('spec-traits');
 specTraits.innerHTML = FUNCTIONAL.map((i) =>
-  `<div class="trait"><span>${LABEL[i]}</span><canvas id="st-${i}"></canvas><span class="v" id="sv-${i}"></span></div>`).join('') +
+  `<div class="trait"><span>${translateLabel(LABEL[i])}</span><canvas id="st-${i}"></canvas><span class="v" id="sv-${i}"></span></div>`).join('') +
   `<div class="trait"><span>Lineage colour</span><span id="st-hue"></span><span class="v">neutral</span></div>`;
 
 function select(id: number) {
+  if(id!==selected)$('specimen').scrollTop=0;
+  if(id>=0 && experience?.mode==='watch')experience.setMode('explore');
+  if(id>=0 && climate.classList.contains('open')){climate.classList.remove('open');$('climate-toggle').setAttribute('aria-expanded','false');}
   selected = id;
   following = following && id >= 0;
   $('specimen').hidden = id < 0;
@@ -209,29 +221,31 @@ function updateSpecimen() {
   const s = lastSeen;
   if (!s) return;
   $('specimen').classList.toggle('dead', dead);
-  $('spec-kicker').textContent = dead ? 'Specimen · deceased' : s.parentId < 0 ? 'Specimen · founder' : 'Specimen';
-  $('spec-title').textContent = `No. ${s.id.toLocaleString()}`;
+  $('spec-kicker').textContent = dead ? t('個體資料 · 已離開','Specimen · deceased') : s.parentId < 0 ? t('個體資料 · 起始成員','Specimen · founder') : t('個體資料','Specimen');
+  $('spec-title').textContent = archive?.selectedName(s.id)||t(`第 ${s.id.toLocaleString()} 號`,`No. ${s.id.toLocaleString()}`);
   $('spec-lineage').textContent = s.parentId < 0
-    ? (s.founderId === s.id && s.birthTick > 0 ? 'Released into the chamber' : 'One of the founders')
-    : `Generation ${s.generation} of founder ${s.founderId} · child of ${s.parentId}`;
+    ? (s.founderId === s.id && s.birthTick > 0 ? t('中途加入觀察箱','Released into the chamber') : t('起始家族的一員','One of the founders'))
+    : t(`起始成員 ${s.founderId} 的第 ${s.generation} 代 · 親代 ${s.parentId}`,`Generation ${s.generation} of founder ${s.founderId} · child of ${s.parentId}`);
   const e = s.energy / s.ph.capacity;
   $('spec-vitals').innerHTML = [
     [`${s.age.toLocaleString()}`, 'ticks old'],
     [`${s.offspring}`, 'offspring'],
     [`${(o ? o.speed : 0).toFixed(2)}`, 'world units / tick'],
     [`${Math.round(e * 100)}%<div class="bar"><i style="width:${Math.min(100, e * 100)}%"></i></div>`, 'energy reserve'],
-  ].map(([b, l]) => `<div><b>${b}</b><span>${l}</span></div>`).join('');
+  ].map(([b, l]) => `<div><b>${b}</b><span>${translateLabel(l)}</span></div>`).join('');
   for (const i of FUNCTIONAL) {
     strip($(`st-${i}`) as HTMLCanvasElement, i, s.ph.traits[i]);
     $(`sv-${i}`).textContent = fmt(i, s.ph.traits[i]);
   }
   const { warm, cool } = coloursOf(s.ph.traits, s.type);
-  $('spec-ecology').textContent = `${sim.cfg.types[s.type].name} · corners ${s.corners || 'n/a'} · lobes ${s.lobes || 'n/a'} · actual speed ceiling ${s.ph.vmax.toFixed(2)} units/tick · affinity A/B ${s.ph.affA}/${s.ph.affB} · intake ceiling ${s.ph.intakeMax.toFixed(3)} energy/tick · maintenance ${s.ph.fixedCost.toFixed(3)} energy/tick · body cost ${s.ph.buildCost.toFixed(3)} energy. Count traits change only in offspring.`;
-  if (s.type === 2) $('spec-ecology').textContent += ` Inherited decorative particles by lobe: ${particleCounts(s).join(' / ')}. These do not change gene count or metabolism.`;
+  $('spec-ecology').textContent = t(`${typeName(s.type)} · 角數 ${s.corners||'—'} · 瓣數 ${s.lobes||'—'} · 游速上限 ${s.ph.vmax.toFixed(2)} 距離／步 · 食物偏好 A／B ${s.ph.affA}／${s.ph.affB} · 每步取食上限 ${s.ph.intakeMax.toFixed(3)} 能量 · 每步維持 ${s.ph.fixedCost.toFixed(3)} 能量 · 新生建造代價 ${s.ph.buildCost.toFixed(3)} 能量。角瓣差異在新生子代出現。`,`${sim.cfg.types[s.type].name} · corners ${s.corners || 'n/a'} · lobes ${s.lobes || 'n/a'} · actual speed ceiling ${s.ph.vmax.toFixed(2)} units/tick · affinity A/B ${s.ph.affA}/${s.ph.affB} · intake ceiling ${s.ph.intakeMax.toFixed(3)} energy/tick · maintenance ${s.ph.fixedCost.toFixed(3)} energy/tick · body cost ${s.ph.buildCost.toFixed(3)} energy. Count traits change only in offspring.`);
+  if (s.type === 2) $('spec-ecology').textContent += t(` 各瓣遺傳粒子：${particleCounts(s).join('／')}。`,` Inherited particles by lobe: ${particleCounts(s).join(' / ')}.`);
   $('st-hue').innerHTML = `<i class="swatch" style="background:${pigmentCss(cool)}"></i><i class="swatch" style="background:${pigmentCss(warm)}"></i>`;
   ($('spec-follow') as HTMLButtonElement).classList.toggle('on', following);
+  $('spec-follow').setAttribute('aria-pressed',String(following&&!dead));
   ($('spec-follow') as HTMLButtonElement).disabled = dead;
-  if (dead) { $('spec-lineage').textContent += ` · died at ${s.age.toLocaleString()} ticks`; following = false; }
+  if (dead) { $('spec-lineage').textContent += t(` · 存活 ${s.age.toLocaleString()} 步後離開`,` · died at ${s.age.toLocaleString()} ticks`); following = false; }
+  archive?.refreshSelected();
 }
 $('spec-close').onclick = () => select(-1);
 $('spec-follow').onclick = () => { following = !following; if (!following) cam.zoom = Math.max(1, cam.zoom); updateSpecimen(); };
@@ -265,9 +279,9 @@ rich.onchange = () => { sim.setEnvironment({ cellCapacity: Number(rich.value) },
 function setPlacing(mode: typeof placing) {
   placing = mode;
   lifeCv.classList.toggle('placing', !!mode);
-  const t = $('toast');
-  t.hidden = !mode;
-  if (mode) t.textContent = mode === 'clone' ? `Click to place a clone of No. ${selected} · Esc to cancel` : 'Click to release a random newcomer · Esc to cancel';
+  const toast = $('toast');
+  toast.hidden = !mode;
+  if (mode) toast.textContent = mode === 'clone' ? t(`點擊水域放入第 ${selected} 號的同源個體 · Esc 取消`,`Click to place a clone of No. ${selected} · Esc to cancel`) : t('點擊水域放入新住客 · Esc 取消','Click to release a random newcomer · Esc to cancel');
 }
 $('b-release').onclick = () => setPlacing('random');
 
@@ -287,8 +301,9 @@ function load(next: Simulation) {
   updateNotes();
   history.replaceState(null, '', `?seed=${sim.cfg.seed}`);
   observer?.worldChanged(sim);
+  archive?.worldChanged(sim);
 }
-const confirmReplace = () => confirmAction({ title: '取代目前的觀察箱？', message: '目前尚未儲存的進度與介入將被取代。若想保留這個世界，請先取消並儲存快照。', accept: '取代世界', cancel: '保留目前世界' });
+const confirmReplace = () => confirmAction({ title:t('取代目前的觀察箱？','Replace the current chamber?'),message:t('目前尚未儲存的進度與介入將被取代。若想保留這個世界，請先取消並儲存快照。','Unsaved progress and interventions will be replaced. Cancel and export a snapshot first to keep this world.'),accept:t('取代世界','Replace world'),cancel:t('保留目前世界','Keep current world') });
 async function newWorld() { if (await confirmReplace()) load(new Simulation(makeConfig({ seed: randomSeed() }))); }
 $('b-new').onclick = newWorld;
 $('b-ext-new').onclick = newWorld;
@@ -297,6 +312,7 @@ $('b-ext-release').onclick = () => {
   for (let i = 0; i < 40; i++) sim.introduce(randomGenome(rng, 0.5, 1), rng.next() * sim.cfg.width, rng.next() * sim.cfg.height, sim.cfg.founders.energyFrac, { type: sim.cfg.model === 1 ? 0 : i % 3 });
 };
 $('b-save').onclick = () => {
+  if(archive){archive.export();return;}
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(sim.snapshot())], { type: 'application/json' }));
   a.download = `evolution-seed${sim.cfg.seed}-tick${sim.tick}.json`;
@@ -308,11 +324,11 @@ $<HTMLInputElement>('f-load').onchange = async (e) => {
   const file = (e.target as HTMLInputElement).files?.[0];
   if (!file) return;
   try {
-    const next = Simulation.restore(JSON.parse(await file.text()));
-    if (!next.history.length || !Number.isFinite(next.tick)) throw new Error('Missing observation history or tick');
-    if (await confirmReplace()) load(next);
+    const value=JSON.parse(await file.text());
+    openRecord(value);
+    if (await confirmReplace()) archive ? archive.open(value) : load(openRecord(value).sim);
   }
-  catch (err) { await showNotice('無法開啟快照', String(err)); }
+  catch (err) { await showNotice(t('無法開啟快照','Unable to open snapshot'), String(err)); }
   finally { (e.target as HTMLInputElement).value = ''; }
 };
 
@@ -335,14 +351,25 @@ function applySpeed() {
   $<HTMLButtonElement>('b-play').disabled = researching;
 }
 $('b-play').onclick = () => { paused = !paused; applySpeed(); };
-$('b-zin').onclick = () => cam.zoomAt(cam.vw / 2, cam.vh / 2, cam.zoom * 1.5);
-$('b-zout').onclick = () => cam.zoomAt(cam.vw / 2, cam.vh / 2, cam.zoom / 1.5);
+function syncZoom() {
+  const label=`${Number(cam.zoom.toFixed(3))}×`;
+  if($('zoom-value').textContent!==label)$('zoom-value').textContent=label;
+  ($('b-zin') as HTMLButtonElement).disabled=cam.zoom>=MAX_ZOOM;
+  ($('b-zout') as HTMLButtonElement).disabled=cam.zoom<=MIN_ZOOM;
+}
+$('b-zin').onclick = () => {following=false;cam.zoomAt(cam.vw / 2, cam.vh / 2, cam.zoom * ZOOM_STEP);syncZoom();};
+$('b-zout').onclick = () => {following=false;cam.zoomAt(cam.vw / 2, cam.vh / 2, cam.zoom / ZOOM_STEP);syncZoom();};
 
 const climate = $('climate');
-$('climate-toggle').onclick = () => { const open = climate.classList.toggle('open'); $('climate-toggle').setAttribute('aria-expanded', String(open)); };
+$('climate-toggle').onclick = () => {
+  const open = climate.classList.toggle('open'); $('climate-toggle').setAttribute('aria-expanded', String(open));
+  if(open){$('specimen').hidden=true;experience?.closeExtras();}
+  else if(selected>=0)$('specimen').hidden=false;
+};
 
 const notes = $('notes');
 function toggleNotes(open = !notes.classList.contains('open')) {
+  if(open){experience?.closeExtras();if(!$('vault-panel').hidden)archive?.setOpen(false);}
   if (open && observer?.isOpen) observer.setOpen(false);
   notes.classList.toggle('open', open);
   notes.setAttribute('aria-hidden', String(!open));
@@ -351,11 +378,14 @@ function toggleNotes(open = !notes.classList.contains('open')) {
   if (open) updateNotes();
   (open ? $('notes-close') : $('notes-toggle')).focus();
 }
-$('notes-toggle').onclick = () => toggleNotes();
+$('notes-toggle').onclick = () => {if(experience?.mode==='watch')experience.setMode('research');else toggleNotes();};
 $('notes-close').onclick = () => toggleNotes(false);
 
 // ---------------------------------------------------------------- pointer
 let down: { x: number; y: number; cx: number; cy: number; moved: boolean } | null = null;
+const touches=new Map<number,[number,number]>();
+let pinch:{distance:number;zoom:number}|null=null;
+let suppressTap=false;
 const local = (e: PointerEvent | WheelEvent) => { const r = lifeCv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
 const pickRadius = () => Math.max(6, 16 / cam.s);
 function pickOrganism(x: number, y: number): Organism | null {
@@ -369,11 +399,16 @@ function pickOrganism(x: number, y: number): Organism | null {
 }
 lifeCv.addEventListener('pointerdown', (e) => {
   const [x, y] = local(e);
+  touches.set(e.pointerId,[x,y]);
+  if(touches.size>=2){const [a,b]=[...touches.values()];pinch={distance:Math.max(1,Math.hypot(a[0]-b[0],a[1]-b[1])),zoom:cam.zoom};down=null;suppressTap=true;following=false;lifeCv.setPointerCapture(e.pointerId);return;}
+  suppressTap=false;
   down = { x, y, cx: cam.x, cy: cam.y, moved: false };
   lifeCv.setPointerCapture(e.pointerId);
 });
 lifeCv.addEventListener('pointermove', (e) => {
   const [x, y] = local(e);
+  if(touches.has(e.pointerId))touches.set(e.pointerId,[x,y]);
+  if(pinch && touches.size>=2){const [a,b]=[...touches.values()];cam.zoomAt((a[0]+b[0])/2,(a[1]+b[1])/2,pinch.zoom*Math.hypot(a[0]-b[0],a[1]-b[1])/pinch.distance);return;}
   if (down) {
     if (!down.moved && Math.hypot(x - down.x, y - down.y) > 5) { down.moved = true; following = false; lifeCv.classList.add('dragging'); }
     if (down.moved) { cam.x = down.cx - (x - down.x) / cam.s; cam.y = down.cy - (y - down.y) / cam.s; cam.clamp(); }
@@ -384,6 +419,8 @@ lifeCv.addEventListener('pointermove', (e) => {
   lifeCv.classList.toggle('over', hover >= 0 && !placing);
 });
 lifeCv.addEventListener('pointerup', (e) => {
+  touches.delete(e.pointerId);
+  if(suppressTap){if(touches.size===0){pinch=null;suppressTap=false;}return;}
   lifeCv.classList.remove('dragging');
   if (!down) return;
   const moved = down.moved;
@@ -402,7 +439,7 @@ lifeCv.addEventListener('pointerup', (e) => {
   select(pickOrganism(wx, wy)?.id ?? -1);
 });
 lifeCv.addEventListener('pointerleave', () => { hover = -1; });
-lifeCv.addEventListener('pointercancel', () => { down = null; lifeCv.classList.remove('dragging'); });
+lifeCv.addEventListener('pointercancel', e => { touches.delete(e.pointerId);pinch=null;suppressTap=touches.size>0;down = null; lifeCv.classList.remove('dragging'); });
 lifeCv.addEventListener('wheel', (e) => {
   e.preventDefault();
   const [x, y] = local(e);
@@ -425,7 +462,7 @@ window.addEventListener('keydown', (e) => {
     if (n) { const o = sim.orgs[(i + (e.key === ']' ? 1 : n - 1) + n) % n]; select(o.id); cam.x = o.x; cam.y = o.y; cam.clamp(); }
     e.preventDefault();
   }
-  else if (e.key === 'Escape') { if (placing) setPlacing(null); else if (observer?.isOpen) observer.setOpen(false); else if (notes.classList.contains('open')) toggleNotes(false); else select(-1); }
+  else if (e.key === 'Escape') { if (placing) setPlacing(null); else if(!$('vault-panel').hidden)archive?.setOpen(false);else if(!$('sound-panel').hidden){experience?.closeSound();$('sound-toggle').focus();}else if(!$('onboarding').hidden)experience?.closeExtras();else if (observer?.isOpen) observer.setOpen(false); else if (notes.classList.contains('open')) toggleNotes(false); else select(-1); }
   wake();
 });
 
@@ -435,7 +472,7 @@ function wake() {
   document.body.classList.remove('idle');
   clearTimeout(idleTimer);
   idleTimer = window.setTimeout(() => {
-    if (!notes.classList.contains('open') && !observer?.isOpen && !placing && !document.activeElement?.closest('button, a, input, #notes')) document.body.classList.add('idle');
+    if (!notes.classList.contains('open') && !observer?.isOpen && !placing && $('vault-panel').hidden && $('sound-panel').hidden && $('onboarding').hidden && !document.activeElement?.closest('button, a, input, #notes')) document.body.classList.add('idle');
   }, 7000);
 }
 ['pointermove', 'pointerdown', 'wheel', 'touchstart'].forEach((ev) => window.addEventListener(ev, wake, { passive: true }));
@@ -449,6 +486,7 @@ window.addEventListener('resize', resize);
 // ---------------------------------------------------------------- main loop
 let lastT = performance.now(), lastPanel = 0, frameMs = 0;
 let rateStart = lastT, rateTicks = 0, actualRate = 0;
+let renderedWorld:Simulation|undefined,renderedView='';
 document.addEventListener('visibilitychange', () => { lastT = performance.now(); rateStart = lastT; rateTicks = 0; });
 function frame(now: number) {
   const frameStart = performance.now();
@@ -465,6 +503,7 @@ function frame(now: number) {
   life.sync(sim, speed <= 16 && !reducedMotion.matches, live);
   animTime += live;
   observer?.frame(sim, clock.paused ? 0 : elapsed);
+  syncZoom();
   rateTicks += sim.tick - before;
   if (now - rateStart >= 1000) { actualRate = rateTicks * 1000 / (now - rateStart); rateTicks = 0; rateStart = now; }
 
@@ -472,28 +511,34 @@ function frame(now: number) {
     const v = life.vis.get(selected);
     if (v) {
       const z = Math.max(cam.zoom, 2.6);
-      cam.zoom += (z - cam.zoom) * 0.06;
-      cam.x += (v.lx - cam.x) * 0.08;
-      cam.y += (v.ly - cam.y) * 0.08;
+      const ease=1-Math.exp(-dt*4.5);
+      cam.zoom += (z - cam.zoom) * ease;
+      cam.x += (v.lx - cam.x) * ease;
+      cam.y += (v.ly - cam.y) * ease;
       cam.clamp();
     }
   }
   const alpha = clock.paused ? 1 : Math.min(1, clock.phase);
   const visualTime = reducedMotion.matches ? 0 : animTime;
-  field.render(sim, cam, visualTime, dpr());
-  life.render(sim, cam, alpha, visualTime, reducedMotion.matches ? 0 : live, dpr(), selected, hover);
+  const view=[sim.tick,sim.orgs.length,clock.paused,sim.env.cellCapacity,sim.env.regrowthRate,sim.env.influx,sim.envB.cellCapacity,sim.envB.regrowthRate,sim.envB.influx,cam.x.toFixed(3),cam.y.toFixed(3),cam.zoom.toFixed(4),cam.vw,cam.vh,dpr(),selected,hover,reducedMotion.matches].join('/');
+  if(!clock.paused || renderedWorld!==sim || renderedView!==view) {
+    field.render(sim, cam, visualTime, dpr());
+    life.render(sim, cam, alpha, visualTime, reducedMotion.matches ? 0 : live, dpr(), selected, hover);
+    renderedWorld=sim;renderedView=view;
+  }
 
   if (now - lastPanel > 300) {
     lastPanel = now;
-    $('caption').textContent = `Model ${sim.cfg.model} · ${sim.cfg.seed} · ${sim.tick.toLocaleString()} ticks · ${sim.orgs.length} living`;
+    $('caption').textContent = `觀察箱 ${sim.cfg.seed} · ${sim.tick.toLocaleString()} 步 · ${sim.orgs.length.toLocaleString()} 個生命`;
     $('clock').textContent = `${sim.tick.toLocaleString()} t`;
-    $('pace').textContent = `${dialogOpen ? 'Paused for confirmation' : researching ? 'Chamber paused for experiments' : paused ? 'Paused' : `Target ${30 * speed} ticks/s · actual ${Math.round(actualRate)} ticks/s`} · frame work ${frameMs.toFixed(1)} ms (smoothed JS callback time; not GPU completion or FPS)`;
+    $('pace').textContent = t(`${dialogOpen?'確認期間暫停':researching?'比較實驗進行中，本箱暫停':paused?'已暫停':`目標每秒 ${30*speed} 步 · 實際每秒 ${Math.round(actualRate)} 步`} · 畫面工作 ${frameMs.toFixed(1)} 毫秒（平滑後程式回呼時間，非GPU完成時間或幀率）`,`${dialogOpen ? 'Paused for confirmation' : researching ? 'Chamber paused for experiments' : paused ? 'Paused' : `Target ${30 * speed} ticks/s · actual ${Math.round(actualRate)} ticks/s`} · frame work ${frameMs.toFixed(1)} ms (smoothed JS callback time; not GPU completion or FPS)`);
     if (notes.classList.contains('open')) updateNotes();
     updateSpecimen();
     laboratory.refresh(lastSeen);
+    archive?.frame(now);experience?.frame(now,clock.paused);
     const extinct = sim.orgs.length === 0;
     $('extinct').hidden = !extinct;
-    if (extinct) { const tick = extinctionTick(sim.events); $('extinct-title').textContent = tick === undefined ? 'No living organisms' : `Extinct at tick ${tick.toLocaleString()}`; }
+    if (extinct) { const tick = extinctionTick(sim.events); $('extinct-title').textContent = tick === undefined ? t('目前沒有現存生物','No living organisms') : t(`第 ${tick.toLocaleString()} 步，最後一個生命離開`,`Extinct at tick ${tick.toLocaleString()}`); }
   }
   if (selected >= 0 && lastSeen) portrait($('spec-portrait') as HTMLCanvasElement, lastSeen, sim.cfg.sensorAngle, lastSeen.alive ? visualTime : 0);
   frameMs = frameMs * 0.9 + (performance.now() - frameStart) * 0.1;
@@ -504,8 +549,19 @@ function frame(now: number) {
 (window as any).__frameMs = () => frameMs;
 document.addEventListener('app-dialog-toggle', e => { dialogOpen = (e as CustomEvent).detail.open; applySpeed(); });
 laboratory = new Laboratory(() => sim, load, select, () => { researching = true; applySpeed(); return () => { researching = false; applySpeed(); }; });
-observer = new ObserverPane(() => sim, () => { if (notes.classList.contains('open')) toggleNotes(false); });
+const closeStudioPanels=()=>{if(notes.classList.contains('open'))toggleNotes(false);if(observer?.isOpen)observer.setOpen(false);if(!$('vault-panel').hidden)archive?.setOpen(false);experience?.closeExtras();};
+experience=new Experience(()=>sim,mode=>{
+  closeStudioPanels();climate.classList.remove('open');$('climate-toggle').setAttribute('aria-expanded','false');
+  if(mode==='watch'){$('specimen').hidden=true;setPlacing(null);}
+  else if(mode==='research'){toggleNotes(true);$('specimen').hidden=true;}
+  else if(selected>=0)$('specimen').hidden=false;
+},closeStudioPanels);
+archive=new ChamberArchive(()=>sim,load,id=>{select(id);const o=sim.orgs.find(o=>o.id===id);if(o){cam.x=o.x;cam.y=o.y;cam.clamp();}},()=>lastSeen,closeStudioPanels);
+// Observer reading is another exclusive right-hand surface.
+observer = new ObserverPane(() => sim,closeStudioPanels);
 load(sim);
+installLanguageControl(()=>{updateNotes();updateSpecimen();laboratory.languageChanged(lastSeen);});
+installSelectControls();
 applySpeed();
 wake();
 requestAnimationFrame(frame);

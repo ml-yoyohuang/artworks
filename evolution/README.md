@@ -1,5 +1,12 @@
 # Evolution Machine
 
+Stage 4 adds Watch / Explore / Research views, optional ambient synthesis, local autosave with a backup,
+named chambers, specimen favourites and nicknames, a short skippable introduction and touch pinch zoom.
+Open **收藏與續看** to resume a previous observation. Export important worlds: browser-local storage can
+be cleared. New application exports wrap the scientific snapshot and favourites in `evolution-world` v1;
+plain legacy snapshots still import. See [QUALITY_REPORT](docs/QUALITY_REPORT.md) for actual tests and
+outstanding audio, device and long-session verification. Stage 4 science rules remain model 3.
+
 Latest experience update: internal grazer rays, inherited per-lobe particles, model 3 curvature-limited movement,
 in-page confirmation dialogs, and a session-only Chinese observer journal (20 s / 1 / 3 / 10 min).
 New worlds use model 3; existing model-1/2 snapshots keep their rules. Original `research` suites default

@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "typecheck": "tsc --noEmit",
+    "avatar:export": "vite-node experiments/export-avatar.ts",
     "test": "vitest run",
     "exp": "vite-node experiments/run.ts --",
     "research": "vite-node experiments/stage3.ts --"
