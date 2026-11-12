@@ -15,6 +15,14 @@ export class Clock {
     this.maxTicksPerFrame = maxTicksPerFrame;
   }
 
+  /** Fraction (0..1) of the next tick already elapsed: use it to interpolate rendering. */
+  get phase(): number {
+    return this.acc;
+  }
+
+  /** Discard a previous world's interpolation phase when replacing it. */
+  reset(): void { this.acc = 0; }
+
   /** Number of ticks to run for `dtSeconds` of real time. */
   advance(dtSeconds: number): number {
     if (this.paused) return 0;

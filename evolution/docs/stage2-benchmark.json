@@ -1,0 +1,93 @@
+{
+  "node": "v16.14.2",
+  "platform": "win32",
+  "seed": 123,
+  "warmupTicks": 30,
+  "measuredTicks": 200,
+  "results": [
+    {
+      "founders": 200,
+      "medianMsPerTick": 0.20674150000326336,
+      "runs": [
+        {
+          "msPerTick": 0.7903679999988527,
+          "startPopulation": 200,
+          "endPopulation": 181
+        },
+        {
+          "msPerTick": 0.20674150000326336,
+          "startPopulation": 200,
+          "endPopulation": 181
+        },
+        {
+          "msPerTick": 0.2065749999973923,
+          "startPopulation": 200,
+          "endPopulation": 181
+        }
+      ]
+    },
+    {
+      "founders": 700,
+      "medianMsPerTick": 0.6911304999981076,
+      "runs": [
+        {
+          "msPerTick": 1.0924700000043959,
+          "startPopulation": 694,
+          "endPopulation": 595
+        },
+        {
+          "msPerTick": 0.6911304999981076,
+          "startPopulation": 694,
+          "endPopulation": 595
+        },
+        {
+          "msPerTick": 0.6373675000015646,
+          "startPopulation": 694,
+          "endPopulation": 595
+        }
+      ]
+    },
+    {
+      "founders": 1500,
+      "medianMsPerTick": 1.406663499996066,
+      "runs": [
+        {
+          "msPerTick": 1.406663499996066,
+          "startPopulation": 1483,
+          "endPopulation": 1195
+        },
+        {
+          "msPerTick": 1.6523329999949783,
+          "startPopulation": 1483,
+          "endPopulation": 1195
+        },
+        {
+          "msPerTick": 1.3377355000004172,
+          "startPopulation": 1483,
+          "endPopulation": 1195
+        }
+      ]
+    },
+    {
+      "founders": 3000,
+      "medianMsPerTick": 2.6608944999985398,
+      "runs": [
+        {
+          "msPerTick": 2.6608944999985398,
+          "startPopulation": 2979,
+          "endPopulation": 2110
+        },
+        {
+          "msPerTick": 2.926875,
+          "startPopulation": 2979,
+          "endPopulation": 2110
+        },
+        {
+          "msPerTick": 2.2717200000025333,
+          "startPopulation": 2979,
+          "endPopulation": 2110
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,36 @@
-# HANDOFF — end of STAGE 1
+# HANDOFF
+
+## STAGE 2 status (observation chamber)
+
+2026-11-12 規格對照修正與最新驗證見 [STAGE2_REPORT](STAGE2_REPORT.md)、
+[STAGE2_AUDIT](STAGE2_AUDIT.md)、[ART_DIRECTION](ART_DIRECTION.md)、
+[VISUAL_SYSTEM](VISUAL_SYSTEM.md)。下方早期「done」表與 GPU 量測屬歷史交接，
+不代表跨瀏覽器或完整 Stage 2 驗收。最新介面已澄清顯示尺寸非精確面積比例、
+隱藏頁面暫停與倍率為目標值等限制。
+
+`index.html` is now the artistic interface; the STAGE 1 viewer moved to `diagnostic.html`.
+
+| Part | File | State |
+|---|---|---|
+| watercolour field (WebGL): water = resource, peach = grazed fertile ground, motes = local resource density | `src/app/field.ts` | done; 2D fallback without WebGL |
+| organisms: genome-derived silhouettes, sensor antennae, speed-driven tail beat, energy nucleus, real division / dissolution | `src/app/creatures.ts` | done; sprite cache per organism, level of detail when zoomed out |
+| camera: microscope start (zoom 2), wheel / buttons zoom, drag pan, follow a specimen | `src/app/camera.ts`, `main.ts` | done; no pinch-zoom on touch yet |
+| specimen card: lineage, vitals, each trait against the population distribution | `main.ts` | done |
+| field notes: population and resource with intervention marks, auto-ranged trait means, diversity, chronicle, legend | `main.ts` | done |
+| climate & experiments: productivity, richness, release a newcomer, place a clone, save / open / new world, `?seed=` URLs | `main.ts` | done |
+| idle mode: controls fade after 7 s without input | `style.css`, `main.ts` | done |
+
+Measured in the embedded Chromium (GTX 1050 Ti, 1440×900 at 2× DPR, ~700 organisms): field
+0.6 ms, organisms ≈ 4 ms per frame, simulation 0.4 ms per tick. 1× speed = 30 ticks/s.
+Bodies are drawn 1.5× their physical radius (`BODY_SCALE`) so they read at a glance; relative
+sizes are exact. Not yet verified: Safari / Firefox, real phones, save / open round trip by hand.
+
+Open STAGE 2 work: pinch zoom; a lineage-tree view (`sim.lineage`); simulation in a Web Worker
+for 64× speed on slow machines; sound (optional); share-a-world links that embed a snapshot.
+
+---
+
+# STAGE 1 handoff
 
 ## Complete
 
@@ -48,7 +80,7 @@ whichever way it comes out.
 
 ## STAGE 2 — building the artistic interface
 
-Visual direction (from `docs/concept-art.png`): warm paper ground, pale-blue water bodies,
+*(Implemented in STAGE 2 — see the status table at the top.)* Visual direction (from `docs/concept-art.png`): warm paper ground, pale-blue water bodies,
 peach sediment, kidney-shaped cells with orange↔blue gradients and deep-violet nuclei, fine
 antennae with dotted tips, soft grain, no glow.
 
