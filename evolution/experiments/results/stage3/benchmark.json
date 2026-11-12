@@ -1,0 +1,585 @@
+{
+ "node": "v16.14.2",
+ "results": [
+  {
+   "count": 60,
+   "config": {
+    "model": 2,
+    "seed": 123,
+    "width": 960,
+    "height": 640,
+    "cellSize": 10,
+    "patchiness": 0.8,
+    "patchScale": 9,
+    "env": {
+     "regrowthRate": 0.012,
+     "influx": 0.004,
+     "cellCapacity": 10
+    },
+    "resourceB": {
+     "regrowthRate": 0.012,
+     "influx": 0.004,
+     "cellCapacity": 10,
+     "patchiness": 0.8,
+     "patchScale": 9,
+     "layout": "complementary"
+    },
+    "corpseRecycling": false,
+    "types": [
+     {
+      "name": "Mobile forager",
+      "affinity": [
+       1,
+       0.15
+      ],
+      "intake": 1,
+      "basal": 1,
+      "speed": 1,
+      "move": 1
+     },
+     {
+      "name": "Conservative grazer",
+      "affinity": [
+       0.15,
+       1
+      ],
+      "intake": 0.75,
+      "basal": 0.6,
+      "speed": 0.5,
+      "move": 1
+     },
+     {
+      "name": "Multi-lobed generalist",
+      "affinity": [
+       0.6,
+       0.6
+      ],
+      "intake": 0.55,
+      "basal": 1,
+      "speed": 0.85,
+      "move": 1
+     }
+    ],
+    "morph": {
+     "corners": {
+      "min": 3,
+      "max": 8,
+      "mutationRate": 0.02,
+      "uptakePer": 0.06,
+      "basalPer": 0.07,
+      "speedPer": 0,
+      "buildPer": 0.04,
+      "founding": [
+       4,
+       5,
+       6,
+       7
+      ]
+     },
+     "lobes": {
+      "min": 3,
+      "max": 6,
+      "mutationRate": 0.02,
+      "uptakePer": 0.1,
+      "basalPer": 0.08,
+      "speedPer": 0.06,
+      "buildPer": 0.06,
+      "founding": [
+       3,
+       4,
+       5
+      ]
+     }
+    },
+    "bodyRadius": 4,
+    "maxTurn": 0.5,
+    "sensorAngle": 0.7,
+    "energy": {
+     "capacityPerMass": 30,
+     "intakeRate": 0.6,
+     "halfSaturation": 2,
+     "feedSpeed": 1,
+     "assimilation": 0.7,
+     "basal": 0.05,
+     "locomotion": 0.015,
+     "speedCapacity": 0.004,
+     "sensing": 0.0004,
+     "brain": 0.008,
+     "birthCostPerMass": 5
+    },
+    "life": {
+     "maturityAge": 40,
+     "baseHazard": 0.0002,
+     "gompertzA": 0.00002,
+     "gompertzTau": 400
+    },
+    "mutation": {
+     "rate": 0.05,
+     "traitSd": 0.15,
+     "weightSd": 0.2
+    },
+    "founders": {
+     "count": 60,
+     "mix": [
+      1,
+      1,
+      1
+     ],
+     "energyFrac": 0.6,
+     "traitSd": 0.5,
+     "weightSd": 1
+    },
+    "maxPopulation": 3000,
+    "metrics": {
+     "sampleInterval": 100,
+     "maxSamples": 2048
+    },
+    "lineageMaxNodes": 12000
+   },
+   "measuredTicks": 1000,
+   "ms": 331.7458999976516,
+   "ticksPerSecond": 3014.3552640954385,
+   "organismUpdatesPerSecond": 457597.21522127214,
+   "startPop": 91,
+   "endPop": 342,
+   "history": 12,
+   "lineage": 354,
+   "heapGrowthMB": 0.485968
+  },
+  {
+   "count": 240,
+   "config": {
+    "model": 2,
+    "seed": 123,
+    "width": 960,
+    "height": 640,
+    "cellSize": 10,
+    "patchiness": 0.8,
+    "patchScale": 9,
+    "env": {
+     "regrowthRate": 0.012,
+     "influx": 0.004,
+     "cellCapacity": 10
+    },
+    "resourceB": {
+     "regrowthRate": 0.012,
+     "influx": 0.004,
+     "cellCapacity": 10,
+     "patchiness": 0.8,
+     "patchScale": 9,
+     "layout": "complementary"
+    },
+    "corpseRecycling": false,
+    "types": [
+     {
+      "name": "Mobile forager",
+      "affinity": [
+       1,
+       0.15
+      ],
+      "intake": 1,
+      "basal": 1,
+      "speed": 1,
+      "move": 1
+     },
+     {
+      "name": "Conservative grazer",
+      "affinity": [
+       0.15,
+       1
+      ],
+      "intake": 0.75,
+      "basal": 0.6,
+      "speed": 0.5,
+      "move": 1
+     },
+     {
+      "name": "Multi-lobed generalist",
+      "affinity": [
+       0.6,
+       0.6
+      ],
+      "intake": 0.55,
+      "basal": 1,
+      "speed": 0.85,
+      "move": 1
+     }
+    ],
+    "morph": {
+     "corners": {
+      "min": 3,
+      "max": 8,
+      "mutationRate": 0.02,
+      "uptakePer": 0.06,
+      "basalPer": 0.07,
+      "speedPer": 0,
+      "buildPer": 0.04,
+      "founding": [
+       4,
+       5,
+       6,
+       7
+      ]
+     },
+     "lobes": {
+      "min": 3,
+      "max": 6,
+      "mutationRate": 0.02,
+      "uptakePer": 0.1,
+      "basalPer": 0.08,
+      "speedPer": 0.06,
+      "buildPer": 0.06,
+      "founding": [
+       3,
+       4,
+       5
+      ]
+     }
+    },
+    "bodyRadius": 4,
+    "maxTurn": 0.5,
+    "sensorAngle": 0.7,
+    "energy": {
+     "capacityPerMass": 30,
+     "intakeRate": 0.6,
+     "halfSaturation": 2,
+     "feedSpeed": 1,
+     "assimilation": 0.7,
+     "basal": 0.05,
+     "locomotion": 0.015,
+     "speedCapacity": 0.004,
+     "sensing": 0.0004,
+     "brain": 0.008,
+     "birthCostPerMass": 5
+    },
+    "life": {
+     "maturityAge": 40,
+     "baseHazard": 0.0002,
+     "gompertzA": 0.00002,
+     "gompertzTau": 400
+    },
+    "mutation": {
+     "rate": 0.05,
+     "traitSd": 0.15,
+     "weightSd": 0.2
+    },
+    "founders": {
+     "count": 240,
+     "mix": [
+      1,
+      1,
+      1
+     ],
+     "energyFrac": 0.6,
+     "traitSd": 0.5,
+     "weightSd": 1
+    },
+    "maxPopulation": 3000,
+    "metrics": {
+     "sampleInterval": 100,
+     "maxSamples": 2048
+    },
+    "lineageMaxNodes": 12000
+   },
+   "measuredTicks": 1000,
+   "ms": 387.26439999789,
+   "ticksPerSecond": 2582.215148114437,
+   "organismUpdatesPerSecond": 860920.8592419457,
+   "startPop": 361,
+   "endPop": 524,
+   "history": 12,
+   "lineage": 558,
+   "heapGrowthMB": -2.601072
+  },
+  {
+   "count": 700,
+   "config": {
+    "model": 2,
+    "seed": 123,
+    "width": 960,
+    "height": 640,
+    "cellSize": 10,
+    "patchiness": 0.8,
+    "patchScale": 9,
+    "env": {
+     "regrowthRate": 0.012,
+     "influx": 0.004,
+     "cellCapacity": 10
+    },
+    "resourceB": {
+     "regrowthRate": 0.012,
+     "influx": 0.004,
+     "cellCapacity": 10,
+     "patchiness": 0.8,
+     "patchScale": 9,
+     "layout": "complementary"
+    },
+    "corpseRecycling": false,
+    "types": [
+     {
+      "name": "Mobile forager",
+      "affinity": [
+       1,
+       0.15
+      ],
+      "intake": 1,
+      "basal": 1,
+      "speed": 1,
+      "move": 1
+     },
+     {
+      "name": "Conservative grazer",
+      "affinity": [
+       0.15,
+       1
+      ],
+      "intake": 0.75,
+      "basal": 0.6,
+      "speed": 0.5,
+      "move": 1
+     },
+     {
+      "name": "Multi-lobed generalist",
+      "affinity": [
+       0.6,
+       0.6
+      ],
+      "intake": 0.55,
+      "basal": 1,
+      "speed": 0.85,
+      "move": 1
+     }
+    ],
+    "morph": {
+     "corners": {
+      "min": 3,
+      "max": 8,
+      "mutationRate": 0.02,
+      "uptakePer": 0.06,
+      "basalPer": 0.07,
+      "speedPer": 0,
+      "buildPer": 0.04,
+      "founding": [
+       4,
+       5,
+       6,
+       7
+      ]
+     },
+     "lobes": {
+      "min": 3,
+      "max": 6,
+      "mutationRate": 0.02,
+      "uptakePer": 0.1,
+      "basalPer": 0.08,
+      "speedPer": 0.06,
+      "buildPer": 0.06,
+      "founding": [
+       3,
+       4,
+       5
+      ]
+     }
+    },
+    "bodyRadius": 4,
+    "maxTurn": 0.5,
+    "sensorAngle": 0.7,
+    "energy": {
+     "capacityPerMass": 30,
+     "intakeRate": 0.6,
+     "halfSaturation": 2,
+     "feedSpeed": 1,
+     "assimilation": 0.7,
+     "basal": 0.05,
+     "locomotion": 0.015,
+     "speedCapacity": 0.004,
+     "sensing": 0.0004,
+     "brain": 0.008,
+     "birthCostPerMass": 5
+    },
+    "life": {
+     "maturityAge": 40,
+     "baseHazard": 0.0002,
+     "gompertzA": 0.00002,
+     "gompertzTau": 400
+    },
+    "mutation": {
+     "rate": 0.05,
+     "traitSd": 0.15,
+     "weightSd": 0.2
+    },
+    "founders": {
+     "count": 700,
+     "mix": [
+      1,
+      1,
+      1
+     ],
+     "energyFrac": 0.6,
+     "traitSd": 0.5,
+     "weightSd": 1
+    },
+    "maxPopulation": 3000,
+    "metrics": {
+     "sampleInterval": 100,
+     "maxSamples": 2048
+    },
+    "lineageMaxNodes": 12000
+   },
+   "measuredTicks": 1000,
+   "ms": 1073.6808000020683,
+   "ticksPerSecond": 931.3755075047198,
+   "organismUpdatesPerSecond": 889652.678895031,
+   "startPop": 1058,
+   "endPop": 1399,
+   "history": 12,
+   "lineage": 1484,
+   "heapGrowthMB": 8.065128
+  },
+  {
+   "count": 1500,
+   "config": {
+    "model": 2,
+    "seed": 123,
+    "width": 960,
+    "height": 640,
+    "cellSize": 10,
+    "patchiness": 0.8,
+    "patchScale": 9,
+    "env": {
+     "regrowthRate": 0.012,
+     "influx": 0.004,
+     "cellCapacity": 10
+    },
+    "resourceB": {
+     "regrowthRate": 0.012,
+     "influx": 0.004,
+     "cellCapacity": 10,
+     "patchiness": 0.8,
+     "patchScale": 9,
+     "layout": "complementary"
+    },
+    "corpseRecycling": false,
+    "types": [
+     {
+      "name": "Mobile forager",
+      "affinity": [
+       1,
+       0.15
+      ],
+      "intake": 1,
+      "basal": 1,
+      "speed": 1,
+      "move": 1
+     },
+     {
+      "name": "Conservative grazer",
+      "affinity": [
+       0.15,
+       1
+      ],
+      "intake": 0.75,
+      "basal": 0.6,
+      "speed": 0.5,
+      "move": 1
+     },
+     {
+      "name": "Multi-lobed generalist",
+      "affinity": [
+       0.6,
+       0.6
+      ],
+      "intake": 0.55,
+      "basal": 1,
+      "speed": 0.85,
+      "move": 1
+     }
+    ],
+    "morph": {
+     "corners": {
+      "min": 3,
+      "max": 8,
+      "mutationRate": 0.02,
+      "uptakePer": 0.06,
+      "basalPer": 0.07,
+      "speedPer": 0,
+      "buildPer": 0.04,
+      "founding": [
+       4,
+       5,
+       6,
+       7
+      ]
+     },
+     "lobes": {
+      "min": 3,
+      "max": 6,
+      "mutationRate": 0.02,
+      "uptakePer": 0.1,
+      "basalPer": 0.08,
+      "speedPer": 0.06,
+      "buildPer": 0.06,
+      "founding": [
+       3,
+       4,
+       5
+      ]
+     }
+    },
+    "bodyRadius": 4,
+    "maxTurn": 0.5,
+    "sensorAngle": 0.7,
+    "energy": {
+     "capacityPerMass": 30,
+     "intakeRate": 0.6,
+     "halfSaturation": 2,
+     "feedSpeed": 1,
+     "assimilation": 0.7,
+     "basal": 0.05,
+     "locomotion": 0.015,
+     "speedCapacity": 0.004,
+     "sensing": 0.0004,
+     "brain": 0.008,
+     "birthCostPerMass": 5
+    },
+    "life": {
+     "maturityAge": 40,
+     "baseHazard": 0.0002,
+     "gompertzA": 0.00002,
+     "gompertzTau": 400
+    },
+    "mutation": {
+     "rate": 0.05,
+     "traitSd": 0.15,
+     "weightSd": 0.2
+    },
+    "founders": {
+     "count": 1500,
+     "mix": [
+      1,
+      1,
+      1
+     ],
+     "energyFrac": 0.6,
+     "traitSd": 0.5,
+     "weightSd": 1
+    },
+    "maxPopulation": 3000,
+    "metrics": {
+     "sampleInterval": 100,
+     "maxSamples": 2048
+    },
+    "lineageMaxNodes": 12000
+   },
+   "measuredTicks": 1000,
+   "ms": 1485.5117999985814,
+   "ticksPerSecond": 673.1686681997106,
+   "organismUpdatesPerSecond": 955083.6284177311,
+   "startPop": 2201,
+   "endPop": 1630,
+   "history": 12,
+   "lineage": 1750,
+   "heapGrowthMB": 4.542344
+  }
+ ]
+}

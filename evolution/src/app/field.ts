@@ -24,11 +24,11 @@ float noise(vec2 p){
   vec2 i = floor(p), f = fract(p); f = f * f * (3. - 2. * f);
   return mix(mix(hash(i), hash(i + vec2(1., 0.)), f.x), mix(hash(i + vec2(0., 1.)), hash(i + 1.), f.x), f.y);
 }
-vec2 tap(vec2 uv){ return texture2D(uTex, uv).rg; }
-vec2 field(vec2 w){
+vec3 tap(vec2 uv){ return texture2D(uTex, uv).rgb; }
+vec3 field(vec2 w){
   // 5x5 tent-weighted blur over the cell grid: hides the grid, keeps the data
   vec2 uv = w / uWorld, d = .75 / uCells;
-  vec2 s = vec2(0.); float tw = 0.;
+  vec3 s = vec3(0.); float tw = 0.;
   for (int j = -2; j <= 2; j++) for (int i = -2; i <= 2; i++) {
     float wt = (3. - abs(float(i))) * (3. - abs(float(j)));
     s += tap(uv + vec2(float(i), float(j)) * d) * wt; tw += wt;
@@ -43,8 +43,9 @@ void main(){
 
   vec2 q = w + (vec2(noise(w * .03 + uTime * .015), noise(w * .03 + 17.3 - uTime * .015)) - .5) * 16.
          + (vec2(noise(w * .13), noise(w * .13 + 5.1)) - .5) * 4.;
-  vec2 f = field(q);
+  vec3 f = field(q);
   float r = f.r, fert = f.g;
+  float blendB = f.b / max(.001, f.r + f.b);
 
   float sed = smoothstep(.35, .8, fert);
   vec3 peach = mix(vec3(.976, .874, .768), vec3(.953, .757, .588), smoothstep(.65, 1., fert) * .8);
@@ -58,13 +59,16 @@ void main(){
   vec3 wc = mix(vec3(.690, .878, .914), vec3(.420, .757, .855), smoothstep(.42, .95, r));
   wc = mix(wc, vec3(.53, .80, .88), (1. - smoothstep(edge, edge + .05, r)) * .45);
   wc *= 1. + (noise(w * .09 + 3.) - .5) * .06;
+  wc = mix(wc, vec3(.57, .80, .71), blendB * .5);
   col = mix(col, wc, water);
+  col = mix(col, vec3(.80,.88,.78), smoothstep(.3,.8,f.b) * (1. - water) * .4);
 
   vec2 g = w / 6., id = floor(g);
   vec2 c = id + .2 + .6 * vec2(hash(id), hash(id + 3.1));
   c += .12 * vec2(sin(uTime * .7 + hash(id) * 6.28), cos(uTime * .6 + hash(id + 1.) * 6.28));
   float d = length(g - c) * 6.;
-  float local = tap((id * 6. + 3.) / uWorld).r;
+  vec3 localData = tap((id * 6. + 3.) / uWorld);
+  float local = max(localData.r, localData.b);
   float show = step(hash(id + 7.7), local * .5);
   float rad = .3 + hash(id + 9.) * .4;
   float dotm = (1. - smoothstep(rad - px, rad + px, d)) * show;
@@ -131,8 +135,9 @@ export class Field {
     if (this.data.length !== n * 4) this.data = new Uint8Array(n * 4);
     const cap = sim.env.cellCapacity, d = this.data;
     for (let i = 0; i < n; i++) {
-      d[i * 4] = Math.min(255, (sim.resource[i] / cap) * 255);
+      d[i * 4] = cap > 0 ? Math.min(255, (sim.resource[i] / cap) * 255) : 0;
       d[i * 4 + 1] = sim.fertility[i] * 255;
+      d[i * 4 + 2] = sim.envB.cellCapacity > 0 ? Math.min(255, sim.resourceB[i] / sim.envB.cellCapacity * 255) : 0;
       d[i * 4 + 3] = 255;
     }
     if (!this.gl) return this.fallback(sim, cam, fs);
@@ -165,10 +170,11 @@ export class Field {
     }
     const img = this.fallbackImage;
     for (let i = 0; i < sim.cols * sim.rows; i++) {
-      const r = this.data[i * 4] / 255, f = this.data[i * 4 + 1] / 255, wtr = r > 0.3 ? 1 : 0;
+      const b = this.data[i * 4 + 2] / 255, a = this.data[i * 4] / 255;
+      const r = Math.max(a, b), f = this.data[i * 4 + 1] / 255, wtr = r > 0.3 ? 1 : 0;
       img.data[i * 4] = wtr ? 150 : 247 - 6 * f;
       img.data[i * 4 + 1] = wtr ? 213 : 240 - 40 * f;
-      img.data[i * 4 + 2] = wtr ? 228 : 228 - 70 * f;
+      img.data[i * 4 + 2] = wtr ? (b > a ? 190 : 228) : 228 - 70 * f;
       img.data[i * 4 + 3] = 255;
     }
     const tmp = this.fallbackCanvas!;

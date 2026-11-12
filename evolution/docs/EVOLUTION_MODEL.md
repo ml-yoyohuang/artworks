@@ -1,5 +1,19 @@
 # EVOLUTION MODEL — the rules as implemented
 
+## Model versions (STAGE 3)
+
+**後續運動更新：新世界預設已升為 model 3**，在 model 2 生態上加入 speed/R 最小轉動半徑。舊模型／快照保持原規則，詳見 [EXPERIENCE_UPDATE](EXPERIENCE_UPDATE.md)。以下段落保留 model 2 基準，原長期實驗尚未全部重跑為模型 3。
+
+The **model 2 baseline** has A and B resources, three designed founder ecological types, independently inherited corner/lobe counts, and corpse reserve dissipation. The detailed implemented equations and coefficients are in [EXPERIMENT_DESIGN](EXPERIMENT_DESIGN.md); metric definitions in [EVOLUTIONARY_METRICS](EVOLUTIONARY_METRICS.md), lineage retention in [LINEAGE_MODEL](LINEAGE_MODEL.md). These documents describe abstract artificial-life rules, not biological claims.
+
+Model 2 shares one total intake budget across resources, uses affinity-weighted versions of the existing eight controller inputs, and applies explicit type/morphology multipliers to uptake, basal maintenance, maximum speed and body construction. Continuous genome length remains 75; `type`, `corners`, `lobes` are additional discrete inherited genotype fields. Size-based mass and capacity do not increase merely because a body has more corners/lobes. Corner range 3–8 and lobe range 3–6 are configurable implementation defaults. Each count mutation is an independent ±1 at birth; type never randomly switches. Generalist intake .55 limits its single-resource uptake compared with the corresponding specialist under matched size/speed.
+
+Version 2 snapshots save both grids, both live environments, the combined ledger, discrete traits, counters, retained ancestor genotypes and pruning metadata. Version 1 imports preserve **model 1** semantics and known scientific state; absent historical measurements stay unknown. Unsupported versions and malformed stocks/genomes/configurations fail before world replacement. New-model hashes additionally include discrete genotype, both grids, reproduction/kinematic state, configuration, environments, ledger and counters; model-1 hashes retain their original layout. Same-version same-seed/config/interventions are deterministic within documented JS-engine limits.
+
+### Legacy model 1 baseline below
+
+The following sections retain the original single-resource rules for `legacyConfig()` and the archived STAGE 1 experiments; they must not be read as the model-2 resource or morphology definitions. The legacy engine returns remaining corpse reserves to the cell. Its energy ledger and golden hashes remain valid; the earlier viewer legend stating no recycling did not accurately describe this legacy rule.
+
 Source of truth: `src/sim/sim.ts`, `genome.ts`, `brain.ts`, `config.ts`. Default parameter values
 are in `DEFAULT_CONFIG`. One tick = one logical time step (dt = 1).
 

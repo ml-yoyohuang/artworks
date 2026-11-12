@@ -10,7 +10,7 @@ This is the stage where advanced reasoning should be prioritized.
 
 **Do not merely add more features. Deepen the scientific capabilities of the existing world.**
 
-**User-agreed scope update (2026-11-12):** STAGE 3 must also introduce three founder ecological types with genuinely different resource use, metabolism, or survival tradeoffs. Their appearances are the existing orange–blue oval, the lower-left blue–green rounded polygon in `docs/concept-art.png`, and the upper-right multi-lobed cell, provisionally pink–orange. Lobe count must be heritable and able to change through mutation and selection. This is an explicit model extension, not merely three visual skins. See Section 9.4–9.10 for the implementation scope and constraints.
+**User-agreed scope update (2026-11-12):** STAGE 3 must also introduce three founder ecological types with genuinely different resource use, metabolism, or survival tradeoffs. Their appearances are the existing orange–blue oval, the lower-left blue–green rounded polygon in `docs/concept-art.png`, and the upper-right multi-lobed cell, provisionally pink–orange. The conservative type is NOT restricted to six corners: its corner count, like the generalist's lobe count, must be heritable and able to change through mutation and selection. This is an explicit model extension, not merely three visual skins. See Section 9.4–9.10 for the implementation scope and constraints.
 
 ---
 
@@ -51,7 +51,7 @@ Before implementation:
 6. Identify scientific weaknesses, performance limitations, and misleading metrics.
 7. Establish a prioritized implementation plan.
 8. Read `docs/STAGE2_REPORT.md`, `docs/VISUAL_SYSTEM.md`, and `docs/ART_DIRECTION.md`; preserve the current appearance, inherited orange/blue palette variations, and rendering contracts.
-9. Audit how a second resource, ecological type identity, and lobe inheritance affect sensing, uptake allocation, energy accounting, genome layout, snapshots, metrics, and existing experiment baselines before extending them.
+9. Audit how a second resource, ecological type identity, and corner/lobe inheritance affect sensing, uptake allocation, energy accounting, genome layout, snapshots, metrics, and existing experiment baselines before extending them.
 
 Do not assume all previous milestones were correctly implemented.
 
@@ -218,11 +218,11 @@ Where possible, use paired initial conditions to isolate the effect of one chang
 
 Do not change multiple uncontrolled variables and then attribute the result to one cause.
 
-### Experiment G — Three-Type Ecology and Lobe Tradeoffs
+### Experiment G — Three-Type Ecology and Morphology Tradeoffs
 
 Run each ecological type alone, each pair, and all three together under documented A-rich, B-rich, and mixed-resource conditions. Compare uniform and spatially differentiated resources where appropriate. Hold total initial population and initial energy budgets comparable, or explicitly report differences and their consequences.
 
-Measure per-type survival, abundance, births/deaths, resource-specific uptake, energy expenditure, and the multi-lobed type's lobe-count distribution. Include mutation-disabled controls and controlled lobe-count comparisons using otherwise matched backgrounds to distinguish inheritance, selection, and drift.
+Measure per-type survival, abundance, births/deaths, resource-specific uptake, energy expenditure, the conservative type's corner-count distribution, and the multi-lobed type's lobe-count distribution. Include mutation-disabled controls and separate controlled corner-count and lobe-count comparisons using otherwise matched backgrounds to distinguish inheritance, selection, and drift. Do not change corner count and lobe count together and attribute an effect to one of them.
 
 Predeclare run duration, sampling, extinction criteria, and the operational criterion for persistence/coexistence; use multiple seeds and report the fraction of runs satisfying it. Finite-run persistence is not proof of indefinite stable coexistence. Report exclusion and extinction as valid outcomes. Do not tune on a single attractive run and present it as general evidence.
 
@@ -251,7 +251,7 @@ Define an experiment manifest containing:
 - Interventions
 - Measurement definitions
 - Result metadata
-- For the new model: per-type founding counts/genomes, A/B resource settings, type-specific coefficients, lobe expression/mutation rules, and energy-accounting definitions
+- For the new model: per-type founding counts/genomes, A/B resource settings, type-specific coefficients, corner/lobe expression and mutation rules, and energy-accounting definitions
 
 Version the scientific model separately from purely cosmetic presentation changes where appropriate.
 
@@ -413,7 +413,7 @@ The limited, explicitly requested morphology extension below is required in this
 
 The user wants three recognizably different forms of life with different ecological roles. Use stable, inherited ecological-type identifiers; keep them separate from organism ID, founder ID, lineage depth, and any analytical genetic clustering.
 
-For the first implementation, reproduction is asexual and children inherit their parent's type. Mutations change traits within that type, including lobe count where applicable; they do not randomly switch type or turn an oval into a polygon. Cross-type transformation or naturally emerging new species is outside this milestone.
+For the first implementation, reproduction is asexual and children inherit their parent's type. Mutations change traits within that type, including corner count for the conservative type and lobe count for the generalist; they do not randomly switch type or turn an oval into a polygon. A change in corner count does not create a new ecological type. Cross-type transformation or naturally emerging new species is outside this milestone.
 
 User-facing names may describe three fictional simulated species if the interface explains that these are designed ecological categories, not evidence of biological speciation. Scientific exports must use the operational type definition. Never infer type from colour, shape, or a clustering result alone.
 
@@ -422,7 +422,7 @@ The agreed visual identities and proposed ecological design are:
 | Working type | Visual identity | Ecological role to implement and test | Required tradeoff |
 |---|---|---|---|
 | Mobile forager | Existing orange–blue oval/bean form | Preferentially exploits resource A; movement can help reach separated patches | Movement and maintenance consume energy; mobility must not guarantee success |
-| Conservative grazer | Lower-left concept-art cells: soft, roughly hexagonal blue–green outline with a dark central energy metaphor | Preferentially exploits resource B, with slower movement and lower maintenance | Lower uptake/turnover or another explicit cost prevents low metabolism from being a free advantage |
+| Conservative grazer | Lower-left concept-art cells: soft blue–green rounded polygon with an evolvable corner count and a dark central energy metaphor; six corners are a reference example, not a fixed requirement | Preferentially exploits resource B, with slower movement and lower maintenance | Lower uptake/turnover or another explicit cost prevents low metabolism from being a free advantage; corner-count effects require the explicit tradeoff in Section 9.6.2 |
 | Multi-lobed generalist | Upper-right concept-art cells: smooth connected lobes; pink–orange palette is provisional and replaceable | Can exploit both A and B, with lower resource-specific efficiency than the corresponding specialist under matched conditions | Additional lobes increase potential uptake but also increase maintenance and may reduce mobility |
 
 These roles are the starting model design, not claims about observed adaptation. Choose and document quantitative coefficients through controlled experiments. Type differences must enter actual engine equations; do not merely change animation speed, colour, or narrative labels. Preserve meaningful heritable variation within each type rather than assigning identical fixed behaviours to all its members.
@@ -443,7 +443,11 @@ Resource regeneration may depend on documented environmental rules. Do not add h
 
 Two resources and three types do not guarantee three-way coexistence. Begin with documented spatial resource structure and measured tradeoffs; report exclusion honestly before considering further model complexity.
 
-## 9.6 Heritable Lobe Count With Functional Consequences
+## 9.6 Heritable Morphology Counts With Functional Consequences
+
+Corner count and lobe count are distinct type-specific traits. Do not reuse one shared count that accidentally couples the two types' configurations, mutation probabilities, physiological effects, or history. Both require actual inheritance, not random per-frame rendering choices.
+
+### 9.6.1 Multi-Lobed Type — Lobe Count
 
 The multi-lobed type must inherit a real morphology trait that affects both rendered lobe count and modeled physiology.
 
@@ -461,15 +465,31 @@ Requirements:
 
 Do not add arbitrary appendages, dense surface holes, compound eyes, or an unbounded morphology genome to satisfy this request.
 
+### 9.6.2 Conservative Type — Corner Count
+
+The blue–green conservative type must inherit a real **corner-count trait**. The concept art establishes its soft polygonal character, not an immutable hexagonal body plan.
+
+Requirements:
+
+- Choose a configurable, bounded integer range during model design, with at least three corners and a modest upper bound that remains readable as a rounded polygon. Document defaults, expression, mutation probability, and boundary behaviour. The user has not selected an exact range; do not present an implementation choice as user approval.
+- Children normally inherit their parent's corner count. An enabled corner mutation changes it by at most one corner within the bounds; disabled mutation preserves the count. The starting population may contain multiple corner counts under a reproducible founding configuration; do not lock all descendants to six.
+- Define and test a physiological tradeoff for corner count before making adaptation claims. For example, a declared morphology-dependent uptake benefit must be offset by maintenance/construction costs or another explicit disadvantage. The exact relationship is a modeling hypothesis to document and test, not an established biological fact.
+- Control for size, mass, body area, and rounding. More corners do not automatically mean more perimeter or greater uptake at fixed body area. Either compute the relevant geometry consistently or explicitly identify the chosen trait-to-physiology relationship as an abstract model rule; do not justify bonuses using false geometric claims or double-count costs.
+- Keep the type's low-maintenance strategy meaningful. Do not make a single corner count unconditionally superior through an unpriced benefit, or force more/fewer corners over time to provide a visual progression.
+- Corner-count changes occur across reproduction and mutation. An organism does not acquire corners merely by aging, reaching a level, or because the camera zoom changes.
+- Render exactly the expressed count as gentle, discernible rounded corners at inspection scale. Level-of-detail simplification at distant zoom must not overwrite or misreport the underlying trait. Keep the polygon visually distinct from the generalist's connected lobes.
+- Save/restore, genome/phenotype contracts, ancestry records, ancestor previews, exports, and relevant hashes must preserve the actual corner-count state. Missing historical counts must be marked unavailable rather than guessed.
+- Run matched corner-count comparisons, mutation-disabled inheritance checks, bounds/step tests, and population-frequency measurements. Distinguish selection from drift and boundary effects; no particular optimal corner count or sustained coexistence is guaranteed.
+
 ## 9.7 Procedural Rendering of All Three Types
 
 Use `docs/concept-art.png` as the shape reference, preserving STAGE 2's warm paper, soft pigment, restrained membrane and dark energy-core visual language.
 
 - Keep the existing oval's inherited orange/blue palette variations.
-- Make the blue–green type a rounded polygon, not an angular crystal or a spiky creature. Its interior rays/details, if retained, must be identified as visual metaphors unless the engine models them.
+- Make the blue–green type a rounded polygon whose corner count comes from its expressed heritable trait, not a hardcoded hexagon. It must remain soft rather than an angular crystal or a spiky creature. Its interior rays/details, if retained, must be identified as visual metaphors unless the engine models them.
 - Render the multi-lobed type as one connected organism with soft lobes, not several independent organisms or a parent with permanently attached offspring. A single organism contributes one to population counts regardless of its lobes.
 - Pink–orange distinguishes the third type; retain subtle inherited colour variation and keep palette selection replaceable without changing ecological rules.
-- The number of visible lobes must match the expressed simulation trait, including the portrait and recorded-ancestor view.
+- The number of visible corners for the conservative type and lobes for the generalist must match their respective expressed simulation traits, including the portrait and recorded-ancestor view.
 - Shape, scale, energy indicators, selection, sensing overlays, camera following, births/deaths, and reduced-motion behaviour must work for all three types.
 - Keep sensing anatomy honest: decorative rays or lobe tips must not imply extra sensors, independent brains, or locomotion mechanics that were not implemented.
 - Avoid malformed intersections, sharp protrusions, disturbing dense textures, unreadable small lobes, and excessive visual overlap. Update hit testing to account for displayed silhouettes where necessary without introducing unmodeled collisions.
@@ -479,7 +499,7 @@ Use `docs/concept-art.png` as the shape reference, preserving STAGE 2's warm pap
 
 Expose total population and per-type population, birth/death rates, mean energy fraction, actual resource-specific uptake, and documented metabolic/movement costs. Distinguish instantaneous values from interval rates and show the relevant units and sample time.
 
-Show A and B availability separately. Allow inspection of each organism's type, lineage, functional traits, and applicable morphology/uptake parameters. For the multi-lobed population, show lobe-count frequencies and their history; retain representative ancestry data where storage permits, explicitly marking discarded history.
+Show A and B availability separately. Allow inspection of each organism's type, lineage, functional traits, and applicable morphology/uptake parameters. Show corner count for conservative individuals and lobe count for generalists, with each population's count frequencies and history separately. Use not-applicable states for types without the corresponding trait. Retain representative ancestry data where storage permits, explicitly marking discarded history.
 
 Keep the ecosystem visually dominant, with progressively disclosed details. Use shape, labels, and text summaries as well as colour. A change in type abundance is an observation; any explanation involving adaptation must refer to controlled evidence.
 
@@ -487,14 +507,14 @@ Keep the ecosystem visually dominant, with progressively disclosed details. Use 
 
 The existing single-resource experiments are baselines, not results that can automatically be attributed to the new model. Version the new model, resource schema, genome/controller contracts, and snapshot format where they change.
 
-Preserve a documented route to run the legacy single-resource baseline. When importing old snapshots, either keep legacy semantics or provide an explicit, documented migration with stated defaults and limitations; never silently invent historical type, lobe, or resource-B observations. Unsupported versions must fail helpfully before replacing a running world.
+Preserve a documented route to run the legacy single-resource baseline. When importing old snapshots, either keep legacy semantics or provide an explicit, documented migration with stated defaults and limitations; never silently invent historical type, corner-count, lobe-count, or resource-B observations. Unsupported versions must fail helpfully before replacing a running world.
 
 Within a declared model version, the same seed/config/interventions must reproduce the same trajectory under the documented JS-engine limits. Changed model rules need not reproduce an old version's trajectory, but original baseline tests and their interpretation must remain available. Cosmetic palette changes must not affect scientific state hashes or consume simulation RNG.
 
 ## 9.10 Implementation Order and Evidence
 
 1. Audit the existing model, stage documents, and concept art; identify what is already implemented.
-2. Write the two-resource equations, three-type tradeoffs, lobe rules, energy ledger, versioning plan, and falsifiable questions into the existing experiment/model documents before changing engine behaviour. Resolve routine coefficient choices with documented reasoning; do not invent user approval for a different scope.
+2. Write the two-resource equations, three-type tradeoffs, corner/lobe rules, energy ledger, versioning plan, and falsifiable questions into the existing experiment/model documents before changing engine behaviour. Resolve routine coefficient choices with documented reasoning; do not invent user approval for a different scope.
 3. Implement a small headless model increment with inheritance, ledger, allocation, reproducibility, and snapshot tests before building new visual forms.
 4. Run Experiment G across multiple seeds, recording all outcomes, including exclusion and extinction. Separate designed initial differences from changes caused by subsequent evolution.
 5. Implement and inspect all three visual forms, matching actual type/trait data, then add the minimum per-type and resource observations needed to interpret them.
@@ -786,8 +806,8 @@ Implement:
 - Evidence-based evolutionary event detection
 - Appropriate visualization or data access
 - Relevant automated verification
-- The three functional ecological types, two-resource model, heritable lobe-count trait, and matching renderers specified in Section 9
-- Per-type/resource measurements, lobe distributions, and executed Experiment G results
+- The three functional ecological types, two-resource model, heritable corner-count and lobe-count traits, and matching renderers specified in Section 9
+- Per-type/resource measurements, separate corner/lobe distributions, and executed Experiment G results
 - Model/snapshot compatibility handling and documented legacy baselines
 
 Extend the deliverables above and the maintained `docs/EVOLUTION_MODEL.md`, `docs/VISUAL_SYSTEM.md`, and `docs/ART_DIRECTION.md` with the new equations, operational type definitions, phenotype mappings, compatibility policy, and measured results. Do not create duplicate parallel specifications where these documents already cover the topic.
@@ -819,14 +839,16 @@ STAGE 3 is complete when:
 - [ ] Three designed ecological types have stable inherited identities and actual differences in resource use, metabolism, or survival tradeoffs.
 - [ ] Both resource pools participate in sensing/uptake through documented rules, with finite stocks, fair allocation, and a verified combined energy ledger.
 - [ ] Multi-lobed offspring inherit lobe count; enabled mutations obey documented bounds/steps, and disabled mutations preserve it.
+- [ ] Conservative offspring inherit corner count; enabled mutations obey documented bounds/steps, and disabled mutations preserve it. The type is not fixed to six corners.
 - [ ] Lobe count affects modeled benefits and costs; tests and controlled experiments evaluate the tradeoff without forcing an optimum.
-- [ ] All three concept-art-derived forms render correctly, including provisional pink–orange multi-lobed cells; visible lobe count matches simulation data.
-- [ ] Per-type population/resource use and lobe-count distributions are observable and exportable.
+- [ ] Corner count has a documented physiological tradeoff, with size/mass and rounding controlled; no automatic geometric advantage or predetermined optimal count is assumed.
+- [ ] All three concept-art-derived forms render correctly, including variable-corner blue–green polygons and provisional pink–orange multi-lobed cells; visible corner/lobe counts match simulation data.
+- [ ] Per-type population/resource use and separate corner-count/lobe-count distributions are observable and exportable.
 - [ ] Single-type, pairwise, and three-type experiments have been executed across multiple seeds, with persistence/exclusion criteria and negative results reported.
 - [ ] Model/snapshot versioning and the legacy-baseline route are documented and tested; no historical observations are fabricated by migration.
 - [ ] The three forms have been visually inspected in a browser where available, and mixed-population performance has been measured.
 
-The bounded heritable lobe-count model above IS required. Arbitrary body-plan evolution, natural emergence of three species from one ancestor, reproductive isolation, and genuine open-ended evolution are NOT required for completion. Sustained three-way coexistence is a research outcome to evaluate, not a guaranteed acceptance criterion.
+The bounded heritable corner-count and lobe-count models above ARE required. Arbitrary body-plan evolution, natural emergence of three species from one ancestor, reproductive isolation, and genuine open-ended evolution are NOT required for completion. Sustained three-way coexistence is a research outcome to evaluate, not a guaranteed acceptance criterion.
 
 ---
 
@@ -849,8 +871,8 @@ Do not proceed to STAGE 4.
 If the implementation budget is constrained, prioritize:
 
 1. Correct reproducible headless experiments
-2. Two-resource accounting, three functional types, and heritable lobe-count correctness
-3. Controlled multi-type/lobe experiments and reliable per-type long-term metrics
+2. Two-resource accounting, three functional types, and heritable corner-count/lobe-count correctness
+3. Controlled multi-type and separate corner/lobe experiments with reliable per-type long-term metrics
 4. All three accurate visual forms and essential observation tools
 5. Environmental comparisons and ancestry tracking
 6. Evidence-driven event detection and further research interface enhancements

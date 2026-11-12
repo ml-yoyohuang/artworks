@@ -1,0 +1,30 @@
+{
+ "note": "Recorded from the STAGE 1/2 engine (commit 270d540) before the STAGE 3 model extension.",
+ "hashes": {
+  "small-seed3-t2500": {
+   "hash": 559568005,
+   "pop": 69,
+   "nextId": 352
+  },
+  "small-seed9-t2500": {
+   "hash": 439080681,
+   "pop": 81,
+   "nextId": 558
+  },
+  "small-seed42-t2500": {
+   "hash": 528942637,
+   "pop": 91,
+   "nextId": 608
+  },
+  "arena-seed42-t4000": {
+   "hash": 3301685526,
+   "pop": 356,
+   "nextId": 3286
+  }
+ },
+ "snapshotV1": {
+  "hashAtSave": 3360888390,
+  "hashAfter800": 908215809,
+  "popAfter800": 133
+ }
+}

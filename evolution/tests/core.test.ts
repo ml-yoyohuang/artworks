@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  Simulation, makeConfig, Rng, mutate, randomGenome, expressTrait, rawForTrait, expressPhenotype,
+  Simulation, legacyConfig as makeConfig, Rng, mutate, randomGenome, expressTrait, rawForTrait, expressPhenotype,
   Lineage, Clock, GENOME_LEN, N_TRAITS, TRAITS, T_SIZE, T_SPEED, T_SENSE, T_MARKER_A, T_MARKER_B,
   DEFAULT_CONFIG, think, N_IN, N_OUT,
 } from '../src/sim';
@@ -245,7 +245,7 @@ describe('interventions', () => {
 });
 
 describe('lineage', () => {
-  it('prunes dead leaves and trims the dead trunk', () => {
+  it('prunes extinct leaves while preserving recorded ancestry below budget', () => {
     const l = new Lineage();
     l.birth(1, -1, 0); l.birth(2, 1, 1); l.birth(3, 2, 2); l.birth(4, 3, 3); l.birth(5, 3, 3); l.birth(6, 1, 4);
     l.death(6, 5);
@@ -254,10 +254,10 @@ describe('lineage', () => {
     expect(l.nodes.size).toBe(5); // 1,2,3 kept: they have living descendants
     expect(l.mrca(4, 5)).toBe(3);
     l.compact();
-    expect([...l.nodes.keys()].sort()).toEqual([3, 4, 5]); // trunk 1->2 trimmed, MRCA kept
+    expect([...l.nodes.keys()].sort()).toEqual([1, 2, 3, 4, 5]); // model 2 retains ancestor records below budget
     l.death(4, 7);
     l.compact();
-    expect([...l.nodes.keys()]).toEqual([5]);
+    expect([...l.nodes.keys()]).toEqual([1, 2, 3, 5]);
   });
   it('stays bounded in a long run and covers every living organism', () => {
     const sim = new Simulation(small({ seed: 15 }));

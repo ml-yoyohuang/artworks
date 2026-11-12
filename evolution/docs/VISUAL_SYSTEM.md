@@ -1,5 +1,17 @@
 # Visual System — 資料契約
 
+最新外觀：節能型改為核向膜內放射線，多瓣型各瓣有 0–3 個中性遺傳粒子，不再有外部觸鬚；只有游動型保留外部觸鬚／尾巴。各型選取時仍顯示真正的三方向感測虛線。觀察員文字紀錄只保存本次瀏覽，與科學快照／歷史資料分離；運動模型 3 及自訂確認規則見 `EXPERIENCE_UPDATE.md`。以下是各階段基準契約，與本段有差異時以最新更新為準。
+
+## STAGE 3 延伸
+
+模型 2 的 type 明確決定造形／色系：forager 保留橘藍豆形；grazer 使用基因角數產生圓角多邊形、藍綠色系；generalist 用基因瓣數產生單一連通的柔和輪廓、粉橘色系。後兩者的顯示頂點面積先歸一，圓角／平滑仍會讓實際像素面積略有差異，不能當精密生物量量尺；引擎 mass 一律取 size²。角與瓣不是額外感測器。各系配色仍由中性 markers 決定。肖像與祖先預覽沿用同一份造形函式；點選半徑涵蓋顯示外緣，沒有新增碰撞物理。
+
+背景 texture 的 R/G/B 通道保存 resourceA/capA、fertilityA、resourceB/capB。A 決定藍色水域，B 增加綠色水／地表暈染，不把可視紋理當作精確資源計數；精確比例各別顯示於筆記。零容量池紋理貢獻零。保留可重用的 WebGL／2D 暫存。
+
+筆記新增逐類人口曲線、A/B 資源、攝取／代謝 interval rate、角數／瓣數頻率與平均歷史。時間軸用真 tick，缺漏資料斷線而非補零。現場 rule-based log、可取消比較與 JSON 匯出、3 個完整 checkpoint、譜系與完整 genotype 按需展開。祖先肖像的能量固定 50% 且速度零，明確註明是基因造形預覽，不聲稱歷史生理狀態。舊 v1 祖先無基因時不產生假預覽。詳細規則見 `LINEAGE_MODEL.md`。
+
+原始 Stage 2 契約如下，其中橘藍輪廓映射適用於 forager；模型 1 的 corpse reserve recycling 與新模型 2 的 dissipation 有明確版本區分。研究實驗是獨立世界，觀察箱暫停；隱藏觀察頁不補跑時間，但使用者啟動的研究批次會繼續，可能被瀏覽器節流。
+
 `Simulation → Organism.genome / ph / state → shapeOf / sprite / pose → Canvas`
 
 ## 模組界線

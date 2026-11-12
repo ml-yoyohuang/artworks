@@ -24,7 +24,14 @@ function pigment(stops: readonly Pigment[], marker: number): Pigment {
   return { h: a.h + (b.h - a.h) * t, s: a.s + (b.s - a.s) * t, l: a.l + (b.l - a.l) * t };
 }
 
-export function coloursOf(traits: ArrayLike<number>): { warm: Pigment; cool: Pigment } {
+const GREENS: readonly Pigment[] = [{ h: 155, s: 39, l: 71 }, { h: 164, s: 43, l: 69 }, { h: 170, s: 40, l: 74 }, { h: 176, s: 46, l: 68 }];
+const PINKS: readonly Pigment[] = [{ h: 331, s: 58, l: 76 }, { h: 339, s: 64, l: 73 }, { h: 346, s: 62, l: 78 }, { h: 353, s: 65, l: 74 }];
+
+export const TYPE_COLOURS = ['#df884a', '#35999a', '#d87caa'];
+
+export function coloursOf(traits: ArrayLike<number>, type = 0): { warm: Pigment; cool: Pigment } {
+  if (type === 1) return { warm: pigment(GREENS, traits[T_MARKER_A]), cool: pigment(COOL_PIGMENTS, traits[T_MARKER_B]) };
+  if (type === 2) return { warm: pigment(WARM_PIGMENTS, traits[T_MARKER_A]), cool: pigment(PINKS, traits[T_MARKER_B]) };
   return { warm: pigment(WARM_PIGMENTS, traits[T_MARKER_A]), cool: pigment(COOL_PIGMENTS, traits[T_MARKER_B]) };
 }
 

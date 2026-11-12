@@ -134,6 +134,8 @@ The final visual quality must be evaluated across:
 
 Organisms must be visually appealing and meaningfully distinct.
 
+Preserve the three-type morphology contract from `docs/prompt-stage3.md`, Section 9.6–9.7, where implemented. The blue–green conservative type has a heritable, evolvable corner count and is not restricted to a hexagon; the pink–orange generalist has a separate heritable lobe count. Polish rounded silhouettes without changing, hardcoding, or inventing these counts. Inspection-scale renderings, portraits, and recorded ancestors must match available simulation data. Do not implement missing scientific traits as decorative animation during this polish stage; report missing Stage 3 work explicitly.
+
 They should look like members of a coherent fictional ecosystem rather than an unrelated collection of decorative illustrations.
 
 Review:

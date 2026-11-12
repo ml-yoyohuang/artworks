@@ -1,0 +1,11 @@
+# Lineage model
+
+Each organism has a stable ID, biological parent ID, founder ID and lineage depth. Type is inherited unchanged. Separate corner/lobe genes inherit or mutate by one step; continuous genes are immutable during life. A genealogy node records birth/death ticks, ecological type, counts, genome, retained children, and the number of skipped ancestors before its recorded parent.
+
+The inspector's **Lineage & genome** lists the first 24 retained ancestors plus up to eight living immediate children, with living-descendant totals. A selected dead organism remains inspectable through the viewer's last-seen record until selection/world replacement changes it. Ancestor buttons render only recorded genotypes. Their portrait uses 50% energy and zero speed as explicitly labeled preview constants, not a reconstructed historical reserve/behaviour. Raw continuous genes are shown separately from discrete morphology values.
+
+Dead leaves with no living descendants are immediately pruned; the counter `prunedCount` survives but the branch's detailed record does not. Compaction runs every 512 ticks. Above `lineageMaxNodes`, it thins older dead single-child internal ancestors, transferring omission counts into the child's `gap`. Living nodes, founders and branch points are retained. This is a soft historical-record budget: mandatory live/branch records and births between compactions can exceed it; it is not a strict byte limit or complete archive. Results report observed size.
+
+`Lineage.fromJSON` reads old five-number rows. Their genomes/type/count histories were not recorded and are not guessed; morphology previews are unavailable. Living v1 organisms retain their known genome in organism state, but that does not reconstruct unobserved ancestor history. Version 2 saves retained genotype records and pruning metadata. No inference of reproductive isolation or species identity is made from lineage or colour.
+
+Full statistical history is also decimated. Exact state checkpoints (up to three in-memory snapshots in the viewer; optional bounded runner checkpoints) restore the complete world at captured ticks. Charts alone cannot restore historical organisms. Checkpoints do not reconstruct intervals between captures, and manual saves are required for durable storage across browser reloads.

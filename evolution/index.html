@@ -22,6 +22,15 @@
 </header>
 
 <button id="notes-toggle" class="chrome pill" aria-expanded="false" aria-controls="notes">Field notes</button>
+<button id="observer-toggle" class="chrome pill" aria-expanded="false" aria-controls="observer-panel">觀察員紀錄 <span id="observer-count">0</span><span id="observer-unread" class="unread-dot" aria-hidden="true" hidden></span></button>
+<section id="observer-panel" class="card" aria-label="本次瀏覽的觀察員紀錄" hidden>
+  <button class="close" id="observer-close" aria-label="關閉觀察員紀錄">×</button>
+  <div class="kicker">小世界的現場筆記</div><h2>觀察員紀錄</h2>
+  <p id="observer-status" class="hint">正在觀察 · 只記錄本次瀏覽</p>
+  <div class="observer-controls"><label><input id="observer-enabled" type="checkbox" checked> 文字播報</label><label>間隔 <select id="observer-interval"><option value="20">20 秒</option><option value="60" selected>1 分鐘</option><option value="180">3 分鐘</option><option value="600">10 分鐘</option></select></label></div>
+  <p class="hint">陪你追蹤新生子代與族群轉折，也聊生物的小祕密和實驗室日常。這本筆記只留本次觀察，重新整理便翻開新的一頁，最多 200 行。觀測進行時定期記錄，重大發現隨時插播。</p>
+  <div id="observer-article" role="log" aria-live="polite" aria-relevant="additions" aria-label="本次觀察實況"></div>
+</section>
 
 <section id="specimen" class="card" hidden>
   <button class="close" id="spec-close" aria-label="Close">×</button>
@@ -31,6 +40,8 @@
   <canvas id="spec-portrait" aria-hidden="true"></canvas>
   <div class="vitals" id="spec-vitals"></div>
   <div class="traits" id="spec-traits"></div>
+  <p class="hint" id="spec-ecology"></p>
+  <details id="ancestry"><summary>Lineage &amp; genome</summary><div id="lineage-list"></div><p id="lineage-status" class="hint"></p><canvas id="ancestor-portrait" aria-label="Recorded ancestor morphology preview" role="img"></canvas><p id="ancestor-caption" class="hint"></p><pre id="spec-genome"></pre></details>
   <div class="row">
     <button class="pill" id="spec-follow">Follow</button>
     <button class="pill" id="spec-clone">Place a clone</button>
@@ -41,12 +52,14 @@
   <button class="kicker" id="climate-toggle" aria-expanded="false" aria-controls="climate-body" aria-label="Show or hide climate controls">Climate &amp; experiments</button>
   <div class="body" id="climate-body">
   <p class="hint">Changes apply now and are logged. Productivity scales regrowth and influx; richness is energy capacity per cell before fertility.</p>
+  <label>Resource <select id="i-resource"><option value="A">A · blue</option><option value="B">B · green</option></select></label>
   <label><span>Productivity <output id="o-prod"></output></span>
     <input id="i-prod" type="range" min="0" max="2.5" step="0.05"></label>
   <label><span>Richness <output id="o-rich"></output></span>
     <input id="i-rich" type="range" min="2" max="20" step="0.5"></label>
   <div class="row">
     <button class="pill" id="b-release">Release a newcomer</button>
+    <label>Newcomer <select id="i-type"><option value="0">Orange–blue forager</option><option value="1">Blue–green grazer</option><option value="2">Pink–orange generalist</option></select></label>
   </div>
   <div class="row small">
     <button class="link" id="b-new">New world</button>
@@ -76,6 +89,12 @@
   <figure><canvas class="chart tall" id="c-pop" aria-label="Recorded population and resource history" role="img" aria-describedby="pop-scale"></canvas>
     <figcaption><i class="sw ink"></i>living organisms <i class="sw blue"></i>resource, share of capacity <i class="sw tick"></i>interventions</figcaption></figure>
   <p class="hint" id="pop-scale"></p>
+  <h3>Three ecological types</h3>
+  <p class="hint">Designed founder categories, not observed speciation. Rates below cover the last recorded interval; populations and energy are current. A/B uptake and costs use energy units per tick.</p>
+  <div id="type-stats"></div>
+  <canvas class="chart tall" id="c-types" role="img" aria-label="Recorded populations by ecological type" aria-describedby="type-scale"></canvas>
+  <p id="type-scale" class="hint"></p>
+  <details><summary>Morphology distributions</summary><pre id="morph-stats"></pre><canvas class="chart" id="c-morph" role="img" aria-label="Recorded mean corner and lobe counts" aria-describedby="morph-scale"></canvas><p class="hint" id="morph-scale"></p></details>
   <h3>Mean traits</h3>
   <div id="trait-rows"></div>
   <h3>Diversity</h3>
@@ -85,20 +104,33 @@
   <p class="hint" id="div-scale"></p>
   <h3>Chronicle</h3>
   <ol id="events"></ol>
+  <details id="research-details"><summary>Evolution laboratory</summary>
+    <p class="hint">Fresh independent experiments using this world's initial configuration. Current progress and live interventions are not copied. The observation chamber pauses while the batch runs. Experiments continue in hidden tabs, subject to browser throttling; Cancel stops them. Finite-run survival does not establish permanent coexistence.</p>
+    <label>First seed <input id="lab-seed" type="number" value="1" min="0" step="1"></label>
+    <label>Replicates <input id="lab-replicates" type="number" min="1" max="8" value="3"></label>
+    <label>Ticks per run <input id="lab-ticks" type="number" min="100" max="1000000" step="100" value="6000"></label>
+    <label>Comparison <select id="lab-scenario"><option value="resources">A-rich / B-rich / mixed (same nominal cell capacity)</option><option value="mutation">No mutation / default mutation</option><option value="spatial">Uniform / patchy (also changes abundance)</option></select></label>
+    <div class="row"><button id="lab-run" class="pill">Run experiments</button><button id="lab-cancel" class="pill" disabled>Cancel</button><button id="lab-export" class="pill" disabled>Export results</button></div>
+    <p id="lab-status" class="hint" role="status">Ready. No experiments run yet.</p><div id="lab-results"></div>
+  </details>
+  <details><summary>Exact state checkpoints</summary><p class="hint">Keep up to three full states in memory. Restore replaces the world after confirmation. These are exact saved states, not continuous time travel; save a world file for durable storage.</p><button class="pill" id="checkpoint-add">Capture current state</button><div id="checkpoints"></div></details>
+  <details><summary>Discovery log</summary><p class="hint">Measured sample changes with explicit rules; no inferred intentions or claims of adaptation. Most recent 50 observations.</p><ol id="discoveries"></ol></details>
   <h3>How to read a specimen</h3>
   <dl class="legend">
     <dt>Body scale</dt><dd>size gene; displayed radius is enlarged ×1.5. Shape also changes area; it is not a physical footprint.</dd>
-    <dt>Elongation, tail length</dt><dd>maximum speed gene</dd>
+    <dt>Elongation, tail length</dt><dd>forager maximum speed gene; other types use their own inherited silhouettes</dd>
     <dt>Tail beat</dt><dd>how fast it is moving now</dd>
-    <dt>Antennae</dt><dd>visual metaphor for three sensor samples; length is compressed. Selected dotted rays show true range and directions.</dd>
-    <dt>Side notch</dt><dd>share of energy given to each offspring</dd>
-    <dt>Outline ripples</dt><dd>inherited controller genes, used decoratively; no modeled membrane adaptation</dd>
-    <dt>Blue / orange tint</dt><dd>two neutral marker genes: lineage colour, no effect on survival</dd>
+    <dt>Internal structures</dt><dd>grazer rays run from the energy core toward the inside of the membrane. Generalist lobes have 0–3 inherited decorative particles each; they do not add genes or capabilities.</dd>
+    <dt>Antennae</dt><dd>only the forager has external antennae. Selected dotted rays show the actual three sensor directions for every type; internal details are visual metaphors.</dd>
+    <dt>Side notch</dt><dd>forager's share of energy given to each offspring</dd>
+    <dt>Outline ripples</dt><dd>forager controller genes, used decoratively; no modeled membrane adaptation</dd>
+    <dt>Form and colour family</dt><dd>orange–blue oval = forager; blue–green polygon = grazer; pink–orange lobes = generalist. Within-family tint uses two neutral inherited markers.</dd>
+    <dt>Corners / lobes</dt><dd>inherited integer traits, changed only at birth; affect uptake, maintenance and construction. More is not always better.</dd>
     <dt>Dark nucleus</dt><dd>energy reserve metaphor, not a simulated organ</dd>
-    <dt>Water, sediment</dt><dd>smoothed food and fertility maps. Decorative shoreline drift is not resource transport; motes are not countable food items.</dd>
-    <dt>Division, fading</dt><dd>observed births and deaths, shown briefly at low speeds. No nutrient recycling is simulated.</dd>
+    <dt>Water, sediment</dt><dd>blue = A, green tint = B. Smoothed decorative maps; motes are not countable food items. Read availability in field notes.</dd>
+    <dt>Division, fading</dt><dd>observed births and deaths, shown briefly at low speeds. Model 2 dissipates corpse reserves; legacy model 1 returns them to A.</dd>
   </dl>
-  <p class="fine">Organisms follow inherited controllers. Births require energy, maturity and a controller output; deaths arise from starvation or age-dependent random hazard. Founder colours are not species. Diversity is mean raw gene variance, not heterozygosity. Birth/death rates cover the latest recorded interval; lineage and trait statistics use the latest recorded sample. Save a snapshot to preserve interventions; the seed alone reproduces only the initial experiment. Hidden tabs suspend simulation time without catching up. At high speed the frame budget may lower actual tick rate; every executed tick uses the same scientific rules. See docs/EXPERIMENTS.md for measured evidence.</p>
+  <p class="fine">Organisms move using inherited controllers. Births require energy and maturity; deaths arise from starvation or age-dependent random hazard. Three types are designed starting categories, not observed speciation. Diversity is mean raw gene variance, not heterozygosity. Birth/death rates cover the latest recorded interval; lineage and trait statistics use the latest recorded sample. Save a snapshot to preserve interventions; the seed alone reproduces only the initial experiment. Hidden tabs suspend simulation time without catching up. At high speed the frame budget may lower actual tick rate; every executed tick uses the same scientific rules. See docs/STAGE3_REPORT.md for measured evidence.</p>
 </aside>
 
 <div id="toast" hidden></div>

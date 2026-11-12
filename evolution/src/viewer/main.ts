@@ -7,9 +7,10 @@
  *          warm / cool colours = neutral markers A / B, nucleus = energy reserve
  */
 import {
-  Simulation, makeConfig, Clock, TRAITS, T_SPEED, T_SENSE, T_MARKER_A, T_MARKER_B,
+  Simulation, legacyConfig as makeConfig, Clock, TRAITS, T_SPEED, T_SENSE, T_MARKER_A, T_MARKER_B,
   randomGenome, Rng, type Organism,
 } from '../sim';
+import { confirmAction, showNotice } from '../app/dialog';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = $<HTMLCanvasElement>('world');
@@ -18,6 +19,8 @@ const TAU = Math.PI * 2;
 
 let sim = new Simulation(makeConfig({ seed: (Date.now() % 100000) | 0 }));
 const clock = new Clock(60, 4000);
+let dialogOpen = false;
+document.addEventListener('app-dialog-toggle', e => { dialogOpen = (e as CustomEvent).detail.open; applySpeed(); });
 let selectedId = -1;
 let scale = 1;
 
@@ -210,12 +213,13 @@ SPEEDS.forEach(([label], i) => {
   $('speeds').appendChild(b);
 });
 function applySpeed() {
-  clock.paused = SPEEDS[speedIdx][1] === 0;
+  clock.paused = dialogOpen || SPEEDS[speedIdx][1] === 0;
   if (!clock.paused) clock.ticksPerSecond = SPEEDS[speedIdx][1];
   Array.from($("speeds").children).forEach((b, i) => b.classList.toggle('on', i === speedIdx));
 }
 
 function load(next: Simulation) {
+  if (next.cfg.model !== 1) throw new Error('This diagnostic page supports legacy model 1. Open model 2 snapshots in the main observation chamber.');
   sim = next;
   selectedId = -1;
   initField();
@@ -223,7 +227,7 @@ function load(next: Simulation) {
   syncControls();
   $('inspect').innerHTML = '<span class="hint">Click an organism to inspect it. Shift-click the chamber to introduce a copy of the inspected organism (or a random one).</span>';
 }
-$('b-new').onclick = () => load(new Simulation(makeConfig({ seed: (Math.random() * 1e6) | 0 })));
+$('b-new').onclick = async () => { if (await confirmAction({ title: '取代診斷世界？', message: '未儲存的進度會被取代。', accept: '建立新世界' })) load(new Simulation(makeConfig({ seed: (Math.random() * 1e6) | 0 }))); };
 $('b-save').onclick = () => {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(sim.snapshot())], { type: 'application/json' }));
@@ -235,8 +239,9 @@ $('b-load').onclick = () => $('f-load').click();
 $<HTMLInputElement>('f-load').onchange = async (e) => {
   const file = (e.target as HTMLInputElement).files?.[0];
   if (!file) return;
-  try { load(Simulation.restore(JSON.parse(await file.text()))); }
-  catch (err) { alert('Could not load snapshot: ' + err); }
+  try { const next = Simulation.restore(JSON.parse(await file.text())); if (await confirmAction({ title: '載入診斷快照？', message: '未儲存的進度會被取代。', accept: '載入快照' })) load(next); }
+  catch (err) { await showNotice('無法載入快照', String(err)); }
+  finally { (e.target as HTMLInputElement).value = ''; }
 };
 
 canvas.addEventListener('pointerdown', (e) => {
@@ -252,6 +257,7 @@ canvas.addEventListener('pointerdown', (e) => {
   updatePanel();
 });
 window.addEventListener('keydown', (e) => {
+  if (dialogOpen) return;
   if (e.code === 'Space') { speedIdx = speedIdx === 0 ? 1 : 0; applySpeed(); e.preventDefault(); }
 });
 window.addEventListener('resize', resize);

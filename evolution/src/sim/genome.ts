@@ -12,7 +12,7 @@
  */
 import type { Rng } from './rng';
 import { BRAIN_WEIGHTS } from './brain';
-import type { SimConfig } from './config';
+import { type SimConfig, TYPE_GRAZER, TYPE_GENERALIST } from './config';
 
 export interface TraitSpec {
   name: string;
@@ -59,35 +59,78 @@ export function rawForTrait(i: number, v: number): number {
   return Math.log(s / (1 - s));
 }
 
-/** Derived, cached quantities. Pure function of genome + config. */
+/** Derived, cached quantities. Pure function of (genome, type, corners, lobes) + config. */
 export interface Phenotype {
-  traits: Float64Array; // expressed trait values, indexed like TRAITS
-  mass: number; // size^2 (2D body area)
+  traits: Float64Array; // expressed trait values, indexed like TRAITS (before type multipliers)
+  type: number;
+  corners: number; // 0 = not applicable
+  lobes: number; // 0 = not applicable
+  mass: number; // size^2 (2D body area). Corner / lobe counts never change it.
   radius: number;
   capacity: number; // max energy reserve
-  intakeMax: number; // max resource uptake per tick
+  intakeMax: number; // max total resource uptake per tick (shared by A and B)
+  affA: number; // uptake affinity for resource A
+  affB: number;
+  senseA: number; // weight of A in the affinity-weighted resource sensors (affA / (affA + affB))
+  senseB: number;
+  vmax: number; // maximum speed after type and morphology multipliers
   fixedCost: number; // per-tick cost independent of behaviour
   moveCoef: number; // locomotion cost = moveCoef * speed^2
+  buildCost: number; // energy dissipated to build this body at birth
 }
 
-export function expressPhenotype(genome: Float64Array, cfg: SimConfig): Phenotype {
+/** Multipliers contributed by a morphology count; all 1 when the trait does not apply. */
+export function morphFactors(cfg: SimConfig, type: number, corners: number, lobes: number) {
+  const m = type === TYPE_GRAZER ? cfg.morph.corners : type === TYPE_GENERALIST ? cfg.morph.lobes : null;
+  if (!m) return { uptake: 1, basal: 1, speed: 1, build: 1 };
+  const d = (type === TYPE_GRAZER ? corners : lobes) - m.min;
+  return { uptake: 1 + m.uptakePer * d, basal: 1 + m.basalPer * d, speed: Math.max(0.05, 1 - m.speedPer * d), build: 1 + m.buildPer * d };
+}
+
+export function expressPhenotype(genome: Float64Array, cfg: SimConfig, type = 0, corners = 0, lobes = 0): Phenotype {
   const traits = new Float64Array(N_TRAITS);
   for (let i = 0; i < N_TRAITS; i++) traits[i] = expressTrait(i, genome[i]);
   const mass = traits[T_SIZE] * traits[T_SIZE];
   const e = cfg.energy;
+  const t = cfg.types[type];
+  const f = morphFactors(cfg, type, corners, lobes);
+  const vmax = traits[T_SPEED] * (t.speed * f.speed);
+  const affSum = t.affinity[0] + t.affinity[1];
+  // With all multipliers equal to 1 (model 1) every expression below reduces exactly to STAGE 1.
   return {
     traits,
+    type,
+    corners,
+    lobes,
     mass,
     radius: cfg.bodyRadius * traits[T_SIZE],
     capacity: e.capacityPerMass * mass,
-    intakeMax: e.intakeRate * Math.pow(mass, 2 / 3),
+    intakeMax: e.intakeRate * Math.pow(mass, 2 / 3) * (t.intake * f.uptake),
+    affA: t.affinity[0],
+    affB: t.affinity[1],
+    senseA: affSum > 0 ? t.affinity[0] / affSum : 0,
+    senseB: affSum > 0 ? t.affinity[1] / affSum : 0,
+    vmax,
     fixedCost:
-      e.basal * Math.pow(mass, 0.75) +
-      e.speedCapacity * mass * traits[T_SPEED] +
+      e.basal * Math.pow(mass, 0.75) * (t.basal * f.basal) +
+      e.speedCapacity * mass * vmax +
       e.sensing * traits[T_SENSE] +
       e.brain,
-    moveCoef: e.locomotion * mass,
+    moveCoef: e.locomotion * mass * t.move,
+    buildCost: e.birthCostPerMass * mass * f.build,
   };
+}
+
+/**
+ * Mutation of a bounded integer count. With probability `rate` the count steps by +1 or -1
+ * (equal odds); a step that would leave [min, max] is discarded, so the count is unchanged.
+ * Draws from the RNG only when rate > 0.
+ */
+export function mutateCount(count: number, m: { min: number; max: number; mutationRate: number }, rng: Rng): number {
+  if (m.mutationRate <= 0) return count;
+  if (rng.next() >= m.mutationRate) return count;
+  const next = count + (rng.next() < 0.5 ? -1 : 1);
+  return next < m.min || next > m.max ? count : next;
 }
 
 export function randomGenome(rng: Rng, traitSd: number, weightSd: number): Float64Array {

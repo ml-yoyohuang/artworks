@@ -6,7 +6,7 @@
  */
 import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import {
-  Simulation, makeConfig, Rng, rawForTrait, TRAITS, N_TRAITS, N_IN, N_HID,
+  Simulation, legacyConfig as makeConfig, Rng, rawForTrait, TRAITS, N_TRAITS, N_IN, N_HID,
   T_SENSE, T_MARKER_A, type SimConfig, type Sample,
 } from '../src/sim';
 import exampleConfig from './example.config.json';

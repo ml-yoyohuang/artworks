@@ -10,7 +10,11 @@ import { Camera } from './camera';
 import { Field } from './field';
 import { Creatures, portrait } from './creatures';
 import { parseSeed, tickPosition, extinctionTick } from './observation';
-import { coloursOf, pigmentCss } from './palette';
+import { coloursOf, pigmentCss, TYPE_COLOURS } from './palette';
+import { Laboratory } from './laboratory';
+import { confirmAction, showNotice } from './dialog';
+import { ObserverPane } from './observer-ui';
+import { particleCounts } from './anatomy';
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 const fieldCv = $<HTMLCanvasElement>('field');
@@ -23,6 +27,10 @@ const clock = new Clock(30, 4000);
 const params = new URLSearchParams(location.search);
 const randomSeed = () => (Math.random() * 1e6) | 0;
 let sim = new Simulation(makeConfig({ seed: parseSeed(params.get('seed'), randomSeed) }));
+let laboratory: Laboratory;
+let researching = false;
+let dialogOpen = false;
+let observer: ObserverPane | undefined;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 let selected = -1, hover = -1, following = false;
@@ -55,12 +63,13 @@ function line(cv: HTMLCanvasElement, series: { v: number[]; min: number; max: nu
     if (n < 2) continue;
     const y = (v: number) => h - 2 - ((v - s.min) / (s.max - s.min || 1)) * (h - 6);
     const xAt = (i: number) => (ticks.length === n ? tickPosition(ticks[i], ticks[0], ticks[n - 1]) : i / (n - 1)) * w;
+    const path = () => { let pen = false; for (let i = 0; i < n; i++) { if (!Number.isFinite(s.v[i])) { pen = false; continue; } const x = xAt(i); if (pen) g.lineTo(x,y(s.v[i])); else g.moveTo(x,y(s.v[i])); pen = true; } };
     g.beginPath();
-    for (let i = 0; i < n; i++) { const x = xAt(i); i ? g.lineTo(x, y(s.v[i])) : g.moveTo(x, y(s.v[i])); }
+    path();
     if (s.fill) {
       g.save(); g.lineTo(w, h); g.lineTo(0, h); g.closePath(); g.fillStyle = s.fill; g.fill(); g.restore();
       g.beginPath();
-      for (let i = 0; i < n; i++) { const x = xAt(i); i ? g.lineTo(x, y(s.v[i])) : g.moveTo(x, y(s.v[i])); }
+      path();
     }
     g.strokeStyle = s.color;
     g.lineWidth = s.width ?? 1.4;
@@ -116,16 +125,34 @@ function updateNotes() {
   const t0 = h[0].tick, t1 = Math.max(t0 + 1, last.tick);
   const marks = sim.events.filter((e) => e.tick >= t0 && e.tick <= last.tick && e.type !== 'extinction').map((e) => tickPosition(e.tick, t0, t1));
   const pops = h.map((s) => s.population);
+  const typeMax = Math.max(10, ...h.flatMap(s => s.typePop ?? []));
+  line($<HTMLCanvasElement>('c-types'), [0,1,2].map(t => ({ v: h.map(s => s.typePop?.[t] ?? NaN), min: 0, max: typeMax, color: TYPE_COLOURS[t] })), [], ticks);
+  $('type-scale').textContent = `Population scale 0–${typeMax}; ticks ${t0}–${last.tick}. Orange: forager; teal: grazer; pink: generalist. Missing legacy data is not reconstructed.`;
+  $('type-stats').replaceChildren();
+  for (let t = 0; t < 3; t++) {
+    const row = document.createElement('div'); row.className = 'type-stat'; row.style.borderColor = TYPE_COLOURS[t];
+    const rate = (a?: number[]) => a ? (a[t] / span).toFixed(3) : 'n/a';
+    row.textContent = `${sim.cfg.types[t].name}: ${current.typePop[t]} living · energy ${Number.isFinite(current.typeEnergyFrac[t]) ? (current.typeEnergyFrac[t]*100).toFixed(1)+'%' : 'n/a'} · births/deaths per 1000 ticks ${last.typeBirths ? Math.round(last.typeBirths[t]/span*1000) : 'n/a'} / ${last.typeDeaths ? Math.round(last.typeDeaths[t]/span*1000) : 'n/a'} · uptake A/B ${rate(last.typeUptakeA)} / ${rate(last.typeUptakeB)} · maintenance/movement ${rate(last.typeFixedCost)} / ${rate(last.typeMoveCost)}`;
+    $('type-stats').append(row);
+  }
+  const distribution = (a: number[]) => a.map((n,i) => n ? `${i}: ${n}` : '').filter(Boolean).join(' · ') || 'no living organisms';
+  $('morph-stats').textContent = `Grazer corners (count: individuals)\n${distribution(current.cornerCounts)}\nGeneralist lobes (count: individuals)\n${distribution(current.lobeCounts)}\nBirth events ${Number.isFinite(sim.totalBirths) ? sim.totalBirths : 'not recorded in legacy world'}`;
+  const countMean = (a?: number[]) => { const n = a?.reduce((sum,v) => sum+v,0) ?? 0; return n ? a!.reduce((sum,v,i) => sum+v*i,0)/n : NaN; };
+  const countMax = Math.max(sim.cfg.morph.corners.max, sim.cfg.morph.lobes.max);
+  line($<HTMLCanvasElement>('c-morph'), [{ v: h.map(s => countMean(s.cornerCounts)), min: 3, max: countMax, color: TYPE_COLOURS[1] },{ v: h.map(s => countMean(s.lobeCounts)), min: 3, max: countMax, color: TYPE_COLOURS[2] }], [], ticks);
+  $('morph-scale').textContent = `Recorded population means, scale 3–${countMax}; ticks ${t0}–${last.tick}. Teal: corners; pink: lobes. Gaps mean absent/unrecorded populations. Individual count frequencies are in exported samples.`;
   line($('c-pop') as HTMLCanvasElement, [
     { v: h.map((s) => s.resourceFrac), min: 0, max: 1, color: '#6fbfd6', fill: 'rgba(111,191,214,.16)' },
+    { v: h.map((s) => s.resourceFracB ?? NaN), min: 0, max: 1, color: '#6baf92' },
     { v: pops, min: 0, max: Math.max(100, ...pops) * 1.1, color: '#2a1745', width: 1.6 },
   ], marks, ticks);
-  $('pop-scale').textContent = `Ticks ${t0.toLocaleString()}–${last.tick.toLocaleString()} · population 0–${Math.ceil(Math.max(100, ...pops) * 1.1)} · resource 0–100%. Latest recorded sample: tick ${last.tick.toLocaleString()}.`;
+  $('pop-scale').textContent = `Ticks ${t0.toLocaleString()}–${last.tick.toLocaleString()} · population 0–${Math.ceil(Math.max(100, ...pops) * 1.1)} · resources 0–100% (A blue, B green). Now A ${(current.resourceFrac*100).toFixed(1)}%, B ${(current.resourceFracB*100).toFixed(1)}%. Latest recorded sample: tick ${last.tick.toLocaleString()}.`;
   for (const i of FUNCTIONAL) {
     const t = TRAITS[i];
-    const v = h.map((s) => s.traitMean[i]);
+    const v = h.map((s) => s.population ? s.traitMean[i] : NaN);
+    const observed = v.filter(Number.isFinite);
     // auto-range, but never narrower than 15 % of the gene's range, so noise is not drawn as a trend
-    const lo = Math.min(...v), hi = Math.max(...v), mid = (lo + hi) / 2, half = Math.max((hi - lo) / 2 * 1.15, (t.max - t.min) * 0.075);
+    const lo = observed.length ? Math.min(...observed) : t.min, hi = observed.length ? Math.max(...observed) : t.max, mid = (lo + hi) / 2, half = Math.max((hi - lo) / 2 * 1.15, (t.max - t.min) * 0.075);
     const range = `${fmt(i, mid - half)}–${fmt(i, mid + half)}`;
     line($(`tr-${i}`) as HTMLCanvasElement, [{ v, min: mid - half, max: mid + half, color: '#2a1745' }], [], ticks);
     $(`tv-${i}`).innerHTML = last.population ? `${fmt(i, last.traitMean[i])}<small>± ${fmt(i, last.traitSd[i])} SD</small><small>scale ${range}</small>` : '—';
@@ -147,13 +174,16 @@ function updateNotes() {
 }
 function describe(type: string, detail: string): string {
   if (type === 'extinction') return 'The last organism died.';
-  if (type === 'introduction') return `A newcomer was released (${detail}).`;
+  if (type === 'introduction') {
+    try { const d = JSON.parse(detail); return `Released #${d.id}, type ${d.type}, corners ${d.corners || 'n/a'}, lobes ${d.lobes || 'n/a'} at (${Number(d.x).toFixed(1)}, ${Number(d.y).toFixed(1)}).`; }
+    catch { return `A newcomer was released (${detail}).`; }
+  }
   try {
     const p = JSON.parse(detail);
     const parts: string[] = [];
     if (p.regrowthRate !== undefined) parts.push(`productivity ×${(p.regrowthRate / DEFAULT_CONFIG.env.regrowthRate).toFixed(2)}`);
     if (p.cellCapacity !== undefined) parts.push(`richness ${p.cellCapacity}`);
-    return `Climate changed: ${parts.join(', ')}.`;
+    return `Resource ${p.resource ?? 'A'} changed: ${parts.join(', ')}.`;
   } catch { return detail; }
 }
 
@@ -195,7 +225,9 @@ function updateSpecimen() {
     strip($(`st-${i}`) as HTMLCanvasElement, i, s.ph.traits[i]);
     $(`sv-${i}`).textContent = fmt(i, s.ph.traits[i]);
   }
-  const { warm, cool } = coloursOf(s.ph.traits);
+  const { warm, cool } = coloursOf(s.ph.traits, s.type);
+  $('spec-ecology').textContent = `${sim.cfg.types[s.type].name} · corners ${s.corners || 'n/a'} · lobes ${s.lobes || 'n/a'} · actual speed ceiling ${s.ph.vmax.toFixed(2)} units/tick · affinity A/B ${s.ph.affA}/${s.ph.affB} · intake ceiling ${s.ph.intakeMax.toFixed(3)} energy/tick · maintenance ${s.ph.fixedCost.toFixed(3)} energy/tick · body cost ${s.ph.buildCost.toFixed(3)} energy. Count traits change only in offspring.`;
+  if (s.type === 2) $('spec-ecology').textContent += ` Inherited decorative particles by lobe: ${particleCounts(s).join(' / ')}. These do not change gene count or metabolism.`;
   $('st-hue').innerHTML = `<i class="swatch" style="background:${pigmentCss(cool)}"></i><i class="swatch" style="background:${pigmentCss(warm)}"></i>`;
   ($('spec-follow') as HTMLButtonElement).classList.toggle('on', following);
   ($('spec-follow') as HTMLButtonElement).disabled = dead;
@@ -207,21 +239,28 @@ $('spec-clone').onclick = () => setPlacing('clone');
 
 // ---------------------------------------------------------------- climate, placement, files
 const prod = $<HTMLInputElement>('i-prod'), rich = $<HTMLInputElement>('i-rich');
+const resourceChoice = $<HTMLSelectElement>('i-resource');
+const activeResource = () => resourceChoice.value as 'A' | 'B';
+const activeEnv = () => activeResource() === 'A' ? sim.env : sim.envB;
+resourceChoice.onchange = syncClimate;
 function syncClimate() {
-  const p = sim.env.regrowthRate / DEFAULT_CONFIG.env.regrowthRate;
+  const env = activeEnv();
+  const p = env.regrowthRate / DEFAULT_CONFIG.env.regrowthRate;
   prod.value = String(p);
-  rich.value = String(sim.env.cellCapacity);
+  rich.min = '0'; rich.value = String(env.cellCapacity);
   $('o-prod').textContent = `×${p.toFixed(2)}`;
-  $('o-rich').textContent = sim.env.cellCapacity.toFixed(1);
+  $('o-rich').textContent = env.cellCapacity.toFixed(1);
+  prod.disabled = rich.disabled = activeResource() === 'B' && sim.cfg.model === 1;
+  $<HTMLSelectElement>('i-type').disabled = sim.cfg.model === 1;
 }
 prod.oninput = () => { $('o-prod').textContent = `×${Number(prod.value).toFixed(2)}`; };
 rich.oninput = () => { $('o-rich').textContent = Number(rich.value).toFixed(1); };
 prod.onchange = () => {
   const p = Number(prod.value);
-  sim.setEnvironment({ regrowthRate: DEFAULT_CONFIG.env.regrowthRate * p, influx: DEFAULT_CONFIG.env.influx * p });
+  sim.setEnvironment({ regrowthRate: DEFAULT_CONFIG.env.regrowthRate * p, influx: DEFAULT_CONFIG.env.influx * p }, activeResource());
   updateNotes();
 };
-rich.onchange = () => { sim.setEnvironment({ cellCapacity: Number(rich.value) }); updateNotes(); };
+rich.onchange = () => { sim.setEnvironment({ cellCapacity: Number(rich.value) }, activeResource()); updateNotes(); };
 
 function setPlacing(mode: typeof placing) {
   placing = mode;
@@ -241,19 +280,21 @@ function load(next: Simulation) {
   life.reset();
   select(-1);
   following = false;
-  cam.reset();
   resize();
+  cam.reset();
+  cam.clamp();
   syncClimate();
   updateNotes();
   history.replaceState(null, '', `?seed=${sim.cfg.seed}`);
+  observer?.worldChanged(sim);
 }
-const confirmReplace = () => window.confirm('Replace this world? Unsaved progress and interventions will be lost. Save first if you want to continue this experiment later.');
-function newWorld() { if (confirmReplace()) load(new Simulation(makeConfig({ seed: randomSeed() }))); }
+const confirmReplace = () => confirmAction({ title: '取代目前的觀察箱？', message: '目前尚未儲存的進度與介入將被取代。若想保留這個世界，請先取消並儲存快照。', accept: '取代世界', cancel: '保留目前世界' });
+async function newWorld() { if (await confirmReplace()) load(new Simulation(makeConfig({ seed: randomSeed() }))); }
 $('b-new').onclick = newWorld;
 $('b-ext-new').onclick = newWorld;
 $('b-ext-release').onclick = () => {
   const rng = new Rng(randomSeed());
-  for (let i = 0; i < 40; i++) sim.introduce(randomGenome(rng, 0.5, 1), rng.next() * sim.cfg.width, rng.next() * sim.cfg.height);
+  for (let i = 0; i < 40; i++) sim.introduce(randomGenome(rng, 0.5, 1), rng.next() * sim.cfg.width, rng.next() * sim.cfg.height, sim.cfg.founders.energyFrac, { type: sim.cfg.model === 1 ? 0 : i % 3 });
 };
 $('b-save').onclick = () => {
   const a = document.createElement('a');
@@ -269,9 +310,9 @@ $<HTMLInputElement>('f-load').onchange = async (e) => {
   try {
     const next = Simulation.restore(JSON.parse(await file.text()));
     if (!next.history.length || !Number.isFinite(next.tick)) throw new Error('Missing observation history or tick');
-    if (confirmReplace()) load(next);
+    if (await confirmReplace()) load(next);
   }
-  catch (err) { alert('Could not open this snapshot: ' + err); }
+  catch (err) { await showNotice('無法開啟快照', String(err)); }
   finally { (e.target as HTMLInputElement).value = ''; }
 };
 
@@ -286,11 +327,12 @@ SPEEDS.forEach((s) => {
   $('speeds').appendChild(b);
 });
 function applySpeed() {
-  clock.paused = paused;
+  clock.paused = paused || researching || dialogOpen;
   clock.ticksPerSecond = 30 * speed;
-  Array.from($('speeds').children).forEach((b, i) => { b.classList.toggle('on', SPEEDS[i] === speed && !paused); b.setAttribute('aria-pressed', String(SPEEDS[i] === speed && !paused)); });
-  $('b-play').textContent = paused ? '▶' : '❚❚';
-  $('b-play').setAttribute('aria-label', paused ? 'Play' : 'Pause');
+  Array.from($('speeds').children).forEach((b, i) => { b.classList.toggle('on', SPEEDS[i] === speed && !clock.paused); b.setAttribute('aria-pressed', String(SPEEDS[i] === speed && !clock.paused)); (b as HTMLButtonElement).disabled = researching; });
+  $('b-play').textContent = clock.paused ? '▶' : '❚❚';
+  $('b-play').setAttribute('aria-label', clock.paused ? 'Play' : 'Pause');
+  $<HTMLButtonElement>('b-play').disabled = researching;
 }
 $('b-play').onclick = () => { paused = !paused; applySpeed(); };
 $('b-zin').onclick = () => cam.zoomAt(cam.vw / 2, cam.vh / 2, cam.zoom * 1.5);
@@ -301,6 +343,7 @@ $('climate-toggle').onclick = () => { const open = climate.classList.toggle('ope
 
 const notes = $('notes');
 function toggleNotes(open = !notes.classList.contains('open')) {
+  if (open && observer?.isOpen) observer.setOpen(false);
   notes.classList.toggle('open', open);
   notes.setAttribute('aria-hidden', String(!open));
   notes.inert = !open;
@@ -315,6 +358,15 @@ $('notes-close').onclick = () => toggleNotes(false);
 let down: { x: number; y: number; cx: number; cy: number; moved: boolean } | null = null;
 const local = (e: PointerEvent | WheelEvent) => { const r = lifeCv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
 const pickRadius = () => Math.max(6, 16 / cam.s);
+function pickOrganism(x: number, y: number): Organism | null {
+  let picked: Organism | null = null, nearest = Infinity;
+  for (const o of sim.orgs) {
+    const v = life.vis.get(o.id), dx = x - (v?.lx ?? o.x), dy = y - (v?.ly ?? o.y);
+    const dist = dx * dx + dy * dy, radius = Math.max(pickRadius(), v?.shape.ext ?? o.ph.radius * 2);
+    if (dist <= radius * radius && dist < nearest) { nearest = dist; picked = o; }
+  }
+  return picked;
+}
 lifeCv.addEventListener('pointerdown', (e) => {
   const [x, y] = local(e);
   down = { x, y, cx: cam.x, cy: cam.y, moved: false };
@@ -328,7 +380,7 @@ lifeCv.addEventListener('pointermove', (e) => {
     return;
   }
   const [wx, wy] = cam.toWorld(x, y);
-  hover = sim.organismAt(wx, wy, pickRadius())?.id ?? -1;
+  hover = pickOrganism(wx, wy)?.id ?? -1;
   lifeCv.classList.toggle('over', hover >= 0 && !placing);
 });
 lifeCv.addEventListener('pointerup', (e) => {
@@ -342,12 +394,12 @@ lifeCv.addEventListener('pointerup', (e) => {
   if (wx < 0 || wy < 0 || wx > sim.cfg.width || wy > sim.cfg.height) { if (!placing) select(-1); return; }
   if (placing) {
     const src = placing === 'clone' ? (sim.orgs.find((o) => o.id === selected) ?? lastSeen) : null;
-    const o = sim.introduce(src ? src.genome : randomGenome(new Rng(randomSeed()), 0.5, 1), wx, wy);
+    const o = sim.introduce(src ? src.genome : randomGenome(new Rng(randomSeed()), 0.5, 1), wx, wy, sim.cfg.founders.energyFrac, src ? { type: src.type, corners: src.corners, lobes: src.lobes } : { type: sim.cfg.model === 1 ? 0 : Number($<HTMLSelectElement>('i-type').value) });
     setPlacing(null);
     select(o.id);
     return;
   }
-  select(sim.organismAt(wx, wy, pickRadius())?.id ?? -1);
+  select(pickOrganism(wx, wy)?.id ?? -1);
 });
 lifeCv.addEventListener('pointerleave', () => { hover = -1; });
 lifeCv.addEventListener('pointercancel', () => { down = null; lifeCv.classList.remove('dragging'); });
@@ -359,6 +411,7 @@ lifeCv.addEventListener('wheel', (e) => {
 }, { passive: false });
 
 window.addEventListener('keydown', (e) => {
+  if (dialogOpen) return;
   const target = e.target as HTMLElement;
   if (target.closest('input, textarea, select, [contenteditable="true"]') || e.altKey || e.ctrlKey || e.metaKey) return;
   // Preserve native Space/Enter activation on focused controls.
@@ -372,7 +425,7 @@ window.addEventListener('keydown', (e) => {
     if (n) { const o = sim.orgs[(i + (e.key === ']' ? 1 : n - 1) + n) % n]; select(o.id); cam.x = o.x; cam.y = o.y; cam.clamp(); }
     e.preventDefault();
   }
-  else if (e.key === 'Escape') { if (placing) setPlacing(null); else if (notes.classList.contains('open')) toggleNotes(false); else select(-1); }
+  else if (e.key === 'Escape') { if (placing) setPlacing(null); else if (observer?.isOpen) observer.setOpen(false); else if (notes.classList.contains('open')) toggleNotes(false); else select(-1); }
   wake();
 });
 
@@ -382,7 +435,7 @@ function wake() {
   document.body.classList.remove('idle');
   clearTimeout(idleTimer);
   idleTimer = window.setTimeout(() => {
-    if (!notes.classList.contains('open') && !placing && !document.activeElement?.closest('button, a, input, #notes')) document.body.classList.add('idle');
+    if (!notes.classList.contains('open') && !observer?.isOpen && !placing && !document.activeElement?.closest('button, a, input, #notes')) document.body.classList.add('idle');
   }, 7000);
 }
 ['pointermove', 'pointerdown', 'wheel', 'touchstart'].forEach((ev) => window.addEventListener(ev, wake, { passive: true }));
@@ -398,7 +451,9 @@ let lastT = performance.now(), lastPanel = 0, frameMs = 0;
 let rateStart = lastT, rateTicks = 0, actualRate = 0;
 document.addEventListener('visibilitychange', () => { lastT = performance.now(); rateStart = lastT; rateTicks = 0; });
 function frame(now: number) {
-  const dt = Math.min(0.1, (now - lastT) / 1000);
+  const frameStart = performance.now();
+  const elapsed = Math.max(0, (now - lastT) / 1000);
+  const dt = Math.min(0.1, elapsed);
   lastT = now;
   if (document.hidden) { requestAnimationFrame(frame); return; }
   const before = sim.tick;
@@ -406,9 +461,10 @@ function frame(now: number) {
   const deadline = performance.now() + 11;
   while (n > 1 && performance.now() < deadline) { const k = Math.min(n - 1, 8); sim.step(k); n -= k; }
   if (n >= 1) { life.capturePrev(sim); sim.step(1); }
-  const live = paused ? 0 : dt;
+  const live = clock.paused ? 0 : dt;
   life.sync(sim, speed <= 16 && !reducedMotion.matches, live);
   animTime += live;
+  observer?.frame(sim, clock.paused ? 0 : elapsed);
   rateTicks += sim.tick - before;
   if (now - rateStart >= 1000) { actualRate = rateTicks * 1000 / (now - rateStart); rateTicks = 0; rateStart = now; }
 
@@ -422,29 +478,33 @@ function frame(now: number) {
       cam.clamp();
     }
   }
-  const alpha = paused ? 1 : Math.min(1, clock.phase);
+  const alpha = clock.paused ? 1 : Math.min(1, clock.phase);
   const visualTime = reducedMotion.matches ? 0 : animTime;
   field.render(sim, cam, visualTime, dpr());
   life.render(sim, cam, alpha, visualTime, reducedMotion.matches ? 0 : live, dpr(), selected, hover);
 
   if (now - lastPanel > 300) {
     lastPanel = now;
-    $('caption').textContent = `Chamber ${sim.cfg.seed} · ${sim.tick.toLocaleString()} ticks · ${sim.orgs.length} living`;
+    $('caption').textContent = `Model ${sim.cfg.model} · ${sim.cfg.seed} · ${sim.tick.toLocaleString()} ticks · ${sim.orgs.length} living`;
     $('clock').textContent = `${sim.tick.toLocaleString()} t`;
-    $('pace').textContent = `${paused ? 'Paused' : `Target ${30 * speed} ticks/s · actual ${Math.round(actualRate)} ticks/s`} · frame CPU ${frameMs.toFixed(1)} ms (smoothed, excludes GPU / display wait)`;
+    $('pace').textContent = `${dialogOpen ? 'Paused for confirmation' : researching ? 'Chamber paused for experiments' : paused ? 'Paused' : `Target ${30 * speed} ticks/s · actual ${Math.round(actualRate)} ticks/s`} · frame work ${frameMs.toFixed(1)} ms (smoothed JS callback time; not GPU completion or FPS)`;
     if (notes.classList.contains('open')) updateNotes();
     updateSpecimen();
+    laboratory.refresh(lastSeen);
     const extinct = sim.orgs.length === 0;
     $('extinct').hidden = !extinct;
     if (extinct) { const tick = extinctionTick(sim.events); $('extinct-title').textContent = tick === undefined ? 'No living organisms' : `Extinct at tick ${tick.toLocaleString()}`; }
   }
   if (selected >= 0 && lastSeen) portrait($('spec-portrait') as HTMLCanvasElement, lastSeen, sim.cfg.sensorAngle, lastSeen.alive ? visualTime : 0);
-  frameMs = frameMs * 0.9 + (performance.now() - now) * 0.1;
+  frameMs = frameMs * 0.9 + (performance.now() - frameStart) * 0.1;
   requestAnimationFrame(frame);
 }
 
 (window as any).__sim = () => sim; // researcher console access
 (window as any).__frameMs = () => frameMs;
+document.addEventListener('app-dialog-toggle', e => { dialogOpen = (e as CustomEvent).detail.open; applySpeed(); });
+laboratory = new Laboratory(() => sim, load, select, () => { researching = true; applySpeed(); return () => { researching = false; applySpeed(); }; });
+observer = new ObserverPane(() => sim, () => { if (notes.classList.contains('open')) toggleNotes(false); });
 load(sim);
 applySpeed();
 wake();

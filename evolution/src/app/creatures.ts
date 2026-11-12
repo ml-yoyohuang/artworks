@@ -16,11 +16,12 @@ import {
 } from '../sim';
 import type { Camera } from './camera';
 import { coloursOf, pigmentCss } from './palette';
+import { particleCounts } from './anatomy';
 
 const TAU = Math.PI * 2;
 const INK = '#2a1745';
 
-interface Shape { a: number; b: number; ext: number; pts: number[] }
+interface Shape { a: number; b: number; ext: number; pts: number[]; polygon?: boolean }
 interface Sprite { c: HTMLCanvasElement; res: number; key: number; ext: number }
 interface Vis {
   px: number; py: number; ph: number; // pose before the last tick
@@ -41,6 +42,22 @@ const wrap = (a: number) => (a > Math.PI ? a - TAU : a < -Math.PI ? a + TAU : a)
 
 export function shapeOf(o: Organism): Shape {
   const t = o.ph.traits, R = o.ph.radius * BODY_SCALE;
+  if (o.type === 1 || o.type === 2) {
+    const count = o.type === 1 ? o.corners : o.lobes;
+    const n = o.type === 1 ? count : count * 24;
+    const pts: number[] = [];
+    for (let i = 0; i < n; i++) {
+      const th = i / n * TAU;
+      const r = o.type === 1 ? R : R * (1 + .24 * Math.cos(count * th));
+      pts.push(Math.cos(th) * r, Math.sin(th) * r);
+    }
+    let area = 0;
+    for (let i = 0; i < n; i++) { const j = (i + 1) % n; area += pts[i * 2] * pts[j * 2 + 1] - pts[j * 2] * pts[i * 2 + 1]; }
+    const scale = Math.sqrt(Math.PI * R * R / (Math.abs(area) / 2));
+    for (let i = 0; i < pts.length; i++) pts[i] *= scale;
+    const ext = Math.max(...pts.map(Math.abs)) * 1.2 + 1;
+    return { a: R, b: R, ext, pts, polygon: o.type === 1 };
+  }
   const sp = norm(T_SPEED, t[T_SPEED]);
   const a = R * (1 + 0.5 * sp), b = R * (1 - 0.15 * sp);
   const notch = 0.05 + 0.34 * norm(T_INVEST, t[T_INVEST]);
@@ -59,9 +76,18 @@ export function shapeOf(o: Organism): Shape {
   return { a, b, ext: Math.max(a, b) * 1.3 + 0.8, pts };
 }
 
-function outline(ctx: CanvasRenderingContext2D, pts: number[]): void {
+function outline(ctx: CanvasRenderingContext2D, pts: number[], polygon = false): void {
   const n = pts.length / 2;
   ctx.beginPath();
+  if (polygon) {
+    for (let i = 0; i < n; i++) {
+      const p = ((i + n - 1) % n) * 2, v = i * 2, q = ((i + 1) % n) * 2;
+      const x = pts[v] * .82 + pts[p] * .18, y = pts[v + 1] * .82 + pts[p + 1] * .18;
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      ctx.quadraticCurveTo(pts[v], pts[v + 1], pts[v] * .82 + pts[q] * .18, pts[v + 1] * .82 + pts[q + 1] * .18);
+    }
+    ctx.closePath(); return;
+  }
   for (let i = 0; i <= n; i++) {
     const j = (i % n) * 2, k = ((i + 1) % n) * 2;
     const mx = (pts[j] + pts[k]) / 2, my = (pts[j + 1] + pts[k + 1]) / 2;
@@ -73,17 +99,18 @@ function outline(ctx: CanvasRenderingContext2D, pts: number[]): void {
 
 /** Paint a body (no nucleus) in local coordinates: +x = heading. */
 function paintBody(ctx: CanvasRenderingContext2D, o: Organism, sh: Shape, pxPerUnit: number): void {
-  const { cool, warm } = coloursOf(o.ph.traits);
+  const { cool, warm } = coloursOf(o.ph.traits, o.type);
   const { a, b, pts } = sh;
   // pale membrane halo, as in the concept art
-  outline(ctx, pts);
+  outline(ctx, pts, sh.polygon);
   ctx.lineWidth = Math.max(0.9, a * 0.28);
   ctx.strokeStyle = 'rgba(255,255,255,.45)';
   ctx.stroke();
   const g = ctx.createLinearGradient(a, -b * 0.6, -a, b * 0.6);
   g.addColorStop(0, pigmentCss(cool));
   g.addColorStop(0.42, pigmentCss({ ...cool, s: cool.s - 4, l: cool.l + 7 }));
-  g.addColorStop(0.62, `hsl(${(cool.h + warm.h + 360) / 2 % 360},40%,80%)`);
+  const hueDelta = ((warm.h - cool.h + 540) % 360) - 180;
+  g.addColorStop(0.62, `hsl(${(cool.h + hueDelta * .5 + 360) % 360},40%,80%)`);
   g.addColorStop(1, pigmentCss(warm));
   ctx.fillStyle = g;
   ctx.fill();
@@ -107,7 +134,41 @@ function paintBody(ctx: CanvasRenderingContext2D, o: Organism, sh: Shape, pxPerU
   ctx.fillStyle = rg;
   ctx.fillRect(-a * 1.2, -b * 1.2, a * 2.4, b * 2.4);
   ctx.restore();
-  outline(ctx, pts);
+  // Internal structures are clipped to the membrane and cached with the inherited body.
+  if (o.type !== 0) {
+    ctx.save(); outline(ctx, pts, sh.polygon); ctx.clip();
+    if (o.type === 1) {
+      ctx.beginPath();
+      for (let i = 0; i < o.corners; i++) {
+        ctx.moveTo(-a * .1, -b * .05);
+        ctx.lineTo(pts[i * 2] * .73, pts[i * 2 + 1] * .73);
+      }
+      ctx.lineWidth = Math.max(.5 / pxPerUnit, a * .035);
+      ctx.strokeStyle = `hsla(${cool.h},45%,42%,.46)`; ctx.stroke();
+      ctx.fillStyle = `hsla(${cool.h},50%,42%,.65)`;
+      ctx.beginPath();
+      for (let i = 0; i < o.corners; i++) {
+        const x = pts[i * 2] * .73, y = pts[i * 2 + 1] * .73, r = a * .065;
+        ctx.moveTo(x + r,y); ctx.arc(x,y,r,0,TAU);
+      }
+      ctx.fill();
+    } else {
+      const counts = particleCounts(o);
+      ctx.fillStyle = `hsla(${cool.h},48%,39%,.67)`;
+      ctx.beginPath();
+      for (let lobe = 0; lobe < counts.length; lobe++) {
+        const angle = lobe / o.lobes * TAU, c = Math.cos(angle), s = Math.sin(angle);
+        for (let j = 0; j < counts[lobe]; j++) {
+          const radial = a * (.68 + (j % 2) * .16), side = a * (j === 0 ? 0 : j === 1 ? -.16 : .16);
+          const x = c * radial - s * side, y = s * radial + c * side, r = a * .055;
+          ctx.moveTo(x+r,y); ctx.arc(x,y,r,0,TAU);
+        }
+      }
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+  outline(ctx, pts, sh.polygon);
   ctx.lineWidth = Math.max(0.6 / pxPerUnit * 1.5, a * 0.06);
   ctx.strokeStyle = 'rgba(255,255,255,.9)';
   ctx.stroke();
@@ -238,6 +299,7 @@ export class Creatures {
     ctx.beginPath();
     for (const p of poses) {
       const { o, v, x, y, h, sc } = p;
+      if (o.type !== 0) continue;
       const sh = v.shape;
       const len = o.ph.traits[T_SENSE] * 0.26 * sc;
       const sway = Math.sin(t * 1.3 + o.id) * 0.1;
@@ -252,6 +314,7 @@ export class Creatures {
         else ctx.lineTo(ex, ey);
         tips.push(ex, ey);
       }
+      if (o.type !== 0) continue; // polygon / lobes are not extra locomotion organs
       // tail: beats with current speed
       const tl = sh.a * (0.8 + 0.9 * norm(T_SPEED, o.ph.traits[T_SPEED])) * sc;
       const amp = sh.b * 0.45 * sc * Math.min(1, o.speed);
@@ -354,14 +417,14 @@ export function portrait(cv: HTMLCanvasElement, o: Organism, sensorAngle: number
   let cached = portraits.get(o);
   if (!cached) { cached = { shape: shapeOf(o) }; portraits.set(o, cached); }
   const sh = cached.shape;
-  const len = o.ph.traits[T_SENSE] * 0.26;
+  const len = o.type === 0 ? o.ph.traits[T_SENSE] * 0.26 : 0;
   const span = sh.a * 2.1 + len;
   const k = Math.min((W * 0.86) / span, (H * 0.8) / (sh.ext * 2 + len * 0.9)) * dpr;
   const cx = (W * dpr) / 2 - len * 0.45 * k, cy = (H * dpr) / 2;
   ctx.setTransform(k, 0, 0, k, cx, cy);
   ctx.lineCap = 'round';
   ctx.beginPath();
-  for (const an of [-sensorAngle, 0, sensorAngle]) {
+  for (const an of o.type === 0 ? [-sensorAngle, 0, sensorAngle] : []) {
     const bx = Math.cos(an) * sh.a * 0.85, by = Math.sin(an) * sh.b * 0.85;
     const d = an * 1.15 + Math.sin(t * 1.3) * 0.08;
     const ex = bx + Math.cos(d) * len, ey = by + Math.sin(d) * len;
@@ -370,7 +433,7 @@ export function portrait(cv: HTMLCanvasElement, o: Organism, sensorAngle: number
     ctx.quadraticCurveTo((bx + ex) / 2 - Math.sin(d) * curl, (by + ey) / 2 + Math.cos(d) * curl, ex, ey);
   }
   const tl = sh.a * (0.8 + 0.9 * norm(T_SPEED, o.ph.traits[T_SPEED]));
-  for (const off of [-0.28, 0.28]) {
+  for (const off of o.type === 0 ? [-0.28, 0.28] : []) {
     const bx = -Math.cos(off) * sh.a * 0.9, by = -Math.sin(off) * sh.a * 0.9;
     ctx.moveTo(bx, by);
     for (let j = 1; j <= 8; j++) {

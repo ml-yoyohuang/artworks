@@ -1,5 +1,7 @@
 # ARCHITECTURE
 
+STAGE 3 additions: `src/sim/research.ts` orchestrates cancellable, deterministic headless runs, bounded checkpoints and evidence-based discoveries (this orchestration layer uses timers/wall-clock; the transition core `sim.ts` does not). `validation.ts` validates model inputs and snapshot state. `src/app/laboratory.ts` supplies comparisons, exports, recorded ancestry previews and manual exact-state checkpoints. `experiments/stage3.ts` executes model-2 experiments; `experiments/run.ts` explicitly preserves legacy model-1 experiments. Read the versioned rules and current results in `EVOLUTION_MODEL.md` and `STAGE3_REPORT.md`; the original architecture summary below is retained as a baseline overview.
+
 TypeScript, no runtime dependencies. Vite 4 / Vitest 0.34 / vite-node are dev tools only
 (chosen because the machine runs Node 16; newer versions need Node ≥ 18).
 

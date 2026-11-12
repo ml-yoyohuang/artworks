@@ -1,5 +1,15 @@
 # HANDOFF
 
+## 最新體驗更新
+
+最新發版包含 Stage 3 接手完成內容、模型3轉向、本次觀察員紀錄、未讀提示、沉浸式生物筆記與108種實況模板。完整台詞見 [OBSERVER_CONTENT](OBSERVER_CONTENT.md)；三類生物各色系原已具4色票，見 [PIGMENTS](PIGMENTS.md)。缺席巡查的族群名稱改為按當下數量帶入。既有長期實驗主要為模型2，下一步優先補模型3的多種子長期共存與平衡驗證，再進行 Stage 4 整體體驗打磨。
+
+新建世界預設模型 3（speed/R 最小轉動半徑），原模型 1/2 與快照語意保留。節能型改為核向膜內放射線、多瓣型每瓣有 0–3 個中性遺傳粒子；所有系統 confirm/alert 已換成頁內元件；新增本次瀏覽專用的觀察員中文文字播報。55 個測試，細節、運動對照及限制見 [EXPERIENCE_UPDATE](EXPERIENCE_UPDATE.md)。下列 Stage 3 模型 2 與更早段落保留為歷史基準。
+
+## STAGE 3 接手完成版本
+
+預設世界已為模型 2（三類、雙資源、角／瓣遺傳）。原模型 1 經 `legacyConfig()`、原 `npm run exp` 與 `/diagnostic.html` 保留。模型版本與 snapshot schema 是分開的：v2 snapshot 可以保存 model 1 或 2，v1 import 維持 legacy 語意。最新研究能力、實驗結果與限制見 [STAGE3_REPORT](STAGE3_REPORT.md)、[STAGE3_VALIDATION](STAGE3_VALIDATION.md)。以下 Stage 2／Stage 1 區段保留作歷史紀錄，不代表現行功能狀態。
+
 ## STAGE 2 status (observation chamber)
 
 2026-11-12 規格對照修正與最新驗證見 [STAGE2_REPORT](STAGE2_REPORT.md)、

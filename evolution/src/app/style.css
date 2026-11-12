@@ -22,6 +22,16 @@ button { font: inherit; color: inherit; cursor: pointer; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .hint { color: var(--ink-soft); font-size: 11px; line-height: 1.6; }
+details { margin: 16px 0; border-top: 1px solid var(--hair); padding-top: 10px; }
+summary { cursor: pointer; color: var(--ink); font-size: 12px; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; font: 10px/1.6 ui-monospace, monospace; }
+select, input[type=number] { font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--hair); border-radius: 7px; padding: 4px; max-width: 100%; }
+#research-details label { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+#research-details input { width: 100px; }
+.type-stat { border-left: 3px solid; padding: 7px 9px; margin: 8px 0; background: rgba(255,255,255,.3); border-radius: 0 8px 8px 0; font-size: 11px; }
+#lineage-list button, #checkpoints button { margin: 4px 4px 4px 0; }
+#ancestor-portrait { width: 100%; height: 100px; }
+#discoveries { padding-left: 16px; font-size: 11px; }
 body.idle:focus-within .chrome { opacity: 1; pointer-events: auto; }
 
 .chrome { transition: opacity 0.9s ease; }
@@ -46,6 +56,18 @@ body.idle .chrome { opacity: 0; pointer-events: none; }
 .close:hover { color: var(--ink); }
 
 #notes-toggle { position: fixed; right: 24px; top: 24px; background: var(--paper-glass); backdrop-filter: blur(10px); }
+#observer-toggle { position: fixed; right: 24px; top: 65px; background: var(--paper-glass); backdrop-filter: blur(10px); }
+#observer-count { display: inline-block; margin-left: 5px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+#observer-toggle .unread-dot { position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; border-radius: 50%; background: #ce4b43; box-shadow: 0 0 0 2px var(--paper); pointer-events: none; }
+#observer-toggle .unread-dot[hidden] { display: none; }
+#observer-panel { right: 24px; top: 108px; bottom: 94px; width: min(350px,calc(100vw - 32px)); padding: 22px; display: flex; flex-direction: column; }
+#observer-panel[hidden] { display: none; }
+#observer-panel h2 { margin: 5px 0 0; font: 400 25px/1.4 var(--serif); }
+.observer-controls { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 12px; }
+#observer-article { overflow: auto; flex: 1; min-height: 80px; padding-right: 6px; overscroll-behavior: contain; }
+#observer-article p { font-size: 12px; line-height: 1.85; padding: 12px 0; margin: 0; border-top: 1px solid var(--hair); }
+.observation-time { display: block; color: var(--ink-soft); font-size: 10px; font-variant-numeric: tabular-nums; margin-bottom: 4px; }
+@media(max-width:760px) { #observer-toggle { right: 16px; top: 58px; padding: 5px 12px; } #observer-panel { right: 16px; top: 100px; bottom: 74px; } }
 
 /* climate */
 #climate { left: 24px; bottom: 24px; width: 268px; padding: 0; overflow: hidden; }

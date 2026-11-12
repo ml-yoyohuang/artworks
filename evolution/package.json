@@ -8,7 +8,8 @@
     "build": "vite build",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "exp": "vite-node experiments/run.ts --"
+    "exp": "vite-node experiments/run.ts --",
+    "research": "vite-node experiments/stage3.ts --"
   },
   "devDependencies": {
     "typescript": "~5.4.5",

@@ -1,5 +1,28 @@
 # Evolution Machine
 
+Latest experience update: internal grazer rays, inherited per-lobe particles, model 3 curvature-limited movement,
+in-page confirmation dialogs, and a session-only Chinese observer journal (20 s / 1 / 3 / 10 min).
+New worlds use model 3; existing model-1/2 snapshots keep their rules. Original `research` suites default
+to model 2; add `--model3` for separately named new-model results. See [EXPERIENCE_UPDATE](docs/EXPERIENCE_UPDATE.md).
+
+STAGE 3 now adds three designed ecological types, two resources, inherited corner/lobe counts,
+recorded ancestry, exact checkpoints and a cancellable research laboratory in Field notes.
+New worlds use model 3; old snapshots retain their original model. Three-way coexistence is
+not guaranteed. Current results and limitations: [STAGE3_REPORT](docs/STAGE3_REPORT.md).
+
+```bash
+npm run research -- g          # 87 ecology/morphology runs, seeds 1–3
+npm run research -- controls   # model-2 A–F paired comparisons
+npm run research -- long       # 3 seeds × 100,000 ticks
+npm run research -- benchmark  # four starting population sizes
+npm run research -- path/to/manifest.json
+```
+
+Results include complete reproducible configurations in `experiments/results/stage3/`.
+Ctrl+C cancels with partial results. Add `--quick` for smoke runs. The existing `npm run exp`
+commands below explicitly keep model-1 semantics and their archived scientific baselines.
+The diagnostic page is legacy model 1; use the main chamber to open model-3 worlds.
+
 A deterministic artificial-life engine: organisms with heritable genomes forage, reproduce with
 mutation and die in a 2D world of renewable resource. Fitness is never computed; selection is
 whatever the energy economy does.
