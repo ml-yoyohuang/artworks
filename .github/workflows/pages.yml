@@ -42,6 +42,10 @@ jobs:
       - name: Publish compiled ORBIT at its existing URL
         # Jekyll's Docker action creates root-owned output on the runner.
         run: sudo rsync -a --delete orbit/dist/ _site/orbit/
+      # Historical scientific hashes were recorded with Node 16.14.2 / its V8 math.
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 16.14.2
       - name: Install Evolution dependencies
         run: npm ci
         working-directory: evolution
