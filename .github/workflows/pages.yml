@@ -42,6 +42,17 @@ jobs:
       - name: Publish compiled ORBIT at its existing URL
         # Jekyll's Docker action creates root-owned output on the runner.
         run: sudo rsync -a --delete orbit/dist/ _site/orbit/
+      - name: Install Evolution dependencies
+        run: npm ci
+        working-directory: evolution
+      - name: Test and build Evolution
+        run: |
+          npm run typecheck
+          npm test
+          npm run build
+        working-directory: evolution
+      - name: Publish compiled Evolution
+        run: sudo rsync -a --delete evolution/dist/ _site/evolution/
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
